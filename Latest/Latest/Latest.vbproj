@@ -1,0 +1,1074 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D4C841CF-611E-436A-8E3E-C3110425AFF8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Latest.My.MyApplication</StartupObject>
+    <RootNamespace>Latest</RootNamespace>
+    <AssemblyName>Latest 14</AssemblyName>
+    <MyType>WindowsForms</MyType>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Latest 14.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Latest 14.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="IWshRuntimeLibrary" />
+    <Import Include="Latest" />
+    <Import Include="Latest.My" />
+    <Import Include="Latest.My.Resources" />
+    <Import Include="Microsoft.Office" />
+    <Import Include="Microsoft.Office.Core" />
+    <Import Include="Microsoft.Office.Interop" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing.Imaging" />
+    <Import Include="System.Drawing.Printing" />
+    <Import Include="System.Net.Configuration" />
+    <Import Include="System.Net.Mail" />
+    <Import Include="System.Net.NetworkInformation" />
+    <Import Include="System.Net.Sockets" />
+    <Import Include="System.Runtime.InteropServices" />
+    <Import Include="System.Runtime.InteropServices.ComTypes" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressEnterLead.Designer.vb">
+      <DependentUpon>AddressEnterLead.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AddressEnterLead.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSalesRep.Designer.vb">
+      <DependentUpon>AddSalesRep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AddSalesRep.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administration.Designer.vb">
+      <DependentUpon>Administration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Administration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlertNotify.designer.vb">
+      <DependentUpon>AlertNotify.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AlertNotify.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ALERT_LOGIC.vb" />
+    <Compile Include="Alert_Logic_Tick.vb" />
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="AssignAlert.Designer.vb">
+      <DependentUpon>AssignAlert.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AssignAlert.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Attach - Copy.vb" />
+    <Compile Include="Attach.vb" />
+    <Compile Include="AttachAFile.designer.vb">
+      <DependentUpon>AttachAFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AttachAFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AUTO_COMPLETE_LOGINS.vb" />
+    <Compile Include="bulkPrintOperations.vb" />
+    <Compile Include="CandCNotes.designer.vb">
+      <DependentUpon>CandCNotes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CandCNotes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Class2.vb" />
+    <Compile Include="createAShortCut.vb" />
+    <Compile Include="EditScheduledAction.Designer.vb">
+      <DependentUpon>EditScheduledAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditScheduledAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmailIssuedLeads.vb" />
+    <Compile Include="exclusions.Designer.vb">
+      <DependentUpon>exclusions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="exclusions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form4.Designer.vb">
+      <DependentUpon>Form4.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form4.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form5.Designer.vb">
+      <DependentUpon>Form5.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form5.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateList.designer.vb">
+      <DependentUpon>frmCreateList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMappoint.Designer.vb">
+      <DependentUpon>frmMappoint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMappoint.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrint.Designer.vb">
+      <DependentUpon>frmPrint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrint.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTesting.Designer.vb">
+      <DependentUpon>frmTesting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTesting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="imgLSTS.vb" />
+    <Compile Include="ColdCalling.Designer.vb">
+      <DependentUpon>ColdCalling.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ColdCalling.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommonNFO.designer.vb">
+      <DependentUpon>CommonNFO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CommonNFO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompanyInformation.vb" />
+    <Compile Include="Contact Info.designer.vb">
+      <DependentUpon>Contact Info.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Contact Info.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CUSTOMER_LABEL.vb" />
+    <Compile Include="DBASE_Backup.vb" />
+    <Compile Include="Display.designer.vb">
+      <DependentUpon>Display.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Display.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTPManipulation.vb" />
+    <Compile Include="DuplicateLead.Designer.vb">
+      <DependentUpon>DuplicateLead.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DuplicateLead.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DuplicateRecord.designer.vb">
+      <DependentUpon>DuplicateRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DuplicateRecord.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCustomerInfo.designer.vb">
+      <DependentUpon>EditCustomerInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditCustomerInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditRolodex.Designer.vb">
+      <DependentUpon>EditRolodex.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditRolodex.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EDIT_CUSTOMER_INFORMATION.vb" />
+    <Compile Include="Edit_Verify_Address.vb" />
+    <Compile Include="Employee Contacts.designer.vb">
+      <DependentUpon>Employee Contacts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Employee Contacts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterLead.designer.vb">
+      <DependentUpon>EnterLead.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EnterLead.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENTER_LEAD.vb" />
+    <Compile Include="ErrorLogFlatFile.vb" />
+    <Compile Include="Finance.Designer.vb">
+      <DependentUpon>Finance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Finance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindLead.designer.vb">
+      <DependentUpon>FindLead.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FindLead.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindLogic.vb" />
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.designer.vb">
+      <DependentUpon>Form3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.vb">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBackup.designer.vb">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChat.Designer.vb">
+      <DependentUpon>frmChat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmChat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditCompanyInformation.Designer.vb">
+      <DependentUpon>frmEditCompanyInformation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditCompanyInformation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmErrorLogs.Designer.vb">
+      <DependentUpon>frmErrorLogs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmErrorLogs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRolodex.Designer.vb">
+      <DependentUpon>frmRolodex.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRolodex.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewEditAutoNotes.Designer.vb">
+      <DependentUpon>frmViewEditAutoNotes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewEditAutoNotes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewEditPrimaryLeadSources.designer.vb">
+      <DependentUpon>frmViewEditPrimaryLeadSources.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewEditPrimaryLeadSources.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewEditProducts.Designer.vb">
+      <DependentUpon>frmViewEditProducts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewEditProducts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewEditWorkHours.designer.vb">
+      <DependentUpon>frmViewEditWorkHours.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewEditWorkHours.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetIcons.vb" />
+    <Compile Include="Import.vb" />
+    <Compile Include="ImportPictures.Designer.vb">
+      <DependentUpon>ImportPictures.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImportPictures.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IMPORT_PICTURES_LOGIC.vb" />
+    <Compile Include="Installation.designer.vb">
+      <DependentUpon>Installation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Installation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issue_Leads.vb" />
+    <Compile Include="jbPicsAttachedFiles.vb" />
+    <Compile Include="Locked_for_Editing.vb" />
+    <Compile Include="LOGIN.Designer.vb">
+      <DependentUpon>LOGIN.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LOGIN_OLD.Designer.vb">
+      <DependentUpon>LOGIN_OLD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIN_OLD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LOGIN_OLDV2.designer.vb">
+      <DependentUpon>LOGIN_OLDV2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIN_OLDV2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageAlerts.designer.vb">
+      <DependentUpon>ManageAlerts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ManageAlerts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MAPPOINT_LOGIC_V2.vb" />
+    <Compile Include="MarketingLeadSources.Designer.vb">
+      <DependentUpon>MarketingLeadSources.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MarketingLeadSources.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MarketingManager.designer.vb">
+      <DependentUpon>MarketingManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MarketingManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemorizeNotes.Designer.vb">
+      <DependentUpon>MemorizeNotes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MemorizeNotes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="openset.Designer.vb">
+      <DependentUpon>openset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="openset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="opensetappt.vb" />
+    <Compile Include="open_kill.vb" />
+    <Compile Include="open_setappt.vb" />
+    <Compile Include="Open_Windows.vb" />
+    <Compile Include="PastDueAlerts.designer.vb">
+      <DependentUpon>PastDueAlerts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PastDueAlerts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PENDING_REQUEST_INFO.vb" />
+    <Compile Include="PopulateAF.vb" />
+    <Compile Include="printingOperations.vb" />
+    <Compile Include="ReusableListViewControl.vb" />
+    <Compile Include="salessetappt.Designer.vb">
+      <DependentUpon>salessetappt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="salessetappt.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales_Performance_Report.vb" />
+    <Compile Include="PreviousCustomer.Designer.vb">
+      <DependentUpon>PreviousCustomer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PreviousCustomer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductDetail.designer.vb">
+      <DependentUpon>ProductDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDetail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recovery.designer.vb">
+      <DependentUpon>Recovery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recovery.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="REG_LOGIC.vb" />
+    <Compile Include="ROLODEX_LOGIC.vb" />
+    <Compile Include="SalesListBuilder.Designer.vb">
+      <DependentUpon>SalesListBuilder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesListBuilder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesListManager.vb" />
+    <Compile Include="SalesResult.designer.vb">
+      <DependentUpon>SalesResult.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesResult.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SALES_REPORTING_LOGIC.vb" />
+    <Compile Include="ScheduleAction.designer.vb">
+      <DependentUpon>ScheduleAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduleAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SCHEDULE_ACTION_LOGIC.vb" />
+    <Compile Include="SecondSource.Designer.vb">
+      <DependentUpon>SecondSource.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SecondSource.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetUpUser.Designer.vb">
+      <DependentUpon>SetUpUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SetUpUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetUpUser1.Designer.vb">
+      <DependentUpon>SetUpUser1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SetUpUser1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetUpUser2.Designer.vb">
+      <DependentUpon>SetUpUser2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SetUpUser2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.vb">
+      <DependentUpon>Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MAPPOINT_LOGIC.vb" />
+    <Compile Include="pBar.Designer.vb">
+      <DependentUpon>pBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="pBar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetAppt.Designer.vb">
+      <DependentUpon>SetAppt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SetAppt.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen1.Designer.vb">
+      <DependentUpon>SplashScreen1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="STATIC_VARIABLES2.vb" />
+    <Compile Include="systemCheckLogin.vb" />
+    <Compile Include="TimeFormat.vb" />
+    <Compile Include="ToggleUndoCandC.vb" />
+    <Compile Include="USER_LOGIC.vb" />
+    <Compile Include="USER_LOGICv2.vb" />
+    <Compile Include="VerifyAddress.vb" />
+    <Compile Include="ViewEditAutoNotes.vb" />
+    <Compile Include="ViewEditPrimaryLeadSources.vb" />
+    <Compile Include="ViewEditProducts.vb" />
+    <Compile Include="ViewEditWorkHours.vb" />
+    <Compile Include="WarmCalling.vb" />
+    <Compile Include="CNGApptTime.Designer.vb">
+      <DependentUpon>CNGApptTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CNGApptTime.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmingSingleRecord.Designer.vb">
+      <DependentUpon>ConfirmingSingleRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmingSingleRecord.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DoNotCallOrMail.vb" />
+    <Compile Include="ConfirmingData.vb" />
+    <Compile Include="Confirming.Designer.vb">
+      <DependentUpon>Confirming.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Confirming.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerHistory.vb" />
+    <Compile Include="EmailTemplate.designer.vb">
+      <DependentUpon>EmailTemplate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinancingDepartment.Designer.vb">
+      <DependentUpon>FinancingDepartment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FinancingDepartment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstallationDepartment.Designer.vb">
+      <DependentUpon>InstallationDepartment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InstallationDepartment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kill.Designer.vb">
+      <DependentUpon>Kill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Kill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogPhoneCall.designer.vb">
+      <DependentUpon>LogPhoneCall.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LogPhoneCall.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MarketingDepartment.Designer.vb">
+      <DependentUpon>MarketingDepartment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MarketingDepartment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales.Designer.vb">
+      <DependentUpon>Sales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Sales.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScheduledActions.vb" />
+    <Compile Include="STATIC_VARIABLES.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reissue.designer.vb">
+      <DependentUpon>Reissue.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reissue.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RescheduleAppt.Designer.vb">
+      <DependentUpon>RescheduleAppt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RescheduleAppt.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendNotesSM.Designer.vb">
+      <DependentUpon>SendNotesSM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SendNotesSM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TruncateNotes.vb" />
+    <Compile Include="WCaller.Designer.vb">
+      <DependentUpon>WCaller.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WCaller.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WCallerSingleRecord.designer.vb">
+      <DependentUpon>WCallerSingleRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WCallerSingleRecord.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WHERE_IS_LEAD_LOGIC.vb" />
+    <Compile Include="which_form.vb" />
+    <Compile Include="XFerOBJ.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AddressEnterLead.resx">
+      <DependentUpon>AddressEnterLead.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSalesRep.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AddSalesRep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administration.resx">
+      <DependentUpon>Administration.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlertNotify.resx">
+      <DependentUpon>AlertNotify.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AssignAlert.resx">
+      <DependentUpon>AssignAlert.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AttachAFile.resx">
+      <DependentUpon>AttachAFile.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CandCNotes.resx">
+      <DependentUpon>CandCNotes.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CNGApptTime.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CNGApptTime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColdCalling.resx">
+      <DependentUpon>ColdCalling.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonNFO.resx">
+      <DependentUpon>CommonNFO.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Confirming.resx">
+      <DependentUpon>Confirming.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfirmingSingleRecord.resx">
+      <DependentUpon>ConfirmingSingleRecord.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contact Info.resx">
+      <DependentUpon>Contact Info.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Display.resx">
+      <DependentUpon>Display.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DuplicateLead.resx">
+      <DependentUpon>DuplicateLead.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DuplicateRecord.resx">
+      <DependentUpon>DuplicateRecord.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCustomerInfo.resx">
+      <DependentUpon>EditCustomerInfo.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditRolodex.resx">
+      <DependentUpon>EditRolodex.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditScheduledAction.resx">
+      <DependentUpon>EditScheduledAction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmailTemplate.resx">
+      <DependentUpon>EmailTemplate.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee Contacts.resx">
+      <DependentUpon>Employee Contacts.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterLead.resx">
+      <DependentUpon>EnterLead.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="exclusions.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>exclusions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance.resx">
+      <DependentUpon>Finance.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FinancingDepartment.resx">
+      <DependentUpon>FinancingDepartment.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindLead.resx">
+      <DependentUpon>FindLead.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Form3.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form4.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Form4.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form5.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Form5.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBackup.resx">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChat.resx">
+      <DependentUpon>frmChat.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateList.resx">
+      <DependentUpon>frmCreateList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditCompanyInformation.resx">
+      <DependentUpon>frmEditCompanyInformation.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmErrorLogs.resx">
+      <DependentUpon>frmErrorLogs.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMappoint.resx">
+      <DependentUpon>frmMappoint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrint.resx">
+      <DependentUpon>frmPrint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRolodex.resx">
+      <DependentUpon>frmRolodex.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTesting.resx">
+      <DependentUpon>frmTesting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewEditAutoNotes.resx">
+      <DependentUpon>frmViewEditAutoNotes.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewEditPrimaryLeadSources.resx">
+      <DependentUpon>frmViewEditPrimaryLeadSources.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewEditProducts.resx">
+      <DependentUpon>frmViewEditProducts.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewEditWorkHours.resx">
+      <DependentUpon>frmViewEditWorkHours.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportPictures.resx">
+      <DependentUpon>ImportPictures.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Installation.resx">
+      <DependentUpon>Installation.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LOGIN.resx">
+      <DependentUpon>LOGIN.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LOGIN_OLD.resx">
+      <DependentUpon>LOGIN_OLD.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LOGIN_OLDV2.resx">
+      <DependentUpon>LOGIN_OLDV2.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageAlerts.resx">
+      <DependentUpon>ManageAlerts.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarketingLeadSources.resx">
+      <DependentUpon>MarketingLeadSources.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarketingManager.resx">
+      <DependentUpon>MarketingManager.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemorizeNotes.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MemorizeNotes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="openset.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>openset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PastDueAlerts.resx">
+      <DependentUpon>PastDueAlerts.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviousCustomer.resx">
+      <DependentUpon>PreviousCustomer.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductDetail.resx">
+      <DependentUpon>ProductDetail.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recovery.resx">
+      <DependentUpon>Recovery.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesListBuilder.resx">
+      <DependentUpon>SalesListBuilder.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesResult.resx">
+      <DependentUpon>SalesResult.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="salessetappt.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>salessetappt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScheduleAction.resx">
+      <DependentUpon>ScheduleAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SecondSource.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SecondSource.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetUpUser.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SetUpUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetUpUser1.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SetUpUser1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetUpUser2.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SetUpUser2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstallationDepartment.resx">
+      <DependentUpon>InstallationDepartment.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kill.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Kill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogPhoneCall.resx">
+      <DependentUpon>LogPhoneCall.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarketingDepartment.resx">
+      <DependentUpon>MarketingDepartment.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pBar.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>pBar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reissue.resx">
+      <DependentUpon>Reissue.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RescheduleAppt.resx">
+      <DependentUpon>RescheduleAppt.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales.resx">
+      <DependentUpon>Sales.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SendNotesSM.resx">
+      <DependentUpon>SendNotesSM.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetAppt.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SetAppt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen1.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SplashScreen1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WCaller.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WCaller.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WCallerSingleRecord.resx">
+      <DependentUpon>WCallerSingleRecord.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <BaseApplicationManifest Include="My Project\app.manifest" />
+    <None Include="Resources\%24this.Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="MapPoint">
+      <Guid>{31851F80-AFE6-11D2-A3C9-00C04F72F340}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>2</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="Outlook">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\attach files.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calledcancelled.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cash2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recovery2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\notesnew.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0176.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add12x12.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SpecialInstructions24.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print 32.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\transfer6.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Call&amp;Cancel48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inetcpl_4480.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

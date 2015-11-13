@@ -1,0 +1,417 @@
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\bin\Debug\Latest 14.exe.manifest
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\bin\Debug\Latest 14.application
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\bin\Debug\Latest 14.exe
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\bin\Debug\Latest 14.pdb
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\bin\Debug\Latest 14.xml
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\bin\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\bin\Debug\Interop.MapPoint.dll
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\bin\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Interop.MapPoint.dll
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.vbproj.ResolveComReference.cache
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.AddressEnterLead.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.AddSalesRep.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Administration.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.AlertNotify.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.AssignAlert.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.AttachAFile.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.CandCNotes.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.CNGApptTime.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.ColdCalling.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.CommonNFO.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Confirming.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.ConfirmingSingleRecord.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Contact_Info.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Display.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.DuplicateLead.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.DuplicateRecord.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.EditCustomerInfo.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.EditRolodex.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.EmailTemplate.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Employee_Contacts.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.EnterLead.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.exclusions.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Finance.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.FinancingDepartment.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.FindLead.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Form1.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.EditAutoNotesLists.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Form2.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Form4.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Form5.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.frmBackup.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.frmChat.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.frmEditCompanyInformation.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.frmErrorLogs.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.frmRolodex.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditAutoNotes.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditPrimaryLeadSources.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditProducts.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditWorkHours.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.ImportPictures.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Installation.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.LOGIN.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.LOGIN_OLD.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.LOGIN_OLDV2.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.ManageAlerts.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.MarketerLeadSources.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.MarketingManager.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.MemorizeNotes.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.openset.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.PastDueAlerts.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.PreviousCustomer.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.ProductDetail.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Recovery.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.SalesListBuilder.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.SDResult.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.salessetappt.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.ScheduleAction.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.SecondSource.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.SetUpUser.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.SetUpUser1.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.SetUpUser2.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.InstallationDepartment.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Kill.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.LogPhoneCall.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Main.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.MarketingDepartment.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Resources.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Progress.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Reissue.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.RescheduleAppt.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.Sales.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.SendNotesSM.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.SetAppt.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.SplashScreen1.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.WCaller.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.WCallerSingleRecord.resources
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest.vbproj.GenerateResource.Cache
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest 14.TrustInfo.xml
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest 14.exe.manifest
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest 14.application
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest 14.exe
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest 14.xml
+C:\Users\Clay\Desktop\Converted Project\Latest\Latest\obj\Debug\Latest 14.pdb
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Interop.MapPoint.dll
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.vbproj.ResolveComReference.cache
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.AddressEnterLead.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.AddSalesRep.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Administration.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.AlertNotify.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.AssignAlert.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.AttachAFile.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.CandCNotes.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.CNGApptTime.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.ColdCalling.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.CommonNFO.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Confirming.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.ConfirmingSingleRecord.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Contact_Info.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Display.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.DuplicateLead.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.DuplicateRecord.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.EditCustomerInfo.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.EditRolodex.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.EmailTemplate.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Employee_Contacts.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.EnterLead.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.exclusions.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Finance.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.FinancingDepartment.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.FindLead.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Form1.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.EditAutoNotesLists.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Form2.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Form4.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Form5.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmBackup.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmChat.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmEditCompanyInformation.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmErrorLogs.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmMappoint.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmPrint.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmRolodex.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmTesting.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditAutoNotes.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditPrimaryLeadSources.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditProducts.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditWorkHours.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.ImportPictures.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Installation.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.LOGIN.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.LOGIN_OLD.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.LOGIN_OLDV2.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.ManageAlerts.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.MarketerLeadSources.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.MarketingManager.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.MemorizeNotes.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.openset.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.PastDueAlerts.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.PreviousCustomer.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.ProductDetail.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Recovery.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.SalesListBuilder.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.SDResult.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.salessetappt.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.ScheduleAction.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.SecondSource.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.SetUpUser.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.SetUpUser1.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.SetUpUser2.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.InstallationDepartment.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Kill.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.LogPhoneCall.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Main.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.MarketingDepartment.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Resources.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Progress.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Reissue.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.RescheduleAppt.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.Sales.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.SendNotesSM.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.SetAppt.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.SplashScreen1.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.WCaller.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.WCallerSingleRecord.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.vbproj.GenerateResource.Cache
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\bin\Debug\Latest 14.exe.manifest
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\bin\Debug\Latest 14.application
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\bin\Debug\Latest 14.exe
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\bin\Debug\Latest 14.pdb
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\bin\Debug\Latest 14.xml
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\bin\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\bin\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest 14.TrustInfo.xml
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest 14.exe.manifest
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest 14.application
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest 14.exe
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest 14.xml
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest 14.pdb
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.EditScheduledAction.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmCreateList.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmEmailPreview.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache
+C:\Users\Clay\Documents\Visual Studio 2013\Projects\Converted Project\Latest\Latest\obj\Debug\Latest.frmEmailTemplateChoice.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\bin\Debug\Latest 14.exe.manifest
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\bin\Debug\Latest 14.application
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\bin\Debug\Latest 14.exe
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\bin\Debug\Latest 14.pdb
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\bin\Debug\Latest 14.xml
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\bin\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\bin\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Interop.MapPoint.dll
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.vbproj.ResolveComReference.cache
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.AddressEnterLead.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.AddSalesRep.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Administration.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.AlertNotify.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.AssignAlert.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.AttachAFile.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.CandCNotes.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.CNGApptTime.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.ColdCalling.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.CommonNFO.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Confirming.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.ConfirmingSingleRecord.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Contact_Info.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Display.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.DuplicateLead.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.DuplicateRecord.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.EditCustomerInfo.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.EditRolodex.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.EditScheduledAction.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.EmailTemplate.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Employee_Contacts.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.EnterLead.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.exclusions.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Finance.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.FinancingDepartment.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.FindLead.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Form1.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.EditAutoNotesLists.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Form2.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Form4.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Form5.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Form6.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmBackup.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmChat.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmCreateList.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmEditCompanyInformation.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmEmailPreview.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmEmailTemplateChoice.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmErrorLogs.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmImportBulkData.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmMappoint.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmPrint.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmRolodex.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmTesting.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditAutoNotes.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditPrimaryLeadSources.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditProducts.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmViewEditWorkHours.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.ImportPictures.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Installation.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.LOGIN.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.LOGIN_OLD.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.LOGIN_OLDV2.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.ManageAlerts.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.MarketerLeadSources.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.MarketingManager.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.MemorizeNotes.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.openset.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.PastDueAlerts.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.PreviousCustomer.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.ProductDetail.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Recovery.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.SalesListBuilder.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.SDResult.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.salessetappt.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.ScheduleAction.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.SecondSource.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.SetUpUser.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.SetUpUser1.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.SetUpUser2.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.InstallationDepartment.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Kill.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.LogPhoneCall.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Main.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.MarketingDepartment.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Resources.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Progress.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Reissue.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.RescheduleAppt.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.Sales.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.SendNotesSM.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.SetAppt.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.SplashScreen1.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.WCaller.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.WCallerSingleRecord.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.vbproj.GenerateResource.Cache
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest 14.TrustInfo.xml
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest 14.exe.manifest
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest 14.application
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest 14.exe
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest 14.xml
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest 14.pdb
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.frmLogin.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.AddManager.resources
+C:\Users\Andy\My Programming Folder\Converted Project\Latest\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache
+C:\Users\Andy\My Programming Folder\Current Project\Latest\bin\Debug\Latest 14.exe.manifest
+C:\Users\Andy\My Programming Folder\Current Project\Latest\bin\Debug\Latest 14.application
+C:\Users\Andy\My Programming Folder\Current Project\Latest\bin\Debug\Latest 14.exe
+C:\Users\Andy\My Programming Folder\Current Project\Latest\bin\Debug\Latest 14.pdb
+C:\Users\Andy\My Programming Folder\Current Project\Latest\bin\Debug\Latest 14.xml
+C:\Users\Andy\My Programming Folder\Current Project\Latest\bin\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Andy\My Programming Folder\Current Project\Latest\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\Andy\My Programming Folder\Current Project\Latest\bin\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Interop.MapPoint.dll
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.vbproj.ResolveComReference.cache
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.AddManager.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.AddressEnterLead.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.AddSalesRep.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Administration.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.AlertNotify.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.AssignAlert.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.AttachAFile.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.CandCNotes.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.CNGApptTime.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.ColdCalling.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.CommonNFO.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Confirming.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.ConfirmingSingleRecord.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Contact_Info.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Display.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.DuplicateLead.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.DuplicateRecord.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.EditCustomerInfo.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.EditRolodex.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.EditScheduledAction.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.EmailTemplate.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Employee_Contacts.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.EnterLead.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.exclusions.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Finance.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.FinancingDepartment.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.FindLead.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Form1.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.EditAutoNotesLists.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Form2.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Form4.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Form5.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Form6.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmBackup.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmChat.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmCreateList.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmEditCompanyInformation.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmEmailPreview.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmEmailTemplateChoice.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmErrorLogs.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmImportBulkData.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmLogin.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmMappoint.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmPrint.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmRolodex.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmTesting.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmViewEditAutoNotes.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmViewEditPrimaryLeadSources.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmViewEditProducts.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.frmViewEditWorkHours.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.ImportPictures.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Installation.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.LOGIN.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.LOGIN_OLD.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.LOGIN_OLDV2.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.ManageAlerts.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.MarketerLeadSources.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.MarketingManager.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.MemorizeNotes.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.openset.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.PastDueAlerts.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.PreviousCustomer.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.ProductDetail.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Recovery.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.SalesListBuilder.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.SDResult.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.salessetappt.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.ScheduleAction.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.SecondSource.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.SetUpUser.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.SetUpUser1.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.SetUpUser2.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.InstallationDepartment.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Kill.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.LogPhoneCall.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Main.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.MarketingDepartment.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Resources.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Progress.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Reissue.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.RescheduleAppt.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.Sales.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.SendNotesSM.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.SetAppt.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.SplashScreen1.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.WCaller.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.WCallerSingleRecord.resources
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest.vbproj.GenerateResource.Cache
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest 14.TrustInfo.xml
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest 14.exe.manifest
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest 14.application
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest 14.exe
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest 14.xml
+C:\Users\Andy\My Programming Folder\Current Project\Latest\obj\Debug\Latest 14.pdb
