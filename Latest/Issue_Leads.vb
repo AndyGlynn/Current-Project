@@ -1188,7 +1188,11 @@ Public Class Issue_Leads
         If Sales.pnlIssue.Controls.Count = 0 Then
             Exit Sub
         Else
-            fs = Sales.pnlIssue.Controls.Item(0).Controls.Item(1).Font.Size
+            Try
+                fs = Sales.pnlIssue.Controls.Item(0).Controls.Item(1).Font.Size
+            Catch ex As Exception
+                Exit Sub
+            End Try
         End If
         Dim fcnt As Integer
         Dim doit As Integer

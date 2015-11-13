@@ -54,43 +54,43 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>d33i++96ijUSorUNH13YxnUsos8=</dsig:DigestValue>
+        <dsig:DigestValue>7aksrxLbY2H3PUZK5sqkFyMNgAM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Core.dll" size="430592">
-      <assemblyIdentity name="Interop.Microsoft.Office.Core" version="2.5.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Core.dll" size="437248">
+      <assemblyIdentity name="Interop.Microsoft.Office.Core" version="2.7.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>aqYKNwBUojf19zloRz6S29YA7kI=</dsig:DigestValue>
+        <dsig:DigestValue>1bTLKNy80JtbI3EA2zvx8qKzvxA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Interop.Outlook.dll" size="911872">
-      <assemblyIdentity name="Interop.Microsoft.Office.Interop.Outlook" version="9.3.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Interop.Outlook.dll" size="965632">
+      <assemblyIdentity name="Interop.Microsoft.Office.Interop.Outlook" version="9.5.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>F5Fs9b6r8weO+5hKh9trfkpUp8U=</dsig:DigestValue>
+        <dsig:DigestValue>yItst5B+5B/SbAjNslpHg5zD6z8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="3516416">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="3511296">
       <assemblyIdentity name="Latest 14" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>UwT0RWZmnYSmKapGvs2SdgsB2Tc=</dsig:DigestValue>
+        <dsig:DigestValue>95dRswVGoMpfHsLOzZiT6FyYD84=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -10,7 +10,7 @@ Imports System.Text.StringBuilder
 Public Class bulkPrintOperations
     Public Const sqlCNX As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1"
     Public Const local_test_directory_print = "C:/Users/Clay/Desktop/Print Leads/"
-    Public Const Server_directory_print = "\\server.greenworks.local\Company\ISS\Print Leads"
+    Public Const Server_directory_print = "\\server.greenworks.local\Company\ISS\Print Leads\"
 
 
     Public ListOfLeadNumbers As ArrayList
