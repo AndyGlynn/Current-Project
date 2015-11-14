@@ -184,7 +184,7 @@ Public Class EmailIssuedLeads
         Dim can_get_email As Boolean = False
         Dim rep_cnx As SqlConnection = New SqlConnection(cnx_string)
         rep_cnx.Open()
-        Dim cmdCheck As SqlCommand = New SqlCommand("SELECT HasEmail from tblTestEmployee where FName = '" & RepFName & "' and LName = '" & RepLName & "';", rep_cnx)
+        Dim cmdCheck As SqlCommand = New SqlCommand("SELECT CanEmail from UserPermissionTable where UserFirstName = '" & RepFName & "' and UserLastName = '" & RepLName & "';", rep_cnx)
         Dim strReturn As String = cmdCheck.ExecuteScalar
         rep_cnx.Close()
         rep_cnx = Nothing
@@ -200,7 +200,7 @@ Public Class EmailIssuedLeads
         Dim can_get_email As Boolean = False
         Dim rep_cnx As SqlConnection = New SqlConnection(cnx_string)
         rep_cnx.Open()
-        Dim cmdCheck As SqlCommand = New SqlCommand("SELECT HasEmail from tblTestEmployee where EmployeeID = '" & EmployeeID & "'", rep_cnx)
+        Dim cmdCheck As SqlCommand = New SqlCommand("SELECT CanEmail from UserPermissionTable where ID = '" & EmployeeID & "'", rep_cnx)
         Dim strReturn As String = cmdCheck.ExecuteScalar
         rep_cnx.Close()
         rep_cnx = Nothing
@@ -217,7 +217,7 @@ Public Class EmailIssuedLeads
     Public Function GetRepEmailAddress(ByVal RepFName As String, ByVal RepLName As String)
         Dim emailAddress As String
         Dim rep_cnx As SqlConnection = New SqlConnection(cnx_string)
-        Dim cmdGet As SqlCommand = New SqlCommand("SELECT EmailAddress from tblTestEmployee where HasEmail = 1 and FName = '" & RepFName & "' and LName = '" & RepLName & "';", rep_cnx)
+        Dim cmdGet As SqlCommand = New SqlCommand("SELECT Email from UserPermissionTable where CanEmail = 1 and UserFirstName = '" & RepFName & "' and UserLastName = '" & RepLName & "';", rep_cnx)
         rep_cnx.Open()
         emailAddress = cmdGet.ExecuteScalar
         rep_cnx.Close()
@@ -227,7 +227,7 @@ Public Class EmailIssuedLeads
     Public Function GetRepEmailAddress(ByVal EmployeeID As String)
         Dim emailAddress As String
         Dim rep_cnx As SqlConnection = New SqlConnection(cnx_string)
-        Dim cmdGet As SqlCommand = New SqlCommand("SELECT EmailAddress from tblTestEmployee where HasEmail = 1 and EmployeeID = '" & EmployeeID & "';", rep_cnx)
+        Dim cmdGet As SqlCommand = New SqlCommand("SELECT Email from UserPermissionTable where CanEmail = 1 and ID = '" & EmployeeID & "';", rep_cnx)
         rep_cnx.Open()
         emailAddress = cmdGet.ExecuteScalar
         rep_cnx.Close()
@@ -558,7 +558,7 @@ Public Class EmailIssuedLeads
             prxyFAr2.Add(fname1)
             prxyLAr2.Add(lname1)
             rep_cnx.Open()
-            Dim cmdEMAIL As SqlCommand = New SqlCommand("SELECT EmailAddress from tblTestEmployee where FName = '" & fname1 & "' and LName = '" & lname1 & "';", rep_cnx)
+            Dim cmdEMAIL As SqlCommand = New SqlCommand("SELECT Email from UserPermissionTable where UserFirstName = '" & fname1 & "' and UserLastName = '" & lname1 & "';", rep_cnx)
             Dim EmailAddress As String = cmdEMAIL.ExecuteScalar
             rep_cnx.Close()
             arListOfEmails.add(EmailAddress)
@@ -739,7 +739,7 @@ Public Class EmailIssuedLeads
             prxyFAr2.Add(fname1)
             prxyLAr2.Add(lname1)
             rep_cnx.Open()
-            Dim cmdEMAIL As SqlCommand = New SqlCommand("SELECT EmailAddress from tblTestEmployee where FName = '" & fname1 & "' and LName = '" & lname1 & "';", rep_cnx)
+            Dim cmdEMAIL As SqlCommand = New SqlCommand("SELECT Email from UserPermissionTable where UserFirstName = '" & fname1 & "' and UserLastName = '" & lname1 & "';", rep_cnx)
             Dim EmailAddress As String = cmdEMAIL.ExecuteScalar
             rep_cnx.Close()
             arListOfEmails.add(EmailAddress)
@@ -961,16 +961,16 @@ Public Class EmailIssuedLeads
     Public Sub EMAIL_SINGLE_MarkupEmail_WITH_EXCLUSIONS(ByVal RepFName As String, ByVal RepLName As String, ByVal LeadNum As String, ByVal _Exclusions As Exclusions, ByVal RepEmail As String, ByVal Msg As String, ByVal Subject As String)
         Dim smptSERV As New SmtpClient
         Dim credentials As New Net.NetworkCredential
-        credentials.Password = "bgfsreeffypxxxzr"
-        credentials.UserName = "aaron.clay79@gmail.com"
+        credentials.Password = STATIC_VARIABLES.CurrentLoggedInEmployee.EmailPassword
+        credentials.UserName = STATIC_VARIABLES.CurrentLoggedInEmployee.Email
         smptSERV.UseDefaultCredentials = False
-        smptSERV.EnableSsl = True
-        smptSERV.Port = 587 '' default for gmail ssl
-        smptSERV.Host = "smtp.gmail.com"
+        smptSERV.EnableSsl = STATIC_VARIABLES.CurrentLoggedInEmployee.OutGOSSL
+        smptSERV.Port = STATIC_VARIABLES.CurrentLoggedInEmployee.OutgoingPort
+        smptSERV.Host = STATIC_VARIABLES.CurrentLoggedInEmployee.Outgoing
         smptSERV.Credentials = credentials
 
-        Dim eml_msg As New MailMessage("aaron.clay79@gmail.com", "aaron.clay79@gmail.com")
-        Dim mailAddress As New MailAddress("aaron.clay79@gmail.com", "ImproveIt360!v2")
+        Dim eml_msg As New MailMessage(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, RepEmail)
+        Dim mailAddress As New MailAddress(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName)
 
         With eml_msg
             .From = mailAddress
@@ -987,16 +987,16 @@ Public Class EmailIssuedLeads
     Public Sub BulkMailWithExclusions(ByVal RepEmail As String, ByVal MSG As String)
         Dim smptSERV As New SmtpClient
         Dim credentials As New Net.NetworkCredential
-        credentials.Password = "bgfsreeffypxxxzr"
-        credentials.UserName = "aaron.clay79@gmail.com"
+        credentials.Password = STATIC_VARIABLES.CurrentLoggedInEmployee.EmailPassword
+        credentials.UserName = STATIC_VARIABLES.CurrentLoggedInEmployee.Email
         smptSERV.UseDefaultCredentials = False
-        smptSERV.EnableSsl = True
-        smptSERV.Port = 587 '' default for gmail ssl
-        smptSERV.Host = "smtp.gmail.com"
+        smptSERV.EnableSsl = STATIC_VARIABLES.CurrentLoggedInEmployee.OutGOSSL
+        smptSERV.Port = STATIC_VARIABLES.CurrentLoggedInEmployee.OutgoingPort  '' default for gmail ssl
+        smptSERV.Host = STATIC_VARIABLES.CurrentLoggedInEmployee.Outgoing
         smptSERV.Credentials = credentials
 
-        Dim eml_msg As New MailMessage(" aaron.clay79@gmail.com", "aaron.clay79@gmail.com") '' change the second part to actual rep's email for this to work right.
-        Dim mailAddress As New MailAddress("aaron.clay79@gmail.com", "ImproveIt360!v2")
+        Dim eml_msg As New MailMessage(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, RepEmail) '' change the second part to actual rep's email for this to work right.
+        Dim mailAddress As New MailAddress(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName)
 
         With eml_msg
             .From = mailAddress
@@ -1011,17 +1011,16 @@ Public Class EmailIssuedLeads
     Public Sub BulkMailWithoutExclusions(ByVal RepEmail As String, ByVal MSG As String)
         Dim smptSERV As New SmtpClient
         Dim credentials As New Net.NetworkCredential
-        credentials.Password = "bgfsreeffypxxxzr"
-        credentials.UserName = "aaron.clay79@gmail.com"
+        credentials.Password = STATIC_VARIABLES.CurrentLoggedInEmployee.EmailPassword
+        credentials.UserName = STATIC_VARIABLES.CurrentLoggedInEmployee.Email
         smptSERV.UseDefaultCredentials = False
-        smptSERV.EnableSsl = True
-        smptSERV.Port = 587 '' default for gmail ssl
-        smptSERV.Host = "smtp.gmail.com"
+        smptSERV.EnableSsl = STATIC_VARIABLES.CurrentLoggedInEmployee.OutGOSSL
+        smptSERV.Port = STATIC_VARIABLES.CurrentLoggedInEmployee.OutgoingPort
+        smptSERV.Host = STATIC_VARIABLES.CurrentLoggedInEmployee.Outgoing
         smptSERV.Credentials = credentials
 
-        Dim eml_msg As New MailMessage(" aaron.clay79@gmail.com", "aaron.clay79@gmail.com") '' change the second part to actual rep's email for this to work right.
-        Dim mailAddress As New MailAddress("aaron.clay79@gmail.com", "ImproveIt360!v2")
-
+        Dim eml_msg As New MailMessage(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, RepEmail) '' change the second part to actual rep's email for this to work right.
+        Dim mailAddress As New MailAddress(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName)
         With eml_msg
             .From = mailAddress
             .Subject = "Leads For The Day" & Date.Today.ToString
@@ -1033,18 +1032,18 @@ Public Class EmailIssuedLeads
     End Sub
 
     Public Sub EMAIL_SINGLE_MarkupEmail_WITHOUT_EXCLUSIONS(ByVal RepFName As String, ByVal RepLName As String, ByVal LeadNum As String, ByVal RepEmail As String, ByVal Msg As String, ByVal Subject As String)
-        Dim smptSERV As New SmtpClient
+       Dim smptSERV As New SmtpClient
         Dim credentials As New Net.NetworkCredential
-        credentials.Password = "bgfsreeffypxxxzr"
-        credentials.UserName = "aaron.clay79@gmail.com"
+        credentials.Password = STATIC_VARIABLES.CurrentLoggedInEmployee.EmailPassword
+        credentials.UserName = STATIC_VARIABLES.CurrentLoggedInEmployee.Email
         smptSERV.UseDefaultCredentials = False
-        smptSERV.EnableSsl = True
-        smptSERV.Port = 587 '' default for gmail ssl
-        smptSERV.Host = "smtp.gmail.com"
+        smptSERV.EnableSsl = STATIC_VARIABLES.CurrentLoggedInEmployee.OutGOSSL
+        smptSERV.Port = STATIC_VARIABLES.CurrentLoggedInEmployee.OutgoingPort
+        smptSERV.Host = STATIC_VARIABLES.CurrentLoggedInEmployee.Outgoing
         smptSERV.Credentials = credentials
 
-        Dim eml_msg As New MailMessage("aaron.clay79@gmail.com", "aaron.clay79@gmail.com")
-        Dim mailAddress As New MailAddress("aaron.clay79@gmail.com", "ImproveIt360!v2")
+        Dim eml_msg As New MailMessage(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, RepEmail)
+        Dim mailAddress As New MailAddress(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName)
 
         With eml_msg
             .From = mailAddress
@@ -1060,16 +1059,16 @@ Public Class EmailIssuedLeads
     Public Sub Send_BLAST_MAIL(ByVal _From As String, ByVal Recipient As String, ByVal _MSG As String, Subject As String)
         Dim smptSERV As New SmtpClient
         Dim credentials As New Net.NetworkCredential
-        credentials.Password = "bgfsreeffypxxxzr"
-        credentials.UserName = "aaron.clay79@gmail.com"
+        credentials.Password = STATIC_VARIABLES.CurrentLoggedInEmployee.EmailPassword
+        credentials.UserName = STATIC_VARIABLES.CurrentLoggedInEmployee.Email
         smptSERV.UseDefaultCredentials = False
-        smptSERV.EnableSsl = True
-        smptSERV.Port = 587 '' default for gmail ssl
-        smptSERV.Host = "smtp.gmail.com"
+        smptSERV.EnableSsl = STATIC_VARIABLES.CurrentLoggedInEmployee.OutGOSSL
+        smptSERV.Port = STATIC_VARIABLES.CurrentLoggedInEmployee.OutgoingPort
+        smptSERV.Host = STATIC_VARIABLES.CurrentLoggedInEmployee.Outgoing
         smptSERV.Credentials = credentials
 
-        Dim eml_msg As New MailMessage("aaron.clay79@gmail.com", Recipient)
-        Dim mailAddress As New MailAddress("aaron.clay79@gmail.com", _From)
+        Dim eml_msg As New MailMessage(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, Recipient)
+        Dim mailAddress As New MailAddress(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName)
 
         With eml_msg
             .From = mailAddress
@@ -1183,20 +1182,20 @@ Public Class EmailIssuedLeads
     Public Sub MailTheListToMarketingManager(ByVal listOfLeads As ArrayList, ByVal FName As String, ByVal LName As String, ByVal EmailAddress As String, ByVal ApptDate As String)
         Dim smptSERV As New SmtpClient
         Dim credentials As New Net.NetworkCredential
-        credentials.Password = "bgfsreeffypxxxzr"
-        credentials.UserName = "aaron.clay79@gmail.com"
+        credentials.Password = STATIC_VARIABLES.CurrentLoggedInEmployee.EmailPassword
+        credentials.UserName = STATIC_VARIABLES.CurrentLoggedInEmployee.Email
         smptSERV.UseDefaultCredentials = False
-        smptSERV.EnableSsl = True
-        smptSERV.Port = 587 '' default for gmail ssl
-        smptSERV.Host = "smtp.gmail.com"
+        smptSERV.EnableSsl = STATIC_VARIABLES.CurrentLoggedInEmployee.OutGOSSL
+        smptSERV.Port = STATIC_VARIABLES.CurrentLoggedInEmployee.OutgoingPort  '' default for gmail ssl
+        smptSERV.Host = STATIC_VARIABLES.CurrentLoggedInEmployee.Outgoing
         smptSERV.Credentials = credentials
 
         Dim daysplit() = Split(ApptDate, " ", -1)
         Dim _date As String = daysplit(0).ToString
 
-        Dim eml_msg As New MailMessage("aaron.clay79@gmail.com", "aaron.clay79@gmail.com") '' change the to email address to email address variable
+        Dim eml_msg As New MailMessage(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, STATIC_VARIABLES.CurrentLoggedInEmployee.Email) '' change the to email address to email address variable
         Dim MM_Name As String = (FName & " " & LName)
-        Dim mailAddress As New MailAddress("aaron.clay79@gmail.com", MM_Name)
+        Dim mailAddress As New MailAddress(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName)
         Dim dateTimeSplit() = Split(ApptDate, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
         Dim aptDate As String = dateTimeSplit(0)
         Dim g As Integer = 0
