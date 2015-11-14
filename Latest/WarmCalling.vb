@@ -1760,20 +1760,70 @@ Public Class WarmCalling
                 Trim(d(0))
                 WCaller.txtApptDate.Text = d(0)
                 WCaller.txtApptDay.Text = r1.Item(30)
-                Dim t = Split(r1.Item(31), " ", 2)
-                Dim u = t(1)
-                Dim u2 As String
-                Dim u3 As String
-                If u.Length = 11 Then
-                    u2 = Microsoft.VisualBasic.Left(u, 5)
-                    u3 = Microsoft.VisualBasic.Right(u, 3)
-                    u = u2 & u3
-                Else
-                    u2 = Microsoft.VisualBasic.Left(u, 4)
-                    u3 = Microsoft.VisualBasic.Right(u, 3)
-                    u = u2 & u3
-                End If
-                WCaller.txtApptTime.Text = u
+                ''
+                '' 11-6-2015 AC
+                '' table structure for debugging purpose:
+                '' 
+                ''        ID, Marketer, PLS , SLS, LeadGenOn, C1FName,C1Lname,C2fname,c2lname
+                '' Idx:   0     1       2      3     4         5        6       7       8 
+
+                ''        staddress , city, state, zip, housephone, altphone1, phone1type, altphone2, 
+                '' Idx:     9            10    11    12    13          14          15          16
+
+                ''        phone2type, spokewith, c1work, c2work, p1, p2, p3, color, prodQTY, YearsOwned
+                '' Idx:     17           18        19      20    21  22  23   24      25       26 
+
+                ''        homeage, homeval, apptdate, apptday, appttime, specIns, lat, long, TimeStampVal
+                '' Idx:     27      28        29       30        31        32      33   34      35
+
+                ''        Rep1, rep2, Result, QuotedSold, Par, Recoverable, ManagerNotes, Cash, Finance
+                '' Idx:    36   37     38       39         40     41            42          43    44 
+
+                ''        p1qssplit,p2qssplit,p3qssplit,MarketingResults, confirmer, DoNotMail, DoNotCall
+                '' Idx:     45        46         47        48               49         50          51
+
+                ''        emailAddy, p1 acro, p2 acro, p3 acro, marketing man, sales man, kill pend, issue note,
+                '' Idx:     52         53       54        55        56           57          58         59
+
+                ''        NeedsSalesRes, SetNotes,IsPrevCust, IsRecovery, LastUpdated
+                '' Idx:    60              61        62         63           64
+
+
+
+                '' r1.item(31) = 'ApptTime' Field | (DateTime, null) Type on table [ EnterLead ] 
+                '' sample data from 68336:> '1900-01-01 15:00:00.000'
+                '' im pretty sure what is trying to happen here is just to pull out the 
+                '' the time like "5:00 PM" and its getting lost in translation. 
+
+
+
+                'Dim t = Split(r1.Item(31), " ", 2)
+                'Dim u = t(1)
+                'Dim u2 As String
+                'Dim u3 As String
+                'If u.Length = 11 Then
+                '    u2 = Microsoft.VisualBasic.Left(u, 5)
+                '    u3 = Microsoft.VisualBasic.Right(u, 3)
+                '    u = u2 & u3
+                'Else
+                '    u2 = Microsoft.VisualBasic.Left(u, 4)
+                '    u3 = Microsoft.VisualBasic.Right(u, 3)
+                '    u = u2 & u3
+                'End If
+
+                Dim _Hour As Object = r1.Item("ApptTime").ToString
+                Dim dateTime() = Split(_Hour, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                Dim _date As String = ""
+                Dim _time As String = ""
+                Dim _AmPM As String = ""
+                _date = dateTime(0) '' 1900-01-01
+                _time = dateTime(1) '' 12:00:00 
+                _AmPM = dateTime(2) '' AM/PM
+                Dim splitTime() = Split(_time, ":", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                Dim hour As String = splitTime(0) '' 12
+                Dim minute As String = splitTime(1) '' 00-59 
+                Dim correctedTime As String = ((hour & ":" & minute) & " " & _AmPM)
+                WCaller.txtApptTime.Text = correctedTime.ToString
                 WCaller.txtProducts.Text = r1.Item(21) & vbCrLf & r1.Item(22) & vbCrLf & r1.Item(23)
                 WCaller.txtColor.Text = r1.Item(24)
                 WCaller.txtQty.Text = r1.Item(25)
