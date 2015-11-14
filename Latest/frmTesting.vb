@@ -28,12 +28,12 @@
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim z As New USER_LOGICv2
-        Dim x As USER_LOGICv2.Employee = z.Get_User_Obj(Me.txtFName.Text, Me.txtLName.Text, Me.txtPWD.Text)
+        Dim x As USER_LOGICv2.UserObj = z.Get_User_Obj(Me.txtFName.Text, Me.txtPWD.Text)
         STATIC_VARIABLES.employee.Add(x)
         z = Nothing
         x = Nothing
-        MsgBox(STATIC_VARIABLES.employee(0).ID & " : " & STATIC_VARIABLES.employee(0).FName & ", " & STATIC_VARIABLES.employee(0).LName & " ", MsgBoxStyle.Information, "User Info Dump")
-        Main.tsLoggedInAs.Text = STATIC_VARIABLES.employee(0).FName
+        MsgBox(STATIC_VARIABLES.employee(0).ID & " : " & STATIC_VARIABLES.employee(0).UserFirstName & ", " & STATIC_VARIABLES.employee(0).UserLastName & " ", MsgBoxStyle.Information, "User Info Dump")
+        Main.tsLoggedInAs.Text = STATIC_VARIABLES.employee(0).UserFirstName
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click

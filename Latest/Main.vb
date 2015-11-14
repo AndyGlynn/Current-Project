@@ -149,18 +149,21 @@ Public Class Main
         x.KillProcess() '' make sure all mappoint instances are not runnning and closed out / free resources 
         Dim c As New USER_LOGICv2
         Try
-            Dim frm As Windows.Forms.Form = Me.ActiveMdiChild
-            Dim scrX As Integer = frm.Location.X
-            Dim scrY As Integer = frm.Location.Y
-            Dim scrW As Integer = frm.Width
-            Dim scrH As Integer = frm.Height
-            c.LogOut("Aaron", "Clay", scrX, scrY, scrW, scrH, frm.Name.ToString, "No Query", My.Computer.Name.ToString, "admin")
+            Dim frmX As Windows.Forms.Form = Me.ActiveMdiChild
+            Dim scrX As Integer = frmX.Location.X
+            Dim scrY As Integer = frmX.Location.Y
+            Dim scrW As Integer = frmX.Width
+            Dim scrH As Integer = frmX.Height
+            'c.LogOut("00", scrX, scrY, scrW, scrH, frm.Name, "", c.Get_MACH_NAME, "")
+            c.LogOutOfSystem(STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName, STATIC_VARIABLES.CurrentLoggedInEmployee.UserLastName, scrX, scrY, scrW, scrH, frmX.Name)
         Catch ex As Exception
+            Dim frmX As String = ""
             Dim scrX As Integer = 0
             Dim scrY As Integer = 0
             Dim scrW As Integer = 0
             Dim scrH As Integer = 0
-            c.LogOut("99", scrX, scrY, scrW, scrH, "Main", "No Query", My.Computer.Name.ToString, "admin")
+            'c.LogOut("99", scrX, scrY, scrW, scrH, "Main", "No Query", My.Computer.Name.ToString, "admin")
+            c.LogOutOfSystem(STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName, STATIC_VARIABLES.CurrentLoggedInEmployee.UserLastName, scrX, scrY, scrW, scrH, frmX)
         End Try
 
 
@@ -985,4 +988,9 @@ Public Class Main
     End Sub
 
  
+    
+    Private Sub TestingFormACToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestingFormACToolStripMenuItem.Click
+        frmTesting.MdiParent = Me
+        frmTesting.Show()
+    End Sub
 End Class

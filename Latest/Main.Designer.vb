@@ -94,6 +94,7 @@ Partial Class Main
         Me.tsNetworkStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel5 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsSqlSTatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.TestingFormACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMain.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -292,7 +293,7 @@ Partial Class Main
         Me.tsbtransfer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsbtransfer.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtransfer.Name = "tsbtransfer"
-        Me.tsbtransfer.Size = New System.Drawing.Size(90, 49)
+        Me.tsbtransfer.Size = New System.Drawing.Size(89, 49)
         Me.tsbtransfer.Text = "Transfer Lead"
         Me.tsbtransfer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -340,7 +341,7 @@ Partial Class Main
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportDataToolStripMenuItem, Me.ToolStripSeparator3, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportDataToolStripMenuItem, Me.ToolStripSeparator3, Me.ExitToolStripMenuItem, Me.TestingFormACToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -349,7 +350,7 @@ Partial Class Main
         '
         Me.ImportDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Improveit360ToolStripMenuItem})
         Me.ImportDataToolStripMenuItem.Name = "ImportDataToolStripMenuItem"
-        Me.ImportDataToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.ImportDataToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.ImportDataToolStripMenuItem.Text = "Import D&ata"
         '
         'Improveit360ToolStripMenuItem
@@ -361,12 +362,12 @@ Partial Class Main
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(161, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(168, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.ExitToolStripMenuItem.Text = "Exit - ( ALT + F4 )"
         '
         'UsersToolStripMenuItem
@@ -629,6 +630,12 @@ Partial Class Main
         Me.tsSqlSTatus.Size = New System.Drawing.Size(10, 17)
         Me.tsSqlSTatus.Text = " "
         '
+        'TestingFormACToolStripMenuItem
+        '
+        Me.TestingFormACToolStripMenuItem.Name = "TestingFormACToolStripMenuItem"
+        Me.TestingFormACToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.TestingFormACToolStripMenuItem.Text = "Testing Form - AC"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -725,5 +732,6 @@ Partial Class Main
     Friend WithEvents ImportDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Improveit360ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TestingFormACToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

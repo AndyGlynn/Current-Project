@@ -7,6 +7,11 @@ Imports System.IO
 Public Class LOGIN
     Dim strPath As String = "C:\Users\Public\pref.xml"
     Public Success As Boolean = False
+    ''uncomment for production
+    '' 
+    Private user_name As String = "Aaron"
+    Private pwd As String = "spoken1"
+    ''
 
     Private Sub LOGIN_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
@@ -44,7 +49,7 @@ Public Class LOGIN
    
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+       
         '' to be done: user snapshotp feature trumps the local xml file
         '' edit : 8-13-2015 Aaron
 
@@ -53,22 +58,22 @@ Public Class LOGIN
         Me.Text = STATIC_VARIABLES.ProgramName.ToString & " : Login"
         Dim a As New AUTO_COMPLETE_LOGINS
 
-        Dim doc As New XmlDocument
-        doc.Load(strPath)
-        Dim r1 As XmlNodeReader
-        r1 = New XmlNodeReader(doc)
-        While r1.Read
-            Select Case r1.NodeType
-                Case Is = XmlNodeType.Element
-                Case Is = XmlNodeType.Text
-                    Dim str As String = Nothing
-                    str = r1.Value
-                    Me.txtUserName.Text = str
-                    Exit Select
-            End Select
-        End While
-        r1.Close()
-        doc = Nothing
+        'Dim doc As New XmlDocument
+        'doc.Load(strPath)
+        'Dim r1 As XmlNodeReader
+        'r1 = New XmlNodeReader(doc)
+        'While r1.Read
+        '    Select Case r1.NodeType
+        '        Case Is = XmlNodeType.Element
+        '        Case Is = XmlNodeType.Text
+        '            Dim str As String = Nothing
+        '            str = r1.Value
+        '            Me.txtUserName.Text = str
+        '            Exit Select
+        '    End Select
+        'End While
+        'r1.Close()
+        'doc = Nothing
         Me.Activate()
         If Me.txtUserName.Text <> "" Then
 
@@ -77,10 +82,18 @@ Public Class LOGIN
             Me.txtUserName.Select()
         End If
 
-        Me.txtPWD.Text = "2527" ''Remove Later
+        'Me.txtPWD.Text = "2527" ''Remove Later
 
-     
-        Me.btnOK_Click(Nothing, Nothing) ''Remove Later
+
+        'Me.btnOK_Click(Nothing, Nothing) ''Remove Later
+
+
+        '' UNCOMMENT FOR PRODUCTION
+        '' AC
+        Me.txtPWD.Text = Me.pwd
+        Me.txtUserName.Text = Me.user_name
+
+
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -195,6 +208,12 @@ Public Class LOGIN
         '        Exit Select
         'End Select
         ''PastDueAlerts.Show()
+
+        Dim usr_obj As New USER_LOGICv2.UserObj
+        Dim sql As New USER_LOGICv2
+        usr_obj = sql.Get_User_Obj(Me.user_name, Me.pwd)
+        STATIC_VARIABLES.CurrentLoggedInEmployee = usr_obj
+        sql = Nothing
         Me.Close()
 
         'End If

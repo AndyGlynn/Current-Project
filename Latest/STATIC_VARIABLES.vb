@@ -17,6 +17,13 @@ Module STATIC_VARIABLES
     Public EmailDirectory As String = "\\SERVER\Company\ISS\Email Leads\" & Date.Now.ToString & "\"
 
 #Region "User Information"
+
+    '' all of these public vars are essentially useless now due to 
+    '' me creating a user obj for public var employee as (userobj) 
+    '' just an fyi. 
+    '' can access all this information via CLASS: USER_LOGIC_v2 => Func: Get_User_Obj(args) => dim var => "var.[Property/Field]" 
+    '' 11-14-2015 AC
+
     Public Login As String = ""
     Public CurrentUser As String = ""
     Public CurrentID As String = ""
@@ -42,15 +49,17 @@ Module STATIC_VARIABLES
     Public LicenseKey As String = "AAAAA-BBBBB-CCCCC-DDDDD-FFFFF-1"
     Public LeaseKey As String = "000-00000-001"
     Public Server_Assigned_Hash As String = ""
-    Public NET_CLIENT As Tcpclient
+    Public NET_CLIENT As TcpClient
     Public ActiveChild As Form
     Public PendingXFER As Boolean = False
     Public salesworkaround As Boolean = True
 
-    Public employee As New List(Of USER_LOGICv2.Employee)
+
+    Public CurrentLoggedInEmployee As USER_LOGICv2.UserObj
+    Public employee As New List(Of USER_LOGICv2.UserObj)
     Public CurrentExclusionSet As EmailIssuedLeads.Exclusions
 
-     
+
 
 
 

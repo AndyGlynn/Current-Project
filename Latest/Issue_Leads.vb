@@ -19,7 +19,7 @@ Public Class Issue_Leads
     Dim cm As ContextMenuStrip = Sales.cmIssue
     Dim Rep2 As Boolean = False
     Public panelsize As String
-    Public arReps As List(Of USER_LOGICv2.Employee)
+    Public arReps As List(Of USER_LOGICv2.UserObj)
 
 
 
@@ -1922,11 +1922,11 @@ Public Class Issue_Leads
     '' not well designed. 
     '' garbage work around for new table structure 
     '' Wrong List Fucker   AG :>)
-    Public Property ListOfReps As List(Of USER_LOGICv2.Employee)
+    Public Property ListOfReps As List(Of USER_LOGICv2.UserObj)
         Get
             Return arReps
         End Get
-        Set(value As List(Of USER_LOGICv2.Employee))
+        Set(value As List(Of USER_LOGICv2.UserObj))
             arReps = value
         End Set
     End Property
