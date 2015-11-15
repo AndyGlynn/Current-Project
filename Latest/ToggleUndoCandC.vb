@@ -49,7 +49,7 @@ Public Class ToggleUndoCandC
         '' Ask Andy. 8-27-2015
         ''
         Dim usr As String = STATIC_VARIABLES.CurrentUser
-        Dim status As String = "Unconfirmed"
+
         Dim m_resCNX As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         m_resCNX.Open()
         Dim cmdUP As SqlCommand = New SqlCommand("UPDATE enterlead SET MarketingResults = (Select Top 1 Mresult from LeadHistory Where Leadnum = '" & LeadNum & "' order by id desc) WHERE ID = '" & LeadNum & "';", m_resCNX)

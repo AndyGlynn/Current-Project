@@ -23,7 +23,7 @@ Partial Class Sales
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"12/12/2007", "12345", "Earnest VanDielen"}, -1)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"12/12/2007", "12345", "Earnest VanDielen"}, -1)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Sales))
         Me.tsSalesDepartment = New System.Windows.Forms.ToolStrip()
         Me.tbMain = New System.Windows.Forms.TabControl()
@@ -671,7 +671,7 @@ Partial Class Sales
         Me.lvnoresults.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvnoresults.FullRowSelect = True
         Me.lvnoresults.HideSelection = False
-        Me.lvnoresults.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.lvnoresults.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.lvnoresults.Location = New System.Drawing.Point(651, 25)
         Me.lvnoresults.MultiSelect = False
         Me.lvnoresults.Name = "lvnoresults"
@@ -820,9 +820,9 @@ Partial Class Sales
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbProductInfo)
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbApptInfo)
         Me.SplitContainer1.Panel2.Controls.Add(Me.tsCustomerLog)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.pnlAFPics)
         Me.SplitContainer1.Panel2.Controls.Add(Me.pnlCustomerHistory)
         Me.SplitContainer1.Panel2.Controls.Add(Me.tsAFPics)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.pnlAFPics)
         Me.SplitContainer1.Size = New System.Drawing.Size(1054, 562)
         Me.SplitContainer1.SplitterDistance = 215
         Me.SplitContainer1.SplitterWidth = 1
@@ -1684,7 +1684,7 @@ Partial Class Sales
         Me.gbHomeInfo.ForeColor = System.Drawing.Color.Gray
         Me.gbHomeInfo.Location = New System.Drawing.Point(718, 3)
         Me.gbHomeInfo.Name = "gbHomeInfo"
-        Me.gbHomeInfo.Size = New System.Drawing.Size(124, 198)
+        Me.gbHomeInfo.Size = New System.Drawing.Size(115, 198)
         Me.gbHomeInfo.TabIndex = 183
         Me.gbHomeInfo.TabStop = False
         Me.gbHomeInfo.Text = "Home Info:"
@@ -1774,7 +1774,7 @@ Partial Class Sales
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
         Me.gbSpecialInstructions.Location = New System.Drawing.Point(445, 207)
         Me.gbSpecialInstructions.Name = "gbSpecialInstructions"
-        Me.gbSpecialInstructions.Size = New System.Drawing.Size(397, 144)
+        Me.gbSpecialInstructions.Size = New System.Drawing.Size(388, 144)
         Me.gbSpecialInstructions.TabIndex = 188
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions:"
@@ -1787,7 +1787,7 @@ Partial Class Sales
         Me.rtbSpecialInstructions.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(6, 22)
         Me.rtbSpecialInstructions.Name = "rtbSpecialInstructions"
-        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(316, 116)
+        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(307, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
         Me.rtbSpecialInstructions.Text = "The customer only wants a rough frame in the basement and they are interested in " & _
     "upper grids in the windows"
@@ -2038,7 +2038,7 @@ Partial Class Sales
         Me.tsCustomerLog.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsCustomerLog.Name = "tsCustomerLog"
         Me.tsCustomerLog.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsCustomerLog.Size = New System.Drawing.Size(841, 33)
+        Me.tsCustomerLog.Size = New System.Drawing.Size(832, 33)
         Me.tsCustomerLog.TabIndex = 189
         Me.tsCustomerLog.Text = "ToolStrip1"
         Me.tsCustomerLog.Visible = False
@@ -2110,7 +2110,7 @@ Partial Class Sales
         Me.pnlAFPics.AutoScroll = True
         Me.pnlAFPics.Location = New System.Drawing.Point(4, 390)
         Me.pnlAFPics.Name = "pnlAFPics"
-        Me.pnlAFPics.Size = New System.Drawing.Size(846, 172)
+        Me.pnlAFPics.Size = New System.Drawing.Size(832, 172)
         Me.pnlAFPics.TabIndex = 201
         Me.pnlAFPics.Visible = False
         '
@@ -2122,7 +2122,7 @@ Partial Class Sales
         Me.pnlCustomerHistory.AutoScroll = True
         Me.pnlCustomerHistory.Location = New System.Drawing.Point(4, 390)
         Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(876, 172)
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(829, 172)
         Me.pnlCustomerHistory.TabIndex = 200
         '
         'tsAFPics
@@ -2137,7 +2137,7 @@ Partial Class Sales
         Me.tsAFPics.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsAFPics.Name = "tsAFPics"
         Me.tsAFPics.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsAFPics.Size = New System.Drawing.Size(844, 33)
+        Me.tsAFPics.Size = New System.Drawing.Size(832, 33)
         Me.tsAFPics.TabIndex = 201
         Me.tsAFPics.Text = "ToolStrip1"
         '
