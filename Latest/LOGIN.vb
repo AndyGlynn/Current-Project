@@ -9,7 +9,8 @@ Public Class LOGIN
     Public Success As Boolean = False
     ''uncomment for production
     '' 
- 
+    Public user_name = "Aaron"
+    Public PWD = "Spoken1"
     ''
 
     Private Sub LOGIN_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
@@ -19,7 +20,7 @@ Public Class LOGIN
         'PastDueAlerts.Show()
      
         ''Go Fuck Yourself Aaron
-
+        ''Go Fuck Yourself Andy.
 
 
 
@@ -89,7 +90,8 @@ Public Class LOGIN
 
         '' UNCOMMENT FOR PRODUCTION
         '' AC
-        Me.txtPWD.Text = "2527"
+        Me.txtUserName.Text = user_name
+        Me.txtPWD.Text = PWD
         Me.btnOK_Click(Nothing, Nothing)
 
 

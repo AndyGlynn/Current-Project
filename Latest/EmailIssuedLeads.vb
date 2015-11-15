@@ -1259,6 +1259,17 @@ Public Class EmailIssuedLeads
         End If
         Return ShouldMail
     End Function
+
+    Public Function Get_Record_Email(ByVal recID As String)
+        Dim res As String = ""
+        Dim cnxID As New SqlConnection(cnx_string)
+        cnxID.Open()
+        Dim cmdGET As New SqlCommand("SELECT EmailAddress FROM EnterLead where ID = '" & recID & "';", cnxID)
+        res = cmdGET.ExecuteScalar
+        cnxID.Close()
+        Return res
+    End Function
+
 #End Region
 
 End Class

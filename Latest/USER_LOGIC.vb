@@ -291,8 +291,11 @@ Public Class USER_LOGIC
                                 STATIC_VARIABLES.ActiveChild = Sales
                                 'sales.Focus()
                                 'sales.Show()
-
-
+                            Case Is = "frmTesting"
+                                frmTesting.MdiParent = Main
+                                frmTesting.Show()
+                                frmTesting.BringToFront()
+                                STATIC_VARIABLES.ActiveChild = frmTesting
                                 Exit Select
                             Case Is = "Installation Department"
                                 '' need form

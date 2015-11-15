@@ -5,6 +5,7 @@
     Public Department As String = ""
 
 
+
     Private Sub frmEmailPreview_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         ResetForm()
         Me.cboTemplates.Items.Clear()
@@ -68,8 +69,22 @@
 
     Private Sub btnSendEmail_Click(sender As Object, e As EventArgs) Handles btnSendEmail.Click
         Dim y As New EmailIssuedLeads
-        y.Send_BLAST_MAIL("aaron.clay79@gmail.com", "aaron.clay79@gmail.com", Me.rtfPreview.Text, Me.lblSubject.Text)
-        MsgBox("Email Sent.", MsgBoxStyle.Information, "SENT EMAIL")
+        Dim CustEmail As String = y.Get_Record_Email(STATIC_VARIABLES.CurrentID)
+        If Len(CustEmail) <= 0 Then
+            MsgBox("This Customer Does Not Have an Email Address.", MsgBoxStyle.Information, "DEBUG INFO - No Customer Email Address")
+            y = Nothing
+            Exit Sub
+        ElseIf Len(CustEmail) Then
+            If Len(STATIC_VARIABLES.CurrentLoggedInEmployee.Email) <= 0 Then
+                MsgBox("You do not have a valid email address to send from.", MsgBoxStyle.Information, "DEBUG INFO - You Dont Have An Email Address")
+                y = Nothing
+                Exit Sub
+            ElseIf Len(STATIC_VARIABLES.CurrentLoggedInEmployee.Email) >= 1 Then
+                y.Send_BLAST_MAIL(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, CustEmail, Me.rtfPreview.Text, Me.lblSubject.Text)
+                y = Nothing
+                MsgBox("Email Sent.", MsgBoxStyle.Information, "SENT EMAIL")
+            End If
+        End If
         Me.ResetForm()
         Me.Close()
     End Sub
