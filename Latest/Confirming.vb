@@ -58,6 +58,7 @@ Public Class Confirming
     Friend WithEvents EnterLead As New ToolStripMenuItem '' TEMPORARY DEBUG REMOVE LATER
     Friend WithEvents LastID As String
     Public LastIDS As String
+
     Public Tab As String
     Public cntTotal As Integer = 0
     Public cntConfirmed As Integer = 0
@@ -65,7 +66,9 @@ Public Class Confirming
     Public cntCandC As Integer = 0
     Public OrigRep1 As String
     Public OrigRep2 As String
+    Private Sub Test(sender As String)
 
+    End Sub
     Private Sub Confirming_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         STATIC_VARIABLES.CurrentID = ""
         Me.Dispose()

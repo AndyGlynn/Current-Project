@@ -9,8 +9,7 @@ Public Class LOGIN
     Public Success As Boolean = False
     ''uncomment for production
     '' 
-    Private user_name As String = "Aaron"
-    Private pwd As String = "spoken1"
+ 
     ''
 
     Private Sub LOGIN_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
@@ -90,8 +89,8 @@ Public Class LOGIN
 
         '' UNCOMMENT FOR PRODUCTION
         '' AC
-        Me.txtPWD.Text = Me.pwd
-        Me.txtUserName.Text = Me.user_name
+        Me.txtPWD.Text = "2527"
+        Me.btnOK_Click(Nothing, Nothing)
 
 
     End Sub
