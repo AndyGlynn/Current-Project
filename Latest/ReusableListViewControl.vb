@@ -765,7 +765,7 @@ Public Class ReusableListViewControl
                     _CurrentPath = x.Tag
                     GetDirInfo(_CurrentPath)
                 ElseIf x.SubItems(1).Text <> "File Folder" Then
-                    System.Diagnostics.Process.Start(Item_SEL.Tag)
+                    System.Diagnostics.Process.Start(x.Tag)
                 End If
 
             End If

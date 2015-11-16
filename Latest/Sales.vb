@@ -2,6 +2,8 @@ Imports System.Data
 Imports System.Data.Sql
 Imports System.Data.SqlClient
 Imports System
+Imports System.Threading
+
 Public Class Sales
 #Region "Variables & Dynamic Buttons"
 #Region "Criteria Variables"
@@ -21,6 +23,18 @@ Public Class Sales
     Public R8 As String = "No Results"
     Public panelsize As Integer
 #End Region
+
+#Region "Edits For lsAttachedFiles and lsJobPictures 11-15-2015"
+    '' AC
+    '' static controls on pnlAFPics
+    '' view -> other windows -> document outline (ctrl + alt + d) 
+    '' 
+    Private rootDirAF As String = "\\192.168.1.2\Company\ISS\Attached Files\"
+    Private rootDirJP As String = "\\192.168.1.2\Company\ISS\Job Pictures\"
+
+#End Region
+
+
 #Region "Toolbar Buttons"
     '' Summary Tab Button Set 
     Friend WithEvents btnSalesResult As New System.Windows.Forms.ToolStripButton
@@ -1484,6 +1498,17 @@ Public Class Sales
 
     Private Sub SalesDepartment_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        '' EDIT: 11-16-2015
+        '' Multi-Threading Static Controls: AC
+        '' 
+        'Dim th1 As New Thread(AddressOf Get_Files_And_Dirs)
+        'th1.Start()
+
+        'Dim th2 As New Thread(AddressOf Get_Dirs)
+        'th2.Start()
+
+
+
         'Me.Parent = Main
         Me.Text = "Sales Department"
         Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
@@ -1995,6 +2020,9 @@ Public Class Sales
         If Me.lvSales.SelectedItems.Count <> 0 Then
             Dim c As New CustomerHistory
             c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
+
+
+
         End If
     End Sub
 
@@ -2023,10 +2051,19 @@ Public Class Sales
         Dim InitPoint As System.Drawing.Point = New System.Drawing.Point((0 + 10), (0 + 10))
         Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(((widthOfParent / 2) + 10), (0 + 10))
 
-        Dim rc As ReusableListViewControl = New ReusableListViewControl
-        rc.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint, "lsAF", heightOfControl, widthOfControl)
-        Dim rc2 As ReusableListViewControl = New ReusableListViewControl
-        rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
+
+        '' EDIT 11-15-2015
+        '' Going back to a static control design with
+        '' multi-threads. AC
+        'Dim rc As ReusableListViewControl = New ReusableListViewControl
+        'rc.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint, "lsAF", heightOfControl, widthOfControl)
+        'Dim rc2 As ReusableListViewControl = New ReusableListViewControl
+        'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
+        ''END EDIT 
+
+
+        Get_Files_And_Dirs(STATIC_VARIABLES.CurrentID)
+        Get_Dirs(STATIC_VARIABLES.CurrentID)
 
     End Sub
 
@@ -2059,15 +2096,15 @@ Public Class Sales
 
                 
                 For Each x In Me.pnlAFPics.Controls
-                    If x.Name.ToString = "lsAF" Then
+                    If x.Name.ToString = "lsAttachedFiles" Then
                         Dim prevLocX As Integer = x.Location.X
                         Dim prevLocY As Integer = x.Location.Y
                         x.Size = New System.Drawing.Point((p_width / 2) - 20, p_height - 10)
                         x.Location = New Point(prevLocX + 5, 5)
 
                     End If
-                    If x.Name.ToString = "lsJP" Then
-                         
+                    If x.Name.ToString = "lsJobPictures" Then
+
                         x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
                         x.Location = New Point((p_width / 2) + 5, 5)
                     End If
@@ -2083,10 +2120,10 @@ Public Class Sales
 
                 Dim x As Control
                 For Each x In Me.pnlAFPics.Controls
-                    If x.Name.ToString = "lsAF" Then
+                    If x.Name.ToString = "lsAttachedFiles" Then
                         x.Size = New System.Drawing.Point(0, 0)
                     End If
-                    If x.Name.ToString = "lsJP" Then
+                    If x.Name.ToString = "lsJobPictures" Then
                         x.Size = New System.Drawing.Point((p_width - 20), (p_height - 10))
                         x.Location = New Point(5, 5)
                     End If
@@ -2099,12 +2136,12 @@ Public Class Sales
                 Me.tslblAFPic.Text = "Attached Files"
                 Dim x As Control
                 For Each x In Me.pnlAFPics.Controls
-                    If x.Name.ToString = "lsAF" Then
+                    If x.Name.ToString = "lsAttachedFiles" Then
                         x.Size = New System.Drawing.Point((p_width - 20), (p_height - 10))
                         x.Location = New Point(5, 5)
 
                     End If
-                    If x.Name.ToString = "lsJP" Then
+                    If x.Name.ToString = "lsJobPictures" Then
                         x.Size = New System.Drawing.Point(0, 0)
                     End If
                 Next
@@ -2679,11 +2716,111 @@ Public Class Sales
      
     End Sub
 
+#Region "List View Context Menus - Static Control Edits"
+
+    ''
+    '' Edit 11-16-2015
+    '' AC
+    '' Delgates (form work) 
+    '' subs (form work)
+    '' threads (form work)
+    '' pop list view controls from separate thread (class work-doesnt have to directly update ui)
+    '' change directories around (maybe class work) 
+    '' get all icon sizes (class work - readonly properties / file structure ? / doesnt have to update ui directly)
+    '' context menu functions - ccp, create shortcut , open (form work)
+    '' mouse functions, long click file/folder rename, hover selection / drag drop  ( form work) 
+    '' 
+    '' lvItem structure for all views / col headers for details view.
+    ''    TEXT     |             TAG                  |      Size(rounded KB)(sub 1)        |    LastModified(sub2)         |   Type   {file/folder}
+    '' file.txt    |   c:\user\blah\desktop\file.txt  |              125KB                  |       10/15/2015 09:00 AM     |       File
+    ''
+
+
+#Region "Stuff For Multi-threading"
+
+    Private ar_files As List(Of AF_And_JP_Logic.FileObject)
+    Private ar_dir As List(Of AF_And_JP_Logic.DirObject)
+
+    Public Delegate Sub GetFiles(ByVal LeadNum As String)
+    Public Delegate Sub GetDirs(ByVal LeadNum As String)
+
+    Private Function Get_Files_And_Dirs(ByVal LeadNum As String)
+        Dim z As GetFiles
+        z = AddressOf GetTheFiles
+        z.Invoke(LeadNum)
+    End Function
+
+    Private Function Get_Dirs(ByVal LeadNum As String)
+        Dim z As GetDirs
+        z = AddressOf GetTheDirs
+        z.Invoke(LeadNum)
+    End Function
+
+    Private Function GetTheFiles(ByVal LeadNum As String)
+
+        Dim b As New AF_And_JP_Logic(LeadNum, "AF") '' af AND jp
+        ar_files = b.Files
+        AddListItem_Files(ar_files, Me.lsAttachedFiles)
+
+        Dim d As New AF_And_JP_Logic(LeadNum, "JP")
+        ar_files = d.Files
+        AddListItem_Files(ar_files, Me.lsJobPictures)
+
+    End Function
+
+    Private Function GetTheDirs(ByVal LeadNum As String)
+        Dim c As New AF_And_JP_Logic(LeadNum, "AF") '' af AND jp
+        ar_dir = c.Directories
+        AddListItem_Directories(ar_dir, Me.lsAttachedFiles)
+
+        Dim d As New AF_And_JP_Logic(LeadNum, "JP")
+        ar_files = d.Files
+        AddListItem_Files(ar_files, Me.lsJobPictures)
+
+    End Function
+
+    Private Function AddListItem_Files(ByVal ItemList As List(Of AF_And_JP_Logic.FileObject), ByVal Control As ListView)
+        Dim c As AF_And_JP_Logic.FileObject
+        Me.lsAttachedFiles.Items.Clear()
+        Try
+
+            For Each c In ItemList
+                Dim y As New ListViewItem
+                y.Text = c.FileName
+                y.SubItems.Add(c.DateModified)
+                y.SubItems.Add(c.FileSize)
+                y.SubItems.Add("File")
+                y.Tag = c.FullPath
+                Control.Items.Add(y)
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Private Function AddListItem_Directories(ByVal ItemList As List(Of AF_And_JP_Logic.DirObject), ByVal Control As ListView)
+        Dim c As AF_And_JP_Logic.DirObject
+        Me.lsAttachedFiles.Items.Clear()
+        Try
+            For Each c In ItemList
+                Dim y As New ListViewItem
+                y.Text = c.FileName
+                y.SubItems.Add(c.DateModified)
+                y.SubItems.Add("")
+                y.Tag = c.FullPath
+                y.SubItems.Add("Folder")
+                Control.Items.Add(y)
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+#End Region
+
+
     Private Sub lvAttachedFiles_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
-        'If Me.lvAttachedFiles.SelectedItems.Count <> 0 Then
-        '    Dim x As New jbPicsAttachedFiles
-        '    x.LaunchAttachedFile(Me.ID, Me.lvAttachedFiles.SelectedItems.Item(0).Text)
-        'End If
+
     End Sub
 
     Private Sub lvAttachedFiles_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -2695,148 +2832,38 @@ Public Class Sales
     End Sub
 
     Private Sub lvAttachedFiles_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-        'If Me.lvAttachedFiles.SelectedItems.Count <> 0 Then
-        '    Me.cmsAF.Items(0).Visible = True
-        '    Me.cmsAF.Items(1).Visible = True
-        '    Me.cmsAF.Items(2).Visible = True
-        '    Me.cmsAF.Items(3).Visible = True
-        '    Me.cmsAF.Items(4).Visible = True
-        '    Me.cmsAF.Items(5).Visible = True
-        '    Me.cmsAF.Items(6).Visible = True
-        '    Me.cmsAF.Items(7).Visible = True
-        '    Me.cmsAF.Items(8).Visible = True
-        '    Me.cmsAF.Items(9).Visible = True
-        '    Me.cmsAF.Items(10).Visible = True
-        '    Me.cmsAF.Items(11).Visible = False
-        '    Me.cmsAF.Items(12).Visible = False
-        '    Me.cmsAF.Items(13).Visible = False
-        '    Me.cmsAF.Items(14).Visible = False
-        '    Me.cmsAF.Items(15).Visible = False
-        '    Me.cmsAF.Items(16).Visible = False
-        '    Me.cmsAF.Items(17).Visible = False
-        'Else
-        '    Me.cmsAF.Items(0).Visible = False
-        '    Me.cmsAF.Items(1).Visible = False
-        '    Me.cmsAF.Items(2).Visible = False
-        '    Me.cmsAF.Items(3).Visible = False
-        '    Me.cmsAF.Items(4).Visible = False
-        '    Me.cmsAF.Items(5).Visible = False
-        '    Me.cmsAF.Items(6).Visible = False
-        '    Me.cmsAF.Items(7).Visible = False
-        '    Me.cmsAF.Items(8).Visible = False
-        '    Me.cmsAF.Items(9).Visible = False
-        '    Me.cmsAF.Items(10).Visible = False
-        '    Me.cmsAF.Items(11).Visible = True
-        '    Me.cmsAF.Items(12).Visible = True
-        '    Me.cmsAF.Items(13).Visible = True
-        '    Me.cmsAF.Items(14).Visible = True
-        '    Me.cmsAF.Items(15).Visible = True
-        '    Me.cmsAF.Items(16).Visible = True
-        '    Me.cmsAF.Items(17).Visible = True
 
-        'End If
     End Sub
 
- 
-   
+
+
     Private Sub lvAttachedFiles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
-    Dim g As New jbPicsAttachedFiles
+
 
 
     Private Sub btnOpen_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOpen.Click
-        'Dim x As New jbPicsAttachedFiles
-        'x.LaunchAttachedFile(Me.ID, Me.lvAttachedFiles.SelectedItems.Item(0).Text)
+
     End Sub
 
     Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDelete.Click
-        'Dim b As ListViewItem
-        'For Each b In Me.lvAttachedFiles.Items
-        '    If b.Selected = True Then
-        '        '' this is the one to delete 
-        '        '' 
-        '        g.DeleteFile(b.Text)
-        '    End If
-        'Next
-        'Dim z As New PopulateAF(Me)
+
     End Sub
 
     Private Sub btnRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRename.Click
-        'If Me.lvAttachedFiles.SelectedItems.Count > 1 Then
-        '    MsgBox("You can only rename 1 file at a time!", MsgBoxStyle.Exclamation, "Rename does not support multiple files")
-        '    Exit Sub
-        'End If
 
-
-        'Dim y As String = InputBox("New File Name", "New File Name")
-        'If y = "" Then
-        '    Exit Sub
-        'End If
-        'Dim count As Integer = 0
-
-        'If y.Contains("/") Then
-        '    count += 1
-        'ElseIf y.Contains("\") Then
-        '    count += 1
-        'ElseIf y.Contains("?") Then
-        '    count += 1
-        'ElseIf y.Contains(":") Then
-        '    count += 1
-        'ElseIf y.Contains("*") Then
-        '    count += 1
-        'ElseIf y.Contains(">") Then
-        '    count += 1
-        'ElseIf y.Contains("<") Then
-        '    count += 1
-        'ElseIf y.Contains("|") Then
-        '    count += 1
-        'ElseIf y.Contains(Chr(34)) Then
-        '    count += 1
-        'End If
-        'If count >= 1 Then
-        '    MsgBox("Cannot use these Characters: \ / ? : *  > < | " & Chr(34), MsgBoxStyle.Exclamation, "Cannot use Special Characters in File Name")
-        '    Exit Sub
-        'End If
-        'Dim s = Split(Me.lvAttachedFiles.SelectedItems.Item(0).Text, ".")
-        'Dim x As New jbPicsAttachedFiles
-        'x.RenameFile(s(0), y, s(1))
-        'Dim z As New PopulateAF(Me)
     End Sub
 
     Private Sub btnCut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCut.Click
-        'Dim h As ListViewItem
-        'g._arCopiedAttachedFiles.Clear()
-        'g._arCopiedOperation.Clear()
-        'Clipboard.Clear()
-        'For Each h In Me.lvAttachedFiles.Items
-        '    If h.Selected = True Then
-        '        Dim arNameAndExt = Split(h.Text, ".")
-        '        Dim FullName As String = g.ConvertFilePath(arNameAndExt(0), arNameAndExt(1))
-        '        g._arCopiedAttachedFiles.Add(FullName)
-        '        g._arCopiedOperation.Add("Cut")
-        '        Me.lvAttachedFiles.Items.Remove(h)
-        '    End If
-        'Next
+
     End Sub
 
     Private Sub btnCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopy.Click
-        'Try
 
-        '    Dim a As ListViewItem
-        '    For Each a In Me.lvAttachedFiles.Items
-        '        If a.Selected = True Then
-        '            Dim arNameAndExt = Split(a.Text, ".")
-        '            Dim FullName As String = g.ConvertFilePath(arNameAndExt(0), arNameAndExt(1))
-        '            g._arCopiedAttachedFiles.Add(FullName)
-        '            g._arCopiedOperation.Add("Copy")
-        '        End If
-        '    Next
-        'Catch ex As Exception
-        '    '' catch the error and call log 
-        'End Try
     End Sub
 
+#End Region
     Private Sub btnAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAscending.Click
         Me.btnAscending.Checked = True
         Me.btnDescending.Checked = False
@@ -2918,38 +2945,38 @@ Public Class Sales
     End Sub
 
     Private Sub btnNewFolder_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolder.Click
-        Dim y As String = InputBox("Please enter the name of the folder you want to create.", "New Folder Name", "New Folder")
-        If y = "" Then
-            Exit Sub
-        End If
-        Dim count As Integer = 0
+        'Dim y As String = InputBox("Please enter the name of the folder you want to create.", "New Folder Name", "New Folder")
+        'If y = "" Then
+        '    Exit Sub
+        'End If
+        'Dim count As Integer = 0
 
-        If y.Contains("/") Then
-            count += 1
-        ElseIf y.Contains("\") Then
-            count += 1
-        ElseIf y.Contains("?") Then
-            count += 1
-        ElseIf y.Contains(":") Then
-            count += 1
-        ElseIf y.Contains("*") Then
-            count += 1
-        ElseIf y.Contains(">") Then
-            count += 1
-        ElseIf y.Contains("<") Then
-            count += 1
-        ElseIf y.Contains("|") Then
-            count += 1
-        ElseIf y.Contains(Chr(34)) Then
-            count += 1
-        End If
-        If count >= 1 Then
-            MsgBox("Cannot use these Characters: \ / ? : *  > < | " & Chr(34), MsgBoxStyle.Exclamation, "Cannot use Special Characters in File Name")
-            Exit Sub
-        End If
-        g.CreateDirectoryAttachedFiles(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID & "\", y)
-        'Dim z As New PopulateAF(Me)
-       Me.GetRidOfOldAndPutNew()
+        'If y.Contains("/") Then
+        '    count += 1
+        'ElseIf y.Contains("\") Then
+        '    count += 1
+        'ElseIf y.Contains("?") Then
+        '    count += 1
+        'ElseIf y.Contains(":") Then
+        '    count += 1
+        'ElseIf y.Contains("*") Then
+        '    count += 1
+        'ElseIf y.Contains(">") Then
+        '    count += 1
+        'ElseIf y.Contains("<") Then
+        '    count += 1
+        'ElseIf y.Contains("|") Then
+        '    count += 1
+        'ElseIf y.Contains(Chr(34)) Then
+        '    count += 1
+        'End If
+        'If count >= 1 Then
+        '    MsgBox("Cannot use these Characters: \ / ? : *  > < | " & Chr(34), MsgBoxStyle.Exclamation, "Cannot use Special Characters in File Name")
+        '    Exit Sub
+        'End If
+        'g.CreateDirectoryAttachedFiles(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID & "\", y)
+        ''Dim z As New PopulateAF(Me)
+        'Me.GetRidOfOldAndPutNew()
     End Sub
 
     Private Sub EditCustomerToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EditCustomerToolStripMenuItem.Click
@@ -2963,7 +2990,7 @@ Public Class Sales
 
     End Sub
 
-  
+
     Private Sub pnlIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlIssue.Click
         For i As Integer = 1 To Me.pnlIssue.Controls.Count
             Dim all As Panel = Me.pnlIssue.Controls(i - 1)
@@ -3322,7 +3349,7 @@ Public Class Sales
             End Try
         End If
 
-    
+
 
 
 
@@ -3330,7 +3357,7 @@ Public Class Sales
 
     End Sub
 
- 
+
     Private Sub btnExclude_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExclude.Click
         If Me.btnExclude.Text.Contains("Off") Then
             Me.btnExclude.Text = "Turn On Exclusions"
@@ -3451,8 +3478,8 @@ Public Class Sales
         btnPrintThisIssue_Click(sender, e)
     End Sub
 
-  
-   
+
+
 
     Private Sub EmailThisLeadToAssignedRepsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EmailThisLeadToAssignedRepsToolStripMenuItem.Click
         btnEmailThisIssue_Click(sender, e)
@@ -3462,9 +3489,9 @@ Public Class Sales
         exclusions.ShowDialog()
     End Sub
 
-  
 
-    
+
+
 
 
 
@@ -3508,14 +3535,14 @@ Public Class Sales
                     For Each a In Me.pnlAFPics.Controls
 
                         If TypeOf (a) Is ListView Then
-                            If a.Name.ToString = "lsAF" Then
+                            If a.Name.ToString = "lsAttachedFiles" Then
                                 Dim pLocX As Integer = a.Location.X
                                 Dim pLocY As Integer = a.Location.Y
                                 a.Width = (p_width / 2) - 20
                                 a.Height = p_height - 10
                                 a.Location = New Point(5, 5)
 
-                            ElseIf a.Name.ToString = "lsJP" Then
+                            ElseIf a.Name.ToString = "lsJobPictures" Then
                                 '' for list view lsJP the offset of X has to be counted in as well
                                 '' 
                                 Dim pLocX As Integer = (p_width / 2)
@@ -3541,7 +3568,7 @@ Public Class Sales
 
                         If TypeOf (a) Is ListView Then
 
-                            If a.Name.ToString = "lsJP" Then
+                            If a.Name.ToString = "lsJobPictures" Then
                                 Dim pLocX As Integer = (p_width)
                                 Dim pLocY As Integer = a.Location.Y
                                 a.Width = (p_width - 20)
@@ -3564,7 +3591,7 @@ Public Class Sales
 
                         If TypeOf (a) Is ListView Then
 
-                            If a.Name.ToString = "lsAF" Then
+                            If a.Name.ToString = "lsAttachedFiles" Then
                                 Dim pLocX As Integer = a.Location.X
                                 Dim pLocY As Integer = a.Location.Y
                                 a.Width = (p_width) - 20
@@ -3588,14 +3615,14 @@ Public Class Sales
                     For Each a In Me.pnlAFPics.Controls
 
                         If TypeOf (a) Is ListView Then
-                            If a.Name.ToString = "lsAF" Then
+                            If a.Name.ToString = "lsAttachedFiles" Then
                                 Dim pLocX As Integer = a.Location.X
                                 Dim pLocY As Integer = a.Location.Y
                                 a.Width = (p_width / 2) - 20
                                 a.Height = p_height - 10
                                 a.Location = New Point(5, 5)
 
-                            ElseIf a.Name.ToString = "lsJP" Then
+                            ElseIf a.Name.ToString = "lsJobPictures" Then
                                 '' for list view lsJP the offset of X has to be counted in as well
                                 '' 
                                 Dim pLocX As Integer = (p_width / 2)
@@ -3644,7 +3671,7 @@ Public Class Sales
             SetAppt.ShowDialog()
         End If
 
-    
+
     End Sub
 
 #Region " ' Email ' buttons tracked down from tool strip sales department . . .  "
@@ -3690,11 +3717,11 @@ Public Class Sales
                             '' if its a called an cancelled, dont do anything with it. 
                             '' called and cancelled will come from enter lead
                             '' proc = GetIssuedCancels
-                           
+
                         End If
                         If TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
                             If y.Controls.ContainsKey("lnk" & leadNum.ToString) = True Then
-                                
+
                                 Dim splitName() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
                                 Dim canGetEmail As Boolean = z.CanRepGetEmail(splitName(0), splitName(1))
                                 If canGetEmail = True Then
@@ -3764,13 +3791,13 @@ Public Class Sales
                             '' if its a called an cancelled, dont do anything with it. 
                             '' called and cancelled will come from enter lead
                             '' proc = GetIssuedCancels
-                            
 
-                           
+
+
                         End If
                         If TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
                             If y.Controls.ContainsKey("lnk" & leadNum.ToString) = True Then
-                                 
+
                                 Dim splitName() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
                                 Dim canGetEmail As Boolean = z.CanRepGetEmail(splitName(0), splitName(1))
                                 If canGetEmail = True Then
@@ -3784,15 +3811,15 @@ Public Class Sales
                     Next
                 End If
             Next
-        Dim ii As Integer = 0
-        Dim _do As String = ""
-        For ii = 0 To arRepsThatCanGetEmail.Count - 1
-            _do += arRepsThatCanGetEmail(ii) & vbCrLf
-        Next
-        Dim aa As Integer = 0
-        Dim _dont As String
-        For aa = 0 To arRepsThatDontGetEmail.Count - 1
-            _dont += arRepsThatDontGetEmail(aa) & vbCrLf
+            Dim ii As Integer = 0
+            Dim _do As String = ""
+            For ii = 0 To arRepsThatCanGetEmail.Count - 1
+                _do += arRepsThatCanGetEmail(ii) & vbCrLf
+            Next
+            Dim aa As Integer = 0
+            Dim _dont As String
+            For aa = 0 To arRepsThatDontGetEmail.Count - 1
+                _dont += arRepsThatDontGetEmail(aa) & vbCrLf
             Next
             '' DEBUG INFO
             'MsgBox("DO: " & vbCrLf & _do & vbCrLf & "DONT:" & vbCrLf & _dont, MsgBoxStyle.Information, "Debug NFO - Reps That DO: No Exclusions")
@@ -3820,7 +3847,7 @@ Public Class Sales
 
             xyz.BulkEmailWithoutExceptions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
         End If
-       
+
 
     End Sub
 
@@ -3837,121 +3864,7 @@ Public Class Sales
 
 #End Region
 
-    Private Sub EmailSingleRecord()
-        Dim z As New EmailIssuedLeads
-        Dim emlBody As String = ""
-        If Me.btnExclude.Text.Contains("Off") Then
-            Dim y As Panel
-            Dim leadNum As String = "0"
-            For Each y In pnlIssue.Controls
-                If y.BorderStyle = BorderStyle.FixedSingle Then
-                    '' this is the selected record now determine rep and can they get email and so on. . . . . 
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
-                        If TypeOf ctrl Is LinkLabel Then
-                            'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
-                            leadNum = ctrl.Text
-                            '' check last m result here to make sure it can be done. 
-                            '' 
-                            ''--8-25-2015 Per Andy Edit
-                            '' needs to filter down to ALL print options, all Email options
-                            '' 
-                            
 
-
-                        ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
-                            Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                            Dim fname As String = strRep(0)
-                            Dim lname As String = strRep(1)
-
-                            Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
-                            If canGetEmail = False Then
-                                MsgBox("This sales rep cannot recieve emails.", MsgBoxStyle.Critical, "Can't Recieve Email")
-                                Exit Sub
-                            End If
-                            Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
-                            Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
-                            STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
-                            'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
-                            If canGetEmail = True Then
-                                '' check here to make sure not called an cancelled
-                                '' 8-26-2014
-
-                                If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
-                                    MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
-                                    Exit Sub
-                                End If
-
-                                emlBody = z.ConstructMessageWithExclusions(fname, lname, leadNum, exclusionSet, emailAddy)
-                                'MsgBox(emlBody)
-                                '' uncomment here to actually send
-                                z.EMAIL_SINGLE_MarkupEmail_WITH_EXCLUSIONS(fname, lname, leadNum, exclusionSet, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
-                            ElseIf canGetEmail = False Then
-                                '' do nothing for now. 
-                                ''
-                            End If
-
-                        End If '' end type of control 
-
-                    Next
-                End If
-            Next
-        ElseIf Me.btnExclude.Text.Contains("On") Then
-            Dim y As Panel
-            Dim leadNum As String = "0"
-            For Each y In pnlIssue.Controls
-                If y.BorderStyle = BorderStyle.FixedSingle Then
-                    '' this is the selected record now determine rep and can they get email and so on. . . . . 
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
-                        If TypeOf ctrl Is LinkLabel Then
-                            'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
-                            leadNum = ctrl.Text
-                            
-                        ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
-                            Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                            Dim fname As String = strRep(0)
-                            Dim lname As String = strRep(1)
-                            Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
-                            If canGetEmail = False Then
-                                MsgBox("This Sales Rep cannot recieve Email.", MsgBoxStyle.Critical, "Can't Recieve Email")
-                                Exit Sub
-                            End If
-                            Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
-                            Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
-                            STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
-                            'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
-                            If canGetEmail = True Then
-                                '' check here to make sure not called an cancelled
-                                '' 8-26-2014
-
-                                If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
-                                    MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
-                                    Exit Sub
-                                End If
-
-
-
-                                emlBody = z.ConstructMessageWithoutExclusions(fname, lname, leadNum, emailAddy)
-                                'MsgBox(emlBody)
-                                '' uncomment here to actually send
-                                z.EMAIL_SINGLE_MarkupEmail_WITHOUT_EXCLUSIONS(fname, lname, leadNum, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
-                            ElseIf canGetEmail = False Then
-                                '' do nothing for now. 
-                            End If
-                        End If
-
-                        'End If
-
-
-
-                    Next
-                End If
-            Next
-        End If
-
-
-    End Sub
 
     Private Sub tsAttachedFilesNAV_Click(sender As Object, e As EventArgs) Handles tsAttachedFilesNAV.Click
 
@@ -3963,14 +3876,25 @@ Public Class Sales
             If TypeOf (x) Is ListView Then
                 If x.Name = "lsAF" Then
                     Dim a As ListView = x
-                    Dim b As New ReusableListViewControl
-                    b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
+                    '' EDIT 11-15-2015
+                    '' static control / multi thread
+                    'Dim b As New ReusableListViewControl
+                    'b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
+                    '' end edit
+
+                    Get_Dirs(STATIC_VARIABLES.CurrentID)
+                    Get_Files_And_Dirs(STATIC_VARIABLES.CurrentID)
                 End If
             ElseIf x.Name = "lsJP" Then
                 If x.Name = "lsJP" Then
                     Dim a As ListView = x
-                    Dim b As New ReusableListViewControl
-                    b.ChangeDirectory(STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID, a)
+                    '' EDIT 11-15-2015
+                    '' static control / multi thread
+                    'Dim b As New ReusableListViewControl
+                    'b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
+                    '' end edit
+                    Get_Dirs(STATIC_VARIABLES.CurrentID)
+                    Get_Files_And_Dirs(STATIC_VARIABLES.CurrentID)
                 End If
             End If
         Next
@@ -4022,7 +3946,7 @@ Public Class Sales
         Dim ls2 As ListView = pnlAFPics.Controls("lsJP")
         pnlAFPics.Controls.Remove(ls2)
 
-        
+
         Dim widthOfParent As Integer = pnlAFPics.Width
         Dim widthOfControl As Integer = (widthOfParent / 2) - 20
         Dim heightOfParent As Integer = pnlAFPics.Height
@@ -4030,10 +3954,18 @@ Public Class Sales
         Dim InitPoint As System.Drawing.Point = New System.Drawing.Point((0 + 10), (0 + 10))
         Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(((widthOfParent / 2) + 10), (0 + 10))
 
-        Dim rc As ReusableListViewControl = New ReusableListViewControl
-        rc.GenerateListControl(pnlAFPics, dir1, InitPoint, "lsAF", heightOfControl, widthOfControl)
-        Dim rc2 As ReusableListViewControl = New ReusableListViewControl
-        rc2.GenerateListControl(pnlAFPics, dir2, InitPoint2, "lsJP", heightOfControl, widthOfControl)
+
+        '' EDIT 11-15-2015
+        '' Going back to a static control design with
+        '' multi-threads. AC
+        'Dim rc As ReusableListViewControl = New ReusableListViewControl
+        'rc.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint, "lsAF", heightOfControl, widthOfControl)
+        'Dim rc2 As ReusableListViewControl = New ReusableListViewControl
+        'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
+        ''END EDIT 
+
+        Get_Dirs(STATIC_VARIABLES.CurrentID)
+        Get_Files_And_Dirs(STATIC_VARIABLES.CurrentID)
 
     End Sub
 
@@ -4099,7 +4031,7 @@ Public Class Sales
             Next
             frmPrint.ShowDialog()
         End If
-        
+
 
     End Sub
 
@@ -4252,7 +4184,7 @@ Public Class Sales
                 End If
             Next
         End If
-        
+
     End Sub
 
 #End Region
@@ -4272,9 +4204,11 @@ Public Class Sales
 
     End Function
 #End Region
-     
+
+#Region "Emailing Stuff"
+
     Private Sub btnEMailCustomer_Click(sender As Object, e As EventArgs) Handles btnEMailCustomer.Click
-        
+
         ' MsgBox("Hit Test", MsgBoxStyle.Information, "DEBUG INFO")
         '' pull up frmEmailPreview
         '' 3 public vars
@@ -4298,12 +4232,126 @@ Public Class Sales
         Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
 
         frmEmailTemplateChoice.ShowDialog()
+    End Sub
+
+
+    Private Sub EmailSingleRecord()
+        Dim z As New EmailIssuedLeads
+        Dim emlBody As String = ""
+        If Me.btnExclude.Text.Contains("Off") Then
+            Dim y As Panel
+            Dim leadNum As String = "0"
+            For Each y In pnlIssue.Controls
+                If y.BorderStyle = BorderStyle.FixedSingle Then
+                    '' this is the selected record now determine rep and can they get email and so on. . . . . 
+                    Dim ctrl As Control
+                    For Each ctrl In y.Controls
+                        If TypeOf ctrl Is LinkLabel Then
+                            'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
+                            leadNum = ctrl.Text
+                            '' check last m result here to make sure it can be done. 
+                            '' 
+                            ''--8-25-2015 Per Andy Edit
+                            '' needs to filter down to ALL print options, all Email options
+                            '' 
 
 
 
+                        ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
+                            Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                            Dim fname As String = strRep(0)
+                            Dim lname As String = strRep(1)
+
+                            Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
+                            If canGetEmail = False Then
+                                MsgBox("This sales rep cannot recieve emails.", MsgBoxStyle.Critical, "Can't Recieve Email")
+                                Exit Sub
+                            End If
+                            Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
+                            Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
+                            STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
+                            'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
+                            If canGetEmail = True Then
+                                '' check here to make sure not called an cancelled
+                                '' 8-26-2014
+
+                                If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
+                                    MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
+                                    Exit Sub
+                                End If
+
+                                emlBody = z.ConstructMessageWithExclusions(fname, lname, leadNum, exclusionSet, emailAddy)
+                                'MsgBox(emlBody)
+                                '' uncomment here to actually send
+                                z.EMAIL_SINGLE_MarkupEmail_WITH_EXCLUSIONS(fname, lname, leadNum, exclusionSet, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
+                            ElseIf canGetEmail = False Then
+                                '' do nothing for now. 
+                                ''
+                            End If
+
+                        End If '' end type of control 
+
+                    Next
+                End If
+            Next
+        ElseIf Me.btnExclude.Text.Contains("On") Then
+            Dim y As Panel
+            Dim leadNum As String = "0"
+            For Each y In pnlIssue.Controls
+                If y.BorderStyle = BorderStyle.FixedSingle Then
+                    '' this is the selected record now determine rep and can they get email and so on. . . . . 
+                    Dim ctrl As Control
+                    For Each ctrl In y.Controls
+                        If TypeOf ctrl Is LinkLabel Then
+                            'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
+                            leadNum = ctrl.Text
+
+                        ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
+                            Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                            Dim fname As String = strRep(0)
+                            Dim lname As String = strRep(1)
+                            Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
+                            If canGetEmail = False Then
+                                MsgBox("This Sales Rep cannot recieve Email.", MsgBoxStyle.Critical, "Can't Recieve Email")
+                                Exit Sub
+                            End If
+                            Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
+                            Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
+                            STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
+                            'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
+                            If canGetEmail = True Then
+                                '' check here to make sure not called an cancelled
+                                '' 8-26-2014
+
+                                If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
+                                    MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
+                                    Exit Sub
+                                End If
+
+
+
+                                emlBody = z.ConstructMessageWithoutExclusions(fname, lname, leadNum, emailAddy)
+                                'MsgBox(emlBody)
+                                '' uncomment here to actually send
+                                z.EMAIL_SINGLE_MarkupEmail_WITHOUT_EXCLUSIONS(fname, lname, leadNum, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
+                            ElseIf canGetEmail = False Then
+                                '' do nothing for now. 
+                            End If
+                        End If
+
+                        'End If
+
+
+
+                    Next
+                End If
+            Next
+        End If
 
 
     End Sub
+
+#End Region
 
     Private Sub dtpSummary2_LostFocus(sender As Object, e As EventArgs) Handles dtpSummary2.LostFocus
         focusdtp2 = False
@@ -4338,7 +4386,7 @@ Public Class Sales
                 cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
             End If
         End If
-   
+
     End Sub
 
     Private Sub tbMain_SizeChanged(sender As Object, e As EventArgs) Handles tbMain.SizeChanged
