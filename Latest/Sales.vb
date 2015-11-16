@@ -2061,10 +2061,8 @@ Public Class Sales
         'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
         ''END EDIT 
 
-
-        Get_Files_And_Dirs(STATIC_VARIABLES.CurrentID)
-        Get_Dirs(STATIC_VARIABLES.CurrentID)
-
+      
+        GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
     End Sub
 
     Private Sub tsbtnShowCH_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbtnShowCH.Click
@@ -2745,15 +2743,37 @@ Public Class Sales
     Public Delegate Sub GetDirs(ByVal LeadNum As String)
 
     Private Function Get_Files_And_Dirs(ByVal LeadNum As String)
-        Dim z As GetFiles
-        z = AddressOf GetTheFiles
-        z.Invoke(LeadNum)
+        'Dim z As GetFiles
+        'z = AddressOf GetTheFiles
+        'z.Invoke(LeadNum)
+        GetTheFiles(LeadNum)
     End Function
 
     Private Function Get_Dirs(ByVal LeadNum As String)
-        Dim z As GetDirs
-        z = AddressOf GetTheDirs
-        z.Invoke(LeadNum)
+        'Dim z As GetDirs
+        'z = AddressOf GetTheDirs
+        'z.Invoke(LeadNum)
+        GetTheDirs(LeadNum)
+    End Function
+
+    Private Function GetImages_Files_And_Folders(ByVal LeadNum As String)
+        Me.imgLst16.Images.Clear()
+        Me.ImgLst32.Images.Clear()
+        Me.ImgLst64.Images.Clear()
+        Me.ImgLst128.Images.Clear()
+        Me.ImgLst256.Images.Clear()
+
+
+
+        Get_Dirs(LeadNum)
+        Get_Files_And_Dirs(LeadNum)
+
+        Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
+        Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
+
+        Me.lsJobPictures.LargeImageList = Me.ImgLst32
+        Me.lsJobPictures.SmallImageList = Me.ImgLst32
+
     End Function
 
     Private Function GetTheFiles(ByVal LeadNum As String)
@@ -2769,6 +2789,9 @@ Public Class Sales
     End Function
 
     Private Function GetTheDirs(ByVal LeadNum As String)
+
+
+
         Dim c As New AF_And_JP_Logic(LeadNum, "AF") '' af AND jp
         ar_dir = c.Directories
         AddListItem_Directories(ar_dir, Me.lsAttachedFiles)
@@ -2781,7 +2804,8 @@ Public Class Sales
 
     Private Function AddListItem_Files(ByVal ItemList As List(Of AF_And_JP_Logic.FileObject), ByVal Control As ListView)
         Dim c As AF_And_JP_Logic.FileObject
-        Me.lsAttachedFiles.Items.Clear()
+        ' Control.Items.Clear()
+        
         Try
 
             For Each c In ItemList
@@ -2791,6 +2815,12 @@ Public Class Sales
                 y.SubItems.Add(c.FileSize)
                 y.SubItems.Add("File")
                 y.Tag = c.FullPath
+                y.ImageKey = c.FileName
+                Me.imgLst16.Images.Add(c.FileName, c.smIcon)
+                Me.ImgLst32.Images.Add(c.FileName, c.mdIcon)
+                Me.ImgLst64.Images.Add(c.FileName, c.lgIcon)
+                Me.ImgLst128.Images.Add(c.FileName, c.lgThumb)
+                Me.ImgLst256.Images.Add(c.FileName, c.jbIcon)
                 Control.Items.Add(y)
             Next
         Catch ex As Exception
@@ -2800,7 +2830,7 @@ Public Class Sales
 
     Private Function AddListItem_Directories(ByVal ItemList As List(Of AF_And_JP_Logic.DirObject), ByVal Control As ListView)
         Dim c As AF_And_JP_Logic.DirObject
-        Me.lsAttachedFiles.Items.Clear()
+        ' Control.Items.Clear()
         Try
             For Each c In ItemList
                 Dim y As New ListViewItem
@@ -2809,6 +2839,12 @@ Public Class Sales
                 y.SubItems.Add("")
                 y.Tag = c.FullPath
                 y.SubItems.Add("Folder")
+                Me.imgLst16.Images.Add(c.FileName, c.smIcon)
+                Me.ImgLst32.Images.Add(c.FileName, c.mdIcon)
+                Me.ImgLst64.Images.Add(c.FileName, c.lgIcon)
+                Me.ImgLst128.Images.Add(c.FileName, c.lgIcon)
+                Me.ImgLst256.Images.Add(c.FileName, c.jbIcon)
+                y.ImageKey = c.FileName
                 Control.Items.Add(y)
             Next
         Catch ex As Exception
@@ -2876,6 +2912,9 @@ Public Class Sales
 
     Private Sub btnXLarge_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnXLarge.Click
         Me.btnXLarge.Checked = True
+        Me.lsAttachedFiles.View = View.LargeIcon
+        Me.lsAttachedFiles.LargeImageList = Me.ImgLst256
+        Me.lsAttachedFiles.SmallImageList = Me.ImgLst256
         Me.btnLarge.Checked = False
         Me.btnMedium.Checked = False
         Me.btnSmall.Checked = False
@@ -2887,6 +2926,9 @@ Public Class Sales
     Private Sub btnLarge_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLarge.Click
         Me.btnXLarge.Checked = False
         Me.btnLarge.Checked = True
+        Me.lsAttachedFiles.LargeImageList = Me.ImgLst128
+        Me.lsAttachedFiles.SmallImageList = Me.ImgLst128
+        Me.lsAttachedFiles.View = View.LargeIcon
         Me.btnMedium.Checked = False
         Me.btnSmall.Checked = False
         Me.btnList.Checked = False
@@ -2898,6 +2940,9 @@ Public Class Sales
         Me.btnXLarge.Checked = False
         Me.btnLarge.Checked = False
         Me.btnMedium.Checked = True
+        Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
+        Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
+        Me.lsAttachedFiles.View = View.LargeIcon
         Me.btnSmall.Checked = False
         Me.btnList.Checked = False
         Me.btnDetails.Checked = False
@@ -2909,6 +2954,9 @@ Public Class Sales
         Me.btnLarge.Checked = False
         Me.btnMedium.Checked = False
         Me.btnSmall.Checked = True
+        Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
+        Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
+        Me.lsAttachedFiles.View = View.SmallIcon
         Me.btnList.Checked = False
         Me.btnDetails.Checked = False
         Me.btnTiles.Checked = False
@@ -2920,6 +2968,9 @@ Public Class Sales
         Me.btnMedium.Checked = False
         Me.btnSmall.Checked = False
         Me.btnList.Checked = True
+        Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
+        Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
+        Me.lsAttachedFiles.View = View.List
         Me.btnDetails.Checked = False
         Me.btnTiles.Checked = False
     End Sub
@@ -2931,6 +2982,10 @@ Public Class Sales
         Me.btnSmall.Checked = False
         Me.btnList.Checked = False
         Me.btnDetails.Checked = True
+        Me.lsAttachedFiles.LargeImageList = Me.imgLst16
+        Me.lsAttachedFiles.SmallImageList = Me.imgLst16
+        Me.lsAttachedFiles.View = View.Details
+        '' column logic.
         Me.btnTiles.Checked = False
     End Sub
 
@@ -2942,6 +2997,9 @@ Public Class Sales
         Me.btnList.Checked = False
         Me.btnDetails.Checked = False
         Me.btnTiles.Checked = True
+        Me.lsAttachedFiles.LargeImageList = Me.ImgLst128
+        Me.lsAttachedFiles.SmallImageList = Me.ImgLst128
+        Me.lsAttachedFiles.View = View.Tile
     End Sub
 
     Private Sub btnNewFolder_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolder.Click
@@ -3882,8 +3940,7 @@ Public Class Sales
                     'b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
                     '' end edit
 
-                    Get_Dirs(STATIC_VARIABLES.CurrentID)
-                    Get_Files_And_Dirs(STATIC_VARIABLES.CurrentID)
+                    GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
                 End If
             ElseIf x.Name = "lsJP" Then
                 If x.Name = "lsJP" Then
@@ -3893,8 +3950,7 @@ Public Class Sales
                     'Dim b As New ReusableListViewControl
                     'b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
                     '' end edit
-                    Get_Dirs(STATIC_VARIABLES.CurrentID)
-                    Get_Files_And_Dirs(STATIC_VARIABLES.CurrentID)
+                    GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
                 End If
             End If
         Next
@@ -3964,8 +4020,7 @@ Public Class Sales
         'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
         ''END EDIT 
 
-        Get_Dirs(STATIC_VARIABLES.CurrentID)
-        Get_Files_And_Dirs(STATIC_VARIABLES.CurrentID)
+       GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
 
     End Sub
 
