@@ -247,7 +247,7 @@ Public Class AF_And_JP_Logic
                 z.FileExt = y.Extension
                 z.FileName = y.Name
                 z.FullPath = y.FullName
-                z.FileSize = (Math.Round(y.Length, 2) / 1024).ToString & " KB"
+                z.FileSize = y.Length
                 z.IconKey = y.Name
                 z.jbIcon = GetJumbos(y.FullName)
                 z.lgIcon = GetLarges(y.FullName)

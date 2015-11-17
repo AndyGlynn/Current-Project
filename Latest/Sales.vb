@@ -2061,8 +2061,11 @@ Public Class Sales
         'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
         ''END EDIT 
 
-      
-        GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
+        'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
+        'th1.Start()
+        'th1.Join()
+        bgGetImages_DoWork(Me, Nothing)
+        'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
     End Sub
 
     Private Sub tsbtnShowCH_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbtnShowCH.Click
@@ -2743,25 +2746,47 @@ Public Class Sales
     Public Delegate Sub GetDirs(ByVal LeadNum As String)
 
     Private Function Get_Files_And_Dirs(ByVal LeadNum As String)
-        'Dim z As GetFiles
-        'z = AddressOf GetTheFiles
-        'z.Invoke(LeadNum)
-        GetTheFiles(LeadNum)
+        Dim z As GetFiles
+        z = AddressOf GetTheFiles
+        z.Invoke(LeadNum)
+        'GetTheFiles(LeadNum)
     End Function
 
     Private Function Get_Dirs(ByVal LeadNum As String)
-        'Dim z As GetDirs
-        'z = AddressOf GetTheDirs
-        'z.Invoke(LeadNum)
-        GetTheDirs(LeadNum)
+        Dim z As GetDirs
+        z = AddressOf GetTheDirs
+        z.Invoke(LeadNum)
+        'GetTheDirs(LeadNum)
     End Function
 
     Private Function GetImages_Files_And_Folders(ByVal LeadNum As String)
+
+        'CheckForIllegalCrossThreadCalls = False
+        
+
+
+        Me.imgLst16.ColorDepth = ColorDepth.Depth32Bit
+        Me.imgLst16.ImageSize = New Size(16, 16)
         Me.imgLst16.Images.Clear()
+
+        Me.ImgLst32.ColorDepth = ColorDepth.Depth32Bit
+        Me.ImgLst32.ImageSize = New Size(32, 32)
         Me.ImgLst32.Images.Clear()
-        Me.ImgLst64.Images.Clear()
+
+        Me.ImgLst48.Images.Clear()
+        Me.ImgLst48.ColorDepth = ColorDepth.Depth32Bit
+        Me.ImgLst48.ImageSize = New Size(64, 64)
+
         Me.ImgLst128.Images.Clear()
+        Me.ImgLst128.ColorDepth = ColorDepth.Depth32Bit
+        Me.ImgLst128.ImageSize = New Size(64, 64)
+
         Me.ImgLst256.Images.Clear()
+        Me.ImgLst256.ColorDepth = ColorDepth.Depth32Bit
+        Me.ImgLst256.ImageSize = New Size(256, 256)
+
+        Me.lsAttachedFiles.Items.Clear()
+        Me.lsJobPictures.Items.Clear()
 
 
 
@@ -2812,15 +2837,22 @@ Public Class Sales
                 Dim y As New ListViewItem
                 y.Text = c.FileName
                 y.SubItems.Add(c.DateModified)
-                y.SubItems.Add(c.FileSize)
+
+                Dim sz = Math.Round(c.FileSize / 1024, 0)
+                Dim siz = sz.ToString & " KB"
+                y.SubItems.Add(siz)
                 y.SubItems.Add("File")
                 y.Tag = c.FullPath
                 y.ImageKey = c.FileName
                 Me.imgLst16.Images.Add(c.FileName, c.smIcon)
                 Me.ImgLst32.Images.Add(c.FileName, c.mdIcon)
-                Me.ImgLst64.Images.Add(c.FileName, c.lgIcon)
-                Me.ImgLst128.Images.Add(c.FileName, c.lgThumb)
+                Me.ImgLst48.Images.Add(c.FileName, c.lgIcon)
+                Me.ImgLst128.Images.Add(c.FileName, c.lgIcon)
                 Me.ImgLst256.Images.Add(c.FileName, c.jbIcon)
+                '' if thumbs are present, add them to image lists
+                '' but only if they are present. 
+
+
                 Control.Items.Add(y)
             Next
         Catch ex As Exception
@@ -2841,9 +2873,12 @@ Public Class Sales
                 y.SubItems.Add("Folder")
                 Me.imgLst16.Images.Add(c.FileName, c.smIcon)
                 Me.ImgLst32.Images.Add(c.FileName, c.mdIcon)
-                Me.ImgLst64.Images.Add(c.FileName, c.lgIcon)
+                Me.ImgLst48.Images.Add(c.FileName, c.lgIcon)
                 Me.ImgLst128.Images.Add(c.FileName, c.lgIcon)
                 Me.ImgLst256.Images.Add(c.FileName, c.jbIcon)
+                '' if thumbs are present, add them to image lists
+                '' but only if they are present. 
+
                 y.ImageKey = c.FileName
                 Control.Items.Add(y)
             Next
@@ -2900,6 +2935,8 @@ Public Class Sales
     End Sub
 
 #End Region
+
+#Region "List Views"
     Private Sub btnAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAscending.Click
         Me.btnAscending.Checked = True
         Me.btnDescending.Checked = False
@@ -2940,8 +2977,8 @@ Public Class Sales
         Me.btnXLarge.Checked = False
         Me.btnLarge.Checked = False
         Me.btnMedium.Checked = True
-        Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
-        Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
+        Me.lsAttachedFiles.LargeImageList = Me.ImgLst48
+        Me.lsAttachedFiles.SmallImageList = Me.ImgLst48
         Me.lsAttachedFiles.View = View.LargeIcon
         Me.btnSmall.Checked = False
         Me.btnList.Checked = False
@@ -2986,6 +3023,23 @@ Public Class Sales
         Me.lsAttachedFiles.SmallImageList = Me.imgLst16
         Me.lsAttachedFiles.View = View.Details
         '' column logic.
+        Dim colName As New ColumnHeader
+        colName.Width = 150
+        colName.Text = "Name"
+        Dim colDateMod As New ColumnHeader
+        colDateMod.Width = 75
+        colDateMod.Text = "Date Modified"
+        Dim colType As New ColumnHeader
+        colType.Width = 50
+        colType.Text = "Size"
+        Dim colSize As New ColumnHeader
+        colSize.Width = 50
+        colSize.Text = "Type"
+        Me.lsAttachedFiles.Columns.Clear()
+
+        Dim arCols() As ColumnHeader = {colName, colDateMod, colType, colSize}
+        Me.lsAttachedFiles.Columns.AddRange(arCols)
+
         Me.btnTiles.Checked = False
     End Sub
 
@@ -3001,7 +3055,7 @@ Public Class Sales
         Me.lsAttachedFiles.SmallImageList = Me.ImgLst128
         Me.lsAttachedFiles.View = View.Tile
     End Sub
-
+#End Region
     Private Sub btnNewFolder_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolder.Click
         'Dim y As String = InputBox("Please enter the name of the folder you want to create.", "New Folder Name", "New Folder")
         'If y = "" Then
@@ -3940,18 +3994,26 @@ Public Class Sales
                     'b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
                     '' end edit
 
-                    GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
+                    'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
+                    'th1.Start()
+                    'th1.Join()
+                    'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
+                    bgGetImages_DoWork(Me, Nothing)
                 End If
             ElseIf x.Name = "lsJP" Then
-                If x.Name = "lsJP" Then
-                    Dim a As ListView = x
-                    '' EDIT 11-15-2015
-                    '' static control / multi thread
-                    'Dim b As New ReusableListViewControl
-                    'b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
-                    '' end edit
-                    GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
-                End If
+
+                Dim a As ListView = x
+                '' EDIT 11-15-2015
+                '' static control / multi thread
+                'Dim b As New ReusableListViewControl
+                'b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
+                '' end edit
+                'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
+                'th1.Start()
+                'th1.Join()
+                bgGetImages_DoWork(Me, Nothing)
+                'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
+
             End If
         Next
 
@@ -4020,7 +4082,11 @@ Public Class Sales
         'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
         ''END EDIT 
 
-       GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
+        'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
+        'th1.Start()
+        'th1.Join()
+        bgGetImages_DoWork(Me, Nothing)
+        'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
 
     End Sub
 
@@ -4449,4 +4515,118 @@ Public Class Sales
         'MsgBox(x.ToString)
         'Me.tbMain.ItemSize = New Size(x, 20)
     End Sub
+
+    Private Sub bgGetImages_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgGetImages.DoWork
+        GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
+    End Sub
+#Region "List View - Job Pictures"
+    Private Sub cmJPExtraLarge_Click(sender As Object, e As EventArgs) Handles cmJPExtraLarge.Click
+        Me.cmJPExtraLarge.Checked = True
+        Me.lsJobPictures.View = View.LargeIcon
+        Me.lsJobPictures.LargeImageList = Me.ImgLst256
+        Me.lsJobPictures.SmallImageList = Me.ImgLst256
+        Me.cmJPLarge.Checked = False
+        Me.cmJPMedium.Checked = False
+        Me.cmJPSmall.Checked = False
+        Me.cmJPList.Checked = False
+        Me.cmJPDetails.Checked = False
+        Me.cmJPTiles.Checked = False
+    End Sub
+
+    Private Sub cmJPLarge_Click(sender As Object, e As EventArgs) Handles cmJPLarge.Click
+        Me.cmJPExtraLarge.Checked = False
+        Me.lsJobPictures.View = View.LargeIcon
+        Me.lsJobPictures.LargeImageList = Me.ImgLst128
+        Me.lsJobPictures.SmallImageList = Me.ImgLst128
+        Me.cmJPLarge.Checked = True
+        Me.cmJPMedium.Checked = False
+        Me.cmJPSmall.Checked = False
+        Me.cmJPList.Checked = False
+        Me.cmJPDetails.Checked = False
+        Me.cmJPTiles.Checked = False
+    End Sub
+
+    Private Sub cmJPMedium_Click(sender As Object, e As EventArgs) Handles cmJPMedium.Click
+        Me.cmJPExtraLarge.Checked = False
+        Me.lsJobPictures.View = View.LargeIcon
+        Me.lsJobPictures.LargeImageList = Me.ImgLst48
+        Me.lsJobPictures.SmallImageList = Me.ImgLst48
+        Me.cmJPLarge.Checked = False
+        Me.cmJPMedium.Checked = True
+        Me.cmJPSmall.Checked = False
+        Me.cmJPList.Checked = False
+        Me.cmJPDetails.Checked = False
+        Me.cmJPTiles.Checked = False
+    End Sub
+
+    Private Sub cmJPSmall_Click(sender As Object, e As EventArgs) Handles cmJPSmall.Click
+        Me.cmJPExtraLarge.Checked = False
+        Me.lsJobPictures.View = View.SmallIcon
+        Me.lsJobPictures.LargeImageList = Me.ImgLst32
+        Me.lsJobPictures.SmallImageList = Me.ImgLst32
+        Me.cmJPLarge.Checked = False
+        Me.cmJPMedium.Checked = False
+        Me.cmJPSmall.Checked = True
+        Me.cmJPList.Checked = False
+        Me.cmJPDetails.Checked = False
+        Me.cmJPTiles.Checked = False
+    End Sub
+
+    Private Sub cmJPList_Click(sender As Object, e As EventArgs) Handles cmJPList.Click
+        Me.cmJPExtraLarge.Checked = False
+        Me.lsJobPictures.View = View.List
+        Me.lsJobPictures.LargeImageList = Me.ImgLst32
+        Me.lsJobPictures.SmallImageList = Me.ImgLst32
+        Me.cmJPLarge.Checked = False
+        Me.cmJPMedium.Checked = False
+        Me.cmJPSmall.Checked = False
+        Me.cmJPList.Checked = True
+        Me.cmJPDetails.Checked = False
+        Me.cmJPTiles.Checked = False
+    End Sub
+
+    Private Sub cmJPDetails_Click(sender As Object, e As EventArgs) Handles cmJPDetails.Click
+        Me.cmJPExtraLarge.Checked = False
+        Me.lsJobPictures.View = View.Details
+        Me.lsJobPictures.LargeImageList = Me.imgLst16
+        Me.lsJobPictures.SmallImageList = Me.imgLst16
+        Me.cmJPLarge.Checked = False
+        Me.cmJPMedium.Checked = False
+        Me.cmJPSmall.Checked = False
+        Me.cmJPList.Checked = False
+        Me.cmJPDetails.Checked = True
+        Me.cmJPTiles.Checked = False
+
+        Dim colName As New ColumnHeader
+        colName.Width = 150
+        colName.Text = "Name"
+        Dim colDateMod As New ColumnHeader
+        colDateMod.Width = 75
+        colDateMod.Text = "Date Modified"
+        Dim colType As New ColumnHeader
+        colType.Width = 50
+        colType.Text = "Size"
+        Dim colSize As New ColumnHeader
+        colSize.Width = 50
+        colSize.Text = "Type"
+        Me.lsJobPictures.Columns.Clear()
+
+        Dim arCols() As ColumnHeader = {colName, colDateMod, colType, colSize}
+        Me.lsJobPictures.Columns.AddRange(arCols)
+
+    End Sub
+
+    Private Sub cmJPTiles_Click(sender As Object, e As EventArgs) Handles cmJPTiles.Click
+        Me.cmJPExtraLarge.Checked = False
+        Me.lsJobPictures.View = View.Details
+        Me.lsJobPictures.LargeImageList = Me.ImgLst128
+        Me.lsJobPictures.SmallImageList = Me.ImgLst128
+        Me.cmJPLarge.Checked = False
+        Me.cmJPMedium.Checked = False
+        Me.cmJPSmall.Checked = False
+        Me.cmJPList.Checked = False
+        Me.cmJPDetails.Checked = False
+        Me.cmJPTiles.Checked = True
+    End Sub
+#End Region
 End Class
