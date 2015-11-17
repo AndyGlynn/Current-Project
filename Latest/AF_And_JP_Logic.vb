@@ -231,6 +231,12 @@ Public Class AF_And_JP_Logic
         ar_directories = Get_Folders_In_Directory(target_path)
 
     End Sub
+    Public Sub New(ByVal Directory As String)
+        ar_Files = New List(Of FileObject)
+        ar_Files = Get_Files_In_Directory(Directory)
+        ar_directories = New List(Of DirObject)
+        ar_directories = Get_Folders_In_Directory(Directory)
+    End Sub
 #End Region
 #Region "Main Loops To Get Files and Folder Info"
 

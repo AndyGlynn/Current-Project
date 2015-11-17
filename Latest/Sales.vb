@@ -2763,7 +2763,7 @@ Public Class Sales
 
         'CheckForIllegalCrossThreadCalls = False
         
-
+        Me.tsAttachedFilesNAV.Enabled = False
 
         Me.imgLst16.ColorDepth = ColorDepth.Depth32Bit
         Me.imgLst16.ImageSize = New Size(16, 16)
@@ -2915,7 +2915,9 @@ Public Class Sales
 
 
     Private Sub btnOpen_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOpen.Click
-
+        If sel_Item_right IsNot Nothing Then
+            System.Diagnostics.Process.Start(sel_Item_right.Tag)
+        End If
     End Sub
 
     Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDelete.Click
@@ -3980,39 +3982,20 @@ Public Class Sales
 
     Private Sub tsAttachedFilesNAV_Click(sender As Object, e As EventArgs) Handles tsAttachedFilesNAV.Click
 
-        'MsgBox(dir1 & vbCrLf & dir2)
-        'Me.GetRidOfOldAndPutNew()
-
         Dim x As Control
         For Each x In Me.pnlAFPics.Controls
             If TypeOf (x) Is ListView Then
-                If x.Name = "lsAF" Then
+                If x.Name = "lsAttachedFiles" Then
                     Dim a As ListView = x
-                    '' EDIT 11-15-2015
-                    '' static control / multi thread
-                    'Dim b As New ReusableListViewControl
-                    'b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
-                    '' end edit
-
-                    'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
-                    'th1.Start()
-                    'th1.Join()
-                    'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
                     bgGetImages_DoWork(Me, Nothing)
+                    '' 11-17-2015 AC
+                    '' now do logic to check whether or not to lock up one level button
+                    Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID)
+                    
                 End If
-            ElseIf x.Name = "lsJP" Then
-
+            ElseIf x.Name = "lsJobPictures" Then
                 Dim a As ListView = x
-                '' EDIT 11-15-2015
-                '' static control / multi thread
-                'Dim b As New ReusableListViewControl
-                'b.ChangeDirectory(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID, a)
-                '' end edit
-                'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
-                'th1.Start()
-                'th1.Join()
                 bgGetImages_DoWork(Me, Nothing)
-                'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
 
             End If
         Next
@@ -4627,6 +4610,116 @@ Public Class Sales
         Me.cmJPList.Checked = False
         Me.cmJPDetails.Checked = False
         Me.cmJPTiles.Checked = True
+    End Sub
+#End Region
+
+
+
+#Region "ls attached files - selection logic "
+
+    Private sel_Item_right As ListViewItem
+    Private sel_Item_left As ListViewItem
+
+    Private Const af_dir As String = "\\192.168.1.2\Company\ISS\Attached Files\"
+    Private Const jp_dir As String = "\\192.168.1.2\Company\ISS\Job Pictures\"
+
+    Private Sub lsAttachedFiles_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lsAttachedFiles.MouseDoubleClick
+        ''
+        '' if its a file: open it
+        '' if its a folder: change the directory on the list view control to it.
+        '' 
+        Select Case e.Button
+            Case Windows.Forms.MouseButtons.Left
+                Select Case sel_Item_left.SubItems(3).Text
+                    Case Is = "File"
+                        System.Diagnostics.Process.Start(sel_Item_left.Tag)
+                        Exit Select
+                    Case Is = "Folder"
+                        '' 
+                        '' have lsAF nav to this directory and repop.
+                        '' 
+
+                        Dim af As New AF_And_JP_Logic(sel_Item_left.Tag)
+                        lsAttachedFiles.Tag = sel_Item_left.Tag
+                        If lsAttachedFiles.Tag = af_dir & "\" Then
+                            Me.tsAttachedFilesNAV.Enabled = False
+                        ElseIf lsAttachedFiles.Tag <> af_dir & "\" Then
+                            Me.tsAttachedFilesNAV.Enabled = True
+                        End If
+                        Me.lsAttachedFiles.Items.Clear()
+                        For Each x As AF_And_JP_Logic.FileObject In af.Files
+                            Dim lvItem As New ListViewItem
+                            '' Name | Date Mod | Size | Type
+                            lvItem.Text = x.FileName
+                            lvItem.Tag = x.FullPath
+                            lvItem.SubItems.Add(x.DateModified)
+                            Dim sz = Math.Round(x.FileSize / 1024, 0)
+                            Dim sz_str As String = sz.ToString & " KB"
+                            lvItem.SubItems.Add(sz_str)
+                            lvItem.SubItems.Add("File")
+                            Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                            Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
+                            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                            Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                            lvItem.ImageKey = x.FileName
+                            Me.lsAttachedFiles.Items.Add(lvItem)
+                        Next
+
+                        sel_Item_left = Nothing
+                        sel_Item_right = Nothing
+                        ''
+                        '' 1 clear out list view
+                        '' 2 set the directory of the listview
+                        '' 3 check to see if the button should be locked
+                        '' 4 clear out/append image lists for new folder/file icon associations
+                        '' 5 loop through and repopulate the listview with the 'new' items.
+                        '' 5 reset sel_item_left & sel_item_right vars
+                        '' 
+
+
+                        Exit Select
+                    Case Else
+                        Exit Select
+                End Select
+            Case Windows.Forms.MouseButtons.Right
+                Select Case sel_Item_right.SubItems(3).Text
+                    Case Is = "File"
+                        Exit Select
+                    Case Is = "Folder"
+                        Exit Select
+                    Case Else
+                        Exit Select
+                End Select
+        End Select
+    End Sub
+
+
+
+
+    Private Sub lsAttachedFiles_MouseUp(sender As Object, e As MouseEventArgs) Handles lsAttachedFiles.MouseUp
+        Dim ls As ListView = sender
+        Select Case e.Button
+            Case Windows.Forms.MouseButtons.Left
+                Dim i As ListViewItem
+                For Each i In ls.Items
+                    If i.Selected = True Then
+                        sel_Item_left = i
+                    End If
+                Next
+                Exit Select
+            Case Windows.Forms.MouseButtons.Right
+                For Each i As ListViewItem In ls.Items
+                    If i.Selected = True Then
+                        sel_Item_right = i
+                    End If
+                Next
+                Exit Select
+            Case Else
+                sel_Item_left = Nothing
+                sel_Item_right = Nothing
+                Exit Select
+        End Select
     End Sub
 #End Region
 End Class
