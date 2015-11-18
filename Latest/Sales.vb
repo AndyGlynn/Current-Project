@@ -2921,6 +2921,60 @@ Public Class Sales
     End Sub
 
     Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+        If sel_Item_right IsNot Nothing Then
+            If sel_Item_right.SubItems(3).Text = "File" Then
+                If System.IO.File.Exists(sel_Item_right.Tag) = True Then
+                    System.IO.File.Delete(sel_Item_right.Tag)
+                    ' now repop
+                    Dim whereToCreate As String = lsAttachedFiles.Tag
+                    If Len(whereToCreate) <= 0 Then
+                        whereToCreate = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    ElseIf Len(whereToCreate) >= 1 Then
+                        whereToCreate = Me.lsAttachedFiles.Tag
+                    End If
+                    Dim repop As New AF_And_JP_Logic(whereToCreate)
+                    Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+                    arFiles = repop.Files
+                    Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+                    arDirs = repop.Directories
+                    repop = Nothing
+                    Me.lsAttachedFiles.Items.Clear()
+                    AddListItem_Directories(arDirs, Me.lsAttachedFiles)
+                    AddListItem_Files(arFiles, Me.lsAttachedFiles)
+                    sel_Item_left = Nothing
+                    sel_Item_right = Nothing
+                End If
+            End If
+        End If
+
+        If sel_Item_right IsNot Nothing Then
+            If sel_Item_right.SubItems(3).Text = "Folder" Then
+                If System.IO.Directory.Exists(sel_Item_right.Tag) = True Then
+                    System.IO.Directory.Delete(sel_Item_right.Tag)
+                    Dim whereToCreate As String = lsAttachedFiles.Tag
+                    If Len(whereToCreate) <= 0 Then
+                        whereToCreate = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    ElseIf Len(whereToCreate) >= 1 Then
+                        whereToCreate = Me.lsAttachedFiles.Tag
+                    End If
+                    Dim repop As New AF_And_JP_Logic(whereToCreate)
+                    Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+                    arFiles = repop.Files
+                    Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+                    arDirs = repop.Directories
+                    repop = Nothing
+                    Me.lsAttachedFiles.Items.Clear()
+                    AddListItem_Directories(arDirs, Me.lsAttachedFiles)
+                    AddListItem_Files(arFiles, Me.lsAttachedFiles)
+                    sel_Item_left = Nothing
+                    sel_Item_right = Nothing
+                End If
+            End If
+
+        ElseIf sel_Item_right Is Nothing Then
+            sel_Item_left = Nothing
+            Exit Sub
+        End If
 
     End Sub
 
@@ -3059,38 +3113,82 @@ Public Class Sales
     End Sub
 #End Region
     Private Sub btnNewFolder_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolder.Click
-        'Dim y As String = InputBox("Please enter the name of the folder you want to create.", "New Folder Name", "New Folder")
-        'If y = "" Then
-        '    Exit Sub
-        'End If
-        'Dim count As Integer = 0
 
-        'If y.Contains("/") Then
-        '    count += 1
-        'ElseIf y.Contains("\") Then
-        '    count += 1
-        'ElseIf y.Contains("?") Then
-        '    count += 1
-        'ElseIf y.Contains(":") Then
-        '    count += 1
-        'ElseIf y.Contains("*") Then
-        '    count += 1
-        'ElseIf y.Contains(">") Then
-        '    count += 1
-        'ElseIf y.Contains("<") Then
-        '    count += 1
-        'ElseIf y.Contains("|") Then
-        '    count += 1
-        'ElseIf y.Contains(Chr(34)) Then
-        '    count += 1
-        'End If
-        'If count >= 1 Then
-        '    MsgBox("Cannot use these Characters: \ / ? : *  > < | " & Chr(34), MsgBoxStyle.Exclamation, "Cannot use Special Characters in File Name")
-        '    Exit Sub
-        'End If
-        'g.CreateDirectoryAttachedFiles(STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID & "\", y)
-        ''Dim z As New PopulateAF(Me)
-        'Me.GetRidOfOldAndPutNew()
+        Dim cur_Dir As String = Me.lsAttachedFiles.Tag
+        If Len(cur_Dir) <= 0 Then
+            cur_Dir = (af_dir & STATIC_VARIABLES.CurrentID)
+        ElseIf Len(cur_Dir) >= 1 Then
+            cur_Dir = cur_Dir
+        End If
+
+        '' LEGACY CODE FROM DYNAMIC Control
+        '' 
+        Dim iteration As Integer = 0
+        'lsCollection.Clear()
+        Dim dir_ As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
+        Dim cnt = dir_.GetDirectories("New fo*", IO.SearchOption.AllDirectories)
+
+        Dim xyz As System.IO.DirectoryInfo
+        For Each xyz In cnt
+            iteration += 1
+        Next
+
+        Dim next1 As Integer = (iteration + 1)
+        If next1 <= 1 Then
+            System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder")
+        ElseIf next1 > 1 Then
+            System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder (" & next1.ToString & ")")
+        End If
+
+        Dim dir_2 As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
+
+        Dim af As New AF_And_JP_Logic(cur_Dir)
+        Me.lsAttachedFiles.Items.Clear()
+        For Each x As AF_And_JP_Logic.FileObject In af.Files
+            Dim lvItem As New ListViewItem
+            '' Name | Date Mod | Size | Type
+            lvItem.Text = x.FileName
+            lvItem.Tag = x.FullPath
+            lvItem.SubItems.Add(x.DateModified)
+            Dim sz = Math.Round(x.FileSize / 1024, 0)
+            Dim sz_str As String = sz.ToString & " KB"
+            lvItem.SubItems.Add(sz_str)
+            lvItem.SubItems.Add("File")
+            Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+            Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
+            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+            Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+            lvItem.ImageKey = x.FileName
+            Me.lsAttachedFiles.Items.Add(lvItem)
+        Next
+
+        For Each y As AF_And_JP_Logic.DirObject In af.Directories
+            Dim lvItem As New ListViewItem
+            lvItem.Text = y.FileName
+            lvItem.Tag = y.FullPath
+            lvItem.SubItems.Add(y.DateModified)
+            lvItem.SubItems.Add("")
+            lvItem.SubItems.Add("Folder")
+            Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+            Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+            Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+            Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+            Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+            lvItem.ImageKey = y.FileName
+            Me.lsAttachedFiles.Items.Add(lvItem)
+        Next
+
+        sel_Item_left = Nothing
+        sel_Item_right = Nothing
+
+        Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID)
+        If rootDir_Lead = af_dir & STATIC_VARIABLES.CurrentID Then
+            Me.tsAttachedFilesNAV.Enabled = False
+        ElseIf rootDir_Lead <> af_dir & STATIC_VARIABLES.CurrentID Then
+            Me.tsAttachedFilesNAV.Enabled = True
+        End If
+
     End Sub
 
     Private Sub EditCustomerToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EditCustomerToolStripMenuItem.Click
@@ -3991,7 +4089,11 @@ Public Class Sales
                     '' 11-17-2015 AC
                     '' now do logic to check whether or not to lock up one level button
                     Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID)
-                    
+                    If rootDir_Lead = af_dir & STATIC_VARIABLES.CurrentID Then
+                        Me.tsAttachedFilesNAV.Enabled = False
+                    ElseIf rootDir_Lead <> af_dir & STATIC_VARIABLES.CurrentID Then
+                        Me.tsAttachedFilesNAV.Enabled = True
+                    End If
                 End If
             ElseIf x.Name = "lsJobPictures" Then
                 Dim a As ListView = x
@@ -4722,4 +4824,64 @@ Public Class Sales
         End Select
     End Sub
 #End Region
+
+    Private Sub btnSendtoDesktop_Click(sender As Object, e As EventArgs) Handles btnSendtoDesktop.Click
+        If sel_Item_right IsNot Nothing Then
+            Dim y As New ReusableListViewControl.createAShortCut(InputBox("Name for the shortcut?", "Name The Shortcut", "<ShortCutName>"), sel_Item_right.Tag)
+            sel_Item_left = Nothing
+            sel_Item_right = Nothing
+        ElseIf sel_Item_right Is Nothing Then
+            sel_Item_left = Nothing
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub btnCreateSC_Click(sender As Object, e As EventArgs) Handles btnCreateSC.Click
+        If sel_Item_right IsNot Nothing Then
+            Dim whereToCreate As String = lsAttachedFiles.Tag
+            If Len(whereToCreate) <= 0 Then
+                whereToCreate = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+            ElseIf Len(whereToCreate) >= 1 Then
+                whereToCreate = Me.lsAttachedFiles.Tag
+            End If
+            Dim y As New ReusableListViewControl.createAShortCut(InputBox("Name for the shortcut?", "Name The Shortcut", "<ShortCutName>"), sel_Item_right.Tag, whereToCreate)
+
+            Dim repop As New AF_And_JP_Logic(whereToCreate)
+            Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+            arFiles = repop.Files
+            Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+            arDirs = repop.Directories
+            repop = Nothing
+            Me.lsAttachedFiles.Items.Clear()
+            AddListItem_Directories(arDirs, Me.lsAttachedFiles)
+            AddListItem_Files(arFiles, Me.lsAttachedFiles)
+            sel_Item_left = Nothing
+            sel_Item_right = Nothing
+        ElseIf sel_Item_right Is Nothing Then
+            sel_Item_left = Nothing
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+
+        sel_Item_left = Nothing
+        sel_Item_right = Nothing
+
+        Dim whereToCreate As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+        Me.lsAttachedFiles.Tag = whereToCreate
+
+        Dim repop As New AF_And_JP_Logic(whereToCreate)
+        Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+        arFiles = repop.Files
+        Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+        arDirs = repop.Directories
+        repop = Nothing
+        Me.lsAttachedFiles.Items.Clear()
+        AddListItem_Directories(arDirs, Me.lsAttachedFiles)
+        AddListItem_Files(arFiles, Me.lsAttachedFiles)
+
+        Me.tsAttachedFilesNAV.Enabled = False
+
+    End Sub
 End Class
