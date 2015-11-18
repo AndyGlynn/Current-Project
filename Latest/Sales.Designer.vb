@@ -2427,6 +2427,7 @@ Partial Class Sales
         '
         'btnPaste
         '
+        Me.btnPaste.Enabled = False
         Me.btnPaste.Name = "btnPaste"
         Me.btnPaste.Size = New System.Drawing.Size(160, 22)
         Me.btnPaste.Text = "Paste"
