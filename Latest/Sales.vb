@@ -936,7 +936,9 @@ Public Class Sales
         Catch ex As Exception
             'Cnn.Close()
             'Me.PullCustomerINFO(ID)
-            MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
+            'MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
+            Dim err As String = ex.Message
+            MsgBox("Error: " & vbCrLf & err, MsgBoxStyle.Critical, "DEBUG INFO - ERROR PULLInfo()")
         End Try
         If Me.txtHousePhone.Text <> "" Then
             Me.btnMain.Text = "Call Main Phone - " & Me.txtHousePhone.Text
@@ -1006,7 +1008,8 @@ Public Class Sales
             If Me.pnlCustomerHistory.Visible = True Then
                 c.SetUp(Me, ID, Me.TScboCustomerHistory)
             Else
-                Me.GetRidOfOldAndPutNew()
+                ' Me.GetRidOfOldAndPutNew()
+                GetImages_Files_And_Folders(ID)
             End If
 
         End If
@@ -2825,6 +2828,16 @@ Public Class Sales
         ar_files = d.Files
         AddListItem_Files(ar_files, Me.lsJobPictures)
 
+
+        Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
+        Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
+        Me.lsAttachedFiles.Invalidate()
+        Me.lsJobPictures.SmallImageList = Me.ImgLst32
+        Me.lsJobPictures.LargeImageList = Me.ImgLst32
+        Me.lsJobPictures.Invalidate()
+
+
+
     End Function
 
     Private Function AddListItem_Files(ByVal ItemList As List(Of AF_And_JP_Logic.FileObject), ByVal Control As ListView)
@@ -2856,7 +2869,8 @@ Public Class Sales
                 Control.Items.Add(y)
             Next
         Catch ex As Exception
-
+            'Dim err As String = ex.Message
+            'MsgBox("Error: " & vbCrLf & ex.Message.ToString, MsgBoxStyle.Critical, "DEBUG INFO - AddListItem_Directories()")
         End Try
     End Function
 
@@ -2883,7 +2897,8 @@ Public Class Sales
                 Control.Items.Add(y)
             Next
         Catch ex As Exception
-
+            'Dim err As String = ex.Message
+            'MsgBox("Error: " & vbCrLf & ex.Message.ToString, MsgBoxStyle.Critical, "DEBUG INFO - AddListItem_Directories()")
         End Try
     End Function
 
@@ -3031,7 +3046,7 @@ Public Class Sales
                                     Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
                                     Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
                                     Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                    Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
                                     lvItem.ImageKey = x.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -3047,7 +3062,7 @@ Public Class Sales
                                     Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                     Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                     Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                     lvItem.ImageKey = y.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -3103,7 +3118,7 @@ Public Class Sales
                                     Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
                                     Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
                                     Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                    Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
                                     lvItem.ImageKey = x.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -3119,7 +3134,7 @@ Public Class Sales
                                     Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                     Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                     Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                     lvItem.ImageKey = y.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -3339,7 +3354,7 @@ Public Class Sales
             Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
             Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
             Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-            Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
             lvItem.ImageKey = x.FileName
             Me.lsAttachedFiles.Items.Add(lvItem)
         Next
@@ -3355,7 +3370,7 @@ Public Class Sales
             Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
             Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
             Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-            Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+            Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
             lvItem.ImageKey = y.FileName
             Me.lsAttachedFiles.Items.Add(lvItem)
         Next
@@ -4315,7 +4330,7 @@ Public Class Sales
                                     Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
                                     Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
                                     Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                    Me.ImgLst256.Images.Add(xy.FileSize, xy.jbIcon)
+                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
                                     lvItem.ImageKey = xy.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -4331,7 +4346,7 @@ Public Class Sales
                                     Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                     Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                     Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                     lvItem.ImageKey = y.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -4358,7 +4373,7 @@ Public Class Sales
                                     Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
                                     Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
                                     Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                    Me.ImgLst256.Images.Add(xy.FileSize, xy.jbIcon)
+                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
                                     lvItem.ImageKey = xy.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -4374,7 +4389,7 @@ Public Class Sales
                                     Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                     Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                     Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                     lvItem.ImageKey = y.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -4422,7 +4437,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
                                 Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
                                 Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                Me.ImgLst256.Images.Add(xy.FileSize, xy.jbIcon)
+                                Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
                                 lvItem.ImageKey = xy.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -4438,7 +4453,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                 Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                 Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                 lvItem.ImageKey = y.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -4460,7 +4475,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
                                 Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
                                 Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                Me.ImgLst256.Images.Add(xy.FileSize, xy.jbIcon)
+                                Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
                                 lvItem.ImageKey = xy.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -4476,7 +4491,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                 Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                 Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                 lvItem.ImageKey = y.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5194,13 +5209,13 @@ Public Class Sales
 
                     '' now repop 
 
-                    If Len(Me.lsAttachedFiles.Tag) <= 0 Then
-                        Me.lsAttachedFiles.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                        Me.tsAttachedFilesNAV.Enabled = False
-                    ElseIf Len(Me.lsAttachedFiles.Tag) >= 1 Then
-                        Me.lsAttachedFiles.Tag = Me.lsAttachedFiles.Tag
-                        Me.tsAttachedFilesNAV.Enabled = True
-                    End If
+                    'If Len(Me.lsAttachedFiles.Tag) <= 0 Then
+                    '    Me.lsAttachedFiles.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    '    Me.tsAttachedFilesNAV.Enabled = False
+                    'ElseIf Len(Me.lsAttachedFiles.Tag) >= 1 Then
+                    '    Me.lsAttachedFiles.Tag = Me.lsAttachedFiles.Tag
+                    '    Me.tsAttachedFilesNAV.Enabled = True
+                    'End If
 
                     Dim af As New AF_And_JP_Logic(Me.lsAttachedFiles.Tag)
 
@@ -5219,7 +5234,7 @@ Public Class Sales
                         Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
                         Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
                         Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                        Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
                         lvItem.ImageKey = x.FileName
                         Me.lsAttachedFiles.Items.Add(lvItem)
                     Next
@@ -5235,7 +5250,7 @@ Public Class Sales
                         Me.ImgLst32.Images.Add(yy.FileName, yy.mdIcon)
                         Me.ImgLst48.Images.Add(yy.FileName, yy.lgIcon)
                         Me.ImgLst128.Images.Add(yy.FileName, yy.lgIcon)
-                        Me.ImgLst256.Images.Add(yy.FileSize, yy.jbIcon)
+                        Me.ImgLst256.Images.Add(yy.FileName, yy.jbIcon)
                         lvItem.ImageKey = yy.FileName
                         Me.lsAttachedFiles.Items.Add(lvItem)
                     Next
@@ -5291,13 +5306,13 @@ Public Class Sales
 
                     '' now repop
 
-                    If Len(Me.lsAttachedFiles.Tag) <= 0 Then
-                        Me.lsAttachedFiles.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                        Me.tsAttachedFilesNAV.Enabled = False
-                    ElseIf Len(Me.lsAttachedFiles.Tag) >= 1 Then
-                        Me.lsAttachedFiles.Tag = Me.lsAttachedFiles.Tag
-                        Me.tsAttachedFilesNAV.Enabled = True
-                    End If
+                    'If Len(Me.lsAttachedFiles.Tag) <= 0 Then
+                    '    Me.lsAttachedFiles.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    '    Me.tsAttachedFilesNAV.Enabled = False
+                    'ElseIf Len(Me.lsAttachedFiles.Tag) >= 1 Then
+                    '    Me.lsAttachedFiles.Tag = Me.lsAttachedFiles.Tag
+                    '    Me.tsAttachedFilesNAV.Enabled = True
+                    'End If
 
                     Dim af As New AF_And_JP_Logic(Me.lsAttachedFiles.Tag)
 
@@ -5320,7 +5335,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
                                 Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
                                 Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5340,7 +5355,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(yy.FileName, yy.mdIcon)
                                 Me.ImgLst48.Images.Add(yy.FileName, yy.lgIcon)
                                 Me.ImgLst128.Images.Add(yy.FileName, yy.lgIcon)
-                                Me.ImgLst256.Images.Add(yy.FileSize, yy.jbIcon)
+                                Me.ImgLst256.Images.Add(yy.FileName, yy.jbIcon)
                                 lvItem.ImageKey = yy.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5464,7 +5479,7 @@ Public Class Sales
                             Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
                             Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
                             Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                            Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
                             lvItem.ImageKey = x.FileName
                             Me.lsAttachedFiles.Items.Add(lvItem)
                         Next
@@ -5480,7 +5495,7 @@ Public Class Sales
                             Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                             Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                             Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                            Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                            Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                             lvItem.ImageKey = y.FileName
                             Me.lsAttachedFiles.Items.Add(lvItem)
                         Next
@@ -5665,22 +5680,29 @@ Public Class Sales
             Dim dest_dir As String = Me.lsAttachedFiles.Tag
             Dim fname As String = ""
             Dim folname As String = ""
+            Dim fileExt As String = ""
+
+
+            '' need file ext for file copy
+            '' IF is file
             If Len(dest_dir) <= 0 Then
                 '' change to root dir
                 dest_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
                 fname = SplitApartFileName(sel_Item_right.Tag)
                 folname = SplitFolderName(sel_Item_right.Tag)
+                fileExt = SplitApartFileExt(sel_Item_right.Tag)
             ElseIf Len(dest_dir) >= 1 Then
                 dest_dir = dest_dir
                 fname = SplitApartFileName(sel_Item_right.Tag)
                 folname = SplitFolderName(sel_Item_right.Tag)
+                fileExt = SplitApartFileExt(sel_Item_right.Tag)
             End If
 
             Select Case operation
                 Case Is = "CUT"
                     Select Case sel_Item_right.SubItems(3).Text
                         Case Is = "File"
-                            System.IO.File.Move(src_dir, dest_dir & "\" & fname)
+                            System.IO.File.Move(src_dir, dest_dir & "\" & fname & "." & fileExt)
                             '' now repop
                             Dim cur_dir As String = Me.lsAttachedFiles.Tag
                             If Len(cur_dir) <= 0 Then
@@ -5704,7 +5726,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
                                 Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
                                 Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5720,7 +5742,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                 Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                 Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                 lvItem.ImageKey = y.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5763,7 +5785,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
                                 Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
                                 Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5779,7 +5801,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                 Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                 Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                 lvItem.ImageKey = y.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5790,7 +5812,7 @@ Public Class Sales
                 Case Is = "COPY"
                     Select Case sel_Item_right.SubItems(3).Text
                         Case Is = "File"
-                            System.IO.File.Copy(src_dir, dest_dir & "\ Copy Of - " & fname)
+                            System.IO.File.Copy(src_dir, dest_dir & "\ Copy Of - " & fname & "." & fileExt)
                             '' now repop
                             Dim cur_dir As String = Me.lsAttachedFiles.Tag
                             If Len(cur_dir) <= 0 Then
@@ -5814,7 +5836,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
                                 Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
                                 Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5830,7 +5852,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                 Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                 Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                 lvItem.ImageKey = y.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5860,7 +5882,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
                                 Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
                                 Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5876,7 +5898,7 @@ Public Class Sales
                                 Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
                                 Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
                                 Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
                                 lvItem.ImageKey = y.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next

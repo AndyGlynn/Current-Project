@@ -243,6 +243,10 @@ Public Class AF_And_JP_Logic
 
     Private Function Get_Files_In_Directory(ByVal Directory As String)
 
+        If Len(Directory) <= 0 Then
+            Directory = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+        End If
+
         Dim dir_info As New DirectoryInfo(Directory)
         If dir_info.Exists = True Then
             Dim y As FileInfo
@@ -316,6 +320,9 @@ Public Class AF_And_JP_Logic
     End Function
 
     Private Function Get_Folders_In_Directory(ByVal Directory As String)
+        If Len(Directory) <= 0 Then
+            Directory = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+        End If
         Dim dir_info As New DirectoryInfo(Directory)
         If dir_info.Exists = True Then
             Dim y As DirectoryInfo
