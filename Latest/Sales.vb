@@ -2103,7 +2103,7 @@ Public Class Sales
                     If x.Name.ToString = "lsAttachedFiles" Then
                         Dim prevLocX As Integer = x.Location.X
                         Dim prevLocY As Integer = x.Location.Y
-                        x.Size = New System.Drawing.Point((p_width / 2) - 20, p_height - 10)
+                        x.Size = New System.Drawing.Point((p_width / 2) - 10, p_height - 10)
                         x.Location = New Point(prevLocX + 5, 5)
 
                     End If
@@ -2858,9 +2858,25 @@ Public Class Sales
                 y.Tag = c.FullPath
                 y.ImageKey = c.FileName
                 Me.imgLst16.Images.Add(c.FileName, c.smIcon)
-                Me.ImgLst32.Images.Add(c.FileName, c.mdIcon)
-                Me.ImgLst48.Images.Add(c.FileName, c.lgIcon)
-                Me.ImgLst128.Images.Add(c.FileName, c.lgIcon)
+
+                If c.smThumb IsNot Nothing Then
+                    Me.ImgLst32.Images.Add(c.FileName, c.smThumb)
+                ElseIf c.smThumb Is Nothing Then
+                    Me.ImgLst32.Images.Add(c.FileName, c.mdIcon)
+                End If
+
+                If c.lgThumb IsNot Nothing Then
+                    Me.ImgLst48.Images.Add(c.FileName, c.lgThumb)
+                ElseIf c.lgThumb Is Nothing Then
+                    Me.ImgLst48.Images.Add(c.FileName, c.lgIcon)
+                End If
+
+                If c.lgThumb IsNot Nothing Then
+                    Me.ImgLst48.Images.Add(c.FileName, c.lgThumb)
+                ElseIf c.lgThumb Is Nothing Then
+                    Me.ImgLst128.Images.Add(c.FileName, c.lgIcon)
+                End If
+
                 Me.ImgLst256.Images.Add(c.FileName, c.jbIcon)
                 '' if thumbs are present, add them to image lists
                 '' but only if they are present. 
@@ -3042,13 +3058,41 @@ Public Class Sales
                                     Dim sz_str As String = sz.ToString & " KB"
                                     lvItem.SubItems.Add(sz_str)
                                     lvItem.SubItems.Add("File")
+
                                     Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                    Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
                                     lvItem.ImageKey = x.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
+
                                 Next
 
                                 For Each y As AF_And_JP_Logic.DirObject In af.Directories
@@ -3115,10 +3159,36 @@ Public Class Sales
                                     lvItem.SubItems.Add(sz_str)
                                     lvItem.SubItems.Add("File")
                                     Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                    Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
                                     lvItem.ImageKey = x.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -3351,10 +3421,36 @@ Public Class Sales
             lvItem.SubItems.Add(sz_str)
             lvItem.SubItems.Add("File")
             Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-            Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+            If x.smThumb IsNot Nothing Then
+                Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+            ElseIf x.smThumb Is Nothing Then
+                Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+            End If
+
+            If x.mdThumb IsNot Nothing Then
+                Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+            ElseIf x.mdThumb Is Nothing Then
+                Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+            End If
+
+            If x.lgThumb IsNot Nothing Then
+                Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+            ElseIf x.lgThumb Is Nothing Then
+                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+            End If
+
+            If x.jbThumb IsNot Nothing Then
+                Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+            ElseIf x.jbThumb Is Nothing Then
+                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+            End If
+
+            If x.Tile IsNot Nothing Then
+                Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+            ElseIf x.Tile Is Nothing Then
+                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+            End If
+
             lvItem.ImageKey = x.FileName
             Me.lsAttachedFiles.Items.Add(lvItem)
         Next
@@ -4037,7 +4133,7 @@ Public Class Sales
                                 Dim pLocY As Integer = a.Location.Y
                                 a.Width = (p_width / 2) - 20
                                 a.Height = p_height - 10
-                                a.Location = New Point(pLocX + 5, 5)
+                                a.Location = New Point(pLocX, 5)
                             End If
                         End If
                     Next
@@ -4327,10 +4423,36 @@ Public Class Sales
                                     lvItem.SubItems.Add(sz_str)
                                     lvItem.SubItems.Add("File")
                                     Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                    Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
-                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                    Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                    If xy.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                    ElseIf xy.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                    End If
+
+                                    If xy.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                    ElseIf xy.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                    End If
+
+                                    If xy.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                    ElseIf xy.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
                                     lvItem.ImageKey = xy.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -4370,10 +4492,36 @@ Public Class Sales
                                     lvItem.SubItems.Add(sz_str)
                                     lvItem.SubItems.Add("File")
                                     Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                    Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
-                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                    Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                    If xy.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                    ElseIf xy.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                    End If
+
+                                    If xy.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                    ElseIf xy.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                    End If
+
+                                    If xy.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                    ElseIf xy.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
                                     lvItem.ImageKey = xy.FileName
                                     Me.lsAttachedFiles.Items.Add(lvItem)
                                 Next
@@ -4434,10 +4582,36 @@ Public Class Sales
                                 lvItem.SubItems.Add(sz_str)
                                 lvItem.SubItems.Add("File")
                                 Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
-                                Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                If xy.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                ElseIf xy.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                End If
+
+                                If xy.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                ElseIf xy.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                End If
+
+                                If xy.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                ElseIf xy.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                End If
+
+                                If xy.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                ElseIf xy.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                End If
+
+                                If xy.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                ElseIf xy.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                End If
+
                                 lvItem.ImageKey = xy.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -4472,10 +4646,36 @@ Public Class Sales
                                 lvItem.SubItems.Add(sz_str)
                                 lvItem.SubItems.Add("File")
                                 Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
-                                Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                If xy.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                ElseIf xy.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                End If
+
+                                If xy.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                ElseIf xy.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                End If
+
+                                If xy.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                ElseIf xy.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                End If
+
+                                If xy.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                ElseIf xy.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                End If
+
+                                If xy.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                ElseIf xy.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                End If
+
                                 lvItem.ImageKey = xy.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5231,10 +5431,36 @@ Public Class Sales
                         lvItem.SubItems.Add(sz_str)
                         lvItem.SubItems.Add("File")
                         Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                        Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                        If x.smThumb IsNot Nothing Then
+                            Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                        ElseIf x.smThumb Is Nothing Then
+                            Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                        End If
+
+                        If x.mdThumb IsNot Nothing Then
+                            Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                        ElseIf x.mdThumb Is Nothing Then
+                            Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                        End If
+
+                        If x.lgThumb IsNot Nothing Then
+                            Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                        ElseIf x.lgThumb Is Nothing Then
+                            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                        End If
+
+                        If x.jbThumb IsNot Nothing Then
+                            Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                        ElseIf x.jbThumb Is Nothing Then
+                            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                        End If
+
+                        If x.Tile IsNot Nothing Then
+                            Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                        ElseIf x.Tile Is Nothing Then
+                            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                        End If
+
                         lvItem.ImageKey = x.FileName
                         Me.lsAttachedFiles.Items.Add(lvItem)
                     Next
@@ -5332,10 +5558,36 @@ Public Class Sales
                                 lvItem.SubItems.Add(sz_str)
                                 lvItem.SubItems.Add("File")
                                 Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-                                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5476,10 +5728,36 @@ Public Class Sales
                             lvItem.SubItems.Add(sz_str)
                             lvItem.SubItems.Add("File")
                             Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                            Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-                            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                            If x.smThumb IsNot Nothing Then
+                                Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                            ElseIf x.smThumb Is Nothing Then
+                                Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                            End If
+
+                            If x.mdThumb IsNot Nothing Then
+                                Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                            ElseIf x.mdThumb Is Nothing Then
+                                Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                            End If
+
+                            If x.lgThumb IsNot Nothing Then
+                                Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                            ElseIf x.lgThumb Is Nothing Then
+                                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                            End If
+
+                            If x.jbThumb IsNot Nothing Then
+                                Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                            ElseIf x.jbThumb Is Nothing Then
+                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                            End If
+
+                            If x.Tile IsNot Nothing Then
+                                Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                            ElseIf x.Tile Is Nothing Then
+                                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                            End If
+
                             lvItem.ImageKey = x.FileName
                             Me.lsAttachedFiles.Items.Add(lvItem)
                         Next
@@ -5723,10 +6001,36 @@ Public Class Sales
                                 lvItem.SubItems.Add(sz_str)
                                 lvItem.SubItems.Add("File")
                                 Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-                                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5782,10 +6086,36 @@ Public Class Sales
                                 lvItem.SubItems.Add(sz_str)
                                 lvItem.SubItems.Add("File")
                                 Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-                                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5833,10 +6163,36 @@ Public Class Sales
                                 lvItem.SubItems.Add(sz_str)
                                 lvItem.SubItems.Add("File")
                                 Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-                                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next
@@ -5879,10 +6235,36 @@ Public Class Sales
                                 lvItem.SubItems.Add(sz_str)
                                 lvItem.SubItems.Add("File")
                                 Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
-                                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
                                 lvItem.ImageKey = x.FileName
                                 Me.lsAttachedFiles.Items.Add(lvItem)
                             Next

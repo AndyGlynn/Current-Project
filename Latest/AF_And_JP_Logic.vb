@@ -36,13 +36,21 @@ Public Class AF_And_JP_Logic
         Public FileExt As String
         Public FullPath As String
         Public IconKey As String
+
         Public smIcon As Icon ''16
-        Public lgIcon As Icon '' 32
-        Public mdIcon As Icon '' 48-64
         Public smThumb As Image
+
+        Public mdIcon As Icon '' 32
         Public mdThumb As Image
+
+        Public lgIcon As Icon '' 64
         Public lgThumb As Image
+
         Public jbIcon As Icon '' 256x256
+        Public jbThumb As Image '' 
+
+        Public Tile As Image ' 128
+
         Public FileSize As String
         Public DateCreated As String
         Public DateModified As String
@@ -265,40 +273,40 @@ Public Class AF_And_JP_Logic
                 z.mdIcon = GetMediums(y.FullName)
                 Dim pullThum As Boolean = False
                 Select Case y.Extension
-                    Case "jpg"
+                    Case ".jpg"
                         pullThum = True
                         Exit Select
-                    Case "JPG"
+                    Case ".JPG"
                         pullThum = True
                         Exit Select
-                    Case "JPEG"
+                    Case ".JPEG"
                         pullThum = True
                         Exit Select
-                    Case "jpeg"
+                    Case ".jpeg"
                         pullThum = True
                         Exit Select
-                    Case "png"
+                    Case ".png"
                         pullThum = True
                         Exit Select
-                    Case "PNG"
+                    Case ".PNG"
                         pullThum = True
                         Exit Select
-                    Case "bmp"
+                    Case ".bmp"
                         pullThum = True
                         Exit Select
-                    Case "BMP"
+                    Case ".BMP"
                         pullThum = True
                         Exit Select
-                    Case "tiff"
+                    Case ".tiff"
                         pullThum = True
                         Exit Select
-                    Case "TIFF"
+                    Case ".TIFF"
                         pullThum = True
                         Exit Select
-                    Case "gif"
+                    Case ".gif"
                         pullThum = True
                         Exit Select
-                    Case "GIF"
+                    Case ".GIF"
                         pullThum = True
                         Exit Select
                     Case Else
@@ -421,13 +429,24 @@ Public Class AF_And_JP_Logic
 
     Private Function Extract_Thumbs(ByVal FillFullName As String, ByVal File As FileObject)
         Dim y As FileObject = File
+
+
+        '' one thumb for each size.
+        '' 16
+        '' 32
+        '' 48
+        '' 128
+        '' 256
+
+
+
         Try
             Dim thumA As Image = Bitmap.FromFile(FillFullName, True)
-            Dim tThumbA64 As Image = thumA.GetThumbnailImage(64, 64, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
-            Dim imgC As Image = tThumbA64.Clone
-            tThumbA64.Dispose()
+            Dim tThumbA16 As Image = thumA.GetThumbnailImage(16, 16, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
+            Dim imgC As Image = tThumbA16.Clone
+            tThumbA16.Dispose()
             thumA.Dispose()
-            y.mdThumb = imgC
+            y.smThumb = imgC
 
         Catch ex As Exception
             '' point to default error icon here.
@@ -436,11 +455,11 @@ Public Class AF_And_JP_Logic
 
         Try
             Dim thumB As Image = Bitmap.FromFile(FillFullName, True)
-            Dim tThumbB256 As Image = thumB.GetThumbnailImage(256, 256, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
-            Dim imgD As Image = tThumbB256.Clone
+            Dim tThumbB32 As Image = thumB.GetThumbnailImage(32, 32, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
+            Dim imgD As Image = tThumbB32.Clone
             thumB.Dispose()
-            tThumbB256.Dispose()
-            y.lgThumb = imgD
+            tThumbB32.Dispose()
+            y.mdThumb = imgD
 
         Catch ex As Exception
             '' point to default error icon here.
@@ -453,12 +472,39 @@ Public Class AF_And_JP_Logic
             Dim imgE As Image = tthumbC48.Clone
             thumC.Dispose()
             tthumbC48.Dispose()
-            y.smThumb = imgE
+            y.lgThumb = imgE
 
         Catch ex As Exception
             '' point to default error icon here.
             '' 
         End Try
+
+        Try
+            Dim thumC As Image = Bitmap.FromFile(FillFullName, True)
+            Dim tthumbC256 As Image = thumC.GetThumbnailImage(256, 256, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
+            Dim imgE As Image = tthumbC256.Clone
+            thumC.Dispose()
+            tthumbC256.Dispose()
+            y.jbThumb = imgE
+
+        Catch ex As Exception
+            '' point to default error icon here.
+            '' 
+        End Try
+
+        Try
+            Dim thumC As Image = Bitmap.FromFile(FillFullName, True)
+            Dim tthumbC128 As Image = thumC.GetThumbnailImage(128, 128, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
+            Dim imgE As Image = tthumbC128.Clone
+            thumC.Dispose()
+            tthumbC128.Dispose()
+            y.Tile = imgE
+
+        Catch ex As Exception
+            '' point to default error icon here.
+            '' 
+        End Try
+
         Return y
     End Function
 
