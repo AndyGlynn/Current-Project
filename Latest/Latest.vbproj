@@ -394,6 +394,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Issue_Leads.vb" />
+    <Compile Include="ItemEndDragObj.vb" />
     <Compile Include="jbPicsAttachedFiles.vb" />
     <Compile Include="listAF_and_listJP.vb" />
     <Compile Include="Locked_for_Editing.vb" />

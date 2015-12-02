@@ -2950,7 +2950,7 @@ Public Class Sales
         If sel_Item_right IsNot Nothing Then
             If sel_Item_right.SubItems(3).Text = "Folder" Then
                 If System.IO.Directory.Exists(sel_Item_right.Tag) = True Then
-                    System.IO.Directory.Delete(sel_Item_right.Tag)
+                    System.IO.Directory.Delete(sel_Item_right.Tag, True)
                     Dim whereToCreate As String = lsAttachedFiles.Tag
                     If Len(whereToCreate) <= 0 Then
                         whereToCreate = (af_dir & STATIC_VARIABLES.CurrentID & "\")
@@ -3171,11 +3171,15 @@ Public Class Sales
 
 #Region "List Views"
     Private Sub btnAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAscending.Click
+        Dim y As New ListSortAscending
+        Me.lsAttachedFiles.ListViewItemSorter = y
         Me.btnAscending.Checked = True
         Me.btnDescending.Checked = False
     End Sub
 
     Private Sub btnDescending_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDescending.Click
+        Dim z As New ListSortDescending
+        Me.lsAttachedFiles.ListViewItemSorter = z
         Me.btnAscending.Checked = False
         Me.btnDescending.Checked = True
     End Sub
@@ -4261,16 +4265,252 @@ Public Class Sales
         For Each x In Me.pnlAFPics.Controls
             If TypeOf (x) Is ListView Then
                 If x.Name = "lsAttachedFiles" Then
-                    Dim a As ListView = x
-                    bgGetImages_DoWork(Me, Nothing)
                     '' 11-17-2015 AC
                     '' now do logic to check whether or not to lock up one level button
-                    Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID)
-                    If rootDir_Lead = af_dir & STATIC_VARIABLES.CurrentID Then
-                        Me.tsAttachedFilesNAV.Enabled = False
-                    ElseIf rootDir_Lead <> af_dir & STATIC_VARIABLES.CurrentID Then
-                        Me.tsAttachedFilesNAV.Enabled = True
+                    Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    ''
+                    '' get current directory
+                    Dim cur_dir As String = x.Tag
+                    '' get 'up one directory
+                    Dim pieces() = Split(cur_dir, "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                    Dim cnt As Integer = -1 '' zero based index
+                    Dim up_one As String = ""
+                    Dim arItems As New ArrayList
+                    For Each pc As String In pieces
+                        cnt += 1
+                    Next
+                    If pieces(cnt) = "" Then '' if the last item is blank -> "\" then move the index back another one to compensate
+                        cnt = (cnt - 1)
                     End If
+                    Dim iter As Integer = 0
+                    For iter = 0 To (cnt - 1)
+                        If pieces(iter) = "" Then
+                            up_one += "\"
+                        ElseIf pieces(iter) <> "" Then
+                            up_one += (pieces(iter) & "\")
+                        End If
+                    Next
+                    '' move to the up one
+                    x.Tag = up_one
+                    '' process images and whatnot
+                    Dim a As ListView = x
+                    'bgGetImages_DoWork(Me, Nothing)
+                    If sel_Item_left IsNot Nothing Then
+                        Select Case sel_Item_left.SubItems(3).Text
+                            Case Is = "File"
+                                Dim af As New AF_And_JP_Logic(x.Tag)
+
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = xy.FileName
+                                    lvItem.Tag = xy.FullPath
+                                    lvItem.SubItems.Add(xy.DateModified)
+                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                    Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
+                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                    Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                    Me.ImgLst256.Images.Add(xy.FileSize, xy.jbIcon)
+                                    lvItem.ImageKey = xy.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+                                Exit Select
+                            Case Is = "Folder"
+                                '' 
+                                '' have lsAF nav to this directory and repop.
+                                '' 
+
+                                Dim af As New AF_And_JP_Logic(x.Tag)
+
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = xy.FileName
+                                    lvItem.Tag = xy.FullPath
+                                    lvItem.SubItems.Add(xy.DateModified)
+                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                    Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
+                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                    Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                    Me.ImgLst256.Images.Add(xy.FileSize, xy.jbIcon)
+                                    lvItem.ImageKey = xy.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                'sel_Item_left = Nothing
+                                'sel_Item_right = Nothing
+                                ''
+                                '' 1 clear out list view
+                                '' 2 set the directory of the listview
+                                '' 3 check to see if the button should be locked
+                                '' 4 clear out/append image lists for new folder/file icon associations
+                                '' 5 loop through and repopulate the listview with the 'new' items.
+                                '' 5 reset sel_item_left & sel_item_right vars
+                                '' 
+
+
+                                Exit Select
+                            Case Else
+                                '' just fail it
+                                Exit Select
+                        End Select
+                    ElseIf sel_Item_left Is Nothing Then
+                        '' 
+                        '' where is the cur dir pointing?
+                        '' if its at root
+                        ''     keep at root to repop
+                        '' if its not at root
+                        ''     move it up one to repop
+                        '' 
+                        If cur_dir = (af_dir & STATIC_VARIABLES.CurrentID) Then
+                            Dim af As New AF_And_JP_Logic(x.Tag)
+
+                            Me.lsAttachedFiles.Items.Clear()
+                            For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                Dim lvItem As New ListViewItem
+                                '' Name | Date Mod | Size | Type
+                                lvItem.Text = xy.FileName
+                                lvItem.Tag = xy.FullPath
+                                lvItem.SubItems.Add(xy.DateModified)
+                                Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                Dim sz_str As String = sz.ToString & " KB"
+                                lvItem.SubItems.Add(sz_str)
+                                lvItem.SubItems.Add("File")
+                                Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
+                                Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                Me.ImgLst256.Images.Add(xy.FileSize, xy.jbIcon)
+                                lvItem.ImageKey = xy.FileName
+                                Me.lsAttachedFiles.Items.Add(lvItem)
+                            Next
+
+                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                Dim lvItem As New ListViewItem
+                                lvItem.Text = y.FileName
+                                lvItem.Tag = y.FullPath
+                                lvItem.SubItems.Add(y.DateModified)
+                                lvItem.SubItems.Add("")
+                                lvItem.SubItems.Add("Folder")
+                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                lvItem.ImageKey = y.FileName
+                                Me.lsAttachedFiles.Items.Add(lvItem)
+                            Next
+                        ElseIf cur_dir <> (af_dir & STATIC_VARIABLES.CurrentID) Then
+                            Dim af As New AF_And_JP_Logic(up_one)
+
+                            Me.lsAttachedFiles.Items.Clear()
+                            For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                Dim lvItem As New ListViewItem
+                                '' Name | Date Mod | Size | Type
+                                lvItem.Text = xy.FileName
+                                lvItem.Tag = xy.FullPath
+                                lvItem.SubItems.Add(xy.DateModified)
+                                Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                Dim sz_str As String = sz.ToString & " KB"
+                                lvItem.SubItems.Add(sz_str)
+                                lvItem.SubItems.Add("File")
+                                Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                Me.ImgLst32.Images.Add(xy.FileName, xy.mdIcon)
+                                Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                Me.ImgLst256.Images.Add(xy.FileSize, xy.jbIcon)
+                                lvItem.ImageKey = xy.FileName
+                                Me.lsAttachedFiles.Items.Add(lvItem)
+                            Next
+
+                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                Dim lvItem As New ListViewItem
+                                lvItem.Text = y.FileName
+                                lvItem.Tag = y.FullPath
+                                lvItem.SubItems.Add(y.DateModified)
+                                lvItem.SubItems.Add("")
+                                lvItem.SubItems.Add("Folder")
+                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst256.Images.Add(y.FileSize, y.jbIcon)
+                                lvItem.ImageKey = y.FileName
+                                Me.lsAttachedFiles.Items.Add(lvItem)
+                            Next
+                        End If
+
+
+
+                    End If
+
+                    '' now check to enable/disable nav button
+                    '' 
+                    If Len(x.Tag) <= 0 Then
+                        If x.Tag = rootDir_Lead Then
+                            Me.tsAttachedFilesNAV.Enabled = False
+                        ElseIf x.Tag <> rootDir_Lead Then
+                            Me.tsAttachedFilesNAV.Enabled = True
+                        End If
+                    ElseIf Len(x.Tag) >= 1 Then
+                        If x.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
+                            If x.Tag = rootDir_Lead Then
+                                Me.tsAttachedFilesNAV.Enabled = False
+                            ElseIf x.Tag <> rootDir_Lead Then
+                                Me.tsAttachedFilesNAV.Enabled = True
+                            End If
+                        ElseIf x.Tag <> (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
+                            If x.Tag = rootDir_Lead Then
+                                Me.tsAttachedFilesNAV.Enabled = False
+                            ElseIf x.Tag <> rootDir_Lead Then
+                                Me.tsAttachedFilesNAV.Enabled = True
+                            End If
+                        End If
+
+                    End If
+
                 End If
             ElseIf x.Name = "lsJobPictures" Then
                 Dim a As ListView = x
@@ -4899,8 +5139,289 @@ Public Class Sales
     Private sel_Item_right As ListViewItem
     Private sel_Item_left As ListViewItem
 
+    Private sel_item_left_DandD As ListViewItem
+    Private sel_item_right_DandD As ListViewItem
+
+    Private PreviousText As String = ""
+
     Private Const af_dir As String = "\\192.168.1.2\Company\ISS\Attached Files\"
     Private Const jp_dir As String = "\\192.168.1.2\Company\ISS\Job Pictures\"
+
+    Private Sub lsAttachedFiles_AfterLabelEdit(sender As Object, e As LabelEditEventArgs) Handles lsAttachedFiles.AfterLabelEdit
+        If e.Label Is Nothing Then
+
+            'MsgBox("nothing recieved",critical,"DEBUG INFO ONLY")
+            Return
+        ElseIf e.Label <> Nothing Then
+
+            'Try
+            Dim snd As ListView = sender
+            Dim z As ListViewItem
+            Dim targetItem As ListViewItem
+            For Each z In snd.Items
+                If z.Selected = True Then
+                    targetItem = z
+                End If
+            Next
+
+            Select Case z.SubItems(3).Text
+                Case Is = "File"
+                    Dim y As Integer = 0
+                    y = e.Item
+                    Dim lvSelected As ListViewItem = snd.Items(y)
+                    Dim fileName As String = lvSelected.Text
+                    Dim filePath As String = lvSelected.Tag
+                    Dim splits = lvSelected.Tag.ToString.Split("\")
+                    Dim tt As Object
+                    Dim count As Integer = 0
+                    For Each tt In splits
+                        count += 1
+                    Next
+                    Dim fileExtPeices = splits(count - 1).ToString.Split(".")
+                    Dim fileExt
+                    fileName = fileExtPeices(0).ToString
+                    fileExt = "." & fileExtPeices(1).ToString
+                    fileName = (e.Label)
+                    splits(count - 1) = fileName
+                    Dim g As Integer
+                    Dim reconstructed As String = ""
+                    For g = 0 To count - 1
+                        reconstructed += ("\" & splits(g).ToString)
+                    Next
+                    reconstructed = (reconstructed.ToString.Substring(1, reconstructed.Length - 1))
+                    Rename(lvSelected.Tag, reconstructed)
+                    lvSelected.Tag = reconstructed
+
+                    '' now repop 
+
+                    If Len(Me.lsAttachedFiles.Tag) <= 0 Then
+                        Me.lsAttachedFiles.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                        Me.tsAttachedFilesNAV.Enabled = False
+                    ElseIf Len(Me.lsAttachedFiles.Tag) >= 1 Then
+                        Me.lsAttachedFiles.Tag = Me.lsAttachedFiles.Tag
+                        Me.tsAttachedFilesNAV.Enabled = True
+                    End If
+
+                    Dim af As New AF_And_JP_Logic(Me.lsAttachedFiles.Tag)
+
+                    Me.lsAttachedFiles.Items.Clear()
+                    For Each x As AF_And_JP_Logic.FileObject In af.Files
+                        Dim lvItem As New ListViewItem
+                        '' Name | Date Mod | Size | Type
+                        lvItem.Text = x.FileName
+                        lvItem.Tag = x.FullPath
+                        lvItem.SubItems.Add(x.DateModified)
+                        Dim sz = Math.Round(x.FileSize / 1024, 0)
+                        Dim sz_str As String = sz.ToString & " KB"
+                        lvItem.SubItems.Add(sz_str)
+                        lvItem.SubItems.Add("File")
+                        Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                        Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
+                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                        Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                        lvItem.ImageKey = x.FileName
+                        Me.lsAttachedFiles.Items.Add(lvItem)
+                    Next
+
+                    For Each yy As AF_And_JP_Logic.DirObject In af.Directories
+                        Dim lvItem As New ListViewItem
+                        lvItem.Text = yy.FileName
+                        lvItem.Tag = yy.FullPath
+                        lvItem.SubItems.Add(yy.DateModified)
+                        lvItem.SubItems.Add("")
+                        lvItem.SubItems.Add("Folder")
+                        Me.imgLst16.Images.Add(yy.FileName, yy.smIcon)
+                        Me.ImgLst32.Images.Add(yy.FileName, yy.mdIcon)
+                        Me.ImgLst48.Images.Add(yy.FileName, yy.lgIcon)
+                        Me.ImgLst128.Images.Add(yy.FileName, yy.lgIcon)
+                        Me.ImgLst256.Images.Add(yy.FileSize, yy.jbIcon)
+                        lvItem.ImageKey = yy.FileName
+                        Me.lsAttachedFiles.Items.Add(lvItem)
+                    Next
+
+
+                Case Is = "Folder"
+
+                    '' 11-25-2015 AC
+                    '' obviously need a method here to rename folders / directories.
+                    '' need source directory (loc) -> need destination directory (loc) 
+                    '' make sure it doesn't already exist
+                    '' if it does, fail it or choose another name
+                    '' no special chars in directory name
+                    '' after rename comitted, repop container
+                    '' 
+                    Dim y As Integer = 0
+                    y = e.Item
+                    Dim lvSelected As ListViewItem = snd.Items(y)
+                    '' af_dir const already has "\" on end of it
+                    '' tag = full path name of original directory
+                    '' 
+                    Dim cur_dir As String = lsAttachedFiles.Tag '' where the directory is focused at
+                    If Len(lsAttachedFiles.Tag) <= 0 Then
+                        cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    ElseIf Len(lsAttachedFiles.Tag) >= 0 Then
+                        cur_dir = cur_dir
+                    End If
+                    '' now split it up and check to see if the new one exists already.  (count -1 of '\') = where the new name needs to be placed.
+                    '' 
+                    Dim dirs() = Split(cur_dir, "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                    Dim cntP As Integer = 0
+                    For Each st As String In dirs
+                        cntP += 1
+                    Next
+                    Dim i As Integer = 0
+                    Dim reconstructed As String = ""
+                    For i = 0 To cntP - 1
+                        If i >= (cntP - 1) Then
+                            '' no trailing '\' and add new dir name
+                            reconstructed += (e.Label)
+                        ElseIf i < (cntP - 1) Then
+                            '' trailing '\'
+                            reconstructed += (dirs(i) & "\")
+                        End If
+                    Next
+                    If System.IO.Directory.Exists(reconstructed) = True Then
+                        '' fail it
+                        Exit Sub
+                    ElseIf System.IO.Directory.Exists(reconstructed) = False Then
+                        Dim dirX As String = (lvSelected.Tag)
+                        My.Computer.FileSystem.RenameDirectory(dirX, e.Label)
+                    End If
+
+                    '' now repop
+
+                    If Len(Me.lsAttachedFiles.Tag) <= 0 Then
+                        Me.lsAttachedFiles.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                        Me.tsAttachedFilesNAV.Enabled = False
+                    ElseIf Len(Me.lsAttachedFiles.Tag) >= 1 Then
+                        Me.lsAttachedFiles.Tag = Me.lsAttachedFiles.Tag
+                        Me.tsAttachedFilesNAV.Enabled = True
+                    End If
+
+                    Dim af As New AF_And_JP_Logic(Me.lsAttachedFiles.Tag)
+
+                    Me.lsAttachedFiles.Items.Clear()
+                    If af.Files IsNot Nothing Then
+                        If af.Files.Count <= 0 Then
+
+                        ElseIf af.Files.Count >= 1 Then
+                            For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                Dim lvItem As New ListViewItem
+                                '' Name | Date Mod | Size | Type
+                                lvItem.Text = x.FileName
+                                lvItem.Tag = x.FullPath
+                                lvItem.SubItems.Add(x.DateModified)
+                                Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                Dim sz_str As String = sz.ToString & " KB"
+                                lvItem.SubItems.Add(sz_str)
+                                lvItem.SubItems.Add("File")
+                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                Me.ImgLst32.Images.Add(x.FileName, x.mdIcon)
+                                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                Me.ImgLst256.Images.Add(x.FileSize, x.jbIcon)
+                                lvItem.ImageKey = x.FileName
+                                Me.lsAttachedFiles.Items.Add(lvItem)
+                            Next
+                        End If
+                    End If
+
+                    If af.Directories IsNot Nothing Then
+                        If af.Directories.Count >= 1 Then
+                            For Each yy As AF_And_JP_Logic.DirObject In af.Directories
+                                Dim lvItem As New ListViewItem
+                                lvItem.Text = yy.FileName
+                                lvItem.Tag = yy.FullPath
+                                lvItem.SubItems.Add(yy.DateModified)
+                                lvItem.SubItems.Add("")
+                                lvItem.SubItems.Add("Folder")
+                                Me.imgLst16.Images.Add(yy.FileName, yy.smIcon)
+                                Me.ImgLst32.Images.Add(yy.FileName, yy.mdIcon)
+                                Me.ImgLst48.Images.Add(yy.FileName, yy.lgIcon)
+                                Me.ImgLst128.Images.Add(yy.FileName, yy.lgIcon)
+                                Me.ImgLst256.Images.Add(yy.FileSize, yy.jbIcon)
+                                lvItem.ImageKey = yy.FileName
+                                Me.lsAttachedFiles.Items.Add(lvItem)
+                            Next
+                        End If
+                    End If
+
+                Case Else
+                        Exit Select
+
+            End Select
+
+
+            'Catch ex As Exception
+            '    '' fail it if it doesn't work
+            '    Dim msg As String = ex.Message
+            '    Dim stopp As Object
+            '    MsgBox(msg, MsgBoxStyle.Critical, "DEBUG INFO")
+
+            'End Try
+        End If
+    End Sub
+
+    Private Sub lsAttachedFiles_BeforeLabelEdit(sender As Object, e As LabelEditEventArgs) Handles lsAttachedFiles.BeforeLabelEdit
+        ''
+        '' before label edit -> name of listviewItem -> store it locally
+        ''
+        Dim ls As ListView = sender
+        Dim f_or_f As String = ""
+        For Each y As ListViewItem In ls.Items
+            If y.Selected = True Then
+                '' strip off the directory portion of the file or folder and pipe to var
+                Select Case y.SubItems(3).Text
+                    Case Is = "File"
+                        PreviousText = SplitApartFileName(y.Tag)
+                        Exit Select
+                    Case Is = "Folder"
+                        PreviousText = SplitFolderName(y.Tag)
+                        Exit Select
+                    Case Else
+                        PreviousText = ""
+                        Exit Select
+                End Select
+            End If
+        Next
+    End Sub
+
+   
+
+    Private Sub lsAttachedFiles_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles lsAttachedFiles.ItemDrag
+        If e.Item IsNot Nothing Then
+            sel_item_left_DandD = e.Item
+            Me.lsAttachedFiles.MultiSelect = True
+            Me.lsAttachedFiles.HoverSelection = True
+            Dim operation As String = "Drag"
+            Select Case sel_item_left_DandD.SubItems(3).Text
+                '' file or folder?
+                Case Is = "File"
+                    '' get the file name
+                    Dim fname As String = ""
+                    fname = SplitApartFileName(sel_item_left_DandD.Tag)
+
+
+
+                    Exit Select
+                Case Is = "Folder"
+                    Dim fname As String = ""
+                    fname = SplitFolderName(sel_item_left_DandD.Tag)
+
+
+
+
+                    Exit Select
+                Case Else
+                    sel_item_left_DandD = Nothing
+                    Exit Select
+            End Select
+        End If
+    End Sub
+
+
+   
 
     Private Sub lsAttachedFiles_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lsAttachedFiles.MouseDoubleClick
         ''
@@ -4919,12 +5440,15 @@ Public Class Sales
                         '' 
 
                         Dim af As New AF_And_JP_Logic(sel_Item_left.Tag)
-                        lsAttachedFiles.Tag = sel_Item_left.Tag
-                        If lsAttachedFiles.Tag = af_dir & "\" Then
+                        Dim cur_dir As String = lsAttachedFiles.Tag
+                        Dim next_dir As String = sel_Item_left.Tag
+                        lsAttachedFiles.Tag = next_dir
+                        If next_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
                             Me.tsAttachedFilesNAV.Enabled = False
-                        ElseIf lsAttachedFiles.Tag <> af_dir & "\" Then
+                        ElseIf next_dir <> (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
                             Me.tsAttachedFilesNAV.Enabled = True
                         End If
+
                         Me.lsAttachedFiles.Items.Clear()
                         For Each x As AF_And_JP_Logic.FileObject In af.Files
                             Dim lvItem As New ListViewItem
@@ -4989,6 +5513,10 @@ Public Class Sales
         End Select
     End Sub
 
+    
+
+    
+
 
 
 
@@ -4996,6 +5524,7 @@ Public Class Sales
         Dim ls As ListView = sender
         Select Case e.Button
             Case Windows.Forms.MouseButtons.Left
+
                 Dim i As ListViewItem
                 For Each i In ls.Items
                     If i.Selected = True Then
@@ -5003,14 +5532,21 @@ Public Class Sales
                     End If
                 Next
                 Exit Select
+
             Case Windows.Forms.MouseButtons.Right
+
                 For Each i As ListViewItem In ls.Items
                     If i.Selected = True Then
                         sel_Item_right = i
                     End If
                 Next
                 Exit Select
+
             Case Else
+                sel_item_left_DandD = Nothing
+                sel_item_right_DandD = Nothing
+                Me.lsAttachedFiles.HoverSelection = False
+                Me.lsAttachedFiles.MultiSelect = False
                 sel_Item_left = Nothing
                 sel_Item_right = Nothing
                 Exit Select
@@ -5195,7 +5731,15 @@ Public Class Sales
                             '' aka: scerio where folder is being brought out of 1 level down folder
                             '' to root directory of attached files for lead 
                             '' 
-                            System.IO.Directory.Move(src_dir, dest_dir & "\" & fname)
+
+                            If src_dir = (dest_dir & "\" & fname) Then
+                                Dim root_dir As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                                System.IO.Directory.Move(src_dir, root_dir & fname)
+                            ElseIf src_dir <> (dest_dir & "\" & fname) Then
+                                System.IO.Directory.Move(src_dir, dest_dir & "\" & fname)
+                            End If
+
+
                             '' now repop
                             Dim cur_dir As String = Me.lsAttachedFiles.Tag
                             If Len(cur_dir) <= 0 Then
@@ -5246,7 +5790,7 @@ Public Class Sales
                 Case Is = "COPY"
                     Select Case sel_Item_right.SubItems(3).Text
                         Case Is = "File"
-                            System.IO.File.Copy(src_dir, dest_dir & "\" & fname)
+                            System.IO.File.Copy(src_dir, dest_dir & "\ Copy Of - " & fname)
                             '' now repop
                             Dim cur_dir As String = Me.lsAttachedFiles.Tag
                             If Len(cur_dir) <= 0 Then
@@ -5292,7 +5836,7 @@ Public Class Sales
                             Next
                             Exit Select
                         Case Is = "Folder"
-                            My.Computer.FileSystem.CopyDirectory(src_dir, dest_dir & "\" & fname)
+                            My.Computer.FileSystem.CopyDirectory(src_dir, dest_dir & "\ Copy Of -" & fname)
                             '' now repop
                             Dim cur_dir As String = Me.lsAttachedFiles.Tag
                             If Len(cur_dir) <= 0 Then
@@ -5365,4 +5909,27 @@ Public Class Sales
             'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split File Name Error")
         End Try
     End Function
+
+    Private Class ListSortAscending
+        Implements IComparer
+
+        Public Function Compare(x As Object, y As Object) As Integer Implements IComparer.Compare
+            Dim ret = -1
+            ret = [String].Compare(CType(x, ListViewItem).Text, (CType(y, ListViewItem).Text))
+            Return ret
+        End Function
+    End Class
+
+    Private Class ListSortDescending
+        Implements IComparer
+
+        Public Function Compare(x As Object, y As Object) As Integer Implements IComparer.Compare
+            Dim ret = -1
+            ret = [String].Compare(CType(y, ListViewItem).Text, (CType(x, ListViewItem).Text))
+            Return ret
+        End Function
+    End Class
+
+
+
 End Class

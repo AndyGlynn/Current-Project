@@ -423,7 +423,6 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Interop.IWshRuntimeLibrary.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Interop.Microsoft.Office.Core.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Interop.IWshRuntimeLibrary.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Interop.MapPoint.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Interop.Microsoft.Office.Core.dll
@@ -523,3 +522,4 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.exe
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.xml
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.pdb
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache
