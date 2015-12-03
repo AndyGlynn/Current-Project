@@ -23,7 +23,7 @@ Partial Class Sales
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"12/12/2007", "12345", "Earnest VanDielen"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"12/12/2007", "12345", "Earnest VanDielen"}, -1)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Sales))
         Me.tsSalesDepartment = New System.Windows.Forms.ToolStrip()
         Me.tbMain = New System.Windows.Forms.TabControl()
@@ -219,7 +219,6 @@ Partial Class Sales
         Me.btnDetails = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnTiles = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnSortby = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnAscending = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnDescending = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnRefresh = New System.Windows.Forms.ToolStripMenuItem()
@@ -231,15 +230,15 @@ Partial Class Sales
         Me.cmJP = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnSendtoDesktopJP = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnCutJP = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnCopyJP = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnCreateSCJP = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnDeleteJP = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRenameJP = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnJPViews = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmJPExtraLarge = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmJPLarge = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmJPMedium = New System.Windows.Forms.ToolStripMenuItem()
@@ -249,18 +248,13 @@ Partial Class Sales
         Me.cmJPDetails = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmJPTiles = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem17 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem20 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem21 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem22 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem23 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem24 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnAscendingJP = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnDescJP = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRefreshJP = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem25 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnPasteJP = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator19 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem26 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnNewFolderJP = New System.Windows.Forms.ToolStripMenuItem()
         Me.tpIssueLeads = New System.Windows.Forms.TabPage()
         Me.pnlIssue = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -704,7 +698,7 @@ Partial Class Sales
         Me.lvnoresults.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvnoresults.FullRowSelect = True
         Me.lvnoresults.HideSelection = False
-        Me.lvnoresults.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.lvnoresults.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvnoresults.Location = New System.Drawing.Point(651, 25)
         Me.lvnoresults.MultiSelect = False
         Me.lvnoresults.Name = "lvnoresults"
@@ -1437,7 +1431,7 @@ Partial Class Sales
         Me.gbContactInfo.ForeColor = System.Drawing.Color.Gray
         Me.gbContactInfo.Location = New System.Drawing.Point(5, 3)
         Me.gbContactInfo.Name = "gbContactInfo"
-        Me.gbContactInfo.Size = New System.Drawing.Size(749, 198)
+        Me.gbContactInfo.Size = New System.Drawing.Size(794, 198)
         Me.gbContactInfo.TabIndex = 191
         Me.gbContactInfo.TabStop = False
         Me.gbContactInfo.Text = "Contact Info:"
@@ -1449,7 +1443,7 @@ Partial Class Sales
         Me.txtHousePhone.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtHousePhone.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHousePhone.ForeColor = System.Drawing.Color.Black
-        Me.txtHousePhone.Location = New System.Drawing.Point(541, 33)
+        Me.txtHousePhone.Location = New System.Drawing.Point(586, 33)
         Me.txtHousePhone.Name = "txtHousePhone"
         Me.txtHousePhone.ReadOnly = True
         Me.txtHousePhone.Size = New System.Drawing.Size(116, 16)
@@ -1463,7 +1457,7 @@ Partial Class Sales
         Me.txtaltphone2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone2.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone2.Location = New System.Drawing.Point(541, 96)
+        Me.txtaltphone2.Location = New System.Drawing.Point(586, 96)
         Me.txtaltphone2.Name = "txtaltphone2"
         Me.txtaltphone2.ReadOnly = True
         Me.txtaltphone2.Size = New System.Drawing.Size(116, 16)
@@ -1476,7 +1470,7 @@ Partial Class Sales
         Me.txtaltphone1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone1.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone1.Location = New System.Drawing.Point(541, 64)
+        Me.txtaltphone1.Location = New System.Drawing.Point(586, 64)
         Me.txtaltphone1.Name = "txtaltphone1"
         Me.txtaltphone1.ReadOnly = True
         Me.txtaltphone1.Size = New System.Drawing.Size(116, 16)
@@ -1488,7 +1482,7 @@ Partial Class Sales
         Me.lnkEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkEmail.AutoSize = True
         Me.lnkEmail.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lnkEmail.Location = New System.Drawing.Point(488, 144)
+        Me.lnkEmail.Location = New System.Drawing.Point(533, 144)
         Me.lnkEmail.Name = "lnkEmail"
         Me.lnkEmail.Size = New System.Drawing.Size(144, 16)
         Me.lnkEmail.TabIndex = 136
@@ -1502,7 +1496,7 @@ Partial Class Sales
         Me.lblEmail.BackColor = System.Drawing.Color.Transparent
         Me.lblEmail.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmail.ForeColor = System.Drawing.Color.Gray
-        Me.lblEmail.Location = New System.Drawing.Point(437, 144)
+        Me.lblEmail.Location = New System.Drawing.Point(482, 144)
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.Size = New System.Drawing.Size(45, 16)
         Me.lblEmail.TabIndex = 135
@@ -1528,7 +1522,7 @@ Partial Class Sales
         Me.txtAlt1Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt1Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt1Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt1Type.Location = New System.Drawing.Point(673, 64)
+        Me.txtAlt1Type.Location = New System.Drawing.Point(718, 64)
         Me.txtAlt1Type.Name = "txtAlt1Type"
         Me.txtAlt1Type.ReadOnly = True
         Me.txtAlt1Type.Size = New System.Drawing.Size(57, 16)
@@ -1542,7 +1536,7 @@ Partial Class Sales
         Me.txtAlt2Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt2Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt2Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt2Type.Location = New System.Drawing.Point(673, 96)
+        Me.txtAlt2Type.Location = New System.Drawing.Point(718, 96)
         Me.txtAlt2Type.Name = "txtAlt2Type"
         Me.txtAlt2Type.ReadOnly = True
         Me.txtAlt2Type.Size = New System.Drawing.Size(57, 16)
@@ -1556,7 +1550,7 @@ Partial Class Sales
         Me.lblAltPhone2.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone2.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone2.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone2.Location = New System.Drawing.Point(437, 96)
+        Me.lblAltPhone2.Location = New System.Drawing.Point(482, 96)
         Me.lblAltPhone2.Name = "lblAltPhone2"
         Me.lblAltPhone2.Size = New System.Drawing.Size(84, 16)
         Me.lblAltPhone2.TabIndex = 83
@@ -1569,7 +1563,7 @@ Partial Class Sales
         Me.lblAltPhone1.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone1.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone1.Location = New System.Drawing.Point(437, 64)
+        Me.lblAltPhone1.Location = New System.Drawing.Point(482, 64)
         Me.lblAltPhone1.Name = "lblAltPhone1"
         Me.lblAltPhone1.Size = New System.Drawing.Size(88, 16)
         Me.lblAltPhone1.TabIndex = 81
@@ -1592,7 +1586,7 @@ Partial Class Sales
         Me.lblHousePhone.BackColor = System.Drawing.Color.Transparent
         Me.lblHousePhone.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHousePhone.ForeColor = System.Drawing.Color.Gray
-        Me.lblHousePhone.Location = New System.Drawing.Point(437, 33)
+        Me.lblHousePhone.Location = New System.Drawing.Point(482, 33)
         Me.lblHousePhone.Name = "lblHousePhone"
         Me.lblHousePhone.Size = New System.Drawing.Size(97, 16)
         Me.lblHousePhone.TabIndex = 78
@@ -1715,7 +1709,7 @@ Partial Class Sales
         Me.gbHomeInfo.Controls.Add(Me.txtYrBuilt)
         Me.gbHomeInfo.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbHomeInfo.ForeColor = System.Drawing.Color.Gray
-        Me.gbHomeInfo.Location = New System.Drawing.Point(760, 3)
+        Me.gbHomeInfo.Location = New System.Drawing.Point(805, 3)
         Me.gbHomeInfo.Name = "gbHomeInfo"
         Me.gbHomeInfo.Size = New System.Drawing.Size(75, 198)
         Me.gbHomeInfo.TabIndex = 183
@@ -1807,7 +1801,7 @@ Partial Class Sales
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
         Me.gbSpecialInstructions.Location = New System.Drawing.Point(445, 207)
         Me.gbSpecialInstructions.Name = "gbSpecialInstructions"
-        Me.gbSpecialInstructions.Size = New System.Drawing.Size(390, 144)
+        Me.gbSpecialInstructions.Size = New System.Drawing.Size(435, 144)
         Me.gbSpecialInstructions.TabIndex = 188
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions:"
@@ -1820,7 +1814,7 @@ Partial Class Sales
         Me.rtbSpecialInstructions.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(6, 22)
         Me.rtbSpecialInstructions.Name = "rtbSpecialInstructions"
-        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(309, 116)
+        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(354, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
         Me.rtbSpecialInstructions.Text = "The customer only wants a rough frame in the basement and they are interested in " & _
     "upper grids in the windows"
@@ -2071,7 +2065,7 @@ Partial Class Sales
         Me.tsCustomerLog.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsCustomerLog.Name = "tsCustomerLog"
         Me.tsCustomerLog.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsCustomerLog.Size = New System.Drawing.Size(874, 33)
+        Me.tsCustomerLog.Size = New System.Drawing.Size(919, 33)
         Me.tsCustomerLog.TabIndex = 189
         Me.tsCustomerLog.Text = "ToolStrip1"
         Me.tsCustomerLog.Visible = False
@@ -2143,7 +2137,7 @@ Partial Class Sales
         Me.pnlCustomerHistory.AutoScroll = True
         Me.pnlCustomerHistory.Location = New System.Drawing.Point(4, 390)
         Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(834, 172)
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(879, 172)
         Me.pnlCustomerHistory.TabIndex = 200
         '
         'tsAFPics
@@ -2158,7 +2152,7 @@ Partial Class Sales
         Me.tsAFPics.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsAFPics.Name = "tsAFPics"
         Me.tsAFPics.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsAFPics.Size = New System.Drawing.Size(831, 33)
+        Me.tsAFPics.Size = New System.Drawing.Size(876, 33)
         Me.tsAFPics.TabIndex = 201
         Me.tsAFPics.Text = "ToolStrip1"
         '
@@ -2227,7 +2221,7 @@ Partial Class Sales
         Me.pnlAFPics.Controls.Add(Me.lsJobPictures)
         Me.pnlAFPics.Location = New System.Drawing.Point(4, 390)
         Me.pnlAFPics.Name = "pnlAFPics"
-        Me.pnlAFPics.Size = New System.Drawing.Size(834, 172)
+        Me.pnlAFPics.Size = New System.Drawing.Size(879, 172)
         Me.pnlAFPics.TabIndex = 201
         Me.pnlAFPics.Visible = False
         '
@@ -2362,15 +2356,10 @@ Partial Class Sales
         '
         'btnSortby
         '
-        Me.btnSortby.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator10, Me.btnAscending, Me.btnDescending})
+        Me.btnSortby.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAscending, Me.btnDescending})
         Me.btnSortby.Name = "btnSortby"
         Me.btnSortby.Size = New System.Drawing.Size(160, 22)
         Me.btnSortby.Text = "Sort By"
-        '
-        'ToolStripSeparator10
-        '
-        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(133, 6)
         '
         'btnAscending
         '
@@ -2428,7 +2417,7 @@ Partial Class Sales
         '
         'cmJP
         '
-        Me.cmJP.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripSeparator13, Me.ToolStripMenuItem3, Me.ToolStripSeparator14, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripSeparator15, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripMenuItem9, Me.ToolStripMenuItem17, Me.ToolStripMenuItem24, Me.ToolStripSeparator18, Me.ToolStripMenuItem25, Me.ToolStripSeparator19, Me.ToolStripMenuItem26})
+        Me.cmJP.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripSeparator13, Me.btnSendtoDesktopJP, Me.ToolStripSeparator14, Me.btnCutJP, Me.btnCopyJP, Me.ToolStripSeparator15, Me.btnCreateSCJP, Me.btnDeleteJP, Me.btnRenameJP, Me.btnJPViews, Me.ToolStripMenuItem17, Me.btnRefreshJP, Me.ToolStripSeparator18, Me.btnPasteJP, Me.ToolStripSeparator19, Me.btnNewFolderJP})
         Me.cmJP.Name = "cmsAF"
         Me.cmJP.Size = New System.Drawing.Size(161, 298)
         '
@@ -2443,58 +2432,58 @@ Partial Class Sales
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
         Me.ToolStripSeparator13.Size = New System.Drawing.Size(157, 6)
         '
-        'ToolStripMenuItem3
+        'btnSendtoDesktopJP
         '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem3.Text = "Send to Desktop"
+        Me.btnSendtoDesktopJP.Name = "btnSendtoDesktopJP"
+        Me.btnSendtoDesktopJP.Size = New System.Drawing.Size(160, 22)
+        Me.btnSendtoDesktopJP.Text = "Send to Desktop"
         '
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
         Me.ToolStripSeparator14.Size = New System.Drawing.Size(157, 6)
         '
-        'ToolStripMenuItem4
+        'btnCutJP
         '
-        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem4.Text = "Cut"
+        Me.btnCutJP.Name = "btnCutJP"
+        Me.btnCutJP.Size = New System.Drawing.Size(160, 22)
+        Me.btnCutJP.Text = "Cut"
         '
-        'ToolStripMenuItem5
+        'btnCopyJP
         '
-        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem5.Text = "Copy"
+        Me.btnCopyJP.Name = "btnCopyJP"
+        Me.btnCopyJP.Size = New System.Drawing.Size(160, 22)
+        Me.btnCopyJP.Text = "Copy"
         '
         'ToolStripSeparator15
         '
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
         Me.ToolStripSeparator15.Size = New System.Drawing.Size(157, 6)
         '
-        'ToolStripMenuItem6
+        'btnCreateSCJP
         '
-        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem6.Text = "Create Shortcut"
+        Me.btnCreateSCJP.Name = "btnCreateSCJP"
+        Me.btnCreateSCJP.Size = New System.Drawing.Size(160, 22)
+        Me.btnCreateSCJP.Text = "Create Shortcut"
         '
-        'ToolStripMenuItem7
+        'btnDeleteJP
         '
-        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
-        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem7.Text = "Delete"
+        Me.btnDeleteJP.Name = "btnDeleteJP"
+        Me.btnDeleteJP.Size = New System.Drawing.Size(160, 22)
+        Me.btnDeleteJP.Text = "Delete"
         '
-        'ToolStripMenuItem8
+        'btnRenameJP
         '
-        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
-        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem8.Text = "Rename"
+        Me.btnRenameJP.Name = "btnRenameJP"
+        Me.btnRenameJP.Size = New System.Drawing.Size(160, 22)
+        Me.btnRenameJP.Text = "Rename"
         '
-        'ToolStripMenuItem9
+        'btnJPViews
         '
-        Me.ToolStripMenuItem9.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmJPExtraLarge, Me.cmJPLarge, Me.cmJPMedium, Me.cmJPSmall, Me.ToolStripSeparator16, Me.cmJPList, Me.cmJPDetails, Me.cmJPTiles})
-        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
-        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem9.Text = "View"
+        Me.btnJPViews.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmJPExtraLarge, Me.cmJPLarge, Me.cmJPMedium, Me.cmJPSmall, Me.ToolStripSeparator16, Me.cmJPList, Me.cmJPDetails, Me.cmJPTiles})
+        Me.btnJPViews.Name = "btnJPViews"
+        Me.btnJPViews.Size = New System.Drawing.Size(160, 22)
+        Me.btnJPViews.Text = "View"
         '
         'cmJPExtraLarge
         '
@@ -2545,83 +2534,52 @@ Partial Class Sales
         '
         'ToolStripMenuItem17
         '
-        Me.ToolStripMenuItem17.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem18, Me.ToolStripMenuItem19, Me.ToolStripMenuItem20, Me.ToolStripMenuItem21, Me.ToolStripSeparator17, Me.ToolStripMenuItem22, Me.ToolStripMenuItem23})
+        Me.ToolStripMenuItem17.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAscendingJP, Me.btnDescJP})
         Me.ToolStripMenuItem17.Name = "ToolStripMenuItem17"
         Me.ToolStripMenuItem17.Size = New System.Drawing.Size(160, 22)
         Me.ToolStripMenuItem17.Text = "Sort By"
         '
-        'ToolStripMenuItem18
+        'btnAscendingJP
         '
-        Me.ToolStripMenuItem18.Checked = True
-        Me.ToolStripMenuItem18.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ToolStripMenuItem18.Name = "ToolStripMenuItem18"
-        Me.ToolStripMenuItem18.Size = New System.Drawing.Size(149, 22)
-        Me.ToolStripMenuItem18.Text = "Name"
+        Me.btnAscendingJP.Checked = True
+        Me.btnAscendingJP.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.btnAscendingJP.Name = "btnAscendingJP"
+        Me.btnAscendingJP.Size = New System.Drawing.Size(136, 22)
+        Me.btnAscendingJP.Text = "Ascending"
         '
-        'ToolStripMenuItem19
+        'btnDescJP
         '
-        Me.ToolStripMenuItem19.Name = "ToolStripMenuItem19"
-        Me.ToolStripMenuItem19.Size = New System.Drawing.Size(149, 22)
-        Me.ToolStripMenuItem19.Text = "Date Modified"
+        Me.btnDescJP.Name = "btnDescJP"
+        Me.btnDescJP.Size = New System.Drawing.Size(136, 22)
+        Me.btnDescJP.Text = "Descending"
         '
-        'ToolStripMenuItem20
+        'btnRefreshJP
         '
-        Me.ToolStripMenuItem20.Name = "ToolStripMenuItem20"
-        Me.ToolStripMenuItem20.Size = New System.Drawing.Size(149, 22)
-        Me.ToolStripMenuItem20.Text = "Type"
-        '
-        'ToolStripMenuItem21
-        '
-        Me.ToolStripMenuItem21.Name = "ToolStripMenuItem21"
-        Me.ToolStripMenuItem21.Size = New System.Drawing.Size(149, 22)
-        Me.ToolStripMenuItem21.Text = "Size"
-        '
-        'ToolStripSeparator17
-        '
-        Me.ToolStripSeparator17.Name = "ToolStripSeparator17"
-        Me.ToolStripSeparator17.Size = New System.Drawing.Size(146, 6)
-        '
-        'ToolStripMenuItem22
-        '
-        Me.ToolStripMenuItem22.Checked = True
-        Me.ToolStripMenuItem22.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ToolStripMenuItem22.Name = "ToolStripMenuItem22"
-        Me.ToolStripMenuItem22.Size = New System.Drawing.Size(149, 22)
-        Me.ToolStripMenuItem22.Text = "Ascending"
-        '
-        'ToolStripMenuItem23
-        '
-        Me.ToolStripMenuItem23.Name = "ToolStripMenuItem23"
-        Me.ToolStripMenuItem23.Size = New System.Drawing.Size(149, 22)
-        Me.ToolStripMenuItem23.Text = "Descending"
-        '
-        'ToolStripMenuItem24
-        '
-        Me.ToolStripMenuItem24.Name = "ToolStripMenuItem24"
-        Me.ToolStripMenuItem24.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem24.Text = "Refresh"
+        Me.btnRefreshJP.Name = "btnRefreshJP"
+        Me.btnRefreshJP.Size = New System.Drawing.Size(160, 22)
+        Me.btnRefreshJP.Text = "Refresh"
         '
         'ToolStripSeparator18
         '
         Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
         Me.ToolStripSeparator18.Size = New System.Drawing.Size(157, 6)
         '
-        'ToolStripMenuItem25
+        'btnPasteJP
         '
-        Me.ToolStripMenuItem25.Name = "ToolStripMenuItem25"
-        Me.ToolStripMenuItem25.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem25.Text = "Paste"
+        Me.btnPasteJP.Name = "btnPasteJP"
+        Me.btnPasteJP.Size = New System.Drawing.Size(160, 22)
+        Me.btnPasteJP.Text = "Paste"
         '
         'ToolStripSeparator19
         '
         Me.ToolStripSeparator19.Name = "ToolStripSeparator19"
         Me.ToolStripSeparator19.Size = New System.Drawing.Size(157, 6)
         '
-        'ToolStripMenuItem26
+        'btnNewFolderJP
         '
-        Me.ToolStripMenuItem26.Name = "ToolStripMenuItem26"
-        Me.ToolStripMenuItem26.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem26.Text = "New Folder"
+        Me.btnNewFolderJP.Name = "btnNewFolderJP"
+        Me.btnNewFolderJP.Size = New System.Drawing.Size(160, 22)
+        Me.btnNewFolderJP.Text = "New Folder"
         '
         'tpIssueLeads
         '
@@ -3097,15 +3055,15 @@ Partial Class Sales
     Friend WithEvents cmJP As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator13 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnSendtoDesktopJP As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator14 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnCutJP As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnCopyJP As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator15 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripMenuItem6 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem7 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem8 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem9 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnCreateSCJP As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnDeleteJP As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnRenameJP As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnJPViews As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmJPExtraLarge As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmJPLarge As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmJPMedium As System.Windows.Forms.ToolStripMenuItem
@@ -3115,21 +3073,15 @@ Partial Class Sales
     Friend WithEvents cmJPDetails As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmJPTiles As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem17 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem18 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem19 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem20 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem21 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator17 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripMenuItem22 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem23 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem24 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnAscendingJP As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnDescJP As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnRefreshJP As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator18 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripMenuItem25 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnPasteJP As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator19 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripMenuItem26 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnNewFolderJP As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents bgGetImages As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnSortby As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator10 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents btnAscending As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnDescending As System.Windows.Forms.ToolStripMenuItem
 End Class

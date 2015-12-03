@@ -2720,7 +2720,7 @@ Public Class Sales
      
     End Sub
 
-#Region "List View Context Menus - Static Control Edits"
+#Region "List View Context Menus - NOTES"
 
     ''
     '' Edit 11-16-2015
@@ -2738,7 +2738,7 @@ Public Class Sales
     ''    TEXT     |             TAG                  |      Size(rounded KB)(sub 1)        |    LastModified(sub2)         |   Type   {file/folder}
     '' file.txt    |   c:\user\blah\desktop\file.txt  |              125KB                  |       10/15/2015 09:00 AM     |       File
     ''
-
+#End Region
 
 #Region "Stuff For Multi-threading"
 
@@ -2920,37 +2920,21 @@ Public Class Sales
 
 #End Region
 
-
-    Private Sub lvAttachedFiles_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
-
-    End Sub
-
-    Private Sub lvAttachedFiles_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
-
-    End Sub
-
-    Private Sub lvAttachedFiles_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-
-    End Sub
-
-    Private Sub lvAttachedFiles_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-
-    End Sub
-
-
-
-    Private Sub lvAttachedFiles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-    End Sub
-
-
-
+#Region "Context Menu - OPEN - LS and JP"
     Private Sub btnOpen_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOpen.Click
         If sel_Item_right IsNot Nothing Then
             System.Diagnostics.Process.Start(sel_Item_right.Tag)
         End If
     End Sub
 
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        If sel_Item_Right_Jp IsNot Nothing Then
+            System.Diagnostics.Process.Start(sel_Item_Right_Jp.Tag)
+        End If
+    End Sub
+#End Region
+
+#Region "Delete Context Menus - LS and JP"
     Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         If sel_Item_right IsNot Nothing Then
             If sel_Item_right.SubItems(3).Text = "File" Then
@@ -2961,7 +2945,7 @@ Public Class Sales
                     If Len(whereToCreate) <= 0 Then
                         whereToCreate = (af_dir & STATIC_VARIABLES.CurrentID & "\")
                     ElseIf Len(whereToCreate) >= 1 Then
-                        whereToCreate = Me.lsAttachedFiles.Tag
+                        whereToCreate = Me.lsJobPictures.Tag
                     End If
                     Dim repop As New AF_And_JP_Logic(whereToCreate)
                     Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
@@ -2969,7 +2953,7 @@ Public Class Sales
                     Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
                     arDirs = repop.Directories
                     repop = Nothing
-                    Me.lsAttachedFiles.Items.Clear()
+                    Me.lsJobPictures.Items.Clear()
                     AddListItem_Directories(arDirs, Me.lsAttachedFiles)
                     AddListItem_Files(arFiles, Me.lsAttachedFiles)
                     sel_Item_left = Nothing
@@ -3008,7 +2992,67 @@ Public Class Sales
         End If
 
     End Sub
+    Private Sub btnDeleteJP_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDeleteJP.Click
+        If sel_Item_Right_Jp IsNot Nothing Then
+            If sel_Item_Right_Jp.SubItems(3).Text = "File" Then
+                If System.IO.File.Exists(sel_Item_Right_Jp.Tag) = True Then
+                    System.IO.File.Delete(sel_Item_Right_Jp.Tag)
+                    ' now repop
+                    Dim whereToCreate As String = lsJobPictures.Tag
+                    If Len(whereToCreate) <= 0 Then
+                        whereToCreate = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                    ElseIf Len(whereToCreate) >= 1 Then
+                        whereToCreate = Me.lsJobPictures.Tag
+                    End If
+                    Dim repop As New AF_And_JP_Logic(whereToCreate)
+                    Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+                    arFiles = repop.Files
+                    Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+                    arDirs = repop.Directories
+                    repop = Nothing
+                    Me.lsJobPictures.Items.Clear()
+                    AddListItem_Directories(arDirs, Me.lsJobPictures)
+                    AddListItem_Files(arFiles, Me.lsJobPictures)
+                    sel_Item_Left_Jp = Nothing
+                    sel_Item_Right_Jp = Nothing
+                End If
+            End If
+        End If
 
+        If sel_Item_Right_Jp IsNot Nothing Then
+            If sel_Item_Right_Jp.SubItems(3).Text = "Folder" Then
+                If System.IO.Directory.Exists(sel_Item_Right_Jp.Tag) = True Then
+                    System.IO.Directory.Delete(sel_Item_Right_Jp.Tag, True)
+                    Dim whereToCreate As String = lsJobPictures.Tag
+                    If Len(whereToCreate) <= 0 Then
+                        whereToCreate = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                    ElseIf Len(whereToCreate) >= 1 Then
+                        whereToCreate = Me.lsJobPictures.Tag
+                    End If
+                    Dim repop As New AF_And_JP_Logic(whereToCreate)
+                    Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+                    arFiles = repop.Files
+                    Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+                    arDirs = repop.Directories
+                    repop = Nothing
+                    Me.lsJobPictures.Items.Clear()
+                    AddListItem_Directories(arDirs, Me.lsJobPictures)
+                    AddListItem_Files(arFiles, Me.lsJobPictures)
+                    sel_Item_Left_Jp = Nothing
+                    sel_Item_Right_Jp = Nothing
+                End If
+            End If
+
+        ElseIf sel_Item_Right_Jp Is Nothing Then
+            sel_Item_Left_Jp = Nothing
+            Exit Sub
+        End If
+
+    End Sub
+
+#End Region
+
+#Region "Rename Context Menu - LS and JP"
     Private Sub btnRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRename.Click
         If sel_Item_right IsNot Nothing Then
             Select Case sel_Item_right.SubItems(3).Text
@@ -3230,6 +3274,232 @@ Public Class Sales
         End If
     End Sub
 
+
+    Private Sub btnRenameJP_Click(sender As Object, e As EventArgs) Handles btnRenameJP.Click
+        If sel_Item_Right_Jp IsNot Nothing Then
+            Select Case sel_Item_Right_Jp.SubItems(3).Text
+                Case "File"
+                    ''
+                    '' 1) rename file
+                    ''    msdn: no =>  system.io.fileRename()             ?   https://msdn.microsoft.com/en-us/library/system.io.file%28v=vs.100%29.aspx
+                    ''          yes => my.computer.filesystem.RenameFile()    https://msdn.microsoft.com/en-us/library/5w05844e%28v=vs.120%29.aspx
+                    '' wtf.
+                    ''
+                    '' 2) repop control with renamed file(s)
+                    '' 3) set the selected items to nothing
+                    '' 4) exit 
+                    ''
+                    Dim new_name As String = InputBox("Please enter the NEW name of the file to be renamed.", "Rename File")
+                    If Len(new_name) >= 1 Then
+                        '' acceptable
+                        '' does it already exits ? 
+                        Select Case System.IO.File.Exists(new_name)
+                            Case Is = True
+                                '' already there
+                                sel_Item_Left_Jp = Nothing
+                                sel_Item_Right_Jp = Nothing
+                                Exit Select
+                            Case Is = False
+                                '' not there
+                                '' get file extenstion
+                                '' 
+                                Dim fileExt As String = SplitApartFileExt(sel_Item_Right_Jp.Tag)
+                                My.Computer.FileSystem.RenameFile(sel_Item_Right_Jp.Tag, new_name & "." & fileExt)
+                                '' now repop
+                                Dim cur_dir As String = Me.lsJobPictures.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsJobPictures.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+
+                                sel_Item_Left_Jp = Nothing
+                                sel_Item_Right_Jp = Nothing
+                                Exit Select
+                            Case Else
+                                '' dunno
+                                sel_Item_Left_Jp = Nothing
+                                sel_Item_Right_Jp = Nothing
+                                Exit Select
+                        End Select
+
+                    ElseIf Len(new_name) <= 0 Then
+                        '' unacceptable
+                    End If
+
+                Case "Folder"
+                    Dim new_name As String = InputBox("Please enter the NEW name of the Folder to be renamed.", "Rename Folder")
+                    If Len(new_name) >= 1 Then
+                        '' acceptable
+                        '' does it already exits ? 
+                        Select Case System.IO.Directory.Exists(new_name)
+                            Case Is = True
+                                '' already there
+                                sel_Item_Left_Jp = Nothing
+                                sel_Item_Right_Jp = Nothing
+                                Exit Select
+                            Case Is = False
+                                '' not there
+                                My.Computer.FileSystem.RenameDirectory(sel_Item_Right_Jp.Tag, new_name)
+                                '' now repop
+                                Dim cur_dir As String = Me.lsJobPictures.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsJobPictures.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+
+                                sel_Item_Left_Jp = Nothing
+                                sel_Item_Right_Jp = Nothing
+                                Exit Select
+                            Case Else
+                                '' dunno
+                                sel_Item_Left_Jp = Nothing
+                                sel_Item_Right_Jp = Nothing
+                                Exit Select
+                        End Select
+                    End If
+
+                Case Else
+                    Exit Select
+            End Select
+
+
+        ElseIf sel_Item_Right_Jp Is Nothing Then
+            sel_Item_Left_Jp = Nothing
+        End If
+    End Sub
+
+#End Region
+
+#Region "Context Menu Cut - LS and JP "
+
     Private Sub btnCut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCut.Click
         If sel_Item_right IsNot Nothing Then
             My.Computer.Clipboard.SetText("CUT|" & sel_Item_right.Tag)
@@ -3241,6 +3511,20 @@ Public Class Sales
         End If
     End Sub
 
+    Private Sub btnCutJP_Click(sender As Object, e As EventArgs) Handles btnCutJP.Click
+        If sel_Item_Right_Jp IsNot Nothing Then
+            My.Computer.Clipboard.SetText("CUT|" & sel_Item_Right_Jp.Tag)
+            Me.btnPaste.Enabled = True
+        ElseIf sel_Item_Right_Jp Is Nothing Then
+            My.Computer.Clipboard.Clear()
+            Me.btnPasteJP.Enabled = False
+            sel_Item_Left_Jp = Nothing
+        End If
+    End Sub
+
+#End Region
+
+#Region "Copy Context Menu - LS and JP"
     Private Sub btnCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopy.Click
         If sel_Item_right IsNot Nothing Then
             My.Computer.Clipboard.SetText("COPY|" & sel_Item_right.Tag)
@@ -3252,22 +3536,49 @@ Public Class Sales
         End If
     End Sub
 
+    Private Sub btnCopyJP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyJP.Click
+        If sel_Item_Right_Jp IsNot Nothing Then
+            My.Computer.Clipboard.SetText("COPY|" & sel_Item_Right_Jp.Tag)
+            Me.btnPaste.Enabled = True
+        ElseIf sel_Item_Right_Jp Is Nothing Then
+            My.Computer.Clipboard.Clear()
+            Me.btnPasteJP.Enabled = False
+            sel_Item_Left_Jp = Nothing
+        End If
+    End Sub
+
 #End Region
 
-#Region "List Views"
+#Region "List View Sorts - LS and JP"
     Private Sub btnAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAscending.Click
         Dim y As New ListSortAscending
         Me.lsAttachedFiles.ListViewItemSorter = y
         Me.btnAscending.Checked = True
         Me.btnDescending.Checked = False
     End Sub
+    Private Sub btnAscendingJP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAscendingJP.Click
+        Dim y As New ListSortAscending
+        Me.lsJobPictures.ListViewItemSorter = y
+        Me.btnAscendingJP.Checked = True
+        Me.btnDescJP.Checked = False
+    End Sub
 
-    Private Sub btnDescending_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDescending.Click
+    Private Sub btnDesc_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDescending.Click
         Dim z As New ListSortDescending
         Me.lsAttachedFiles.ListViewItemSorter = z
         Me.btnAscending.Checked = False
         Me.btnDescending.Checked = True
     End Sub
+    Private Sub btnDescending_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDescJP.Click
+        Dim z As New ListSortDescending
+        Me.lsJobPictures.ListViewItemSorter = z
+        Me.btnAscendingJP.Checked = False
+        Me.btnDescJP.Checked = True
+    End Sub
+#End Region
+
+#Region "List View - {views} Attached Files"
+
 
     Private Sub btnXLarge_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnXLarge.Click
         Me.btnXLarge.Checked = True
@@ -3378,6 +3689,9 @@ Public Class Sales
         Me.lsAttachedFiles.View = View.Tile
     End Sub
 #End Region
+
+
+#Region "Context Menu New Folder - LS and JP"
     Private Sub btnNewFolder_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolder.Click
 
         Dim cur_Dir As String = Me.lsAttachedFiles.Tag
@@ -3482,6 +3796,110 @@ Public Class Sales
         End If
 
     End Sub
+    Private Sub btnNewFolderJP_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolderJP.Click
+        Dim cur_Dir As String = Me.lsJobPictures.Tag
+        If Len(cur_Dir) <= 0 Then
+            cur_Dir = (jp_dir & STATIC_VARIABLES.CurrentID)
+        ElseIf Len(cur_Dir) >= 1 Then
+            cur_Dir = cur_Dir
+        End If
+
+        '' LEGACY CODE FROM DYNAMIC Control
+        '' 
+        Dim iteration As Integer = 0
+        'lsCollection.Clear()
+        Dim dir_ As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
+        Dim cnt = dir_.GetDirectories("New fo*", IO.SearchOption.AllDirectories)
+
+        Dim xyz As System.IO.DirectoryInfo
+        For Each xyz In cnt
+            iteration += 1
+        Next
+
+        Dim next1 As Integer = (iteration + 1)
+        If next1 <= 1 Then
+            System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder")
+        ElseIf next1 > 1 Then
+            System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder (" & next1.ToString & ")")
+        End If
+
+        Dim dir_2 As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
+
+        Dim af As New AF_And_JP_Logic(cur_Dir)
+        Me.lsJobPictures.Items.Clear()
+        For Each x As AF_And_JP_Logic.FileObject In af.Files
+            Dim lvItem As New ListViewItem
+            '' Name | Date Mod | Size | Type
+            lvItem.Text = x.FileName
+            lvItem.Tag = x.FullPath
+            lvItem.SubItems.Add(x.DateModified)
+            Dim sz = Math.Round(x.FileSize / 1024, 0)
+            Dim sz_str As String = sz.ToString & " KB"
+            lvItem.SubItems.Add(sz_str)
+            lvItem.SubItems.Add("File")
+            Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+            If x.smThumb IsNot Nothing Then
+                Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+            ElseIf x.smThumb Is Nothing Then
+                Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+            End If
+
+            If x.mdThumb IsNot Nothing Then
+                Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+            ElseIf x.mdThumb Is Nothing Then
+                Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+            End If
+
+            If x.lgThumb IsNot Nothing Then
+                Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+            ElseIf x.lgThumb Is Nothing Then
+                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+            End If
+
+            If x.jbThumb IsNot Nothing Then
+                Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+            ElseIf x.jbThumb Is Nothing Then
+                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+            End If
+
+            If x.Tile IsNot Nothing Then
+                Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+            ElseIf x.Tile Is Nothing Then
+                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+            End If
+
+            lvItem.ImageKey = x.FileName
+            Me.lsJobPictures.Items.Add(lvItem)
+        Next
+
+        For Each y As AF_And_JP_Logic.DirObject In af.Directories
+            Dim lvItem As New ListViewItem
+            lvItem.Text = y.FileName
+            lvItem.Tag = y.FullPath
+            lvItem.SubItems.Add(y.DateModified)
+            lvItem.SubItems.Add("")
+            lvItem.SubItems.Add("Folder")
+            Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+            Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+            Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+            Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+            Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+            lvItem.ImageKey = y.FileName
+            Me.lsJobPictures.Items.Add(lvItem)
+        Next
+
+        sel_Item_Left_Jp = Nothing
+        sel_Item_Right_Jp = Nothing
+
+        'Dim rootDir_Lead As String = (jp_dir & STATIC_VARIABLES.CurrentID)
+        'If rootDir_Lead = jp_dir & STATIC_VARIABLES.CurrentID Then
+        '    Me.tsAttachedFilesNAV.Enabled = False
+        'ElseIf rootDir_Lead <> jp_dir & STATIC_VARIABLES.CurrentID Then
+        '    Me.tsAttachedFilesNAV.Enabled = True
+        'End If
+
+    End Sub
+#End Region
 
     Private Sub EditCustomerToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EditCustomerToolStripMenuItem.Click
         Me.btnEditCustomer_Click(Nothing, Nothing)
@@ -5227,16 +5645,15 @@ Public Class Sales
 
     End Sub
 
-    Private Sub tbMain_SizeChanged(sender As Object, e As EventArgs) Handles tbMain.SizeChanged
-        'Dim x As Integer = (Me.tbMain.Height / 5)
-        'MsgBox(x.ToString)
-        'Me.tbMain.ItemSize = New Size(x, 20)
-    End Sub
+
 
     Private Sub bgGetImages_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgGetImages.DoWork
         GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
     End Sub
-#Region "List View - Job Pictures"
+
+
+
+#Region "List View - {Views} Job Pictures"
     Private Sub cmJPExtraLarge_Click(sender As Object, e As EventArgs) Handles cmJPExtraLarge.Click
         Me.cmJPExtraLarge.Checked = True
         Me.lsJobPictures.View = View.LargeIcon
@@ -5347,17 +5764,19 @@ Public Class Sales
     End Sub
 #End Region
 
-
-
-#Region "ls attached files - selection logic "
+#Region "ls attached files / job pictures - selection logic "
 
     Private sel_Item_right As ListViewItem
     Private sel_Item_left As ListViewItem
+
+    Private sel_Item_Right_Jp As ListViewItem
+    Private sel_Item_Left_Jp As ListViewItem
 
     Private sel_item_left_DandD As ListViewItem
     Private sel_item_right_DandD As ListViewItem
 
     Private PreviousText As String = ""
+    Private PreviousTextJP As String = ""
 
     Private Const af_dir As String = "\\192.168.1.2\Company\ISS\Attached Files\"
     Private Const jp_dir As String = "\\192.168.1.2\Company\ISS\Job Pictures\"
@@ -5615,7 +6034,275 @@ Public Class Sales
                     End If
 
                 Case Else
-                        Exit Select
+                    Exit Select
+
+            End Select
+
+
+            'Catch ex As Exception
+            '    '' fail it if it doesn't work
+            '    Dim msg As String = ex.Message
+            '    Dim stopp As Object
+            '    MsgBox(msg, MsgBoxStyle.Critical, "DEBUG INFO")
+
+            'End Try
+        End If
+    End Sub
+
+    Private Sub lsJobPictures_AfterLabelEdit(sender As Object, e As LabelEditEventArgs) Handles lsJobPictures.AfterLabelEdit
+        If e.Label Is Nothing Then
+
+            'MsgBox("nothing recieved",critical,"DEBUG INFO ONLY")
+            Return
+        ElseIf e.Label <> Nothing Then
+
+            'Try
+            Dim snd As ListView = sender
+            Dim z As ListViewItem
+            Dim targetItem As ListViewItem
+            For Each z In snd.Items
+                If z.Selected = True Then
+                    targetItem = z
+                End If
+            Next
+
+            Select Case z.SubItems(3).Text
+                Case Is = "File"
+                    Dim y As Integer = 0
+                    y = e.Item
+                    Dim lvSelected As ListViewItem = snd.Items(y)
+                    Dim fileName As String = lvSelected.Text
+                    Dim filePath As String = lvSelected.Tag
+                    Dim splits = lvSelected.Tag.ToString.Split("\")
+                    Dim tt As Object
+                    Dim count As Integer = 0
+                    For Each tt In splits
+                        count += 1
+                    Next
+                    Dim fileExtPeices = splits(count - 1).ToString.Split(".")
+                    Dim fileExt
+                    fileName = fileExtPeices(0).ToString
+                    fileExt = "." & fileExtPeices(1).ToString
+                    fileName = (e.Label)
+                    splits(count - 1) = fileName
+                    Dim g As Integer
+                    Dim reconstructed As String = ""
+                    For g = 0 To count - 1
+                        reconstructed += ("\" & splits(g).ToString)
+                    Next
+                    reconstructed = (reconstructed.ToString.Substring(1, reconstructed.Length - 1))
+                    Rename(lvSelected.Tag, reconstructed)
+                    lvSelected.Tag = reconstructed
+
+                    '' now repop 
+
+                    'If Len(Me.lsJobPictures.Tag) <= 0 Then
+                    '    Me.lsJobPictures.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    '    Me.tsAttachedFilesNAV.Enabled = False
+                    'ElseIf Len(Me.lsJobPictures.Tag) >= 1 Then
+                    '    Me.lsJobPictures.Tag = Me.lsJobPictures.Tag
+                    '    Me.tsAttachedFilesNAV.Enabled = True
+                    'End If
+
+                    Dim af As New AF_And_JP_Logic(Me.lsJobPictures.Tag)
+
+                    Me.lsJobPictures.Items.Clear()
+                    For Each x As AF_And_JP_Logic.FileObject In af.Files
+                        Dim lvItem As New ListViewItem
+                        '' Name | Date Mod | Size | Type
+                        lvItem.Text = x.FileName
+                        lvItem.Tag = x.FullPath
+                        lvItem.SubItems.Add(x.DateModified)
+                        Dim sz = Math.Round(x.FileSize / 1024, 0)
+                        Dim sz_str As String = sz.ToString & " KB"
+                        lvItem.SubItems.Add(sz_str)
+                        lvItem.SubItems.Add("File")
+                        Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                        If x.smThumb IsNot Nothing Then
+                            Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                        ElseIf x.smThumb Is Nothing Then
+                            Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                        End If
+
+                        If x.mdThumb IsNot Nothing Then
+                            Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                        ElseIf x.mdThumb Is Nothing Then
+                            Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                        End If
+
+                        If x.lgThumb IsNot Nothing Then
+                            Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                        ElseIf x.lgThumb Is Nothing Then
+                            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                        End If
+
+                        If x.jbThumb IsNot Nothing Then
+                            Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                        ElseIf x.jbThumb Is Nothing Then
+                            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                        End If
+
+                        If x.Tile IsNot Nothing Then
+                            Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                        ElseIf x.Tile Is Nothing Then
+                            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                        End If
+
+                        lvItem.ImageKey = x.FileName
+                        Me.lsJobPictures.Items.Add(lvItem)
+                    Next
+
+                    For Each yy As AF_And_JP_Logic.DirObject In af.Directories
+                        Dim lvItem As New ListViewItem
+                        lvItem.Text = yy.FileName
+                        lvItem.Tag = yy.FullPath
+                        lvItem.SubItems.Add(yy.DateModified)
+                        lvItem.SubItems.Add("")
+                        lvItem.SubItems.Add("Folder")
+                        Me.imgLst16.Images.Add(yy.FileName, yy.smIcon)
+                        Me.ImgLst32.Images.Add(yy.FileName, yy.mdIcon)
+                        Me.ImgLst48.Images.Add(yy.FileName, yy.lgIcon)
+                        Me.ImgLst128.Images.Add(yy.FileName, yy.lgIcon)
+                        Me.ImgLst256.Images.Add(yy.FileName, yy.jbIcon)
+                        lvItem.ImageKey = yy.FileName
+                        Me.lsJobPictures.Items.Add(lvItem)
+                    Next
+
+
+                Case Is = "Folder"
+
+                    '' 11-25-2015 AC
+                    '' obviously need a method here to rename folders / directories.
+                    '' need source directory (loc) -> need destination directory (loc) 
+                    '' make sure it doesn't already exist
+                    '' if it does, fail it or choose another name
+                    '' no special chars in directory name
+                    '' after rename comitted, repop container
+                    '' 
+                    Dim y As Integer = 0
+                    y = e.Item
+                    Dim lvSelected As ListViewItem = snd.Items(y)
+                    '' af_dir const already has "\" on end of it
+                    '' tag = full path name of original directory
+                    '' 
+                    Dim cur_dir As String = lsJobPictures.Tag '' where the directory is focused at
+                    If Len(lsJobPictures.Tag) <= 0 Then
+                        cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    ElseIf Len(lsJobPictures.Tag) >= 0 Then
+                        cur_dir = cur_dir
+                    End If
+                    '' now split it up and check to see if the new one exists already.  (count -1 of '\') = where the new name needs to be placed.
+                    '' 
+                    Dim dirs() = Split(cur_dir, "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                    Dim cntP As Integer = 0
+                    For Each st As String In dirs
+                        cntP += 1
+                    Next
+                    Dim i As Integer = 0
+                    Dim reconstructed As String = ""
+                    For i = 0 To cntP - 1
+                        If i >= (cntP - 1) Then
+                            '' no trailing '\' and add new dir name
+                            reconstructed += (e.Label)
+                        ElseIf i < (cntP - 1) Then
+                            '' trailing '\'
+                            reconstructed += (dirs(i) & "\")
+                        End If
+                    Next
+                    If System.IO.Directory.Exists(reconstructed) = True Then
+                        '' fail it
+                        Exit Sub
+                    ElseIf System.IO.Directory.Exists(reconstructed) = False Then
+                        Dim dirX As String = (lvSelected.Tag)
+                        My.Computer.FileSystem.RenameDirectory(dirX, e.Label)
+                    End If
+
+                    '' now repop
+
+                    'If Len(Me.lsJobPictures.Tag) <= 0 Then
+                    '    Me.lsJobPictures.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    '    Me.tsAttachedFilesNAV.Enabled = False
+                    'ElseIf Len(Me.lsJobPictures.Tag) >= 1 Then
+                    '    Me.lsJobPictures.Tag = Me.lsJobPictures.Tag
+                    '    Me.tsAttachedFilesNAV.Enabled = True
+                    'End If
+
+                    Dim af As New AF_And_JP_Logic(Me.lsJobPictures.Tag)
+
+                    Me.lsJobPictures.Items.Clear()
+                    If af.Files IsNot Nothing Then
+                        If af.Files.Count <= 0 Then
+
+                        ElseIf af.Files.Count >= 1 Then
+                            For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                Dim lvItem As New ListViewItem
+                                '' Name | Date Mod | Size | Type
+                                lvItem.Text = x.FileName
+                                lvItem.Tag = x.FullPath
+                                lvItem.SubItems.Add(x.DateModified)
+                                Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                Dim sz_str As String = sz.ToString & " KB"
+                                lvItem.SubItems.Add(sz_str)
+                                lvItem.SubItems.Add("File")
+                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                lvItem.ImageKey = x.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+                        End If
+                    End If
+
+                    If af.Directories IsNot Nothing Then
+                        If af.Directories.Count >= 1 Then
+                            For Each yy As AF_And_JP_Logic.DirObject In af.Directories
+                                Dim lvItem As New ListViewItem
+                                lvItem.Text = yy.FileName
+                                lvItem.Tag = yy.FullPath
+                                lvItem.SubItems.Add(yy.DateModified)
+                                lvItem.SubItems.Add("")
+                                lvItem.SubItems.Add("Folder")
+                                Me.imgLst16.Images.Add(yy.FileName, yy.smIcon)
+                                Me.ImgLst32.Images.Add(yy.FileName, yy.mdIcon)
+                                Me.ImgLst48.Images.Add(yy.FileName, yy.lgIcon)
+                                Me.ImgLst128.Images.Add(yy.FileName, yy.lgIcon)
+                                Me.ImgLst256.Images.Add(yy.FileName, yy.jbIcon)
+                                lvItem.ImageKey = yy.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+                        End If
+                    End If
+
+                Case Else
+                    Exit Select
 
             End Select
 
@@ -5654,7 +6341,95 @@ Public Class Sales
         Next
     End Sub
 
-   
+    Private Sub lsJobPictures_BeforeLabelEdit(sender As Object, e As LabelEditEventArgs) Handles lsJobPictures.BeforeLabelEdit
+        ''
+        '' before label edit -> name of listviewItem -> store it locally
+        ''
+        Dim ls As ListView = sender
+        Dim f_or_f As String = ""
+        For Each y As ListViewItem In ls.Items
+            If y.Selected = True Then
+                '' strip off the directory portion of the file or folder and pipe to var
+                Select Case y.SubItems(3).Text
+                    Case Is = "File"
+                        PreviousTextJP = SplitApartFileName(y.Tag)
+                        Exit Select
+                    Case Is = "Folder"
+                        PreviousTextJP = SplitFolderName(y.Tag)
+                        Exit Select
+                    Case Else
+                        PreviousTextJP = ""
+                        Exit Select
+                End Select
+            End If
+        Next
+    End Sub
+
+    Private Sub lsAttachedFiles_MouseUp(sender As Object, e As MouseEventArgs) Handles lsAttachedFiles.MouseUp
+        Dim ls As ListView = sender
+        Select Case e.Button
+            Case Windows.Forms.MouseButtons.Left
+
+                Dim i As ListViewItem
+                For Each i In ls.Items
+                    If i.Selected = True Then
+                        sel_Item_left = i
+                    End If
+                Next
+                Exit Select
+
+            Case Windows.Forms.MouseButtons.Right
+
+                For Each i As ListViewItem In ls.Items
+                    If i.Selected = True Then
+                        sel_Item_right = i
+                    End If
+                Next
+                Exit Select
+
+            Case Else
+                sel_item_left_DandD = Nothing
+                sel_item_right_DandD = Nothing
+                Me.lsAttachedFiles.HoverSelection = False
+                Me.lsAttachedFiles.MultiSelect = False
+                sel_Item_left = Nothing
+                sel_Item_right = Nothing
+                Exit Select
+        End Select
+    End Sub
+
+    Private Sub lsJobPictures_MouseUp(sender As Object, e As MouseEventArgs) Handles lsJobPictures.MouseUp
+        Dim ls As ListView = sender
+        Select Case e.Button
+            Case Windows.Forms.MouseButtons.Left
+
+                Dim i As ListViewItem
+                For Each i In ls.Items
+                    If i.Selected = True Then
+                        sel_Item_Left_Jp = i
+                    End If
+                Next
+                Exit Select
+
+            Case Windows.Forms.MouseButtons.Right
+
+                For Each i As ListViewItem In ls.Items
+                    If i.Selected = True Then
+                        sel_Item_Right_Jp = i
+                    End If
+                Next
+                Exit Select
+
+            Case Else
+                sel_item_left_DandD = Nothing
+                sel_item_right_DandD = Nothing
+                Me.lsJobPictures.HoverSelection = False
+                Me.lsJobPictures.MultiSelect = False
+                sel_Item_Left_Jp = Nothing
+                sel_Item_Right_Jp = Nothing
+                Exit Select
+        End Select
+    End Sub
 
     Private Sub lsAttachedFiles_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles lsAttachedFiles.ItemDrag
         If e.Item IsNot Nothing Then
@@ -5687,8 +6462,36 @@ Public Class Sales
         End If
     End Sub
 
+    Private Sub lsJobPictures_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles lsJobPictures.ItemDrag
+        If e.Item IsNot Nothing Then
+            sel_item_left_DandD = e.Item
+            Me.lsJobPictures.MultiSelect = True
+            Me.lsJobPictures.HoverSelection = True
+            Dim operation As String = "Drag"
+            Select Case sel_item_left_DandD.SubItems(3).Text
+                '' file or folder?
+                Case Is = "File"
+                    '' get the file name
+                    Dim fname As String = ""
+                    fname = SplitApartFileName(sel_item_left_DandD.Tag)
 
-   
+
+
+                    Exit Select
+                Case Is = "Folder"
+                    Dim fname As String = ""
+                    fname = SplitFolderName(sel_item_left_DandD.Tag)
+
+
+
+
+                    Exit Select
+                Case Else
+                    sel_item_left_DandD = Nothing
+                    Exit Select
+            End Select
+        End If
+    End Sub
 
     Private Sub lsAttachedFiles_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lsAttachedFiles.MouseDoubleClick
         ''
@@ -5806,47 +6609,119 @@ Public Class Sales
         End Select
     End Sub
 
-    
-
-    
-
-
-
-
-    Private Sub lsAttachedFiles_MouseUp(sender As Object, e As MouseEventArgs) Handles lsAttachedFiles.MouseUp
-        Dim ls As ListView = sender
+    Private Sub lsJobPictures_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lsJobPictures.MouseDoubleClick
+        ''
+        '' if its a file: open it
+        '' if its a folder: change the directory on the list view control to it.
+        '' 
         Select Case e.Button
             Case Windows.Forms.MouseButtons.Left
+                Select Case sel_Item_Left_Jp.SubItems(3).Text
+                    Case Is = "File"
+                        System.Diagnostics.Process.Start(sel_Item_Left_Jp.Tag)
+                        Exit Select
+                    Case Is = "Folder"
+                        '' 
+                        '' have lsAF nav to this directory and repop.
+                        '' 
 
-                Dim i As ListViewItem
-                For Each i In ls.Items
-                    If i.Selected = True Then
-                        sel_Item_left = i
-                    End If
-                Next
-                Exit Select
+                        Dim af As New AF_And_JP_Logic(sel_Item_Left_Jp.Tag)
+                        Dim cur_dir As String = lsJobPictures.Tag
+                        Dim next_dir As String = sel_Item_Left_Jp.Tag
+                        lsJobPictures.Tag = next_dir
+                        Me.lsJobPictures.Items.Clear()
+                        For Each x As AF_And_JP_Logic.FileObject In af.Files
+                            Dim lvItem As New ListViewItem
+                            '' Name | Date Mod | Size | Type
+                            lvItem.Text = x.FileName
+                            lvItem.Tag = x.FullPath
+                            lvItem.SubItems.Add(x.DateModified)
+                            Dim sz = Math.Round(x.FileSize / 1024, 0)
+                            Dim sz_str As String = sz.ToString & " KB"
+                            lvItem.SubItems.Add(sz_str)
+                            lvItem.SubItems.Add("File")
+                            Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                            If x.smThumb IsNot Nothing Then
+                                Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                            ElseIf x.smThumb Is Nothing Then
+                                Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                            End If
 
+                            If x.mdThumb IsNot Nothing Then
+                                Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                            ElseIf x.mdThumb Is Nothing Then
+                                Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                            End If
+
+                            If x.lgThumb IsNot Nothing Then
+                                Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                            ElseIf x.lgThumb Is Nothing Then
+                                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                            End If
+
+                            If x.jbThumb IsNot Nothing Then
+                                Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                            ElseIf x.jbThumb Is Nothing Then
+                                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                            End If
+
+                            If x.Tile IsNot Nothing Then
+                                Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                            ElseIf x.Tile Is Nothing Then
+                                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                            End If
+
+                            lvItem.ImageKey = x.FileName
+                            Me.lsJobPictures.Items.Add(lvItem)
+                        Next
+
+                        For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                            Dim lvItem As New ListViewItem
+                            lvItem.Text = y.FileName
+                            lvItem.Tag = y.FullPath
+                            lvItem.SubItems.Add(y.DateModified)
+                            lvItem.SubItems.Add("")
+                            lvItem.SubItems.Add("Folder")
+                            Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                            Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                            Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                            Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                            Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                            lvItem.ImageKey = y.FileName
+                            Me.lsJobPictures.Items.Add(lvItem)
+                        Next
+
+                        'sel_Item_left = Nothing
+                        'sel_Item_right = Nothing
+                        ''
+                        '' 1 clear out list view
+                        '' 2 set the directory of the listview
+                        '' 3 check to see if the button should be locked
+                        '' 4 clear out/append image lists for new folder/file icon associations
+                        '' 5 loop through and repopulate the listview with the 'new' items.
+                        '' 5 reset sel_item_left & sel_item_right vars
+                        '' 
+
+
+                        Exit Select
+                    Case Else
+                        Exit Select
+                End Select
             Case Windows.Forms.MouseButtons.Right
-
-                For Each i As ListViewItem In ls.Items
-                    If i.Selected = True Then
-                        sel_Item_right = i
-                    End If
-                Next
-                Exit Select
-
-            Case Else
-                sel_item_left_DandD = Nothing
-                sel_item_right_DandD = Nothing
-                Me.lsAttachedFiles.HoverSelection = False
-                Me.lsAttachedFiles.MultiSelect = False
-                sel_Item_left = Nothing
-                sel_Item_right = Nothing
-                Exit Select
+                Select Case sel_Item_Right_Jp.SubItems(3).Text
+                    Case Is = "File"
+                        Exit Select
+                    Case Is = "Folder"
+                        Exit Select
+                    Case Else
+                        Exit Select
+                End Select
         End Select
     End Sub
+
 #End Region
 
+#Region "Create ShortCuts From Context Menus - LS and JP"
     Private Sub btnSendtoDesktop_Click(sender As Object, e As EventArgs) Handles btnSendtoDesktop.Click
         If sel_Item_right IsNot Nothing Then
             Dim y As New ReusableListViewControl.createAShortCut(InputBox("Name for the shortcut?", "Name The Shortcut", "Desktop Shortcut To - " & sel_Item_right.Text), sel_Item_right.Tag)
@@ -5858,6 +6733,19 @@ Public Class Sales
         End If
     End Sub
 
+    Private Sub btnSendtoDesktopJP_Click(sender As Object, e As EventArgs) Handles btnSendtoDesktopJP.Click
+        If sel_Item_Right_Jp IsNot Nothing Then
+            Dim y As New ReusableListViewControl.createAShortCut(InputBox("Name for the shortcut?", "Name the Shortcut", "Desktop Shortcut To - " & sel_Item_Right_Jp.Text), sel_Item_Right_Jp.Tag)
+            sel_Item_Right_Jp = Nothing
+            sel_Item_Left_Jp = Nothing
+        ElseIf sel_Item_Right_Jp Is Nothing Then
+            sel_Item_Left_Jp = Nothing
+            Exit Sub
+        End If
+    End Sub
+#End Region
+
+#Region "Create Shortcut Context Menu - LS and JP"
     Private Sub btnCreateSC_Click(sender As Object, e As EventArgs) Handles btnCreateSC.Click
         If sel_Item_right IsNot Nothing Then
             Dim whereToCreate As String = lsAttachedFiles.Tag
@@ -5885,6 +6773,36 @@ Public Class Sales
         End If
     End Sub
 
+    Private Sub btnCreateSCJP_Click(sender As Object, e As EventArgs) Handles btnCreateSCJP.Click
+        If sel_Item_Right_Jp IsNot Nothing Then
+            Dim whereToCreate As String = lsJobPictures.Tag
+            If Len(whereToCreate) <= 0 Then
+                whereToCreate = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+            ElseIf Len(whereToCreate) >= 1 Then
+                whereToCreate = Me.lsJobPictures.Tag
+            End If
+            Dim y As New ReusableListViewControl.createAShortCut(InputBox("Name for the shortcut?", "Name The Shortcut", "Shortcut To - " & sel_Item_Right_Jp.Text), sel_Item_Right_Jp.Tag, whereToCreate)
+
+            Dim repop As New AF_And_JP_Logic(whereToCreate)
+            Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+            arFiles = repop.Files
+            Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+            arDirs = repop.Directories
+            repop = Nothing
+            Me.lsJobPictures.Items.Clear()
+            AddListItem_Directories(arDirs, Me.lsJobPictures)
+            AddListItem_Files(arFiles, Me.lsJobPictures)
+            sel_Item_Left_Jp = Nothing
+            sel_Item_Right_Jp = Nothing
+        ElseIf sel_Item_Right_Jp Is Nothing Then
+            sel_Item_Left_Jp = Nothing
+            Exit Sub
+        End If
+    End Sub
+
+#End Region
+
+#Region "Context Menu Refresh - LS and JP"
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
 
         sel_Item_left = Nothing
@@ -5906,6 +6824,30 @@ Public Class Sales
         Me.tsAttachedFilesNAV.Enabled = False
 
     End Sub
+
+    Private Sub btnRefreshJP_Click(ByVal sender As Object, e As EventArgs) Handles btnRefreshJP.Click
+
+        sel_Item_Left_Jp = Nothing
+        sel_Item_Right_Jp = Nothing
+
+        Dim whereToCreate As String = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+        Me.lsJobPictures.Tag = whereToCreate
+
+        Dim repop As New AF_And_JP_Logic(whereToCreate)
+        Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+        arFiles = repop.Files
+        Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+        arDirs = repop.Directories
+        repop = Nothing
+        Me.lsJobPictures.Items.Clear()
+        AddListItem_Directories(arDirs, Me.lsJobPictures)
+        AddListItem_Files(arFiles, Me.lsJobPictures)
+
+    End Sub
+
+#End Region
+
+
 
     Private Function SplitApartFileExt(ByVal FullPath As String)
         Try
@@ -5937,6 +6879,8 @@ Public Class Sales
 
     End Function
 
+
+#Region "Context Menu Paste - LS and JP"
 
     Private Sub btnPaste_Click(sender As Object, e As EventArgs) Handles btnPaste.Click
         Dim itemToCCP As String = My.Computer.Clipboard.GetText(TextDataFormat.Text)
@@ -6300,6 +7244,372 @@ Public Class Sales
         End If
     End Sub
 
+    Private Sub btnPasteJP_Click(sender As Object, e As EventArgs) Handles btnPasteJP.Click
+        Dim itemToCCP As String = My.Computer.Clipboard.GetText(TextDataFormat.Text)
+        If Len(itemToCCP) <= 0 Then
+            '' nothng here
+            sel_Item_Left_Jp = Nothing
+            sel_Item_Right_Jp = Nothing
+            Me.btnPasteJP.Enabled = False
+        ElseIf Len(itemToCCP) >= 1 Then
+            Dim parts() = Split(itemToCCP, "|", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim operation As String = parts(0)
+            Dim performOpOn As String = parts(1)
+
+            ''MsgBox("Operation: " & operation & vbCrLf & "Perform Operation On: " & performOpOn, MsgBoxStyle.Information, "DEBUG CCP Operations")
+
+            Dim src_dir As String = sel_Item_Right_Jp.Tag
+
+
+            Dim dest_dir As String = Me.lsJobPictures.Tag
+            Dim fname As String = ""
+            Dim folname As String = ""
+            Dim fileExt As String = ""
+
+
+            '' need file ext for file copy
+            '' IF is file
+            If Len(dest_dir) <= 0 Then
+                '' change to root dir
+                dest_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                fname = SplitApartFileName(sel_Item_Right_Jp.Tag)
+                folname = SplitFolderName(sel_Item_Right_Jp.Tag)
+                fileExt = SplitApartFileExt(sel_Item_Right_Jp.Tag)
+            ElseIf Len(dest_dir) >= 1 Then
+                dest_dir = dest_dir
+                fname = SplitApartFileName(sel_Item_Right_Jp.Tag)
+                folname = SplitFolderName(sel_Item_Right_Jp.Tag)
+                fileExt = SplitApartFileExt(sel_Item_Right_Jp.Tag)
+            End If
+
+            Select Case operation
+                Case Is = "CUT"
+                    Select Case sel_Item_Right_Jp.SubItems(3).Text
+                        Case Is = "File"
+                            System.IO.File.Move(src_dir, dest_dir & "\" & fname & "." & fileExt)
+                            '' now repop
+                            Dim cur_dir As String = Me.lsJobPictures.Tag
+                            If Len(cur_dir) <= 0 Then
+                                cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                            ElseIf Len(cur_dir) >= 1 Then
+                                cur_dir = cur_dir
+                            End If
+                            Dim af As New AF_And_JP_Logic(cur_dir)
+                            Me.lsJobPictures.Items.Clear()
+                            For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                Dim lvItem As New ListViewItem
+                                '' Name | Date Mod | Size | Type
+                                lvItem.Text = x.FileName
+                                lvItem.Tag = x.FullPath
+                                lvItem.SubItems.Add(x.DateModified)
+                                Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                Dim sz_str As String = sz.ToString & " KB"
+                                lvItem.SubItems.Add(sz_str)
+                                lvItem.SubItems.Add("File")
+                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                lvItem.ImageKey = x.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+
+                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                Dim lvItem As New ListViewItem
+                                lvItem.Text = y.FileName
+                                lvItem.Tag = y.FullPath
+                                lvItem.SubItems.Add(y.DateModified)
+                                lvItem.SubItems.Add("")
+                                lvItem.SubItems.Add("Folder")
+                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                lvItem.ImageKey = y.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+                            Exit Select
+                        Case Is = "Folder"
+                            ''  need logic here to determine if source and dest are the same 
+                            '' if so, some how change dir name
+                            '' aka: scerio where folder is being brought out of 1 level down folder
+                            '' to root directory of attached files for lead 
+                            '' 
+
+                            If src_dir = (dest_dir & "\" & fname) Then
+                                Dim root_dir As String = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                System.IO.Directory.Move(src_dir, root_dir & fname)
+                            ElseIf src_dir <> (dest_dir & "\" & fname) Then
+                                System.IO.Directory.Move(src_dir, dest_dir & "\" & fname)
+                            End If
+
+
+                            '' now repop
+                            Dim cur_dir As String = Me.lsJobPictures.Tag
+                            If Len(cur_dir) <= 0 Then
+                                cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                            ElseIf Len(cur_dir) >= 1 Then
+                                cur_dir = cur_dir
+                            End If
+                            Dim af As New AF_And_JP_Logic(cur_dir)
+                            Me.lsJobPictures.Items.Clear()
+                            For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                Dim lvItem As New ListViewItem
+                                '' Name | Date Mod | Size | Type
+                                lvItem.Text = x.FileName
+                                lvItem.Tag = x.FullPath
+                                lvItem.SubItems.Add(x.DateModified)
+                                Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                Dim sz_str As String = sz.ToString & " KB"
+                                lvItem.SubItems.Add(sz_str)
+                                lvItem.SubItems.Add("File")
+                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                lvItem.ImageKey = x.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+
+                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                Dim lvItem As New ListViewItem
+                                lvItem.Text = y.FileName
+                                lvItem.Tag = y.FullPath
+                                lvItem.SubItems.Add(y.DateModified)
+                                lvItem.SubItems.Add("")
+                                lvItem.SubItems.Add("Folder")
+                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                lvItem.ImageKey = y.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+                            Exit Select
+                        Case Else
+
+                    End Select
+                Case Is = "COPY"
+                    Select Case sel_Item_Right_Jp.SubItems(3).Text
+                        Case Is = "File"
+                            System.IO.File.Copy(src_dir, dest_dir & "\ Copy Of - " & fname & "." & fileExt)
+                            '' now repop
+                            Dim cur_dir As String = Me.lsJobPictures.Tag
+                            If Len(cur_dir) <= 0 Then
+                                cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                            ElseIf Len(cur_dir) >= 1 Then
+                                cur_dir = cur_dir
+                            End If
+                            Dim af As New AF_And_JP_Logic(cur_dir)
+                            Me.lsJobPictures.Items.Clear()
+                            For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                Dim lvItem As New ListViewItem
+                                '' Name | Date Mod | Size | Type
+                                lvItem.Text = x.FileName
+                                lvItem.Tag = x.FullPath
+                                lvItem.SubItems.Add(x.DateModified)
+                                Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                Dim sz_str As String = sz.ToString & " KB"
+                                lvItem.SubItems.Add(sz_str)
+                                lvItem.SubItems.Add("File")
+                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                lvItem.ImageKey = x.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+
+                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                Dim lvItem As New ListViewItem
+                                lvItem.Text = y.FileName
+                                lvItem.Tag = y.FullPath
+                                lvItem.SubItems.Add(y.DateModified)
+                                lvItem.SubItems.Add("")
+                                lvItem.SubItems.Add("Folder")
+                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                lvItem.ImageKey = y.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+                            Exit Select
+                        Case Is = "Folder"
+                            My.Computer.FileSystem.CopyDirectory(src_dir, dest_dir & "\ Copy Of -" & fname)
+                            '' now repop
+                            Dim cur_dir As String = Me.lsJobPictures.Tag
+                            If Len(cur_dir) <= 0 Then
+                                cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                            ElseIf Len(cur_dir) >= 1 Then
+                                cur_dir = cur_dir
+                            End If
+                            Dim af As New AF_And_JP_Logic(cur_dir)
+                            Me.lsJobPictures.Items.Clear()
+                            For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                Dim lvItem As New ListViewItem
+                                '' Name | Date Mod | Size | Type
+                                lvItem.Text = x.FileName
+                                lvItem.Tag = x.FullPath
+                                lvItem.SubItems.Add(x.DateModified)
+                                Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                Dim sz_str As String = sz.ToString & " KB"
+                                lvItem.SubItems.Add(sz_str)
+                                lvItem.SubItems.Add("File")
+                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                If x.smThumb IsNot Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                ElseIf x.smThumb Is Nothing Then
+                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                End If
+
+                                If x.mdThumb IsNot Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.mdThumb Is Nothing Then
+                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.lgThumb IsNot Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                ElseIf x.lgThumb Is Nothing Then
+                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                If x.jbThumb IsNot Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                ElseIf x.jbThumb Is Nothing Then
+                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                End If
+
+                                If x.Tile IsNot Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                ElseIf x.Tile Is Nothing Then
+                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                End If
+
+                                lvItem.ImageKey = x.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+
+                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                Dim lvItem As New ListViewItem
+                                lvItem.Text = y.FileName
+                                lvItem.Tag = y.FullPath
+                                lvItem.SubItems.Add(y.DateModified)
+                                lvItem.SubItems.Add("")
+                                lvItem.SubItems.Add("Folder")
+                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                lvItem.ImageKey = y.FileName
+                                Me.lsJobPictures.Items.Add(lvItem)
+                            Next
+                            Exit Select
+                        Case Else
+
+                    End Select
+                Case Else
+
+                    Exit Select
+
+            End Select
+
+            sel_Item_Left_Jp = Nothing
+            sel_Item_Right_Jp = Nothing
+            Me.btnPasteJP.Enabled = False
+        End If
+    End Sub
+
+
+#End Region
+
+
     Public Function SplitApartFileName(ByVal FullPath As String)
         Try
             Dim BeginAr() = FullPath.ToString.Split("\")
@@ -6333,6 +7643,11 @@ Public Class Sales
             Return ret
         End Function
     End Class
+
+
+
+
+
 
 
 
