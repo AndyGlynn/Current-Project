@@ -318,7 +318,11 @@ Public Class AF_And_JP_Logic
                 ElseIf pullThum = False Then
                     z = z
                 End If
-                ar_Files.Add(z)
+                If z.FileName <> "Thumbs" Then
+                    If z.FileExt <> ".db" Then
+                        ar_Files.Add(z)
+                    End If
+                End If
             Next
             Return ar_Files
         ElseIf dir_info.Exists = False Then

@@ -2825,8 +2825,8 @@ Public Class Sales
         AddListItem_Directories(ar_dir, Me.lsAttachedFiles)
 
         Dim d As New AF_And_JP_Logic(LeadNum, "JP")
-        ar_files = d.Files
-        AddListItem_Files(ar_files, Me.lsJobPictures)
+        ar_dir = d.Directories
+        AddListItem_Directories(ar_dir, Me.lsJobPictures)
 
 
         Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
@@ -2856,13 +2856,18 @@ Public Class Sales
                 y.SubItems.Add(siz)
                 y.SubItems.Add("File")
                 y.Tag = c.FullPath
-                y.ImageKey = c.FileName
-                Me.imgLst16.Images.Add(c.FileName, c.smIcon)
 
+                Me.imgLst16.Images.Add(c.FileName, c.smIcon)
                 If c.smThumb IsNot Nothing Then
-                    Me.ImgLst32.Images.Add(c.FileName, c.smThumb)
+                    Me.imgLst16.Images.Add(c.FileName, c.smThumb)
                 ElseIf c.smThumb Is Nothing Then
-                    Me.ImgLst32.Images.Add(c.FileName, c.mdIcon)
+                    Me.imgLst16.Images.Add(c.FileName, c.mdIcon)
+                End If
+
+                If c.mdThumb IsNot Nothing Then
+                    Me.ImgLst32.Images.Add(c.FileName, c.lgThumb)
+                ElseIf c.mdThumb Is Nothing Then
+                    Me.ImgLst32.Images.Add(c.FileName, c.lgIcon)
                 End If
 
                 If c.lgThumb IsNot Nothing Then
@@ -2871,13 +2876,41 @@ Public Class Sales
                     Me.ImgLst48.Images.Add(c.FileName, c.lgIcon)
                 End If
 
-                If c.lgThumb IsNot Nothing Then
-                    Me.ImgLst48.Images.Add(c.FileName, c.lgThumb)
-                ElseIf c.lgThumb Is Nothing Then
+                If c.jbThumb IsNot Nothing Then
+                    Me.ImgLst256.Images.Add(c.FileName, c.jbThumb)
+                ElseIf c.jbThumb Is Nothing Then
+                    Me.ImgLst256.Images.Add(c.FileName, c.jbIcon)
+                End If
+
+                If c.Tile IsNot Nothing Then
+                    Me.ImgLst128.Images.Add(c.FileName, c.Tile)
+                ElseIf c.Tile Is Nothing Then
                     Me.ImgLst128.Images.Add(c.FileName, c.lgIcon)
                 End If
 
-                Me.ImgLst256.Images.Add(c.FileName, c.jbIcon)
+                y.ImageKey = c.FileName
+
+                'Me.imgLst16.Images.Add(c.FileName, c.smIcon)
+
+                'If c.smThumb IsNot Nothing Then
+                '    Me.ImgLst32.Images.Add(c.FileName, c.smThumb)
+                'ElseIf c.smThumb Is Nothing Then
+                '    Me.ImgLst32.Images.Add(c.FileName, c.mdIcon)
+                'End If
+
+                'If c.lgThumb IsNot Nothing Then
+                '    Me.ImgLst48.Images.Add(c.FileName, c.lgThumb)
+                'ElseIf c.lgThumb Is Nothing Then
+                '    Me.ImgLst48.Images.Add(c.FileName, c.lgIcon)
+                'End If
+
+                'If c.lgThumb IsNot Nothing Then
+                '    Me.ImgLst48.Images.Add(c.FileName, c.lgThumb)
+                'ElseIf c.lgThumb Is Nothing Then
+                '    Me.ImgLst128.Images.Add(c.FileName, c.lgIcon)
+                'End If
+
+                'Me.ImgLst256.Images.Add(c.FileName, c.jbIcon)
                 '' if thumbs are present, add them to image lists
                 '' but only if they are present. 
 
@@ -5752,7 +5785,7 @@ Public Class Sales
 
     Private Sub cmJPTiles_Click(sender As Object, e As EventArgs) Handles cmJPTiles.Click
         Me.cmJPExtraLarge.Checked = False
-        Me.lsJobPictures.View = View.Details
+        Me.lsJobPictures.View = View.Tile
         Me.lsJobPictures.LargeImageList = Me.ImgLst128
         Me.lsJobPictures.SmallImageList = Me.ImgLst128
         Me.cmJPLarge.Checked = False
@@ -6840,6 +6873,7 @@ Public Class Sales
         arDirs = repop.Directories
         repop = Nothing
         Me.lsJobPictures.Items.Clear()
+
         AddListItem_Directories(arDirs, Me.lsJobPictures)
         AddListItem_Files(arFiles, Me.lsJobPictures)
 
