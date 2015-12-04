@@ -1846,6 +1846,34 @@ Public Class WarmCalling
         End If
 
     End Sub
+
+    Public Function IsAppointmentSet(ByVal LeadNum As String)
+        Dim Appt_Set As Boolean = False
+        Try
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGET As New SqlCommand("SELECT MarketingResults FROM EnterLead WHERE ID='" & LeadNum & "';", cnx)
+            cnx.Open()
+            Dim res As String = cmdGET.ExecuteScalar
+            cnx.Close()
+            cnx = Nothing
+            Select Case res
+                Case Is = "Set Appointment"
+                    Appt_Set = True
+                    Exit Select
+                Case Else
+                    Appt_Set = False
+                    Exit Select
+            End Select
+            Return Appt_Set
+        Catch ex As Exception
+            Dim err As String = ex.Message
+            Appt_Set = False
+            Return Appt_Set
+        End Try
+
+    End Function
+
+
     Public Class MyApptsTab
         Public Class DisplayColumn
             Public Sub New()
@@ -2142,6 +2170,7 @@ Public Class WarmCalling
         End Sub
     End Class
    
+     
 End Class
 
 

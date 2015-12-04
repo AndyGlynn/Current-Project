@@ -140,15 +140,6 @@ Partial Class WCaller
         Me.txtYrBuilt = New System.Windows.Forms.TextBox()
         Me.gbContactInfo = New System.Windows.Forms.GroupBox()
         Me.txtWorkHours = New System.Windows.Forms.RichTextBox()
-        Me.tsAutoDial = New System.Windows.Forms.ToolStrip()
-        Me.tsbtnPreviousRecord = New System.Windows.Forms.ToolStripButton()
-        Me.tsbtnNextRecord = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbtnHousePhone = New System.Windows.Forms.ToolStripSplitButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tslblCalling = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbtnCloseDialer = New System.Windows.Forms.ToolStripButton()
         Me.txtHousePhone = New System.Windows.Forms.TextBox()
         Me.txtaltphone2 = New System.Windows.Forms.TextBox()
         Me.txtaltphone1 = New System.Windows.Forms.TextBox()
@@ -168,6 +159,15 @@ Partial Class WCaller
         Me.lblContact2 = New System.Windows.Forms.Label()
         Me.lblContact1 = New System.Windows.Forms.Label()
         Me.ListView4 = New System.Windows.Forms.ListView()
+        Me.tsAutoDial = New System.Windows.Forms.ToolStrip()
+        Me.tsbtnPreviousRecord = New System.Windows.Forms.ToolStripButton()
+        Me.tsbtnNextRecord = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbtnHousePhone = New System.Windows.Forms.ToolStripSplitButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tslblCalling = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbtnCloseDialer = New System.Windows.Forms.ToolStripButton()
         Me.tsCustomerLog = New System.Windows.Forms.ToolStrip()
         Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
@@ -203,8 +203,8 @@ Partial Class WCaller
         Me.gbApptInfo.SuspendLayout()
         Me.gbHomeInfo.SuspendLayout()
         Me.gbContactInfo.SuspendLayout()
-        Me.tsAutoDial.SuspendLayout()
         CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tsAutoDial.SuspendLayout()
         Me.tsCustomerLog.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -541,12 +541,12 @@ Partial Class WCaller
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(138, 26)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(137, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.ToolStripMenuItem1.Text = "Show Notes"
         '
         'TabPage5
@@ -1500,77 +1500,6 @@ Partial Class WCaller
         Me.txtWorkHours.TabIndex = 178
         Me.txtWorkHours.Text = ""
         '
-        'tsAutoDial
-        '
-        Me.tsAutoDial.Dock = System.Windows.Forms.DockStyle.None
-        Me.tsAutoDial.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.tsAutoDial.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnPreviousRecord, Me.tsbtnNextRecord, Me.ToolStripSeparator3, Me.tsbtnHousePhone, Me.ToolStripSeparator1, Me.tslblCalling, Me.ToolStripSeparator2, Me.tsbtnCloseDialer})
-        Me.tsAutoDial.Location = New System.Drawing.Point(104, 0)
-        Me.tsAutoDial.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
-        Me.tsAutoDial.Name = "tsAutoDial"
-        Me.tsAutoDial.Size = New System.Drawing.Size(501, 25)
-        Me.tsAutoDial.TabIndex = 177
-        Me.tsAutoDial.Text = "tsAutodial"
-        Me.tsAutoDial.Visible = False
-        '
-        'tsbtnPreviousRecord
-        '
-        Me.tsbtnPreviousRecord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbtnPreviousRecord.Image = CType(resources.GetObject("tsbtnPreviousRecord.Image"), System.Drawing.Image)
-        Me.tsbtnPreviousRecord.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnPreviousRecord.Name = "tsbtnPreviousRecord"
-        Me.tsbtnPreviousRecord.Size = New System.Drawing.Size(23, 22)
-        Me.tsbtnPreviousRecord.Text = "ToolStripButton2"
-        '
-        'tsbtnNextRecord
-        '
-        Me.tsbtnNextRecord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbtnNextRecord.Image = CType(resources.GetObject("tsbtnNextRecord.Image"), System.Drawing.Image)
-        Me.tsbtnNextRecord.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnNextRecord.Name = "tsbtnNextRecord"
-        Me.tsbtnNextRecord.Size = New System.Drawing.Size(23, 22)
-        Me.tsbtnNextRecord.Text = "ToolStripButton3"
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
-        '
-        'tsbtnHousePhone
-        '
-        Me.tsbtnHousePhone.ForeColor = System.Drawing.Color.Black
-        Me.tsbtnHousePhone.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnHousePhone.Name = "tsbtnHousePhone"
-        Me.tsbtnHousePhone.Size = New System.Drawing.Size(194, 22)
-        Me.tsbtnHousePhone.Text = "Call Main Phone- (419) 472-4000"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'tslblCalling
-        '
-        Me.tslblCalling.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tslblCalling.ForeColor = System.Drawing.Color.Black
-        Me.tslblCalling.Name = "tslblCalling"
-        Me.tslblCalling.Size = New System.Drawing.Size(151, 22)
-        Me.tslblCalling.Text = "Calling.... (419) 472-4000"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'tsbtnCloseDialer
-        '
-        Me.tsbtnCloseDialer.ForeColor = System.Drawing.Color.Black
-        Me.tsbtnCloseDialer.Image = CType(resources.GetObject("tsbtnCloseDialer.Image"), System.Drawing.Image)
-        Me.tsbtnCloseDialer.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnCloseDialer.Name = "tsbtnCloseDialer"
-        Me.tsbtnCloseDialer.Size = New System.Drawing.Size(89, 22)
-        Me.tsbtnCloseDialer.Text = "Close Dialer"
-        '
         'txtHousePhone
         '
         Me.txtHousePhone.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1819,6 +1748,77 @@ Partial Class WCaller
         Me.ListView4.UseCompatibleStateImageBehavior = False
         Me.ListView4.View = System.Windows.Forms.View.Details
         '
+        'tsAutoDial
+        '
+        Me.tsAutoDial.Dock = System.Windows.Forms.DockStyle.None
+        Me.tsAutoDial.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.tsAutoDial.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnPreviousRecord, Me.tsbtnNextRecord, Me.ToolStripSeparator3, Me.tsbtnHousePhone, Me.ToolStripSeparator1, Me.tslblCalling, Me.ToolStripSeparator2, Me.tsbtnCloseDialer})
+        Me.tsAutoDial.Location = New System.Drawing.Point(104, 0)
+        Me.tsAutoDial.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
+        Me.tsAutoDial.Name = "tsAutoDial"
+        Me.tsAutoDial.Size = New System.Drawing.Size(501, 25)
+        Me.tsAutoDial.TabIndex = 177
+        Me.tsAutoDial.Text = "tsAutodial"
+        Me.tsAutoDial.Visible = False
+        '
+        'tsbtnPreviousRecord
+        '
+        Me.tsbtnPreviousRecord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnPreviousRecord.Image = CType(resources.GetObject("tsbtnPreviousRecord.Image"), System.Drawing.Image)
+        Me.tsbtnPreviousRecord.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnPreviousRecord.Name = "tsbtnPreviousRecord"
+        Me.tsbtnPreviousRecord.Size = New System.Drawing.Size(23, 22)
+        Me.tsbtnPreviousRecord.Text = "ToolStripButton2"
+        '
+        'tsbtnNextRecord
+        '
+        Me.tsbtnNextRecord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnNextRecord.Image = CType(resources.GetObject("tsbtnNextRecord.Image"), System.Drawing.Image)
+        Me.tsbtnNextRecord.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnNextRecord.Name = "tsbtnNextRecord"
+        Me.tsbtnNextRecord.Size = New System.Drawing.Size(23, 22)
+        Me.tsbtnNextRecord.Text = "ToolStripButton3"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsbtnHousePhone
+        '
+        Me.tsbtnHousePhone.ForeColor = System.Drawing.Color.Black
+        Me.tsbtnHousePhone.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnHousePhone.Name = "tsbtnHousePhone"
+        Me.tsbtnHousePhone.Size = New System.Drawing.Size(194, 22)
+        Me.tsbtnHousePhone.Text = "Call Main Phone- (419) 472-4000"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'tslblCalling
+        '
+        Me.tslblCalling.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tslblCalling.ForeColor = System.Drawing.Color.Black
+        Me.tslblCalling.Name = "tslblCalling"
+        Me.tslblCalling.Size = New System.Drawing.Size(151, 22)
+        Me.tslblCalling.Text = "Calling.... (419) 472-4000"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsbtnCloseDialer
+        '
+        Me.tsbtnCloseDialer.ForeColor = System.Drawing.Color.Black
+        Me.tsbtnCloseDialer.Image = CType(resources.GetObject("tsbtnCloseDialer.Image"), System.Drawing.Image)
+        Me.tsbtnCloseDialer.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnCloseDialer.Name = "tsbtnCloseDialer"
+        Me.tsbtnCloseDialer.Size = New System.Drawing.Size(89, 22)
+        Me.tsbtnCloseDialer.Text = "Close Dialer"
+        '
         'tsCustomerLog
         '
         Me.tsCustomerLog.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -2020,9 +2020,9 @@ Partial Class WCaller
         Me.gbHomeInfo.PerformLayout()
         Me.gbContactInfo.ResumeLayout(False)
         Me.gbContactInfo.PerformLayout()
+        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tsAutoDial.ResumeLayout(False)
         Me.tsAutoDial.PerformLayout()
-        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tsCustomerLog.ResumeLayout(False)
         Me.tsCustomerLog.PerformLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()

@@ -121,14 +121,47 @@ Public Class WCaller
         If Me.Tab = "MA" Then
             If Me.lvMyAppts.SelectedItems.Count = 0 Or Me.lvMyAppts.Items.Count = 0 Then
                 Me.ToolBarConfig(2)
+                Dim g As New WarmCalling
+                Dim b As ListViewItem
+                For Each b In Me.lvMyAppts.Items
+                    If b.Selected = True Then
+                        Dim res As Boolean = g.IsAppointmentSet(b.Tag)
+                        If res = True Then
+                            Me.ContextMenuStrip1.Items(1).Text = "Move Appointment"
+                            Me.btnSetAppt.Text = "Move Appointment"
+                        ElseIf res = False Then
+                            Me.ContextMenuStrip1.Items(1).Text = "Set Appointment"
+                            Me.btnSetAppt.Text = "Set Appointment"
+                        End If
+                    End If
+                Next
+                g = Nothing
                 Exit Sub
             End If
             Dim z = Me.lvMyAppts.SelectedItems(0).Index
             Dim y As ListViewGroup = Me.lvMyAppts.Items(z).Group
             If y.Name <> ("grpMemorized") Then
+                '' no set appt button
                 Me.ToolBarConfig(3)
+
             Else
+
                 Me.ToolBarConfig(2)
+                Dim g As New WarmCalling
+                Dim b As ListViewItem
+                For Each b In Me.lvMyAppts.Items
+                    If b.Selected = True Then
+                        Dim res As Boolean = g.IsAppointmentSet(b.Tag)
+                        If res = True Then
+                            Me.ContextMenuStrip1.Items(1).Text = "Move Appointment"
+                            Me.btnSetAppt.Text = "Move Appointment"
+                        ElseIf res = False Then
+                            Me.ContextMenuStrip1.Items(1).Text = "Set Appointment"
+                            Me.btnSetAppt.Text = "Set Appointment"
+                        End If
+                    End If
+                Next
+                g = Nothing
             End If
             Dim c As New WarmCalling
             If Me.lvMyAppts.SelectedItems.Count = 0 Then
@@ -218,7 +251,14 @@ Public Class WCaller
             Me.ToolBarConfig(1)
             If Me.lvWarmCalling.SelectedItems.Count > 0 Then
                 c.PullCustomerINFO(Me.lvWarmCalling.SelectedItems(0).Text)
-
+                Dim g As New WarmCalling
+                Dim res As Boolean = g.IsAppointmentSet(Me.lvWarmCalling.SelectedItems(0).Text)
+                If res = True Then
+                    Me.btnSetAppt.Text = "Move Appointment"
+                ElseIf res = False Then
+                    Me.btnSetAppt.Text = "Set Appointment"
+                End If
+                g = Nothing
                 Me.btnAutoDialer.DropDownItems.Add(Me.separator)
                 Me.btnAutoDialer.DropDownItems.Add(Me.btnMain)
                 Me.btnMain.Text = "Call Main- " & Me.txtHousePhone.Text
@@ -976,28 +1016,40 @@ Public Class WCaller
     End Sub
 
     Private Sub btnSetAppt_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetAppt.ButtonClick
-        SetAppt.frm = Me
-        If Tab = "WC" Then
-            If Me.lvWarmCalling.SelectedItems.Count = 0 Then
-                MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-                Exit Sub
-            End If
-            SetAppt.ID = Me.lvWarmCalling.SelectedItems(0).Text
-        Else
-            If Me.lvMyAppts.SelectedItems.Count = 0 Then
-                MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-                Exit Sub
-            End If
-            SetAppt.ID = Me.lvMyAppts.SelectedItems(0).Tag
-        End If
-        Dim s = Split(Me.txtContact1.Text, " ")
-        Dim s2 = Split(Me.txtContact2.Text, " ")
-        SetAppt.Contact1 = s(0)
-        SetAppt.Contact2 = s2(0)
-        SetAppt.OrigApptDate = Me.txtApptDate.Text
-        SetAppt.OrigApptTime = Me.txtApptTime.Text
-        SetAppt.ShowInTaskbar = False
-        SetAppt.ShowDialog()
+        Select Case Me.btnSetAppt.Text
+            Case Is = "Set Apointment"
+                SetAppt.frm = Me
+                If Tab = "WC" Then
+                    If Me.lvWarmCalling.SelectedItems.Count = 0 Then
+                        MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
+                        Exit Sub
+                    End If
+                    SetAppt.ID = Me.lvWarmCalling.SelectedItems(0).Text
+                Else
+                    If Me.lvMyAppts.SelectedItems.Count = 0 Then
+                        MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
+                        Exit Sub
+                    End If
+                    SetAppt.ID = Me.lvMyAppts.SelectedItems(0).Tag
+                End If
+                Dim s = Split(Me.txtContact1.Text, " ")
+                Dim s2 = Split(Me.txtContact2.Text, " ")
+                SetAppt.Contact1 = s(0)
+                SetAppt.Contact2 = s2(0)
+                SetAppt.OrigApptDate = Me.txtApptDate.Text
+                SetAppt.OrigApptTime = Me.txtApptTime.Text
+                SetAppt.ShowInTaskbar = False
+                SetAppt.ShowDialog()
+                Exit Select
+            Case Is = "Move Appointment"
+                ''
+                '' depends on what Andy wants done here
+                '' for now, do nothing with it and just change the text on the button
+                '' 
+                MsgBox("Place holder for 'Move Appointment' only. ", MsgBoxStyle.Information, "DEBUG INFO - Move Appointment from btnSetAppt - " & Me.lvMyAppts.SelectedItems(0).Tag)
+                Exit Select
+        End Select
+        
     End Sub
 
   Private Sub WCaller_ResizeEnd(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ResizeEnd
