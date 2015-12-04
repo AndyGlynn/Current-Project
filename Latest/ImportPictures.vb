@@ -2,6 +2,9 @@
 
 Public Class ImportPictures
     Private ProdAcro As String = ""
+
+   
+
     Private Sub ImportPictures_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim z As New IMPORT_PICTURES_LOGIC
         z.GetProducts()
@@ -63,29 +66,105 @@ Public Class ImportPictures
                 OpenPics.Multiselect = True
 
                 OpenPics.Title = "Select Picture(s) to Import"
-                OpenPics.Filter = "JPEG|*.jpg|BMP|*.bmp|TIFF|*.tif|PNG|*.png|WMF|*.wmf|GIF|*.gif|All Files|*.*"
+                OpenPics.Filter = "JPG|*.jpg|JPEG|*.jpeg|BMP|*.bmp|TIFF|*.tif|PNG|*.png|WMF|*.wmf|GIF|*.gif|All Files|*.*"
                 OpenPics.FileName = "[Select a File]"
                 OpenPics.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.Desktop '"C:\documents and settings\All users\Desktop"
                 OpenPics.ShowDialog()
 
-                Import.FileName = Me.txtLeadNum.Text & "-" & ProgressVal & "-" & ProdAcro.ToString
-                Import.StripGarbage()
+                Dim fName() As String = OpenPics.FileNames
+                Dim strConcat As String = ""
+                Dim cntFiles As Integer = -1 '' zero based index 
+                For Each z As String In fName
+                    strConcat += z & vbCrLf
+                    cntFiles += 1
+                Next
 
+                Dim i As Integer = 0
+                Dim arReconstructed As New ArrayList
+                For i = 0 To cntFiles
+                    '' Structure
+                    '' lead num - {b,m,e} - acro - fileNum[] => & File Extension.
+                    '' 
+                    '' Process:
+                    '' first break file name down by delimeter "\"
+                    '' second get index of last 'split'
+                    '' third break off file extension from last 'part' 
+                    '' 
+                    Dim parts() = Split(fName(i), "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                    Dim cntOfParts As Integer = parts.Length
+                    Dim FileAndExt As String = parts(cntOfParts - 1)
+
+                    Dim f_parts() = Split(FileAndExt, ".", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                    Dim file_Name As String = f_parts(0)
+                    Dim file_ext As String = f_parts(1)
+
+                    '' now, for each file { this part loop } 
+                    '' send the info off to Import_V2 class to:
+                    '' a) fail if exists
+                    '' b) if it doesnt exist => create directory
+                    ''    i) after dir created => insert the file there
+                    '' c) call a 'completion event' / move to the next part in block
+                    '' 
+                    '' then remove {if they exist} previous references in the image list on sales of image indexes
+                    '' 
+                    '' then call a refresh method to repop the list view control for added job pictures
+                    '' 
+                    Dim g As New Import_V2.ImportPicObj
+                    g.LeadNum = Me.txtLeadNum.Text
+                    g.FullPath = fName(i)
+                    g.Acro = ProdAcro
+                    g.FileExt = file_ext
+                    g.FileNumSequence = i
+                    g.BeginMidEnd = ProgressVal
+
+                    Dim y As New Import_V2
+                    y.ImportThePictures(g)
+
+                    Dim strConstructed As String = (g.LeadNum & "-" & g.BeginMidEnd & "-" & ProdAcro & "-" & g.FileNumSequence & "." & g.FileExt)
+
+                    For Each f As Windows.Forms.Form In Application.OpenForms
+                        If f.Name = "Sales" Then
+                            Dim idx16 As Integer = Sales.imgLst16.Images.IndexOfKey(strConstructed)
+                            Dim idx32 As Integer = Sales.ImgLst32.Images.IndexOfKey(strConstructed)
+                            Dim idx48 As Integer = Sales.ImgLst48.Images.IndexOfKey(strConstructed)
+                            Dim idx128 As Integer = Sales.ImgLst128.Images.IndexOfKey(strConstructed)
+                            Dim idx256 As Integer = Sales.ImgLst256.Images.IndexOfKey(strConstructed)
+                            If idx16 >= 0 Then
+                                Sales.imgLst16.Images.RemoveAt(idx16)
+                            End If
+                            If idx32 >= 0 Then
+                                Sales.ImgLst32.Images.RemoveAt(idx32)
+                            End If
+                            If idx48 >= 0 Then
+                                Sales.ImgLst48.Images.RemoveAt(idx48)
+                            End If
+                            If idx128 >= 0 Then
+                                Sales.ImgLst128.Images.RemoveAt(idx128)
+                            End If
+                            If idx256 >= 0 Then
+                                Sales.ImgLst256.Images.RemoveAt(idx256)
+                            End If
+
+                        End If
+                    Next
+                    y = Nothing
+                Next
+                
                 Me.txtLeadNum.Text = ""
                 Me.cboProductSel.Text = ""
+                ProdAcro = ""
+                Import.FileName = ""
+                Dim v As New Import_V2
+                v.CloseImportPictures()
+                Sales.btnRefreshJP_Click(Nothing, Nothing)
 
-                'Case False
-                'MsgBox("Our Database cannot find Lead # " & Me.txtLeadNum.Text & ". Please check your entry and try again.", MsgBoxStyle.Exclamation, "Error Validating Lead Number")
-                'Me.txtLeadNum.Text = ""
-                'Me.txtLeadNum.Select()
-                'Exit Sub
                 Exit Select
             Case Is < 1
                 Me.ErrorProvider1.SetError(Me.GroupBox1, "You must select job picture status.")
                 Exit Select
         End Select
-        ProdAcro = ""
-        Me.Close()
+
+
     End Sub
 
 

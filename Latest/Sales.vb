@@ -6836,7 +6836,7 @@ Public Class Sales
 #End Region
 
 #Region "Context Menu Refresh - LS and JP"
-    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+    Public Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
 
         sel_Item_left = Nothing
         sel_Item_right = Nothing
@@ -6856,9 +6856,11 @@ Public Class Sales
 
         Me.tsAttachedFilesNAV.Enabled = False
 
+       
+
     End Sub
 
-    Private Sub btnRefreshJP_Click(ByVal sender As Object, e As EventArgs) Handles btnRefreshJP.Click
+    Public Sub btnRefreshJP_Click(ByVal sender As Object, e As EventArgs) Handles btnRefreshJP.Click
 
         sel_Item_Left_Jp = Nothing
         sel_Item_Right_Jp = Nothing
@@ -6873,6 +6875,8 @@ Public Class Sales
         arDirs = repop.Directories
         repop = Nothing
         Me.lsJobPictures.Items.Clear()
+
+       
 
         AddListItem_Directories(arDirs, Me.lsJobPictures)
         AddListItem_Files(arFiles, Me.lsJobPictures)

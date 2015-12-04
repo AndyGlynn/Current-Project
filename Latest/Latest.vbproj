@@ -387,6 +387,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IMPORT_PICTURES_LOGIC.vb" />
+    <Compile Include="Import_V2.vb" />
     <Compile Include="Installation.designer.vb">
       <DependentUpon>Installation.vb</DependentUpon>
     </Compile>
