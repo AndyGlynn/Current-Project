@@ -242,7 +242,7 @@ Public Class SalesListBuilder
         Me.Loading = False
     End Sub
 
-    Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
+    Public Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
         Me.cboRep.Text = ""
         Me.cboProduct.Text = ""
         Me.cboCity.Text = ""

@@ -1118,7 +1118,7 @@ Public Class frmCreateList
         End If
     End Sub
 
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+    Public Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         Me.epForm.Clear()
         Me.epGeo.Clear()
         Me.cboDateRange.SelectedItem = Nothing
@@ -1149,7 +1149,7 @@ Public Class frmCreateList
         Me.chlstOrderBy.Items.Remove("Sale Closed Date")
         Me.chlstOrderBy.Items.Remove("Loan Satisfied Date")
         Me.chlstOrderBy.Items.Remove("Approved Loan Amount")
-       
+
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click

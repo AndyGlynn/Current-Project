@@ -118,8 +118,12 @@ Public Class Sales
     '' Email template Buttons 
     '' 11-3-2015 AC
     '' 
-    
-
+    Friend WithEvents btnEmailWizard As New ToolStripDropDownButton
+    Friend WithEvents btnEmailTemplateBuilder As New ToolStripMenuItem
+    Friend WithEvents cboEmailTemplates As New ToolStripComboBox
+    Friend WithEvents btnCreateNewEmailTemplate As New ToolStripMenuItem
+    Friend WithEvents btnEmailThisCustomer As New ToolStripMenuItem
+    Friend WithEvents tsSeparatorEmail As New ToolStripSeparator
 
 
 #End Region
@@ -361,7 +365,60 @@ Public Class Sales
         'btnEmailWizard   '' lead in button for all other choices
         'btnEmailTemplateAll   '' will take a list of recID's , apply template, and bulk mail
         'btnEmailTemplateOne 
- 
+
+
+        '' EDITS: 12-14-2015 
+        '' Item 14: punchlist.pdf
+        ''        Menu(Struct)
+        ''-----------------------------------------------
+        ''|Email Wizard          v|
+        ''|Choose Email template->| [cbo list of templates]
+        ''| [separator]		      |  create new template  |
+        ''|Email This customer    |
+        ''
+        ''{send off to choose template and so on } 
+        ''
+
+
+        '' Items:
+        ''------------------------------------------------
+        '' Friend WithEvents btnEmailWizard As New ToolStripDropDownButton
+        '' Friend WithEvents btnEmailTemplateBuilder As New ToolStripMenuItem
+        '' Friend WithEvents cboEmailTemplates As New ToolStripComboBox
+        '' Friend WithEvents btnCreateNewEmailTemplate As New ToolStripMenuItem
+        '' Friend WithEvents btnEmailThisCustomer As New ToolStripMenuItem
+
+
+
+        Me.btnEmailWizard.Name = "btnEmailWizard" '' drop down button
+        Me.btnEmailWizard.Size = New System.Drawing.Size(122, 22)
+        Me.btnEmailWizard.Image = Me.ilToolbarButtons.Images(6)
+        '' icon  for btnEmailWizard ? -> confirming.  IDX = me.ilToolBarButtons(7) Nope.  6? 
+        Me.btnEmailWizard.Text = "Email Wizard" '' drop down menu item
+
+        Me.btnEmailTemplateBuilder.Name = "btnEmailTemplateBuilder"
+        Me.btnEmailTemplateBuilder.Size = New System.Drawing.Point(122, 22)
+        Me.btnEmailTemplateBuilder.Text = "Choose Email Template"
+
+
+        Me.btnCreateNewEmailTemplate.Name = "btnCreateNewEmailTemplate"
+        Me.btnCreateNewEmailTemplate.Text = "Create New Template"
+
+        Me.btnEmailThisCustomer.Name = "btnEmailThisCustomer"
+        Me.btnEmailThisCustomer.Text = "Email This Customer"
+
+        Me.cboEmailTemplates.Name = "cboEmailTemplates"
+        Me.cboEmailTemplates.Size = New System.Drawing.Size(122, 22)
+        '' => Get Templates => populate cbo.
+        '' 
+        Get_ToolStrip_Templates()
+        Me.btnEmailWizard.DropDownItems.Add(btnEmailTemplateBuilder)
+        Me.btnEmailTemplateBuilder.DropDownItems.Add(cboEmailTemplates)
+        Me.btnEmailTemplateBuilder.DropDownItems.Add(btnCreateNewEmailTemplate)
+        Me.btnEmailWizard.DropDown.Items.Add(tsSeparatorEmail)
+        Me.btnEmailWizard.DropDown.Items.Add(btnEmailThisCustomer)
+
+        '' END -> GOTO Line 7750 for events / subs 
 
 
 
@@ -639,7 +696,7 @@ Public Class Sales
                 Me.dtpIssueLeads.Visible = False
 
             Case Is = 2  '' Customer List Tab , Sales List Tab 
-                Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult2, Me.btnCustomerTools, Me.btnBuildList, Me.btnPrintCustomerList, Me.lblToCustomerList, Me.lblFromCustomerList, Me.cboDateRangeCustomerList, Me.lblDateRangeCustomerList})
+                Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult2, Me.btnCustomerTools, Me.btnBuildList, Me.btnPrintCustomerList, Me.lblToCustomerList, Me.lblFromCustomerList, Me.cboDateRangeCustomerList, Me.lblDateRangeCustomerList, Me.btnEmailWizard})
                 Me.btnMemorize.Text = "Memorize This Record"
                 Me.btnMemorize.Image = Me.ilToolbarButtons.Images(4)
                 Me.dtpSummary.Visible = False
@@ -667,7 +724,7 @@ Public Class Sales
                 ''Need code to deselect any tasks in the task manager
             Case Is = 3 '' Customer List Tab , Memorized Appts Tab
 
-                Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult2, Me.btnCustomerTools, Me.btnPrintCustomerList})
+                Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult2, Me.btnCustomerTools, Me.btnPrintCustomerList, Me.btnEmailWizard})
                 
                 Me.btnMemorize.Text = "Remove This Record"
                 Me.btnMemorize.Image = Me.ilToolbarButtons.Images(10)
@@ -1841,6 +1898,8 @@ Public Class Sales
         SalesListBuilder.Rollback = Me.cboSalesList.Text
         If Me.cboSalesList.Text <> "Custom..." Then
             Me.cboSalesList.Text = "Custom..."
+            frmCreateList.btnClear_Click(Nothing, Nothing)
+            SalesListBuilder.btnClear_Click(Nothing, Nothing)
         Else
             SalesListBuilder.ShowDialog()
         End If
@@ -7695,5 +7754,59 @@ Public Class Sales
 
 
 
+#Region "12-14-15 Edits for Email Templating Wizard"
 
+    '' Line 414 logic
+    '' Edits: 12-14-2015 Punchlist.pdf
+    '' 
+    ''Friend WithEvents btnEmailWizard As New ToolStripDropDownButton
+    ''Friend WithEvents btnEmailTemplateBuilder As New ToolStripMenuItem
+    ''Friend WithEvents cboEmailTemplates As New ToolStripComboBox
+    ''Friend WithEvents btnCreateNewEmailTemplate As New ToolStripMenuItem
+    ''Friend WithEvents btnEmailThisCustomer As New ToolStripMenuItem
+    ''Friend WithEvents tsSeparatorEmail As New ToolStripSeparator          // no event
+
+    Private Sub btnEmailWizard_Click(sender As Object, e As EventArgs) Handles btnEmailWizard.Click
+
+        '' Public LeadToShow As convertLeadToStruct.EnterLead_Record
+        '' Public TemplateName As String = ""
+        '' Public Department As String = ""
+        MsgBox("btnEmailWizard Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
+    End Sub
+
+    Private Sub btnEmailTemplateBuilder_Click(sender As Object, e As EventArgs) Handles btnEmailTemplateBuilder.Click
+        MsgBox("btnEmailTemplateBuilder Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
+    End Sub
+
+    Private Sub Get_ToolStrip_Templates()
+        Me.cboEmailTemplates.Items.Clear()
+        Dim y As New emlTemplateLogic
+        Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+        Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
+        Dim g As List(Of emlTemplateLogic.TemplateInfo)
+        g = y.GetTemplatesByDepartment(False, depart_)
+        Dim a As emlTemplateLogic.TemplateInfo
+        For Each a In g
+            Me.cboEmailTemplates.Items.Add(a.TemplateName)
+        Next
+    End Sub
+
+    Private Sub cboEmailTemplates_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEmailTemplates.SelectedIndexChanged
+        MsgBox("cboEmailTemplates Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
+    End Sub
+
+    Private Sub btnCreateNewEmailTemplate_Click(sender As Object, e As EventArgs) Handles btnCreateNewEmailTemplate.Click
+        MsgBox("btnCreateNewEmailTemplate Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
+    End Sub
+
+    Private Sub btnEmailThisCustomer_Click(sender As Object, e As EventArgs) Handles btnEmailThisCustomer.Click
+        MsgBox("btnEmailThisCustomer Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
+    End Sub
+
+#End Region
+
+   
+   
+   
+   
 End Class
