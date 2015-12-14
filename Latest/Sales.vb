@@ -2683,17 +2683,22 @@ Public Class Sales
         If Me.LoadComplete = False Then
             Exit Sub
         End If
-     
+
+
 
         If Me.cboDateRangeSummary.Text <> "Custom" Then
             Dim d As New DTPManipulation(Me.cboDateRangeSummary.Text)
             Me.dtpSummary2.Value = d.retDateFrom
             Me.dtpSummary.Value = d.retDateTo
+            Dim r As New Sales_Performance_Report
+            Dim accuracy As String = r.ReportAccuracy
+            Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
+            r = Nothing
+            x = Nothing
 
         End If
-        Dim r As New Sales_Performance_Report
-        '' comment out before production
-        Dim x As New Print_Sales_Perf_Report(Me.dtpSummary.Value, Me.dtpSummary2.Value)
+
+        
 
     End Sub
     Dim dtpsum2orig As String

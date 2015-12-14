@@ -8,6 +8,13 @@ Public Class Sales_Performance_Report
     Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
     Dim tt As New ToolTip
 
+    Private accuracy As Double = 0.0
+
+    Public ReadOnly Property ReportAccuracy As Double
+        Get
+            Return accuracy
+        End Get
+    End Property
 
 
     Public Sub New()
@@ -349,8 +356,10 @@ Public Class Sales_Performance_Report
                     Dim a As Double = 100 - ((CType(r1.Item(16), Integer) * 100) / CType(r1.Item(2), Integer))
 
 
+                    Dim acc As Double = Math.Round(a, 2)
+                    accuracy = acc
 
-                    Sales.lblAccuracy.Text = "This report is " & Math.Round(a, 2) & "% accurate"
+                    Sales.lblAccuracy.Text = "This report is " & acc.ToString & "% accurate"
                 End If
                 If r1.Item(0) <> 1 Then
                     p.Controls.Add(lnk)

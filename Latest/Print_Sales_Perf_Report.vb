@@ -75,8 +75,8 @@ Public Class Print_Sales_Perf_Report
         Public ttlSold As Double
     End Structure
 
-    Public Sub New(ByVal StartDate As Date, ByVal EndDate As Date)
-        
+    Public Sub New(ByVal StartDate As Date, ByVal EndDate As Date, ByVal Accuracy As String)
+
         Dim year As Integer = Date.Today.Year
         Dim month As Integer = Date.Today.Month
         Dim day As Integer = Date.Today.Day
@@ -93,7 +93,7 @@ Public Class Print_Sales_Perf_Report
         End If
 
         Dim arData As List(Of LineOfData) = GenerateLines(StartDate, EndDate)
-        Write_HTML_Doc(arData)
+        Write_HTML_Doc(arData, StartDate, EndDate, Accuracy)
 
         'reportWriter.WriteLine("ID | Rep | Issued | Demos | DemoPer | Resets | ResetsPer | NotHit | NotHitPer | NoDemo | NoDemoPer | Sale | SalePer | RC | RCPer | Sold | NoResults ")
         'reportWriter.WriteLine("int  var    numer   numer   numer     numer      numer      numer   numer        numer     numer      numer  numer    numer numer   money  numer")
@@ -110,12 +110,12 @@ Public Class Print_Sales_Perf_Report
         '    reportWriter.Close()
         '    Exit Sub
         'End If
-        
+
     End Sub
 
     Private Function GenerateLines(ByVal StartDate As Date, ByVal EndDate As Date)
         arLinesOfData = New List(Of LineOfData)
-        
+
         Try
             Dim cnx1 As New SqlConnection(cnx)
             cnx1.Open()
@@ -177,7 +177,12 @@ Public Class Print_Sales_Perf_Report
     End Function
 
 #Region "Write_HTML_DOC()"
-    Private Sub Write_HTML_Doc(ByVal ListData As List(Of LineOfData))
+    Private Sub Write_HTML_Doc(ByVal ListData As List(Of LineOfData), ByVal StartDate As String, ByVal EndDate As String, ByVal Accuracy As String)
+        Dim cntData As Integer = 0
+        cntData = ListData.Count
+        If cntData <= 0 Then
+            Exit Sub
+        End If
 
         Dim path As String = Pro_ReportDirectory
 
@@ -2136,11 +2141,7 @@ Public Class Print_Sales_Perf_Report
         '' 
         '' 
 
-        Dim accuracyPer As String = "98.67%"
-        Dim dateStart As String = "12/1/2015"
-        Dim dateEnd As String = "12/31/2015"
-
-
+        Dim accuracyPer As String = Accuracy
 
         Try
 
@@ -2158,7 +2159,7 @@ Public Class Print_Sales_Perf_Report
             sr.WriteLine("</head>")
             sr.WriteLine("<body>")
             sr.WriteLine("<div class='screen'> <!--- Screen Div --->")
-            sr.WriteLine("<span class='lblAccuracyHeader'>This report is 98.67% accurate.</span><span class='lblTitleHeader'>Performance Report</span><span class='lblDateRangeHeader'>Report Date Range: " & dateStart & " to " & dateEnd & "</span>")
+            sr.WriteLine("<span class='lblAccuracyHeader'>This report is " & accuracyPer & "% accurate.</span><span class='lblTitleHeader'>Performance Report</span><span class='lblDateRangeHeader'>Report Date Range: " & StartDate & " to " & EndDate & "</span>")
             sr.WriteLine("<div class='hdrLbls'> <!-- headers --><span class='lblSalesRep'>Sales Rep</span><span class='lblNumIssued'>Issued</span><span class='lblDemoNoSales'>Demo/No Sales</span><span class='lblNotHits'>Not Hits</span><span class='lblResets'>Resets</span><span class='lblNoDemos'>No Demos</span><span class='lblSales'>Sales</span><span class='lblRecissionCancels'>Recission Cancels</span><span class='lblTotalSold'>Sold</span>")
             sr.WriteLine("<div class='subCont'><!-- Rows of data -->")
 
@@ -2168,7 +2169,7 @@ Public Class Print_Sales_Perf_Report
                 sr.WriteLine("<div class='zebra'><!-- Zebra 'Row'-->")
                 sr.WriteLine("      <!-- Row --><span class='subSalesRep'>" & g.SalesRep & "</span><span class='subIssuedCNT'>" & g.Issued & "</span> </span><span class='subDemoNoCNT'>" & g.DemoNoSaleCount & "</span><span class='subDemoNoPer'>" & g.DemoNoSalePercent & "%</span><span class='subNotHitsCNT'>" & g.NotHitCount & "</span>")
                 sr.WriteLine(" 		<span class='subNotHitsPer'>" & g.NotHitPercent & "%</span><span class='subResetsCNT'>" & g.ResetCount & "</span><span class='subResetsPer'>" & g.ResetCountPercent & "%</span><span class='subNoDemosCNT'>" & g.NoDemoCount & "</span><span class='subNoDemosPer'>" & g.NoDemoCountPercent & "%</span>")
-                sr.WriteLine("		<span class='subSalesCNT'>" & g.SalesCount & "</span><span class='subSalesPer'>" & g.SalesCountPercent & "%</span><span class='subRecCanCNT'>" & g.RecissionCancelCount & "</span><span class='subRecCanPer'>" & g.RecissionCancelPercent & "%</span><span class='subSold'>$" & g.TotalSoldPerRep & "</span><br />")
+                sr.WriteLine("		<span class='subSalesCNT'>" & g.SalesCount & "</span><span class='subSalesPer'>" & g.SalesCountPercent & "%</span><span class='subRecCanCNT'>" & g.RecissionCancelCount & "</span><span class='subRecCanPer'>" & g.RecissionCancelPercent & "%</span><span class='subSold'>" & FormatCurrency(g.TotalSoldPerRep, 2, Microsoft.VisualBasic.TriState.False, False, Microsoft.VisualBasic.TriState.True) & "</span><br />")
                 sr.WriteLine("</div><!--END Zebra 'Row' -->")
             Next
 
@@ -2179,7 +2180,7 @@ Public Class Print_Sales_Perf_Report
             sr.WriteLine("      <span class='lblTotal'>Totals: </span><span class='lblTotalIssueCnt'>" & gg.Issued & "</span> <span class='lblTotalDemoNoSalesCnt'>" & gg.DemoNoSaleCount & "</span><span class='lblTotalDemoNoSalesPer'>" & gg.DemoNoSalePercent & "%</span>")
             sr.WriteLine("  	<span class='lblTotalNotHitsCnt'>" & gg.NotHitCount & "</span><span class='lblTotalNotHitsPer'>" & gg.NotHitPercent & "%</span><span class='lblTotalResetsCnt'>" & gg.ResetCount & "</span><span class='lblTotalResetsPer'>" & gg.ResetCountPercent & "%</span>")
             sr.WriteLine("		<span class='lblTotalNoDemosCnt'>" & gg.NoDemoCount & "</span><span class='lblTotalNoDemosPer'>" & gg.NoDemoCountPercent & "%</span><span class='lblTotalSalesCnt'>" & gg.SalesCount & "</span><span class='lblTotalSalesPer'>" & gg.SalesCountPercent & "%</span>")
-            sr.WriteLine("  	<span class='lblTotalRecCanCnt'>" & gg.RecissionCancelCount & "</span><span class='lblTotalRecCanPer'>" & gg.RecissionCancelPercent & "%</span><span class='lblTotalSoldMoney'>$" & gg.TotalSoldPerRep & "</span>")
+            sr.WriteLine("  	<span class='lblTotalRecCanCnt'>" & gg.RecissionCancelCount & "</span><span class='lblTotalRecCanPer'>" & gg.RecissionCancelPercent & "%</span><span class='lblTotalSoldMoney'>" & FormatCurrency(gg.TotalSoldPerRep, 2, Microsoft.VisualBasic.TriState.False, Microsoft.VisualBasic.TriState.False, Microsoft.VisualBasic.TriState.True) & "</span>")
             sr.WriteLine("</div><!--Totals-->")
 
             sr.WriteLine("</div><!--Sub Cont -->")
