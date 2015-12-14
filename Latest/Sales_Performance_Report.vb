@@ -7,7 +7,12 @@ Public Class Sales_Performance_Report
     Dim panel As Panel = Sales.pnlPerformanceReport
     Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
     Dim tt As New ToolTip
+
+
+
     Public Sub New()
+
+      
         panel.Controls.Clear()
         panel.SuspendLayout()
         'MsgBox(Sales.dtpSummary.Value.ToString & " | " & Sales.dtpSummary2.Value.ToString)
@@ -84,7 +89,7 @@ Public Class Sales_Performance_Report
                     p2.Size = New Size(panel.Width, 2)
                     panel.Controls.Add(p2)
                     AddHandler p3.MouseEnter, AddressOf panels
-         
+
                 End If
 
 
@@ -218,7 +223,7 @@ Public Class Sales_Performance_Report
                 lblSalesPer.AutoSize = False
                 lblSalesPer.TextAlign = ContentAlignment.MiddleRight
                 AddHandler lblSalesPer.MouseEnter, AddressOf panels
-     
+
 
                 Dim lblNoDemos As New Label
                 lblNoDemos.Text = r1.Item(9)

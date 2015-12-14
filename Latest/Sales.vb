@@ -2692,6 +2692,8 @@ Public Class Sales
 
         End If
         Dim r As New Sales_Performance_Report
+        '' comment out before production
+        Dim x As New Print_Sales_Perf_Report(Me.dtpSummary.Value, Me.dtpSummary2.Value)
 
     End Sub
     Dim dtpsum2orig As String
