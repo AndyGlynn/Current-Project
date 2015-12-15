@@ -191,6 +191,12 @@
     <Compile Include="frmEmailTemplateChoice.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmEmailTemplateListManager.Designer.vb">
+      <DependentUpon>frmEmailTemplateListManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmailTemplateListManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmImportBulkData.Designer.vb">
       <DependentUpon>frmImportBulkData.vb</DependentUpon>
     </Compile>
@@ -838,6 +844,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmailTemplateChoice.resx">
       <DependentUpon>frmEmailTemplateChoice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmailTemplateListManager.resx">
+      <DependentUpon>frmEmailTemplateListManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmErrorLogs.resx">
       <DependentUpon>frmErrorLogs.vb</DependentUpon>

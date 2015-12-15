@@ -53,6 +53,7 @@ Partial Class Main
         Me.Improveit360ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TestingFormACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoginToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -94,7 +95,7 @@ Partial Class Main
         Me.tsNetworkStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel5 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsSqlSTatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.TestingFormACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnEditEmailTemplatesList = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMain.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -370,6 +371,12 @@ Partial Class Main
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.ExitToolStripMenuItem.Text = "Exit - ( ALT + F4 )"
         '
+        'TestingFormACToolStripMenuItem
+        '
+        Me.TestingFormACToolStripMenuItem.Name = "TestingFormACToolStripMenuItem"
+        Me.TestingFormACToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.TestingFormACToolStripMenuItem.Text = "Testing Form - AC"
+        '
         'UsersToolStripMenuItem
         '
         Me.UsersToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoginToolStripMenuItem, Me.LogoutToolStripMenuItem})
@@ -423,7 +430,7 @@ Partial Class Main
         '
         'AutoNotesToolStripMenuItem
         '
-        Me.AutoNotesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.WorkHoursToolStripMenuItem, Me.PrimaryLeadSourcesToolStripMenuItem, Me.SecondaryLeadSourcesToolStripMenuItem, Me.ProductsToolStripMenuItem})
+        Me.AutoNotesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.WorkHoursToolStripMenuItem, Me.PrimaryLeadSourcesToolStripMenuItem, Me.SecondaryLeadSourcesToolStripMenuItem, Me.ProductsToolStripMenuItem, Me.btnEditEmailTemplatesList})
         Me.AutoNotesToolStripMenuItem.Name = "AutoNotesToolStripMenuItem"
         Me.AutoNotesToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.AutoNotesToolStripMenuItem.Text = "Lists"
@@ -630,11 +637,11 @@ Partial Class Main
         Me.tsSqlSTatus.Size = New System.Drawing.Size(10, 17)
         Me.tsSqlSTatus.Text = " "
         '
-        'TestingFormACToolStripMenuItem
+        'btnEditEmailTemplatesList
         '
-        Me.TestingFormACToolStripMenuItem.Name = "TestingFormACToolStripMenuItem"
-        Me.TestingFormACToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.TestingFormACToolStripMenuItem.Text = "Testing Form - AC"
+        Me.btnEditEmailTemplatesList.Name = "btnEditEmailTemplatesList"
+        Me.btnEditEmailTemplatesList.Size = New System.Drawing.Size(201, 22)
+        Me.btnEditEmailTemplatesList.Text = "Email Templates"
         '
         'Main
         '
@@ -733,5 +740,6 @@ Partial Class Main
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Improveit360ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TestingFormACToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnEditEmailTemplatesList As System.Windows.Forms.ToolStripMenuItem
 
 End Class

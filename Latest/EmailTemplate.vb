@@ -94,6 +94,7 @@ Public Class EmailTemplate
                         y = Nothing
                         ResetForm()
                         Confirming.GetTemplates()
+                        Sales.Get_ToolStrip_Templates()
                         Me.Close()
                     ElseIf exists = True Then
                         MsgBox("There is already a templated named: " & z.TemplateName & " stored." & vbCrLf & "Please choose another name and try again.", MsgBoxStyle.Information, "Duplicate Exists")
@@ -178,7 +179,7 @@ Public Class EmailTemplate
             Dim z As New emlTemplateLogic
             Dim zz As New emlTemplateLogic.TemplateInfo
             Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-            zz = z.GetSingleTemplate(sel_str, False, z.GetEmployeeDepartment(name(0), name(1), False))
+            zz = z.GetSingleTemplate(sel_str, False)
             Me.txtsubject.Text = zz.Subject
             Me.rtfEmailBody.Text = zz.Body
             Me.btnSave.Text = "Update"

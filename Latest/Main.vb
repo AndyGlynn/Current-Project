@@ -993,4 +993,8 @@ Public Class Main
         frmTesting.MdiParent = Me
         frmTesting.Show()
     End Sub
+
+    Private Sub btnEditEmailTemplatesList_Click(sender As Object, e As EventArgs) Handles btnEditEmailTemplatesList.Click
+        frmEmailTemplateListManager.Show()
+    End Sub
 End Class

@@ -1444,7 +1444,7 @@ Public Class Confirming
             Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
             Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
             Dim a As emlTemplateLogic.TemplateInfo
-            a = y.GetSingleTemplate(ts_txt, False, depart_)
+            a = y.GetSingleTemplate(ts_txt, False)
             'MsgBox("Template Name: '" & a.TemplateName & "'" & vbCrLf & "Template Subject: '" & a.Subject & "'" & vbCrLf & "Template Body: '" & a.Body & "'", MsgBoxStyle.Information, "DEBUG INFO")
             Dim b As New emlTemplateLogic
             Dim id As String = STATIC_VARIABLES.CurrentID
@@ -1472,7 +1472,7 @@ Public Class Confirming
             Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
             Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
             Dim a As emlTemplateLogic.TemplateInfo
-            a = y.GetSingleTemplate(ts_txt, False, depart_)
+            a = y.GetSingleTemplate(ts_txt, False)
             'MsgBox("Template Name: '" & a.TemplateName & "'" & vbCrLf & "Template Subject: '" & a.Subject & "'" & vbCrLf & "Template Body: '" & a.Body & "'", MsgBoxStyle.Information, "DEBUG INFO")
             Dim b As New emlTemplateLogic
             Dim id As String = STATIC_VARIABLES.CurrentID

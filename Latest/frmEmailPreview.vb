@@ -18,8 +18,8 @@
         Dim z As New emlTemplateLogic
         Dim depart_ As String = z.GetEmployeeDepartment(name(0), name(1), False)
         Me.Department = depart_
-        Dim template_scrubbed As String = z.TestTemplateScrub(LeadToShow.RecID, False, TemplateName, depart_)
-        Dim templt_info As emlTemplateLogic.TemplateInfo = z.GetSingleTemplate(TemplateName, False, depart_)
+        Dim template_scrubbed As String = z.TestTemplateScrub(LeadToShow.RecID, False, TemplateName)
+        Dim templt_info As emlTemplateLogic.TemplateInfo = z.GetSingleTemplate(TemplateName, False)
         Dim g As List(Of emlTemplateLogic.TemplateInfo)
         g = z.GetTemplatesByDepartment(False, depart_)
         Dim a As emlTemplateLogic.TemplateInfo
@@ -60,8 +60,8 @@
         Dim cbo As ComboBox = sender
         Dim cbo_txt As String = cbo.Text
         Dim z As New emlTemplateLogic
-        Dim template_scrubbed As String = z.TestTemplateScrub(LeadToShow.RecID, False, cbo_txt, Me.Department)
-        Dim templt_info As emlTemplateLogic.TemplateInfo = z.GetSingleTemplate(cbo_txt, False, Me.Department)
+        Dim template_scrubbed As String = z.TestTemplateScrub(LeadToShow.RecID, False, cbo_txt)
+        Dim templt_info As emlTemplateLogic.TemplateInfo = z.GetSingleTemplate(cbo_txt, False)
         Me.rtfPreview.Text = template_scrubbed
         Me.lblAppliedTemplate.Text = cbo_txt
         Me.lblSubject.Text = z.SubjectScrub(LeadToShow.RecID, False, cbo_txt, Me.Department)

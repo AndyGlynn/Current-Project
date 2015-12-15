@@ -67,11 +67,28 @@ Public Class emlTemplateLogic
         End While
         r1.Close()
         cnx.Close()
+
+        '' now get 'DEFAULT' templates and add to array.
+        '' 
+        cnx.Open()
+        Dim cmdGET2 As New SqlCommand("SELECT * FROM tblEmailTemplates WHERE Department = 'DEFAULT';", cnx)
+        Dim r2 As SqlDataReader = cmdGET2.ExecuteReader
+        While r2.Read
+            Dim y As New TemplateInfo
+            y.ID = r2.Item("ID")
+            y.Subject = r2.Item("Subject")
+            y.Body = r2.Item("Body")
+            y.TemplateName = r2.Item("TemplateName")
+            y.Department = r2.Item("Department")
+            arTemplates.Add(y)
+        End While
+        r2.Close()
+        cnx.Close()
         cnx = Nothing
         Return arTemplates
     End Function
 
-    Public Function GetSingleTemplate(ByVal TemplateName As String, ByVal Dev_Or_Pro As Boolean, ByVal Department As String)
+    Public Function GetSingleTemplate(ByVal TemplateName As String, ByVal Dev_Or_Pro As Boolean)
         Dim cnx As SqlConnection
         Dim x As New TemplateInfo
         If Dev_Or_Pro = True Then
@@ -80,7 +97,7 @@ Public Class emlTemplateLogic
             cnx = New SqlConnection(pro_cnx)
         End If
         cnx.Open()
-        Dim cmdGET As New SqlCommand("SELECT * FROM tblEmailTemplates WHERE TemplateName = '" & TemplateName & "' AND Department = '" & Department & "';", cnx)
+        Dim cmdGET As New SqlCommand("SELECT * FROM tblEmailTemplates WHERE TemplateName = '" & TemplateName & "';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader
         While r1.Read
             x.ID = r1.Item("ID")
@@ -245,7 +262,7 @@ Public Class emlTemplateLogic
         Dim b As New convertLeadToStruct
         rec = b.ConvertToStructure(RecID, False)
         Dim a As New emlTemplateLogic
-        z = a.GetSingleTemplate(TemplateName, False, Department)
+        z = a.GetSingleTemplate(TemplateName, False)
 
         ''  subject tags 
         '' 
@@ -276,11 +293,11 @@ Public Class emlTemplateLogic
 
     End Function
 
-    Public Function TestTemplateScrub(ByVal RecID As String, ByVal Dev_Or_Pro As Boolean, ByVal TemplateName As String, ByVal Department As String)
+    Public Function TestTemplateScrub(ByVal RecID As String, ByVal Dev_Or_Pro As Boolean, ByVal TemplateName As String)
         Dim Scrubbed_TEXT As String = ""
-        
+
         Dim template_text As String = ""
-        Dim z As emlTemplateLogic.TemplateInfo = GetSingleTemplate(TemplateName, False, Department)
+        Dim z As emlTemplateLogic.TemplateInfo = GetSingleTemplate(TemplateName, False)
         template_text = z.Body
         Dim converter As New convertLeadToStruct
         Dim rec As convertLeadToStruct.EnterLead_Record

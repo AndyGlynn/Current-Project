@@ -110,9 +110,9 @@
             id = id
         End If
         'Dim scrubbedText As String = b.TestTemplateScrub(id, False, "TEST TEMPLATE", "Administration")
-        Dim nonScrubbedTemplate As emlTemplateLogic.TemplateInfo = b.GetSingleTemplate("TEST TEMPLATE", False, "Administration")
+        Dim nonScrubbedTemplate As emlTemplateLogic.TemplateInfo = b.GetSingleTemplate("TEST TEMPLATE", False)
         Me.rtfUnscrubbed.Text = nonScrubbedTemplate.Body
-        Me.rtfScrubbed.Text = b.TestTemplateScrub(id, False, "TEST TEMPLATE", "Administration")
+        Me.rtfScrubbed.Text = b.TestTemplateScrub(id, False, "TEST TEMPLATE")
 
     End Sub
 
@@ -158,7 +158,7 @@
                 Dim g As New bulkEmail.EmailMessageScrubbed
                 g.recID = b.RecID
                 g.Subject = y.SubjectScrub(b.RecID, False, str_temp, Me.lblDepartment.Text)
-                g.Body = y.TestTemplateScrub(b.RecID, False, str_temp, Me.lblDepartment.Text)
+                g.Body = y.TestTemplateScrub(b.RecID, False, str_temp)
                 arScrubbedMSGS.Add(g)
             Next
 
