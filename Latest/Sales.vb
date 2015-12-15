@@ -7768,14 +7768,10 @@ Public Class Sales
 
     Private Sub btnEmailWizard_Click(sender As Object, e As EventArgs) Handles btnEmailWizard.Click
 
-        '' Public LeadToShow As convertLeadToStruct.EnterLead_Record
-        '' Public TemplateName As String = ""
-        '' Public Department As String = ""
-        MsgBox("btnEmailWizard Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
     End Sub
 
     Private Sub btnEmailTemplateBuilder_Click(sender As Object, e As EventArgs) Handles btnEmailTemplateBuilder.Click
-        MsgBox("btnEmailTemplateBuilder Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
+
     End Sub
 
     Private Sub Get_ToolStrip_Templates()
@@ -7792,15 +7788,47 @@ Public Class Sales
     End Sub
 
     Private Sub cboEmailTemplates_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEmailTemplates.SelectedIndexChanged
-        MsgBox("cboEmailTemplates Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
+        Dim tsCBO As ToolStripComboBox = sender
+        Dim ts_txt As String = tsCBO.Text
+        If Len(ts_txt) <= 0 Then
+            Exit Sub
+        ElseIf Len(ts_txt) >= 1 Then
+            'MsgBox("Template Name: " & ts_txt, MsgBoxStyle.Information, "DEBUG INFO")
+            Dim y As New emlTemplateLogic
+            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
+            Dim a As emlTemplateLogic.TemplateInfo
+            a = y.GetSingleTemplate(ts_txt, False, depart_)
+            'MsgBox("Template Name: '" & a.TemplateName & "'" & vbCrLf & "Template Subject: '" & a.Subject & "'" & vbCrLf & "Template Body: '" & a.Body & "'", MsgBoxStyle.Information, "DEBUG INFO")
+            Dim b As New emlTemplateLogic
+            Dim id As String = STATIC_VARIABLES.CurrentID
+            If Len(id) <= 0 Then
+                id = b.GetMaxID(False)
+            ElseIf Len(id) >= 1 Then
+                id = id
+            End If
+            'Dim scrubbedText As String = b.TestTemplateScrub(id, False, "TEST TEMPLATE", "Administration")
+            Dim aa As New convertLeadToStruct
+            Dim Lead_ As convertLeadToStruct.EnterLead_Record = aa.ConvertToStructure(id, False)
+            frmEmailPreview.LeadToShow = Lead_
+            frmEmailPreview.TemplateName = ts_txt
+            frmEmailPreview.ShowDialog()
+        End If
     End Sub
 
     Private Sub btnCreateNewEmailTemplate_Click(sender As Object, e As EventArgs) Handles btnCreateNewEmailTemplate.Click
-        MsgBox("btnCreateNewEmailTemplate Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
+        EmailTemplate.Show()
+        EmailTemplate.BringToFront()
     End Sub
 
     Private Sub btnEmailThisCustomer_Click(sender As Object, e As EventArgs) Handles btnEmailThisCustomer.Click
-        MsgBox("btnEmailThisCustomer Hit Test.", MsgBoxStyle.Information, "DEBUG INFO - Hit Test")
+        Dim emailAddress As String = Me.lnkEmail.Text
+        If Len(emailAddress) <= 0 Then
+            MsgBox("This customer doesn't have an email address to send mail to.", MsgBoxStyle.Critical, "No Email Address For Customer")
+            Exit Sub
+        ElseIf Len(emailAddress) >= 1 Then
+            frmEmailTemplateChoice.Show()
+        End If
     End Sub
 
 #End Region

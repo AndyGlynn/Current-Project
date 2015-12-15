@@ -38,6 +38,10 @@
         ElseIf Len(str_template) >= 1 Then
             '' template selected 
             frmEmailPreview.TemplateName = str_template
+            Dim z As New convertLeadToStruct
+            Dim x As New convertLeadToStruct.EnterLead_Record
+            x = z.ConvertToStructure(STATIC_VARIABLES.CurrentID, False)
+            frmEmailPreview.LeadToShow = x
             Me.Close()
             frmEmailPreview.ShowDialog()
         End If

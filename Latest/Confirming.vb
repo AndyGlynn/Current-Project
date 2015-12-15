@@ -730,10 +730,7 @@ Public Class Confirming
 
     End Sub
 
-    Private Sub CreateNewTemplateu_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CreateNewTemplateu.Click
-        EmailTemplate.ShowInTaskbar = False
-        EmailTemplate.ShowDialog()
-    End Sub
+  
 
     Private Sub calledcancelled_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles calledcancelled.Click
 
@@ -1411,11 +1408,14 @@ Public Class Confirming
 
   
 
-    
+
+#Region "Emailing Functions/Subs"
+
     '' email template logic
     '' 10-26-15
     Public Sub GetTemplates()
         Me.TemplateListu.Items.Clear()
+        Me.TemplateListc.Items.Clear()
         Dim y As New emlTemplateLogic
         Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
         Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
@@ -1424,14 +1424,15 @@ Public Class Confirming
         Dim a As emlTemplateLogic.TemplateInfo
         For Each a In g
             Me.TemplateListu.Items.Add(a.TemplateName)
+            Me.TemplateListc.Items.Add(a.TemplateName)
         Next
 
     End Sub
 
-    
 
-    
-     
+
+
+
     Private Sub TemplateListu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TemplateListu.SelectedIndexChanged
         Dim tsCBO As ToolStripComboBox = sender
         Dim ts_txt As String = tsCBO.Text
@@ -1460,5 +1461,68 @@ Public Class Confirming
             frmEmailPreview.ShowDialog()
         End If
     End Sub
+    Private Sub TemplateListc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TemplateListc.SelectedIndexChanged
+        Dim tsCBO As ToolStripComboBox = sender
+        Dim ts_txt As String = tsCBO.Text
+        If Len(ts_txt) <= 0 Then
+            Exit Sub
+        ElseIf Len(ts_txt) >= 1 Then
+            'MsgBox("Template Name: " & ts_txt, MsgBoxStyle.Information, "DEBUG INFO")
+            Dim y As New emlTemplateLogic
+            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
+            Dim a As emlTemplateLogic.TemplateInfo
+            a = y.GetSingleTemplate(ts_txt, False, depart_)
+            'MsgBox("Template Name: '" & a.TemplateName & "'" & vbCrLf & "Template Subject: '" & a.Subject & "'" & vbCrLf & "Template Body: '" & a.Body & "'", MsgBoxStyle.Information, "DEBUG INFO")
+            Dim b As New emlTemplateLogic
+            Dim id As String = STATIC_VARIABLES.CurrentID
+            If Len(id) <= 0 Then
+                id = b.GetMaxID(False)
+            ElseIf Len(id) >= 1 Then
+                id = id
+            End If
+            'Dim scrubbedText As String = b.TestTemplateScrub(id, False, "TEST TEMPLATE", "Administration")
+            Dim aa As New convertLeadToStruct
+            Dim Lead_ As convertLeadToStruct.EnterLead_Record = aa.ConvertToStructure(id, False)
+            frmEmailPreview.LeadToShow = Lead_
+            frmEmailPreview.TemplateName = ts_txt
+            frmEmailPreview.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub EmailCustomu_Click(sender As Object, e As EventArgs) Handles EmailCustomu.Click
+        Dim emailAddress As String = Me.lnkEmail.Text
+        If Len(emailAddress) <= 0 Then
+            MsgBox("This customer doesn't have a valid email address to mail to.", MsgBoxStyle.Critical, "No Valid Email Address.")
+            Exit Sub
+        ElseIf Len(emailAddress) >= 1 Then
+            frmEmailTemplateChoice.Show()
+            frmEmailTemplateChoice.BringToFront()
+        End If
+    End Sub
+    Private Sub EmailCustomc_Click(sender As Object, e As EventArgs) Handles EmailCustomc.Click
+        Dim emailAddress As String = Me.lnkEmail.Text
+        If Len(emailAddress) <= 0 Then
+            MsgBox("This customer doesn't have a valid email address to mail to.", MsgBoxStyle.Critical, "No Valid Email Address.")
+            Exit Sub
+        ElseIf Len(emailAddress) >= 1 Then
+            frmEmailTemplateChoice.Show()
+            frmEmailTemplateChoice.BringToFront()
+        End If
+    End Sub
+
+    Private Sub CreateNewTemplateu_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CreateNewTemplateu.Click
+        EmailTemplate.ShowInTaskbar = False
+        EmailTemplate.ShowDialog()
+    End Sub
+    Private Sub CreateNewTemplatec_Click(sender As Object, e As EventArgs) Handles CreateNewTemplatec.Click
+        EmailTemplate.ShowInTaskbar = False
+        EmailTemplate.ShowDialog()
+    End Sub
+#End Region
+
+  
+   
+   
 End Class
 
