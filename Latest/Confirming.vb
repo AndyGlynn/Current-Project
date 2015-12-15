@@ -1449,7 +1449,8 @@ Public Class Confirming
             Dim b As New emlTemplateLogic
             Dim id As String = STATIC_VARIABLES.CurrentID
             If Len(id) <= 0 Then
-                id = b.GetMaxID(False)
+                MsgBox("No lead selected to apply template to.", MsgBoxStyle.Critical, "No Lead Selected")
+                Exit Sub
             ElseIf Len(id) >= 1 Then
                 id = id
             End If
@@ -1477,7 +1478,8 @@ Public Class Confirming
             Dim b As New emlTemplateLogic
             Dim id As String = STATIC_VARIABLES.CurrentID
             If Len(id) <= 0 Then
-                id = b.GetMaxID(False)
+                MsgBox("No lead selected to apply template to.", MsgBoxStyle.Critical, "No Lead Selected")
+                Exit Sub
             ElseIf Len(id) >= 1 Then
                 id = id
             End If
