@@ -62,7 +62,12 @@ Public Class Sales
     ''Add more nested Buttons for this 
     ''Add more nested Buttons for this 
     Friend WithEvents btnSetAppt As New ToolStripMenuItem
+
+    '' 12-15-2015
+    '' Target for edits on menu -> letter wizard for word integration
     Friend WithEvents btnCustomerTools As New System.Windows.Forms.ToolStripDropDownButton
+    '' 
+
     Friend WithEvents btnPrintCustomerList As New ToolStripDropDownButton
     Friend WithEvents btnPrintApptSheet As New ToolStripMenuItem
     Friend WithEvents btnPrintCustomerInfoSheet As New ToolStripMenuItem
@@ -88,7 +93,13 @@ Public Class Sales
     Friend WithEvents btnCallCustomer As New System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnMainPhone As New System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnAltPhone1 As New System.Windows.Forms.ToolStripMenuItem
+    ''12-15-2015
+    '' target for edits on menu -> letter wizard for word integration
     Friend WithEvents btnLetter As New System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cboLetterWizardTemplates As New System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents btnCreateNewLetterTemplate As New System.Windows.Forms.ToolStripMenuItem
+    '' 
+
     Friend WithEvents btnAltPhone2 As New System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnAssignRep As New System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnSaveRep As New System.Windows.Forms.ToolStripMenuItem
@@ -124,6 +135,9 @@ Public Class Sales
     Friend WithEvents btnCreateNewEmailTemplate As New ToolStripMenuItem
     Friend WithEvents btnEmailThisCustomer As New ToolStripMenuItem
     Friend WithEvents tsSeparatorEmail As New ToolStripSeparator
+
+
+
 
 
 #End Region
@@ -489,11 +503,15 @@ Public Class Sales
         '
         'btnLetter
         '
-        'Me.btnLetter.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {  ''Add Range Later         })
+        Me.btnLetter.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cboLetterWizardTemplates, Me.btnCreateNewLetterTemplate})
+
+        Me.btnCreateNewLetterTemplate.Name = "btnCreateNewLetterTemplate"
+        Me.btnCreateNewLetterTemplate.Text = "Create New Letter Template"
+
         Me.btnLetter.Image = Me.ilToolbarButtons.Images(7)
         Me.btnLetter.Name = "btnLetter"
         Me.btnLetter.Size = New System.Drawing.Size(173, 22)
-        Me.btnLetter.Text = "Send a Letter"
+        Me.btnLetter.Text = "Letter Wizard"
         'btnSetAppt
         '
         Me.btnSetAppt.Image = Me.ilToolbarButtons.Images(8)
@@ -5570,23 +5588,29 @@ Public Class Sales
         'Public LeadToShow As convertLeadToStruct.EnterLead_Record
         'Public TemplateName As String = ""
         'Public Department As String = ""
-        Dim obj_ As New convertLeadToStruct
-        Dim y As New emlTemplateLogic
-        Dim _lead As New convertLeadToStruct.EnterLead_Record
-        Dim recID As String = STATIC_VARIABLES.CurrentID.ToString
-        If Len(recID) <= 0 Then
-            '' take first lead in dbase | testing 
-            recID = y.GetMaxID(False)
-        ElseIf Len(recID) >= 1 Then
-            '' use current recID
-            recID = recID
-        End If
-        _lead = obj_.ConvertToStructure(recID, False)
-        frmEmailPreview.LeadToShow = _lead
-        Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-        Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
+        Dim emailAddress As String = Me.lnkEmail.Text
+        If Len(emailAddress) <= 0 Then
+            MsgBox("This customer doesn't have a valid email address to send email to.", MsgBoxStyle.Critical, "No Valid Email Address")
+            Exit Sub
+        ElseIf Len(emailAddress) >= 1 Then
+            Dim obj_ As New convertLeadToStruct
+            Dim y As New emlTemplateLogic
+            Dim _lead As New convertLeadToStruct.EnterLead_Record
+            Dim recID As String = STATIC_VARIABLES.CurrentID.ToString
+            If Len(recID) <= 0 Then
+                '' take first lead in dbase | testing 
+                recID = y.GetMaxID(False)
+            ElseIf Len(recID) >= 1 Then
+                '' use current recID
+                recID = recID
+            End If
+            _lead = obj_.ConvertToStructure(recID, False)
+            frmEmailPreview.LeadToShow = _lead
+            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
 
-        frmEmailTemplateChoice.ShowDialog()
+            frmEmailTemplateChoice.ShowDialog()
+        End If
     End Sub
 
 
