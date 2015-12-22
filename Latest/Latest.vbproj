@@ -468,6 +468,7 @@
     <Compile Include="PENDING_REQUEST_INFO.vb" />
     <Compile Include="PopulateAF.vb" />
     <Compile Include="printingOperations.vb" />
+    <Compile Include="printToPrinter.vb" />
     <Compile Include="Print_Sales_Perf_Report.vb" />
     <Compile Include="ReusableListViewControl.vb" />
     <Compile Include="salessetappt.Designer.vb">

@@ -5409,7 +5409,9 @@ Public Class Sales
     End Sub
 
     Private Sub btnPrintApptSheet_Click(sender As Object, e As EventArgs) Handles btnPrintApptSheet.Click
-        MsgBox("btnPrintApptSheet")
+        'MsgBox("btnPrintApptSheet")
+        Dim x As New printToPrinter(STATIC_VARIABLES.CurrentID)
+
     End Sub
 
     Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click

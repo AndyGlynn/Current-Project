@@ -4,6 +4,8 @@ Imports System.Text
 Imports System.Data
 Imports System.Data.Sql
 Imports System.Data.SqlClient
+Imports System.Drawing.Printing
+
 
 Public Class Print_Sales_Perf_Report
 
@@ -33,7 +35,6 @@ Public Class Print_Sales_Perf_Report
     Private Const Dev_ReportDirectory As String = "C:\Users\Clay\Desktop\Sales Performance Reports\"
 
     Private Const cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
-
 
     Public Structure LineOfData
         Public ControlName As String
@@ -74,6 +75,7 @@ Public Class Print_Sales_Perf_Report
         Public ttlRecissionCancelPer As Integer
         Public ttlSold As Double
     End Structure
+
 
     Public Sub New(ByVal StartDate As Date, ByVal EndDate As Date, ByVal Accuracy As String)
 
@@ -2205,6 +2207,9 @@ Public Class Print_Sales_Perf_Report
 
 
     End Sub
+
+
+
 #End Region
 
 
