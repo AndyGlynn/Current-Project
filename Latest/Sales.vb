@@ -5410,12 +5410,16 @@ Public Class Sales
 
     Private Sub btnPrintApptSheet_Click(sender As Object, e As EventArgs) Handles btnPrintApptSheet.Click
         'MsgBox("btnPrintApptSheet")
-        Dim x As New printToPrinter(STATIC_VARIABLES.CurrentID)
+        Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
 
     End Sub
 
     Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click
         MsgBox("btnPrintCurrentList")
+    End Sub
+
+    Private Sub btnPrintCustomerInfoSheet_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerInfoSheet.Click
+        Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
     End Sub
 
     Private Sub btnPrintNoEmailIssue_Click(sender As Object, e As EventArgs) Handles btnPrintNoEmailIssue.Click
@@ -7864,4 +7868,5 @@ Public Class Sales
    
    
    
+    
 End Class

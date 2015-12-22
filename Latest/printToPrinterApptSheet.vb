@@ -5,7 +5,7 @@ Imports System.Data.Sql
 Imports System.Data.SqlClient
 
 
-Public Class printToPrinter
+Public Class printToPrinterApptSheet
 
     Public Structure MessageBody
         'strLead += r1.Item("ID") & vbCrLf
