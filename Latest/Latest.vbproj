@@ -469,6 +469,7 @@
     <Compile Include="PopulateAF.vb" />
     <Compile Include="printingOperations.vb" />
     <Compile Include="printToPrinterApptSheet.vb" />
+    <Compile Include="printToPrinterContactList.vb" />
     <Compile Include="printToPrinterCustInfoSheet.vb" />
     <Compile Include="Print_Sales_Perf_Report.vb" />
     <Compile Include="ReusableListViewControl.vb" />

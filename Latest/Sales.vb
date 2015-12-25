@@ -5415,9 +5415,14 @@ Public Class Sales
     End Sub
 
     Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click
-        MsgBox("btnPrintCurrentList")
+        'MsgBox("btnPrintCurrentList")
+        Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
+        Dim x As New printToPrinterContactList(lvCol)
+        x.ShowDoc()
     End Sub
-
+    Private Sub btnPrintCustomerList_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerList.Click
+        'MsgBox("btnPrintCustomerList")
+    End Sub
     Private Sub btnPrintCustomerInfoSheet_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerInfoSheet.Click
         Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
     End Sub
@@ -7869,4 +7874,5 @@ Public Class Sales
    
    
     
+   
 End Class
