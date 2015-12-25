@@ -191,7 +191,9 @@ Public Class SalesListManager
         cnn.Open()
         r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
         Dim cnt As Integer = 0
+        Dim cntRecs As Integer = 0
         While r.Read
+            cntRecs += 1
             Dim lv As New ListViewItem
             lv.Name = r.Item(0)
             lv.Text = r.Item(0)
@@ -298,6 +300,7 @@ Public Class SalesListManager
 
         r.Close()
         cnn.Close()
+        Sales.lblCntFiltered.Text = cntRecs.ToString
         If Sales.lvSales.SelectedItems.Count = 0 And Sales.lvSales.Items.Count <> 0 Then
             Sales.lvSales.TopItem.Selected = True
         End If

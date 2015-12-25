@@ -70,9 +70,11 @@ Public Class ConfirmingData
 
                 cnnC.Open()
                 r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-                While R1.Read
+                Dim cntRecs As Integer = 0
+                While r1.Read
+                    cntRecs += 1
                     Dim lv As New ListViewItem
-                    lv.Text = R1.Item(0)
+                    lv.Text = r1.Item(0)
                     Dim u As String = r1.Item(12).ToString
                     Dim w = InStr(u, " ")
                     u = Microsoft.VisualBasic.Right(u, w + 2)
@@ -89,7 +91,7 @@ Public Class ConfirmingData
                         u = u2 & u3
                     End If
                     lv.SubItems.Add(u)
-                    lv.SubItems.Add(R1.Item(1) & ", " & R1.Item(2))
+                    lv.SubItems.Add(r1.Item(1) & ", " & r1.Item(2))
                     If r1.Item(3) <> "" Then
                         lv.SubItems.Add(r1.Item(3) & ", " & r1.Item(4))
                     Else
@@ -127,7 +129,7 @@ Public Class ConfirmingData
                 End While
                 r1.Close()
                 cnnC.Close()
-
+                Confirming.lblConfirmingFiltered.Text = cntRecs.ToString
                 Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
                 Dim param4 As SqlParameter = New SqlParameter("@PLS", PLS)
                 Dim param5 As SqlParameter = New SqlParameter("@SLS", SLS)

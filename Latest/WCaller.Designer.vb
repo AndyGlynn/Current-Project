@@ -184,6 +184,8 @@ Partial Class WCaller
         Me.txtDate2 = New System.Windows.Forms.TextBox()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.lblCnt = New System.Windows.Forms.Label()
+        Me.lblCntReturned = New System.Windows.Forms.Label()
         Me.tsWarmCalling.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -378,6 +380,8 @@ Partial Class WCaller
         'TabPage4
         '
         Me.TabPage4.Controls.Add(Me.lblGroupBy)
+        Me.TabPage4.Controls.Add(Me.lblCntReturned)
+        Me.TabPage4.Controls.Add(Me.lblCnt)
         Me.TabPage4.Controls.Add(Me.cboGroupBy)
         Me.TabPage4.Controls.Add(Me.btnExpandWarmCalling)
         Me.TabPage4.Controls.Add(Me.lblToChangeWarmCalling)
@@ -494,10 +498,10 @@ Partial Class WCaller
         Me.lvWarmCalling.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvWarmCalling.FullRowSelect = True
         Me.lvWarmCalling.HideSelection = False
-        Me.lvWarmCalling.Location = New System.Drawing.Point(3, 95)
+        Me.lvWarmCalling.Location = New System.Drawing.Point(3, 83)
         Me.lvWarmCalling.MultiSelect = False
         Me.lvWarmCalling.Name = "lvWarmCalling"
-        Me.lvWarmCalling.Size = New System.Drawing.Size(210, 452)
+        Me.lvWarmCalling.Size = New System.Drawing.Size(210, 444)
         Me.lvWarmCalling.TabIndex = 9
         Me.lvWarmCalling.UseCompatibleStateImageBehavior = False
         Me.lvWarmCalling.View = System.Windows.Forms.View.Details
@@ -541,12 +545,12 @@ Partial Class WCaller
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(138, 26)
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(137, 22)
         Me.ToolStripMenuItem1.Text = "Show Notes"
         '
         'TabPage5
@@ -1974,6 +1978,28 @@ Partial Class WCaller
         '
         Me.Timer1.Interval = 150
         '
+        'lblCnt
+        '
+        Me.lblCnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.lblCnt.AutoSize = True
+        Me.lblCnt.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.lblCnt.Location = New System.Drawing.Point(8, 530)
+        Me.lblCnt.Name = "lblCnt"
+        Me.lblCnt.Size = New System.Drawing.Size(70, 16)
+        Me.lblCnt.TabIndex = 87
+        Me.lblCnt.Text = "Records: "
+        '
+        'lblCntReturned
+        '
+        Me.lblCntReturned.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.lblCntReturned.AutoSize = True
+        Me.lblCntReturned.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.lblCntReturned.Location = New System.Drawing.Point(132, 531)
+        Me.lblCntReturned.Name = "lblCntReturned"
+        Me.lblCntReturned.Size = New System.Drawing.Size(12, 16)
+        Me.lblCntReturned.TabIndex = 88
+        Me.lblCntReturned.Text = " "
+        '
         'WCaller
         '
         Me.AcceptButton = Me.btnExpandWarmCalling
@@ -2187,4 +2213,6 @@ Partial Class WCaller
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents lblCntReturned As System.Windows.Forms.Label
+    Friend WithEvents lblCnt As System.Windows.Forms.Label
 End Class

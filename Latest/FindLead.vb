@@ -324,6 +324,7 @@ Public Class FindLead
 
     Private Sub FindLead_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Me.txtsearch.Text = ""
+        Me.Text = "Find..."
         Me.lstSearchResults.Items.Clear()
 
         'Me.Dispose()

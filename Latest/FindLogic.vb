@@ -19,7 +19,9 @@ Public Class FindLogic
             cmdGet.Parameters.Add(param1)
             CNN.Open()
             Dim R1 As SqlDataReader = cmdGet.ExecuteReader
+            Dim cntRec As Integer = 0
             While R1.Read
+                cntRec += 1
                 Dim lv As New ListViewItem
                 lv.Name = R1.Item(0)
                 lv.Text = R1.Item(0)
@@ -48,6 +50,8 @@ Public Class FindLogic
             End While
             R1.Close()
             CNN.Close()
+
+            FindLead.Text = "Found... -[ Records: " & cntRec.ToString & " ]"
         Catch ex As Exception
 
             Dim err As New ErrorLogFlatFile

@@ -40,6 +40,7 @@ Public Class WCaller
     Private Sub WCaller_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim c As New WarmCalling.LoadProcedure()
 
+        
     End Sub
 
     Private Sub TabControl2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl2.SelectedIndexChanged
@@ -469,6 +470,7 @@ Public Class WCaller
         Dim c As New WarmCalling
         c.ManagerCriteria()
         c.Populate()
+
         Me.btnClear.Enabled = True
     End Sub
 
@@ -597,6 +599,7 @@ Public Class WCaller
         End If
         Dim c As New WarmCalling
         c.Populate()
+
     End Sub
 
     Private Sub dtp1_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1.ValueChanged
@@ -664,6 +667,8 @@ Public Class WCaller
         End If
         Dim c As New WarmCalling
         c.Populate()
+
+
     End Sub
 
     Public Sub btnZipCity_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnZipCity.Click
@@ -695,6 +700,7 @@ Public Class WCaller
         If Me.cboGroupBy.Text = "" Then
             Me.lvWarmCalling.Groups.Clear()
             c.Populate()
+
             Exit Sub
         End If
         c.GroupBy()
@@ -702,6 +708,7 @@ Public Class WCaller
 
     Private Sub cboPLSWarmCalling_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboPLSWarmCalling.SelectedIndexChanged
         Dim c As New WarmCalling
+
 
         If Me.LoadComplete = False Then
             Exit Sub
@@ -719,6 +726,7 @@ Public Class WCaller
         End If
         Dim c As New WarmCalling
         c.Populate()
+
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click

@@ -812,8 +812,9 @@ Public Class Sales
             x = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
         End If
         Me.lvnoresults.Items.Clear()
-
+        Dim cntNoResults As Integer = 0
         While r1.Read
+            cntNoResults += 1
             Dim lv As New ListViewItem
             Dim d
             Dim rep1 As String
@@ -846,7 +847,8 @@ Public Class Sales
             End If
         End While
         r1.Close()
-        Cnn.Close()
+        cnn.Close()
+        Me.Label38.Text = (Me.Label38.Text & " -[ Records: " & cntNoResults & " ]")
     End Sub
     Public Sub PullInfo(ByVal ID As String)
         If Me.ID = ID And Me.ForceRefresh = False Then
@@ -1617,6 +1619,7 @@ Public Class Sales
         Me.PopulateNoResults()
         Me.LoadGroups()
         Dim x As New ScheduledActions
+
         x.SetUp(Me)
 
 

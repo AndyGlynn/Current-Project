@@ -38,6 +38,21 @@ Public Class WarmCalling
     Dim C9 As String
     Dim C10 As String
     Dim GB As String = WCaller.cboGroupBy.Text
+
+    '' 12-25-2015
+    '' need a way to "count" all the records coming out per respective query
+    '' line: 1388  -> add an iteration counter ( iteration += 1)
+    '' 
+    Public rectCNTW As Integer = 0
+    Public Property Count_Of_Records As Integer
+        Get
+            Return rectCNTW
+        End Get
+        Set(value As Integer)
+            rectCNTW = value
+        End Set
+    End Property
+
     Public Sub GroupBy()
 
         WCaller.lvWarmCalling.Groups.Clear()
@@ -1386,6 +1401,7 @@ Public Class WarmCalling
             Dim cnt As Integer = 0
             While r.Read
                 Dim lv As New ListViewItem
+                rectCNTW += 1
                 lv.Name = r.Item(0)
                 lv.Text = r.Item(0)
                 Dim u As String = r.Item(2).ToString
@@ -1443,6 +1459,7 @@ Public Class WarmCalling
                 cnt = cnt + 1
 
             End While
+
             r.Close()
             cnn.Close()
             WCaller.txtRecordsMatching.Text = CStr(cnt)
@@ -1455,10 +1472,13 @@ Public Class WarmCalling
             If WCaller.lvWarmCalling.Items.Count = 0 Then
                 Me.PullCustomerINFO("")
             End If
+            WCaller.lblCntReturned.Text = rectCNTW.ToString
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
     End Sub
+
+     
     Public Sub ManagerCriteria()
 
         Dim param1 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
@@ -2025,6 +2045,7 @@ Public Class WarmCalling
         End Class
     End Class
     Public Class LoadProcedure
+        
         Public Sub New()
             ' WCaller.MdiParent = Main
             ''  Set up default times and dates to dispay on click or focus of control
@@ -2038,6 +2059,7 @@ Public Class WarmCalling
             Next
             ''      Populates Primary Lead Source
             Dim c As New WarmCalling
+
             c.GetPrimaryLeadSource()
             ''      Clears all text boxes overlaying all date and time pickers to give it 
             ''      the appearance of blank values in all these fields indicating that no time or 
@@ -2170,6 +2192,7 @@ Public Class WarmCalling
         End Sub
     End Class
    
+     
      
 End Class
 

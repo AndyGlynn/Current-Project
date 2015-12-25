@@ -13,6 +13,16 @@ Public Class ScheduledActions
     Private notes As String
     Private cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
 
+    Private cntRecords As Integer = 0
+    Public Property Count_Of_Scheduled_Actions As Integer
+        Get
+            Return cntRecords
+        End Get
+        Set(value As Integer)
+            cntRecords = value
+        End Set
+    End Property
+
     Public Structure SchedAction
         Public ID As String
         Public LeadNum As String
@@ -77,6 +87,7 @@ Public Class ScheduledActions
 
 
             Dim o As Integer = CInt(r2.Item(0))
+
             If o Mod 2 = 0 Then
                 sw = False
             Else
@@ -101,7 +112,7 @@ Public Class ScheduledActions
 
 
             While R1.Read
-
+                cntRecords += 1
 
                 Dim p As New Panel
 
@@ -285,6 +296,7 @@ Public Class ScheduledActions
 
 
             End While
+            Sales.GroupBox4.Text = (Sales.GroupBox4.Text & " - [ Records: " & cntRecords.ToString & " ]")
             R1.Close()
             cnn.Close()
         Catch ex As Exception

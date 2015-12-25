@@ -132,6 +132,8 @@ Partial Class Confirming
         Me.ttconfirming = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttCustomerHistoryNotes = New System.Windows.Forms.ToolTip(Me.components)
         Me.RefreshData = New System.Windows.Forms.Timer(Me.components)
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblConfirmingFiltered = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -190,6 +192,8 @@ Partial Class Confirming
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.lblConfirmingFiltered)
+        Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Controls.Add(Me.btnExpandConfirming)
         Me.TabPage1.Controls.Add(Me.lblToChangeConfirming)
         Me.TabPage1.Controls.Add(Me.lblConfirmingSLS)
@@ -298,7 +302,7 @@ Partial Class Confirming
         Me.lvConfirming.Location = New System.Drawing.Point(3, 61)
         Me.lvConfirming.MultiSelect = False
         Me.lvConfirming.Name = "lvConfirming"
-        Me.lvConfirming.Size = New System.Drawing.Size(211, 485)
+        Me.lvConfirming.Size = New System.Drawing.Size(211, 460)
         Me.lvConfirming.TabIndex = 0
         Me.lvConfirming.UseCompatibleStateImageBehavior = False
         Me.lvConfirming.View = System.Windows.Forms.View.Details
@@ -1346,6 +1350,26 @@ Partial Class Confirming
         '
         Me.RefreshData.Interval = 10000
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Label3.Location = New System.Drawing.Point(3, 533)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(59, 13)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "Records: "
+        '
+        'lblConfirmingFiltered
+        '
+        Me.lblConfirmingFiltered.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.lblConfirmingFiltered.AutoSize = True
+        Me.lblConfirmingFiltered.Location = New System.Drawing.Point(109, 533)
+        Me.lblConfirmingFiltered.Name = "lblConfirmingFiltered"
+        Me.lblConfirmingFiltered.Size = New System.Drawing.Size(10, 13)
+        Me.lblConfirmingFiltered.TabIndex = 8
+        Me.lblConfirmingFiltered.Text = " "
+        '
         'Confirming
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1490,5 +1514,7 @@ Partial Class Confirming
     Friend WithEvents txtWorkHours As System.Windows.Forms.RichTextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lblConfirmingFiltered As System.Windows.Forms.Label
 
 End Class
