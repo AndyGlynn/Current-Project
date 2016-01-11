@@ -35,6 +35,7 @@ Public Class Confirming
     Friend WithEvents EmailCustomc As New ToolStripMenuItem '
     Friend WithEvents EmailTemplatec As New ToolStripMenuItem
     Friend WithEvents EmailTemplateu As New ToolStripMenuItem
+    Friend WithEvents EmailBlastSend As New ToolStripMenuItem
     Friend WithEvents SalesResult As New ToolStripMenuItem
     Friend WithEvents btnCNGApptTime As New ToolStripMenuItem
     Friend WithEvents SalesSeparator As New ToolStripSeparator
@@ -66,9 +67,7 @@ Public Class Confirming
     Public cntCandC As Integer = 0
     Public OrigRep1 As String
     Public OrigRep2 As String
-    Private Sub Test(sender As String)
-
-    End Sub
+  
     Private Sub Confirming_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         STATIC_VARIABLES.CurrentID = ""
         Me.Dispose()
@@ -224,11 +223,13 @@ Public Class Confirming
         Me.EmailTemplateu.Text = "Choose Email Template"
         Me.CreateNewTemplateu.Text = "Create New Template"
         Me.CreateNewTemplatec.Text = "Create New Template"
+        Me.EmailBlastSend.Text = "Send Blast Mail To Sales Rep"
         '   Email Setup Unconfirmed
         Dim emu
         emu = Me.Emailu.DropDownItems
         emu.add(Me.EmailCustomu)
         emu.add(Me.EmailTemplateu)
+        emu.add(Me.EmailBlastSend)
         Me.EmailTemplateu.DropDownItems.Add(Me.TemplateListu)
         Me.EmailTemplateu.DropDownItems.Add(Me.CreateNewTemplateu)
 
@@ -1526,5 +1527,11 @@ Public Class Confirming
   
    
    
+    Private Sub EmailBlastSend_Click(sender As Object, e As EventArgs) Handles EmailBlastSend.Click
+        frmBlastMail.MdiParent = Main
+        frmBlastMail.RecID = STATIC_VARIABLES.CurrentID
+        frmBlastMail.Show()
+        frmBlastMail.BringToFront()
+    End Sub
 End Class
 

@@ -578,16 +578,23 @@ Public Class EditCustomerInfo
             Exit Sub
         End If
         click += 1
-        SetAppt.OrigApptDate = Me.txtApptDate.Text
-        SetAppt.OrigApptTime = Me.txtApptTime.Text
-        SetAppt.Contact1 = d.Get_First(Me.txtContact1.Text)
-        SetAppt.Contact2 = d.Get_First(Me.txtContact2.Text)
-        SetAppt.frm = WhichForm
-        'If click = 1 Then
-        '    SetAppt.ShowDialog()
-        'End If
 
-        SetAppt.ShowDialog() ''come back weird fuckin bug, form opens and closes first time only then works fine 
+
+       
+
+        'SetAppt.OrigApptDate = Me.txtApptDate.Text
+        'SetAppt.OrigApptTime = Me.txtApptTime.Text
+        'SetAppt.Contact1 = d.Get_First(Me.txtContact1.Text)
+        'SetAppt.Contact2 = d.Get_First(Me.txtContact2.Text)
+        'SetAppt.frm = WhichForm
+        If click = 1 Then
+            SetAppt_V2.CallingForm = "Confirming"
+            SetAppt_V2.ID = ID
+            SetAppt_V2.MdiParent = Main
+            SetAppt_V2.Show()
+        End If
+
+        'SetAppt.ShowDialog() ''come back weird fuckin bug, form opens and closes first time only then works fine 
         d.Get_New_Appt(ID)
 
 

@@ -980,7 +980,7 @@ Public Class EmailIssuedLeads
         End With
         smptSERV.Send(eml_msg)
 
-
+        MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
 
 
     End Sub
@@ -1005,7 +1005,7 @@ Public Class EmailIssuedLeads
             .IsBodyHtml = False
         End With
         smptSERV.Send(eml_msg)
-
+        MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
 
     End Sub
     Public Sub BulkMailWithoutExclusions(ByVal RepEmail As String, ByVal MSG As String)
@@ -1028,7 +1028,7 @@ Public Class EmailIssuedLeads
             .IsBodyHtml = False
         End With
         smptSERV.Send(eml_msg)
-
+        MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
     End Sub
 
     Public Sub EMAIL_SINGLE_MarkupEmail_WITHOUT_EXCLUSIONS(ByVal RepFName As String, ByVal RepLName As String, ByVal LeadNum As String, ByVal RepEmail As String, ByVal Msg As String, ByVal Subject As String)
@@ -1053,7 +1053,7 @@ Public Class EmailIssuedLeads
         End With
         smptSERV.Send(eml_msg)
 
-
+        MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
     End Sub
 
     Public Sub Send_BLAST_MAIL(ByVal _From As String, ByVal Recipient As String, ByVal _MSG As String, Subject As String)
@@ -1077,6 +1077,34 @@ Public Class EmailIssuedLeads
             .IsBodyHtml = False
         End With
         smptSERV.Send(eml_msg)
+
+        MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
+
+    End Sub
+
+    Public Sub Send_Blast_Mail_Confirming(ByVal _From As String, ByVal _To As String, ByVal _MSG As String, ByVal Subject As String, ByVal _FromSMTP As String, ByVal _FromSMTPPort As String, ByVal _FromPWD As String, ByVal _FromUSR As String, ByVal _FromDisplayName As String)
+        Dim smptSERV As New SmtpClient
+        Dim credentials As New Net.NetworkCredential
+        credentials.Password = _FromPWD
+        credentials.UserName = _FromUSR
+        smptSERV.UseDefaultCredentials = False
+        smptSERV.EnableSsl = STATIC_VARIABLES.CurrentLoggedInEmployee.OutGOSSL
+        smptSERV.Port = _FromSMTPPort
+        smptSERV.Host = _FromSMTP
+        smptSERV.Credentials = credentials
+
+        Dim eml_msg As New MailMessage(_From, _To)
+        Dim mailAddress As New MailAddress(_From, _FromDisplayName)
+
+        With eml_msg
+            .From = mailAddress
+            .Subject = Subject
+            .Body = _MSG
+            .IsBodyHtml = False
+        End With
+        smptSERV.Send(eml_msg)
+
+        MsgBox("Mail Sent to: " & _To.ToString & " .", MsgBoxStyle.Information, "Mail Was Sent.")
 
     End Sub
 

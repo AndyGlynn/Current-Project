@@ -30,6 +30,8 @@ Partial Class Confirming
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.lblConfirmingFiltered = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.btnExpandConfirming = New System.Windows.Forms.Button()
         Me.lblToChangeConfirming = New System.Windows.Forms.Label()
         Me.lblConfirmingSLS = New System.Windows.Forms.Label()
@@ -132,8 +134,6 @@ Partial Class Confirming
         Me.ttconfirming = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttCustomerHistoryNotes = New System.Windows.Forms.ToolTip(Me.components)
         Me.RefreshData = New System.Windows.Forms.Timer(Me.components)
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.lblConfirmingFiltered = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -209,6 +209,26 @@ Partial Class Confirming
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Confirming"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'lblConfirmingFiltered
+        '
+        Me.lblConfirmingFiltered.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.lblConfirmingFiltered.AutoSize = True
+        Me.lblConfirmingFiltered.Location = New System.Drawing.Point(109, 533)
+        Me.lblConfirmingFiltered.Name = "lblConfirmingFiltered"
+        Me.lblConfirmingFiltered.Size = New System.Drawing.Size(10, 13)
+        Me.lblConfirmingFiltered.TabIndex = 8
+        Me.lblConfirmingFiltered.Text = " "
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Label3.Location = New System.Drawing.Point(3, 533)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(59, 13)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "Records: "
         '
         'btnExpandConfirming
         '
@@ -1349,26 +1369,6 @@ Partial Class Confirming
         'RefreshData
         '
         Me.RefreshData.Interval = 10000
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Label3.Location = New System.Drawing.Point(3, 533)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(59, 13)
-        Me.Label3.TabIndex = 7
-        Me.Label3.Text = "Records: "
-        '
-        'lblConfirmingFiltered
-        '
-        Me.lblConfirmingFiltered.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.lblConfirmingFiltered.AutoSize = True
-        Me.lblConfirmingFiltered.Location = New System.Drawing.Point(109, 533)
-        Me.lblConfirmingFiltered.Name = "lblConfirmingFiltered"
-        Me.lblConfirmingFiltered.Size = New System.Drawing.Size(10, 13)
-        Me.lblConfirmingFiltered.TabIndex = 8
-        Me.lblConfirmingFiltered.Text = " "
         '
         'Confirming
         '

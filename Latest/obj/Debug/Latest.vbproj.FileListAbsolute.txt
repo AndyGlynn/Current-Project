@@ -528,3 +528,4 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Inte
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\AxInterop.MapPoint.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\AxInterop.MapPoint.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.SetAppt_V2.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmBlastMail.resources
