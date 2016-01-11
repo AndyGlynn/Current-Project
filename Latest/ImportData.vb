@@ -1349,7 +1349,8 @@ Public Class ImportData
     End Function
     Public Sub VerifyAddress(ByVal obj As ImportData_V2.sqlOperations.Record_And_Address, ByVal DevOrPro As Boolean)
         Try
-            oApp = STATIC_VARIABLES.oApp
+            'oApp = STATIC_VARIABLES.oApp
+            Dim oApp = CreateObject("Mappoint.Application")
             Dim oMap As MapPoint.Map = oApp.ActiveMap
             oApp.Visible = False
             oMap.Saved = True

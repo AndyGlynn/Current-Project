@@ -474,7 +474,8 @@ Public Class Edit_Verify_Address
             End If
 
 
-            oApp = STATIC_VARIABLES.oApp
+            'oApp = STATIC_VARIABLES.oApp
+            oApp = CreateObject("Mappoint.Application")
             oMap = oApp.ActiveMap
             oResults = oMap.FindAddressResults(StAddress, City, , State, Zip, MapPoint.GeoCountry.geoCountryUnitedStates)
             Dim c

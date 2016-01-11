@@ -22,6 +22,7 @@ Partial Class frmMappoint
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMappoint))
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -88,19 +89,21 @@ Partial Class frmMappoint
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.AxMappointControl1 = New AxMapPoint.AxMappointControl()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        CType(Me.AxMappointControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Splitter1
         '
         Me.Splitter1.Location = New System.Drawing.Point(0, 0)
         Me.Splitter1.Name = "Splitter1"
-        Me.Splitter1.Size = New System.Drawing.Size(3, 420)
+        Me.Splitter1.Size = New System.Drawing.Size(3, 702)
         Me.Splitter1.TabIndex = 0
         Me.Splitter1.TabStop = False
         '
@@ -113,7 +116,7 @@ Partial Class frmMappoint
         Me.TabControl1.Location = New System.Drawing.Point(12, 30)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(375, 380)
+        Me.TabControl1.Size = New System.Drawing.Size(417, 386)
         Me.TabControl1.TabIndex = 11
         '
         'TabPage1
@@ -133,7 +136,7 @@ Partial Class frmMappoint
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(367, 354)
+        Me.TabPage1.Size = New System.Drawing.Size(409, 360)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Single Address Lookup"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -263,7 +266,7 @@ Partial Class frmMappoint
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(367, 354)
+        Me.TabPage2.Size = New System.Drawing.Size(409, 360)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Point To Point Directions"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -460,7 +463,7 @@ Partial Class frmMappoint
         Me.TabPage3.Controls.Add(Me.Label15)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(367, 354)
+        Me.TabPage3.Size = New System.Drawing.Size(409, 360)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Plot Sales Results"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -593,7 +596,7 @@ Partial Class frmMappoint
         Me.TabPage4.Controls.Add(Me.Label9)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(367, 354)
+        Me.TabPage4.Size = New System.Drawing.Size(409, 360)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Distances"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -714,11 +717,21 @@ Partial Class frmMappoint
         Me.Label9.TabIndex = 0
         Me.Label9.Text = "Distance Between Cities :"
         '
+        'AxMappointControl1
+        '
+        Me.AxMappointControl1.Enabled = True
+        Me.AxMappointControl1.Location = New System.Drawing.Point(435, 30)
+        Me.AxMappointControl1.Name = "AxMappointControl1"
+        Me.AxMappointControl1.OcxState = CType(resources.GetObject("AxMappointControl1.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.AxMappointControl1.Size = New System.Drawing.Size(714, 660)
+        Me.AxMappointControl1.TabIndex = 12
+        '
         'frmMappoint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(397, 420)
+        Me.ClientSize = New System.Drawing.Size(1161, 702)
+        Me.Controls.Add(Me.AxMappointControl1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Splitter1)
         Me.Name = "frmMappoint"
@@ -736,6 +749,7 @@ Partial Class frmMappoint
         Me.GroupBox1.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
+        CType(Me.AxMappointControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -805,4 +819,5 @@ Partial Class frmMappoint
     Friend WithEvents cboPointAState As System.Windows.Forms.ComboBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
     Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents AxMappointControl1 As AxMapPoint.AxMappointControl
 End Class

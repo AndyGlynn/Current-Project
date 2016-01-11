@@ -5,7 +5,7 @@ Imports System.Net.Sockets
 Module STATIC_VARIABLES
     Public Const ProgramName As String = "Improveit! 360"
     Public SMN As New Collection
-    Public oApp As New MapPoint.Application
+    'Public oApp As New MapPoint.Application
     ' Public CurrentUser As String = ""
     Public CurrentManager As String = ""
     Public Cnn As String = "Data Source=192.168.1.2;Initial Catalog=iss;User Id=sa;Password=spoken1;"

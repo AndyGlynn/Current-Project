@@ -14,6 +14,7 @@ Public Class MAPPOINT_LOGIC
     Implements IDisposable
     '' mappoint variables
     'Public oApp As MapPoint.Application = New MapPoint.Application
+    Public oApp As MapPoint.Application = CreateObject("Mappoint.Application")
     Public oMap As MapPoint.Map = oApp.ActiveMap
     Public oResults As MapPoint.FindResults
     Public Mappoint_Dataset As MapPoint.DataSet

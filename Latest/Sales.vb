@@ -4692,27 +4692,36 @@ Public Class Sales
 
 
     Private Sub btnSetAppt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetAppt.Click
-        If Me.ID = "" Then
-            MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
-        SetAppt.ID = Me.ID
-        SetAppt.frm = Me
+        '' 1-10-2015 Testing Purposes
+        '' 
+        'If Me.ID = "" Then
+        '    MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
+        '    Exit Sub
+        'End If
+        'SetAppt.ID = Me.ID
+        'SetAppt.MdiParent = Main
+        'SetAppt.frm = Me
 
-        SetAppt.OrigApptDate = Me.txtApptDate.Text
-        SetAppt.OrigApptTime = Me.txtApptTime.Text
-        Dim s = Split(Me.txtContact1.Text, " ")
-        Dim s2 = Split(Me.txtContact2.Text, " ")
-        SetAppt.Contact1 = s(0)
-        SetAppt.Contact2 = s2(0)
-        If STATIC_VARIABLES.salesworkaround = True Then
-            STATIC_VARIABLES.salesworkaround = False
-            SetAppt.ShowDialog()
-            Me.btnSetAppt_Click(sender, e)
-        Else
-            SetAppt.ShowDialog()
-        End If
+        'SetAppt.OrigApptDate = Me.txtApptDate.Text
+        'SetAppt.OrigApptTime = Me.txtApptTime.Text
+        'Dim s = Split(Me.txtContact1.Text, " ")
+        'Dim s2 = Split(Me.txtContact2.Text, " ")
+        'SetAppt.Contact1 = s(0)
+        'SetAppt.Contact2 = s2(0)
+        'If STATIC_VARIABLES.salesworkaround = True Then
+        '    STATIC_VARIABLES.salesworkaround = False
 
+        '    Me.btnSetAppt_Click(sender, e)
+        '    SetAppt.Show()
+        'Else
+        '    Me.btnSetAppt_Click(sender, e)
+        '    SetAppt.Show()
+        'End If
+
+        SetAppt_V2.MdiParent = Main
+        SetAppt_V2.ID = Me.ID
+        SetAppt_V2.CallingForm = "Sales"
+        SetAppt_V2.Show()
 
     End Sub
 

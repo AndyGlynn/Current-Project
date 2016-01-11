@@ -431,6 +431,7 @@
     </Compile>
     <Compile Include="mappointBulkScrub.vb" />
     <Compile Include="MAPPOINT_LOGIC_V2.vb" />
+    <Compile Include="MAPPOINT_LOGIC_V3.vb" />
     <Compile Include="MarketingLeadSources.Designer.vb">
       <DependentUpon>MarketingLeadSources.vb</DependentUpon>
     </Compile>
@@ -525,6 +526,12 @@
       <DependentUpon>SecondSource.vb</DependentUpon>
     </Compile>
     <Compile Include="SecondSource.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetAppt_V2.Designer.vb">
+      <DependentUpon>SetAppt_V2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SetAppt_V2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SetUpUser.Designer.vb">
@@ -967,6 +974,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>SecondSource.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SetAppt_V2.resx">
+      <DependentUpon>SetAppt_V2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SetUpUser.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SetUpUser.vb</DependentUpon>
@@ -1062,6 +1072,14 @@
     <None Include="Resources\%24this.Icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="AxMapPoint">
+      <Guid>{51C0A9CA-F7B7-4F5A-96F4-43927C6FA50F}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="IWshRuntimeLibrary">
       <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -1071,9 +1089,9 @@
       <Isolated>False</Isolated>
     </COMReference>
     <COMReference Include="MapPoint">
-      <Guid>{31851F80-AFE6-11D2-A3C9-00C04F72F340}</Guid>
-      <VersionMajor>8</VersionMajor>
-      <VersionMinor>3</VersionMinor>
+      <Guid>{51C0A9CA-F7B7-4F5A-96F4-43927C6FA50F}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
