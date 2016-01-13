@@ -1072,4 +1072,16 @@ Public Class WCaller
 
   
 
+    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
+        frmLinkSendEmail.Cust_Email = Me.lnkEmail.Text
+        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
+        frmLinkSendEmail.Show()
+        frmLinkSendEmail.BringToFront()
+    End Sub
+
+    Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
+        frmEditSpecialInstructions.RecID = ID
+        frmEditSpecialInstructions.CallingForm = "WCaller"
+        frmEditSpecialInstructions.Show()
+    End Sub
 End Class

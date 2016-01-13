@@ -365,8 +365,10 @@ Public Class EditCustomerInfo
                     eCnt += 1
                 End If
                 If Me.txtContact2.Text <> "" And Me.cboC2WorkHours.Text = "" Then
-                    ep.SetError(Me.cboC2WorkHours, "Required Field")
-                    eCnt += 1
+                    If Len(Me.txtContact2.Text) > 1 And Me.cboC2WorkHours.Text <> " " Then
+                        ep.SetError(Me.cboC2WorkHours, "Required Field")
+                        eCnt += 1
+                    End If
                 End If
                 If Me.cboC1WorkHours.Text = "" Then
                     ep.SetError(Me.cboC1WorkHours, "Required Field")

@@ -19,20 +19,14 @@ Partial Class Recovery
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.pnlCustomerHistory = New System.Windows.Forms.Panel
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
-        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox
-        Me.pnlCustomerHistory.SuspendLayout()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
+        Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblRecID = New System.Windows.Forms.Label()
         Me.ToolStrip1.SuspendLayout()
+        Me.pnlCustomerHistory.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'pnlCustomerHistory
-        '
-        Me.pnlCustomerHistory.Controls.Add(Me.ToolStrip1)
-        Me.pnlCustomerHistory.Location = New System.Drawing.Point(46, 86)
-        Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(200, 100)
-        Me.pnlCustomerHistory.TabIndex = 1
         '
         'ToolStrip1
         '
@@ -49,24 +43,54 @@ Partial Class Recovery
         Me.TScboCustomerHistory.Name = "TScboCustomerHistory"
         Me.TScboCustomerHistory.Size = New System.Drawing.Size(121, 25)
         '
+        'pnlCustomerHistory
+        '
+        Me.pnlCustomerHistory.Controls.Add(Me.ToolStrip1)
+        Me.pnlCustomerHistory.Location = New System.Drawing.Point(46, 86)
+        Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(200, 100)
+        Me.pnlCustomerHistory.TabIndex = 1
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(13, 25)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(85, 13)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "Current Record: "
+        '
+        'lblRecID
+        '
+        Me.lblRecID.AutoSize = True
+        Me.lblRecID.Location = New System.Drawing.Point(104, 25)
+        Me.lblRecID.Name = "lblRecID"
+        Me.lblRecID.Size = New System.Drawing.Size(10, 13)
+        Me.lblRecID.TabIndex = 3
+        Me.lblRecID.Text = " "
+        '
         'Recovery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(292, 273)
+        Me.Controls.Add(Me.lblRecID)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.pnlCustomerHistory)
         Me.Name = "Recovery"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Recovery"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.pnlCustomerHistory.ResumeLayout(False)
-        Me.pnlCustomerHistory.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        Me.pnlCustomerHistory.ResumeLayout(False)
+        Me.pnlCustomerHistory.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents pnlCustomerHistory As System.Windows.Forms.Panel
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents TScboCustomerHistory As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents pnlCustomerHistory As System.Windows.Forms.Panel
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lblRecID As System.Windows.Forms.Label
 End Class

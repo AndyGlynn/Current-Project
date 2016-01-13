@@ -54,7 +54,8 @@ Public Class ConfirmingData
 
         ElseIf Tab = "Dispatch" Then
             cmdGet = New SqlCommand("dbo.ConfirmingDispatch", cnnS)
-
+        Else
+            cmdGet = New SqlCommand("dbo.Confirming", cnnC)
         End If
         Dim r1 As SqlDataReader
         Dim param1 As SqlParameter = New SqlParameter("@PLS", PLS)
@@ -537,8 +538,24 @@ Public Class ConfirmingData
                 Confirming.txtProducts.Text = r1.Item(21) & vbCrLf & r1.Item(22) & vbCrLf & r1.Item(23)
                 Confirming.txtColor.Text = r1.Item(24)
                 Confirming.txtQty.Text = r1.Item(25)
-                Confirming.txtYrBuilt.Text = r1.Item(27)
-                Confirming.txtYrsOwned.Text = r1.Item(26)
+
+
+                '' vars for auto calcs
+                '' 1-13-2015 AC
+                Dim curYear As Integer = Date.Today.Year
+                Dim builtYear As Integer = CType(r1.Item(27), Integer)
+                Dim AgeOfHome As Integer = (curYear - builtYear)
+                Confirming.txtYrBuilt.Text = AgeOfHome.ToString
+
+                Dim yrPur As Integer = CType(r1.Item(26), Integer)
+                Dim YrsOwned As Integer = (curYear - yrPur)
+                Confirming.txtYrsOwned.Text = YrsOwned.ToString
+                ''
+
+                'Confirming.txtYrBuilt.Text = r1.Item(27)
+                'Confirming.txtYrsOwned.Text = r1.Item(26)
+
+
                 Confirming.txtHomeValue.Text = r1.Item(28)
                 Confirming.rtbSpecialInstructions.Text = r1.Item(32)
             End While

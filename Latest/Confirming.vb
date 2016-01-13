@@ -1156,7 +1156,10 @@ Public Class Confirming
         CNGApptTime.ShowDialog()
     End Sub
     Private Sub lnkEmail_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkEmail.Click
-        System.Diagnostics.Process.Start("outlook.exe")
+        frmLinkSendEmail.Cust_Email = Me.lnkEmail.Text
+        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
+        frmLinkSendEmail.Show()
+        frmLinkSendEmail.BringToFront()
     End Sub
 
     Private Sub EditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EditCustomer.Click
@@ -1532,6 +1535,12 @@ Public Class Confirming
         frmBlastMail.RecID = STATIC_VARIABLES.CurrentID
         frmBlastMail.Show()
         frmBlastMail.BringToFront()
+    End Sub
+
+    Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
+        frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
+        frmEditSpecialInstructions.CallingForm = "Confirming"
+        frmEditSpecialInstructions.Show()
     End Sub
 End Class
 

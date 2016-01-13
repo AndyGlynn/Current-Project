@@ -22,77 +22,86 @@ Partial Class ConfirmingSingleRecord
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConfirmingSingleRecord))
-        Me.gbSpecialInstructions = New System.Windows.Forms.GroupBox
-        Me.rtbSpecialInstructions = New System.Windows.Forms.RichTextBox
-        Me.gbProductInfo = New System.Windows.Forms.GroupBox
-        Me.Button3 = New System.Windows.Forms.Button
-        Me.txtProducts = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.lblQty = New System.Windows.Forms.Label
-        Me.ComboBox5 = New System.Windows.Forms.ComboBox
-        Me.txtColor = New System.Windows.Forms.TextBox
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.lblColor = New System.Windows.Forms.Label
-        Me.ComboBox6 = New System.Windows.Forms.ComboBox
-        Me.txtQty = New System.Windows.Forms.TextBox
-        Me.lblProducts = New System.Windows.Forms.Label
-        Me.gbApptInfo = New System.Windows.Forms.GroupBox
-        Me.txtApptDate = New System.Windows.Forms.TextBox
-        Me.txtApptTime = New System.Windows.Forms.TextBox
-        Me.Label22 = New System.Windows.Forms.Label
-        Me.lblApptDate = New System.Windows.Forms.Label
-        Me.lblApptDay = New System.Windows.Forms.Label
-        Me.txtApptDay = New System.Windows.Forms.TextBox
-        Me.gbHomeInfo = New System.Windows.Forms.GroupBox
-        Me.txtHomeValue = New System.Windows.Forms.TextBox
-        Me.txtYrsOwned = New System.Windows.Forms.TextBox
-        Me.lblYrBuilt = New System.Windows.Forms.Label
-        Me.lblYrsOwned = New System.Windows.Forms.Label
-        Me.lblHomeValue = New System.Windows.Forms.Label
-        Me.txtYrBuilt = New System.Windows.Forms.TextBox
-        Me.gbContactInfo = New System.Windows.Forms.GroupBox
-        Me.txtHousePhone = New System.Windows.Forms.TextBox
-        Me.txtaltphone2 = New System.Windows.Forms.TextBox
-        Me.txtaltphone1 = New System.Windows.Forms.TextBox
-        Me.lnkEmail = New System.Windows.Forms.LinkLabel
-        Me.lblEmail = New System.Windows.Forms.Label
-        Me.txtWorkHours = New System.Windows.Forms.TextBox
-        Me.txtAlt1Type = New System.Windows.Forms.TextBox
-        Me.txtAlt2Type = New System.Windows.Forms.TextBox
-        Me.lblAltPhone2 = New System.Windows.Forms.Label
-        Me.lblAltPhone1 = New System.Windows.Forms.Label
-        Me.pctVerified = New System.Windows.Forms.PictureBox
-        Me.lblHousePhone = New System.Windows.Forms.Label
-        Me.lblWorkHours = New System.Windows.Forms.Label
-        Me.txtAddress = New System.Windows.Forms.TextBox
-        Me.lblAddress = New System.Windows.Forms.Label
-        Me.txtContact2 = New System.Windows.Forms.TextBox
-        Me.txtContact1 = New System.Windows.Forms.TextBox
-        Me.lblContact2 = New System.Windows.Forms.Label
-        Me.lblContact1 = New System.Windows.Forms.Label
-        Me.ListView4 = New System.Windows.Forms.ListView
-        Me.tsConfirming = New System.Windows.Forms.ToolStrip
-        Me.btnSetAppt = New System.Windows.Forms.ToolStripButton
-        Me.btnEditCustomer = New System.Windows.Forms.ToolStripButton
-        Me.btnChangeStatus = New System.Windows.Forms.ToolStripDropDownButton
-        Me.btnKill = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator
-        Me.btnDoNotCall = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnDoNotMail = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnDoNotCallOrMail = New System.Windows.Forms.ToolStripMenuItem
-        Me.tsCustomerLog = New System.Windows.Forms.ToolStrip
-        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel
-        Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton
-        Me.calledcancelled = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel
+        Me.gbSpecialInstructions = New System.Windows.Forms.GroupBox()
+        Me.rtbSpecialInstructions = New System.Windows.Forms.RichTextBox()
+        Me.gbProductInfo = New System.Windows.Forms.GroupBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.txtProducts = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblQty = New System.Windows.Forms.Label()
+        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
+        Me.txtColor = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblColor = New System.Windows.Forms.Label()
+        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
+        Me.txtQty = New System.Windows.Forms.TextBox()
+        Me.lblProducts = New System.Windows.Forms.Label()
+        Me.gbApptInfo = New System.Windows.Forms.GroupBox()
+        Me.txtApptDate = New System.Windows.Forms.TextBox()
+        Me.txtApptTime = New System.Windows.Forms.TextBox()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.lblApptDate = New System.Windows.Forms.Label()
+        Me.lblApptDay = New System.Windows.Forms.Label()
+        Me.txtApptDay = New System.Windows.Forms.TextBox()
+        Me.gbHomeInfo = New System.Windows.Forms.GroupBox()
+        Me.txtHomeValue = New System.Windows.Forms.TextBox()
+        Me.txtYrsOwned = New System.Windows.Forms.TextBox()
+        Me.lblYrBuilt = New System.Windows.Forms.Label()
+        Me.lblYrsOwned = New System.Windows.Forms.Label()
+        Me.lblHomeValue = New System.Windows.Forms.Label()
+        Me.txtYrBuilt = New System.Windows.Forms.TextBox()
+        Me.gbContactInfo = New System.Windows.Forms.GroupBox()
+        Me.txtHousePhone = New System.Windows.Forms.TextBox()
+        Me.txtaltphone2 = New System.Windows.Forms.TextBox()
+        Me.txtaltphone1 = New System.Windows.Forms.TextBox()
+        Me.lnkEmail = New System.Windows.Forms.LinkLabel()
+        Me.lblEmail = New System.Windows.Forms.Label()
+        Me.txtWorkHours = New System.Windows.Forms.TextBox()
+        Me.txtAlt1Type = New System.Windows.Forms.TextBox()
+        Me.txtAlt2Type = New System.Windows.Forms.TextBox()
+        Me.lblAltPhone2 = New System.Windows.Forms.Label()
+        Me.lblAltPhone1 = New System.Windows.Forms.Label()
+        Me.pctVerified = New System.Windows.Forms.PictureBox()
+        Me.lblHousePhone = New System.Windows.Forms.Label()
+        Me.lblWorkHours = New System.Windows.Forms.Label()
+        Me.txtAddress = New System.Windows.Forms.TextBox()
+        Me.lblAddress = New System.Windows.Forms.Label()
+        Me.txtContact2 = New System.Windows.Forms.TextBox()
+        Me.txtContact1 = New System.Windows.Forms.TextBox()
+        Me.lblContact2 = New System.Windows.Forms.Label()
+        Me.lblContact1 = New System.Windows.Forms.Label()
+        Me.ListView4 = New System.Windows.Forms.ListView()
+        Me.tsConfirming = New System.Windows.Forms.ToolStrip()
+        Me.btnSetAppt = New System.Windows.Forms.ToolStripButton()
+        Me.btnEditCustomer = New System.Windows.Forms.ToolStripButton()
+        Me.btnChangeStatus = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.btnKill = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnDoNotCall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnDoNotMail = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnDoNotCallOrMail = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsCustomerLog = New System.Windows.Forms.ToolStrip()
+        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton()
+        Me.calledcancelled = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.ilCustomerHistory = New System.Windows.Forms.ImageList(Me.components)
         Me.ttCustomerHistoryNotes = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttconfirming = New System.Windows.Forms.ToolTip(Me.components)
         Me.ilToolStripIcons = New System.Windows.Forms.ImageList(Me.components)
-        Me.pnlCustomerHistory = New System.Windows.Forms.Panel
+        Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
+        Me.tsDDDepartments = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.FinancingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConfirmingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InstallationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RecoveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WarmCallingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MarketingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColdCallingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.gbSpecialInstructions.SuspendLayout()
         Me.gbProductInfo.SuspendLayout()
         Me.gbApptInfo.SuspendLayout()
@@ -119,7 +128,7 @@ Partial Class ConfirmingSingleRecord
         'rtbSpecialInstructions
         '
         Me.rtbSpecialInstructions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rtbSpecialInstructions.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.rtbSpecialInstructions.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(8, 22)
@@ -127,7 +136,7 @@ Partial Class ConfirmingSingleRecord
         Me.rtbSpecialInstructions.Size = New System.Drawing.Size(292, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
         Me.rtbSpecialInstructions.Text = "The customer only wants a rough frame in the basement and they are interested in " & _
-            "upper grids in the windows"
+    "upper grids in the windows"
         '
         'gbProductInfo
         '
@@ -736,7 +745,7 @@ Partial Class ConfirmingSingleRecord
         'ListView4
         '
         Me.ListView4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ListView4.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListView4.FullRowSelect = True
         Me.ListView4.GridLines = True
@@ -753,7 +762,7 @@ Partial Class ConfirmingSingleRecord
         'tsConfirming
         '
         Me.tsConfirming.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.tsConfirming.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSetAppt, Me.btnEditCustomer, Me.btnChangeStatus})
+        Me.tsConfirming.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSetAppt, Me.btnEditCustomer, Me.btnChangeStatus, Me.tsDDDepartments})
         Me.tsConfirming.Location = New System.Drawing.Point(0, 0)
         Me.tsConfirming.Name = "tsConfirming"
         Me.tsConfirming.Size = New System.Drawing.Size(783, 25)
@@ -922,6 +931,64 @@ Partial Class ConfirmingSingleRecord
         Me.pnlCustomerHistory.Size = New System.Drawing.Size(753, 197)
         Me.pnlCustomerHistory.TabIndex = 193
         '
+        'tsDDDepartments
+        '
+        Me.tsDDDepartments.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tsDDDepartments.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FinancingToolStripMenuItem, Me.ConfirmingToolStripMenuItem, Me.InstallationToolStripMenuItem, Me.SalesToolStripMenuItem, Me.RecoveryToolStripMenuItem, Me.WarmCallingToolStripMenuItem, Me.MarketingToolStripMenuItem, Me.ColdCallingToolStripMenuItem})
+        Me.tsDDDepartments.Image = CType(resources.GetObject("tsDDDepartments.Image"), System.Drawing.Image)
+        Me.tsDDDepartments.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsDDDepartments.Name = "tsDDDepartments"
+        Me.tsDDDepartments.Size = New System.Drawing.Size(101, 22)
+        Me.tsDDDepartments.Text = "View Lead In. . ."
+        '
+        'FinancingToolStripMenuItem
+        '
+        Me.FinancingToolStripMenuItem.Name = "FinancingToolStripMenuItem"
+        Me.FinancingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FinancingToolStripMenuItem.Text = "Financing"
+        '
+        'ConfirmingToolStripMenuItem
+        '
+        Me.ConfirmingToolStripMenuItem.Name = "ConfirmingToolStripMenuItem"
+        Me.ConfirmingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ConfirmingToolStripMenuItem.Text = "Confirming"
+        '
+        'InstallationToolStripMenuItem
+        '
+        Me.InstallationToolStripMenuItem.Name = "InstallationToolStripMenuItem"
+        Me.InstallationToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.InstallationToolStripMenuItem.Text = "Installation"
+        '
+        'SalesToolStripMenuItem
+        '
+        Me.SalesToolStripMenuItem.Name = "SalesToolStripMenuItem"
+        Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SalesToolStripMenuItem.Text = "Sales"
+        '
+        'RecoveryToolStripMenuItem
+        '
+        Me.RecoveryToolStripMenuItem.Name = "RecoveryToolStripMenuItem"
+        Me.RecoveryToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RecoveryToolStripMenuItem.Text = "Recovery"
+        '
+        'WarmCallingToolStripMenuItem
+        '
+        Me.WarmCallingToolStripMenuItem.Name = "WarmCallingToolStripMenuItem"
+        Me.WarmCallingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.WarmCallingToolStripMenuItem.Text = "Warm Calling"
+        '
+        'MarketingToolStripMenuItem
+        '
+        Me.MarketingToolStripMenuItem.Name = "MarketingToolStripMenuItem"
+        Me.MarketingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MarketingToolStripMenuItem.Text = "Marketing"
+        '
+        'ColdCallingToolStripMenuItem
+        '
+        Me.ColdCallingToolStripMenuItem.Name = "ColdCallingToolStripMenuItem"
+        Me.ColdCallingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ColdCallingToolStripMenuItem.Text = "Cold Calling"
+        '
         'ConfirmingSingleRecord
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1032,4 +1099,13 @@ Partial Class ConfirmingSingleRecord
     Friend WithEvents btnDoNotCallOrMail As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents pnlCustomerHistory As System.Windows.Forms.Panel
     Friend WithEvents TScboCustomerHistory As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents tsDDDepartments As System.Windows.Forms.ToolStripDropDownButton
+    Friend WithEvents FinancingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConfirmingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents InstallationToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SalesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RecoveryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WarmCallingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MarketingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ColdCallingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

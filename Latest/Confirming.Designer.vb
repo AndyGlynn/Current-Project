@@ -79,6 +79,7 @@ Partial Class Confirming
         Me.calledcancelled = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.gbSpecialInstructions = New System.Windows.Forms.GroupBox()
+        Me.btnEditSPI = New System.Windows.Forms.Button()
         Me.rtbSpecialInstructions = New System.Windows.Forms.RichTextBox()
         Me.gbProductInfo = New System.Windows.Forms.GroupBox()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -673,6 +674,7 @@ Partial Class Confirming
         Me.gbSpecialInstructions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gbSpecialInstructions.BackColor = System.Drawing.Color.White
+        Me.gbSpecialInstructions.Controls.Add(Me.btnEditSPI)
         Me.gbSpecialInstructions.Controls.Add(Me.rtbSpecialInstructions)
         Me.gbSpecialInstructions.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
@@ -682,6 +684,15 @@ Partial Class Confirming
         Me.gbSpecialInstructions.TabIndex = 185
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions: Open for Edit"
+        '
+        'btnEditSPI
+        '
+        Me.btnEditSPI.Location = New System.Drawing.Point(251, 115)
+        Me.btnEditSPI.Name = "btnEditSPI"
+        Me.btnEditSPI.Size = New System.Drawing.Size(53, 23)
+        Me.btnEditSPI.TabIndex = 147
+        Me.btnEditSPI.Text = "Edit"
+        Me.btnEditSPI.UseVisualStyleBackColor = True
         '
         'rtbSpecialInstructions
         '
@@ -1516,5 +1527,6 @@ Partial Class Confirming
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents lblConfirmingFiltered As System.Windows.Forms.Label
+    Friend WithEvents btnEditSPI As System.Windows.Forms.Button
 
 End Class

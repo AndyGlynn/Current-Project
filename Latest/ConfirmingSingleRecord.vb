@@ -339,4 +339,103 @@ Me.Manage_Buttons()
         Form2.Show()
 
     End Sub
+
+    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
+        frmLinkSendEmail.Cust_Email = Me.lnkEmail.Text
+        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
+        frmLinkSendEmail.Show()
+        frmLinkSendEmail.BringToFront()
+    End Sub
+
+    Private Sub FinancingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FinancingToolStripMenuItem.Click
+        FinancingDepartment.RecID = Me.ID
+        FinancingDepartment.Show()
+        FinancingDepartment.BringToFront()
+    End Sub
+
+    Private Sub ConfirmingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfirmingToolStripMenuItem.Click
+        STATIC_VARIABLES.CurrentID = Me.ID
+        Dim y As convertLeadToStruct.EnterLead_Record
+        Dim z As New convertLeadToStruct
+        y = z.ConvertToStructure(Me.ID, False)
+        Dim dt As Date = CType(y.ApptDate, Date)
+        y = Nothing
+        Confirming.MdiParent = Main
+        Confirming.Show()
+        Confirming.BringToFront()
+        Confirming.dpConfirming.Value = dt
+        MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
+    End Sub
+
+    Private Sub InstallationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InstallationToolStripMenuItem.Click
+
+        STATIC_VARIABLES.CurrentID = Me.ID
+        Installation.RecID = STATIC_VARIABLES.CurrentID
+        Installation.MdiParent = Main
+        Installation.Show()
+        Installation.BringToFront()
+
+    End Sub
+
+    Private Sub SalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesToolStripMenuItem.Click
+        STATIC_VARIABLES.CurrentID = Me.ID
+        Sales.ID = STATIC_VARIABLES.CurrentID
+        Sales.MdiParent = Main
+        Sales.Show()
+        Sales.BringToFront()
+        Dim y As convertLeadToStruct.EnterLead_Record
+        Dim z As New convertLeadToStruct
+        y = z.ConvertToStructure(Me.ID, False)
+        Dim dt As Date = CType(y.ApptDate, Date)
+        y = Nothing
+        Sales.dtp1CustomerList.Value = dt
+        Sales.dtp2CustomerList.Value = dt
+        Sales.tbMain.SelectedIndex = 1
+        MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
+
+    End Sub
+
+    Private Sub RecoveryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecoveryToolStripMenuItem.Click
+        STATIC_VARIABLES.CurrentID = Me.ID
+        Recovery.RecID = STATIC_VARIABLES.CurrentID
+        Recovery.MdiParent = Main
+        Recovery.Show()
+        Recovery.BringToFront()
+    End Sub
+
+    Private Sub WarmCallingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WarmCallingToolStripMenuItem.Click
+        STATIC_VARIABLES.CurrentID = Me.ID
+        WCaller.ID = STATIC_VARIABLES.CurrentID
+        WCaller.MdiParent = Main
+        WCaller.Show()
+        WCaller.BringToFront()
+        MsgBox("Warm calling was opened from 'Find'. Some Of your date values / lists may be effected by this.", MsgBoxStyle.Information, "Opened From Find Lead")
+
+
+    End Sub
+
+    Private Sub MarketingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MarketingToolStripMenuItem.Click
+        STATIC_VARIABLES.CurrentID = Me.ID
+        MarketingManager.RecID = STATIC_VARIABLES.CurrentID
+        MarketingManager.MdiParent = Main
+        MarketingManager.Show()
+        MarketingManager.BringToFront()
+        Dim y As convertLeadToStruct.EnterLead_Record
+        Dim z As New convertLeadToStruct
+        y = z.ConvertToStructure(Me.ID, False)
+        Dim dt As Date = CType(y.ApptDate, Date)
+        y = Nothing
+        MarketingManager.tbMain.SelectedIndex = 1
+        MsgBox("This whole form needs to be built. Demonstration purposes only.", MsgBoxStyle.Information, "Whole Form")
+        'MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
+
+    End Sub
+
+    Private Sub ColdCallingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColdCallingToolStripMenuItem.Click
+        STATIC_VARIABLES.CurrentID = Me.ID
+        ColdCalling.recID = STATIC_VARIABLES.CurrentID
+        ColdCalling.MdiParent = Main
+        ColdCalling.Show()
+        ColdCalling.BringToFront()
+    End Sub
 End Class

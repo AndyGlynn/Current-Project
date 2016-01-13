@@ -582,8 +582,18 @@ Public Class EDIT_CUSTOMER_INFORMATION
             EditCustomerInfo.txtZip.Text = Me.Zip
 
 
+
+
+            '' 1-13-2015
+            '' AC
+            '' Need to NOT populate C2WorkHours with ' ' string.
+            '' 
             EditCustomerInfo.cboC1WorkHours.Text = Me.Contact1WorkHours
+
             EditCustomerInfo.cboC2WorkHours.Text = Me.Contact2WorkHours
+            ''
+            ''
+
             EditCustomerInfo.lnkEmail.Text = Me.EmailAddress
             EditCustomerInfo.txtYrBuilt.Text = Me.YearBuilt
             EditCustomerInfo.txtHomeValue.Text = Me.HomeValue
@@ -823,8 +833,53 @@ Public Class EDIT_CUSTOMER_INFORMATION
             Dim param28 As SqlParameter = New SqlParameter("@Color", Me.Product_Color)
             Dim param29 As SqlParameter = New SqlParameter("@SpecialInstruction", Me.Special_Instruction)
             Dim param30 As SqlParameter = New SqlParameter("@Marketer", Me.Marketer_)
+            '' 1-13-2015 AC
+            '' if pls has been changed=> add customer history log to show this
+            '' if sls has been changed=> add customer history log to show this
+
+            ''
+            '' steps: what was the PLS?
+            ''        is it different? If so, generate CH entry
+            ''        What was the sls?
+            ''        is it different? If so, generate CH entry 
+            ''
+            Dim Prev_ As New PreviousInfoForCallHistoryLogging(ID)
+            Dim pls As String = Prev_.Previous_PLSandSLS.PLS
+            Dim sls As String = Prev_.Previous_PLSandSLS.SLS
+            Prev_ = Nothing
+
+            If pls = Me.PriLS Then
+                '' do nothing
+            ElseIf pls <> Me.PriLS Then
+                '' make sure it isn't blank
+                If Len(Me.PriLS) > 0 Then
+                    If Me.PriLS <> " " Then
+                        '' log it here.
+                        '' dim y as new customer history......
+                        
+                        Dim zLog As New LogPLSChange(ID, pls, Me.PriLS, Date.Today)
+
+                    End If
+                End If
+            End If
+
+            If sls = Me.SecLS Then
+                '' do nothing
+            ElseIf sls <> Me.SecLS Then
+                '' make sure it isn't blank
+                If Len(Me.SecLS) > 0 Then
+                    If Me.SecLS <> " " Then
+                        '' log it here.
+                        '' dim y as new customer history......
+                        Dim zLog As New LogSLSChange(ID, sls, Me.SecLS, Date.Today)
+                    End If
+                End If
+            End If
+
             Dim param31 As SqlParameter = New SqlParameter("@PS", Me.PriLS)
             Dim param32 As SqlParameter = New SqlParameter("@SS", Me.SecLS)
+            ''
+
             Dim param33 As SqlParameter = New SqlParameter("@MM", Me.Manage)
 
 
@@ -1498,4 +1553,71 @@ Public Class EDIT_CUSTOMER_INFORMATION
         End Try
     End Sub
 
+
+    Private Class PreviousInfoForCallHistoryLogging
+        Public Structure PreviousResults
+            Public PLS As String
+            Public SLS As String
+        End Structure
+        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+        Private _PLSandSLS As PreviousResults
+        Public ReadOnly Property Previous_PLSandSLS As PreviousResults
+            Get
+                Return _PLSandSLS
+            End Get
+        End Property
+
+        Public Sub New(ByVal RecID As String)
+            _PLSandSLS = New PreviousResults
+            _PLSandSLS = What_Was_PreviousPLS(RecID)
+        End Sub
+
+        Private Function What_Was_PreviousPLS(ByVal RecID As String)
+            Dim cnx As New SqlConnection(pro_cnx)
+            cnx.Open()
+            Dim cmdGET As New SqlCommand("SELECT PrimaryLeadSource,SecondaryLeadSource FROM EnterLead WHERE ID='" & RecID & "';", cnx)
+            Dim a As New PreviousResults
+            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+            While r1.Read
+                a.PLS = r1.Item("PrimaryLeadSource")
+                a.SLS = r1.Item("SecondaryLeadSource")
+            End While
+            r1.Close()
+            cnx.Close()
+            cnx = Nothing
+            Return a
+        End Function
+    End Class
+    Private Class LogPLSChange
+        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+        Public Sub New(ByVal RecID As String, ByVal OldPLS As String, ByVal NewPLS As String, ByVal TriggerDate As Date)
+            UpdateLog(OldPLS, NewPLS, RecID, TriggerDate)
+        End Sub
+        Private Sub UpdateLog(ByVal OldPLS As String, ByVal NewPLS As String, ByVal RecID As String, ByVal TriggerDate As Date)
+            Dim cnx As New SqlConnection(pro_cnx)
+            cnx.Open()
+            Dim strReason As String = ""
+            strReason = "Primary Lead Source Was changed from: " & OldPLS & " to " & NewPLS & " by " & STATIC_VARIABLES.CurrentUser
+            Dim cmdINS As New SqlCommand("INSERT LeadHistory (LeadNum,TriggerDate,USRLoggedOn,PLS,Description,Notes,Department,Sub Department) values('" & RecID & "','" & TriggerDate & "','" & STATIC_VARIABLES.CurrentUser & "','" & NewPLS & "','" & strReason & "','" & strReason & "','System','System');", cnx)
+            cmdINS.ExecuteReader()
+            cnx.Close()
+            cnx = Nothing
+        End Sub
+    End Class
+    Private Class LogSLSChange
+        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+        Public Sub New(ByVal RecID As String, ByVal OldSLS As String, ByVal NewSLS As String, ByVal TriggerDate As Date)
+            UpdateLog(OldSLS, NewSLS, RecID, TriggerDate)
+        End Sub
+        Private Sub UpdateLog(ByVal OldSLS As String, ByVal NewSLS As String, ByVal RecID As String, ByVal TriggerDate As Date)
+            Dim cnx As New SqlConnection(pro_cnx)
+            cnx.Open()
+            Dim strReason As String = ""
+            strReason = "Secondary Lead Source Was changed from: " & OldSLS & " to " & NewSLS & " by " & STATIC_VARIABLES.CurrentUser
+            Dim cmdINS As New SqlCommand("INSERT LeadHistory (LeadNum,TriggerDate,USRLoggedOn,SLS,Description,Notes,Department,Sub Department) values('" & RecID & "','" & TriggerDate & "','" & STATIC_VARIABLES.CurrentUser & "','" & NewSLS & "','" & strReason & "','" & strReason & "','System','System');", cnx)
+            cmdINS.ExecuteReader()
+            cnx.Close()
+            cnx = Nothing
+        End Sub
+    End Class
 End Class

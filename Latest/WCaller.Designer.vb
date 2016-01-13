@@ -47,6 +47,8 @@ Partial Class WCaller
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.lblGroupBy = New System.Windows.Forms.Label()
+        Me.lblCntReturned = New System.Windows.Forms.Label()
+        Me.lblCnt = New System.Windows.Forms.Label()
         Me.cboGroupBy = New System.Windows.Forms.ComboBox()
         Me.btnExpandWarmCalling = New System.Windows.Forms.Button()
         Me.lblToChangeWarmCalling = New System.Windows.Forms.Label()
@@ -184,8 +186,7 @@ Partial Class WCaller
         Me.txtDate2 = New System.Windows.Forms.TextBox()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.lblCnt = New System.Windows.Forms.Label()
-        Me.lblCntReturned = New System.Windows.Forms.Label()
+        Me.btnEditSPI = New System.Windows.Forms.Button()
         Me.tsWarmCalling.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -409,6 +410,28 @@ Partial Class WCaller
         Me.lblGroupBy.Size = New System.Drawing.Size(51, 13)
         Me.lblGroupBy.TabIndex = 86
         Me.lblGroupBy.Text = "Group By"
+        '
+        'lblCntReturned
+        '
+        Me.lblCntReturned.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.lblCntReturned.AutoSize = True
+        Me.lblCntReturned.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.lblCntReturned.Location = New System.Drawing.Point(132, 531)
+        Me.lblCntReturned.Name = "lblCntReturned"
+        Me.lblCntReturned.Size = New System.Drawing.Size(12, 16)
+        Me.lblCntReturned.TabIndex = 88
+        Me.lblCntReturned.Text = " "
+        '
+        'lblCnt
+        '
+        Me.lblCnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.lblCnt.AutoSize = True
+        Me.lblCnt.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.lblCnt.Location = New System.Drawing.Point(8, 530)
+        Me.lblCnt.Name = "lblCnt"
+        Me.lblCnt.Size = New System.Drawing.Size(70, 16)
+        Me.lblCnt.TabIndex = 87
+        Me.lblCnt.Text = "Records: "
         '
         'cboGroupBy
         '
@@ -1107,6 +1130,7 @@ Partial Class WCaller
         Me.gbSpecialInstructions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gbSpecialInstructions.BackColor = System.Drawing.Color.White
+        Me.gbSpecialInstructions.Controls.Add(Me.btnEditSPI)
         Me.gbSpecialInstructions.Controls.Add(Me.rtbSpecialInstructions)
         Me.gbSpecialInstructions.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
@@ -1978,27 +2002,14 @@ Partial Class WCaller
         '
         Me.Timer1.Interval = 150
         '
-        'lblCnt
+        'btnEditSPI
         '
-        Me.lblCnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.lblCnt.AutoSize = True
-        Me.lblCnt.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.lblCnt.Location = New System.Drawing.Point(8, 530)
-        Me.lblCnt.Name = "lblCnt"
-        Me.lblCnt.Size = New System.Drawing.Size(70, 16)
-        Me.lblCnt.TabIndex = 87
-        Me.lblCnt.Text = "Records: "
-        '
-        'lblCntReturned
-        '
-        Me.lblCntReturned.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.lblCntReturned.AutoSize = True
-        Me.lblCntReturned.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.lblCntReturned.Location = New System.Drawing.Point(132, 531)
-        Me.lblCntReturned.Name = "lblCntReturned"
-        Me.lblCntReturned.Size = New System.Drawing.Size(12, 16)
-        Me.lblCntReturned.TabIndex = 88
-        Me.lblCntReturned.Text = " "
+        Me.btnEditSPI.Location = New System.Drawing.Point(237, 116)
+        Me.btnEditSPI.Name = "btnEditSPI"
+        Me.btnEditSPI.Size = New System.Drawing.Size(51, 23)
+        Me.btnEditSPI.TabIndex = 147
+        Me.btnEditSPI.Text = "Edit"
+        Me.btnEditSPI.UseVisualStyleBackColor = True
         '
         'WCaller
         '
@@ -2215,4 +2226,5 @@ Partial Class WCaller
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents lblCntReturned As System.Windows.Forms.Label
     Friend WithEvents lblCnt As System.Windows.Forms.Label
+    Friend WithEvents btnEditSPI As System.Windows.Forms.Button
 End Class

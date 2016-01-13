@@ -52,7 +52,7 @@ Public Class CustomerHistory
         ElseIf frm.Name = "Finance" Then
             panel = Finance.pnlCustomerHistory
         ElseIf frm.Name = "Installation" Then
-            panel = Installation.pnlCustomerHistory
+            'panel = Installation.pnlCustomerHistory
         ElseIf frm.Name = "MarketingManager" Then
             panel = MarketingManager.pnlCustomerHistory
         ElseIf frm.Name = "PreviousCustomer" Then
@@ -390,11 +390,17 @@ Public Class CustomerHistory
     Me.panel.Select()
     End Sub
     Private Sub ResetToolTip(ByVal sender As Object, ByVal e As System.EventArgs)
-        If Me.ttNotes.Active = False Then
-            Me.ttNotes.Active = True
-        ElseIf Me.ttNotes.Active = True Then
-            Me.ttNotes.Active = False
-        End If
+        '' 1-12-2015
+        '' Tool Tips not behaving correctly.
+        '' 
+        'If Me.ttNotes.Active = False Then
+        '    Me.ttNotes.Active = True
+        'ElseIf Me.ttNotes.Active = True Then
+        '    'Me.ttNotes.Active = False
+        'End If
+
+
+
     End Sub
     Private Sub Rollover(ByVal sender As Object, ByVal e As System.EventArgs)
 

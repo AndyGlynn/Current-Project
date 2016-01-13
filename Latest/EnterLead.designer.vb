@@ -22,85 +22,85 @@ Partial Class EnterLead
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EnterLead))
-        Me.txtProdQTY = New System.Windows.Forms.MaskedTextBox
-        Me.cboProduct1 = New System.Windows.Forms.ComboBox
-        Me.txtZip = New System.Windows.Forms.MaskedTextBox
-        Me.Label58 = New System.Windows.Forms.Label
-        Me.Label59 = New System.Windows.Forms.Label
-        Me.txtProdColor = New System.Windows.Forms.TextBox
-        Me.txtAltPhone2 = New System.Windows.Forms.MaskedTextBox
-        Me.cboProduct3 = New System.Windows.Forms.ComboBox
-        Me.txtAltPhone1 = New System.Windows.Forms.MaskedTextBox
-        Me.txtHousePhone = New System.Windows.Forms.MaskedTextBox
-        Me.cboAltPhone2Type = New System.Windows.Forms.ComboBox
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox
-        Me.txtP3acro = New System.Windows.Forms.TextBox
-        Me.txtP2acro = New System.Windows.Forms.TextBox
-        Me.txtP1acro = New System.Windows.Forms.TextBox
-        Me.cboProduct2 = New System.Windows.Forms.ComboBox
-        Me.Label60 = New System.Windows.Forms.Label
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox
-        Me.txtCity = New System.Windows.Forms.TextBox
-        Me.txtEmail = New System.Windows.Forms.TextBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label46 = New System.Windows.Forms.Label
-        Me.cboAlt1Type = New System.Windows.Forms.ComboBox
-        Me.cboC2Work = New System.Windows.Forms.ComboBox
-        Me.Label47 = New System.Windows.Forms.Label
-        Me.Label48 = New System.Windows.Forms.Label
-        Me.cboSpokeWith = New System.Windows.Forms.ComboBox
-        Me.txtState = New System.Windows.Forms.TextBox
-        Me.Label49 = New System.Windows.Forms.Label
-        Me.cboC1Work = New System.Windows.Forms.ComboBox
-        Me.Label50 = New System.Windows.Forms.Label
-        Me.Label51 = New System.Windows.Forms.Label
-        Me.Label52 = New System.Windows.Forms.Label
-        Me.txtStAddy = New System.Windows.Forms.TextBox
-        Me.Label53 = New System.Windows.Forms.Label
-        Me.Label54 = New System.Windows.Forms.Label
-        Me.Label55 = New System.Windows.Forms.Label
-        Me.txtC2LName = New System.Windows.Forms.TextBox
-        Me.txtC2FName = New System.Windows.Forms.TextBox
-        Me.txtC1LName = New System.Windows.Forms.TextBox
-        Me.txtC1FName = New System.Windows.Forms.TextBox
-        Me.Label56 = New System.Windows.Forms.Label
-        Me.Label57 = New System.Windows.Forms.Label
-        Me.txtHomeVal = New System.Windows.Forms.MaskedTextBox
-        Me.txtAgeOfHome = New System.Windows.Forms.MaskedTextBox
-        Me.txtYearsOwned = New System.Windows.Forms.MaskedTextBox
-        Me.cboMarketer = New System.Windows.Forms.ComboBox
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.cboPriLead = New System.Windows.Forms.ComboBox
+        Me.txtProdQTY = New System.Windows.Forms.MaskedTextBox()
+        Me.cboProduct1 = New System.Windows.Forms.ComboBox()
+        Me.txtZip = New System.Windows.Forms.MaskedTextBox()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.txtProdColor = New System.Windows.Forms.TextBox()
+        Me.txtAltPhone2 = New System.Windows.Forms.MaskedTextBox()
+        Me.cboProduct3 = New System.Windows.Forms.ComboBox()
+        Me.txtAltPhone1 = New System.Windows.Forms.MaskedTextBox()
+        Me.txtHousePhone = New System.Windows.Forms.MaskedTextBox()
+        Me.cboAltPhone2Type = New System.Windows.Forms.ComboBox()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.txtP3acro = New System.Windows.Forms.TextBox()
+        Me.txtP2acro = New System.Windows.Forms.TextBox()
+        Me.txtP1acro = New System.Windows.Forms.TextBox()
+        Me.cboProduct2 = New System.Windows.Forms.ComboBox()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.txtCity = New System.Windows.Forms.TextBox()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.cboAlt1Type = New System.Windows.Forms.ComboBox()
+        Me.cboC2Work = New System.Windows.Forms.ComboBox()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.cboSpokeWith = New System.Windows.Forms.ComboBox()
+        Me.txtState = New System.Windows.Forms.TextBox()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.cboC1Work = New System.Windows.Forms.ComboBox()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.Label51 = New System.Windows.Forms.Label()
+        Me.Label52 = New System.Windows.Forms.Label()
+        Me.txtStAddy = New System.Windows.Forms.TextBox()
+        Me.Label53 = New System.Windows.Forms.Label()
+        Me.Label54 = New System.Windows.Forms.Label()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.txtC2LName = New System.Windows.Forms.TextBox()
+        Me.txtC2FName = New System.Windows.Forms.TextBox()
+        Me.txtC1LName = New System.Windows.Forms.TextBox()
+        Me.txtC1FName = New System.Windows.Forms.TextBox()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.Label57 = New System.Windows.Forms.Label()
+        Me.txtHomeVal = New System.Windows.Forms.MaskedTextBox()
+        Me.txtAgeOfHome = New System.Windows.Forms.MaskedTextBox()
+        Me.txtYearsOwned = New System.Windows.Forms.MaskedTextBox()
+        Me.cboMarketer = New System.Windows.Forms.ComboBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cboPriLead = New System.Windows.Forms.ComboBox()
         Me.epEnterLead = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox
-        Me.Label26 = New System.Windows.Forms.Label
-        Me.txtApptTime = New System.Windows.Forms.DateTimePicker
-        Me.Label25 = New System.Windows.Forms.Label
-        Me.Label23 = New System.Windows.Forms.Label
-        Me.dtpApptInfo = New System.Windows.Forms.DateTimePicker
-        Me.txtApptday = New System.Windows.Forms.TextBox
-        Me.Label63 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label68 = New System.Windows.Forms.Label
-        Me.rtfSpecialIns = New System.Windows.Forms.RichTextBox
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnSaveNew = New System.Windows.Forms.Button
-        Me.btnSaveClose = New System.Windows.Forms.Button
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.dtpLeadGen = New System.Windows.Forms.DateTimePicker
-        Me.Label41 = New System.Windows.Forms.Label
-        Me.Label69 = New System.Windows.Forms.Label
-        Me.Label70 = New System.Windows.Forms.Label
-        Me.Label42 = New System.Windows.Forms.Label
-        Me.Label43 = New System.Windows.Forms.Label
-        Me.cboSecLead = New System.Windows.Forms.ComboBox
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox
-        Me.txtMarketingManager = New System.Windows.Forms.TextBox
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.txtApptTime = New System.Windows.Forms.DateTimePicker()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.dtpApptInfo = New System.Windows.Forms.DateTimePicker()
+        Me.txtApptday = New System.Windows.Forms.TextBox()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.rtfSpecialIns = New System.Windows.Forms.RichTextBox()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSaveNew = New System.Windows.Forms.Button()
+        Me.btnSaveClose = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dtpLeadGen = New System.Windows.Forms.DateTimePicker()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.Label70 = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.cboSecLead = New System.Windows.Forms.ComboBox()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.txtMarketingManager = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         CType(Me.epEnterLead, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -415,7 +415,7 @@ Partial Class EnterLead
         Me.Label46.Location = New System.Drawing.Point(327, 175)
         Me.Label46.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(124, 13)
+        Me.Label46.Size = New System.Drawing.Size(123, 13)
         Me.Label46.TabIndex = 0
         Me.Label46.Text = "Contact 2 Work Hrs:"
         '
@@ -455,7 +455,7 @@ Partial Class EnterLead
         Me.Label47.Location = New System.Drawing.Point(327, 143)
         Me.Label47.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(124, 13)
+        Me.Label47.Size = New System.Drawing.Size(123, 13)
         Me.Label47.TabIndex = 0
         Me.Label47.Text = "Contact 1 Work Hrs:"
         '
@@ -690,7 +690,7 @@ Partial Class EnterLead
         Me.txtAgeOfHome.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAgeOfHome.Location = New System.Drawing.Point(121, 59)
         Me.txtAgeOfHome.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtAgeOfHome.Mask = "000"
+        Me.txtAgeOfHome.Mask = "0000"
         Me.txtAgeOfHome.Name = "txtAgeOfHome"
         Me.txtAgeOfHome.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtAgeOfHome.Size = New System.Drawing.Size(44, 21)
@@ -701,7 +701,7 @@ Partial Class EnterLead
         Me.txtYearsOwned.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYearsOwned.Location = New System.Drawing.Point(121, 24)
         Me.txtYearsOwned.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtYearsOwned.Mask = "000"
+        Me.txtYearsOwned.Mask = "0000"
         Me.txtYearsOwned.Name = "txtYearsOwned"
         Me.txtYearsOwned.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtYearsOwned.Size = New System.Drawing.Size(44, 21)
@@ -886,7 +886,7 @@ Partial Class EnterLead
         Me.Label68.Location = New System.Drawing.Point(8, 100)
         Me.Label68.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label68.Name = "Label68"
-        Me.Label68.Size = New System.Drawing.Size(81, 13)
+        Me.Label68.Size = New System.Drawing.Size(80, 13)
         Me.Label68.TabIndex = 0
         Me.Label68.Text = "Home Value:"
         '
@@ -980,9 +980,9 @@ Partial Class EnterLead
         Me.Label69.Location = New System.Drawing.Point(8, 63)
         Me.Label69.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label69.Name = "Label69"
-        Me.Label69.Size = New System.Drawing.Size(86, 13)
+        Me.Label69.Size = New System.Drawing.Size(96, 13)
         Me.Label69.TabIndex = 0
-        Me.Label69.Text = "Age of Home:"
+        Me.Label69.Text = "YearPurchased:"
         '
         'Label70
         '
@@ -992,9 +992,9 @@ Partial Class EnterLead
         Me.Label70.Location = New System.Drawing.Point(8, 26)
         Me.Label70.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label70.Name = "Label70"
-        Me.Label70.Size = New System.Drawing.Size(87, 13)
+        Me.Label70.Size = New System.Drawing.Size(72, 13)
         Me.Label70.TabIndex = 0
-        Me.Label70.Text = "Years Owned:"
+        Me.Label70.Text = "Years Built:"
         '
         'Label42
         '

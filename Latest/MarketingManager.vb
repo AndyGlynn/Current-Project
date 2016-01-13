@@ -1,5 +1,26 @@
 Public Class MarketingManager
 
+    Public RecID As String = ""
+
+    ''*****************************************************************
+    '' READ THIS !!!
+    ''*****************************************************************
+    '' When this gets built => 
+    '' '' vars for auto calcs
+    '' 1-13-2015 AC
+    'Dim curYear As Integer = Date.Today.Year
+    'Dim builtYear As Integer = CType(r1.Item(27), Integer)
+    'Dim AgeOfHome As Integer = (curYear - builtYear)
+    '            marketingmanager.txtYrBuilt.Text = AgeOfHome.ToString
+    'Dim yrPur As Integer = CType(r1.Item(26), Integer)
+    'Dim YrsOwned As Integer = (curYear - yrPur)
+    '            marketingmanager.txtYrsOwned.Text = YrsOwned.ToString
+    ' 
+    '******************************************************************
+
+
+
+
     Private Sub MarketingManager_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.MdiParent = Main
         Dim y As New ScheduledActions
@@ -91,5 +112,18 @@ Public Class MarketingManager
         frmCreateList.Show()
         frmCreateList.MdiParent = Main
 
+    End Sub
+
+    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
+        frmLinkSendEmail.Cust_Email = Me.lnkEmail.Text
+        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
+        frmLinkSendEmail.Show()
+        frmLinkSendEmail.BringToFront()
+    End Sub
+
+    Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
+        frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
+        frmEditSpecialInstructions.CallingForm = "MarketingManager"
+        frmEditSpecialInstructions.Show()
     End Sub
 End Class

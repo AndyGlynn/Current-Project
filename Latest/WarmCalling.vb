@@ -1847,8 +1847,21 @@ Public Class WarmCalling
                 WCaller.txtProducts.Text = r1.Item(21) & vbCrLf & r1.Item(22) & vbCrLf & r1.Item(23)
                 WCaller.txtColor.Text = r1.Item(24)
                 WCaller.txtQty.Text = r1.Item(25)
-                WCaller.txtYrBuilt.Text = r1.Item(27)
-                WCaller.txtYrsOwned.Text = r1.Item(26)
+
+
+                '' vars for auto calcs
+                '' 1-13-2015 AC
+                Dim curYear As Integer = Date.Today.Year
+                Dim builtYear As Integer = CType(r1.Item(27), Integer)
+                Dim AgeOfHome As Integer = (curYear - builtYear)
+                WCaller.txtYrBuilt.Text = AgeOfHome.ToString
+
+                Dim yrPur As Integer = CType(r1.Item(26), Integer)
+                Dim YrsOwned As Integer = (curYear - yrPur)
+                WCaller.txtYrsOwned.Text = YrsOwned.ToString
+                ''
+                'WCaller.txtYrBuilt.Text = r1.Item(27)
+                'WCaller.txtYrsOwned.Text = r1.Item(26)
                 WCaller.txtHomeValue.Text = r1.Item(28)
                 WCaller.rtbSpecialInstructions.Text = r1.Item(32)
             End While

@@ -20,43 +20,17 @@ Partial Class Installation
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Installation))
-        Me.pnlCustomerHistory = New System.Windows.Forms.Panel
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
-        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox
-        Me.tsInstallationDepartment = New System.Windows.Forms.ToolStrip
-        Me.ScheduledTasks = New System.Windows.Forms.ToolStripDropDownButton
-        Me.btnMarkTaskAsDone = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnEditScheduledTask = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnRemoveThisCompletedTask = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnRemoveAllScheduledTask = New System.Windows.Forms.ToolStripMenuItem
-        Me.pnlScheduledTasks = New System.Windows.Forms.Panel
-        Me.pnlCustomerHistory.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
+        Me.tsInstallationDepartment = New System.Windows.Forms.ToolStrip()
+        Me.ScheduledTasks = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.btnMarkTaskAsDone = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnEditScheduledTask = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRemoveThisCompletedTask = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRemoveAllScheduledTask = New System.Windows.Forms.ToolStripMenuItem()
+        Me.pnlScheduledTasks = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblRecID = New System.Windows.Forms.Label()
         Me.tsInstallationDepartment.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'pnlCustomerHistory
-        '
-        Me.pnlCustomerHistory.Controls.Add(Me.ToolStrip1)
-        Me.pnlCustomerHistory.Location = New System.Drawing.Point(46, 86)
-        Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(200, 100)
-        Me.pnlCustomerHistory.TabIndex = 1
-        '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TScboCustomerHistory})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(200, 25)
-        Me.ToolStrip1.TabIndex = 0
-        Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'TScboCustomerHistory
-        '
-        Me.TScboCustomerHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.TScboCustomerHistory.Name = "TScboCustomerHistory"
-        Me.TScboCustomerHistory.Size = New System.Drawing.Size(121, 25)
         '
         'tsInstallationDepartment
         '
@@ -104,8 +78,8 @@ Partial Class Installation
         'pnlScheduledTasks
         '
         Me.pnlScheduledTasks.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlScheduledTasks.AutoScroll = True
         Me.pnlScheduledTasks.BackColor = System.Drawing.Color.White
         Me.pnlScheduledTasks.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -114,31 +88,42 @@ Partial Class Installation
         Me.pnlScheduledTasks.Size = New System.Drawing.Size(628, 231)
         Me.pnlScheduledTasks.TabIndex = 251
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(42, 60)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(99, 13)
+        Me.Label1.TabIndex = 253
+        Me.Label1.Text = "Current Record ID: "
+        '
+        'lblRecID
+        '
+        Me.lblRecID.AutoSize = True
+        Me.lblRecID.Location = New System.Drawing.Point(179, 60)
+        Me.lblRecID.Name = "lblRecID"
+        Me.lblRecID.Size = New System.Drawing.Size(10, 13)
+        Me.lblRecID.TabIndex = 254
+        Me.lblRecID.Text = " "
+        '
         'Installation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(890, 492)
+        Me.Controls.Add(Me.lblRecID)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.tsInstallationDepartment)
         Me.Controls.Add(Me.pnlScheduledTasks)
-        Me.Controls.Add(Me.pnlCustomerHistory)
         Me.Name = "Installation"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Installation"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.pnlCustomerHistory.ResumeLayout(False)
-        Me.pnlCustomerHistory.PerformLayout()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
         Me.tsInstallationDepartment.ResumeLayout(False)
         Me.tsInstallationDepartment.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents pnlCustomerHistory As System.Windows.Forms.Panel
-    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents TScboCustomerHistory As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents tsInstallationDepartment As System.Windows.Forms.ToolStrip
     Friend WithEvents ScheduledTasks As System.Windows.Forms.ToolStripDropDownButton
     Friend WithEvents btnMarkTaskAsDone As System.Windows.Forms.ToolStripMenuItem
@@ -146,4 +131,6 @@ Partial Class Installation
     Friend WithEvents btnRemoveThisCompletedTask As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnRemoveAllScheduledTask As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents pnlScheduledTasks As System.Windows.Forms.Panel
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lblRecID As System.Windows.Forms.Label
 End Class

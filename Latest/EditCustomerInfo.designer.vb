@@ -370,10 +370,10 @@ Partial Class EditCustomerInfo
         Me.TabPage2.Controls.Add(Me.txtCity)
         Me.TabPage2.Controls.Add(Me.txtAddress)
         Me.TabPage2.Controls.Add(Me.lblAddress)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 46)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(470, 311)
+        Me.TabPage2.Size = New System.Drawing.Size(470, 290)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Address Info"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -509,9 +509,9 @@ Partial Class EditCustomerInfo
         Me.TabPage3.Controls.Add(Me.lblYrsOwned)
         Me.TabPage3.Controls.Add(Me.lblHomeValue)
         Me.TabPage3.Controls.Add(Me.txtYrBuilt)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 46)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(470, 311)
+        Me.TabPage3.Size = New System.Drawing.Size(470, 290)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Home Info"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -523,9 +523,9 @@ Partial Class EditCustomerInfo
         Me.Label8.ForeColor = System.Drawing.Color.Gray
         Me.Label8.Location = New System.Drawing.Point(234, 89)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(46, 16)
+        Me.Label8.Size = New System.Drawing.Size(83, 16)
         Me.Label8.TabIndex = 47
-        Me.Label8.Text = "Years"
+        Me.Label8.Text = "(xxxx Year)"
         '
         'Label6
         '
@@ -534,9 +534,9 @@ Partial Class EditCustomerInfo
         Me.Label6.ForeColor = System.Drawing.Color.Gray
         Me.Label6.Location = New System.Drawing.Point(234, 38)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(46, 16)
+        Me.Label6.Size = New System.Drawing.Size(83, 16)
         Me.Label6.TabIndex = 46
-        Me.Label6.Text = "Years"
+        Me.Label6.Text = "(xxxx Year)"
         '
         'Label2
         '
@@ -589,9 +589,9 @@ Partial Class EditCustomerInfo
         Me.lblYrBuilt.ForeColor = System.Drawing.Color.Gray
         Me.lblYrBuilt.Location = New System.Drawing.Point(28, 38)
         Me.lblYrBuilt.Name = "lblYrBuilt"
-        Me.lblYrBuilt.Size = New System.Drawing.Size(96, 16)
+        Me.lblYrBuilt.Size = New System.Drawing.Size(76, 16)
         Me.lblYrBuilt.TabIndex = 39
-        Me.lblYrBuilt.Text = "Age of Home:"
+        Me.lblYrBuilt.Text = "Year Built:"
         '
         'lblYrsOwned
         '
@@ -600,9 +600,9 @@ Partial Class EditCustomerInfo
         Me.lblYrsOwned.ForeColor = System.Drawing.Color.Gray
         Me.lblYrsOwned.Location = New System.Drawing.Point(28, 89)
         Me.lblYrsOwned.Name = "lblYrsOwned"
-        Me.lblYrsOwned.Size = New System.Drawing.Size(99, 16)
+        Me.lblYrsOwned.Size = New System.Drawing.Size(116, 16)
         Me.lblYrsOwned.TabIndex = 38
-        Me.lblYrsOwned.Text = "Years Owned:"
+        Me.lblYrsOwned.Text = "Year Purchased:"
         '
         'lblHomeValue
         '
@@ -636,9 +636,9 @@ Partial Class EditCustomerInfo
         Me.TabPage4.Controls.Add(Me.lblColor)
         Me.TabPage4.Controls.Add(Me.txtQty)
         Me.TabPage4.Controls.Add(Me.lblProducts)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 46)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(470, 311)
+        Me.TabPage4.Size = New System.Drawing.Size(470, 290)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Product Info"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -737,9 +737,9 @@ Partial Class EditCustomerInfo
         Me.TabPage5.Controls.Add(Me.lblApptDate)
         Me.TabPage5.Controls.Add(Me.lblApptDay)
         Me.TabPage5.Controls.Add(Me.txtApptDay)
-        Me.TabPage5.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 46)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(470, 311)
+        Me.TabPage5.Size = New System.Drawing.Size(470, 290)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Appt. Info"
         Me.TabPage5.UseVisualStyleBackColor = True

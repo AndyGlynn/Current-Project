@@ -210,7 +210,7 @@ Public Class SCHEDULE_ACTION_LOGIC
                 Case "PreviousCustomer"
                     tscbo = PreviousCustomer.TScboCustomerHistory
                 Case "Installation"
-                    tscbo = Installation.TScboCustomerHistory
+                    'tscbo = Installation.TScboCustomerHistory
                 Case "ConfirmingSingleRecord"
                     tscbo = ConfirmingSingleRecord.TScboCustomerHistory
                 Case "SecondSource"

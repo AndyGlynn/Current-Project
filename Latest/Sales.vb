@@ -1002,8 +1002,17 @@ Public Class Sales
                 Me.txtProducts.Text = r1.Item(21) & vbCrLf & r1.Item(22) & vbCrLf & r1.Item(23)
                 Me.txtColor.Text = r1.Item(24)
                 Me.txtQty.Text = r1.Item(25)
-                Me.txtYrBuilt.Text = r1.Item(27)
-                Me.txtYrsOwned.Text = r1.Item(26)
+                '' vars for auto calcs
+                '' 1-13-2015 AC
+                Dim curYear As Integer = Date.Today.Year
+                Dim builtYear As Integer = CType(r1.Item(27), Integer)
+                Dim AgeOfHome As Integer = (curYear - builtYear)
+                Me.txtYrBuilt.Text = AgeOfHome.ToString
+
+                Dim yrPur As Integer = CType(r1.Item(26), Integer)
+                Dim YrsOwned As Integer = (curYear - yrPur)
+                Me.txtYrsOwned.Text = YrsOwned.ToString
+                ''
                 Me.txtHomeValue.Text = r1.Item(28)
                 Me.rtbSpecialInstructions.Text = r1.Item(32)
             End While
@@ -7887,4 +7896,19 @@ Public Class Sales
    
     
    
+    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
+        Dim lnk As LinkLabel = sender
+        frmLinkSendEmail.MdiParent = Main
+        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
+        frmLinkSendEmail.Cust_Email = lnk.Text
+        frmLinkSendEmail.Show()
+        frmLinkSendEmail.BringToFront()
+    End Sub
+
+     
+    Private Sub btnUpdateSPI_Click(sender As Object, e As EventArgs) Handles btnUpdateSPI.Click
+        frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
+        frmEditSpecialInstructions.CallingForm = "Sales"
+        frmEditSpecialInstructions.Show()
+    End Sub
 End Class
