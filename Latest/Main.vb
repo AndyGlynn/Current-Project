@@ -910,13 +910,13 @@ Public Class Main
                             Case "SecondSource"
                         End Select
                         If lv IsNot Nothing Then
-                            If lv.SelectedItems.Count <> 0 And lv IsNot Sales.lvnoresults Then
-                                STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).Text
-                            ElseIf lv.SelectedItems.Count <> 0 And lv Is Sales.lvnoresults Then
-                                STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).SubItems(1).Text
-                            Else
-                                STATIC_VARIABLES.CurrentID = ""
-                            End If
+                            'If lv.SelectedItems.Count <> 0 And lv IsNot Sales.lvnoresults Then
+                            '    STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).Text
+                            'ElseIf lv.SelectedItems.Count <> 0 And lv Is Sales.lvnoresults Then
+                            '    STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).SubItems(1).Text
+                            'Else
+                            '    STATIC_VARIABLES.CurrentID = ""
+                            'End If
 
                         Else
                             If f.Name = "ConfirmingSingleRecord" Then
@@ -997,4 +997,6 @@ Public Class Main
     Private Sub btnEditEmailTemplatesList_Click(sender As Object, e As EventArgs) Handles btnEditEmailTemplatesList.Click
         frmEmailTemplateListManager.Show()
     End Sub
+
+    
 End Class

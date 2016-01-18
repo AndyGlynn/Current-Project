@@ -801,55 +801,131 @@ Public Class Sales
         End Select
     End Sub
     Public Sub PopulateNoResults()
-        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet As SqlCommand = New SqlCommand("dbo.NoResultsSummary", Cnn)
-        cmdGet.CommandType = CommandType.StoredProcedure
-        Cnn.Open()
-        Dim r1 As SqlDataReader
-        r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+        'Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+        'Dim cmdGet As SqlCommand = New SqlCommand("dbo.NoResultsSummary", Cnn)
+        'cmdGet.CommandType = CommandType.StoredProcedure
+        'Cnn.Open()
+        'Dim r1 As SqlDataReader
+        'r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
         Dim x As String
         If Me.lvnoresults.SelectedItems.Count <> 0 Then
             x = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
         End If
         Me.lvnoresults.Items.Clear()
         Dim cntNoResults As Integer = 0
-        While r1.Read
-            cntNoResults += 1
-            Dim lv As New ListViewItem
-            Dim d
-            Dim rep1 As String
-            Dim rep2 As String
-            Try
-                rep1 = r1.Item(2).ToString
-            Catch ex As Exception
-                rep1 = ""
-            End Try
-            Try
-                rep2 = r1.Item(3).ToString
-            Catch ex As Exception
-                rep2 = ""
-            End Try
 
-            d = Split(r1.Item(0), " ", 2)
-            lv.Text = d(0)
-            lv.Tag = r1.Item(1)
-            lv.SubItems.Add(r1.Item(1).ToString)
-            If rep2 <> "" Then
-                lv.SubItems.Add(rep1 & " & " & rep2)
+        Dim a As New PullNoResults
+        Dim _lsNoRes As New List(Of PullNoResults.NoResultRecord)
+        _lsNoRes = a.NoResultsSummary
+        Dim lvCol As New ListView.ListViewItemCollection(Me.lvnoresults)
+        cntNoResults = _lsNoRes.Count
+        a = Nothing
+        For Each b As PullNoResults.NoResultRecord In _lsNoRes
+            Dim c As New ListViewItem
+            Dim aptDate() = Split(b.ApptDate, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            c.Text = aptDate(0)
+            c.Tag = b.ID
+            c.SubItems.Add(b.ID)
+            If b.Rep2 <> "" And b.Rep2 <> " " Then
+                c.SubItems.Add(b.Rep1 & " and " & b.Rep2)
             Else
-                lv.SubItems.Add(rep1)
+                c.SubItems.Add(b.Rep1)
             End If
+            lvCol.Add(c)
+        Next
 
-            Me.lvnoresults.Items.Add(lv)
-            If lv.SubItems(1).Text = x Then
-                lv.Selected = True
-                lv.EnsureVisible()
-            End If
-        End While
-        r1.Close()
-        cnn.Close()
+
+
+        'While r1.Read
+        '    cntNoResults += 1
+        '    Dim lv As New ListViewItem
+        '    Dim d
+        '    Dim rep1 As String
+        '    Dim rep2 As String
+        '    Try
+        '        rep1 = r1.Item(2).ToString
+        '    Catch ex As Exception
+        '        rep1 = ""
+        '    End Try
+        '    Try
+        '        rep2 = r1.Item(3).ToString
+        '    Catch ex As Exception
+        '        rep2 = ""
+        '    End Try
+
+        '    d = Split(r1.Item(0), " ", 2)
+        '    lv.Text = d(0)
+        '    lv.Tag = r1.Item(1)
+        '    lv.SubItems.Add(r1.Item(1).ToString)
+        '    If rep2 <> "" Then
+        '        lv.SubItems.Add(rep1 & " & " & rep2)
+        '    Else
+        '        lv.SubItems.Add(rep1)
+        '    End If
+
+        'Me.lvnoresults.Items.Add(lv)
+        'If lv.SubItems(1).Text = x Then
+        '    lv.Selected = True
+        '    lv.EnsureVisible()
+        'End If
+        ''End While
+        'R1.Close()
+        'Cnn.Close()
+
         Me.Label38.Text = (Me.Label38.Text & " -[ Records: " & cntNoResults & " ]")
     End Sub
+
+    Private Class PullNoResults
+        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1"
+        '' query Results Structure
+        '' -----------------------
+        '' ApptDate,ID,Rep1,Rep2
+        '' -----------------------
+
+        Public Structure NoResultRecord
+            Public ApptDate As String
+            Public ID As String
+            Public Rep1 As String
+            Public Rep2 As String
+        End Structure
+
+        Private _NoRes As List(Of NoResultRecord)
+        Public ReadOnly Property NoResultsSummary As List(Of NoResultRecord)
+            Get
+                Return _NoRes
+            End Get
+        End Property
+
+        Public Sub New()
+            _NoRes = New List(Of NoResultRecord)
+            _NoRes = Get_No_Results()
+        End Sub
+        Private Function Get_No_Results()
+            Dim cnx As New SqlConnection(pro_cnx)
+            Try
+                cnx.Open()
+                Dim cmdGET As New SqlCommand("exec [dbo].[NoResultsSummary];", cnx)
+                Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+                While r1.Read
+                    Dim c As New NoResultRecord
+                    c.ApptDate = r1.Item("ApptDate")
+                    c.ID = r1.Item("ID")
+                    c.Rep1 = r1.Item("Rep1")
+                    c.Rep2 = r1.Item("Rep2")
+                    _NoRes.Add(c)
+                End While
+                r1.Close()
+                cnx.Close()
+                cnx = Nothing
+            Catch ex As Exception
+                cnx.Close()
+                cnx = Nothing
+            End Try
+            Return _NoRes
+        End Function
+    End Class
+
+
     Public Sub PullInfo(ByVal ID As String)
         If Me.ID = ID And Me.ForceRefresh = False Then
             Exit Sub
@@ -1086,13 +1162,14 @@ Public Class Sales
         r2.Close()
         cnn2.Close()
 
-        Dim c As New CustomerHistory
+        'Dim c As New CustomerHistory
         If ID <> "" Then
             If Me.tbMain.SelectedIndex = 1 Then
                 Me.Text = "Sales Department Record ID: " & ID
             End If
             If Me.pnlCustomerHistory.Visible = True Then
-                c.SetUp(Me, ID, Me.TScboCustomerHistory)
+                'c.SetUp(Me, ID, Me.TScboCustomerHistory)
+                bgCustomerHistory_DoWork(Nothing, Nothing)
             Else
                 ' Me.GetRidOfOldAndPutNew()
                 GetImages_Files_And_Folders(ID)
@@ -1620,7 +1697,7 @@ Public Class Sales
         Me.SplitContainer1.SplitterDistance = 218
         Me.SplitContainer1.IsSplitterFixed = True
         Me.btnExpandSalesList.Text = Chr(187)
-        Me.cboDateRangeCustomerList.Text = "All"
+        'Me.cboDateRangeCustomerList.Text = "All"
 
 
 
@@ -1633,8 +1710,15 @@ Public Class Sales
 
 
 
+        '' old
+        dtp1CustomerList.Value = Date.Today.ToShortDateString
 
-        dtp1CustomerList.Value = CDate("1/1/1900 12:00:00 AM")
+        '' new -- why are we running the query for the entire year on load? 
+        'dtp1CustomerList.Value = Date.Today
+        dtp2CustomerList.Value = Date.Today
+
+
+
         Me.cboSalesList.Text = "Unfiltered Sales Dept. List"
         Me.PopulateMemorized()
         If Me.lvnoresults.Items.Count <> 0 Then
@@ -1686,6 +1770,8 @@ Public Class Sales
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tbMain.SelectedIndexChanged
         Dim x As Integer = 0
         x = Me.tbMain.SelectedIndex
+
+        'MsgBox("Tab Changed.", MsgBoxStyle.Information, "DEBUG INFO")
         Select Case x
             Case 0
                 Me.tbMain.TabPages(x).ImageKey = "Summary- Selected.png"
@@ -1710,20 +1796,20 @@ Public Class Sales
                 Me.tbMain.TabPages(2).ImageKey = "Issue Leads.png"
                 Me.tbMain.TabPages(3).ImageKey = "References.png"
                 Me.tbMain.TabPages(4).ImageKey = "Reports.png"
-                ' Me.lvAttachedFiles.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvAttachedFiles.Height)
-                ' Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
+                'Me.lvAttachedFiles.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvAttachedFiles.Height)
+                'Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
                 If Me.TabControl2.SelectedIndex = 0 Then
-                    If Me.lvSales.Items.Count <> 0 And Me.lvSales.SelectedItems.Count = 0 Then
-                        Me.lvSales.TopItem.Selected = True
-                    End If
+                    'If Me.lvSales.Items.Count <> 0 And Me.lvSales.SelectedItems.Count = 0 Then
+                    '    Me.lvSales.TopItem.Selected = True
+                    'End If
                     Me.ToolbarConfig(2)
-                    If Me.lvSales.SelectedItems.Count = 0 Then
-                        Me.ID = ""
-                        STATIC_VARIABLES.CurrentID = Me.ID
-                    Else
-                        Me.ID = Me.lvSales.SelectedItems(0).Text
-                        STATIC_VARIABLES.CurrentID = Me.ID
-                    End If
+                    'If Me.lvSales.SelectedItems.Count = 0 Then
+                    '    Me.ID = ""
+                    '    STATIC_VARIABLES.CurrentID = Me.ID
+                    'Else
+                    '    Me.ID = Me.lvSales.SelectedItems(0).Text
+                    '    STATIC_VARIABLES.CurrentID = Me.ID
+                    'End If
                 Else
                     Me.ToolbarConfig(3)
                     If Me.lvMemorized.SelectedItems.Count = 0 Then
@@ -1915,6 +2001,8 @@ Public Class Sales
 
 #End Region
 #Region "Customer List Page Events"
+
+#End Region
 #Region "Customer List Page Toolbar Buttons"
     Private Sub btnSalesResult2_ButtonClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalesResult2.ButtonClick
         If Me.ID = "" Then
@@ -1954,36 +2042,64 @@ Public Class Sales
         Me.cboDateRangeCustomerList.Text = "Custom"
     End Sub
     Private Sub dtp2CustomerList_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2CustomerList.GotFocus
-        'txt1CustomerList.Visible = False
+
+        txt1CustomerList.Visible = False
         txt2CustomerList.Text = Me.dtp2CustomerList.Value.ToShortDateString
         txt2CustomerList.Visible = False
         Me.cboDateRangeCustomerList.Text = "Custom"
     End Sub
     Private Sub dtp2CustomerList_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2CustomerList.LostFocus
+
         If Me.LastD1 = txt1CustomerList.Text And Me.LastD2 = txt2CustomerList.Text Then
             Exit Sub
         End If
-        Dim c As New SalesListManager
+        bgSalesQuery_DoWork(Nothing, Nothing)
+        If current_Item IsNot Nothing Then
+            PullInfo(current_Item.Text)
+            RaiseEvent PopCustHistory()
+        End If
+        'Me.Cursor = Cursors.WaitCursor
+        'Dim c As New SalesListManager(sender)
+        'arItemCache = New ArrayList
+        'arItemCache = c.LV_Sales_Items
+        'Me.Cursor = Cursors.Default
     End Sub
     Private Sub dtp2CustomerList_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2CustomerList.ValueChanged
+
         If Me.LoadComplete = False Then
             Exit Sub
         End If
         txt2CustomerList.Text = Me.dtp2CustomerList.Value.ToShortDateString
     End Sub
     Private Sub dtp1CustomerList_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1CustomerList.GotFocus
+        current_Item = Nothing
         txt1CustomerList.Visible = False
         txt1CustomerList.Text = dtp1CustomerList.Value.ToShortDateString
         'txt2CustomerList.Visible = False
         Me.cboDateRangeCustomerList.Text = "Custom"
     End Sub
     Private Sub dtp1CustomerList_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1CustomerList.LostFocus
+
         If txt1CustomerList.Text = Me.LastD1 And txt2CustomerList.Text = Me.LastD2 Then
             Exit Sub
         End If
-        Dim c As New SalesListManager
+        ''Dim c As New SalesListManager
+        bgSalesQuery_DoWork(Nothing, Nothing)
+        If current_Item IsNot Nothing Then
+            PullInfo(current_Item.Text)
+            RaiseEvent PopCustHistory()
+        End If
+
+        '' Make them choose both dates in an instance for only querying for ONE day.
+        '' 
+        'Me.Cursor = Cursors.WaitCursor
+        'Dim c As New SalesListManager(sender)
+        'arItemCache = New ArrayList
+        'arItemCache = c.LV_Sales_Items
+        'Me.Cursor = Cursors.Default
     End Sub
     Private Sub dtp1CustomerList_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1CustomerList.ValueChanged
+
         If Me.LoadComplete = False Then
             Exit Sub
         End If
@@ -2014,16 +2130,26 @@ Public Class Sales
         If Me.LastD1 = txt1CustomerList.Text And Me.LastD2 = txt2CustomerList.Text Then
             Exit Sub
         End If
-        Dim c As New SalesListManager
+        ''Dim c As New SalesListManager
+        bgSalesQuery_DoWork(Nothing, Nothing)
+        If current_Item IsNot Nothing Then
+            PullInfo(current_Item.Text)
+             RaiseEvent PopCustHistory()
+        End If
+        'Me.Cursor = Cursors.WaitCursor
+        'Dim c As New SalesListManager(sender)
+        'arItemCache = New ArrayList
+        'arItemCache = c.LV_Sales_Items
+        'Me.Cursor = Cursors.Default
     End Sub
 
 #End Region
 
 #Region "Customer List Controls"
 
-  
 
-    
+
+
 
     Private Sub lblGroupBy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblGroupBy.Click
         Me.cboGroupSales.Focus()
@@ -2039,7 +2165,16 @@ Public Class Sales
             Me.lblGroupBy.ForeColor = Color.Gray
             Me.lblGroupBy.Text = "Group By"
         End If
-        Dim c As New SalesListManager
+        bgSalesQuery_DoWork(Nothing, Nothing)
+        If current_Item IsNot Nothing Then
+            PullInfo(current_Item.Text)
+             RaiseEvent PopCustHistory()
+        End If
+        'Me.Cursor = Cursors.WaitCursor
+        'Dim c As New SalesListManager(sender)
+        'arItemCache = New ArrayList
+        'arItemCache = c.LV_Sales_Items
+        'Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -2071,7 +2206,16 @@ Public Class Sales
             Me.lvSales.Sorting = Windows.Forms.SortOrder.None
             Me.LinkLabel2.Text = "Order By ID"
             Me.LinkLabel2.Location = New System.Drawing.Point(114, 3)
-            Dim c As New SalesListManager
+            bgSalesQuery_DoWork(Nothing, Nothing)
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                 RaiseEvent PopCustHistory()
+            End If
+            'Me.Cursor = Cursors.WaitCursor
+            'Dim c As New SalesListManager(sender)
+            'arItemCache = New ArrayList
+            'arItemCache = c.LV_Sales_Items
+            'Me.Cursor = Cursors.Default
         End If
     End Sub
     Private Sub cboSalesList_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboSalesList.SelectedIndexChanged
@@ -2089,30 +2233,85 @@ Public Class Sales
                 Me.cboDateRangeCustomerList.SelectedItem = "Custom"
             End If
         End If
-
-        Dim c As New SalesListManager
-    End Sub
-    Public Sub lvSales_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvSales.SelectedIndexChanged
-        If Me.lvSales.SelectedItems.Count <> 0 Then
-            Me.RefreshSelectedItem(Me.lvSales, Me.lvSales.SelectedItems(0).Text)
-            Me.PullInfo(Me.lvSales.SelectedItems(0).Text)
-            Me.ID = Me.lvSales.SelectedItems(0).Text
-            STATIC_VARIABLES.CurrentID = Me.ID
-        Else
-            Me.PullInfo("")
-            Me.ID = ""
-            STATIC_VARIABLES.CurrentID = Me.ID
+        bgSalesQuery_DoWork(Nothing, Nothing)
+        If current_Item IsNot Nothing Then
+            PullInfo(current_Item.Text)
+             RaiseEvent PopCustHistory()
         End If
+        'Me.Cursor = Cursors.WaitCursor
+        'Dim c As New SalesListManager(sender)
+        'arItemCache = New ArrayList
+        'arItemCache = c.LV_Sales_Items
+        'Me.Cursor = Cursors.Default
+    End Sub
+
+
+#Region "LV Sales Virutal Mode "
+    Public arItemCache As ArrayList
+    Public current_Item As ListViewItem
+    Private firstItem As Integer
+    Private Event PopCustHistory()
+
+    Private Sub lvSales_MouseClick(sender As Object, e As MouseEventArgs) Handles lvSales.MouseClick
+        Try
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+            Else
+                Exit Sub
+            End If
+        Catch ex As Exception
+            Dim err As String = ex.Message
+            MsgBox("Error:" & err, MsgBoxStyle.Exclamation, "LVSales_MouseClick()")
+        End Try
+    End Sub
+    Private Sub lvSales_RetrieveVirtualItem(sender As Object, e As RetrieveVirtualItemEventArgs) Handles lvSales.RetrieveVirtualItem
+
+        Try
+            If Not (arItemCache Is Nothing) AndAlso e.ItemIndex >= firstItem AndAlso e.ItemIndex < firstItem + arItemCache.Count Then
+                e.Item = arItemCache((e.ItemIndex - firstItem))
+                current_Item = e.Item
+            End If
+        Catch ex As Exception
+            Dim err As String = ex.Message
+            MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "LvSales_RetrievewVirtualItem()")
+        End Try
+
 
     End Sub
+    Private Sub lvsales_CacheVirtualItems(ByVal sender As Object, ByVal e As CacheVirtualItemsEventArgs) Handles lvSales.CacheVirtualItems
+        Try
+
+            If Not (arItemCache Is Nothing) AndAlso e.StartIndex >= firstItem AndAlso e.EndIndex <= firstItem + arItemCache.Count Then
+                Return
+            End If
+
+
+            firstItem = e.StartIndex
+        Catch ex As Exception
+            Dim err As String = ex.Message
+            MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "CachVirtualItems")
+        End Try
+
+
+
+    End Sub
+    Private Sub lvsales_SearchForVirtualItem(ByVal sender As Object, ByVal e As SearchForVirtualItemEventArgs) Handles lvSales.SearchForVirtualItem
+        Try
+            current_Item = arItemCache(e.Index)
+        Catch ex As Exception
+            Dim err As String = ex.Message
+            MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "SearchForVirtualItem()")
+        End Try
+    End Sub
+
 #End Region
 
 #Region "Customer Log & Attached Files"
     Private Sub TScboCustomerHistory_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TScboCustomerHistory.SelectedIndexChanged
         If Me.lvSales.SelectedItems.Count <> 0 Then
-            Dim c As New CustomerHistory
-            c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
-
+            ' Dim c As New CustomerHistory
+            'c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
+            bgCustomerHistory_DoWork(Nothing, Nothing)
 
 
         End If
@@ -2167,13 +2366,15 @@ Public Class Sales
         Me.pnlAFPics.Visible = False
         Me.tsAttachedFilesNAV.Enabled = False
         If Me.ID <> "" Then
-            Dim x As New CustomerHistory
-            x.SetUp(Me, ID, Me.TScboCustomerHistory)
+            'Dim x As New CustomerHistory
+            'x.SetUp(Me, ID, Me.TScboCustomerHistory)
+            STATIC_VARIABLES.CurrentID = ID
+            bgCustomerHistory_DoWork(Nothing, Nothing)
         End If
     End Sub
 
     Private Sub tscboAFPicsFilter_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscboAFPicsFilter.SelectedIndexChanged
-        
+
         Dim p_width As Integer = Me.pnlAFPics.Width
         Dim p_height As Integer = Me.pnlAFPics.Height
         ''
@@ -2187,7 +2388,7 @@ Public Class Sales
                 Me.tslblAFPic.Text = "Attached Files and Job Pictures..."
                 Dim x As Control
 
-                
+
                 For Each x In Me.pnlAFPics.Controls
                     If x.Name.ToString = "lsAttachedFiles" Then
                         Dim prevLocX As Integer = x.Location.X
@@ -2370,7 +2571,7 @@ Public Class Sales
     End Sub
 
     Public Sub btnSingleRecord_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSingleRecord.Click
-        Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Dim cmdGet As SqlCommand
         Dim r As SqlDataReader
         cmdGet = New SqlCommand("Select Count (ID)from enterlead where ID  = " & Me.txtSingleRecordInput.Text, cnn)
@@ -2405,7 +2606,7 @@ Public Class Sales
                 Me.lvSales.Focus()
                 If x = vbYes Then
 
-                    Dim cnn1 As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+                    Dim cnn1 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
                     Dim cmdGet1 As SqlCommand
                     Dim r1 As SqlDataReader
                     cmdGet1 = New SqlCommand("Update tblwherecanleadgo set Sales = 'True' Where Leadnumber = " & CType(Me.txtSingleRecordInput.Text, Integer), cnn1)
@@ -2418,9 +2619,14 @@ Public Class Sales
 
                     r1.Close()
                     cnn1.Close()
-                    Dim c As New SalesListManager
-                    Me.lvSales.Items(Me.txtSingleRecordInput.Text).Selected = True
-                    Me.lvSales.SelectedItems(0).EnsureVisible()
+                    'Dim c As New SalesListManager(Me.btnSingleRecord)
+                    'Me.lvSales.Items(Me.txtSingleRecordInput.Text).Selected = True
+                    'Me.lvSales.SelectedItems(0).EnsureVisible()
+                    bgSalesQuery_DoWork(Nothing, Nothing)
+                    If current_Item IsNot Nothing Then
+                        PullInfo(current_Item.Text)
+                        RaiseEvent PopCustHistory()
+                    End If
                 End If
             End Try
         End Try
@@ -2433,7 +2639,7 @@ Public Class Sales
 
 
     Private Sub btnSaveRep_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSaveRep.Click
-        Dim cnn2 As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+        Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Dim cmdGet1 As SqlCommand
         Dim r2 As SqlDataReader
         cmdGet1 = New SqlCommand("Update enterlead set rep1 = " & "'" & Me.cboRep1.Text & "'" & ", rep2 = " & "'" & Me.cboRep2.Text & "'" & ",lastupdated = 'true' where ID = " & Me.ID, cnn2)
@@ -2473,7 +2679,7 @@ Public Class Sales
         If Me.TabControl2.SelectedIndex = 1 Then
             Me.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
         Else
-            Me.lvSales_SelectedIndexChanged(Nothing, Nothing)
+            'Me.lvSales_SelectedIndexChanged(Nothing, Nothing)
         End If
 
 
@@ -2495,10 +2701,10 @@ Public Class Sales
         End If
 
         If Me.btnMemorize.Text = "Memorize This Record" Then
-          
+
             MemorizeNotes.ShowDialog()
         Else
-            Dim cnn2 As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+            Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
             Dim cmdGet1 As SqlCommand
             Dim r2 As SqlDataReader
             cmdGet1 = New SqlCommand("Delete memorizedappts where leadnum = " & "'" & STATIC_VARIABLES.CurrentID & "'" & " and UserLoggedOn = " & "'" & STATIC_VARIABLES.CurrentUser & "'" & " and Form = 'Sales' ", cnn2)
@@ -2542,7 +2748,7 @@ Public Class Sales
         Me.PopulateMemorized()
     End Sub
 
- 
+
 
     Private Sub cboGroupByMemorized_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboGroupByMemorized.SelectedIndexChanged
         If Me.cboGroupByMemorized.Text <> "" Then
@@ -2565,13 +2771,14 @@ Public Class Sales
     Private Sub TabControl2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl2.SelectedIndexChanged
         If Me.TabControl2.SelectedIndex = 0 Then
             Me.ToolbarConfig(2)
-            If Me.lvSales.Items.Count = 0 Or Me.lvSales.SelectedItems.Count = 0 Then
+            If arItemCache.Count = 0 Then
                 Me.PullInfo("")
                 Me.ID = ""
                 STATIC_VARIABLES.CurrentID = Me.ID
             Else
-                Me.PullInfo(Me.lvSales.SelectedItems(0).Text)
-                Me.ID = Me.lvSales.SelectedItems(0).Text
+                Dim z As ListViewItem = arItemCache(0)
+                Me.PullInfo(z.Text)
+                Me.ID = z.Text
                 STATIC_VARIABLES.CurrentID = Me.ID
             End If
 
@@ -2591,7 +2798,7 @@ Public Class Sales
                 Me.cboGroupByMemorized.Enabled = False
                 Me.lblgroupbymemorized.Enabled = False
             End If
-      
+
         End If
     End Sub
 
@@ -2612,7 +2819,7 @@ Public Class Sales
     End Sub
 
 
- 
+
 
 
 
@@ -2680,22 +2887,27 @@ Public Class Sales
     End Sub
 
 
- 
 
-  
+
+
 
     Private Sub btnEditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustomer.Click
         If Me.TabControl2.SelectedIndex = 0 Then
-            If Me.lvSales.SelectedItems.Count <> 0 Then
-                EditCustomerInfo.ID = STATIC_VARIABLES.CurrentID
-            End If
+            'If Me.lvSales.SelectedItems.Count <> 0 Then
+            EditCustomerInfo.ID = STATIC_VARIABLES.CurrentID
+            'End If
         Else
             If Me.lvMemorized.SelectedItems.Count <> 0 Then
                 EditCustomerInfo.ID = STATIC_VARIABLES.CurrentID
             End If
+            'End If
+            EditCustomerInfo.Show()
         End If
-        EditCustomerInfo.Show()
 
+        If Me.tbMain.SelectedIndex = 1 Then '' customer history
+            EditCustomerInfo.ID = STATIC_VARIABLES.CurrentID
+            EditCustomerInfo.Show()
+        End If
     End Sub
 
 
@@ -2732,9 +2944,9 @@ Public Class Sales
         Me.btnRemoveThisCompletedTask_Click(Nothing, Nothing)
     End Sub
 
-   
 
-  
+
+
     Private Sub pnlScheduledTasks_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlScheduledTasks.MouseDown
         Me.HideThisCompletedTaskToolStripMenuItem.Visible = False
         Dim c As Integer = Me.pnlScheduledTasks.Controls.Count
@@ -2787,7 +2999,7 @@ Public Class Sales
 
         End If
 
-        
+
 
     End Sub
     Dim dtpsum2orig As String
@@ -2801,11 +3013,11 @@ Public Class Sales
         End If
         Focusdtp1 = True
         dtpsum1orig = Me.dtpSummary.Value.ToString
-     
+
 
 
     End Sub
- 
+
 
     Private Sub dtpSummary2_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpSummary2.GotFocus
         If LoadComplete = False Then
@@ -2813,7 +3025,7 @@ Public Class Sales
         End If
         focusdtp2 = True
         dtpsum2orig = Me.dtpSummary2.Value.ToString
-     
+
     End Sub
 
 #Region "List View Context Menus - NOTES"
@@ -2861,7 +3073,7 @@ Public Class Sales
     Private Function GetImages_Files_And_Folders(ByVal LeadNum As String)
 
         'CheckForIllegalCrossThreadCalls = False
-        
+
         Me.tsAttachedFilesNAV.Enabled = False
 
         Me.imgLst16.ColorDepth = ColorDepth.Depth32Bit
@@ -2939,7 +3151,7 @@ Public Class Sales
     Private Function AddListItem_Files(ByVal ItemList As List(Of AF_And_JP_Logic.FileObject), ByVal Control As ListView)
         Dim c As AF_And_JP_Logic.FileObject
         ' Control.Items.Clear()
-        
+
         Try
 
             For Each c In ItemList
@@ -4549,11 +4761,12 @@ Public Class Sales
     Private Sub Sales_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
         'Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
         If Me.lvSales.SelectedItems.Count <> 0 Then
-            Dim c As New CustomerHistory
-            c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
+            'Dim c As New CustomerHistory
+            'c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
+            bgCustomerHistory_DoWork(Nothing, Nothing)
         End If
-        'Dim x As New ScheduledActions
-        'x.SetUp("Sales")
+        Dim x As New ScheduledActions
+        ' x.SetUp("Sales")
         'Me.SplitContainer1.SplitterDistance = 2500
         Me.SplitContainer1.SplitterDistance = 218
         Me.SplitContainer1.SplitterWidth = 1
@@ -5438,7 +5651,7 @@ Public Class Sales
     Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click
         'MsgBox("btnPrintCurrentList")
         Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
-        Dim x As New printToPrinterContactList(lvCol)
+        Dim x As New printToPrinterContactList(arItemCache)
         x.ShowDoc()
     End Sub
     Private Sub btnPrintCustomerList_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerList.Click
@@ -6978,7 +7191,7 @@ Public Class Sales
 
         Me.tsAttachedFilesNAV.Enabled = False
 
-       
+
 
     End Sub
 
@@ -6998,7 +7211,7 @@ Public Class Sales
         repop = Nothing
         Me.lsJobPictures.Items.Clear()
 
-       
+
 
         AddListItem_Directories(arDirs, Me.lsJobPictures)
         AddListItem_Files(arFiles, Me.lsJobPictures)
@@ -7890,12 +8103,12 @@ Public Class Sales
 
 #End Region
 
-   
-   
-   
-   
-    
-   
+
+
+
+
+
+
     Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
         Dim lnk As LinkLabel = sender
         frmLinkSendEmail.MdiParent = Main
@@ -7905,10 +8118,50 @@ Public Class Sales
         frmLinkSendEmail.BringToFront()
     End Sub
 
-     
+
     Private Sub btnUpdateSPI_Click(sender As Object, e As EventArgs) Handles btnUpdateSPI.Click
         frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
         frmEditSpecialInstructions.CallingForm = "Sales"
         frmEditSpecialInstructions.Show()
+    End Sub
+
+    Private Sub bgSalesQuery_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgSalesQuery.DoWork
+
+        Me.Cursor = Cursors.WaitCursor
+        Dim c As New SalesListManager(sender)
+        arItemCache = New ArrayList
+        arItemCache = c.LV_Sales_Items
+        bgSalesQuery_RunWorkerCompleted(Me, Nothing)
+    End Sub
+
+    
+    Private Sub bgSalesQuery_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles bgSalesQuery.RunWorkerCompleted
+        If arItemCache.Count > 1 Then
+            Dim a As ListViewItem = arItemCache(0)
+            STATIC_VARIABLES.CurrentID = a.Text
+            Me.Text = "Sales Department Record ID: " & a.Text
+            PullInfo(a.Text)
+            AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+            Me.lvSales.EnsureVisible(0)
+            RaiseEvent PopCustHistory()
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
+
+
+
+
+    Private Sub PopulateCustomerHistory()
+        If CType(Me.lblCntFiltered.Text, Integer) > 0 Then
+            bgCustomerHistory_DoWork(Nothing, Nothing)
+        Else
+            PullInfo("")
+            Me.pnlCustomerHistory.Controls.Clear()
+        End If
+    End Sub
+
+    Private Sub bgCustomerHistory_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgCustomerHistory.DoWork
+        Dim c As New CustomerHistory
+        c.SetUp(Me, STATIC_VARIABLES.CurrentID, Me.TScboCustomerHistory)
     End Sub
 End Class

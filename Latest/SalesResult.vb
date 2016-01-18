@@ -2181,7 +2181,7 @@ Public Class SDResult
 
         Sales.ForceRefresh = True
         If Sales.TabControl2.TabIndex = 0 And Sales.lvSales.SelectedItems.Count <> 0 Then
-            Sales.lvSales_SelectedIndexChanged(Nothing, Nothing)
+            'Sales.lvSales_SelectedIndexChanged(Nothing, Nothing)
         ElseIf Sales.TabControl2.TabIndex = 1 And Sales.lvMemorized.SelectedItems.Count <> 0 Then
             Sales.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
         End If
@@ -2518,10 +2518,10 @@ Public Class SDResult
         Sales.ForceRefresh = True
         If Sales.tbMain.SelectedIndex = 1 Then
             If Sales.cboSalesList.Text <> "Unfiltered Sales Dept. List" Or (Sales.cboGroupSales.Text = "Sales Result" Or Sales.cboGroupSales.Text = "Marketing Result" Or Sales.cboGroupSales.Text = "Sales Rep") Then
-                Dim c As New SalesListManager
+                Dim c As New SalesListManager(sender)
             Else
                 If Sales.TabControl2.TabIndex = 0 And Sales.lvSales.SelectedItems.Count <> 0 Then
-                    Sales.lvSales_SelectedIndexChanged(Nothing, Nothing)
+                    'Sales.lvSales_SelectedIndexChanged(Nothing, Nothing)
                 ElseIf Sales.TabControl2.TabIndex = 1 And Sales.lvMemorized.SelectedItems.Count <> 0 Then
                     Sales.PopulateMemorized()
                 End If

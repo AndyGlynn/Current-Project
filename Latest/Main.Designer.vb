@@ -68,6 +68,7 @@ Partial Class Main
         Me.PrimaryLeadSourcesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SecondaryLeadSourcesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnEditEmailTemplatesList = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ErrorLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -95,7 +96,6 @@ Partial Class Main
         Me.tsNetworkStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel5 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsSqlSTatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.btnEditEmailTemplatesList = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMain.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -466,6 +466,12 @@ Partial Class Main
         Me.ProductsToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.ProductsToolStripMenuItem.Text = "Products"
         '
+        'btnEditEmailTemplatesList
+        '
+        Me.btnEditEmailTemplatesList.Name = "btnEditEmailTemplatesList"
+        Me.btnEditEmailTemplatesList.Size = New System.Drawing.Size(201, 22)
+        Me.btnEditEmailTemplatesList.Text = "Email Templates"
+        '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
@@ -636,12 +642,6 @@ Partial Class Main
         Me.tsSqlSTatus.Name = "tsSqlSTatus"
         Me.tsSqlSTatus.Size = New System.Drawing.Size(10, 17)
         Me.tsSqlSTatus.Text = " "
-        '
-        'btnEditEmailTemplatesList
-        '
-        Me.btnEditEmailTemplatesList.Name = "btnEditEmailTemplatesList"
-        Me.btnEditEmailTemplatesList.Size = New System.Drawing.Size(201, 22)
-        Me.btnEditEmailTemplatesList.Text = "Email Templates"
         '
         'Main
         '

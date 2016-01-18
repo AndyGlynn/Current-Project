@@ -522,7 +522,6 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.exe
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.xml
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.pdb
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmEmailTemplateListManager.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Interop.MapPoint.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\AxInterop.MapPoint.dll
@@ -531,3 +530,4 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmBlastMail.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmLinkSendEmail.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmEditSpecialInstructions.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache

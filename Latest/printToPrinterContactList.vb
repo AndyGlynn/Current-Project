@@ -47,14 +47,14 @@ Public Class printToPrinterContactList
     Dim posIDX As Integer = 0
     Dim curIDX As Integer = -1
     Dim ttlPages As Integer = 0
-    Dim lvCol As ListView.ListViewItemCollection
+    Dim lvCol As ArrayList
 
     Public ReadOnly Property List_Of_Records As List(Of RecordOBJ)
         Get
             Return arRecs
         End Get
     End Property
-    Public Sub New(ByVal Data As ListView.ListViewItemCollection)
+    Public Sub New(ByVal Data As ArrayList)
         PD = New PrintDocument
         lvCol = Data
         PPrev = New PrintPreviewDialog
@@ -92,9 +92,13 @@ Public Class printToPrinterContactList
     End Sub
 
     Public Sub ShowDoc()
-        PPrev.ClientSize = New System.Drawing.Size(600, 600)
-        PPrev.ShowDialog()
-
+        Try
+            PPrev.ClientSize = New System.Drawing.Size(600, 600)
+            PPrev.ShowDialog()
+        Catch ex As Exception
+            Dim err As String = ex.Message
+            MsgBox("Error:" & err, MsgBoxStyle.Exclamation, "Print Preview Error")
+        End Try
     End Sub
 
     Private Sub PD_PrintPage(ByVal sender As Object, ByVal e As PrintPageEventArgs)

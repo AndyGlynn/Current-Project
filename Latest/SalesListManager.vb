@@ -3,8 +3,27 @@ Imports System.Data.Sql
 Imports System.Data.SqlClient
 Imports System
 Public Class SalesListManager
+
+
+
+    Private lvSalesCnt As Integer = 0
+    Public ReadOnly Property LV_Sales_Cnt As Integer
+        Get
+            Return lvSalesCnt
+        End Get
+    End Property
+
+    Private _arLVSalesItems As ArrayList
+    Public ReadOnly Property LV_Sales_Items As ArrayList
+        Get
+            Return _arLVSalesItems
+        End Get
+    End Property
+
+
+
     Private Sub Count()
-       
+
         Dim PLS As String = Sales.PLS
         Dim SLS As String = Sales.SLS
         Dim Rep As String = Sales.Rep
@@ -66,7 +85,7 @@ Public Class SalesListManager
         Dim param16 As SqlParameter = New SqlParameter("@State", State)
         Dim param17 As SqlParameter = New SqlParameter("@Recovery", Sales.Recovery)
         Dim param18 As SqlParameter = New SqlParameter("@R8", Sales.R8)
-        Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Dim cmdGet As SqlCommand
         Dim r As SqlDataReader
         cmdGet = New SqlCommand("dbo.SalesDepartment", cnn)
@@ -97,13 +116,25 @@ Public Class SalesListManager
             ''progressbar class
         End If
     End Sub
-    Public Sub New()
+    Public Sub New(ByVal sender As Object)
+        'Dim type = sender.GetType
+        'MsgBox("Sender: " & sender.ToString, MsgBoxStyle.Information, "DEBUG INFO")
+        'Application.DoEvents()
+
+        ''
+
+        Dim Itemcnt As Integer = 0
+        Dim arItems As New ArrayList
+        '' 
 
         Sales.lvSales.Groups.Clear()
         If Sales.cboGroupSales.Text <> "" Then
             Me.Groupby()
         End If
         Sales.lvSales.Items.Clear()
+
+        'Dim lvCol As New ListView.ListViewItemCollection(Sales.lvSales)
+
         Dim PLS As String = Sales.PLS
         Dim SLS As String = Sales.SLS
         Dim Rep As String = Sales.Rep
@@ -165,7 +196,7 @@ Public Class SalesListManager
         Dim param16 As SqlParameter = New SqlParameter("@State", State)
         Dim param17 As SqlParameter = New SqlParameter("@Recovery", Sales.Recovery)
         Dim param18 As SqlParameter = New SqlParameter("@R8", Sales.R8)
-        Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Dim cmdGet As SqlCommand
         Dim r As SqlDataReader
         cmdGet = New SqlCommand("dbo.SalesDepartment", cnn)
@@ -192,8 +223,10 @@ Public Class SalesListManager
         r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
         Dim cnt As Integer = 0
         Dim cntRecs As Integer = 0
+        Dim id As String = ""
         While r.Read
             cntRecs += 1
+            id = r.Item(0)
             Dim lv As New ListViewItem
             lv.Name = r.Item(0)
             lv.Text = r.Item(0)
@@ -291,19 +324,42 @@ Public Class SalesListManager
                 End If
             End If
             lv.SubItems.Add(r.Item(20))
-            Sales.lvSales.Items.Add(lv)
+            'Sales.lvSales.Items.Add(lv)
+            'lvCol.Add(lv)
+            arItems.Add(lv)
+
             If lv.Text = Sales.ID Then
                 lv.Selected = True
                 lv.EnsureVisible()
             End If
+            ' Application.DoEvents()
+            id = ""
         End While
-
+        Itemcnt = arItems.Count
+        Me.lvSalesCnt = Itemcnt
+        Me._arLVSalesItems = arItems
         r.Close()
         cnn.Close()
-        Sales.lblCntFiltered.Text = cntRecs.ToString
-        If Sales.lvSales.SelectedItems.Count = 0 And Sales.lvSales.Items.Count <> 0 Then
-            Sales.lvSales.TopItem.Selected = True
+        'Itemcnt = arItems.Count
+        Sales.lvSales.VirtualMode = True
+        'Sales.lvSales.View = View.Details
+        Sales.lvSales.VirtualListSize = Itemcnt
+        Main.tsProgress.Minimum = 0
+        If Itemcnt <= 0 Then
+            Main.tsProgress.Maximum = 1
+        Else
+            Main.tsProgress.Maximum = Itemcnt
         End If
+        Main.tsProgress.Value = 1
+        Dim ii As Integer
+        For ii = 0 To Itemcnt
+            Main.tsProgress.Increment(1)
+        Next
+        'Sales.arItemCache = arItems
+        Sales.lblCntFiltered.Text = cntRecs.ToString
+        'If Sales.lvSales.SelectedItems.Count = 0 And Sales.lvSales.Items.Count <> 0 Then
+        '    Sales.lvSales.TopItem.Selected = True
+        'End If
         If Sales.lvSales.Items.Count = 0 Then
             Sales.PullInfo("")
         End If
@@ -374,7 +430,7 @@ Public Class SalesListManager
         Dim param17 As SqlParameter = New SqlParameter("@Recovery", Sales.Recovery)
         Dim param18 As SqlParameter = New SqlParameter("@Group", Sales.cboGroupSales.Text)
         Dim param19 As SqlParameter = New SqlParameter("@R8", Sales.R8)
-        Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Dim cmdGet As SqlCommand
         Dim r As SqlDataReader
         cmdGet = New SqlCommand("dbo.SalesDepartmentGroups", cnn)
@@ -401,7 +457,7 @@ Public Class SalesListManager
         cnn.Open()
         r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
         While r.Read
-            Sales.lvSales.Groups.Add(r.Item(0), r.Item(0))
+            'Sales.lvSales.Groups.Add(r.Item(0), r.Item(0))
         End While
         r.Close()
         cnn.Close()
