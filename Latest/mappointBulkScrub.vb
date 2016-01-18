@@ -114,4 +114,7 @@ Public Class mappointBulkScrub
             'b.Dump_To_ProxyTable(v, DevOrPro)
         End Try
     End Sub
+    Public Sub VerifyAddress_Filtered(ByVal obj As ImportData_V2.sqlOperations.Record_And_Address)
+
+    End Sub
 End Class

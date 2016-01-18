@@ -602,6 +602,7 @@
     <Compile Include="USER_LOGIC.vb" />
     <Compile Include="USER_LOGICv2.vb" />
     <Compile Include="VerifyAddress.vb" />
+    <Compile Include="VerifyAddressBulk.vb" />
     <Compile Include="ViewEditAutoNotes.vb" />
     <Compile Include="ViewEditPrimaryLeadSources.vb" />
     <Compile Include="ViewEditProducts.vb" />

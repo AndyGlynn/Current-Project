@@ -40,10 +40,13 @@ Public Class VerifyAddress
 
     Public CloseMethod As String = ""
 
-    Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+    Private cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+
+
 
 
     Public Sub New(ByVal StAddress As String, ByVal City As String, ByVal State As String, ByVal Zip As String, ByVal RunCnt As Integer)
+       
         Me.RunCnt = RunCnt
 
         '' Here is the first check to see if the city is in the table AFTER is has been pulled out of MapPoint
@@ -52,6 +55,8 @@ Public Class VerifyAddress
         Filter(StAddress, City, State, Zip)
 
     End Sub
+    
+
     ' '' General Process
     ' ''
     ' '' First: get count of found addresses through filter 1
@@ -474,8 +479,8 @@ Public Class VerifyAddress
 
 
             'Dim oApp = STATIC_VARIABLES.oApp
-            Dim oApp = CreateObject("Mappoint.Application")
-            oMap = oApp.ActiveMap
+            'Dim oApp = CreateObject("Mappoint.Application")
+            'oMap = oApp.ActiveMap
             oResults = oMap.FindAddressResults(StAddress, City, , State, Zip, MapPoint.GeoCountry.geoCountryUnitedStates)
             Dim c
             Dim item As Integer = 0

@@ -652,7 +652,8 @@
                             Me.lblTable.Text = Table_Name
                             Me.lblMessage.Text = "Updating Addresses . . . "
                             Application.DoEvents()
-                            Dim mpt_bulk As New mappointBulkScrub
+                            'Dim mpt_bulk As New mappointBulkScrub
+                            Dim mpt_bulk As New VerifyAddressBulk '' tripple filter from old code adapted for bulk operations.
                             Dim sql_bulk As New ImportData_V2.sqlOperations
                             Dim arAddresses As List(Of ImportData_V2.sqlOperations.Record_And_Address)
                             arAddresses = sql_bulk.Get_Addresses_tblProspect(False)
@@ -667,8 +668,8 @@
                                 ''If iteration >= 500 Then
                                 ''    Exit For
                                 ''End If
-                          
-                                mpt_bulk.VerifyAddress(x, False)
+                                '' mpt_bulk.VerifyAddress(x,false)
+                                mpt_bulk.filter(x) '' tripple filter from old code adapted for bulk operations.
                                 pbRows.Increment(1)
                                 Me.lblCurrentRecordNum.Text = iteration
                                 Application.DoEvents()
