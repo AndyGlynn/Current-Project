@@ -531,3 +531,4 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmLinkSendEmail.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmEditSpecialInstructions.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.ErrorLogForm.resources

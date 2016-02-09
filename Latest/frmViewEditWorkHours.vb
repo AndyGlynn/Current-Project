@@ -25,18 +25,26 @@ Public Class frmViewEditWorkHours
                 Me.chklstWorkHours.Items.Add(y.ArWorkHours(d), False)
             Next
         Catch ex As Exception
-
+            Dim yy As New ErrorLogging_V2
+            yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "btnDelete", "FormCode", "Event", "btnDelete_Click", "0", ex.Message.ToString)
+            yy = Nothing
         End Try
     End Sub
 
     Private Sub frmViewEditWorkHours_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ResetDefault()
-        Dim x As New ViewEditWorkHours
-        x.PopulateWorkHours()
-        Dim d
-        For d = 0 To x.ArWorkHours.Count - 1
-            Me.chklstWorkHours.Items.Add(x.ArWorkHours(d), False)
-        Next
+        Try
+            ResetDefault()
+            Dim x As New ViewEditWorkHours
+            x.PopulateWorkHours()
+            Dim d
+            For d = 0 To x.ArWorkHours.Count - 1
+                Me.chklstWorkHours.Items.Add(x.ArWorkHours(d), False)
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "btnDelete", "FormCode", "Event", "btnDelete_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 

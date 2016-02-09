@@ -6,7 +6,9 @@ Imports System.IO
 
 Public Class LOGIN_OLDV2
     Dim strPath As String = "C:\pref.xml"
-
+    '' notes: AC
+    '' 2-09-2016
+    '' not used
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Text = STATIC_VARIABLES.ProgramName.ToString & " : Login"
         Dim doc As New XmlDocument

@@ -22,13 +22,13 @@ Partial Class DuplicateLead
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lstDupes = New System.Windows.Forms.ListView
-        Me.ColumnHeader3 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader1 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader2 = New System.Windows.Forms.ColumnHeader
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.btnNew = New System.Windows.Forms.Button
+        Me.lstDupes = New System.Windows.Forms.ListView()
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnNew = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lstDupes

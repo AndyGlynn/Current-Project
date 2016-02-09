@@ -30,8 +30,11 @@ Public Class AUTO_COMPLETE_LOGINS
             Next
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("AUTO_COMPLETE_LOGINS", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "'New'")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("AUTO_COMPLETE_LOGINS", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "'New'")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AUTO_COMPLETE_LOGINS", "AUTO_COMPLETE_LOGINS", "Class", "Constructor()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 End Class

@@ -42,29 +42,42 @@ Public Class Main
     Private mobjText As New StringBuilder()
     Friend WithEvents frmbutton As ToolStripMenuItem
     Public Function GetIPv4Address()
-        GetIPv4Address = String.Empty
-        Dim strmachine As String = System.Net.Dns.GetHostName()
-        Dim iphe As System.Net.IPHostEntry = System.Net.Dns.GetHostEntry(strmachine)
+        Try
+            GetIPv4Address = String.Empty
+            Dim strmachine As String = System.Net.Dns.GetHostName()
+            Dim iphe As System.Net.IPHostEntry = System.Net.Dns.GetHostEntry(strmachine)
 
-        For Each ipheal As System.Net.IPAddress In iphe.AddressList
-            If ipheal.AddressFamily = System.Net.Sockets.AddressFamily.InterNetworkV6 Then
-                GetIPv4Address = ipheal
-                ' MsgBox(ipheal.ToString, MsgBoxStyle.Critical, "ERROR")
+            For Each ipheal As System.Net.IPAddress In iphe.AddressList
+                If ipheal.AddressFamily = System.Net.Sockets.AddressFamily.InterNetworkV6 Then
+                    GetIPv4Address = ipheal
+                    ' MsgBox(ipheal.ToString, MsgBoxStyle.Critical, "ERROR")
 
-            End If
-        Next
-
+                End If
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Method", "GetIPV4Address()", "0", ex.Message.ToString)
+            y = Nothing
+            Return 0
+        End Try
     End Function
     Private Sub tsbsales_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbsales.Click
-        Dim x As Form
-        x = Sales
-        'sales.LOAD_HANDLER = "LOAD"
-        'Sales.lvAttachedFiles.Size = New System.Drawing.Size(Sales.pnlAFPics.Width / 2 - 5, Sales.lvAttachedFiles.Height)
-        'Sales.lvJobPics.Size = New System.Drawing.Size(Sales.pnlAFPics.Width / 2 - 5, Sales.lvJobPics.Height)
-        Sales.Label4.Location = New System.Drawing.Point((Sales.tpSummary.Width / 2) - 87, Sales.Label4.Location.Y)
-        x.MdiParent = Me
-        x.Show()
-        x.BringToFront()
+        Try
+            Dim x As Form
+            x = Sales
+            'sales.LOAD_HANDLER = "LOAD"
+            'Sales.lvAttachedFiles.Size = New System.Drawing.Size(Sales.pnlAFPics.Width / 2 - 5, Sales.lvAttachedFiles.Height)
+            'Sales.lvJobPics.Size = New System.Drawing.Size(Sales.pnlAFPics.Width / 2 - 5, Sales.lvJobPics.Height)
+            Sales.Label4.Location = New System.Drawing.Point((Sales.tpSummary.Width / 2) - 87, Sales.Label4.Location.Y)
+            x.MdiParent = Me
+            x.Show()
+            x.BringToFront()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbsales_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
 
     End Sub
 
@@ -74,58 +87,91 @@ Public Class Main
 
         'Dim y As New Form
         'y = My.Forms.EnterLead
+        Try
+            EnterLead.MdiParent = Me
+            If STATIC_VARIABLES.ActiveChild IsNot Nothing Then
+                STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
+            End If
 
-        EnterLead.MdiParent = Me
-        If STATIC_VARIABLES.ActiveChild IsNot Nothing Then
-            STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
-        End If
 
+            EnterLead.Show()
+            EnterLead.StartPosition = FormStartPosition.CenterParent
+            EnterLead.WindowState = FormWindowState.Normal
+            'EnterLead.PerformLayout()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbnew_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        EnterLead.Show()
-        EnterLead.StartPosition = FormStartPosition.CenterParent
-        EnterLead.WindowState = FormWindowState.Normal
-        'EnterLead.PerformLayout()
 
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
+        Try
+            Application.Exit()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "ExitToolStripMenuItem", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        Application.Exit()
     End Sub
 
     Private Sub tsbattach_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbattach.Click
-        AttachAFile.ShowInTaskbar = False
-        AttachAFile.ShowDialog()
-        'Try
-        '    Dim y As String = InputBox$("Please enter the lead number you wish to attach the file(s) to.", "Enter Lead Number", STATIC_VARIABLES.CurrentID.ToString) ' RecordLogic.CurrentID was taken out for default recordID in rev 5
-        '    If y = "" Then
-        '        MsgBox("You must supply a lead number to attach a file to.", MsgBoxStyle.Exclamation, "Error Attaching File")
-        '        Exit Sub
-        '    End If
-        '    Dim z As New Attach
-        '    Dim a As String = "0"
-        '    z.AttachFile(y, a)
-        '    'MsgBox("File attached to Lead#: " & y.ToString & "", MsgBoxStyle.Information, "File Attached Successfully")
-        '    Exit Sub
-        'Catch ex As Exception
-        '    MsgBox(ex.Message.ToString)
-        'End Try
+        Try
+            AttachAFile.ShowInTaskbar = False
+            AttachAFile.ShowDialog()
+            'Try
+            '    Dim y As String = InputBox$("Please enter the lead number you wish to attach the file(s) to.", "Enter Lead Number", STATIC_VARIABLES.CurrentID.ToString) ' RecordLogic.CurrentID was taken out for default recordID in rev 5
+            '    If y = "" Then
+            '        MsgBox("You must supply a lead number to attach a file to.", MsgBoxStyle.Exclamation, "Error Attaching File")
+            '        Exit Sub
+            '    End If
+            '    Dim z As New Attach
+            '    Dim a As String = "0"
+            '    z.AttachFile(y, a)
+            '    'MsgBox("File attached to Lead#: " & y.ToString & "", MsgBoxStyle.Information, "File Attached Successfully")
+            '    Exit Sub
+            'Catch ex As Exception
+            '    MsgBox(ex.Message.ToString)
+            'End Try
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbattach_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub tsImportsPics_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsImportsPics.Click
-        Dim x As Form
-        x = ImportPictures
-        'x.MdiParent = Me
-        x.ShowInTaskbar = False
-        x.ShowDialog()
+        Try
+            Dim x As Form
+            x = ImportPictures
+            'x.MdiParent = Me
+            x.ShowInTaskbar = False
+            x.ShowDialog()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsImportPics_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub tsbrolodex_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbrolodex.Click
-        Dim x As Form
-        x = frmRolodex 'Employee_Contacts
-        'x.MdiParent = Me
-        x.ShowInTaskbar = False
-        x.ShowDialog()
+        Try
+            Dim x As Form
+            x = frmRolodex 'Employee_Contacts
+            'x.MdiParent = Me
+            x.ShowInTaskbar = False
+            x.ShowDialog()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbrolodex_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub tsbtransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtransfer.Click
@@ -136,7 +182,14 @@ Public Class Main
     End Sub
 
     Private Sub Main_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
-        Me.Dispose()
+        Try
+            Me.Dispose()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "Main_FormClosed", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
 
     End Sub
 
@@ -145,115 +198,163 @@ Public Class Main
         'NetListener2.Stop() '' accept/decline listener shutdown
         'Dim c As New USER_LOGIC
         'c.LogOut_Of_System(STATIC_VARIABLES.Login, STATIC_VARIABLES.UserPWD)
-        Dim x As New MAPPOINT_LOGIC
-        x.KillProcess() '' make sure all mappoint instances are not runnning and closed out / free resources 
-        Dim c As New USER_LOGICv2
         Try
-            Dim frmX As Windows.Forms.Form = Me.ActiveMdiChild
-            Dim scrX As Integer = frmX.Location.X
-            Dim scrY As Integer = frmX.Location.Y
-            Dim scrW As Integer = frmX.Width
-            Dim scrH As Integer = frmX.Height
-            'c.LogOut("00", scrX, scrY, scrW, scrH, frm.Name, "", c.Get_MACH_NAME, "")
-            c.LogOutOfSystem(STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName, STATIC_VARIABLES.CurrentLoggedInEmployee.UserLastName, scrX, scrY, scrW, scrH, frmX.Name)
-        Catch ex As Exception
-            Dim frmX As String = ""
-            Dim scrX As Integer = 0
-            Dim scrY As Integer = 0
-            Dim scrW As Integer = 0
-            Dim scrH As Integer = 0
-            'c.LogOut("99", scrX, scrY, scrW, scrH, "Main", "No Query", My.Computer.Name.ToString, "admin")
-            c.LogOutOfSystem(STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName, STATIC_VARIABLES.CurrentLoggedInEmployee.UserLastName, scrX, scrY, scrW, scrH, frmX)
-        End Try
+            Dim x As New MAPPOINT_LOGIC
+            x.KillProcess() '' make sure all mappoint instances are not runnning and closed out / free resources 
+            Dim c As New USER_LOGICv2
+            Try
+                If My.Computer.Network.IsAvailable = True Then
+                    Dim tstCNN As New System.Data.SqlClient.SqlConnection("SERVER=192.168.1.2;DataBase=Iss;User Id=sa;Password=spoken1;Timeout=5;")
+                    Try
+                        tstCNN.Open()
+                        tstCNN.Close()
+                    Catch ex As Exception
+                        MsgBox("No connection can be made to SQL server. Settings will not be saved.", MsgBoxStyle.Exclamation, "No Network Present.")
+                        Exit Sub
+                    End Try
+                End If
+                Try
+                    Dim frmX As Windows.Forms.Form = Me.ActiveMdiChild
+                    Dim scrX As Integer = frmX.Location.X
+                    Dim scrY As Integer = frmX.Location.Y
+                    Dim scrW As Integer = frmX.Width
+                    Dim scrH As Integer = frmX.Height
+                    'c.LogOut("00", scrX, scrY, scrW, scrH, frm.Name, "", c.Get_MACH_NAME, "")
+                    c.LogOutOfSystem(STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName, STATIC_VARIABLES.CurrentLoggedInEmployee.UserLastName, scrX, scrY, scrW, scrH, frmX.Name)
+                Catch ex As Exception
+                    Dim frmX As String = ""
+                    Dim scrX As Integer = 0
+                    Dim scrY As Integer = 0
+                    Dim scrW As Integer = 0
+                    Dim scrH As Integer = 0
+                    'c.LogOut("99", scrX, scrY, scrW, scrH, "Main", "No Query", My.Computer.Name.ToString, "admin")
+                    c.LogOutOfSystem(STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName, STATIC_VARIABLES.CurrentLoggedInEmployee.UserLastName, scrX, scrY, scrW, scrH, frmX)
+                End Try
 
+            Catch ex As Exception
+
+            End Try
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "Main_FormClosing", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
     Private Sub Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.tmrAlerts.Stop()
+        Try
+            If My.Computer.Network.IsAvailable = False Then
+                MsgBox("There is no network connection Present.", MsgBoxStyle.Exclamation, "No Network.")
+                Exit Sub
+            End If
+            If My.Computer.Network.IsAvailable = True Then
+                Dim tstCNN As New System.Data.SqlClient.SqlConnection("SERVER=192.168.1.2;DataBase=Iss;User Id=sa;Password=spoken1;Timeout=5;")
+                Try
+                    tstCNN.Open()
+                    tstCNN.Close()
+                Catch ex As Exception
+                    MsgBox("No connection can be made to SQL server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "No Network Present.")
+                    Exit Sub
+                End Try
+            End If
 
-        'ManageAlerts.MdiParent = Me
+            Me.tmrAlerts.Stop()
 
-
-        'ThNet.Start()
-        'ThAD.Start()
-        Me.Text = STATIC_VARIABLES.ProgramName
-        Me.TSMain.Enabled = True
-
-        tmrAlerts.Enabled = True
-        'tmrXFER.Enabled = True
-        'tmrStartupLauncher.Enabled = True
-
-
-
-
-
-
-
-        'Dim r As New REG_LOGIC
-        'r.ReadKey(STATIC_VARIABLES.LicenseKey, STATIC_VARIABLES.LeaseKey)
-        LOGIN.TopMost = True
-        LOGIN.ShowDialog()
-        If LOGIN.Success = False Then
-            Exit Sub
-        End If
-        Dim g As New systemCheckLogin
-        Dim cntRecs As Integer = g.CntRecs
-        Me.tsLoggedInAs.Text = STATIC_VARIABLES.CurrentUser
-        Me.tsRecCount.Text = cntRecs.ToString
-        Me.tsProgress.Minimum = 1
-        Me.tsProgress.Maximum = cntRecs
-        Me.tsProgress.Value = cntRecs
-
-        If g.CheckNetworkStatus = False Then
-            Me.tsNetworkStatus.ForeColor = Color.Red
-            Me.tsNetworkStatus.Text = "DOWN"
-        ElseIf g.CheckNetworkStatus = True Then
-            Me.tsNetworkStatus.ForeColor = Color.Green
-            Me.tsNetworkStatus.Text = "UP"
-        End If
-
-        If g.CheckSQLStatus = True Then
-            Me.tsSqlSTatus.ForeColor = Color.Green
-            Me.tsSqlSTatus.Text = "UP"
-        ElseIf g.CheckSQLStatus = False Then
-            Me.tsSqlSTatus.ForeColor = Color.Red
-            Me.tsSqlSTatus.Text = "DOWN"
-        End If
-        tmrAlerts.Start()
-        ' MsgBox(STATIC_VARIABLES.CurrentUser)
-        Dim b As New ALERT_LOGIC(STATIC_VARIABLES.CurrentUser)
-        Dim hour As Integer = Now.Hour
-        Dim minute As Integer = Now.Minute
-        Dim seconds As Integer = Now.Second
-        Dim correctedTime As String = Date.Today.Date & " " & hour & ":" & minute & ":" & seconds
-        Select Case b.CountOfAlerts
-            Case Is >= 1
-                ManageAlerts.ShowInTaskbar = False
-                'ManageAlerts.Visible = False
-                ManageAlerts.Show()
-                ManageAlerts.BringToFront()
+            'ManageAlerts.MdiParent = Me
 
 
-                Exit Select
-            Case Is <= 0
-                Exit Select
-        End Select
+            'ThNet.Start()
+            'ThAD.Start()
+            Me.Text = STATIC_VARIABLES.ProgramName
+            Me.TSMain.Enabled = True
+
+            tmrAlerts.Enabled = True
+            'tmrXFER.Enabled = True
+            'tmrStartupLauncher.Enabled = True
 
 
-        If LOGIN.txtUserName.Text <> "" Then
 
-            LOGIN.txtPWD.Focus()
-        Else
-            LOGIN.txtUserName.Focus()
-        End If
+
+
+
+
+            'Dim r As New REG_LOGIC
+            'r.ReadKey(STATIC_VARIABLES.LicenseKey, STATIC_VARIABLES.LeaseKey)
+            LOGIN.TopMost = True
+            LOGIN.ShowDialog()
+            If LOGIN.Success = False Then
+                Exit Sub
+            End If
+            Dim g As New systemCheckLogin
+            Dim cntRecs As Integer = g.CntRecs
+            Me.tsLoggedInAs.Text = STATIC_VARIABLES.CurrentUser
+            Me.tsRecCount.Text = cntRecs.ToString
+            Me.tsProgress.Minimum = 1
+            Me.tsProgress.Maximum = cntRecs
+            Me.tsProgress.Value = cntRecs
+
+            If g.CheckNetworkStatus = False Then
+                Me.tsNetworkStatus.ForeColor = Color.Red
+                Me.tsNetworkStatus.Text = "DOWN"
+            ElseIf g.CheckNetworkStatus = True Then
+                Me.tsNetworkStatus.ForeColor = Color.Green
+                Me.tsNetworkStatus.Text = "UP"
+            End If
+
+            If g.CheckSQLStatus = True Then
+                Me.tsSqlSTatus.ForeColor = Color.Green
+                Me.tsSqlSTatus.Text = "UP"
+            ElseIf g.CheckSQLStatus = False Then
+                Me.tsSqlSTatus.ForeColor = Color.Red
+                Me.tsSqlSTatus.Text = "DOWN"
+            End If
+            tmrAlerts.Start()
+            ' MsgBox(STATIC_VARIABLES.CurrentUser)
+            Dim b As New ALERT_LOGIC(STATIC_VARIABLES.CurrentUser)
+            Dim hour As Integer = Now.Hour
+            Dim minute As Integer = Now.Minute
+            Dim seconds As Integer = Now.Second
+            Dim correctedTime As String = Date.Today.Date & " " & hour & ":" & minute & ":" & seconds
+            Select Case b.CountOfAlerts
+                Case Is >= 1
+                    ManageAlerts.ShowInTaskbar = False
+                    'ManageAlerts.Visible = False
+                    ManageAlerts.Show()
+                    ManageAlerts.BringToFront()
+
+
+                    Exit Select
+                Case Is <= 0
+                    Exit Select
+            End Select
+
+
+            If LOGIN.txtUserName.Text <> "" Then
+
+                LOGIN.txtPWD.Focus()
+            Else
+                LOGIN.txtUserName.Focus()
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "Main_Load", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
     Private Sub LoginToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoginToolStripMenuItem.Click
-        Dim r As New REG_LOGIC
+        Try
+            Dim r As New REG_LOGIC
 
-        'LOGIN.ShowDialog()
-        'r.ReadKey(STATIC_VARIABLES.LicenseKey, STATIC_VARIABLES.LeaseKey)
+            'LOGIN.ShowDialog()
+            'r.ReadKey(STATIC_VARIABLES.LicenseKey, STATIC_VARIABLES.LeaseKey)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "LoginToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub LogoutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LogoutToolStripMenuItem.Click
@@ -263,52 +364,73 @@ Public Class Main
     End Sub
 
     Private Sub tsbschedule_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbschedule.Click
-        Dim x As Form
-        x = ScheduleAction
-        x.ShowInTaskbar = False
-        x.ShowDialog()
+        Try
+            Dim x As Form
+            x = ScheduleAction
+            x.ShowInTaskbar = False
+            x.ShowDialog()
 
-        x.Focus()
-        x.TopMost = True
+            x.Focus()
+            x.TopMost = True
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbschedule_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
     Private Sub tsbalert_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbalert.Click
-        Dim x As Form
-        x = AssignAlert
-        'x.MdiParent = Me
-        x.ShowInTaskbar = False
-        x.ShowDialog()
+        Try
+            Dim x As Form
+            x = AssignAlert
+            'x.MdiParent = Me
+            x.ShowInTaskbar = False
+            x.ShowDialog()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbalert_click", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub tmrAlerts_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAlerts.Tick
-        Dim User As String = STATIC_VARIABLES.CurrentUser
+        Try
+            Dim User As String = STATIC_VARIABLES.CurrentUser
 
-        Dim x As New Alert_Logic_Tick
-        x.CountAlertsTick(User)
+            Dim x As New Alert_Logic_Tick
+            x.CountAlertsTick(User)
 
-        Select Case x.CountOfAlertsTick
-            Case Is = 1
+            Select Case x.CountOfAlertsTick
+                Case Is = 1
 
-                If STATIC_VARIABLES.ActiveChild IsNot Nothing Then
-                    STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
-                End If
-                x.Get_ID(User)
-            Case Is >= 2
-                If STATIC_VARIABLES.ActiveChild IsNot Nothing Then
-                    STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
-                End If
-                x.Get_ID(User)
-                Me.tmrAlerts_Tick(Nothing, Nothing)
-
-
-
+                    If STATIC_VARIABLES.ActiveChild IsNot Nothing Then
+                        STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
+                    End If
+                    x.Get_ID(User)
+                Case Is >= 2
+                    If STATIC_VARIABLES.ActiveChild IsNot Nothing Then
+                        STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
+                    End If
+                    x.Get_ID(User)
+                    Me.tmrAlerts_Tick(Nothing, Nothing)
 
 
-            Case Is <= 0
 
-                Exit Select
-        End Select
+
+
+                Case Is <= 0
+
+                    Exit Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tmrAlerts_Tick", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
 
 
     End Sub
@@ -454,38 +576,64 @@ Public Class Main
     End Sub
 
     Private Sub WarmCallingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WarmCallingToolStripMenuItem.Click
-        Dim x As Form
-        x = WCaller
-        x.MdiParent = Me
-        x.Show()
+        Try
+            Dim x As Form
+            x = WCaller
+            x.MdiParent = Me
+            x.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "WarmCallingToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
+
     End Sub
 
 
 
     Private Sub tsbfind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbfind.Click
-        FindLead.PREVIOUS_ID = "0"
-        FindLead.ShowInTaskbar = False
-        FindLead.ShowDialog()
-        If Me.forcettconfirm = True Then
-            Confirming.Create_Tooltip(Confirming.dpConfirming, "search results")
-        End If
-        If Me.forcettsales = True Then
-            Confirming.Create_Tooltip(Confirming.dpSales, "search results")
-        End If
-
-
+        Try
+            FindLead.PREVIOUS_ID = "0"
+            FindLead.ShowInTaskbar = False
+            FindLead.ShowDialog()
+            If Me.forcettconfirm = True Then
+                Confirming.Create_Tooltip(Confirming.dpConfirming, "search results")
+            End If
+            If Me.forcettsales = True Then
+                Confirming.Create_Tooltip(Confirming.dpSales, "search results")
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbfind_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
 
     Private Sub tsbchat_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbchat.Click
-        Dim x As Form
-        x = frmChat
-        'STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
-        x.Show()
+        Try
+            Dim x As Form
+            x = frmChat
+            'STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
+            x.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbchat_click", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
+
     End Sub
     Private Sub Send(ByVal t As String)
-        Dim w As New IO.StreamWriter(mobjClient.GetStream)
-        w.Write(t & vbCr)
-        w.Flush()
+        Try
+            Dim w As New IO.StreamWriter(mobjClient.GetStream)
+            w.Write(t & vbCr)
+            w.Flush()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Method", "Send(t as string)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
     Private Sub DoRead(ByVal ar As IAsyncResult)
         '' do read takes the iasynresult as an argument
@@ -554,33 +702,61 @@ Public Class Main
     End Sub
 
     Private Sub ConfirmingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConfirmingToolStripMenuItem.Click
-        Confirming.MdiParent = Me
-        Confirming.Show()
-        Confirming.BringToFront()
+        Try
+            Confirming.MdiParent = Me
+            Confirming.Show()
+            Confirming.BringToFront()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "ConfirmingToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
 
 
     End Sub
 
     Private Sub NewUserToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        SetUpUser.ShowInTaskbar = False
-        SetUpUser.ShowDialog()
+        Try
+            SetUpUser.ShowInTaskbar = False
+            SetUpUser.ShowDialog()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "NewUserToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
 
     End Sub
 
     Private Sub tsbmap_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbmap.Click
         'System.Diagnostics.Process.Start("C:\Users\Andy\Documents\Programming Files\ISSMappointEXE\ISSMappointEXE\bin\Debug\ISSMappointEXE.exe")
         'MsgBox("Place holder for external mappoint.")
-        frmMappoint.Show()
-        frmMappoint.BringToFront()
-        frmMappoint.MdiParent = Me
+        Try
+            frmMappoint.Show()
+            frmMappoint.BringToFront()
+            frmMappoint.MdiParent = Me
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbmap_Click", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
 
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrXFER.Tick
-        If STATIC_VARIABLES.PendingXFER = True Then
-            STATIC_VARIABLES.PendingXFER = False
-            'Transfer_Lead2.Show()
-        End If
+        Try
+            If STATIC_VARIABLES.PendingXFER = True Then
+                STATIC_VARIABLES.PendingXFER = False
+                'Transfer_Lead2.Show()
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "Timer1_Tick", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub tmrStartupLauncher_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrStartupLauncher.Tick
@@ -655,125 +831,204 @@ Public Class Main
 
 
     Private Sub BugsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BugsToolStripMenuItem.Click
-        Dim day As String = Date.Now.Day
-        Dim month As String = Date.Now.Month
-        Dim year As String = Date.Now.Year
-        'MsgBox(month & "/" & day & "/" & year)
-        Dim suggest As String = InputBox$("Enter the bug you have found. Please be as descriptive as possible." & vbCr & "Example: On [form used] I was [doing this action] and [this] happened.", "Bug to Report", "", , )
-        If suggest.ToString.Length <= 0 Then
-            Exit Sub
-        ElseIf suggest.ToString.Length >= 1 Then
-            Dim str As New IO.StreamWriter("\\server\iss\company\Bugs\" & month & "-" & day & "-" & year & " BUGS.txt", True)
-            str.WriteLine(STATIC_VARIABLES.CurrentUser.ToString & " | " & STATIC_VARIABLES.IP.ToString & " | " & suggest.ToString & vbCr)
-            str.Flush()
-            str.Close()
-        End If
+        Try
+            Dim day As String = Date.Now.Day
+            Dim month As String = Date.Now.Month
+            Dim year As String = Date.Now.Year
+            'MsgBox(month & "/" & day & "/" & year)
+            Dim suggest As String = InputBox$("Enter the bug you have found. Please be as descriptive as possible." & vbCr & "Example: On [form used] I was [doing this action] and [this] happened.", "Bug to Report", "", , )
+            If suggest.ToString.Length <= 0 Then
+                Exit Sub
+            ElseIf suggest.ToString.Length >= 1 Then
+                Dim str As New IO.StreamWriter("\\server\iss\company\Bugs\" & month & "-" & day & "-" & year & " BUGS.txt", True)
+                str.WriteLine(STATIC_VARIABLES.CurrentUser.ToString & " | " & STATIC_VARIABLES.IP.ToString & " | " & suggest.ToString & vbCr)
+                str.Flush()
+                str.Close()
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "BugsToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub EnterASuggestionToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnterASuggestionToolStripMenuItem.Click
-        Dim day As String = Date.Now.Day
-        Dim month As String = Date.Now.Month
-        Dim year As String = Date.Now.Year
-        'MsgBox(month & "/" & day & "/" & year)
-        Dim suggest As String = InputBox$("Suggestions?", "Suggestion", "", , )
-        If suggest.ToString.Length <= 0 Then
-            Exit Sub
-        ElseIf suggest.ToString.Length >= 1 Then
-            Dim str As New IO.StreamWriter("\\server\iss\company\Suggestions\" & month & "-" & day & "-" & year & " suggestions.txt", True)
-            str.WriteLine(STATIC_VARIABLES.CurrentUser.ToString & " | " & STATIC_VARIABLES.IP.ToString & " | " & suggest.ToString & vbCr)
-            str.Flush()
-            str.Close()
-        End If
+        Try
+            Dim day As String = Date.Now.Day
+            Dim month As String = Date.Now.Month
+            Dim year As String = Date.Now.Year
+            'MsgBox(month & "/" & day & "/" & year)
+            Dim suggest As String = InputBox$("Suggestions?", "Suggestion", "", , )
+            If suggest.ToString.Length <= 0 Then
+                Exit Sub
+            ElseIf suggest.ToString.Length >= 1 Then
+                Dim str As New IO.StreamWriter("\\server\iss\company\Suggestions\" & month & "-" & day & "-" & year & " suggestions.txt", True)
+                str.WriteLine(STATIC_VARIABLES.CurrentUser.ToString & " | " & STATIC_VARIABLES.IP.ToString & " | " & suggest.ToString & vbCr)
+                str.Flush()
+                str.Close()
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "EnterASuggestionToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub CompanyInformationToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CompanyInformationToolStripMenuItem.Click
         'frmEditCompanyInformation.MdiParent = Me
-        frmEditCompanyInformation.StartPosition = FormStartPosition.CenterScreen
-        frmEditCompanyInformation.ShowInTaskbar = False
-        frmEditCompanyInformation.ShowDialog()
-
+        Try
+            frmEditCompanyInformation.StartPosition = FormStartPosition.CenterScreen
+            frmEditCompanyInformation.ShowInTaskbar = False
+            frmEditCompanyInformation.ShowDialog()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "ComanyInformationToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem1.Click
-        frmViewEditAutoNotes.MdiParent = Me
-        frmViewEditAutoNotes.StartPosition = FormStartPosition.CenterScreen
-        frmViewEditAutoNotes.Show()
+        Try
+            frmViewEditAutoNotes.MdiParent = Me
+            frmViewEditAutoNotes.StartPosition = FormStartPosition.CenterScreen
+            frmViewEditAutoNotes.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "ToolStripMenuItem1_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub WorkHoursToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WorkHoursToolStripMenuItem.Click
-        frmViewEditWorkHours.MdiParent = Me
-        frmViewEditWorkHours.StartPosition = FormStartPosition.CenterScreen
-        frmViewEditWorkHours.Show()
+        Try
+            frmViewEditWorkHours.MdiParent = Me
+            frmViewEditWorkHours.StartPosition = FormStartPosition.CenterScreen
+            frmViewEditWorkHours.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "WorkHoursToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub PrimaryLeadSourcesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PrimaryLeadSourcesToolStripMenuItem.Click
-        frmViewEditPrimaryLeadSources.MdiParent = Me
-        frmViewEditPrimaryLeadSources.StartPosition = FormStartPosition.CenterScreen
-        frmViewEditPrimaryLeadSources.Show()
+        Try
+            frmViewEditPrimaryLeadSources.MdiParent = Me
+            frmViewEditPrimaryLeadSources.StartPosition = FormStartPosition.CenterScreen
+            frmViewEditPrimaryLeadSources.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "PrimaryLeadSourcesToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub ProductsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProductsToolStripMenuItem.Click
-        frmViewEditProducts.MdiParent = Me
-        frmViewEditProducts.StartPosition = FormStartPosition.CenterScreen
-        frmViewEditProducts.Show()
+        Try
+            frmViewEditProducts.MdiParent = Me
+            frmViewEditProducts.StartPosition = FormStartPosition.CenterScreen
+            frmViewEditProducts.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "ProductsToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub ErrorLogsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ErrorLogsToolStripMenuItem.Click
-        frmErrorLogs.MdiParent = Me
-        frmErrorLogs.StartPosition = FormStartPosition.CenterParent
-        frmErrorLogs.Show()
+        'frmErrorLogs.MdiParent = Me
+        'frmErrorLogs.StartPosition = FormStartPosition.CenterParent
+        'frmErrorLogs.Show()
+        Try
+            ErrorLogForm.MdiParent = Me
+            ErrorLogForm.StartPosition = FormStartPosition.CenterParent
+            ErrorLogForm.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "ErrorLogsToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub BackupToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupToolStripMenuItem.Click
-        frmBackup.MdiParent = Me
-        frmBackup.StartPosition = FormStartPosition.CenterParent
-        frmBackup.Show()
+        Try
+            frmBackup.MdiParent = Me
+            frmBackup.StartPosition = FormStartPosition.CenterParent
+            frmBackup.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "BackupToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
     Private Sub WindowsToolStripMenuItem_DropDownOpening(ByVal sender As Object, ByVal e As System.EventArgs) Handles WindowsToolStripMenuItem.DropDownOpening
-        Dim count As Integer = Me.MdiChildren.Length
-        Me.WindowsToolStripMenuItem.DropDownItems.Clear()
-        Me.WindowsToolStripMenuItem.DropDownItems.Add(CloseAll)
-        CloseAll.Text = "Close All"
+        Try
+            Dim count As Integer = Me.MdiChildren.Length
+            Me.WindowsToolStripMenuItem.DropDownItems.Clear()
+            Me.WindowsToolStripMenuItem.DropDownItems.Add(CloseAll)
+            CloseAll.Text = "Close All"
 
-        Me.WindowsToolStripMenuItem.DropDownItems.Add(New ToolStripSeparator)
-        Me.WindowsToolStripMenuItem.DropDownItems.Add(TileVertically)
-        TileVertically.Text = "Tile Vertically"
+            Me.WindowsToolStripMenuItem.DropDownItems.Add(New ToolStripSeparator)
+            Me.WindowsToolStripMenuItem.DropDownItems.Add(TileVertically)
+            TileVertically.Text = "Tile Vertically"
 
-        Me.WindowsToolStripMenuItem.DropDownItems.Add(TileHorizontally)
-        TileHorizontally.Text = "Tile Horizontally"
-        Me.WindowsToolStripMenuItem.DropDownItems.Add(Cascade)
-        Cascade.Text = "Cascade"
-
-
-        Me.WindowsToolStripMenuItem.DropDownItems.Add(New ToolStripSeparator)
-        For i As Integer = 0 To count - 1
-            frmbutton = New ToolStripMenuItem
-            frmbutton.Text = Me.MdiChildren(i).Text
-            frmbutton.Tag = i
-            Dim c As New ContextMenu
-            c.MenuItems.Add("Close " & Me.MdiChildren(i).Text)
+            Me.WindowsToolStripMenuItem.DropDownItems.Add(TileHorizontally)
+            TileHorizontally.Text = "Tile Horizontally"
+            Me.WindowsToolStripMenuItem.DropDownItems.Add(Cascade)
+            Cascade.Text = "Cascade"
 
 
-            If Me.MdiChildren(i) Is Me.ActiveMdiChild Then
-                'frmbutton.Image = Me.ILIcons.Images(0)
-                frmbutton.CheckState = CheckState.Checked
-            End If
-            Me.WindowsToolStripMenuItem.DropDownItems.Add(frmbutton)
-            AddHandler frmbutton.Click, AddressOf frmbutton_Click
-        Next
+            Me.WindowsToolStripMenuItem.DropDownItems.Add(New ToolStripSeparator)
+            For i As Integer = 0 To count - 1
+                frmbutton = New ToolStripMenuItem
+                frmbutton.Text = Me.MdiChildren(i).Text
+                frmbutton.Tag = i
+                Dim c As New ContextMenu
+                c.MenuItems.Add("Close " & Me.MdiChildren(i).Text)
+
+
+                If Me.MdiChildren(i) Is Me.ActiveMdiChild Then
+                    'frmbutton.Image = Me.ILIcons.Images(0)
+                    frmbutton.CheckState = CheckState.Checked
+                End If
+                Me.WindowsToolStripMenuItem.DropDownItems.Add(frmbutton)
+                AddHandler frmbutton.Click, AddressOf frmbutton_Click
+            Next
 
 
 
 
-        Me.WindowsToolStripMenuItem.DropDown.PerformLayout()
+            Me.WindowsToolStripMenuItem.DropDown.PerformLayout()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "WindowsToolStripMenuItem_DropDownOpening", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub frmbutton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles frmbutton.Click
-        Dim Rb As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
-        Me.ActivateMdiChild(MdiChildren(CInt(Rb.Tag)))
-        Me.MdiChildren(CInt(Rb.Tag)).Focus()
+        Try
+            Dim Rb As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+            Me.ActivateMdiChild(MdiChildren(CInt(Rb.Tag)))
+            Me.MdiChildren(CInt(Rb.Tag)).Focus()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "frmButton_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
@@ -821,125 +1076,159 @@ Public Class Main
    
 
     Private Sub Cascade_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Cascade.Click
-        Me.LayoutMdi(System.Windows.Forms.MdiLayout.Cascade)
+        Try
+            Me.LayoutMdi(System.Windows.Forms.MdiLayout.Cascade)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "Cascade_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub TileHorizontally_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TileHorizontally.Click
-        Me.LayoutMdi(System.Windows.Forms.MdiLayout.TileHorizontal)
+        Try
+            Me.LayoutMdi(System.Windows.Forms.MdiLayout.TileHorizontal)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "TileHorizontally_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub TileVertically_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TileVertically.Click
-        Me.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical)
+        Try
+            Me.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "TileVertically_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub CloseAll_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CloseAll.Click
-        For Each frm As Form In Me.MdiChildren
-            frm.Close()
-        Next
-        Me.Refresh()
+        Try
+            For Each frm As Form In Me.MdiChildren
+                frm.Close()
+            Next
+            Me.Refresh()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "CloseAll_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
+    
+
     Private Sub Main_MdiChildActivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MdiChildActivate
-
-        Dim count As Integer = Me.MdiChildren.Length
-        For i As Integer = 0 To count - 1
-            'Me.MdiChildren(i).WindowState = FormWindowState.Normal
-            If Me.MdiChildren(i) Is Me.ActiveMdiChild Then
-                Dim f As Form = Me.MdiChildren(i)
-                Select Case f.Name
-                    Case "Confirming", "Sales", "WCaller", "MarketingManager", "Finance", "Installation", "Administration", _
-                    "Recovery", "PreviousCustomer", "ColdCalling", "ConfirmingSingleRecord", "SecondSource"
-                        STATIC_VARIABLES.ActiveChild = Me.MdiChildren(i)
-                        ''Add decision structure here to manage current id 
-                        '' may fire this event before it selects listview item could be problamatic ''It wasnt 
-                        '' hopefully this fires after load event on form 
-                        ''Tested, Load event for form happens then it hit mdiactivate event here, Should work perfect,
-                        '' and eliminate the need to manage form by form, but it will still be neccesary to cahnge currentID on tab change in each form
-                        Dim lv As ListView
-                        Select Case f.Name
-                            Case "Confirming"
-                                If Confirming.TabControl1.SelectedIndex = 0 Then
-                                    lv = Confirming.lvConfirming
-                                ElseIf Confirming.TabControl1.SelectedIndex = 1 Then
-                                    lv = Confirming.lvSales
-                                Else
-                                    lv = Nothing
-                                End If
-                            Case "Sales"
-                                If Sales.tbMain.SelectedIndex = 0 Then
-                                    If Sales.lvnoresults.SelectedItems.Count <> 0 Then
-                                        lv = Sales.lvnoresults
+        Try
+            Dim count As Integer = Me.MdiChildren.Length
+            For i As Integer = 0 To count - 1
+                'Me.MdiChildren(i).WindowState = FormWindowState.Normal
+                If Me.MdiChildren(i) Is Me.ActiveMdiChild Then
+                    Dim f As Form = Me.MdiChildren(i)
+                    Select Case f.Name
+                        Case "Confirming", "Sales", "WCaller", "MarketingManager", "Finance", "Installation", "Administration", _
+                        "Recovery", "PreviousCustomer", "ColdCalling", "ConfirmingSingleRecord", "SecondSource"
+                            STATIC_VARIABLES.ActiveChild = Me.MdiChildren(i)
+                            ''Add decision structure here to manage current id 
+                            '' may fire this event before it selects listview item could be problamatic ''It wasnt 
+                            '' hopefully this fires after load event on form 
+                            ''Tested, Load event for form happens then it hit mdiactivate event here, Should work perfect,
+                            '' and eliminate the need to manage form by form, but it will still be neccesary to cahnge currentID on tab change in each form
+                            Dim lv As ListView
+                            Select Case f.Name
+                                Case "Confirming"
+                                    If Confirming.TabControl1.SelectedIndex = 0 Then
+                                        lv = Confirming.lvConfirming
+                                    ElseIf Confirming.TabControl1.SelectedIndex = 1 Then
+                                        lv = Confirming.lvSales
                                     Else
                                         lv = Nothing
                                     End If
-                                ElseIf Sales.tbMain.SelectedIndex = 1 Then
-                                    If Sales.TabControl2.SelectedIndex = 0 Then
-                                        lv = Sales.lvSales
-                                    ElseIf Sales.TabControl2.SelectedIndex = 1 Then
-                                        lv = Nothing
+                                Case "Sales"
+                                    If Sales.tbMain.SelectedIndex = 0 Then
+                                        If Sales.lvnoresults.SelectedItems.Count <> 0 Then
+                                            lv = Sales.lvnoresults
+                                        Else
+                                            lv = Nothing
+                                        End If
+                                    ElseIf Sales.tbMain.SelectedIndex = 1 Then
+                                        If Sales.TabControl2.SelectedIndex = 0 Then
+                                            lv = Sales.lvSales
+                                        ElseIf Sales.TabControl2.SelectedIndex = 1 Then
+                                            lv = Nothing
+                                        Else
+                                            lv = Nothing
+                                        End If
+                                    End If
+
+                                Case "Wcaller"
+                                    If WCaller.TabControl2.SelectedIndex = 0 Then
+                                        lv = WCaller.lvWarmCalling
+                                    ElseIf WCaller.TabControl2.SelectedIndex = 1 Then
+                                        lv = WCaller.lvMyAppts
                                     Else
                                         lv = Nothing
                                     End If
-                                End If
-
-                            Case "Wcaller"
-                                If WCaller.TabControl2.SelectedIndex = 0 Then
-                                    lv = WCaller.lvWarmCalling
-                                ElseIf WCaller.TabControl2.SelectedIndex = 1 Then
-                                    lv = WCaller.lvMyAppts
-                                Else
+                                Case "MarketingManager"
+                                    ''add case as form complete 
+                                Case "Finance"
+                                    ''add case as form complete
+                                Case "Installation"
+                                    ''add case as form complete
+                                Case "Administration"
+                                    ''add case as form complete
+                                Case "Recovery"
+                                    ''add case as form complete
+                                Case "PreviousCustomer"
+                                    ''add case as form complete
+                                Case "ColdCalling"
+                                    ''add case as form complete
+                                Case "ConfirmingSingleRecord"
                                     lv = Nothing
-                                End If
-                            Case "MarketingManager"
-                                ''add case as form complete 
-                            Case "Finance"
-                                ''add case as form complete
-                            Case "Installation"
-                                ''add case as form complete
-                            Case "Administration"
-                                ''add case as form complete
-                            Case "Recovery"
-                                ''add case as form complete
-                            Case "PreviousCustomer"
-                                ''add case as form complete
-                            Case "ColdCalling"
-                                ''add case as form complete
-                            Case "ConfirmingSingleRecord"
-                                lv = Nothing
-                                STATIC_VARIABLES.CurrentID = ConfirmingSingleRecord.ID
-                            Case "SecondSource"
-                        End Select
-                        If lv IsNot Nothing Then
-                            'If lv.SelectedItems.Count <> 0 And lv IsNot Sales.lvnoresults Then
-                            '    STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).Text
-                            'ElseIf lv.SelectedItems.Count <> 0 And lv Is Sales.lvnoresults Then
-                            '    STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).SubItems(1).Text
-                            'Else
-                            '    STATIC_VARIABLES.CurrentID = ""
-                            'End If
+                                    STATIC_VARIABLES.CurrentID = ConfirmingSingleRecord.ID
+                                Case "SecondSource"
+                            End Select
+                            If lv IsNot Nothing Then
+                                'If lv.SelectedItems.Count <> 0 And lv IsNot Sales.lvnoresults Then
+                                '    STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).Text
+                                'ElseIf lv.SelectedItems.Count <> 0 And lv Is Sales.lvnoresults Then
+                                '    STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).SubItems(1).Text
+                                'Else
+                                '    STATIC_VARIABLES.CurrentID = ""
+                                'End If
 
-                        Else
-                            If f.Name = "ConfirmingSingleRecord" Then
-                                STATIC_VARIABLES.CurrentID = ConfirmingSingleRecord.ID
-                            ElseIf f.Name = "Sales" And Sales.tbMain.SelectedIndex = 0 Then
-                                If Sales.lvnoresults.SelectedItems.Count <> 0 Then
-                                    STATIC_VARIABLES.CurrentID = Sales.lvnoresults.Tag
-                                End If
-                            ElseIf f.Name = "Sales" And Sales.tbMain.SelectedIndex = 1 And Sales.TabControl2.SelectedIndex = 1 Then
-                                STATIC_VARIABLES.CurrentID = Sales.lvMemorized.SelectedItems.Item(0).SubItems.Item(1).Text
                             Else
+                                If f.Name = "ConfirmingSingleRecord" Then
+                                    STATIC_VARIABLES.CurrentID = ConfirmingSingleRecord.ID
+                                ElseIf f.Name = "Sales" And Sales.tbMain.SelectedIndex = 0 Then
+                                    If Sales.lvnoresults.SelectedItems.Count <> 0 Then
+                                        STATIC_VARIABLES.CurrentID = Sales.lvnoresults.Tag
+                                    End If
+                                ElseIf f.Name = "Sales" And Sales.tbMain.SelectedIndex = 1 And Sales.TabControl2.SelectedIndex = 1 Then
+                                    STATIC_VARIABLES.CurrentID = Sales.lvMemorized.SelectedItems.Item(0).SubItems.Item(1).Text
+                                Else
 
-                                STATIC_VARIABLES.CurrentID = ""
+                                    STATIC_VARIABLES.CurrentID = ""
+                                End If
                             End If
-                        End If
-                    Case Else
-                        'STATIC_VARIABLES.ActiveChild = Nothing
-                        'STATIC_VARIABLES.CurrentID = ""
-                End Select
-            End If
+                        Case Else
+                            'STATIC_VARIABLES.ActiveChild = Nothing
+                            'STATIC_VARIABLES.CurrentID = ""
+                    End Select
+                End If
 
-        Next
-
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "Main_MdiChildActivate", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -951,32 +1240,52 @@ Public Class Main
 
 
     Public Sub open()
+        Try
+            SetAppt.ID = Sales.ID
+            SetAppt.frm = Sales
+            SetAppt.OrigApptDate = Sales.txtApptDate.Text
+            SetAppt.OrigApptTime = Sales.txtApptTime.Text
+            Dim s = Split(Sales.txtContact1.Text, " ")
+            Dim s2 = Split(Sales.txtContact2.Text, " ")
+            SetAppt.Contact1 = s(0)
+            SetAppt.Contact2 = s2(0)
 
-        SetAppt.ID = Sales.ID
-        SetAppt.frm = Sales
-        SetAppt.OrigApptDate = Sales.txtApptDate.Text
-        SetAppt.OrigApptTime = Sales.txtApptTime.Text
-        Dim s = Split(Sales.txtContact1.Text, " ")
-        Dim s2 = Split(Sales.txtContact2.Text, " ")
-        SetAppt.Contact1 = s(0)
-        SetAppt.Contact2 = s2(0)
 
+            SetAppt.ShowDialog()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Sub", "open()", Sales.ID.ToString, ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        SetAppt.ShowDialog()
     End Sub
 
 
     Private Sub MarketingManagerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MarketingManagerToolStripMenuItem.Click
+        Try
+            MarketingManager.MdiParent = Me
+            MarketingManager.Show()
+            MarketingManager.BringToFront()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "MarketingManagerToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        MarketingManager.MdiParent = Me
-        MarketingManager.Show()
-        MarketingManager.BringToFront()
 
     End Sub
 
     Private Sub tsbadmin_Click(sender As Object, e As EventArgs) Handles tsbadmin.Click
-        Administration.MdiParent = Me
-        Administration.Show()
+        Try
+            Administration.MdiParent = Me
+            Administration.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbadmin_Click", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub ImportDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportDataToolStripMenuItem.Click
@@ -984,19 +1293,36 @@ Public Class Main
     End Sub
 
     Private Sub Improveit360ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Improveit360ToolStripMenuItem.Click
-        Form6.ShowDialog()
+        Try
+            Form6.ShowDialog()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "Improveite360ToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
 
  
     
     Private Sub TestingFormACToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestingFormACToolStripMenuItem.Click
-        frmTesting.MdiParent = Me
-        frmTesting.Show()
+        Try
+            frmTesting.MdiParent = Me
+            frmTesting.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "TestingFormACToolStripMenuItem_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnEditEmailTemplatesList_Click(sender As Object, e As EventArgs) Handles btnEditEmailTemplatesList.Click
-        frmEmailTemplateListManager.Show()
+        Try
+            frmEmailTemplateListManager.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "btnEditEmailTemplateList_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
-
-    
 End Class

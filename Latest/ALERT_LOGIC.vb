@@ -171,9 +171,11 @@ Public Class ALERT_LOGIC
             r1.Close()
             cnn.Close()
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm.ToString, "SQL", "GetRecordInformation")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm.ToString, "SQL", "GetRecordInformation")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC", "Sub", "GetRecordInformation(username)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -209,8 +211,11 @@ Public Class ALERT_LOGIC
         Catch ex As Exception
             cnn.Close()
             Return CountOfAlerts
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CountAlerts")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CountAlerts")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC", "Function", "CountAlerts(username)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Function
   
@@ -258,8 +263,11 @@ Public Class ALERT_LOGIC
                     Exit Select
             End Select
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "'New'")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "'New'")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC", "Constructor", "New(UserName)", "0", ex.Message.ToString)
+            y = Nothing
             cnn.Close()
         End Try
 
@@ -345,8 +353,11 @@ Public Class ALERT_LOGIC
                 ForePanel.Controls.Add(lblNotes)
                 ForePanel.Controls.Add(lblAssignedBy)
             Catch ex As Exception
-                Dim err As New ErrorLogFlatFile
-                err.WriteLog("ALERT_LOGIC.CreateForePanel", "ByVal ID As String, ByVal LeadNumber As String, ByVal AlertTime As String, ByVal ExecDate As String, ByVal Notes As String, ByVal AssignedBy As String, ByVal Completed As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "'New'")
+                'Dim err As New ErrorLogFlatFile
+                'err.WriteLog("ALERT_LOGIC.CreateForePanel", "ByVal ID As String, ByVal LeadNumber As String, ByVal AlertTime As String, ByVal ExecDate As String, ByVal Notes As String, ByVal AssignedBy As String, ByVal Completed As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "'New'")
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC.CreateForePanel", "Constructor", "New(ByVal ID As String, ByVal LeadNumber As String, ByVal AlertTime As String, ByVal ExecDate As String, ByVal Notes As String, ByVal AssignedBy As String, ByVal Completed As Boolean)", "0", ex.Message.ToString)
+                y = Nothing
             End Try
 
         End Sub
@@ -360,27 +371,41 @@ Public Class ALERT_LOGIC
             'Me.ForePanel.BackColor = Color.White
         End Sub
         Private Sub forepanel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ForePanel.Click
+            Try
+                If Me.ForePanel.BorderStyle = BorderStyle.FixedSingle Then
+                    Me.ForePanel.BorderStyle = BorderStyle.None
+                    Me.ForePanel.BackColor = Color.White
+                    Dim indx As Integer = PastDueAlerts.SelectedID.IndexOf(Me.ForePanel.Tag)
+                    PastDueAlerts.SelectedID.RemoveAt(indx)
+                    'Form1.SelectedID.RemoveAt(Form1.SelectedID.Count - 1)
+                ElseIf Me.ForePanel.BorderStyle = BorderStyle.None Then
+                    Me.ForePanel.BorderStyle = BorderStyle.FixedSingle
+                    Me.ForePanel.BackColor = Color.SlateGray
+                    PastDueAlerts.SelectedID.Add(Me.ForePanel.Tag.ToString)
+                End If
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC.CreateForePanel", "Event", "forepanel_Click", "0", ex.Message.ToString)
+                y = Nothing
 
-            If Me.ForePanel.BorderStyle = BorderStyle.FixedSingle Then
-                Me.ForePanel.BorderStyle = BorderStyle.None
-                Me.ForePanel.BackColor = Color.White
-                Dim indx As Integer = PastDueAlerts.SelectedID.IndexOf(Me.ForePanel.Tag)
-                PastDueAlerts.SelectedID.RemoveAt(indx)
-                'Form1.SelectedID.RemoveAt(Form1.SelectedID.Count - 1)
-            ElseIf Me.ForePanel.BorderStyle = BorderStyle.None Then
-                Me.ForePanel.BorderStyle = BorderStyle.FixedSingle
-                Me.ForePanel.BackColor = Color.SlateGray
-                PastDueAlerts.SelectedID.Add(Me.ForePanel.Tag.ToString)
-            End If
+            End Try
+
 
             'MsgBox("Unique Record ID# " & Form1.SelectedID.ToString)
         End Sub
 
         Private Sub lnkID_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkID.Click
             'MsgBox("Show information for ID#: " & Me.lnkID.Text.ToString)
-            CommonNFO.RecordID = Me.lnkID.Text
-            CommonNFO.ShowInTaskbar = False
-            CommonNFO.ShowDialog()
+            Try
+                CommonNFO.RecordID = Me.lnkID.Text
+                CommonNFO.ShowInTaskbar = False
+                CommonNFO.ShowDialog()
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC.CreateForePanel", "Event", "lnkID_Click", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End Sub
     End Class
 #End Region

@@ -48,9 +48,16 @@
         Dim cntFiles As Integer = 0
         If path <> "" Then
             If path.ToString.Length > 3 Then
-                Dim x As New ImportData_V2.FileOperations
-                arFile = x.Get_Files(path, "*.csv")
-                x = Nothing
+                Try
+                    Dim x As New ImportData_V2.FileOperations
+                    arFile = x.Get_Files(path, "*.csv")
+                    x = Nothing
+                Catch ex As Exception
+                    Dim y As New ErrorLogging_V2
+                    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmImportBulkData", "FormCode", "Event", "txtDirectory_TextChanged", "0", ex.Message.ToString)
+                    y = Nothing
+                End Try
+
             End If
         End If
         Me.cboFiles.Items.Clear()
@@ -127,7 +134,9 @@
             Dim response As Integer = MsgBox("Are you sure you want to begin?" & vbCrLf & vbCrLf & "This operation cannot be cancelled and may take some time...", MsgBoxStyle.YesNo, "Begin Operation?")
             Select Case response
                 Case vbYes
+
                     Dim y As New ImportData_V2.FileOperations
+
                     Dim cnt As Integer = 0
                     Dim x As String
                     For Each x In Me.cboFiles.Items
@@ -158,7 +167,7 @@
                             y = Nothing
                         End Try
                     Next
-                    
+
 
                     Me.lblMessage.Text = "Process Files Complete. "
 
@@ -182,17 +191,24 @@
                     Form6.lblCurrentRecordNum.Visible = False
                     Form6.lblTblCurCnt.Visible = False
                     Dim stopTime As String = Date.Now.ToString
-                    Dim z As New ImportData_V2.FileOperations
+                    Try
+                        Dim z As New ImportData_V2.FileOperations
 
-                    Dim whereIsReport As String = z.CreateBatchReport(startTime, stopTime, arTableNames) '' creates file and returns file name 
 
-                    z = Nothing
+                        Dim whereIsReport As String = z.CreateBatchReport(startTime, stopTime, arTableNames) '' creates file and returns file name 
 
-                    Exit Select
+                        z = Nothing
 
-                    If Me.chkDisplayReport.CheckState = CheckState.Checked Then
-                        System.Diagnostics.Process.Start(whereIsReport)
-                    End If
+                        Exit Select
+
+                        If Me.chkDisplayReport.CheckState = CheckState.Checked Then
+                            System.Diagnostics.Process.Start(whereIsReport)
+                        End If
+                    Catch ex As Exception
+                        Dim yy As New ErrorLogging_V2
+                        yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmImportBulkData", "FormCode", "Event", "txtDirectory_TextChanged", "0", ex.Message.ToString)
+                        yy = Nothing
+                    End Try
 
                 Case vbNo
                     Exit Select
@@ -744,8 +760,15 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '' Try
-        Dim y As New ImportData
-        y = Nothing
+        Try
+            Dim y As New ImportData
+            y = Nothing
+        Catch ex As Exception
+            Dim yy As New ErrorLogging_V2
+            yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmImportBulkData", "FormCode", "Event", "button1_click", "0", ex.Message.ToString)
+            yy = Nothing
+        End Try
+
         '' Catch ex As Exception
         '' Dim x As String = ex.Message
         '' MsgBox(x, MsgBoxStyle.Critical, "DEBUG INFO")

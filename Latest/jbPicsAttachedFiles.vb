@@ -9,7 +9,14 @@ Imports System.Collections
 
 Imports System.Windows.Forms '' for context menus MAYBE
 
-
+'' notes 2-9-2016
+'' This class was deprecated completely per Andy's request.
+'' Moved over to a "Static Control" style on the Front End Form Code.
+'' Had to tackle a redraw issue that was causing the control to 'blink'.
+'' Resulted in a re-write for static controls on 'Sales.vb => lsAttachefiles & lsJobPictures
+'' 
+'' CLASS NOT USED ANYMORE - Point of Reference Only -  NOT GOING TO WRAP IN ERROR HANDLERS - AC
+'' 
 
 
 Public Class jbPicsAttachedFiles
@@ -123,6 +130,8 @@ Public Class jbPicsAttachedFiles
 
 
 #End Region
+
+
 #Region "Constructor"
     Public Sub New()
         ''

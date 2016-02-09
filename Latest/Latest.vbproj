@@ -137,7 +137,6 @@
     <Compile Include="CandCNotes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Class2.vb" />
     <Compile Include="convertLeadToStruct.vb" />
     <Compile Include="createAShortCut.vb" />
     <Compile Include="createListPrintOperations.vb" />
@@ -149,6 +148,13 @@
     </Compile>
     <Compile Include="EmailIssuedLeads.vb" />
     <Compile Include="emlTemplateLogic.vb" />
+    <Compile Include="ErrorLogForm.Designer.vb">
+      <DependentUpon>ErrorLogForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLogForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorLogging_V2.vb" />
     <Compile Include="exclusions.Designer.vb">
       <DependentUpon>exclusions.vb</DependentUpon>
     </Compile>
@@ -813,6 +819,9 @@
     <EmbeddedResource Include="EnterLead.resx">
       <DependentUpon>EnterLead.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorLogForm.resx">
+      <DependentUpon>ErrorLogForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="exclusions.resx">
       <SubType>Designer</SubType>

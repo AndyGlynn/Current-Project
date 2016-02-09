@@ -340,6 +340,7 @@ Public Class FindLead
     End Sub
 
     Private Sub lstSearchResults_MouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstSearchResults.MouseClick
+
         Dim selitem As ListViewItem
         selitem = Me.lstSearchResults.GetItemAt(e.X, e.Y)
         If selitem Is Nothing Then
@@ -402,86 +403,93 @@ Public Class FindLead
                             End If
 
                             If foundConfirming = 0 Then
-                                Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-                                Dim cmdGET As SqlCommand = New SqlCommand("dbo.AlertConfirm", cnn)
+                                Try
+                                    Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+                                    Dim cmdGET As SqlCommand = New SqlCommand("dbo.AlertConfirm", cnn)
 
-                                Dim param1 As SqlParameter = New SqlParameter("@ID", selitem.Text)
-                                cmdGET.Parameters.Add(param1)
-                                cmdGET.CommandType = CommandType.StoredProcedure
-                                cnn.Open()
-                                Dim r1 As SqlDataReader
+                                    Dim param1 As SqlParameter = New SqlParameter("@ID", selitem.Text)
+                                    cmdGET.Parameters.Add(param1)
+                                    cmdGET.CommandType = CommandType.StoredProcedure
+                                    cnn.Open()
+                                    Dim r1 As SqlDataReader
 
-                                r1 = cmdGET.ExecuteReader
-                                While r1.Read
-                                    'MsgBox(r1.Item(0))
-                                    Dim was As Date = Confirming.dpConfirming.Value
-
-
-
-
-
-                                    Confirming.dpConfirming.Value = r1.Item(0)
-                                    'Exit Sub '' remove 
-                                    'MsgBox(Confirming.lvConfirming.Items.Count)
-                                    For Each Me.i In Confirming.lvConfirming.Items
-                                        'MsgBox(Confirming.lvConfirming.SelectedItems(0).Text)
-                                        If Me.i.Text = selitem.Text Then
-
-                                            Me.i.Selected = True
-
-                                            'Dim c As New ConfirmingData
-                                            'c.PullCustomerINFO(Confirming.Tab, Me.i.Text)
-
-                                            found += 1
-                                            foundConfirming += 1
-                                            If Confirming.TabControl1.SelectedIndex <> 0 Then
-                                                Confirming.TabControl1.SelectedIndex = 0
-                                            End If
-
-                                            Confirming.Focus()
-                                            'Me.Label5_Click(Nothing, Nothing)
-                                            Main.forcettconfirm = True
+                                    r1 = cmdGET.ExecuteReader
+                                    While r1.Read
+                                        'MsgBox(r1.Item(0))
+                                        Dim was As Date = Confirming.dpConfirming.Value
 
 
 
-                                            'Exit Sub
-                                        End If
 
-                                    Next
-                                    If Confirming.lvConfirming.SelectedItems.Count = 0 Then
-                                        Confirming.dpConfirming.Value = was
-                                    End If
-                                    was = Confirming.dpSales.Value
 
-                                    If found = 0 Then
-
-                                        Confirming.dpSales.Value = r1.Item(0)
-                                        For Each Me.i In Confirming.lvSales.Items
+                                        Confirming.dpConfirming.Value = r1.Item(0)
+                                        'Exit Sub '' remove 
+                                        'MsgBox(Confirming.lvConfirming.Items.Count)
+                                        For Each Me.i In Confirming.lvConfirming.Items
+                                            'MsgBox(Confirming.lvConfirming.SelectedItems(0).Text)
                                             If Me.i.Text = selitem.Text Then
+
                                                 Me.i.Selected = True
+
+                                                'Dim c As New ConfirmingData
+                                                'c.PullCustomerINFO(Confirming.Tab, Me.i.Text)
+
                                                 found += 1
                                                 foundConfirming += 1
-                                                If Confirming.TabControl1.SelectedIndex <> 1 Then
-                                                    Confirming.TabControl1.SelectedIndex = 1
+                                                If Confirming.TabControl1.SelectedIndex <> 0 Then
+                                                    Confirming.TabControl1.SelectedIndex = 0
                                                 End If
 
                                                 Confirming.Focus()
-                                                Main.forcettsales = True
-                                                Confirming.Create_Tooltip(Confirming.dpSales, "search results")
                                                 'Me.Label5_Click(Nothing, Nothing)
+                                                Main.forcettconfirm = True
 
 
 
                                                 'Exit Sub
                                             End If
+
                                         Next
-                                        If foundConfirming = 0 Then
-                                            Confirming.dpSales.Value = was
+                                        If Confirming.lvConfirming.SelectedItems.Count = 0 Then
+                                            Confirming.dpConfirming.Value = was
                                         End If
-                                    End If
-                                End While
-                                r1.Close()
-                                cnn.Close()
+                                        was = Confirming.dpSales.Value
+
+                                        If found = 0 Then
+
+                                            Confirming.dpSales.Value = r1.Item(0)
+                                            For Each Me.i In Confirming.lvSales.Items
+                                                If Me.i.Text = selitem.Text Then
+                                                    Me.i.Selected = True
+                                                    found += 1
+                                                    foundConfirming += 1
+                                                    If Confirming.TabControl1.SelectedIndex <> 1 Then
+                                                        Confirming.TabControl1.SelectedIndex = 1
+                                                    End If
+
+                                                    Confirming.Focus()
+                                                    Main.forcettsales = True
+                                                    Confirming.Create_Tooltip(Confirming.dpSales, "search results")
+                                                    'Me.Label5_Click(Nothing, Nothing)
+
+
+
+                                                    'Exit Sub
+                                                End If
+                                            Next
+                                            If foundConfirming = 0 Then
+                                                Confirming.dpSales.Value = was
+                                            End If
+                                        End If
+                                    End While
+                                    r1.Close()
+                                    cnn.Close()
+                                Catch ex As Exception
+                                    Dim y As New ErrorLogging_V2
+                                    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Exclusions", "FormCode", "Sub", "lstSearchResults_MouseClick", "0", ex.Message.ToString)
+                                    y = Nothing
+                                End Try
+
                             End If
 
 
@@ -579,7 +587,9 @@ Public Class FindLead
                                     End If
                                 End While
                             Catch ex As Exception
-
+                                Dim y As New ErrorLogging_V2
+                                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "FindLead", "FormCode", "Sub", "lstSearchResults_MouseClick", "0", ex.Message.ToString)
+                                y = Nothing
                             End Try
 
 
@@ -635,7 +645,7 @@ Public Class FindLead
             ConfirmingSingleRecord.Show()
             'MsgBox("You have no lists open to link to!", MsgBoxStyle.Critical, "Alert Link Failed")
         End If
-       
+
 
         Me.BackgroundWorker1.Dispose()
         'Me.Close()
@@ -668,8 +678,15 @@ Public Class FindLead
     End Sub
 
     Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        Dim y As New FindLogic
-        y.Search(x)
+        Try
+            Dim y As New FindLogic
+            y.Search(x)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "FindLead", "FormCode", "Sub", "BackgroundWorker1_DoWork", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click

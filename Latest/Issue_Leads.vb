@@ -25,6 +25,7 @@ Public Class Issue_Leads
 
  
     Public Sub New(ByVal setup As Boolean, ByVal growshrink As String)
+
         Dim leadCnt As Integer = 0
         If setup = False Then
             Me.panelsize = growshrink
@@ -39,7 +40,7 @@ Public Class Issue_Leads
                 Dim headerpanel As Panel = Sales.tpIssueLeads.Controls.Item(1)
                 Sales.tpIssueLeads.Controls.Remove(headerpanel)
             End If
-          
+
 
             Dim d As String = Sales.dtpIssueLeads.Value
             Dim s = Split(d, " ")
@@ -1014,7 +1015,7 @@ Public Class Issue_Leads
                     Next
                     Rep2 = False
                 End If
-           
+
             End While
             r.Close()
             cnn.Close()
@@ -1176,6 +1177,9 @@ Public Class Issue_Leads
             y.Visible = True
         Catch ex As Exception
             MsgBox(ex.ToString)
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Constructor", "New(...)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -1191,6 +1195,9 @@ Public Class Issue_Leads
             Try
                 fs = Sales.pnlIssue.Controls.Item(0).Controls.Item(1).Font.Size
             Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "ReLayout()", "0", ex.Message.ToString)
+                y = Nothing
                 Exit Sub
             End Try
         End If
@@ -1287,6 +1294,9 @@ Public Class Issue_Leads
 
         Catch ex As Exception
             MsgBox(ex.ToString)
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "ReLayout()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
 
@@ -1336,6 +1346,9 @@ Public Class Issue_Leads
                 'MsgBox(ex.ToString) ''took message box because of known error, when the controls active scrollbar it cause a size chenge before creation done 
                 '' Doesnt matter though cuz after creation in full screen it does another Relayout anyway Cant think of a way to kick it out when this happens 
                 '' so i just commented out MSGBOX
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "ReLayout()", "0", ex.Message.ToString)
+                y = Nothing
             End Try
 
 
@@ -1681,7 +1694,9 @@ Public Class Issue_Leads
                         cbox2.SelectedItem = Orep2
                     End If
                 Catch ex As Exception
-
+                    Dim y As New ErrorLogging_V2
+                    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "Cbo(sender,e)", "0", ex.Message.ToString)
+                    y = Nothing
                 End Try
 
             Next
@@ -1722,7 +1737,9 @@ Public Class Issue_Leads
                 r.Close()
                 cnn.Close()
             Catch ex As Exception
-
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "Cbo(sender,e)", "0", ex.Message.ToString)
+                y = Nothing
             End Try
         End If
     End Sub
@@ -1764,61 +1781,67 @@ Public Class Issue_Leads
 
         '' loop to find linklabel
         ''
-        Dim y As Control
-        Dim where As Panel = sender
+        Try
+            Dim y As Control
+            Dim where As Panel = sender
 
-        Dim proxyLeadNum As String = ""
-        For Each y In where.Controls
-            If TypeOf y Is LinkLabel Then
-                proxyLeadNum = y.Text
+            Dim proxyLeadNum As String = ""
+            For Each y In where.Controls
+                If TypeOf y Is LinkLabel Then
+                    proxyLeadNum = y.Text
+                End If
+            Next
+
+            '' send lead num to sql to find marketing results
+            '' 
+            Dim Last_EL_Result As String = GetMResult(proxyLeadNum)
+
+            If Last_EL_Result = "Called and Cancelled" Then
+                'MsgBox("Undo Called and Cancelled" & vbCrLf & "LeadNum : " & proxyLeadNum & " | Result : " & Last_EL_Result, MsgBoxStyle.Information, "DEBUG INFO")
+                Sales.btnCCIssue.Text = "Undo Called and Cancelled"
+            ElseIf Last_EL_Result <> "Called and Cancelled" Then
+                'MsgBox("Log Appt. as Called and Cancelled" & vbCrLf & "LeadNum : " & proxyLeadNum & " | Result : " & Last_EL_Result, MsgBoxStyle.Information, "DEBUG INFO")
+                Sales.btnCCIssue.Text = "Log Appt. as Called and Cancelled"
             End If
-        Next
-
-        '' send lead num to sql to find marketing results
-        '' 
-        Dim Last_EL_Result As String = GetMResult(proxyLeadNum)
-
-        If Last_EL_Result = "Called and Cancelled" Then
-            'MsgBox("Undo Called and Cancelled" & vbCrLf & "LeadNum : " & proxyLeadNum & " | Result : " & Last_EL_Result, MsgBoxStyle.Information, "DEBUG INFO")
-            Sales.btnCCIssue.Text = "Undo Called and Cancelled"
-        ElseIf Last_EL_Result <> "Called and Cancelled" Then
-            'MsgBox("Log Appt. as Called and Cancelled" & vbCrLf & "LeadNum : " & proxyLeadNum & " | Result : " & Last_EL_Result, MsgBoxStyle.Information, "DEBUG INFO")
-            Sales.btnCCIssue.Text = "Log Appt. as Called and Cancelled"
-        End If
 
 
 
-        Dim m = sender.findform
-        Dim who As Panel = sender
+            Dim m = sender.findform
+            Dim who As Panel = sender
 
-        Dim selected As Boolean
-        If who.BorderStyle = BorderStyle.FixedSingle And e.Button = MouseButtons.Left Then
-            selected = True
-        Else
-            selected = False
-        End If
-
-
-
-
-
-        Dim c As Integer = Sales.pnlIssue.Controls.Count
-        Dim i As Integer
-        For i = 1 To c
-            Dim all As Panel = Sales.pnlIssue.Controls(i - 1)
-            If all.BorderStyle = BorderStyle.FixedSingle Then
-                all.BorderStyle = BorderStyle.None
+            Dim selected As Boolean
+            If who.BorderStyle = BorderStyle.FixedSingle And e.Button = MouseButtons.Left Then
+                selected = True
+            Else
+                selected = False
             End If
-        Next
-        If selected = True Then
-            who.BorderStyle = BorderStyle.None
-            STATIC_VARIABLES.CurrentID = ""
-        Else
-            who.BorderStyle = BorderStyle.FixedSingle
-            STATIC_VARIABLES.CurrentID = who.Controls.Item(2).Text
-        End If
 
-     
+
+
+
+
+            Dim c As Integer = Sales.pnlIssue.Controls.Count
+            Dim i As Integer
+            For i = 1 To c
+                Dim all As Panel = Sales.pnlIssue.Controls(i - 1)
+                If all.BorderStyle = BorderStyle.FixedSingle Then
+                    all.BorderStyle = BorderStyle.None
+                End If
+            Next
+            If selected = True Then
+                who.BorderStyle = BorderStyle.None
+                STATIC_VARIABLES.CurrentID = ""
+            Else
+                who.BorderStyle = BorderStyle.FixedSingle
+                STATIC_VARIABLES.CurrentID = who.Controls.Item(2).Text
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "PanelControl()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+
 
     End Sub
 
@@ -1846,49 +1869,58 @@ Public Class Issue_Leads
     Private Sub scroll(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.y.Select()
     End Sub
+
     Private Sub Add_Rep(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim p As Panel = sender.parent
-        Dim i As PictureBox = p.Controls.Item(8)
-        If i.Tag = "minus" Then
-            p.Size = New Size(p.Width, 48)
-            p.Controls.Item(6).Location = New System.Drawing.Point(p.Controls.Item(6).Location.X, 14)
-            p.Controls.Item(7).Location = New System.Drawing.Point(p.Controls.Item(7).Location.X, 14)
-            p.Controls.Item(7).Visible = False
-            i.Location = New System.Drawing.Point(i.Location.X, 16)
-            i.Image = Sales.ImgIssued.Images(5)
-            i.Tag = "Add"
-            ttlabels.SetToolTip(i, "Add a 2nd Rep")
-            Dim x
-            For x = 0 To p.Controls.Count - 1
-                Dim Cntl As Control = p.Controls.Item(x)
-                If Cntl.Name.Contains("lbl") Then
-                    Cntl.Size = New Size(Cntl.Width, p.Height)
-                    Cntl.Location = New System.Drawing.Point(Cntl.Location.X, 0)
+        Try
+            Dim p As Panel = sender.parent
+            Dim i As PictureBox = p.Controls.Item(8)
+            If i.Tag = "minus" Then
+                p.Size = New Size(p.Width, 48)
+                p.Controls.Item(6).Location = New System.Drawing.Point(p.Controls.Item(6).Location.X, 14)
+                p.Controls.Item(7).Location = New System.Drawing.Point(p.Controls.Item(7).Location.X, 14)
+                p.Controls.Item(7).Visible = False
+                i.Location = New System.Drawing.Point(i.Location.X, 16)
+                i.Image = Sales.ImgIssued.Images(5)
+                i.Tag = "Add"
+                ttlabels.SetToolTip(i, "Add a 2nd Rep")
+                Dim x
+                For x = 0 To p.Controls.Count - 1
+                    Dim Cntl As Control = p.Controls.Item(x)
+                    If Cntl.Name.Contains("lbl") Then
+                        Cntl.Size = New Size(Cntl.Width, p.Height)
+                        Cntl.Location = New System.Drawing.Point(Cntl.Location.X, 0)
+                    End If
+                Next
+                Dim c As ComboBox = p.Controls.Item(7)
+                If c.Text <> "" Then
+                    c.SelectedItem = Nothing
                 End If
-            Next
-            Dim c As ComboBox = p.Controls.Item(7)
-            If c.Text <> "" Then
-                c.SelectedItem = Nothing
+            Else
+                p.Size = New Size(p.Width, 62)
+                p.Controls.Item(6).Location = New System.Drawing.Point(p.Controls.Item(6).Location.X, 7)
+                p.Controls.Item(7).Location = New System.Drawing.Point(p.Controls.Item(7).Location.X, 34)
+                p.Controls.Item(7).Visible = True
+                i.Location = New System.Drawing.Point(i.Location.X, 9)
+                i.Image = Sales.ImgIssued.Images(7)
+                i.Tag = "minus"
+                ttlabels.SetToolTip(i, "Close 2nd Rep")
+                Dim x
+                For x = 0 To p.Controls.Count - 1
+                    Dim Cntl As Control = p.Controls.Item(x)
+                    If Cntl.Name.Contains("lbl") Then
+                        Cntl.Size = New Size(Cntl.Width, p.Height)
+                        Cntl.Location = New System.Drawing.Point(Cntl.Location.X, 0)
+                    End If
+                Next
+
             End If
-        Else
-            p.Size = New Size(p.Width, 62)
-            p.Controls.Item(6).Location = New System.Drawing.Point(p.Controls.Item(6).Location.X, 7)
-            p.Controls.Item(7).Location = New System.Drawing.Point(p.Controls.Item(7).Location.X, 34)
-            p.Controls.Item(7).Visible = True
-            i.Location = New System.Drawing.Point(i.Location.X, 9)
-            i.Image = Sales.ImgIssued.Images(7)
-            i.Tag = "minus"
-            ttlabels.SetToolTip(i, "Close 2nd Rep")
-            Dim x
-            For x = 0 To p.Controls.Count - 1
-                Dim Cntl As Control = p.Controls.Item(x)
-                If Cntl.Name.Contains("lbl") Then
-                    Cntl.Size = New Size(Cntl.Width, p.Height)
-                    Cntl.Location = New System.Drawing.Point(Cntl.Location.X, 0)
-                End If
-            Next
-       
-        End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "Add_Rep(sender,e)", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
+
     End Sub
     Private Sub Pop_Reps(ByVal cbo As ComboBox)
         cbo.Items.Clear()
@@ -1911,6 +1943,9 @@ Public Class Issue_Leads
             r.Close()
             cnn2.Close()
         Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "Pop_Reps(cbo)", "0", ex.Message.ToString)
+            y = Nothing
 
         End Try
 
@@ -1952,14 +1987,21 @@ Public Class Issue_Leads
     '' edit 8-27-2015
     ''
     Private Function GetMResult(ByVal LeadNum As String)
-        Dim res As String = ""
-        Dim m_resCNX As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        m_resCNX.Open()
-        Dim cmdGET As SqlCommand = New SqlCommand("SELECT  MarketingResults FROM enterlead where id='" & LeadNum & "';", m_resCNX)
-        res = cmdGET.ExecuteScalar
-        m_resCNX.Close()
-        m_resCNX = Nothing
-        Return res.ToString
+        Try
+            Dim res As String = ""
+            Dim m_resCNX As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            m_resCNX.Open()
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT  MarketingResults FROM enterlead where id='" & LeadNum & "';", m_resCNX)
+            res = cmdGET.ExecuteScalar
+            m_resCNX.Close()
+            m_resCNX = Nothing
+            Return res.ToString
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "GetMResult(leadnum)", LeadNum, ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 
 #End Region

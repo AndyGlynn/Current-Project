@@ -18,19 +18,26 @@ Public Class ConfirmingSingleRecord
 
 
     Private Sub calledcancelled_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles calledcancelled.Click
-        Dim s = Split(Me.txtContact1.Text, " ")
-        Dim c1 = s(0)
-        Dim s2 = Split(Me.txtContact2.Text, " ")
-        Dim c2 = s2(0)
-        CandCNotes.ID = ID
-        CandCNotes.Contact1 = c1
-        CandCNotes.Contact2 = c2
-        CandCNotes.OrigApptDate = Me.txtApptDate.Text
-        CandCNotes.OrigApptTime = Me.txtApptTime.Text
-        CandCNotes.ShowInTaskbar = False
-        CandCNotes.ShowDialog()
-        Dim c As New CustomerHistory
-        c.SetUp(Me, ID, Me.TScboCustomerHistory)
+        Try
+            Dim s = Split(Me.txtContact1.Text, " ")
+            Dim c1 = s(0)
+            Dim s2 = Split(Me.txtContact2.Text, " ")
+            Dim c2 = s2(0)
+            CandCNotes.ID = ID
+            CandCNotes.Contact1 = c1
+            CandCNotes.Contact2 = c2
+            CandCNotes.OrigApptDate = Me.txtApptDate.Text
+            CandCNotes.OrigApptTime = Me.txtApptTime.Text
+            CandCNotes.ShowInTaskbar = False
+            CandCNotes.ShowDialog()
+            Dim c As New CustomerHistory
+            c.SetUp(Me, ID, Me.TScboCustomerHistory)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "calledandcancelled_Click()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnLogCall_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogCall.ButtonClick
@@ -57,6 +64,7 @@ Public Class ConfirmingSingleRecord
  
 
     Private Sub ConfirmingSingleRecord_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         STATIC_VARIABLES.CurrentID = ID
 
         Me.MdiParent = Main
@@ -91,7 +99,7 @@ Public Class ConfirmingSingleRecord
         End If
 
 
-        Dim cmdGet As SqlCommand = New SqlCommand("dbo.GetCustomerINFO", Cnn)
+        Dim cmdGet As SqlCommand = New SqlCommand("dbo.GetCustomerINFO", cnn)
 
         Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
         cmdGet.CommandType = CommandType.StoredProcedure
@@ -100,7 +108,7 @@ Public Class ConfirmingSingleRecord
 
 
 
-            Cnn.Open()
+            cnn.Open()
 
 
             Dim r1 As SqlDataReader
@@ -170,13 +178,18 @@ Public Class ConfirmingSingleRecord
                 'MsgBox(r1.Item("DoNotCall").ToString & " | " & r1.Item("DoNotMail").ToString & " | " & r1.Item("MarketingResults"))
             End While
             r1.Close()
-            Cnn.Close()
+            cnn.Close()
 
         Catch ex As Exception
             cnn.Close()
             'Me.PullCustomerINFO(ID)
-            MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
+            'MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "ConfirmingSingleRecord_Load", ID, ex.Message.ToString)
+            y = Nothing
         End Try
+        Try
+
         Dim c As New CustomerHistory
         c.SetUp(Me, ID, Me.TScboCustomerHistory)
         Dim k As Form = Kill
@@ -187,56 +200,87 @@ Public Class ConfirmingSingleRecord
 
         Kill.ShowInTaskbar = False
         Kill.ShowDialog()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "ConfirmingSingleRecord_Load", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
     Public Sub btnSetAppt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetAppt.Click
-        SetAppt.frm = Me
+        Try
+            SetAppt.frm = Me
 
-        SetAppt.ID = ID
+            SetAppt.ID = ID
 
 
 
-        Dim s = Split(Me.txtContact1.Text, " ")
-        Dim s2 = Split(Me.txtContact2.Text, " ")
-        SetAppt.Contact1 = s(0)
-        SetAppt.Contact2 = s2(0)
-        SetAppt.OrigApptDate = Me.txtApptDate.Text
-        SetAppt.OrigApptTime = Me.txtApptTime.Text
-        SetAppt.ShowInTaskbar = False
-        SetAppt.ShowDialog()
-        Dim c As New CustomerHistory
-        c.SetUp(Me, ID, Me.TScboCustomerHistory)
+            Dim s = Split(Me.txtContact1.Text, " ")
+            Dim s2 = Split(Me.txtContact2.Text, " ")
+            SetAppt.Contact1 = s(0)
+            SetAppt.Contact2 = s2(0)
+            SetAppt.OrigApptDate = Me.txtApptDate.Text
+            SetAppt.OrigApptTime = Me.txtApptTime.Text
+            SetAppt.ShowInTaskbar = False
+            SetAppt.ShowDialog()
+            Dim c As New CustomerHistory
+            c.SetUp(Me, ID, Me.TScboCustomerHistory)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnSetAppt_Click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
 
     Private Sub btnDoNotCall_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDoNotCall.Click
-        Dim c As New DoNotCallOrMail
-        c.DoNot(ID, sender.text.ToString)
-        Dim d As New CustomerHistory
-        d.SetUp(Me, ID, Me.TScboCustomerHistory)
-Me.Manage_Buttons()
+        Try
+            Dim c As New DoNotCallOrMail
+            c.DoNot(ID, sender.text.ToString)
+            Dim d As New CustomerHistory
+            d.SetUp(Me, ID, Me.TScboCustomerHistory)
+            Me.Manage_Buttons()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnDoNotCall_Click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
 
     End Sub
 
     Private Sub btnDoNotCallOrMail_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDoNotCallOrMail.Click
-        Dim c As New DoNotCallOrMail
-        c.DoNot(ID, sender.text.ToString)
-        Dim d As New CustomerHistory
-        d.SetUp(Me, ID, Me.TScboCustomerHistory)
-        Me.Manage_Buttons()
+        Try
+            Dim c As New DoNotCallOrMail
+            c.DoNot(ID, sender.text.ToString)
+            Dim d As New CustomerHistory
+            d.SetUp(Me, ID, Me.TScboCustomerHistory)
+            Me.Manage_Buttons()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnDoNotCallOrMail_Click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
     Private Sub btnDoNotMail_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDoNotMail.Click
-        Dim x As New DoNotCallOrMail
-        x.DoNot(ID, sender.text.ToString)
-        Dim d As New CustomerHistory
-        d.SetUp(Me, ID, Me.TScboCustomerHistory)
-  Me.Manage_Buttons()
+        Try
+            Dim x As New DoNotCallOrMail
+            x.DoNot(ID, sender.text.ToString)
+            Dim d As New CustomerHistory
+            d.SetUp(Me, ID, Me.TScboCustomerHistory)
+            Me.Manage_Buttons()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnDoNotMail_Click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnEditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustomer.Click
@@ -246,93 +290,120 @@ Me.Manage_Buttons()
     End Sub
 
     Private Sub TScboCustomerHistory_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TScboCustomerHistory.SelectedIndexChanged
-        Dim c As New CustomerHistory
-        c.SetUp(Me, ID, Me.TScboCustomerHistory)
+        Try
+            Dim c As New CustomerHistory
+            c.SetUp(Me, ID, Me.TScboCustomerHistory)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "TScboCustomerHistory_SelectedIndexChanged", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub rtbSpecialInstructions_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles rtbSpecialInstructions.LostFocus
+        Try
+            Dim cnn = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdUP As SqlCommand = New SqlCommand("Update enterlead set SpecialInstruction = @SI where id = @ID", cnn)
+            cmdUP.CommandType = CommandType.Text
+            cnn.Open()
+            Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
+            Dim param2 As SqlParameter = New SqlParameter("@SI", Me.rtbSpecialInstructions.Text)
+            cmdUP.Parameters.Add(param1)
+            cmdUP.Parameters.Add(param2)
+            cmdUP.ExecuteNonQuery()
+            cnn.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "rtbSpecialInstructions", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        Dim cnn = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdUP As SqlCommand = New SqlCommand("Update enterlead set SpecialInstruction = @SI where id = @ID", cnn)
-        cmdUP.CommandType = CommandType.Text
-        cnn.Open()
-        Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
-        Dim param2 As SqlParameter = New SqlParameter("@SI", Me.rtbSpecialInstructions.Text)
-        cmdUP.Parameters.Add(param1)
-        cmdUP.Parameters.Add(param2)
-        cmdUP.ExecuteNonQuery()
-        cnn.Close()
     End Sub
 
     Private Sub ConfirmingSingleRecord_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
         Me.WindowState = FormWindowState.Normal
     End Sub
     Private Sub Manage_Buttons()
-        Dim cmdGet As SqlCommand = New SqlCommand(("Select DoNotCall, DoNotMail, MarketingResults from enterlead where id = " & ID), cnn)
-        cmdGet.CommandType = CommandType.Text
-        cnn.Open()
-        Dim r1 As SqlDataReader
-        r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-        While r1.Read
-            If r1.Item(0) = True And r1.Item(1) = True Then
-                Me.btnDoNotCall.Text = "Undo Do Not Call"
-                Me.btnDoNotMail.Text = "Undo Do Not Mail"
-                Me.btnDoNotCallOrMail.Text = "Undo Do Not Call Or Mail"
-            ElseIf r1.Item(0) = False And r1.Item(1) = True Then
-                Me.btnDoNotCall.Text = "Mark as Do Not Call"
-                Me.btnDoNotMail.Text = "Undo Do Not Mail"
-                Me.btnDoNotCallOrMail.Text = "Mark as Do Not Call Or Mail"
-            ElseIf r1.Item(0) = False And r1.Item(1) = False Then
-                Me.btnDoNotCall.Text = "Mark as Do Not Call"
-                Me.btnDoNotMail.Text = "Mark as Do Not Mail"
-                Me.btnDoNotCallOrMail.Text = "Mark as Do Not Call Or Mail"
-            ElseIf r1.Item(0) = True And r1.Item(1) = False Then
-                Me.btnDoNotCall.Text = "Undo Do Not Call"
-                Me.btnDoNotMail.Text = "Mark as Do Not Mail"
-                Me.btnDoNotCallOrMail.Text = "Mark as Do Not Call Or Mail"
-            End If
-            If r1.Item(0) = True Or r1.Item(2) = "Kill" Then
-                Me.btnSetAppt.Enabled = False
-                Me.btnSetAppt.ToolTipText = "Cannot Set Appt. You must undo ""Do Not Call"" or ""Kill"
-            ElseIf r1.Item(0) = False And r1.Item(2) <> "Kill" Then
-                Me.btnSetAppt.Enabled = True
-                Me.btnSetAppt.ToolTipText = ""
-            End If
-            If r1.Item(2) = "Kill" Then
-                Me.btnKill.Text = "Undo Kill"
-            Else
-                Me.btnKill.Text = "Kill"
-            End If
-        End While
-        r1.Close()
-        cnn.Close()
+        Try
+            Dim cmdGet As SqlCommand = New SqlCommand(("Select DoNotCall, DoNotMail, MarketingResults from enterlead where id = " & ID), cnn)
+            cmdGet.CommandType = CommandType.Text
+            cnn.Open()
+            Dim r1 As SqlDataReader
+            r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+            While r1.Read
+                If r1.Item(0) = True And r1.Item(1) = True Then
+                    Me.btnDoNotCall.Text = "Undo Do Not Call"
+                    Me.btnDoNotMail.Text = "Undo Do Not Mail"
+                    Me.btnDoNotCallOrMail.Text = "Undo Do Not Call Or Mail"
+                ElseIf r1.Item(0) = False And r1.Item(1) = True Then
+                    Me.btnDoNotCall.Text = "Mark as Do Not Call"
+                    Me.btnDoNotMail.Text = "Undo Do Not Mail"
+                    Me.btnDoNotCallOrMail.Text = "Mark as Do Not Call Or Mail"
+                ElseIf r1.Item(0) = False And r1.Item(1) = False Then
+                    Me.btnDoNotCall.Text = "Mark as Do Not Call"
+                    Me.btnDoNotMail.Text = "Mark as Do Not Mail"
+                    Me.btnDoNotCallOrMail.Text = "Mark as Do Not Call Or Mail"
+                ElseIf r1.Item(0) = True And r1.Item(1) = False Then
+                    Me.btnDoNotCall.Text = "Undo Do Not Call"
+                    Me.btnDoNotMail.Text = "Mark as Do Not Mail"
+                    Me.btnDoNotCallOrMail.Text = "Mark as Do Not Call Or Mail"
+                End If
+                If r1.Item(0) = True Or r1.Item(2) = "Kill" Then
+                    Me.btnSetAppt.Enabled = False
+                    Me.btnSetAppt.ToolTipText = "Cannot Set Appt. You must undo ""Do Not Call"" or ""Kill"
+                ElseIf r1.Item(0) = False And r1.Item(2) <> "Kill" Then
+                    Me.btnSetAppt.Enabled = True
+                    Me.btnSetAppt.ToolTipText = ""
+                End If
+                If r1.Item(2) = "Kill" Then
+                    Me.btnKill.Text = "Undo Kill"
+                Else
+                    Me.btnKill.Text = "Kill"
+                End If
+            End While
+            r1.Close()
+            cnn.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Sub", "Manage_Buttons()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub btnKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnKill.Click
-        Dim c As New CustomerHistory
-        If Me.btnKill.Text = "Undo Kill" Then
-            Dim cnn = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdIns As SqlCommand = New SqlCommand("dbo.UnKillAppt", cnn)
-            Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
+        Try
+            Dim c As New CustomerHistory
+            If Me.btnKill.Text = "Undo Kill" Then
+                Dim cnn = New SqlConnection(STATIC_VARIABLES.Cnn)
+                Dim cmdIns As SqlCommand = New SqlCommand("dbo.UnKillAppt", cnn)
+                Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
 
-            cmdIns.CommandType = CommandType.StoredProcedure
-            cmdIns.Parameters.Add(param1)
-            cnn.Open()
-            Dim R1 As SqlDataReader
-            R1 = cmdIns.ExecuteReader(CommandBehavior.CloseConnection)
-            R1.Read()
-            R1.Close()
-            cnn.close()
-            Me.Manage_Buttons()
+                cmdIns.CommandType = CommandType.StoredProcedure
+                cmdIns.Parameters.Add(param1)
+                cnn.Open()
+                Dim R1 As SqlDataReader
+                R1 = cmdIns.ExecuteReader(CommandBehavior.CloseConnection)
+                R1.Read()
+                R1.Close()
+                cnn.close()
+                Me.Manage_Buttons()
+                c.SetUp(Me, ID, Me.TScboCustomerHistory)
+                Exit Sub
+            End If
+
+            Dim d As New open_kill
+
+
+
             c.SetUp(Me, ID, Me.TScboCustomerHistory)
-            Exit Sub
-        End If
+            Me.Manage_Buttons()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnKill_Click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        Dim d As New open_kill
-
-    
-
-        c.SetUp(Me, ID, Me.TScboCustomerHistory)
-        Me.Manage_Buttons()
     End Sub
  
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -354,17 +425,24 @@ Me.Manage_Buttons()
     End Sub
 
     Private Sub ConfirmingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfirmingToolStripMenuItem.Click
-        STATIC_VARIABLES.CurrentID = Me.ID
-        Dim y As convertLeadToStruct.EnterLead_Record
-        Dim z As New convertLeadToStruct
-        y = z.ConvertToStructure(Me.ID, False)
-        Dim dt As Date = CType(y.ApptDate, Date)
-        y = Nothing
-        Confirming.MdiParent = Main
-        Confirming.Show()
-        Confirming.BringToFront()
-        Confirming.dpConfirming.Value = dt
-        MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
+        Try
+            STATIC_VARIABLES.CurrentID = Me.ID
+            Dim y As convertLeadToStruct.EnterLead_Record
+            Dim z As New convertLeadToStruct
+            y = z.ConvertToStructure(Me.ID, False)
+            Dim dt As Date = CType(y.ApptDate, Date)
+            y = Nothing
+            Confirming.MdiParent = Main
+            Confirming.Show()
+            Confirming.BringToFront()
+            Confirming.dpConfirming.Value = dt
+            MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "ConfirmingToolStripMenuItem_Click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub InstallationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InstallationToolStripMenuItem.Click
@@ -378,20 +456,26 @@ Me.Manage_Buttons()
     End Sub
 
     Private Sub SalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesToolStripMenuItem.Click
-        STATIC_VARIABLES.CurrentID = Me.ID
-        Sales.ID = STATIC_VARIABLES.CurrentID
-        Sales.MdiParent = Main
-        Sales.Show()
-        Sales.BringToFront()
-        Dim y As convertLeadToStruct.EnterLead_Record
-        Dim z As New convertLeadToStruct
-        y = z.ConvertToStructure(Me.ID, False)
-        Dim dt As Date = CType(y.ApptDate, Date)
-        y = Nothing
-        Sales.dtp1CustomerList.Value = dt
-        Sales.dtp2CustomerList.Value = dt
-        Sales.tbMain.SelectedIndex = 1
-        MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
+        Try
+            STATIC_VARIABLES.CurrentID = Me.ID
+            Sales.ID = STATIC_VARIABLES.CurrentID
+            Sales.MdiParent = Main
+            Sales.Show()
+            Sales.BringToFront()
+            Dim y As convertLeadToStruct.EnterLead_Record
+            Dim z As New convertLeadToStruct
+            y = z.ConvertToStructure(Me.ID, False)
+            Dim dt As Date = CType(y.ApptDate, Date)
+            y = Nothing
+            Sales.dtp1CustomerList.Value = dt
+            Sales.dtp2CustomerList.Value = dt
+            Sales.tbMain.SelectedIndex = 1
+            MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "SalesToolStripMenuItem_Click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -415,19 +499,25 @@ Me.Manage_Buttons()
     End Sub
 
     Private Sub MarketingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MarketingToolStripMenuItem.Click
-        STATIC_VARIABLES.CurrentID = Me.ID
-        MarketingManager.RecID = STATIC_VARIABLES.CurrentID
-        MarketingManager.MdiParent = Main
-        MarketingManager.Show()
-        MarketingManager.BringToFront()
-        Dim y As convertLeadToStruct.EnterLead_Record
-        Dim z As New convertLeadToStruct
-        y = z.ConvertToStructure(Me.ID, False)
-        Dim dt As Date = CType(y.ApptDate, Date)
-        y = Nothing
-        MarketingManager.tbMain.SelectedIndex = 1
-        MsgBox("This whole form needs to be built. Demonstration purposes only.", MsgBoxStyle.Information, "Whole Form")
-        'MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
+        Try
+            STATIC_VARIABLES.CurrentID = Me.ID
+            MarketingManager.RecID = STATIC_VARIABLES.CurrentID
+            MarketingManager.MdiParent = Main
+            MarketingManager.Show()
+            MarketingManager.BringToFront()
+            Dim y As convertLeadToStruct.EnterLead_Record
+            Dim z As New convertLeadToStruct
+            y = z.ConvertToStructure(Me.ID, False)
+            Dim dt As Date = CType(y.ApptDate, Date)
+            y = Nothing
+            MarketingManager.tbMain.SelectedIndex = 1
+            MsgBox("This whole form needs to be built. Demonstration purposes only.", MsgBoxStyle.Information, "Whole Form")
+            'MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "MarketingToolStripMenuItem_Click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 

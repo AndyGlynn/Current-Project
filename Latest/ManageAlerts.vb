@@ -17,6 +17,11 @@ Public Class ManageAlerts
     Public lvct As Integer = 0
     Public i As ListViewItem
 
+    '' notes: 2-09-2016
+    '' Unsure if this is even being used.
+    '' not going to wrap in error handlers until i know for sure it is used.
+    '' AC
+
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeTime.Click
         'If Me.Size = New Size(298, 290) Then
         Me.Change = True

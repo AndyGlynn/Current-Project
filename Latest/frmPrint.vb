@@ -1,6 +1,6 @@
 ﻿Public Class frmPrint
 
-    Private Const Test_Directory As String = "C:/Users/Clay/Desktop/Print Leads/"
+    ' Private Const Test_Directory As String = "C:/Users/Clay/Desktop/Print Leads/"
     Private Const Production_Directory As String = "\\server.greenworks.local\Company\ISS\Print Leads\"
 
     Private exclu As Boolean = False
@@ -56,27 +56,33 @@
     End Sub
 
     Private Sub lsLeadIds_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lsLeadIds.SelectedIndexChanged
-        If Me.Exclusions = False Then
-            Dim a As ListViewItem
+        Try
+            If Me.Exclusions = False Then
+                Dim a As ListViewItem
 
-            For Each a In Me.lsLeadIds.Items
-                If a.Selected = True Then
-                    Dim b As New bulkPrintOperations
-                    b.DoTheWork(a.Text)
-                End If
-            Next
-        ElseIf Me.Exclusions = True Then
-            Dim a As ListViewItem
+                For Each a In Me.lsLeadIds.Items
+                    If a.Selected = True Then
+                        Dim b As New bulkPrintOperations
+                        b.DoTheWork(a.Text)
+                    End If
+                Next
+            ElseIf Me.Exclusions = True Then
+                Dim a As ListViewItem
 
-            For Each a In Me.lsLeadIds.Items
-                If a.Selected = True Then
-                    Dim b As New bulkPrintOperations
-                    Dim ex_set As bulkPrintOperations.Exclusions
-                    ex_set = b.GetExclusions
-                    b.DoTheWork_EXCLUSIONS(a.Text, ex_set)
-                End If
-            Next
-        End If
+                For Each a In Me.lsLeadIds.Items
+                    If a.Selected = True Then
+                        Dim b As New bulkPrintOperations
+                        Dim ex_set As bulkPrintOperations.Exclusions
+                        ex_set = b.GetExclusions
+                        b.DoTheWork_EXCLUSIONS(a.Text, ex_set)
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmPrint", "FormCode", "Event", "lsLeadIds_SelectedIndexChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -89,56 +95,62 @@
     End Sub
 
     Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
-        If Me.Exclusions = False Then
-            Dim arNumbers As New ArrayList
-            For Each y As ListViewItem In Me.lsLeadIds.Items
-                If y.Selected = True Then
-                    arNumbers.Add(y.Text)
-                End If
-            Next
+        Try
+            If Me.Exclusions = False Then
+                Dim arNumbers As New ArrayList
+                For Each y As ListViewItem In Me.lsLeadIds.Items
+                    If y.Selected = True Then
+                        arNumbers.Add(y.Text)
+                    End If
+                Next
 
 
-            Dim yy As New bulkPrintOperations
-            'MsgBox("String Generated: " & vbCrLf & vbCrLf & yy.Generate_BULK_MSG_BODY(arNumbers), MsgBoxStyle.Information, "DEBUG STRING GENERATION BULK PRINT OBJ")
-            Dim strMSG As String = yy.Generate_BULK_MSG_BODY(arNumbers)
-            yy.GenerateBULK_PRINT(strMSG)
-
-
-
-            'Dim str As String = ""
-            'Dim i As Integer = 0
-            'For i = 0 To arNumbers.Count - 1
-            '    str += arNumbers(i) & vbCrLf
-            'Next
-
-            'MsgBox("Record IDs From Multi-Select : " & vbCrLf & str, MsgBoxStyle.Information, "DEBUG INFO")
-        ElseIf Me.Exclusions = True Then
-
-            Dim arNumbers As New ArrayList
-            For Each y As ListViewItem In Me.lsLeadIds.Items
-                If y.Selected = True Then
-                    arNumbers.Add(y.Text)
-                End If
-            Next
-
-
-            Dim yy As New bulkPrintOperations
-            Dim ex_set As bulkPrintOperations.Exclusions
-            ex_set = yy.GetExclusions
-            'MsgBox("String Generated: " & vbCrLf & vbCrLf & yy.Generate_BULK_MSG_BODY(arNumbers), MsgBoxStyle.Information, "DEBUG STRING GENERATION BULK PRINT OBJ")
-            Dim strMSG As String = yy.Generate_BULK_MSG_BODY_EXCLUSIONS(arNumbers, ex_set)
-            yy.GenerateBULK_PRINT(strMSG)
+                Dim yy As New bulkPrintOperations
+                'MsgBox("String Generated: " & vbCrLf & vbCrLf & yy.Generate_BULK_MSG_BODY(arNumbers), MsgBoxStyle.Information, "DEBUG STRING GENERATION BULK PRINT OBJ")
+                Dim strMSG As String = yy.Generate_BULK_MSG_BODY(arNumbers)
+                yy.GenerateBULK_PRINT(strMSG)
 
 
 
-            'Dim str As String = ""
-            'Dim i As Integer = 0
-            'For i = 0 To arNumbers.Count - 1
-            '    str += arNumbers(i) & vbCrLf
-            'Next
+                'Dim str As String = ""
+                'Dim i As Integer = 0
+                'For i = 0 To arNumbers.Count - 1
+                '    str += arNumbers(i) & vbCrLf
+                'Next
 
-            'MsgBox("Record IDs From Multi-Select : " & vbCrLf & str, MsgBoxStyle.Information, "DEBUG INFO")
-        End If
-        
+                'MsgBox("Record IDs From Multi-Select : " & vbCrLf & str, MsgBoxStyle.Information, "DEBUG INFO")
+            ElseIf Me.Exclusions = True Then
+
+                Dim arNumbers As New ArrayList
+                For Each y As ListViewItem In Me.lsLeadIds.Items
+                    If y.Selected = True Then
+                        arNumbers.Add(y.Text)
+                    End If
+                Next
+
+
+                Dim yy As New bulkPrintOperations
+                Dim ex_set As bulkPrintOperations.Exclusions
+                ex_set = yy.GetExclusions
+                'MsgBox("String Generated: " & vbCrLf & vbCrLf & yy.Generate_BULK_MSG_BODY(arNumbers), MsgBoxStyle.Information, "DEBUG STRING GENERATION BULK PRINT OBJ")
+                Dim strMSG As String = yy.Generate_BULK_MSG_BODY_EXCLUSIONS(arNumbers, ex_set)
+                yy.GenerateBULK_PRINT(strMSG)
+
+
+
+                'Dim str As String = ""
+                'Dim i As Integer = 0
+                'For i = 0 To arNumbers.Count - 1
+                '    str += arNumbers(i) & vbCrLf
+                'Next
+
+                'MsgBox("Record IDs From Multi-Select : " & vbCrLf & str, MsgBoxStyle.Information, "DEBUG INFO")
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmPrint", "FormCode", "Event", "Button1_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 End Class

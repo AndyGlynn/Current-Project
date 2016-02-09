@@ -21,7 +21,9 @@ Public Class EmailTemplate
                 Me.lblSubject.Visible = False
             End If
         Catch ex As Exception
-
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "txtSubject_lostFocus", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 
@@ -39,7 +41,9 @@ Public Class EmailTemplate
                 Me.lblEmailBody.Visible = False
             End If
         Catch ex As Exception
-
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "txtEmailBody_lostFocus", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 
@@ -57,103 +61,117 @@ Public Class EmailTemplate
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        Dim ctrl As Button = sender
-        Dim ctrl_text As String = ctrl.Text
+        Try
+            Dim ctrl As Button = sender
+            Dim ctrl_text As String = ctrl.Text
 
-        Select Case ctrl_text
-            Case Is = "Save and Close"
-                Dim sub_len As Integer = Me.txtsubject.Text.ToString.Length
-                If sub_len <= 0 Then
-                    MsgBox("You must supply a subject for this template.", MsgBoxStyle.Critical, "No Subject Given")
-                    Exit Sub
-                End If
-                Dim bodyLen As Integer = Me.rtfEmailBody.Text.ToString.Length
-                If bodyLen <= 0 Then
-                    MsgBox("You must have a body for this email template.", MsgBoxStyle.Critical, "No Message Body")
-                    Exit Sub
-                End If
-                Dim temp_name As String = InputBox("Please enter a name for this template.", "Enter Template Name", "<New Template>")
-                Dim tempLen As Integer = temp_name.ToString.Length
-                If tempLen <= 0 Then
-                    MsgBox("You must supply a template name in order to save it.", MsgBoxStyle.Critical, "No Template Name")
-                    Exit Sub
-                ElseIf tempLen >= 1 Then
-                    '' check for duplicates
-                    Dim y As New emlTemplateLogic
-                    Dim z As New emlTemplateLogic.TemplateInfo
-                    z.ID = 0
-                    z.Subject = Me.txtsubject.Text
-                    z.Body = Me.rtfEmailBody.Text
-                    z.TemplateName = temp_name
-                    Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                    z.Department = y.GetEmployeeDepartment(name(0), name(1), False)
-                    Dim exists As Boolean = y.CheckDuplicateTemplateExists(False, z)
-                    If exists = False Then
-                        '' insert it
-                        y.InsertNewTemplate(z, False)
-                        y = Nothing
-                        ResetForm()
-                        Confirming.GetTemplates()
-                        Sales.Get_ToolStrip_Templates()
-                        Me.Close()
-                    ElseIf exists = True Then
-                        MsgBox("There is already a templated named: " & z.TemplateName & " stored." & vbCrLf & "Please choose another name and try again.", MsgBoxStyle.Information, "Duplicate Exists")
+            Select Case ctrl_text
+                Case Is = "Save and Close"
+                    Dim sub_len As Integer = Me.txtsubject.Text.ToString.Length
+                    If sub_len <= 0 Then
+                        MsgBox("You must supply a subject for this template.", MsgBoxStyle.Critical, "No Subject Given")
                         Exit Sub
                     End If
-                End If
-            Case Is = "Update"
-                Dim sub_len As Integer = Me.txtsubject.Text.ToString.Length
-                If sub_len <= 0 Then
-                    MsgBox("You must supply a subject for this template.", MsgBoxStyle.Critical, "No Subject Given")
-                    Exit Sub
-                End If
-                Dim bodyLen As Integer = Me.rtfEmailBody.Text.ToString.Length
-                If bodyLen <= 0 Then
-                    MsgBox("You must have a body for this email template.", MsgBoxStyle.Critical, "No Message Body")
-                    Exit Sub
-                End If
-                Dim temp_name As String = Me.cboTemplateName.Text
-                If Len(temp_name) <= 0 Then
-                    MsgBox("Can't update a template without a template name.", MsgBoxStyle.Critical, "Error Updating Template")
-                    Exit Sub
-                ElseIf Len(temp_name) >= 1 Then
-                    Dim zz As New emlTemplateLogic.TemplateInfo
-                    zz.ID = "0"
-                    zz.Subject = Me.txtsubject.Text
-                    zz.Body = Me.rtfEmailBody.Text
-                    zz.TemplateName = temp_name
-                    Dim xy As New emlTemplateLogic
-                    Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                    zz.Department = xy.GetEmployeeDepartment(name(0), name(1), False)
-                    xy.UpdateWholeTemplate(False, zz)
-                    ResetForm()
-                    Confirming.GetTemplates()
-                    Me.Close()
-                End If
-                Exit Select
-            Case Else
-                Exit Select
-        End Select
+                    Dim bodyLen As Integer = Me.rtfEmailBody.Text.ToString.Length
+                    If bodyLen <= 0 Then
+                        MsgBox("You must have a body for this email template.", MsgBoxStyle.Critical, "No Message Body")
+                        Exit Sub
+                    End If
+                    Dim temp_name As String = InputBox("Please enter a name for this template.", "Enter Template Name", "<New Template>")
+                    Dim tempLen As Integer = temp_name.ToString.Length
+                    If tempLen <= 0 Then
+                        MsgBox("You must supply a template name in order to save it.", MsgBoxStyle.Critical, "No Template Name")
+                        Exit Sub
+                    ElseIf tempLen >= 1 Then
+                        '' check for duplicates
+                        Dim y As New emlTemplateLogic
+                        Dim z As New emlTemplateLogic.TemplateInfo
+                        z.ID = 0
+                        z.Subject = Me.txtsubject.Text
+                        z.Body = Me.rtfEmailBody.Text
+                        z.TemplateName = temp_name
+                        Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                        z.Department = y.GetEmployeeDepartment(name(0), name(1), False)
+                        Dim exists As Boolean = y.CheckDuplicateTemplateExists(False, z)
+                        If exists = False Then
+                            '' insert it
+                            y.InsertNewTemplate(z, False)
+                            y = Nothing
+                            ResetForm()
+                            Confirming.GetTemplates()
+                            Sales.Get_ToolStrip_Templates()
+                            Me.Close()
+                        ElseIf exists = True Then
+                            MsgBox("There is already a templated named: " & z.TemplateName & " stored." & vbCrLf & "Please choose another name and try again.", MsgBoxStyle.Information, "Duplicate Exists")
+                            Exit Sub
+                        End If
+                    End If
+                Case Is = "Update"
+                    Dim sub_len As Integer = Me.txtsubject.Text.ToString.Length
+                    If sub_len <= 0 Then
+                        MsgBox("You must supply a subject for this template.", MsgBoxStyle.Critical, "No Subject Given")
+                        Exit Sub
+                    End If
+                    Dim bodyLen As Integer = Me.rtfEmailBody.Text.ToString.Length
+                    If bodyLen <= 0 Then
+                        MsgBox("You must have a body for this email template.", MsgBoxStyle.Critical, "No Message Body")
+                        Exit Sub
+                    End If
+                    Dim temp_name As String = Me.cboTemplateName.Text
+                    If Len(temp_name) <= 0 Then
+                        MsgBox("Can't update a template without a template name.", MsgBoxStyle.Critical, "Error Updating Template")
+                        Exit Sub
+                    ElseIf Len(temp_name) >= 1 Then
+                        Dim zz As New emlTemplateLogic.TemplateInfo
+                        zz.ID = "0"
+                        zz.Subject = Me.txtsubject.Text
+                        zz.Body = Me.rtfEmailBody.Text
+                        zz.TemplateName = temp_name
+                        Dim xy As New emlTemplateLogic
+                        Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                        zz.Department = xy.GetEmployeeDepartment(name(0), name(1), False)
+                        xy.UpdateWholeTemplate(False, zz)
+                        ResetForm()
+                        Confirming.GetTemplates()
+                        Me.Close()
+                    End If
+                    Exit Select
+                Case Else
+                    Exit Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "btnSave_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub ResetForm()
-        Me.txtsubject.Text = ""
-        Me.rtfEmailBody.Text = ""
-        Me.cboTemplateName.Text = ""
-        Me.btnSave.Text = "Save and Close"
-        Me.lblEmailBody.Visible = True
-        Me.lblSubject.Visible = True
-        Me.lblTemplateName.Visible = True
-        Dim y As New emlTemplateLogic
-        Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-        Dim fname As String = name(0)
-        Dim lname As String = name(1)
-        Dim b As New List(Of emlTemplateLogic.TemplateInfo)
-        b = y.GetTemplatesByDepartment(False, y.GetEmployeeDepartment(fname, lname, False))
-        Dim a As emlTemplateLogic.TemplateInfo
-        Me.cboTemplateName.Items.Clear()
-        For Each a In b
-            Me.cboTemplateName.Items.Add(a.TemplateName)
-        Next
+        Try
+            Me.txtsubject.Text = ""
+            Me.rtfEmailBody.Text = ""
+            Me.cboTemplateName.Text = ""
+            Me.btnSave.Text = "Save and Close"
+            Me.lblEmailBody.Visible = True
+            Me.lblSubject.Visible = True
+            Me.lblTemplateName.Visible = True
+            Dim y As New emlTemplateLogic
+            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim fname As String = name(0)
+            Dim lname As String = name(1)
+            Dim b As New List(Of emlTemplateLogic.TemplateInfo)
+            b = y.GetTemplatesByDepartment(False, y.GetEmployeeDepartment(fname, lname, False))
+            Dim a As emlTemplateLogic.TemplateInfo
+            Me.cboTemplateName.Items.Clear()
+            For Each a In b
+                Me.cboTemplateName.Items.Add(a.TemplateName)
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "ResetForm()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
 
     End Sub
 
@@ -173,20 +191,27 @@ Public Class EmailTemplate
     End Sub
 
     Private Sub cboTemplateName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTemplateName.SelectedIndexChanged
-       Dim cbo As ComboBox = sender
-        Dim sel_str As String = cbo.Text
-        If sel_str.ToString.Length >= 1 Then
-            Dim z As New emlTemplateLogic
-            Dim zz As New emlTemplateLogic.TemplateInfo
-            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-            zz = z.GetSingleTemplate(sel_str, False)
-            Me.txtsubject.Text = zz.Subject
-            Me.rtfEmailBody.Text = zz.Body
-            Me.btnSave.Text = "Update"
-        ElseIf sel_str.ToString.Length <= 0 Then
-            Me.btnSave.Text = "Save and Close"
-            Exit Sub
-        End If
+        Try
+            Dim cbo As ComboBox = sender
+            Dim sel_str As String = cbo.Text
+            If sel_str.ToString.Length >= 1 Then
+                Dim z As New emlTemplateLogic
+                Dim zz As New emlTemplateLogic.TemplateInfo
+                Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                zz = z.GetSingleTemplate(sel_str, False)
+                Me.txtsubject.Text = zz.Subject
+                Me.rtfEmailBody.Text = zz.Body
+                Me.btnSave.Text = "Update"
+            ElseIf sel_str.ToString.Length <= 0 Then
+                Me.btnSave.Text = "Save and Close"
+                Exit Sub
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "cboTemplateName_SelectedIndexChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub txtsubject_TextChanged(sender As Object, e As EventArgs) Handles txtsubject.TextChanged

@@ -124,14 +124,24 @@ Public Class CUSTOMER_LABEL
             Return CorrectName
         Catch ex As Exception
             Return CorrectName
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("CUSTOMER_LABEL", "ByVal Contact1FirstName As String, ByVal Contact1LastName As String, ByVal Contact2FirstName As String, ByVal Contact2LastName As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CorrectContactNames")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("CUSTOMER_LABEL", "ByVal Contact1FirstName As String, ByVal Contact1LastName As String, ByVal Contact2FirstName As String, ByVal Contact2LastName As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CorrectContactNames")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CUSTOMER_LABEL", "CUSTOMER_LABEL", "Function", "CorrectContactNames(C1Fname,C1Lname,C2Fname,C2Lname)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Function
     Public Function CorrectStreetAddress(ByVal Staddy As String, ByVal City As String, ByVal State As String, ByVal Zip As String)
-        CorrectStAddress = Staddy & vbCrLf & City & ", " & State & " " & Zip
-        Return CorrectStAddress
+        Try
+            CorrectStAddress = Staddy & vbCrLf & City & ", " & State & " " & Zip
+            Return CorrectStAddress
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CUSTOMER_LABEL", "CUSTOMER_LABEL", "Function", "CorrectAddress(staddy,city,state,zip)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 #End Region
 #Region "New Object"
@@ -157,8 +167,11 @@ Public Class CUSTOMER_LABEL
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("CUSTOMER_LABEL", "ByVal LeadNumber as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetINFO")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("CUSTOMER_LABEL", "ByVal LeadNumber as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetINFO")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CUSTOMER_LABEL", "CUSTOMER_LABEL", "Function", "CorrectStreetAddress(staddy,city,state,zip)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub

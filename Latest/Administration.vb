@@ -43,7 +43,17 @@ Public Class Administration
     End Sub
 
     Private Sub tsbtnUsers_Click(sender As Object, e As EventArgs) Handles tsbtnUsers.Click
-        SetUpUser.ShowDialog()
+        Try
+            SetUpUser.ShowDialog()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Administration", "FormCode", "Event", "tsbtnUsers_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub Administration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

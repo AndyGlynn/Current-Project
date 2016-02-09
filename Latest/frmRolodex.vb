@@ -28,32 +28,38 @@ Public Class frmRolodex
         Me.Close()
     End Sub
     Public Sub PopulateDefaultList(ByVal Department As String)
-        Dim cmdGET As SqlCommand = New SqlCommand("SELECT ID,EmpFirstName,EmpLastName,Department,PrimaryPhone FROM iss.dbo.companyrolodex where Department like @DEP order by EmpLastName asc", cnn)
-        Dim param1 As SqlParameter = New SqlParameter("@DEP", Department)
-        cmdGET.Parameters.Add(param1)
-        cnn.Open()
-        Dim r1 As SqlDataReader
-        r1 = cmdGET.ExecuteReader
-        While r1.Read
-            Dim lv As New ListViewItem()
-            lv.Text = r1.Item("ID")
-            lv.SubItems.Add(r1.Item("EmpLastName"))
-            lv.SubItems.Add(r1.Item("EmpFirstName"))
-            'Me.ListView1.Groups.Add(r1.Item("Department"))
-            lv.Group = Me.ListView1.Groups(r1.Item("Department"))
-            'lv.SubItems.Add(r1.Item("Department"))
-            Dim ph As String = r1.Item("PrimaryPhone")
-            ph = Mid(ph, 1, 3)
-            ph = "(" & ph & ") "
-            Dim firstSet As String = Mid(r1.Item("PrimaryPhone"), 4, 3)
-            firstSet = firstSet & "-"
-            Dim secondset As String = Mid(r1.Item("PrimaryPhone"), 7, 4)
-            Dim correctedLiteral As String = ph & firstSet & secondset
-            lv.SubItems.Add(correctedLiteral)
-            Me.ListView1.Items.Add(lv)
-        End While
-        r1.Close()
-        cnn.Close()
+        Try
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ID,EmpFirstName,EmpLastName,Department,PrimaryPhone FROM iss.dbo.companyrolodex where Department like @DEP order by EmpLastName asc", cnn)
+            Dim param1 As SqlParameter = New SqlParameter("@DEP", Department)
+            cmdGET.Parameters.Add(param1)
+            cnn.Open()
+            Dim r1 As SqlDataReader
+            r1 = cmdGET.ExecuteReader
+            While r1.Read
+                Dim lv As New ListViewItem()
+                lv.Text = r1.Item("ID")
+                lv.SubItems.Add(r1.Item("EmpLastName"))
+                lv.SubItems.Add(r1.Item("EmpFirstName"))
+                'Me.ListView1.Groups.Add(r1.Item("Department"))
+                lv.Group = Me.ListView1.Groups(r1.Item("Department"))
+                'lv.SubItems.Add(r1.Item("Department"))
+                Dim ph As String = r1.Item("PrimaryPhone")
+                ph = Mid(ph, 1, 3)
+                ph = "(" & ph & ") "
+                Dim firstSet As String = Mid(r1.Item("PrimaryPhone"), 4, 3)
+                firstSet = firstSet & "-"
+                Dim secondset As String = Mid(r1.Item("PrimaryPhone"), 7, 4)
+                Dim correctedLiteral As String = ph & firstSet & secondset
+                lv.SubItems.Add(correctedLiteral)
+                Me.ListView1.Items.Add(lv)
+            End While
+            r1.Close()
+            cnn.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmRolodex", "FormCode", "sub", "PopulateDefaultList(department)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -98,25 +104,31 @@ Public Class frmRolodex
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        Dim result As Integer = 0
-        result = MsgBox("Are you sure you wish to delete this employee?", MsgBoxStyle.YesNo, "Delete Employee")
-        Select Case result
-            Case Is = 6
-                Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.companyrolodex where ID = @ID", cnn)
-                Dim param1 As SqlParameter = New SqlParameter("@ID", SelItem.Text)
-                cmdDEL.Parameters.Add(param1)
-                cnn.Open()
-                cmdDEL.ExecuteNonQuery()
-                cnn.Close()
-                Me.ListView1.Items.Clear()
-                PopulateDefaultList(Me.cboDepartment.Text)
-                SelItem = Nothing
-                Exit Select
-            Case Is = 7
-                SelItem = Nothing
-                Exit Select
-        End Select
-        
+        Try
+            Dim result As Integer = 0
+            result = MsgBox("Are you sure you wish to delete this employee?", MsgBoxStyle.YesNo, "Delete Employee")
+            Select Case result
+                Case Is = 6
+                    Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.companyrolodex where ID = @ID", cnn)
+                    Dim param1 As SqlParameter = New SqlParameter("@ID", SelItem.Text)
+                    cmdDEL.Parameters.Add(param1)
+                    cnn.Open()
+                    cmdDEL.ExecuteNonQuery()
+                    cnn.Close()
+                    Me.ListView1.Items.Clear()
+                    PopulateDefaultList(Me.cboDepartment.Text)
+                    SelItem = Nothing
+                    Exit Select
+                Case Is = 7
+                    SelItem = Nothing
+                    Exit Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmRolodex", "FormCode", "sub", "Button3_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -167,6 +179,9 @@ Public Class frmRolodex
 
         Catch ex As Exception
             MsgBox("Error Placing Call: " & Area_Code & Number & "." & vbCrLf & ex.Message.ToString, MsgBoxStyle.Critical, "Error Placing Call")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmRolodex", "FormCode", "Sub", "Button4_Click", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
 

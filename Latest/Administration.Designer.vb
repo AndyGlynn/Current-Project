@@ -27,16 +27,16 @@ Partial Class Administration
         Me.ilScheduledTask = New System.Windows.Forms.ImageList(Me.components)
         Me.pnlScheduledTasks = New System.Windows.Forms.Panel()
         Me.tsInstallationDepartment = New System.Windows.Forms.ToolStrip()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
         Me.ScheduledTasks = New System.Windows.Forms.ToolStripDropDownButton()
         Me.btnMarkTaskAsDone = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnEditScheduledTask = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnRemoveThisCompletedTask = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnRemoveAllScheduledTask = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsbtnUsers = New System.Windows.Forms.ToolStripButton()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
         Me.tsInstallationDepartment.SuspendLayout()
         Me.pnlCustomerHistory.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -73,38 +73,6 @@ Partial Class Administration
         Me.tsInstallationDepartment.Size = New System.Drawing.Size(889, 25)
         Me.tsInstallationDepartment.TabIndex = 251
         Me.tsInstallationDepartment.Text = "ToolStrip1"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(819, 329)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(58, 33)
-        Me.Button1.TabIndex = 253
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'pnlCustomerHistory
-        '
-        Me.pnlCustomerHistory.Controls.Add(Me.ToolStrip1)
-        Me.pnlCustomerHistory.Location = New System.Drawing.Point(12, 369)
-        Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(865, 100)
-        Me.pnlCustomerHistory.TabIndex = 254
-        '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TScboCustomerHistory})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(865, 25)
-        Me.ToolStrip1.TabIndex = 0
-        Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'TScboCustomerHistory
-        '
-        Me.TScboCustomerHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.TScboCustomerHistory.Name = "TScboCustomerHistory"
-        Me.TScboCustomerHistory.Size = New System.Drawing.Size(121, 25)
         '
         'ScheduledTasks
         '
@@ -146,6 +114,38 @@ Partial Class Administration
         Me.tsbtnUsers.Name = "tsbtnUsers"
         Me.tsbtnUsers.Size = New System.Drawing.Size(101, 22)
         Me.tsbtnUsers.Text = "Manage Users"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(819, 329)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(58, 33)
+        Me.Button1.TabIndex = 253
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'pnlCustomerHistory
+        '
+        Me.pnlCustomerHistory.Controls.Add(Me.ToolStrip1)
+        Me.pnlCustomerHistory.Location = New System.Drawing.Point(12, 369)
+        Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(865, 100)
+        Me.pnlCustomerHistory.TabIndex = 254
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TScboCustomerHistory})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(865, 25)
+        Me.ToolStrip1.TabIndex = 0
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'TScboCustomerHistory
+        '
+        Me.TScboCustomerHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.TScboCustomerHistory.Name = "TScboCustomerHistory"
+        Me.TScboCustomerHistory.Size = New System.Drawing.Size(121, 25)
         '
         'Administration
         '

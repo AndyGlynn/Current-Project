@@ -24,13 +24,24 @@ Public Class DuplicateLead
 
     
     Private Sub btnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNew.Click
-        Dim c As New ENTER_LEAD.InsertEnterLead
-        c.InsertLead(MapPointVerified)
-        Me.lstDupes.Items.Clear()
-        Me.Close()
+        Try
+            Dim c As New ENTER_LEAD.InsertEnterLead
+            c.InsertLead(MapPointVerified)
+            Me.lstDupes.Items.Clear()
+            Me.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "DuplicateLead", "FormCode", "Event", "btnNew_Click()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+
+    End Sub
+
+    Private Sub DuplicateLead_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

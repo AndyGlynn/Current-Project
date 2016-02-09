@@ -52,20 +52,25 @@ Public Class frmEditCompanyInformation
     End Sub
 
     Private Sub frmEditCompanyInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Try
+            cmpy_info = New CompanyInformation
+            cmpy_info.GetInformation()
 
-        cmpy_info = New CompanyInformation
-        cmpy_info.GetInformation()
-
-        Me.txtStreetAddress.Text = cmpy_info.StAddress
-        Me.txtAddressLine2.Text = cmpy_info.Address_Line_2
-        Me.txtCity.Text = cmpy_info.City
-        Me.txtState.Text = cmpy_info.State
-        Me.txtZip.Text = cmpy_info.Zip
-        Me.txtWebsite.Text = cmpy_info.Company_WebSite
-        Me.txtCompanyName.Text = cmpy_info.Company_Name
-        Me.txtContactPhoneNumber.Text = cmpy_info.ContactPhoneNumber
-        Me.txtFaxNumber.Text = cmpy_info.ContactFaxNumber
-        Me.txtLogoDirectory.Text = cmpy_info.Logo_Directory
+            Me.txtStreetAddress.Text = cmpy_info.StAddress
+            Me.txtAddressLine2.Text = cmpy_info.Address_Line_2
+            Me.txtCity.Text = cmpy_info.City
+            Me.txtState.Text = cmpy_info.State
+            Me.txtZip.Text = cmpy_info.Zip
+            Me.txtWebsite.Text = cmpy_info.Company_WebSite
+            Me.txtCompanyName.Text = cmpy_info.Company_Name
+            Me.txtContactPhoneNumber.Text = cmpy_info.ContactPhoneNumber
+            Me.txtFaxNumber.Text = cmpy_info.ContactFaxNumber
+            Me.txtLogoDirectory.Text = cmpy_info.Logo_Directory
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEditCompanyInformation", "FormCode", "Sub", "frmEditCompanyInformation_Load", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
     Private Sub ResetDefault()

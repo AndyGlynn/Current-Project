@@ -17,396 +17,408 @@ Public Class USER_LOGIC
     Public Delegate Sub DisplayInvoker(ByVal t As String)
 
     Public Function GetIPv4Address() As IPAddress
-        GetIPv4Address = Nothing
-        Dim strmachine As String = System.Net.Dns.GetHostName()
-        Dim iphe As System.Net.IPHostEntry = System.Net.Dns.GetHostEntry(strmachine)
+        Try
+            GetIPv4Address = Nothing
+            Dim strmachine As String = System.Net.Dns.GetHostName()
+            Dim iphe As System.Net.IPHostEntry = System.Net.Dns.GetHostEntry(strmachine)
 
-        For Each ipheal As System.Net.IPAddress In iphe.AddressList
-            If ipheal.AddressFamily = System.Net.Sockets.AddressFamily.InterNetwork Then
-                GetIPv4Address = ipheal
-                ' MsgBox(ipheal.ToString, MsgBoxStyle.Critical, "ERROR")
+            For Each ipheal As System.Net.IPAddress In iphe.AddressList
+                If ipheal.AddressFamily = System.Net.Sockets.AddressFamily.InterNetwork Then
+                    GetIPv4Address = ipheal
+                    ' MsgBox(ipheal.ToString, MsgBoxStyle.Critical, "ERROR")
 
-            End If
-        Next
+                End If
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Function", "GetIPV4Address()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Function ''Good
     Public Sub Login_To_System()
-
-        Dim USR As String = ""
-        Dim USRF As String = ""
-        Dim USRL As String = ""
-        Dim PWD As String = ""
-        If LOGIN.txtUserName.Text = "Admin" Then
-            USR = "Admin"
-            ' USRL = "Admin"
-            PWD = LOGIN.txtPWD.Text
-        End If
-        If LOGIN.txtUserName.Text <> "Admin" Then
-            ' Dim str2 = Split(LOGIN.txtUserName.Text, " ", 2)
-
-            ' USR = Trim(str2(0))
-            ' USRL = Trim(str2(1))
-            USR = LOGIN.txtUserName.Text
-            PWD = LOGIN.txtPWD.Text
-        End If
-
-
-        'If USR.ToString.Length < 2 Then
-        '    MsgBox("User Name cannot be blank.", MsgBoxStyle.Critical, "ERROR")
-        '    Exit Sub
-        'End If
-
-        'If PWD.ToString.Length < 2 Then
-        '    MsgBox("Password cannot be blank.", MsgBoxStyle.Critical, "ERROR")
-        '    Exit Sub
-        'End If
-
-        Dim cmdCNT As SqlCommand = New SqlCommand("SELECT Count(ID) from iss.dbo.userpermissiontable where UserName = @USR and UserPWD = @PWD", cnn)
-        Dim param1 As SqlParameter = New SqlParameter("@USR", USR)
-        'Dim param33 As SqlParameter = New SqlParameter("@USRL", USRL)
-        Dim param2 As SqlParameter = New SqlParameter("@PWD", PWD)
-        cmdCNT.Parameters.Add(param1)
-        cmdCNT.Parameters.Add(param2)
-        '  cmdCNT.Parameters.Add(param33)
-        cnn.Open()
-        Dim r1 As SqlDataReader
-        Dim cnt As Integer = 0
-        r1 = cmdCNT.ExecuteReader
-        While r1.Read
-            cnt = r1.Item(0)
-        End While
-        r1.Close()
-        cnn.Close()
         Try
-            Select Case cnt
-                Case Is <= 0
-                    MsgBox("User does not exist. Please try again.", MsgBoxStyle.Critical, "ERROR")
-                    LOGIN.Success = False
-                    Exit Sub
-                Case Is = 1
-                    '' pipe information from sql table to user logic module to retain values all through out the program
-                    '' multiple checks.
-                    LOGIN.Success = True
-                    Dim cmdGet As SqlCommand = New SqlCommand("dbo.Get_User_Info", cnn)
-                    cmdGet.CommandType = CommandType.StoredProcedure
-                    Dim param22 As SqlParameter = New SqlParameter("@UserName", USR)
-                    'Dim param3 As SqlParameter = New SqlParameter("@UserFirstName", USRF)
-                    'Dim param44 As SqlParameter = New SqlParameter("@UserLastName", USRL)
-                    Dim param4 As SqlParameter = New SqlParameter("@UserPWD", PWD)
-                    cmdGet.Parameters.Add(param22)
-                    'cmdGet.Parameters.Add(param3)
-                    cmdGet.Parameters.Add(param4)
-                    'cmdGet.Parameters.Add(param44)
+            Dim USR As String = ""
+            Dim USRF As String = ""
+            Dim USRL As String = ""
+            Dim PWD As String = ""
+            If LOGIN.txtUserName.Text = "Admin" Then
+                USR = "Admin"
+                ' USRL = "Admin"
+                PWD = LOGIN.txtPWD.Text
+            End If
+            If LOGIN.txtUserName.Text <> "Admin" Then
+                ' Dim str2 = Split(LOGIN.txtUserName.Text, " ", 2)
 
-                    cnn.Open()
-                    Dim r2 As SqlDataReader
-                    r2 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-                    While r2.Read
-                        If USR = "Admin" Then
-                            STATIC_VARIABLES.CurrentUser = "Admin"
-                        ElseIf USR <> "Admin" Then
-                            STATIC_VARIABLES.CurrentUser = r2.Item(2) & " " & r2.Item(3)
-                        End If
-                        STATIC_VARIABLES.Login = r2.Item(1)
-                        STATIC_VARIABLES.CurrentUser = r2.Item(2) & " " & r2.Item(3)
-                        'MsgBox(STATIC_VARIABLES.CurrentUser)
-                        STATIC_VARIABLES.UserPWD = r2.Item(4)
-                        STATIC_VARIABLES.ColdCall = r2.Item(5)
-                        STATIC_VARIABLES.WarmCall = r2.Item(6)
-                        STATIC_VARIABLES.PreviousCust = r2.Item(7)
-                        STATIC_VARIABLES.Recovery = r2.Item(8)
-                        STATIC_VARIABLES.Confirmer = r2.Item(9)
-                        STATIC_VARIABLES.SalesManager = r2.Item(10)
-                        STATIC_VARIABLES.MarketingManager = r2.Item(11)
-                        STATIC_VARIABLES.Finance = r2.Item(12)
-                        STATIC_VARIABLES.Install = r2.Item(13)
-                        STATIC_VARIABLES.Administration = r2.Item(14)
-                        '' division wich was nixed = item 13
-                        STATIC_VARIABLES.StartUpForm = r2.Item(15)
-                        STATIC_VARIABLES.CurrentForm = r2.Item(15) '' on startup this variable needs a default value // will be replaced as soon a child form is opened up. but, for alerts and past due alerts need default value.
-                        STATIC_VARIABLES.LoggedOn = r2.Item(16)
-                        STATIC_VARIABLES.DoNotShowMapping = r2.Item(17)
-                        STATIC_VARIABLES.MachineName = r2.Item(18)
-                        STATIC_VARIABLES.ManagerFirstName = r2.Item(19)
-                        STATIC_VARIABLES.ManagerLastName = r2.Item(20)
-                        STATIC_VARIABLES.IP = r2.Item(21)
-                        STATIC_VARIABLES.LicenseKey = r2.Item(22)
-                        STATIC_VARIABLES.LeaseKey = r2.Item(23)
-                    End While
-                    r2.Close()
-                    cnn.Close()
+                ' USR = Trim(str2(0))
+                ' USRL = Trim(str2(1))
+                USR = LOGIN.txtUserName.Text
+                PWD = LOGIN.txtPWD.Text
+            End If
 
 
+            'If USR.ToString.Length < 2 Then
+            '    MsgBox("User Name cannot be blank.", MsgBoxStyle.Critical, "ERROR")
+            '    Exit Sub
+            'End If
 
-                    '' get use machine name and ip and log to table
-                    ''
+            'If PWD.ToString.Length < 2 Then
+            '    MsgBox("Password cannot be blank.", MsgBoxStyle.Critical, "ERROR")
+            '    Exit Sub
+            'End If
 
-                    Dim strMachine As String = ""
-                    strMachine = My.Computer.Name
-                    'strMachine = STATIC_VARIABLES.MachineName
-                    Dim ipHost As IPHostEntry
-                    ipHost = Dns.GetHostEntry(strMachine)
-                    Dim ip As IPAddress ' holder for local machine name.
-                    Dim ipAddr() As IPAddress = Dns.GetHostAddresses(strMachine)
-
-                    ip = ipAddr(0)
-                    'Dim SpIP As String = ""
-                    ''SpIP = Split(ipAddr(0).ToString, ".", 4)
-                    'Dim ConvertedIP As String = ""
-                    'ConvertedIP = SpIP(0) & "." & SpIP(1) & "." & SpIP(2) & "." & SpIP(3)
-                    Dim ConvertedIP As String = Me.GetIPv4Address.ToString
-                    STATIC_VARIABLES.IP = ConvertedIP
-                    STATIC_VARIABLES.MachineName = strMachine
-                 
-                    ' MsgBox("Connected to server..." & STATIC_VARIABLES.CurrentUser & STATIC_VARIABLES.MachineName.ToString & STATIC_VARIABLES.IP.ToString & "WTF?", MsgBoxStyle.Information)
-
-
-
-
-
-                    Try
-                        '' reactivation code
-                        '' uncomment
-                        'Dim ipHost1 As IPHostEntry
-                        'ipHost = Dns.GetHostEntry(Dns.GetHostName())
-                        'Dim g
-                        'g = ipHost.AddressList()
-
-                        ' server name is statically assigned here.
-                        ' must make it dynamic after install to pick up on the server name.
-                        ' IE XML config file or something. No ideas yet.
-                        ' SERVERS: 'EKG1' | 'DELLXPS'
-
-                        ' need to shut server down right now to get this to work.
-                        ' MUST re-activate at later time.
-
-                        '  Dim ep As IPEndPoint = New IPEndPoint(, 5586)
-
-                        'mobjClient = New TcpClient(STATIC_VARIABLES.MachineName, 5586)
-                        'MsgBox("Connected to server..." & STATIC_VARIABLES.MachineName, MsgBoxStyle.Information)
-
-                        'mobjClient.GetStream.BeginRead(mardata, 0, 1024, AddressOf DoRead, Nothing)
-
-
-
-                        'Dim port As Int32 = 5586 '' currently unassigned by IANA as of 2-17-2007
-                        'Dim ip1 As IPAddress ' holder for local machine name.
-                        ''Dim strMachineName As String = ""
-                        ''strMachineName = My.Computer.Name
-                        'Dim ipHost As IPHostEntry
-                        'ipHost1 = Dns.GetHostEntry(STATIC_VARIABLES.MachineName)
-                        'Dim ipAddr1() As IPAddress = ipHost.AddressList
-                        'ip1 = ipAddr1(0)
-
-                        'Dim dnsEntry As String = ""
-                        'dnsEntry = Dns.GetHostEntry(IP).HostName
-
-                        ' packet structure 
-                        ' machinename|ipaddress|msg|cmd|user|recipient (if any)|"
-
-                        'Send(PENDING_REQUEST_INFO.LeadNumber & "|" & STATIC_VARIABLES.MachineName & "|" & STATIC_VARIABLES.IP & "| |" & "LOAD" & "|" & STATIC_VARIABLES.Login & "| |")
-
-                        'STATIC_VARIABLES.NET_CLIENT = mobjClient
-                        'MsgBox(STATIC_VARIABLES.NET_CLIENT.ToString)
-
-                        ' no use a store procedure to write this information to the table
-                        ' at login.
-
-                        'Dim cmdNET As SqlCommand = New SqlCommand("dbo.InsertNetworkINFO", cnn)
-                        'Dim param11 As SqlParameter
-                        ''Dim param55 As SqlParameter
-                        'If STATIC_VARIABLES.CurrentUser = "Admin" Then
-                        '    param11 = New SqlParameter("@UserName", STATIC_VARIABLES.Login.ToString)
-                        '    'param55 = New SqlParameter("@UserLName", STATIC_VARIABLES.CurrentUser.ToString)
-                        'ElseIf STATIC_VARIABLES.CurrentUser <> "Admin" Then
-                        '    'Dim str = Split(STATIC_VARIABLES.CurrentUser, " ", 2)
-                        '    param11 = New SqlParameter("@UserName", STATIC_VARIABLES.Login.ToString)
-                        '    ' param55 = New SqlParameter("@UserLName", str(1))
-                        'End If
-                        'Dim param12 As SqlParameter = New SqlParameter("@UserPWD", STATIC_VARIABLES.UserPWD)
-                        'Dim param13 As SqlParameter = New SqlParameter("@MachineName", strMachine)
-                        'Dim param14 As SqlParameter = New SqlParameter("@IP", ConvertedIP)
-                        ''STATIC_VARIABLES.IP = ConvertedIP.ToString
-                        'cmdNET.CommandType = CommandType.StoredProcedure
-                        'cnn.Open()
-                        'cmdNET.Parameters.Add(param11)
-                        'cmdNET.Parameters.Add(param12)
-                        'cmdNET.Parameters.Add(param13)
-                        'cmdNET.Parameters.Add(param14)
-                        ''cmdNET.Parameters.Add(param55)
-                        'Dim r3 As SqlDataReader
-                        'r3 = cmdNET.ExecuteReader(CommandBehavior.CloseConnection)
-                        'r3.Close()
-                        'cnn.Close()
-
-
-                        Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.userpermissiontable " _
-                               & " SET LoggedOn = 1 " _
-                               & " WHERE UserName = @USR  and UserPWD = @PWD", cnn)
-                        Dim param78 As SqlParameter = New SqlParameter("@USR", USR)
-                        'Dim param80 As SqlParameter = New SqlParameter("@USRL", USRL)
-                        Dim param79 As SqlParameter = New SqlParameter("@PWD", UserPWD)
-                        cmdUP.Parameters.Add(param78)
-                        cmdUP.Parameters.Add(param79)
-                        'cmdUP.Parameters.Add(param80)
-                        cnn.Open()
-                        Dim r4 As SqlDataReader
-                        r4 = cmdUP.ExecuteReader(CommandBehavior.CloseConnection)
-                        r4.Close()
-                        cnn.Close()
-
-
-                        ' MsgBox(STATIC_VARIABLES.Server_Assigned_Hash.ToString & ", " & STATIC_VARIABLES.Login.ToString & "," & STATIC_VARIABLES.CurrentUser.ToString & ", " & STATIC_VARIABLES.CurrentForm.ToString & ", " & STATIC_VARIABLES.MachineName & ", " & STATIC_VARIABLES.IP & ", " & STATIC_VARIABLES.StartUpForm)
-
-
-                        '' now startup default form
-                        '' 
-
-                        Select Case STATIC_VARIABLES.StartUpForm
-                            Case Is = "Cold Calling"
-                                '' need form
-                                ColdCalling.Show()
-                                Exit Select
-                            Case Is = "Warm Calling"
-                                WCaller.Show()
-                                Exit Select
-                            Case Is = "Previous Customer"
-                                '' need form
-                                PreviousCustomer.Show()
-                                Exit Select
-                            Case Is = "Recovery"
-                                '' need form
-                                Recovery.Show()
-                                Exit Select
-                            Case Is = "Marketing Manager"
-                                '' need form
-                                MarketingManager.Show()
-                                MarketingManager.BringToFront()
-                                Exit Select
-                            Case Is = "Sales Department"
-                                '' need form
-                                Sales.MdiParent = Main
-                                Sales.Show()
-                                Sales.BringToFront()
-                                STATIC_VARIABLES.ActiveChild = Sales
-                                'sales.Focus()
-                                'sales.Show()
-                            Case Is = "frmTesting"
-                                frmTesting.MdiParent = Main
-                                frmTesting.Show()
-                                frmTesting.BringToFront()
-                                STATIC_VARIABLES.ActiveChild = frmTesting
-                                Exit Select
-                            Case Is = "Installation Department"
-                                '' need form
-                                Installation.Show()
-                                Exit Select
-                            Case Is = "Finance Department"
-                                '' need form
-                                Finance.Show()
-                                Exit Select
-                            Case Is = "Administration"
-                                '' need form
-                                Administration.Show()
-                                Exit Select
-                            Case Is = "Confirming"
-                                Confirming.MdiParent = Main
-                                Confirming.Show()
-                                Confirming.BringToFront()
-
-                                'Confirming.Focus()
-                                'Confirming.Show()
-                                Exit Select
-                            Case Else
-                                Main.Show()
-                                Exit Select
-                        End Select
-
-
-                        '' now set the hash for xfer objects
-                        ''
-
-
-                        '' now check permissions and lock down appropriate buttons on tsmain
-                        ''
-
-
-                        CheckPermissions()
-
-
-                        'Try
-                        '    Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.tblUserHash (UserName,UserHASH) " _
-                        '    & "VALUES(@USR,@USRL,@HASH)", cnn)
-                        '    Dim param100 As SqlParameter = New SqlParameter("@USR", Trim(STATIC_VARIABLES.Login.ToString))
-                        '    ' Dim param200 As SqlParameter = New SqlParameter("@USRL", Trim(STATIC_VARIABLES.CurrentUser))
-                        '    Dim param300 As SqlParameter = New SqlParameter("@HASH", Trim(STATIC_VARIABLES.Server_Assigned_Hash))
-                        '    cmdINS.Parameters.Add(param100)
-                        '    'cmdINS.Parameters.Add(param200)
-                        '    cmdINS.Parameters.Add(param300)
-                        '    cnn.Open()
-                        '    cmdINS.ExecuteNonQuery()
-                        '    cnn.Close()
-                        'Catch ex As Exception
-                        '    cnn.Close()
-                        '    MsgBox("Problem inserting hash to table.", MsgBoxStyle.Critical, "ERROR")
-                        'End Try
-
-                    Catch ex As Exception
-                        MsgBox(ex.ToString)
-                        MsgBox("ip host ln 303", MsgBoxStyle.Critical, "ERROR")
-                    End Try
-
-                    '' now reset the 'Lead Pool' of 'Set Appointments'
-                    ''
-
-                    Try
-                        Dim cmdRES As SqlCommand = New SqlCommand("dbo.ResetLeadPool", cnn)
-                        cmdRES.CommandType = CommandType.StoredProcedure
-                        cnn.Open()
-                        cmdRES.ExecuteNonQuery()
-                        cnn.Close()
-                    Catch ex As Exception
-                        MsgBox("Reset lead pool", MsgBoxStyle.Critical, "ERROR")
-                        cnn.Close()
-                    End Try
-          
-
-                    'Try  '' Not sure why where clearing out attached files on load Probably my idea, will discuss with Aaron and revisit 
-                    '    'Dim cmdRES As SqlCommand = New SqlCommand("Select  id from ScheduledTasks where completed = 'true' and attachedfiles = 'true' and Executiondate <= (getdate() - 60)", cnn)
-                    '    'cmdRES.CommandType = CommandType.Text
-                    '    'cnn.Open()
-                    '    'Dim r As SqlDataReader
-                    '    'r = cmdRES.ExecuteReader(CommandBehavior.CloseConnection)
-                    '    'While r.Read
-                    '    '    Dim id As String = r.Item(0).ToString
-                    '    '    'MsgBox(r.Item(0).ToString & " - " & STATIC_VARIABLES.SAAttachedFileDirectory & r.Item(0).ToString)
-                    '    '    System.IO.Directory.Delete(STATIC_VARIABLES.SAAttachedFileDirectory & id, True)
-
-                    '    'End While
-                    '    'r.Close()
-                    '    'cnn.Close()
-                    '    'cnn.Open()
-                    '    'cmdRES = New SqlCommand("update ScheduledTasks set AttachedFiles = 'false' , AttachedHashValue = '0' where  completed = 'true' and attachedfiles = 'true' and Executiondate <= (getdate() - 60)", cnn)
-                    '    'cmdRES.ExecuteNonQuery()
-                    '    'cnn.Close()
-
-                    'Catch ex As Exception
-                    '    'MsgBox("Clean up old attached files for scheduled tasks", MsgBoxStyle.Critical, "ERROR")
-
-                    '    'cnn.Close()
-                    'End Try
-                Case Else
-                    MsgBox("There was a problem logging in. Please contact your administrator.", MsgBoxStyle.Critical, "ERROR")
-                    Exit Sub
-
-
-            End Select
-        Catch ex As Exception
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT Count(ID) from iss.dbo.userpermissiontable where UserName = @USR and UserPWD = @PWD", cnn)
+            Dim param1 As SqlParameter = New SqlParameter("@USR", USR)
+            'Dim param33 As SqlParameter = New SqlParameter("@USRL", USRL)
+            Dim param2 As SqlParameter = New SqlParameter("@PWD", PWD)
+            cmdCNT.Parameters.Add(param1)
+            cmdCNT.Parameters.Add(param2)
+            '  cmdCNT.Parameters.Add(param33)
+            cnn.Open()
+            Dim r1 As SqlDataReader
+            Dim cnt As Integer = 0
+            r1 = cmdCNT.ExecuteReader
+            While r1.Read
+                cnt = r1.Item(0)
+            End While
+            r1.Close()
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("USER_LOGIC", "None", ex.Message.ToString, "Client", USR & " " & USRL & ", Login", "SQL", "Login_To_System")
-            MsgBox(ex.Message.ToString, MsgBoxStyle.Critical, "ERROR")
+            Try
+                Select Case cnt
+                    Case Is <= 0
+                        MsgBox("User does not exist. Please try again.", MsgBoxStyle.Critical, "ERROR")
+                        LOGIN.Success = False
+                        Exit Sub
+                    Case Is = 1
+                        '' pipe information from sql table to user logic module to retain values all through out the program
+                        '' multiple checks.
+                        LOGIN.Success = True
+                        Dim cmdGet As SqlCommand = New SqlCommand("dbo.Get_User_Info", cnn)
+                        cmdGet.CommandType = CommandType.StoredProcedure
+                        Dim param22 As SqlParameter = New SqlParameter("@UserName", USR)
+                        'Dim param3 As SqlParameter = New SqlParameter("@UserFirstName", USRF)
+                        'Dim param44 As SqlParameter = New SqlParameter("@UserLastName", USRL)
+                        Dim param4 As SqlParameter = New SqlParameter("@UserPWD", PWD)
+                        cmdGet.Parameters.Add(param22)
+                        'cmdGet.Parameters.Add(param3)
+                        cmdGet.Parameters.Add(param4)
+                        'cmdGet.Parameters.Add(param44)
 
+                        cnn.Open()
+                        Dim r2 As SqlDataReader
+                        r2 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+                        While r2.Read
+                            If USR = "Admin" Then
+                                STATIC_VARIABLES.CurrentUser = "Admin"
+                            ElseIf USR <> "Admin" Then
+                                STATIC_VARIABLES.CurrentUser = r2.Item(2) & " " & r2.Item(3)
+                            End If
+                            STATIC_VARIABLES.Login = r2.Item(1)
+                            STATIC_VARIABLES.CurrentUser = r2.Item(2) & " " & r2.Item(3)
+                            'MsgBox(STATIC_VARIABLES.CurrentUser)
+                            STATIC_VARIABLES.UserPWD = r2.Item(4)
+                            STATIC_VARIABLES.ColdCall = r2.Item(5)
+                            STATIC_VARIABLES.WarmCall = r2.Item(6)
+                            STATIC_VARIABLES.PreviousCust = r2.Item(7)
+                            STATIC_VARIABLES.Recovery = r2.Item(8)
+                            STATIC_VARIABLES.Confirmer = r2.Item(9)
+                            STATIC_VARIABLES.SalesManager = r2.Item(10)
+                            STATIC_VARIABLES.MarketingManager = r2.Item(11)
+                            STATIC_VARIABLES.Finance = r2.Item(12)
+                            STATIC_VARIABLES.Install = r2.Item(13)
+                            STATIC_VARIABLES.Administration = r2.Item(14)
+                            '' division wich was nixed = item 13
+                            STATIC_VARIABLES.StartUpForm = r2.Item(15)
+                            STATIC_VARIABLES.CurrentForm = r2.Item(15) '' on startup this variable needs a default value // will be replaced as soon a child form is opened up. but, for alerts and past due alerts need default value.
+                            STATIC_VARIABLES.LoggedOn = r2.Item(16)
+                            STATIC_VARIABLES.DoNotShowMapping = r2.Item(17)
+                            STATIC_VARIABLES.MachineName = r2.Item(18)
+                            STATIC_VARIABLES.ManagerFirstName = r2.Item(19)
+                            STATIC_VARIABLES.ManagerLastName = r2.Item(20)
+                            STATIC_VARIABLES.IP = r2.Item(21)
+                            STATIC_VARIABLES.LicenseKey = r2.Item(22)
+                            STATIC_VARIABLES.LeaseKey = r2.Item(23)
+                        End While
+                        r2.Close()
+                        cnn.Close()
+
+
+
+                        '' get use machine name and ip and log to table
+                        ''
+
+                        Dim strMachine As String = ""
+                        strMachine = My.Computer.Name
+                        'strMachine = STATIC_VARIABLES.MachineName
+                        Dim ipHost As IPHostEntry
+                        ipHost = Dns.GetHostEntry(strMachine)
+                        Dim ip As IPAddress ' holder for local machine name.
+                        Dim ipAddr() As IPAddress = Dns.GetHostAddresses(strMachine)
+
+                        ip = ipAddr(0)
+                        'Dim SpIP As String = ""
+                        ''SpIP = Split(ipAddr(0).ToString, ".", 4)
+                        'Dim ConvertedIP As String = ""
+                        'ConvertedIP = SpIP(0) & "." & SpIP(1) & "." & SpIP(2) & "." & SpIP(3)
+                        Dim ConvertedIP As String = Me.GetIPv4Address.ToString
+                        STATIC_VARIABLES.IP = ConvertedIP
+                        STATIC_VARIABLES.MachineName = strMachine
+
+                        ' MsgBox("Connected to server..." & STATIC_VARIABLES.CurrentUser & STATIC_VARIABLES.MachineName.ToString & STATIC_VARIABLES.IP.ToString & "WTF?", MsgBoxStyle.Information)
+
+
+
+
+
+                        Try
+                            '' reactivation code
+                            '' uncomment
+                            'Dim ipHost1 As IPHostEntry
+                            'ipHost = Dns.GetHostEntry(Dns.GetHostName())
+                            'Dim g
+                            'g = ipHost.AddressList()
+
+                            ' server name is statically assigned here.
+                            ' must make it dynamic after install to pick up on the server name.
+                            ' IE XML config file or something. No ideas yet.
+                            ' SERVERS: 'EKG1' | 'DELLXPS'
+
+                            ' need to shut server down right now to get this to work.
+                            ' MUST re-activate at later time.
+
+                            '  Dim ep As IPEndPoint = New IPEndPoint(, 5586)
+
+                            'mobjClient = New TcpClient(STATIC_VARIABLES.MachineName, 5586)
+                            'MsgBox("Connected to server..." & STATIC_VARIABLES.MachineName, MsgBoxStyle.Information)
+
+                            'mobjClient.GetStream.BeginRead(mardata, 0, 1024, AddressOf DoRead, Nothing)
+
+
+
+                            'Dim port As Int32 = 5586 '' currently unassigned by IANA as of 2-17-2007
+                            'Dim ip1 As IPAddress ' holder for local machine name.
+                            ''Dim strMachineName As String = ""
+                            ''strMachineName = My.Computer.Name
+                            'Dim ipHost As IPHostEntry
+                            'ipHost1 = Dns.GetHostEntry(STATIC_VARIABLES.MachineName)
+                            'Dim ipAddr1() As IPAddress = ipHost.AddressList
+                            'ip1 = ipAddr1(0)
+
+                            'Dim dnsEntry As String = ""
+                            'dnsEntry = Dns.GetHostEntry(IP).HostName
+
+                            ' packet structure 
+                            ' machinename|ipaddress|msg|cmd|user|recipient (if any)|"
+
+                            'Send(PENDING_REQUEST_INFO.LeadNumber & "|" & STATIC_VARIABLES.MachineName & "|" & STATIC_VARIABLES.IP & "| |" & "LOAD" & "|" & STATIC_VARIABLES.Login & "| |")
+
+                            'STATIC_VARIABLES.NET_CLIENT = mobjClient
+                            'MsgBox(STATIC_VARIABLES.NET_CLIENT.ToString)
+
+                            ' no use a store procedure to write this information to the table
+                            ' at login.
+
+                            'Dim cmdNET As SqlCommand = New SqlCommand("dbo.InsertNetworkINFO", cnn)
+                            'Dim param11 As SqlParameter
+                            ''Dim param55 As SqlParameter
+                            'If STATIC_VARIABLES.CurrentUser = "Admin" Then
+                            '    param11 = New SqlParameter("@UserName", STATIC_VARIABLES.Login.ToString)
+                            '    'param55 = New SqlParameter("@UserLName", STATIC_VARIABLES.CurrentUser.ToString)
+                            'ElseIf STATIC_VARIABLES.CurrentUser <> "Admin" Then
+                            '    'Dim str = Split(STATIC_VARIABLES.CurrentUser, " ", 2)
+                            '    param11 = New SqlParameter("@UserName", STATIC_VARIABLES.Login.ToString)
+                            '    ' param55 = New SqlParameter("@UserLName", str(1))
+                            'End If
+                            'Dim param12 As SqlParameter = New SqlParameter("@UserPWD", STATIC_VARIABLES.UserPWD)
+                            'Dim param13 As SqlParameter = New SqlParameter("@MachineName", strMachine)
+                            'Dim param14 As SqlParameter = New SqlParameter("@IP", ConvertedIP)
+                            ''STATIC_VARIABLES.IP = ConvertedIP.ToString
+                            'cmdNET.CommandType = CommandType.StoredProcedure
+                            'cnn.Open()
+                            'cmdNET.Parameters.Add(param11)
+                            'cmdNET.Parameters.Add(param12)
+                            'cmdNET.Parameters.Add(param13)
+                            'cmdNET.Parameters.Add(param14)
+                            ''cmdNET.Parameters.Add(param55)
+                            'Dim r3 As SqlDataReader
+                            'r3 = cmdNET.ExecuteReader(CommandBehavior.CloseConnection)
+                            'r3.Close()
+                            'cnn.Close()
+
+
+                            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.userpermissiontable " _
+                                   & " SET LoggedOn = 1 " _
+                                   & " WHERE UserName = @USR  and UserPWD = @PWD", cnn)
+                            Dim param78 As SqlParameter = New SqlParameter("@USR", USR)
+                            'Dim param80 As SqlParameter = New SqlParameter("@USRL", USRL)
+                            Dim param79 As SqlParameter = New SqlParameter("@PWD", UserPWD)
+                            cmdUP.Parameters.Add(param78)
+                            cmdUP.Parameters.Add(param79)
+                            'cmdUP.Parameters.Add(param80)
+                            cnn.Open()
+                            Dim r4 As SqlDataReader
+                            r4 = cmdUP.ExecuteReader(CommandBehavior.CloseConnection)
+                            r4.Close()
+                            cnn.Close()
+
+
+                            ' MsgBox(STATIC_VARIABLES.Server_Assigned_Hash.ToString & ", " & STATIC_VARIABLES.Login.ToString & "," & STATIC_VARIABLES.CurrentUser.ToString & ", " & STATIC_VARIABLES.CurrentForm.ToString & ", " & STATIC_VARIABLES.MachineName & ", " & STATIC_VARIABLES.IP & ", " & STATIC_VARIABLES.StartUpForm)
+
+
+                            '' now startup default form
+                            '' 
+
+                            Select Case STATIC_VARIABLES.StartUpForm
+                                Case Is = "Cold Calling"
+                                    '' need form
+                                    ColdCalling.Show()
+                                    Exit Select
+                                Case Is = "Warm Calling"
+                                    WCaller.Show()
+                                    Exit Select
+                                Case Is = "Previous Customer"
+                                    '' need form
+                                    PreviousCustomer.Show()
+                                    Exit Select
+                                Case Is = "Recovery"
+                                    '' need form
+                                    Recovery.Show()
+                                    Exit Select
+                                Case Is = "Marketing Manager"
+                                    '' need form
+                                    MarketingManager.Show()
+                                    MarketingManager.BringToFront()
+                                    Exit Select
+                                Case Is = "Sales Department"
+                                    '' need form
+                                    Sales.MdiParent = Main
+                                    Sales.Show()
+                                    Sales.BringToFront()
+                                    STATIC_VARIABLES.ActiveChild = Sales
+                                    'sales.Focus()
+                                    'sales.Show()
+                                Case Is = "frmTesting"
+                                    frmTesting.MdiParent = Main
+                                    frmTesting.Show()
+                                    frmTesting.BringToFront()
+                                    STATIC_VARIABLES.ActiveChild = frmTesting
+                                    Exit Select
+                                Case Is = "Installation Department"
+                                    '' need form
+                                    Installation.Show()
+                                    Exit Select
+                                Case Is = "Finance Department"
+                                    '' need form
+                                    Finance.Show()
+                                    Exit Select
+                                Case Is = "Administration"
+                                    '' need form
+                                    Administration.Show()
+                                    Exit Select
+                                Case Is = "Confirming"
+                                    Confirming.MdiParent = Main
+                                    Confirming.Show()
+                                    Confirming.BringToFront()
+
+                                    'Confirming.Focus()
+                                    'Confirming.Show()
+                                    Exit Select
+                                Case Else
+                                    Main.Show()
+                                    Exit Select
+                            End Select
+
+
+                            '' now set the hash for xfer objects
+                            ''
+
+
+                            '' now check permissions and lock down appropriate buttons on tsmain
+                            ''
+
+
+                            CheckPermissions()
+
+
+                            'Try
+                            '    Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.tblUserHash (UserName,UserHASH) " _
+                            '    & "VALUES(@USR,@USRL,@HASH)", cnn)
+                            '    Dim param100 As SqlParameter = New SqlParameter("@USR", Trim(STATIC_VARIABLES.Login.ToString))
+                            '    ' Dim param200 As SqlParameter = New SqlParameter("@USRL", Trim(STATIC_VARIABLES.CurrentUser))
+                            '    Dim param300 As SqlParameter = New SqlParameter("@HASH", Trim(STATIC_VARIABLES.Server_Assigned_Hash))
+                            '    cmdINS.Parameters.Add(param100)
+                            '    'cmdINS.Parameters.Add(param200)
+                            '    cmdINS.Parameters.Add(param300)
+                            '    cnn.Open()
+                            '    cmdINS.ExecuteNonQuery()
+                            '    cnn.Close()
+                            'Catch ex As Exception
+                            '    cnn.Close()
+                            '    MsgBox("Problem inserting hash to table.", MsgBoxStyle.Critical, "ERROR")
+                            'End Try
+
+                        Catch ex As Exception
+                            MsgBox(ex.ToString)
+                            MsgBox("ip host ln 303", MsgBoxStyle.Critical, "ERROR")
+                        End Try
+
+                        '' now reset the 'Lead Pool' of 'Set Appointments'
+                        ''
+
+                        Try
+                            Dim cmdRES As SqlCommand = New SqlCommand("dbo.ResetLeadPool", cnn)
+                            cmdRES.CommandType = CommandType.StoredProcedure
+                            cnn.Open()
+                            cmdRES.ExecuteNonQuery()
+                            cnn.Close()
+                        Catch ex As Exception
+                            MsgBox("Reset lead pool", MsgBoxStyle.Critical, "ERROR")
+                            cnn.Close()
+                        End Try
+
+
+                        'Try  '' Not sure why where clearing out attached files on load Probably my idea, will discuss with Aaron and revisit 
+                        '    'Dim cmdRES As SqlCommand = New SqlCommand("Select  id from ScheduledTasks where completed = 'true' and attachedfiles = 'true' and Executiondate <= (getdate() - 60)", cnn)
+                        '    'cmdRES.CommandType = CommandType.Text
+                        '    'cnn.Open()
+                        '    'Dim r As SqlDataReader
+                        '    'r = cmdRES.ExecuteReader(CommandBehavior.CloseConnection)
+                        '    'While r.Read
+                        '    '    Dim id As String = r.Item(0).ToString
+                        '    '    'MsgBox(r.Item(0).ToString & " - " & STATIC_VARIABLES.SAAttachedFileDirectory & r.Item(0).ToString)
+                        '    '    System.IO.Directory.Delete(STATIC_VARIABLES.SAAttachedFileDirectory & id, True)
+
+                        '    'End While
+                        '    'r.Close()
+                        '    'cnn.Close()
+                        '    'cnn.Open()
+                        '    'cmdRES = New SqlCommand("update ScheduledTasks set AttachedFiles = 'false' , AttachedHashValue = '0' where  completed = 'true' and attachedfiles = 'true' and Executiondate <= (getdate() - 60)", cnn)
+                        '    'cmdRES.ExecuteNonQuery()
+                        '    'cnn.Close()
+
+                        'Catch ex As Exception
+                        '    'MsgBox("Clean up old attached files for scheduled tasks", MsgBoxStyle.Critical, "ERROR")
+
+                        '    'cnn.Close()
+                        'End Try
+                    Case Else
+                        MsgBox("There was a problem logging in. Please contact your administrator.", MsgBoxStyle.Critical, "ERROR")
+                        Exit Sub
+
+
+                End Select
+            Catch ex As Exception
+                cnn.Close()
+                Dim err As New ErrorLogFlatFile
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "Login_To_System()", "0", ex.Message.ToString)
+                y = Nothing
+                MsgBox("Error Logging into system. Please check logs at \\server\company\ISS\Logs for more information.", MsgBoxStyle.Exclamation, "Error Logging into system.")
+            End Try
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "Login_To_System()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -418,9 +430,11 @@ Public Class USER_LOGIC
             w.Flush()
 
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("USER_LOGIC", "ByVal t as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Network", "Send")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("USER_LOGIC", "ByVal t as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Network", "Send")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "Send(t as string)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
 
@@ -560,9 +574,11 @@ Public Class USER_LOGIC
                 Case Else
             End Select
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("USER_LOGIC", "ByVal Bytes() As Byte, ByVal offset As Integer, ByVal count As Integer", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Network", "BuildString")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("USER_LOGIC", "ByVal Bytes() As Byte, ByVal offset As Integer, ByVal count As Integer", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Network", "BuildString")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "BuildString()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
 
@@ -600,8 +616,11 @@ Public Class USER_LOGIC
                 MarkAsDisconnected("DoRead")
             End Try
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("USER_LOGIC", "ByVal ar As IAsyncResult", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Network", "DoRead")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("USER_LOGIC", "ByVal ar As IAsyncResult", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Network", "DoRead")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "DoRead(ar as IAsyncResult)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
 
@@ -640,71 +659,79 @@ Public Class USER_LOGIC
             Main.TSMain.Enabled = False
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("USER_LOGIC", "ByVal UserName As String, ByVal UserPWD As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "LogOut_Of_System")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("USER_LOGIC", "ByVal UserName As String, ByVal UserPWD As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "LogOut_Of_System")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "Logout_of_System()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
     Public Sub CheckPermissions()
+        Try
+            If STATIC_VARIABLES.Administration = True Then
+                Main.tsbadmin.Enabled = True
+            ElseIf STATIC_VARIABLES.Administration = False Then
+                Main.tsbadmin.Enabled = False
+            End If
 
-        If STATIC_VARIABLES.Administration = True Then
-            Main.tsbadmin.Enabled = True
-        ElseIf STATIC_VARIABLES.Administration = False Then
-            Main.tsbadmin.Enabled = False
-        End If
+            If STATIC_VARIABLES.ColdCall = True Then
+                Main.ColdCallingToolStripMenuItem.Enabled = True
+            ElseIf STATIC_VARIABLES.ColdCall = False Then
+                Main.ColdCallingToolStripMenuItem.Enabled = False
+            End If
 
-        If STATIC_VARIABLES.ColdCall = True Then
-            Main.ColdCallingToolStripMenuItem.Enabled = True
-        ElseIf STATIC_VARIABLES.ColdCall = False Then
-            Main.ColdCallingToolStripMenuItem.Enabled = False
-        End If
+            If STATIC_VARIABLES.WarmCall = True Then
+                Main.WarmCallingToolStripMenuItem.Enabled = True
+            ElseIf STATIC_VARIABLES.WarmCall = False Then
+                Main.WarmCallingToolStripMenuItem.Enabled = False
+            End If
 
-        If STATIC_VARIABLES.WarmCall = True Then
-            Main.WarmCallingToolStripMenuItem.Enabled = True
-        ElseIf STATIC_VARIABLES.WarmCall = False Then
-            Main.WarmCallingToolStripMenuItem.Enabled = False
-        End If
+            If STATIC_VARIABLES.Recovery = True Then
+                Main.RecoveryToolStripMenuItem.Enabled = True
+            ElseIf STATIC_VARIABLES.Recovery = False Then
+                Main.RecoveryToolStripMenuItem.Enabled = False
+            End If
 
-        If STATIC_VARIABLES.Recovery = True Then
-            Main.RecoveryToolStripMenuItem.Enabled = True
-        ElseIf STATIC_VARIABLES.Recovery = False Then
-            Main.RecoveryToolStripMenuItem.Enabled = False
-        End If
+            If STATIC_VARIABLES.PreviousCust = True Then
+                Main.PreviousCustomersToolStripMenuItem.Enabled = True
+            ElseIf STATIC_VARIABLES.PreviousCust = False Then
+                Main.PreviousCustomersToolStripMenuItem.Enabled = False
+            End If
 
-        If STATIC_VARIABLES.PreviousCust = True Then
-            Main.PreviousCustomersToolStripMenuItem.Enabled = True
-        ElseIf STATIC_VARIABLES.PreviousCust = False Then
-            Main.PreviousCustomersToolStripMenuItem.Enabled = False
-        End If
+            If STATIC_VARIABLES.Install = True Then
+                Main.tsbinstall.Enabled = True
+            ElseIf STATIC_VARIABLES.Install = False Then
+                Main.tsbinstall.Enabled = False
+            End If
 
-        If STATIC_VARIABLES.Install = True Then
-            Main.tsbinstall.Enabled = True
-        ElseIf STATIC_VARIABLES.Install = False Then
-            Main.tsbinstall.Enabled = False
-        End If
+            If STATIC_VARIABLES.Finance = True Then
+                Main.tsbfinance.Enabled = True
+            ElseIf STATIC_VARIABLES.Finance = False Then
+                Main.tsbfinance.Enabled = False
+            End If
 
-        If STATIC_VARIABLES.Finance = True Then
-            Main.tsbfinance.Enabled = True
-        ElseIf STATIC_VARIABLES.Finance = False Then
-            Main.tsbfinance.Enabled = False
-        End If
+            If STATIC_VARIABLES.MarketingManager = True Then
+                Main.tsbmarketing.Enabled = True
+            ElseIf STATIC_VARIABLES.MarketingManager = False Then
+                Main.tsbmarketing.Enabled = False
+            End If
 
-        If STATIC_VARIABLES.MarketingManager = True Then
-            Main.tsbmarketing.Enabled = True
-        ElseIf STATIC_VARIABLES.MarketingManager = False Then
-            Main.tsbmarketing.Enabled = False
-        End If
+            If STATIC_VARIABLES.SalesManager = True Then
+                Main.tsbsales.Enabled = True
+            ElseIf STATIC_VARIABLES.SalesManager = False Then
+                Main.tsbsales.Enabled = False
+            End If
 
-        If STATIC_VARIABLES.SalesManager = True Then
-            Main.tsbsales.Enabled = True
-        ElseIf STATIC_VARIABLES.SalesManager = False Then
-            Main.tsbsales.Enabled = False
-        End If
-
-        If STATIC_VARIABLES.Confirmer = True Then
-            Main.ConfirmingToolStripMenuItem.Enabled = True
-        ElseIf STATIC_VARIABLES.Confirmer = False Then
-            Main.ConfirmingToolStripMenuItem.Enabled = False
-        End If
+            If STATIC_VARIABLES.Confirmer = True Then
+                Main.ConfirmingToolStripMenuItem.Enabled = True
+            ElseIf STATIC_VARIABLES.Confirmer = False Then
+                Main.ConfirmingToolStripMenuItem.Enabled = False
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "CheckPermissions()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 End Class

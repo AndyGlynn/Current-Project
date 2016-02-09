@@ -50,15 +50,12 @@ Public Class Attach
             Next
 
         Catch ex As Exception
-            Dim errp As New ErrorLogFlatFile
-            errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
-
+            'Dim errp As New ErrorLogFlatFile
+            'errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "AttachFile(ID)", ID, ex.Message.ToString)
+            y = Nothing
         End Try
-
-
-
-
-
 
         '' Obsolete CODE:
         '' 9-4-2015
@@ -156,47 +153,82 @@ Public Class Attach
     End Sub
 
     Private Sub LogToSQLFileMove(ByVal ID As String, ByVal SourcePath As String, ByVal ServerDestination As String)
-        Dim cnx_MOVE As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        cnx_MOVE.Open()
-        Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.AttachFiles (LeadNum,Location,AttachedHash) values('" & ID & "','" & SourcePath & "','" & ServerDestination & "');", cnx_MOVE)
-        cmdINS.ExecuteScalar()
-        cnx_MOVE.Close()
-        cnx_MOVE = Nothing
+        Try
+            Dim cnx_MOVE As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            cnx_MOVE.Open()
+            Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.AttachFiles (LeadNum,Location,AttachedHash) values('" & ID & "','" & SourcePath & "','" & ServerDestination & "');", cnx_MOVE)
+            cmdINS.ExecuteScalar()
+            cnx_MOVE.Close()
+            cnx_MOVE = Nothing
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "LogToSQLFileMove(ID,SourcePath,ServerDestination)", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Function StripOffFileName(ByVal ItemText As String)
-        Dim arName = Split(ItemText, "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
-        Dim cnt As Integer = 0
-        For Each x As String In arName
-            cnt += 1
-        Next
-        Dim f_name As String = arName(cnt - 1)
-        Return f_name
+        Try
+            Dim arName = Split(ItemText, "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim cnt As Integer = 0
+            For Each x As String In arName
+                cnt += 1
+            Next
+            Dim f_name As String = arName(cnt - 1)
+            Return f_name
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "StripOffFileName(ItemText)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 
     Private Function CountDuplicates(ByVal ID As String, ByVal SourcePath As String, ByVal ServerPath As String)
-        Dim retCNT As Integer = 0
-        Dim cmd_DUP As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        cmd_DUP.Open()
-        Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from AttachFiles where LeadNum = '" & ID & "' and Location ='" & SourcePath & "' and AttachedHash = '" & ServerPath & "';", cmd_DUP)
-        retCNT = cmdCNT.ExecuteScalar
-        cmd_DUP.Close()
-        cmd_DUP = Nothing
-        Return retCNT
+        Try
+            Dim retCNT As Integer = 0
+            Dim cmd_DUP As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            cmd_DUP.Open()
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from AttachFiles where LeadNum = '" & ID & "' and Location ='" & SourcePath & "' and AttachedHash = '" & ServerPath & "';", cmd_DUP)
+            retCNT = cmdCNT.ExecuteScalar
+            cmd_DUP.Close()
+            cmd_DUP = Nothing
+            Return retCNT
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Function", "CountDuplicates(ID,SourcePath,ServerPath)", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 
     Private Function DoesDirectoryExist(ByVal Path As String)
-        Dim Exist As Boolean
-        If System.IO.Directory.Exists(Path) = True Then
-            Exist = True
-        ElseIf System.IO.Directory.Exists(Path) = False Then
-            Exist = False
-        End If
+        Try
+            Dim Exist As Boolean
+            If System.IO.Directory.Exists(Path) = True Then
+                Exist = True
+            ElseIf System.IO.Directory.Exists(Path) = False Then
+                Exist = False
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "DoesDirectoryExist(path)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 
     Private Sub CreateDirectory(ByVal ID As String, ByVal RootLocation As String)
-        Dim path As String = (RootLocation & "\" & ID & "\")
-        System.IO.Directory.CreateDirectory(path)
+        Try
+            Dim path As String = (RootLocation & "\" & ID & "\")
+            System.IO.Directory.CreateDirectory(path)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "CreateDirectory(ID,RootLocation)", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Public Sub CreateAShortCut(ByVal ShortCutName As String, ByVal SourceDestination As String, ByVal WhereToCreate As String)
@@ -235,6 +267,9 @@ Public Class Attach
         Catch ex As Exception
             '' call to error log from here on fail
             '' 
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "CreateAShortCut", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 
@@ -314,11 +349,11 @@ Public Class Attach
             System.Diagnostics.Process.Start(loc.ToString)
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("Attach", "UserName as string, byval HASH as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "OpenFile")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("Attach", "UserName as string, byval HASH as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "OpenFile")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "OpenFile(file,ID)", id, ex.Message.ToString)
+            y = Nothing
         End Try
-
     End Sub
-
-
 End Class

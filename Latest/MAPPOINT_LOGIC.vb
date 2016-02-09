@@ -20,6 +20,14 @@ Public Class MAPPOINT_LOGIC
     Public Mappoint_Dataset As MapPoint.DataSet
     '' connection strings 
     Private AccCNN As OleDb.OleDbConnection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='\\Ekg1\database\copy of database --full\EKG.mdb'")
+    '' notes: 2-09-2016
+    '' Given the line above for an OLEDB cnx instead of sql connection and the file path of the access dbase
+    '' I am going to assume this code is not used anymore due to hardware software environment changes
+    '' not wrapping in error handlers
+    '' Current Paths: SQL=>SQLEXPRESS\192.168.1.2 {Server} for a SQL Connection String Object
+    ''                ISS=>\\server\company\Iss for Logs/af directories/jp directories / reports / html print jobs...etc.
+    '' 
+
     Private CNN As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
     Private ProgressMaxCount As Integer = 0
     Public Property ProgressMax() As Integer

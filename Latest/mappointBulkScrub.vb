@@ -112,6 +112,10 @@ Public Class mappointBulkScrub
             v.State = State
             'Dim b As New sqlOperations
             'b.Dump_To_ProxyTable(v, DevOrPro)
+
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "mappointBulkScrub", "mappointBulkScrub", "Sub", "VerifyAddress(...)", Id, ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
     Public Sub VerifyAddress_Filtered(ByVal obj As ImportData_V2.sqlOperations.Record_And_Address)

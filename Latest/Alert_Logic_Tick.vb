@@ -35,24 +35,33 @@ Public Class Alert_Logic_Tick
         Catch ex As Exception
             cnn.Close()
             Return CountOfAlertsTick
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CountAlertsTick")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CountAlertsTick")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Alert_Logic_Tick", "Alert_Logic_Tick", "Function", "CountAlertsTick(UserName)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Function
     Public Sub Completed(ByVal ID)
+        Try
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.alerttable SET Completed = 1 WHERE ID = @ID", cnn)
+            Dim param3 As SqlParameter = New SqlParameter("@ID", ID)
+            cmdUP.Parameters.Add(param3)
+            cnn.Open()
+            Dim r1 As SqlDataReader
+            r1 = cmdUP.ExecuteReader
+            r1.Close()
+            cnn.Close()
+            Dim y As New AlertNotify
+            y.ID = ID
+            y.Show()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Alert_Logic_Tick", "Alert_Logic_Tick", "Sub", "Completed", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.alerttable SET Completed = 1 WHERE ID = @ID", cnn)
-        Dim param3 As SqlParameter = New SqlParameter("@ID", ID)
-        cmdUP.Parameters.Add(param3)
-        cnn.Open()
-        Dim r1 As SqlDataReader
-        r1 = cmdUP.ExecuteReader
-        r1.Close()
-        cnn.Close()
-        Dim y As New AlertNotify
-        y.ID = ID
-        y.Show()
 
     End Sub
     Public Function Get_ID(ByVal UserName)
@@ -73,8 +82,11 @@ Public Class Alert_Logic_Tick
         Catch ex As Exception
             cnn.Close()
 
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CountAlertsTick")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CountAlertsTick")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Alert_Logic_Tick", "Alert_Logic_Tick", "Function", "Get_ID(UserName)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Function
   

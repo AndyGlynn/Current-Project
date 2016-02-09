@@ -54,8 +54,11 @@ Public Class FindLogic
             FindLead.Text = "Found... -[ Records: " & cntRec.ToString & " ]"
         Catch ex As Exception
 
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("FindLogic", "ByVal Str As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "Search")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("FindLogic", "ByVal Str As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "Search")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "FindLogic", "FindLogic", "Sub", "Search(str)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub

@@ -1,5 +1,16 @@
 Public Class frmErrorLogs
 
+    '' notes: 2-9-2016 AC
+    '' This whole form has been changed and the underlying class re-written to reflect
+    '' hardware and software changes in the local environment
+    '' would be moot to wrap error handlers around this as I am sure
+    '' this is not even used any more.
+
+    '' New Code: Class {ErrorLogging_V2}
+    ''           Method {WriteToLog(args)}
+    '' 
+
+
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim x As New ErrorLogFlatFile
         x.ClearLogs("Both")
@@ -95,4 +106,7 @@ Public Class frmErrorLogs
     End Sub
 
    
+    Private Sub frmErrorLogs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

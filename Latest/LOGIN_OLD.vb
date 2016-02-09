@@ -1,6 +1,9 @@
 Public Class LOGIN_OLD
     Private DefaultUserName As String = "Admin"
     Private DefaultPwd As String = "admin"
+    '' notes: AC
+    '' 2-09-2016
+    '' not used
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Application.Exit()

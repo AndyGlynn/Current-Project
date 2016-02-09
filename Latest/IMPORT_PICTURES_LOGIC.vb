@@ -31,9 +31,11 @@ Public Class IMPORT_PICTURES_LOGIC
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("IMPORT_PICTURE_LOGIC", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetProducts")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("IMPORT_PICTURE_LOGIC", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetProducts")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "IMPORT_PICTURES_LOGIC", "IMPORT_PICTURES_LOGIC", "Sub", "GetProducts()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -53,9 +55,11 @@ Public Class IMPORT_PICTURES_LOGIC
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("IMPORT_PICTURE_LOGIC", "ByVal Product as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PullACRO")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("IMPORT_PICTURE_LOGIC", "ByVal Product as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PullACRO")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "IMPORT_PICTURES_LOGIC", "IMPORT_PICTURES_LOGIC", "Sub", "PullAcro(product)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub

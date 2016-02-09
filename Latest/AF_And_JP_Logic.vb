@@ -226,136 +226,159 @@ Public Class AF_And_JP_Logic
     Public Sub New(ByVal LeadNum As String, ByVal Which_Control As String)
         '' TRUE = AF
         '' FALSE = JP
-        Dim target_path As String = ""
-        If Which_Control = "AF" Then
-            target_path = (af_dir & LeadNum & "\")
-        ElseIf Which_Control = "JP" Then
-            target_path = (jp_dir & LeadNum & "\")
-        End If
+        Try
+            Dim target_path As String = ""
+            If Which_Control = "AF" Then
+                target_path = (af_dir & LeadNum & "\")
+            ElseIf Which_Control = "JP" Then
+                target_path = (jp_dir & LeadNum & "\")
+            End If
 
-        ar_Files = New List(Of FileObject)
-        ar_Files = Get_Files_In_Directory(target_path)
-        ar_directories = New List(Of DirObject)
-        ar_directories = Get_Folders_In_Directory(target_path)
-
+            ar_Files = New List(Of FileObject)
+            ar_Files = Get_Files_In_Directory(target_path)
+            ar_directories = New List(Of DirObject)
+            ar_directories = Get_Folders_In_Directory(target_path)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic", "Class", "Constructor", "New {1}", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
     Public Sub New(ByVal Directory As String)
-        ar_Files = New List(Of FileObject)
-        ar_Files = Get_Files_In_Directory(Directory)
-        ar_directories = New List(Of DirObject)
-        ar_directories = Get_Folders_In_Directory(Directory)
+        Try
+            ar_Files = New List(Of FileObject)
+            ar_Files = Get_Files_In_Directory(Directory)
+            ar_directories = New List(Of DirObject)
+            ar_directories = Get_Folders_In_Directory(Directory)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Constructor", "New {2} Overloaded", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 #End Region
 #Region "Main Loops To Get Files and Folder Info"
 
 
     Private Function Get_Files_In_Directory(ByVal Directory As String)
+        Try
+            If Len(Directory) <= 0 Then
+                Directory = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+            End If
 
-        If Len(Directory) <= 0 Then
-            Directory = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-        End If
-
-        Dim dir_info As New DirectoryInfo(Directory)
-        If dir_info.Exists = True Then
-            Dim y As FileInfo
-            For Each y In dir_info.GetFiles("*.*")
-                Dim z As New FileObject
-                z.DateCreated = y.CreationTime.ToString
-                z.DateModified = y.LastWriteTime.ToString
-                z.FileExt = y.Extension
-                z.FileName = y.Name
-                z.FullPath = y.FullName
-                z.FileSize = y.Length
-                z.IconKey = y.Name
-                z.jbIcon = GetJumbos(y.FullName)
-                z.lgIcon = GetLarges(y.FullName)
-                z.smIcon = GetSmalls(y.FullName)
-                z.mdIcon = GetMediums(y.FullName)
-                Dim pullThum As Boolean = False
-                Select Case y.Extension
-                    Case ".jpg"
-                        pullThum = True
-                        Exit Select
-                    Case ".JPG"
-                        pullThum = True
-                        Exit Select
-                    Case ".JPEG"
-                        pullThum = True
-                        Exit Select
-                    Case ".jpeg"
-                        pullThum = True
-                        Exit Select
-                    Case ".png"
-                        pullThum = True
-                        Exit Select
-                    Case ".PNG"
-                        pullThum = True
-                        Exit Select
-                    Case ".bmp"
-                        pullThum = True
-                        Exit Select
-                    Case ".BMP"
-                        pullThum = True
-                        Exit Select
-                    Case ".tiff"
-                        pullThum = True
-                        Exit Select
-                    Case ".TIFF"
-                        pullThum = True
-                        Exit Select
-                    Case ".gif"
-                        pullThum = True
-                        Exit Select
-                    Case ".GIF"
-                        pullThum = True
-                        Exit Select
-                    Case Else
-                        pullThum = False
-                        Exit Select
-                End Select
-                If pullThum = True Then
-                    z = Extract_Thumbs(y.FullName, z)
-                ElseIf pullThum = False Then
-                    z = z
-                End If
-                If z.FileName <> "Thumbs" Then
-                    If z.FileExt <> ".db" Then
-                        ar_Files.Add(z)
+            Dim dir_info As New DirectoryInfo(Directory)
+            If dir_info.Exists = True Then
+                Dim y As FileInfo
+                For Each y In dir_info.GetFiles("*.*")
+                    Dim z As New FileObject
+                    z.DateCreated = y.CreationTime.ToString
+                    z.DateModified = y.LastWriteTime.ToString
+                    z.FileExt = y.Extension
+                    z.FileName = y.Name
+                    z.FullPath = y.FullName
+                    z.FileSize = y.Length
+                    z.IconKey = y.Name
+                    z.jbIcon = GetJumbos(y.FullName)
+                    z.lgIcon = GetLarges(y.FullName)
+                    z.smIcon = GetSmalls(y.FullName)
+                    z.mdIcon = GetMediums(y.FullName)
+                    Dim pullThum As Boolean = False
+                    Select Case y.Extension
+                        Case ".jpg"
+                            pullThum = True
+                            Exit Select
+                        Case ".JPG"
+                            pullThum = True
+                            Exit Select
+                        Case ".JPEG"
+                            pullThum = True
+                            Exit Select
+                        Case ".jpeg"
+                            pullThum = True
+                            Exit Select
+                        Case ".png"
+                            pullThum = True
+                            Exit Select
+                        Case ".PNG"
+                            pullThum = True
+                            Exit Select
+                        Case ".bmp"
+                            pullThum = True
+                            Exit Select
+                        Case ".BMP"
+                            pullThum = True
+                            Exit Select
+                        Case ".tiff"
+                            pullThum = True
+                            Exit Select
+                        Case ".TIFF"
+                            pullThum = True
+                            Exit Select
+                        Case ".gif"
+                            pullThum = True
+                            Exit Select
+                        Case ".GIF"
+                            pullThum = True
+                            Exit Select
+                        Case Else
+                            pullThum = False
+                            Exit Select
+                    End Select
+                    If pullThum = True Then
+                        z = Extract_Thumbs(y.FullName, z)
+                    ElseIf pullThum = False Then
+                        z = z
                     End If
-                End If
-            Next
-            Return ar_Files
-        ElseIf dir_info.Exists = False Then
-            System.IO.Directory.CreateDirectory(TargetPath)
-        End If
+                    If z.FileName <> "Thumbs" Then
+                        If z.FileExt <> ".db" Then
+                            ar_Files.Add(z)
+                        End If
+                    End If
+                Next
+                Return ar_Files
+            ElseIf dir_info.Exists = False Then
+                System.IO.Directory.CreateDirectory(TargetPath)
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic", "AF_And_JP_Logic", "Function", "Get_Files_In_Directory()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Function
 
     Private Function Get_Folders_In_Directory(ByVal Directory As String)
-        If Len(Directory) <= 0 Then
-            Directory = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-        End If
-        Dim dir_info As New DirectoryInfo(Directory)
-        If dir_info.Exists = True Then
-            Dim y As DirectoryInfo
-            For Each y In dir_info.GetDirectories
-                Dim z As New DirObject
-                z.DateCreated = y.CreationTime.ToString
-                z.DateModified = y.LastWriteTime.ToString
-                z.FileName = y.Name
-                z.FullPath = y.FullName
-                z.HasSubDirsAndFiles = True
-                z.IconKey = y.Name
-                z.jbIcon = GetJumbos(y.FullName)
-                z.lgIcon = GetLarges(y.FullName)
-                z.smIcon = GetSmalls(y.FullName)
-                z.mdIcon = GetMediums(y.FullName)
-                ar_directories.Add(z)
-            Next
-            Return ar_directories
-        ElseIf dir_info.Exists = False Then
-            System.IO.Directory.CreateDirectory(TargetPath)
-        End If
+        Try
+            If Len(Directory) <= 0 Then
+                Directory = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+            End If
+            Dim dir_info As New DirectoryInfo(Directory)
+            If dir_info.Exists = True Then
+                Dim y As DirectoryInfo
+                For Each y In dir_info.GetDirectories
+                    Dim z As New DirObject
+                    z.DateCreated = y.CreationTime.ToString
+                    z.DateModified = y.LastWriteTime.ToString
+                    z.FileName = y.Name
+                    z.FullPath = y.FullName
+                    z.HasSubDirsAndFiles = True
+                    z.IconKey = y.Name
+                    z.jbIcon = GetJumbos(y.FullName)
+                    z.lgIcon = GetLarges(y.FullName)
+                    z.smIcon = GetSmalls(y.FullName)
+                    z.mdIcon = GetMediums(y.FullName)
+                    ar_directories.Add(z)
+                Next
+                Return ar_directories
+            ElseIf dir_info.Exists = False Then
+                System.IO.Directory.CreateDirectory(TargetPath)
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "Get_Folders_In_Directory(directory)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Function
 
@@ -363,153 +386,190 @@ Public Class AF_And_JP_Logic
 
 #Region "Methods To Get Different Image Sizes"
     Private Function GetJumbos(ByVal path As String)
+        Try
+            Dim iml As AF_And_JP_Logic.MimicSysImgList.IImageList
+            Dim riid As Guid = New Guid("46EB5926-582E-4017-9FDF-E8998DAA0950")
+            Dim lresult As IntPtr
+            lresult = SHGetImageList(SHIL_JUMBO, riid, iml)
+            Dim hImg As IntPtr
+            Dim shinfo As SHFILEINFO = New SHFILEINFO
+            Dim icoIDX = shinfo.iIcon
+            Dim hIcon = IntPtr.Zero
+            hImg = SHGetFileInfo(path, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON)
+            Dim hres = iml.GetIcon(shinfo.iIcon, 1, hIcon)
+            Dim ico As Icon = System.Drawing.Icon.FromHandle(hIcon)
+            Dim ico2 As Icon = ico.Clone()
+            ico.Dispose()
+            Return ico2
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetJumbos(path)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        Dim iml As AF_And_JP_Logic.MimicSysImgList.IImageList
-        Dim riid As Guid = New Guid("46EB5926-582E-4017-9FDF-E8998DAA0950")
-        Dim lresult As IntPtr
-        lresult = SHGetImageList(SHIL_JUMBO, riid, iml)
-        Dim hImg As IntPtr
-        Dim shinfo As SHFILEINFO = New SHFILEINFO
-        Dim icoIDX = shinfo.iIcon
-        Dim hIcon = IntPtr.Zero
-        hImg = SHGetFileInfo(path, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON)
-        Dim hres = iml.GetIcon(shinfo.iIcon, 1, hIcon)
-        Dim ico As Icon = System.Drawing.Icon.FromHandle(hIcon)
-        Dim ico2 As Icon = ico.Clone()
-        ico.Dispose()
-        Return ico2
     End Function
 
     Private Function GetLarges(ByVal Path As String)
-        Dim iml As AF_And_JP_Logic.MimicSysImgList.IImageList
-        Dim riid As Guid = New Guid("46EB5926-582E-4017-9FDF-E8998DAA0950")
-        Dim lresult As IntPtr
-        lresult = SHGetImageList(SHIL_EXTRALARGE, riid, iml)
-        Dim hImg As IntPtr
-        Dim shinfo As SHFILEINFO = New SHFILEINFO
-        Dim icoIDX = shinfo.iIcon
-        Dim hIcon = IntPtr.Zero
-        hImg = SHGetFileInfo(Path, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON)
-        Dim hres = iml.GetIcon(shinfo.iIcon, 1, hIcon)
-        Dim ico As Icon = System.Drawing.Icon.FromHandle(hIcon)
-        Dim ico2 As Icon = ico.Clone()
-        ico.Dispose()
-        Return ico2
+        Try
+            Dim iml As AF_And_JP_Logic.MimicSysImgList.IImageList
+            Dim riid As Guid = New Guid("46EB5926-582E-4017-9FDF-E8998DAA0950")
+            Dim lresult As IntPtr
+            lresult = SHGetImageList(SHIL_EXTRALARGE, riid, iml)
+            Dim hImg As IntPtr
+            Dim shinfo As SHFILEINFO = New SHFILEINFO
+            Dim icoIDX = shinfo.iIcon
+            Dim hIcon = IntPtr.Zero
+            hImg = SHGetFileInfo(Path, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON)
+            Dim hres = iml.GetIcon(shinfo.iIcon, 1, hIcon)
+            Dim ico As Icon = System.Drawing.Icon.FromHandle(hIcon)
+            Dim ico2 As Icon = ico.Clone()
+            ico.Dispose()
+            Return ico2
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetLarges(path)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 
     Private Function GetSmalls(ByVal path As String)
-        Dim iml As AF_And_JP_Logic.MimicSysImgList.IImageList
-        Dim riid As Guid = New Guid("46EB5926-582E-4017-9FDF-E8998DAA0950")
-        Dim lresult As IntPtr
-        lresult = SHGetImageList(SHIL_SMALL, riid, iml)
-        Dim hImg As IntPtr
-        Dim shinfo As SHFILEINFO = New SHFILEINFO
-        Dim icoIDX = shinfo.iIcon
-        Dim hIcon = IntPtr.Zero
-        hImg = SHGetFileInfo(path, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON)
-        Dim hres = iml.GetIcon(shinfo.iIcon, 1, hIcon)
-        Dim ico As Icon = System.Drawing.Icon.FromHandle(hIcon)
-        Dim ico2 As Icon = ico.Clone()
-        ico.Dispose()
-        Return ico2
+        Try
+            Dim iml As AF_And_JP_Logic.MimicSysImgList.IImageList
+            Dim riid As Guid = New Guid("46EB5926-582E-4017-9FDF-E8998DAA0950")
+            Dim lresult As IntPtr
+            lresult = SHGetImageList(SHIL_SMALL, riid, iml)
+            Dim hImg As IntPtr
+            Dim shinfo As SHFILEINFO = New SHFILEINFO
+            Dim icoIDX = shinfo.iIcon
+            Dim hIcon = IntPtr.Zero
+            hImg = SHGetFileInfo(path, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON)
+            Dim hres = iml.GetIcon(shinfo.iIcon, 1, hIcon)
+            Dim ico As Icon = System.Drawing.Icon.FromHandle(hIcon)
+            Dim ico2 As Icon = ico.Clone()
+            ico.Dispose()
+            Return ico2
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetSmalls(Path)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 
     Private Function GetMediums(ByVal path As String)
-        Dim iml As AF_And_JP_Logic.MimicSysImgList.IImageList
-        Dim riid As Guid = New Guid("46EB5926-582E-4017-9FDF-E8998DAA0950")
-        Dim lresult As IntPtr
-        lresult = SHGetImageList(SHIL_LARGE, riid, iml)
-        Dim hImg As IntPtr
-        Dim shinfo As SHFILEINFO = New SHFILEINFO
-        Dim icoIDX = shinfo.iIcon
-        Dim hIcon = IntPtr.Zero
-        hImg = SHGetFileInfo(path, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON)
-        Dim hres = iml.GetIcon(shinfo.iIcon, 1, hIcon)
-        Dim ico As Icon = System.Drawing.Icon.FromHandle(hIcon)
-        Dim ico2 As Icon = ico.Clone()
-        ico.Dispose()
-        Return ico2
+        Try
+            Dim iml As AF_And_JP_Logic.MimicSysImgList.IImageList
+            Dim riid As Guid = New Guid("46EB5926-582E-4017-9FDF-E8998DAA0950")
+            Dim lresult As IntPtr
+            lresult = SHGetImageList(SHIL_LARGE, riid, iml)
+            Dim hImg As IntPtr
+            Dim shinfo As SHFILEINFO = New SHFILEINFO
+            Dim icoIDX = shinfo.iIcon
+            Dim hIcon = IntPtr.Zero
+            hImg = SHGetFileInfo(path, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON)
+            Dim hres = iml.GetIcon(shinfo.iIcon, 1, hIcon)
+            Dim ico As Icon = System.Drawing.Icon.FromHandle(hIcon)
+            Dim ico2 As Icon = ico.Clone()
+            ico.Dispose()
+            Return ico2
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetMediums(path)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 
     Private Function Extract_Thumbs(ByVal FillFullName As String, ByVal File As FileObject)
-        Dim y As FileObject = File
-
-
-        '' one thumb for each size.
-        '' 16
-        '' 32
-        '' 48
-        '' 128
-        '' 256
-
-
-
         Try
-            Dim thumA As Image = Bitmap.FromFile(FillFullName, True)
-            Dim tThumbA16 As Image = thumA.GetThumbnailImage(16, 16, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
-            Dim imgC As Image = tThumbA16.Clone
-            tThumbA16.Dispose()
-            thumA.Dispose()
-            y.smThumb = imgC
+            Dim y As FileObject = File
 
+
+            '' one thumb for each size.
+            '' 16
+            '' 32
+            '' 48
+            '' 128
+            '' 256
+
+
+
+            Try
+                Dim thumA As Image = Bitmap.FromFile(FillFullName, True)
+                Dim tThumbA16 As Image = thumA.GetThumbnailImage(16, 16, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
+                Dim imgC As Image = tThumbA16.Clone
+                tThumbA16.Dispose()
+                thumA.Dispose()
+                y.smThumb = imgC
+
+            Catch ex As Exception
+                '' point to default error icon here.
+                '' 
+            End Try
+
+            Try
+                Dim thumB As Image = Bitmap.FromFile(FillFullName, True)
+                Dim tThumbB32 As Image = thumB.GetThumbnailImage(32, 32, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
+                Dim imgD As Image = tThumbB32.Clone
+                thumB.Dispose()
+                tThumbB32.Dispose()
+                y.mdThumb = imgD
+
+            Catch ex As Exception
+                '' point to default error icon here.
+                '' 
+            End Try
+
+            Try
+                Dim thumC As Image = Bitmap.FromFile(FillFullName, True)
+                Dim tthumbC48 As Image = thumC.GetThumbnailImage(48, 48, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
+                Dim imgE As Image = tthumbC48.Clone
+                thumC.Dispose()
+                tthumbC48.Dispose()
+                y.lgThumb = imgE
+
+            Catch ex As Exception
+                '' point to default error icon here.
+                '' 
+            End Try
+
+            Try
+                Dim thumC As Image = Bitmap.FromFile(FillFullName, True)
+                Dim tthumbC256 As Image = thumC.GetThumbnailImage(256, 256, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
+                Dim imgE As Image = tthumbC256.Clone
+                thumC.Dispose()
+                tthumbC256.Dispose()
+                y.jbThumb = imgE
+
+            Catch ex As Exception
+                '' point to default error icon here.
+                '' 
+            End Try
+
+            Try
+                Dim thumC As Image = Bitmap.FromFile(FillFullName, True)
+                Dim tthumbC128 As Image = thumC.GetThumbnailImage(128, 128, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
+                Dim imgE As Image = tthumbC128.Clone
+                thumC.Dispose()
+                tthumbC128.Dispose()
+                y.Tile = imgE
+
+            Catch ex As Exception
+                '' point to default error icon here.
+                '' 
+            End Try
+
+            Return y
         Catch ex As Exception
-            '' point to default error icon here.
-            '' 
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "Extract_Thumbs(FillFullName,File)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
-        Try
-            Dim thumB As Image = Bitmap.FromFile(FillFullName, True)
-            Dim tThumbB32 As Image = thumB.GetThumbnailImage(32, 32, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
-            Dim imgD As Image = tThumbB32.Clone
-            thumB.Dispose()
-            tThumbB32.Dispose()
-            y.mdThumb = imgD
-
-        Catch ex As Exception
-            '' point to default error icon here.
-            '' 
-        End Try
-
-        Try
-            Dim thumC As Image = Bitmap.FromFile(FillFullName, True)
-            Dim tthumbC48 As Image = thumC.GetThumbnailImage(48, 48, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
-            Dim imgE As Image = tthumbC48.Clone
-            thumC.Dispose()
-            tthumbC48.Dispose()
-            y.lgThumb = imgE
-
-        Catch ex As Exception
-            '' point to default error icon here.
-            '' 
-        End Try
-
-        Try
-            Dim thumC As Image = Bitmap.FromFile(FillFullName, True)
-            Dim tthumbC256 As Image = thumC.GetThumbnailImage(256, 256, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
-            Dim imgE As Image = tthumbC256.Clone
-            thumC.Dispose()
-            tthumbC256.Dispose()
-            y.jbThumb = imgE
-
-        Catch ex As Exception
-            '' point to default error icon here.
-            '' 
-        End Try
-
-        Try
-            Dim thumC As Image = Bitmap.FromFile(FillFullName, True)
-            Dim tthumbC128 As Image = thumC.GetThumbnailImage(128, 128, AddressOf GetThumbCallBackAbort, IntPtr.Zero)
-            Dim imgE As Image = tthumbC128.Clone
-            thumC.Dispose()
-            tthumbC128.Dispose()
-            y.Tile = imgE
-
-        Catch ex As Exception
-            '' point to default error icon here.
-            '' 
-        End Try
-
-        Return y
     End Function
 
     Public Function GetThumbCallBackAbort() As Boolean

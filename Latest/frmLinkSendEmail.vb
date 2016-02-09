@@ -88,26 +88,33 @@ Public Class frmLinkSendEmail
        
 
         Private Function Get_Company_Info()
-            Dim a As New CompanyInfo
-            Dim cnx As New SqlConnection(pro_cnx)
-            cnx.Open()
-            Dim cmdGET As New SqlCommand("SELECT CompanyName,Email,EmailLogin,Incoming,Outgoing,Iport,OPort,LogonUsing,EmailPassword FROM CompanyInfo;", cnx)
-            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
-            While r1.Read
-                a.Name = r1.Item("CompanyName")
-                a.Email = r1.Item("Email")
-                a.EmaiLogin = r1.Item("EmailLogin")
-                a.POP3 = r1.Item("Incoming")
-                a.SMTP = r1.Item("Outgoing")
-                a.POP3Port = r1.Item("Iport")
-                a.SMTPPort = r1.Item("Oport")
-                a.LogonUsing = r1.Item("LogonUsing")
-                a.EmailPWD = r1.Item("EmailPassword")
-            End While
-            r1.Close()
-            cnx.Close()
-            cnx = Nothing
-            Return a
+            Try
+                Dim a As New CompanyInfo
+                Dim cnx As New SqlConnection(pro_cnx)
+                cnx.Open()
+                Dim cmdGET As New SqlCommand("SELECT CompanyName,Email,EmailLogin,Incoming,Outgoing,Iport,OPort,LogonUsing,EmailPassword FROM CompanyInfo;", cnx)
+                Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+                While r1.Read
+                    a.Name = r1.Item("CompanyName")
+                    a.Email = r1.Item("Email")
+                    a.EmaiLogin = r1.Item("EmailLogin")
+                    a.POP3 = r1.Item("Incoming")
+                    a.SMTP = r1.Item("Outgoing")
+                    a.POP3Port = r1.Item("Iport")
+                    a.SMTPPort = r1.Item("Oport")
+                    a.LogonUsing = r1.Item("LogonUsing")
+                    a.EmailPWD = r1.Item("EmailPassword")
+                End While
+                r1.Close()
+                cnx.Close()
+                cnx = Nothing
+                Return a
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmLinkSendEmail", "FormCode", "Function", "Get_Company_Info()", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End Function
 
     End Class

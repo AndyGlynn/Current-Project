@@ -11,13 +11,19 @@ Public Class frmViewEditAutoNotes
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ResetDefault()
-        Dim x As New ViewEditAutoNotes
-        x.PopuluateList()
+        Try
+            Dim x As New ViewEditAutoNotes
+            x.PopuluateList()
 
-        Dim d
-        For d = 0 To x.ArAutoNotes.Count - 1
-            Me.chklstAutoNotes.Items.Add(x.ArAutoNotes(d), False)
-        Next
+            Dim d
+            For d = 0 To x.ArAutoNotes.Count - 1
+                Me.chklstAutoNotes.Items.Add(x.ArAutoNotes(d), False)
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmViewEditAuotNotes", "FormCode", "Event", "form1_load", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -43,25 +49,34 @@ Public Class frmViewEditAutoNotes
                 Me.chklstAutoNotes.Items.Add(y.ArAutoNotes(d), False)
             Next
         Catch ex As Exception
-
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmViewEditAuotNotes", "FormCode", "Event", "Button2_Click", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Dim y As New ViewEditAutoNotes
-        Dim strResponse As String = InputBox$("Enter a new auto note to add to list.", "New Auto Note", "")
-        If strResponse.ToString.Length <= 0 Then
-            MsgBox("You cannot have a blank auto note.", MsgBoxStyle.Exclamation, "Error Adding Auto Note")
-            Exit Sub
-        ElseIf strResponse.ToString.Length >= 1 Then
-            y.InsertAutoNote(strResponse)
-            ResetDefault()
-            y.PopuluateList()
-            Dim d
-            For d = 0 To y.ArAutoNotes.Count - 1
-                Me.chklstAutoNotes.Items.Add(y.ArAutoNotes(d), False)
-            Next
-        End If
+        Try
+            Dim y As New ViewEditAutoNotes
+            Dim strResponse As String = InputBox$("Enter a new auto note to add to list.", "New Auto Note", "")
+            If strResponse.ToString.Length <= 0 Then
+                MsgBox("You cannot have a blank auto note.", MsgBoxStyle.Exclamation, "Error Adding Auto Note")
+                Exit Sub
+            ElseIf strResponse.ToString.Length >= 1 Then
+                y.InsertAutoNote(strResponse)
+                ResetDefault()
+                y.PopuluateList()
+                Dim d
+                For d = 0 To y.ArAutoNotes.Count - 1
+                    Me.chklstAutoNotes.Items.Add(y.ArAutoNotes(d), False)
+                Next
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmViewEditAuotNotes", "FormCode", "Event", "Button1_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 End Class

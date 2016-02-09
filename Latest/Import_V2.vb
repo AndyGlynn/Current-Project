@@ -18,21 +18,26 @@ Public Class Import_V2
     Private Const jp_dir As String = "\\192.168.1.2\Company\ISS\Job Pictures\"
 
     Public Sub ImportThePictures(ByVal FileObj As ImportPicObj)
+        Try
+            If System.IO.Directory.Exists(jp_dir & FileObj.LeadNum) = False Then
+                System.IO.Directory.CreateDirectory(jp_dir & FileObj.LeadNum)
+            ElseIf System.IO.Directory.Exists(jp_dir & FileObj.LeadNum) = True Then
+                '' its already there...
+                '' 
+                Dim reconstructed As String = (FileObj.LeadNum & "-" & FileObj.BeginMidEnd & "-" & FileObj.Acro & "-" & FileObj.FileNumSequence & "." & FileObj.FileExt)
+                Try
+                    System.IO.File.Copy(FileObj.FullPath, (jp_dir & FileObj.LeadNum & "\" & reconstructed))
+                Catch ex As Exception
+                    Dim err As String = ex.Message
+                    MsgBox("Error Importing Picture(s)." & vbCrLf & err, MsgBoxStyle.Critical, "DEBUG INFO - Import Picture(s) Error")
+                End Try
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "IMPORT_PICTURES_LOGIC", "IMPORT_PICTURES_LOGIC", "Sub", "ImportThePictures(fileObj)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        If System.IO.Directory.Exists(jp_dir & FileObj.LeadNum) = False Then
-            System.IO.Directory.CreateDirectory(jp_dir & FileObj.LeadNum)
-        ElseIf System.IO.Directory.Exists(jp_dir & FileObj.LeadNum) = True Then
-            '' its already there...
-            '' 
-            Dim reconstructed As String = (FileObj.LeadNum & "-" & FileObj.BeginMidEnd & "-" & FileObj.Acro & "-" & FileObj.FileNumSequence & "." & FileObj.FileExt)
-            Try
-                System.IO.File.Copy(FileObj.FullPath, (jp_dir & FileObj.LeadNum & "\" & reconstructed))
-            Catch ex As Exception
-                Dim err As String = ex.Message
-                MsgBox("Error Importing Picture(s)." & vbCrLf & err, MsgBoxStyle.Critical, "DEBUG INFO - Import Picture(s) Error")
-            End Try
-        End If
-         
 
     End Sub
     Public Sub CloseImportPictures()

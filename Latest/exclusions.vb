@@ -15,6 +15,7 @@ Public Class exclusions
     End Sub
 
     Private Sub exclusions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         Dim cmd As SqlCommand = New SqlCommand("select * from exclusions", cnn)
         cmd.CommandType = CommandType.Text
         Try
@@ -44,7 +45,9 @@ Public Class exclusions
             r1.Close()
             cnn.Close()
         Catch ex As Exception
-            MsgBox(ex.ToString)
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Exclusions", "FormCode", "Sub", "exclusions_load", "0", ex.Message.ToString)
+            y = Nothing
             cnn.Close()
         End Try
     End Sub
@@ -67,7 +70,9 @@ Public Class exclusions
             r1.Close()
             cnn.Close()
         Catch ex As Exception
-            MsgBox(ex.ToString)
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Exclusions", "FormCode", "Sub", "exclusions_load", "0", ex.Message.ToString)
+            y = Nothing
             cnn.Close()
         End Try
         Me.Close()

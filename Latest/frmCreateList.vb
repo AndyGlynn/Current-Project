@@ -33,7 +33,9 @@ Public Class frmCreateList
             End While
             cnn.Close()
         Catch ex As Exception
-
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmCreateList", "FormCode", "sub", "LoadComplete", "0", ex.Message.ToString)
+            y = Nothing
         End Try
       
 
@@ -269,38 +271,43 @@ Public Class frmCreateList
 	'' MERGE CODE: 10-7-2015
 	'' 
         ''    Add Mappoint query code to populate chlstZipCity then loop to check all
-
-        Dim mpt As New MAPPOINT_LOGIC_V2
-        Select Case btnShow.Text
-            Case "Show Zip Codes"
-                Me.chlstZipCity.Items.Clear()
-                Dim arResults As New ArrayList
-                Dim BeginList As List(Of MAPPOINT_LOGIC_V2.ZipState)
-                BeginList = mpt.GetUniqueZipState
-                Me.Cursor = Cursors.WaitCursor
-                Dim StartState As String = mpt.Get_STATE_ForZip(Me.txtZipCity.Text)
-                arResults = mpt.Search_Radius_ZipCode(BeginList, Me.numMiles.Value, Me.txtZipCity.Text, StartState)
-                Dim g As Object
-                For Each g In arResults
-                    Me.chlstZipCity.Items.Add(g.ToString)
-                Next
-                Me.Cursor = Cursors.Default
-                Exit Select
-            Case "Show Cities"
-                Me.chlstZipCity.Items.Clear()
-                Dim arResults As New ArrayList
-                Dim BeginList As List(Of MAPPOINT_LOGIC_V2.CityState)
-                BeginList = mpt.GetUniqueCityState
-                Me.Cursor = Cursors.WaitCursor
-                Dim Start_State As String = mpt.Get_STATE_ForCity(Me.txtZipCity.Text)
-                arResults = mpt.Search_Radius_City(BeginList, Me.numMiles.Value, Me.txtZipCity.Text, Me.cboStateSelection.Text)
-                Dim g As Object
-                For Each g In arResults
-                    Me.chlstZipCity.Items.Add(g.ToString)
-                Next
-                Me.Cursor = Cursors.Default
-                Exit Select
-        End Select
+        Try
+            Dim mpt As New MAPPOINT_LOGIC_V2
+            Select Case btnShow.Text
+                Case "Show Zip Codes"
+                    Me.chlstZipCity.Items.Clear()
+                    Dim arResults As New ArrayList
+                    Dim BeginList As List(Of MAPPOINT_LOGIC_V2.ZipState)
+                    BeginList = mpt.GetUniqueZipState
+                    Me.Cursor = Cursors.WaitCursor
+                    Dim StartState As String = mpt.Get_STATE_ForZip(Me.txtZipCity.Text)
+                    arResults = mpt.Search_Radius_ZipCode(BeginList, Me.numMiles.Value, Me.txtZipCity.Text, StartState)
+                    Dim g As Object
+                    For Each g In arResults
+                        Me.chlstZipCity.Items.Add(g.ToString)
+                    Next
+                    Me.Cursor = Cursors.Default
+                    Exit Select
+                Case "Show Cities"
+                    Me.chlstZipCity.Items.Clear()
+                    Dim arResults As New ArrayList
+                    Dim BeginList As List(Of MAPPOINT_LOGIC_V2.CityState)
+                    BeginList = mpt.GetUniqueCityState
+                    Me.Cursor = Cursors.WaitCursor
+                    Dim Start_State As String = mpt.Get_STATE_ForCity(Me.txtZipCity.Text)
+                    arResults = mpt.Search_Radius_City(BeginList, Me.numMiles.Value, Me.txtZipCity.Text, Me.cboStateSelection.Text)
+                    Dim g As Object
+                    For Each g In arResults
+                        Me.chlstZipCity.Items.Add(g.ToString)
+                    Next
+                    Me.Cursor = Cursors.Default
+                    Exit Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmCreateList", "FormCode", "sub", "btnShow_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
     End Sub
@@ -495,262 +502,245 @@ Public Class frmCreateList
     End Sub
 
     Private Sub btnGenerate_Click(sender As Object, e As EventArgs) Handles btnGenerate.Click
-        Me.RichTextBox1.Text = "" ''Remove After Testing 
+        Try
+            Me.RichTextBox1.Text = "" ''Remove After Testing 
 
 
-        Me.tabDate.ImageKey = Nothing
-        Me.tabDate.ToolTipText = ""
-        Me.tabProducts.ImageKey = Nothing
-        Me.tabProducts.ToolTipText = ""
-        Me.tabGeo.ImageKey = Nothing
-        Me.tabGeo.ToolTipText = ""
-        Me.tabWC.ImageKey = Nothing
-        Me.tabWC.ToolTipText = ""
-        Me.tabPC.ImageKey = Nothing
-        Me.tabPC.ToolTipText = ""
-        Me.tabRecovery.ImageKey = Nothing
-        Me.tabRecovery.ToolTipText = ""
-        Me.tabMarketers.ImageKey = Nothing
-        Me.tabMarketers.ToolTipText = ""
+            Me.tabDate.ImageKey = Nothing
+            Me.tabDate.ToolTipText = ""
+            Me.tabProducts.ImageKey = Nothing
+            Me.tabProducts.ToolTipText = ""
+            Me.tabGeo.ImageKey = Nothing
+            Me.tabGeo.ToolTipText = ""
+            Me.tabWC.ImageKey = Nothing
+            Me.tabWC.ToolTipText = ""
+            Me.tabPC.ImageKey = Nothing
+            Me.tabPC.ToolTipText = ""
+            Me.tabRecovery.ImageKey = Nothing
+            Me.tabRecovery.ToolTipText = ""
+            Me.tabMarketers.ImageKey = Nothing
+            Me.tabMarketers.ToolTipText = ""
 
-        Me.epForm.Clear()
-        Dim tabDate As Integer = 0
-        Dim tabProd As Integer = 0
-        Dim tabGeo As Integer = 0
-        Dim tabWC As Integer = 0
-        Dim tabPC As Integer = 0
-        Dim tabRehash As Integer = 0
-        Dim tabMarketer As Integer = 0
+            Me.epForm.Clear()
+            Dim tabDate As Integer = 0
+            Dim tabProd As Integer = 0
+            Dim tabGeo As Integer = 0
+            Dim tabWC As Integer = 0
+            Dim tabPC As Integer = 0
+            Dim tabRehash As Integer = 0
+            Dim tabMarketer As Integer = 0
 
-        ''Date/Time Tab 
-        If Me.dpFrom.Value.ToShortDateString <> "1/1/1900" And Me.dpTo.Value.ToShortDateString = "1/1/2100" Then              '' Change If Statement to reflect datepicker value instead of visible properties
-            Me.epForm.SetError(Me.dpTo, "You Must Supply a Date!")
-            tabDate += 1
-        End If
-        If Me.dpFrom.Value.ToShortDateString = "1/1/1900" And Me.dpTo.Value.ToShortDateString <> "1/1/2100" Then              '' Change If Statement to reflect datepicker value instead of visible properties
-            Me.epForm.SetError(Me.dpFrom, "You Must Supply a Date!")
-            tabDate += 1
-        End If
-        If Me.tpFrom.Value.ToShortTimeString = "12:00 AM" And Me.tpTo.Value.ToShortTimeString <> "11:59 PM" Then
-            Me.epForm.SetError(Me.tpFrom, "You Must Supply a Time!")
-            tabDate += 1
-        End If
-        If Me.tpFrom.Value.ToShortTimeString <> "12:00 AM" And Me.tpTo.Value.ToShortTimeString = "11:59 PM" Then
-            Me.epForm.SetError(Me.tpTo, "You Must Supply a Time!")
-            tabDate += 1
-        End If
+            ''Date/Time Tab 
+            If Me.dpFrom.Value.ToShortDateString <> "1/1/1900" And Me.dpTo.Value.ToShortDateString = "1/1/2100" Then              '' Change If Statement to reflect datepicker value instead of visible properties
+                Me.epForm.SetError(Me.dpTo, "You Must Supply a Date!")
+                tabDate += 1
+            End If
+            If Me.dpFrom.Value.ToShortDateString = "1/1/1900" And Me.dpTo.Value.ToShortDateString <> "1/1/2100" Then              '' Change If Statement to reflect datepicker value instead of visible properties
+                Me.epForm.SetError(Me.dpFrom, "You Must Supply a Date!")
+                tabDate += 1
+            End If
+            If Me.tpFrom.Value.ToShortTimeString = "12:00 AM" And Me.tpTo.Value.ToShortTimeString <> "11:59 PM" Then
+                Me.epForm.SetError(Me.tpFrom, "You Must Supply a Time!")
+                tabDate += 1
+            End If
+            If Me.tpFrom.Value.ToShortTimeString <> "12:00 AM" And Me.tpTo.Value.ToShortTimeString = "11:59 PM" Then
+                Me.epForm.SetError(Me.tpTo, "You Must Supply a Time!")
+                tabDate += 1
+            End If
 
-        ''Marketers Tab 
-        If Me.chlstMarketers.CheckedItems.Count <= 0 Then
-            Me.epForm.SetError(Me.chlstMarketers, "You Must Select at Least One Marketer!")
-            tabMarketer += 1
-        End If
-        ''Products Tab
-        If Me.chlstProducts.CheckedItems.Count <= 0 Then
-            Me.epForm.SetError(Me.chlstProducts, "You Must Select at Least One Product!")
-            tabProd += 1
-        End If
-
-        ''Geo Tab 
-        If Me.chlstZipCity.Items.Count > 0 And Me.chlstZipCity.CheckedItems.Count <= 0 Then
-            If Me.rdoZip.Checked = True Then
-                Me.epForm.SetError(Me.chlstProducts, "You Must Select at Least One Zip Code!")
-                tabProd += 1
-            Else
-                Me.epForm.SetError(Me.chlstProducts, "You Must Select at Least One City!")
-
-                Me.epForm.SetIconPadding(Me.chlstProducts, 20)
+            ''Marketers Tab 
+            If Me.chlstMarketers.CheckedItems.Count <= 0 Then
+                Me.epForm.SetError(Me.chlstMarketers, "You Must Select at Least One Marketer!")
+                tabMarketer += 1
+            End If
+            ''Products Tab
+            If Me.chlstProducts.CheckedItems.Count <= 0 Then
+                Me.epForm.SetError(Me.chlstProducts, "You Must Select at Least One Product!")
                 tabProd += 1
             End If
-        End If
 
-        ''Warm Calling Tab
-        If Me.chlstWC.CheckedItems.Count <= 0 And Me.chkWC.Checked = True Then
-            Me.epForm.SetError(Me.chlstWC, "You Must Select at Least One Marketing Result!")
-            tabWC += 1
-        End If
+            ''Geo Tab 
+            If Me.chlstZipCity.Items.Count > 0 And Me.chlstZipCity.CheckedItems.Count <= 0 Then
+                If Me.rdoZip.Checked = True Then
+                    Me.epForm.SetError(Me.chlstProducts, "You Must Select at Least One Zip Code!")
+                    tabProd += 1
+                Else
+                    Me.epForm.SetError(Me.chlstProducts, "You Must Select at Least One City!")
 
-        ''Previous Customer Tab
-        If Me.chPC.Checked = True Then
-            If Me.chApprovedFor.Checked = True And Me.txtApprovedDollars.Text = "" Then
-                Me.epForm.SetError(Me.txtApprovedDollars, "You Must Supply a Dollar Amount! ")
-                tabPC += 1
+                    Me.epForm.SetIconPadding(Me.chlstProducts, 20)
+                    tabProd += 1
+                End If
             End If
-            If Me.chApprovedFor.Checked = True Then
-                For z As Integer = 1 To Me.txtApprovedDollars.TextLength
-                    Dim c As Char = GetChar(Me.txtApprovedDollars.Text, z)
+
+            ''Warm Calling Tab
+            If Me.chlstWC.CheckedItems.Count <= 0 And Me.chkWC.Checked = True Then
+                Me.epForm.SetError(Me.chlstWC, "You Must Select at Least One Marketing Result!")
+                tabWC += 1
+            End If
+
+            ''Previous Customer Tab
+            If Me.chPC.Checked = True Then
+                If Me.chApprovedFor.Checked = True And Me.txtApprovedDollars.Text = "" Then
+                    Me.epForm.SetError(Me.txtApprovedDollars, "You Must Supply a Dollar Amount! ")
+                    tabPC += 1
+                End If
+                If Me.chApprovedFor.Checked = True Then
+                    For z As Integer = 1 To Me.txtApprovedDollars.TextLength
+                        Dim c As Char = GetChar(Me.txtApprovedDollars.Text, z)
+                        If (c = "0") Or (c = "1") Or (c = "2") Or (c = "3") Or (c = "4") Or (c = "5") Or (c = "6") Or (c = "7") Or (c = "8") Or (c = "9") Then
+                        Else
+                            Me.epGeo.SetError(Me.txtApprovedDollars, "Field Can Only Contain Numbers!")
+                            tabPC += 1
+
+                        End If
+                    Next
+                End If
+                If Me.dpDate1PC.Value.ToShortDateString = "1/1/1900" And Me.dpDate2PC.Value.ToShortDateString <> "1/1/2100" Then
+                    Me.epForm.SetError(Me.dpDate1PC, "You Must Supply a Date!")
+                    tabPC += 1
+                End If
+                If Me.dpDate1PC.Value.ToShortDateString <> "1/1/1900" And Me.dpDate2PC.Value.ToShortDateString = "1/1/2100" Then
+                    Me.epForm.SetError(Me.dpDate2PC, "You Must Supply a Date!")
+                    tabPC += 1
+                End If
+            End If
+
+            ''Rehash Tab
+            If Me.chRehash.Checked = True Then
+                If Me.chlstRehash.CheckedItems.Count <= 0 Then
+                    Me.epForm.SetError(Me.chlstRehash, "You Must Select at Least One Result!")
+                    tabRehash += 1
+                End If
+                For z As Integer = 1 To Me.txtQuoted.TextLength
+                    Dim c As Char = GetChar(Me.txtQuoted.Text, z)
                     If (c = "0") Or (c = "1") Or (c = "2") Or (c = "3") Or (c = "4") Or (c = "5") Or (c = "6") Or (c = "7") Or (c = "8") Or (c = "9") Then
                     Else
-                        Me.epGeo.SetError(Me.txtApprovedDollars, "Field Can Only Contain Numbers!")
-                        tabPC += 1
-
+                        Me.epGeo.SetError(Me.txtQuoted, "Field Can Only Contain Numbers!")
+                        tabRehash += 1
                     End If
                 Next
             End If
-            If Me.dpDate1PC.Value.ToShortDateString = "1/1/1900" And Me.dpDate2PC.Value.ToShortDateString <> "1/1/2100" Then
-                Me.epForm.SetError(Me.dpDate1PC, "You Must Supply a Date!")
-                tabPC += 1
+            Dim tab As Integer = 0
+            If tabDate > 0 Then
+                Me.tabDate.ImageIndex = 0
+                Me.tabDate.ToolTipText = "Errors on this Tab"
+                tab += 1
             End If
-            If Me.dpDate1PC.Value.ToShortDateString <> "1/1/1900" And Me.dpDate2PC.Value.ToShortDateString = "1/1/2100" Then
-                Me.epForm.SetError(Me.dpDate2PC, "You Must Supply a Date!")
-                tabPC += 1
+            If tabProd > 0 Then
+                Me.tabProducts.ImageIndex = 0
+                Me.tabProducts.ToolTipText = "Errors on this Tab"
+                tab += 1
             End If
-        End If
+            If tabGeo > 0 Then
+                Me.tabGeo.ImageIndex = 0
+                Me.tabGeo.ToolTipText = "Errors on this Tab"
+                tab += 1
+            End If
+            If tabWC > 0 Then
+                Me.tabWC.ImageIndex = 0
+                Me.tabWC.ToolTipText = "Errors on this Tab"
+                tab += 1
+            End If
+            If tabPC > 0 Then
+                Me.tabPC.ImageIndex = 0
+                Me.tabPC.ToolTipText = "Errors on this Tab"
+                tab += 1
+            End If
+            If tabRehash > 0 Then
+                Me.tabRecovery.ImageIndex = 0
+                Me.tabRecovery.ToolTipText = "Errors on this Tab"
+                tab += 1
+            End If
+            If tabMarketer > 0 Then
+                Me.tabMarketers.ImageIndex = 0
+                Me.tabMarketers.ToolTipText = "Errors on this Tab"
+                tab += 1
+            End If
+            If tab > 0 Then
+                Exit Sub
+            End If
 
-        ''Rehash Tab
-        If Me.chRehash.Checked = True Then
-            If Me.chlstRehash.CheckedItems.Count <= 0 Then
-                Me.epForm.SetError(Me.chlstRehash, "You Must Select at Least One Result!")
-                tabRehash += 1
-            End If
-            For z As Integer = 1 To Me.txtQuoted.TextLength
-                Dim c As Char = GetChar(Me.txtQuoted.Text, z)
-                If (c = "0") Or (c = "1") Or (c = "2") Or (c = "3") Or (c = "4") Or (c = "5") Or (c = "6") Or (c = "7") Or (c = "8") Or (c = "9") Then
-                Else
-                    Me.epGeo.SetError(Me.txtQuoted, "Field Can Only Contain Numbers!")
-                    tabRehash += 1
-                End If
+            ''ADD SQL QUERY CODE HERE 
+            'MsgBox("Creating List")
+
+            ''Date Tab
+            Dim Where As String = ""
+            Dim DateQuery As String = ""
+            Dim MarkProdGeo As String = ""
+            Dim WCQuery As String = ""
+            Dim Rehash As String = ""
+            Dim PCQuery As String = ""
+            Dim Slct As String = "Select Distinct(Enterlead.ID), Contact1LastName, Contact1FirstName, Contact2LastName, Contact2FirstName, StAddress, City, State, Zip, HousePhone, AltPhone1, AltPhone2, Enterlead.Product1, Enterlead.Product2, Enterlead.Product3, LeadGeneratedOn, ApptDate, ApptDay, ApptTime, Result, MarketingResults, IsPreviousCustomer, IsRecovery "
+            Dim Orderby As String = ""
+            Dim checked As Integer = 0
+
+            ''Add columns depending on orderby clause 
+            For x As Integer = 0 To Me.chlstOrderBy.CheckedItems.Count - 1
+                Select Case Me.chlstOrderBy.CheckedItems(x).ToString
+                    Case Is = "Reference Rating"
+                        Slct = Slct & ", ReferenceRating"
+                        checked += 1
+                    Case Is = "Sale Closed Date"
+                        Slct = Slct & ", JobClosed"
+                        checked += 1
+                    Case Is = "Loan Satisfied Date"
+                        Slct = Slct & ", ExpectedPayOff"
+                    Case Is = "Approved Loan Amount"
+                        Slct = Slct & ", ApprovedFor"
+                End Select
             Next
-        End If
-        Dim tab As Integer = 0
-        If tabDate > 0 Then
-            Me.tabDate.ImageIndex = 0
-            Me.tabDate.ToolTipText = "Errors on this Tab"
-            tab += 1
-        End If
-        If tabProd > 0 Then
-            Me.tabProducts.ImageIndex = 0
-            Me.tabProducts.ToolTipText = "Errors on this Tab"
-            tab += 1
-        End If
-        If tabGeo > 0 Then
-            Me.tabGeo.ImageIndex = 0
-            Me.tabGeo.ToolTipText = "Errors on this Tab"
-            tab += 1
-        End If
-        If tabWC > 0 Then
-            Me.tabWC.ImageIndex = 0
-            Me.tabWC.ToolTipText = "Errors on this Tab"
-            tab += 1
-        End If
-        If tabPC > 0 Then
-            Me.tabPC.ImageIndex = 0
-            Me.tabPC.ToolTipText = "Errors on this Tab"
-            tab += 1
-        End If
-        If tabRehash > 0 Then
-            Me.tabRecovery.ImageIndex = 0
-            Me.tabRecovery.ToolTipText = "Errors on this Tab"
-            tab += 1
-        End If
-        If tabMarketer > 0 Then
-            Me.tabMarketers.ImageIndex = 0
-            Me.tabMarketers.ToolTipText = "Errors on this Tab"
-            tab += 1
-        End If
-        If tab > 0 Then
-            Exit Sub
-        End If
 
-        ''ADD SQL QUERY CODE HERE 
-        'MsgBox("Creating List")
-
-        ''Date Tab
-        Dim Where As String = ""
-        Dim DateQuery As String = ""
-        Dim MarkProdGeo As String = ""
-        Dim WCQuery As String = ""
-        Dim Rehash As String = ""
-        Dim PCQuery As String = ""
-        Dim Slct As String = "Select Distinct(Enterlead.ID), Contact1LastName, Contact1FirstName, Contact2LastName, Contact2FirstName, StAddress, City, State, Zip, HousePhone, AltPhone1, AltPhone2, Enterlead.Product1, Enterlead.Product2, Enterlead.Product3, LeadGeneratedOn, ApptDate, ApptDay, ApptTime, Result, MarketingResults, IsPreviousCustomer, IsRecovery "
-        Dim Orderby As String = ""
-        Dim checked As Integer = 0
-  
-        ''Add columns depending on orderby clause 
-        For x As Integer = 0 To Me.chlstOrderBy.CheckedItems.Count - 1
-            Select Case Me.chlstOrderBy.CheckedItems(x).ToString
-            Case Is = "Reference Rating"
-                    Slct = Slct & ", ReferenceRating"
-                    checked += 1
-                Case Is = "Sale Closed Date"
-                    Slct = Slct & ", JobClosed"
-                    checked += 1
-                Case Is = "Loan Satisfied Date"
-                    Slct = Slct & ", ExpectedPayOff"
-                Case Is = "Approved Loan Amount"
-                    Slct = Slct & ", ApprovedFor"
-            End Select
-        Next
-
-        Slct = Slct & " From Enterlead"
+            Slct = Slct & " From Enterlead"
 
 
-        If Me.chPC.Checked = True Then
-            If Me.chLoanSatisfied.Checked = True Or Me.chApprovedFor.Checked = True Then
-                Slct = Slct & " Join tblFinance on Enterlead.ID = tblFinance.LeadNum"
-            End If
-            If Me.numReferences.Value > 0 Or Me.dpDate1PC.Value.ToShortDateString <> "1/1/1900" Or checked > 0 Then
-                Slct = Slct & " Join SaleDetail on Enterlead.ID = SaleDetail.LeadNum"
-            End If
-        End If
-
-
-        Dim Fby As Integer = 0
-        If Me.dpGenerated.Value.ToShortDateString <> "1/1/1900" Then
-            DateQuery = "LeadGeneratedOn >= '" & Me.dpGenerated.Value.ToString & "'"
-            Fby += 1
-        End If
-        If Me.dpFrom.Value.ToShortDateString <> "1/1/1900" Then
-            If DateQuery <> "" Then
-                DateQuery = DateQuery & " and "
-            End If
-            DateQuery = DateQuery & "ApptDate Between '" & Me.dpFrom.Value.ToString & "' and '" & Me.dpTo.Value.ToString & "'"
-            Fby += 1
-        End If
-        If Me.tpFrom.Value.ToShortTimeString <> "12:00 AM" Then
-            If DateQuery <> "" Then
-                DateQuery = DateQuery & " and "
-            End If
-            DateQuery = DateQuery & "ApptTime Between '" & Me.tpFrom.Value.ToString & "' And '" & Me.tpTo.Value.ToString & "'"
-            Fby += 1
-        End If
-        If Me.chWeekdays.Checked = True Then
-            If DateQuery <> "" Then
-                DateQuery = DateQuery & " and "
-            End If
-            DateQuery = DateQuery & "ApptDay <> 'Saturday' and ApptDay <> 'Sunday'"
-            Fby += 1
-        End If
-        ''Marketer Tab 
-        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet As SqlCommand
-        Dim r1 As SqlDataReader
-        cmdGet = New SqlCommand("Select Count(distinct(marketer)) from EnterLead", cnn)
-
-
-        cmdGet.CommandType = CommandType.Text
-        cnn.Open()
-        r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-        r1.Read()
-        If r1.Item(0) > Me.chlstMarketers.Items.Count Then    '' If true were working with a filtered down set of Marketers 
-            If MarkProdGeo <> "" Then
-                MarkProdGeo = MarkProdGeo & " and "
-            End If
-            For x As Integer = 0 To Me.chlstMarketers.CheckedItems.Count - 1
-                If x = 0 Then
-                    MarkProdGeo = MarkProdGeo & "("
+            If Me.chPC.Checked = True Then
+                If Me.chLoanSatisfied.Checked = True Or Me.chApprovedFor.Checked = True Then
+                    Slct = Slct & " Join tblFinance on Enterlead.ID = tblFinance.LeadNum"
                 End If
-                If x <> Me.chlstMarketers.CheckedItems.Count - 1 Then
-
-                    MarkProdGeo = MarkProdGeo & "Marketer = '" & Me.chlstMarketers.CheckedItems(x).ToString & "' and "    ''Add Comma after each item until last item 
-                    Fby += 1
-                Else
-                    MarkProdGeo = MarkProdGeo & "Marketer = '" & Me.chlstMarketers.CheckedItems(x).ToString & "')"       ''Last Item Dont Add comma to end of where 
-                    Fby += 1
+                If Me.numReferences.Value > 0 Or Me.dpDate1PC.Value.ToShortDateString <> "1/1/1900" Or checked > 0 Then
+                    Slct = Slct & " Join SaleDetail on Enterlead.ID = SaleDetail.LeadNum"
                 End If
-            Next
-        Else
-            If Me.chlstMarketers.Items.Count <> Me.chlstMarketers.CheckedItems.Count Then  ''If all items are checked in list checkbox and were not working with a filtered down marketer list then no need to query by marketer at all
+            End If
+
+
+            Dim Fby As Integer = 0
+            If Me.dpGenerated.Value.ToShortDateString <> "1/1/1900" Then
+                DateQuery = "LeadGeneratedOn >= '" & Me.dpGenerated.Value.ToString & "'"
+                Fby += 1
+            End If
+            If Me.dpFrom.Value.ToShortDateString <> "1/1/1900" Then
+                If DateQuery <> "" Then
+                    DateQuery = DateQuery & " and "
+                End If
+                DateQuery = DateQuery & "ApptDate Between '" & Me.dpFrom.Value.ToString & "' and '" & Me.dpTo.Value.ToString & "'"
+                Fby += 1
+            End If
+            If Me.tpFrom.Value.ToShortTimeString <> "12:00 AM" Then
+                If DateQuery <> "" Then
+                    DateQuery = DateQuery & " and "
+                End If
+                DateQuery = DateQuery & "ApptTime Between '" & Me.tpFrom.Value.ToString & "' And '" & Me.tpTo.Value.ToString & "'"
+                Fby += 1
+            End If
+            If Me.chWeekdays.Checked = True Then
+                If DateQuery <> "" Then
+                    DateQuery = DateQuery & " and "
+                End If
+                DateQuery = DateQuery & "ApptDay <> 'Saturday' and ApptDay <> 'Sunday'"
+                Fby += 1
+            End If
+            ''Marketer Tab 
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet As SqlCommand
+            Dim r1 As SqlDataReader
+            cmdGet = New SqlCommand("Select Count(distinct(marketer)) from EnterLead", cnn)
+
+
+            cmdGet.CommandType = CommandType.Text
+            cnn.Open()
+            r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+            r1.Read()
+            If r1.Item(0) > Me.chlstMarketers.Items.Count Then    '' If true were working with a filtered down set of Marketers 
                 If MarkProdGeo <> "" Then
                     MarkProdGeo = MarkProdGeo & " and "
                 End If
@@ -760,349 +750,372 @@ Public Class frmCreateList
                     End If
                     If x <> Me.chlstMarketers.CheckedItems.Count - 1 Then
 
-                        MarkProdGeo = MarkProdGeo & "Marketer = '" & Me.chlstMarketers.CheckedItems(x).ToString & "' or "    ''Add Comma after each item until last item 
+                        MarkProdGeo = MarkProdGeo & "Marketer = '" & Me.chlstMarketers.CheckedItems(x).ToString & "' and "    ''Add Comma after each item until last item 
                         Fby += 1
                     Else
                         MarkProdGeo = MarkProdGeo & "Marketer = '" & Me.chlstMarketers.CheckedItems(x).ToString & "')"       ''Last Item Dont Add comma to end of where 
                         Fby += 1
                     End If
                 Next
-            End If
-        End If
-
-        ''Products
-        If Me.chlstProducts.Items.Count <> Me.chlstProducts.CheckedItems.Count Then ''If true filter by checked products, if false no need to filter products (skip to next step)
-            If MarkProdGeo <> "" Then
-                MarkProdGeo = MarkProdGeo & " and "
-            End If
-            For x As Integer = 0 To Me.chlstProducts.CheckedItems.Count - 1
-                If x = 0 Then
-                    MarkProdGeo = MarkProdGeo & "("
-                End If
-                If x <> Me.chlstProducts.CheckedItems.Count - 1 Then
-
-                    MarkProdGeo = MarkProdGeo & "(" & "Enterlead.Product1 = '" & Me.chlstProducts.CheckedItems(x).ToString & "' or Enterlead.Product2 = '" & Me.chlstProducts.CheckedItems(x).ToString & "' or Enterlead.Product3 = '" & Me.chlstProducts.CheckedItems(x).ToString & "') or "    ''Add Comma after each item until last item 
-                    Fby += 1
-                Else
-                    MarkProdGeo = MarkProdGeo & "(" & "Enterlead.Product1 = '" & Me.chlstProducts.CheckedItems(x).ToString & "' or Enterlead.Product2 = '" & Me.chlstProducts.CheckedItems(x).ToString & "' or Enterlead.Product3 = '" & Me.chlstProducts.CheckedItems(x).ToString & "'))"       ''Last Item Dont Add comma to end of where 
-                    Fby += 1
-                End If
-            Next
-        End If
-
-        ''Geo Tab 
-        If Me.chlstZipCity.CheckedItems.Count > 0 Then
-            If MarkProdGeo <> "" Then
-                MarkProdGeo = MarkProdGeo & " and "
-            End If
-            Dim CorZ As String = ""
-            If Me.rdoZip.Checked = True Then
-                CorZ = "Zip"
             Else
-                CorZ = "City"
-            End If
-            For x As Integer = 0 To Me.chlstZipCity.CheckedItems.Count - 1
-                If x = 0 Then
-                    MarkProdGeo = MarkProdGeo & "("
+                If Me.chlstMarketers.Items.Count <> Me.chlstMarketers.CheckedItems.Count Then  ''If all items are checked in list checkbox and were not working with a filtered down marketer list then no need to query by marketer at all
+                    If MarkProdGeo <> "" Then
+                        MarkProdGeo = MarkProdGeo & " and "
+                    End If
+                    For x As Integer = 0 To Me.chlstMarketers.CheckedItems.Count - 1
+                        If x = 0 Then
+                            MarkProdGeo = MarkProdGeo & "("
+                        End If
+                        If x <> Me.chlstMarketers.CheckedItems.Count - 1 Then
+
+                            MarkProdGeo = MarkProdGeo & "Marketer = '" & Me.chlstMarketers.CheckedItems(x).ToString & "' or "    ''Add Comma after each item until last item 
+                            Fby += 1
+                        Else
+                            MarkProdGeo = MarkProdGeo & "Marketer = '" & Me.chlstMarketers.CheckedItems(x).ToString & "')"       ''Last Item Dont Add comma to end of where 
+                            Fby += 1
+                        End If
+                    Next
                 End If
-                If x <> Me.chlstZipCity.CheckedItems.Count - 1 Then
-
-                    MarkProdGeo = MarkProdGeo & CorZ & " = '" & Me.chlstZipCity.CheckedItems(x).ToString & "' or "    ''Add Comma after each item until last item 
-                    Fby += 1
-                Else
-                    MarkProdGeo = MarkProdGeo & CorZ & " = '" & Me.chlstZipCity.CheckedItems(x).ToString & "')"       ''Last Item Dont Add comma to end of where 
-                    Fby += 1
-                End If
-            Next
-        End If
-
-        '' Warm Calling Tab 
-
-        If Me.chkWC.Checked = True Then
-            If WCQuery <> "" Then
-                WCQuery = WCQuery & " and "
-            End If
-            For x As Integer = 0 To Me.chlstWC.CheckedItems.Count - 1
-                If x = 0 Then
-                    WCQuery = WCQuery & "("
-                End If
-                Dim Field As String = ""
-                If Me.chlstWC.CheckedItems(x) = "Reset" Or Me.chlstWC.CheckedItems(x) = "Not Hit" Or Me.chlstWC.CheckedItems(x) = "Not Issued" Then
-                    Field = "Result"
-                Else
-                    Field = "MarketingResults"
-                End If
-                If x <> Me.chlstWC.CheckedItems.Count - 1 Then
-
-                    WCQuery = WCQuery & "(" & Field & " = '" & Me.chlstWC.CheckedItems(x).ToString & "' and isRecovery = 'False' and isPreviousCustomer = 'False') or "    ''Add Comma after each item until last item 
-                    Fby += 1
-                Else
-                    WCQuery = WCQuery & "(" & Field & " = '" & Me.chlstWC.CheckedItems(x).ToString & "' and isRecovery = 'False' and isPreviousCustomer = 'False'))"       ''Last Item Dont Add comma to end of where 
-                    Fby += 1
-                End If
-            Next
-        End If
-
-        '' Recovery
-        If Me.chRehash.Checked = True Then
-            Dim Per As Double = 0
-            If Me.numPar.Value = 0 Then
-                Per = 100
-
-            End If
-            Per = Me.numPar.Value / 100
-            Per = 1 - Per
-            Dim Q As Integer = 0
-            If Me.txtQuoted.Text <> "" Then
-                Q = CType(Me.txtQuoted.Text, Integer)
             End If
 
-            For x As Integer = 0 To Me.chlstRehash.CheckedItems.Count - 1
-                If x = 0 Then
-                    Rehash = Rehash & "("
-                End If
-                Dim Field As String = ""
-                If Me.chlstRehash.CheckedItems(x) = "Reset" Or Me.chlstRehash.CheckedItems(x) = "Not Hit" Or Me.chlstRehash.CheckedItems(x) = "Not Issued" Or Me.chlstRehash.CheckedItems(x) = "Demo/No Sale" Or Me.chlstRehash.CheckedItems(x) = "Recission Cancel" Then
-                    Field = "Result"
-                Else
-                    Field = "MarketingResults"
-                End If
-                If x <> Me.chlstRehash.CheckedItems.Count - 1 Then
-
-                    Rehash = Rehash & "(" & Field & " = '" & Me.chlstRehash.CheckedItems(x).ToString & "' and isRecovery = 'True' and isPreviousCustomer = 'False' and (QuotedSold *" & Per & ") >= ParPrice and QuotedSold >= " & Q & " ) or "    ''Add Comma after each item until last item 
-                    Fby += 1
-                Else
-                    Rehash = Rehash & "(" & Field & " = '" & Me.chlstRehash.CheckedItems(x).ToString & "' and isRecovery = 'True' and isPreviousCustomer = 'False' and (QuotedSold *" & Per & ") >= ParPrice and QuotedSold >= " & Q & "))"       ''Last Item Dont Add comma to end of where 
-                    Fby += 1
-                End If
-            Next
-
-
-
-
-        End If
-
-        ''Reconstruct Where Statement 
-        If WCQuery <> "" Then ''Constructs Query For Warm Calling 
-            If DateQuery <> "" And MarkProdGeo <> "" Then
-                Where = "(" & DateQuery & " and " & MarkProdGeo & " and " & WCQuery & ")"
-            ElseIf DateQuery <> "" And MarkProdGeo = "" Then
-                Where = "(" & DateQuery & " and " & WCQuery & ")"
-            ElseIf DateQuery = "" And MarkProdGeo <> "" Then
-                Where = "(" & MarkProdGeo & " and " & WCQuery & ")"
-            ElseIf DateQuery = "" And MarkProdGeo = "" Then
-                Where = WCQuery
-            End If
-        End If
-
-        If Where <> "" And Rehash <> "" Then
-            Where = Where & " or "
-        End If
-
-        If Rehash <> "" Then ''Constructs Query For Rehash 
-            If DateQuery <> "" And MarkProdGeo <> "" Then
-                Where = Where & "(" & DateQuery & " and " & MarkProdGeo & " and " & Rehash & ")"
-            ElseIf DateQuery <> "" And MarkProdGeo = "" Then
-                Where = Where & "(" & DateQuery & " and " & Rehash & ")"
-            ElseIf DateQuery = "" And MarkProdGeo <> "" Then
-                Where = Where & "(" & MarkProdGeo & " and " & Rehash & ")"
-            ElseIf DateQuery = "" And MarkProdGeo = "" Then
-                Where = Where & Rehash
-            End If
-        End If
-
-        If Me.chPC.Checked = True Then ''Build PC Query Here 
-
-            If Me.chFutureInterest.Checked = True Then
-                PCQuery = PCQuery & "(Enterlead.Product1 <> '' and Enterlead.Product2 <> '' and Enterlead.Product3 <> '')"
-            End If
-
-            If Me.rdoCash.Checked = True Then
-                If PCQuery <> "" Then
-                    PCQuery = PCQuery & " and "
-                End If
-                PCQuery = PCQuery & "Enterlead.Cash = 'True'"
-            End If
-
-            If Me.rdoLoan.Checked = True Then
-                If PCQuery <> "" Then
-                    PCQuery = PCQuery & " and "
-                End If
-                PCQuery = PCQuery & "Enterlead.Finance = 'True'"
-            End If
-
-            If Me.chApprovedFor.Checked = True Then
-                If PCQuery <> "" Then
-                    PCQuery = PCQuery & " and "
-                End If
-                PCQuery = PCQuery & "ApprovedFor >= " & CType(Me.txtApprovedDollars.Text, Integer)
-            End If
-
-            If Me.chLoanSatisfied.Checked = True Then
-                If PCQuery <> "" Then
-                    PCQuery = PCQuery & " and "
-                End If
-                Dim Dt As Date = Today
-                Dt = Dt.Month & "/1/" & Dt.Year
-                If Me.numMonths.Value > 0 Then
-                    Dt = Dt.AddMonths(Me.numMonths.Value)
-                End If
-                PCQuery = PCQuery & "ExpectedPayOff <= '" & Dt.ToShortDateString & "'"
-            End If
-
-            If Me.numReferences.Value > 0 Then
-                If PCQuery <> "" Then
-                    PCQuery = PCQuery & " and "
-                End If
-                PCQuery = PCQuery & "ReferenceRating >= " & Me.numReferences.Value
-            End If
-
-            If Me.dpDate1PC.Value.ToShortDateString <> "1/1/1900" Then
-                If PCQuery <> "" Then
-                    PCQuery = PCQuery & " and "
-                End If
-                PCQuery = PCQuery & "JobClosed Between '" & Me.dpDate1PC.Value.ToShortDateString & "' and '" & Me.dpDate2PC.Value.ToShortDateString & "'"
-            End If
-
-            If PCQuery <> "" Then
-                PCQuery = PCQuery & " and isPreviousCustomer = 'True'"
-            End If
-
-        End If
-
-
-
-
-        If PCQuery <> "" And (WCQuery <> "" Or Rehash <> "") Then
-            Where = Where & " or "
-        End If
-
-        If Me.chPC.Checked = True Then
-
-
-            If PCQuery <> "" Then ''Constructs Query For PC's 
+            ''Products
+            If Me.chlstProducts.Items.Count <> Me.chlstProducts.CheckedItems.Count Then ''If true filter by checked products, if false no need to filter products (skip to next step)
                 If MarkProdGeo <> "" Then
-                    Where = Where & "(" & MarkProdGeo & " and " & PCQuery & ")"
-                Else
-                    Where = Where & PCQuery
+                    MarkProdGeo = MarkProdGeo & " and "
                 End If
-            Else
-                If MarkProdGeo <> "" And Me.chPC.Checked = True Then
-                    Where = Where & "(" & MarkProdGeo & " and " & "isPreviousCustomer = 'True')"
-                Else
-                    If Where = "" Then
-                        Where = "isPreviousCustomer = 'True'"
+                For x As Integer = 0 To Me.chlstProducts.CheckedItems.Count - 1
+                    If x = 0 Then
+                        MarkProdGeo = MarkProdGeo & "("
+                    End If
+                    If x <> Me.chlstProducts.CheckedItems.Count - 1 Then
+
+                        MarkProdGeo = MarkProdGeo & "(" & "Enterlead.Product1 = '" & Me.chlstProducts.CheckedItems(x).ToString & "' or Enterlead.Product2 = '" & Me.chlstProducts.CheckedItems(x).ToString & "' or Enterlead.Product3 = '" & Me.chlstProducts.CheckedItems(x).ToString & "') or "    ''Add Comma after each item until last item 
+                        Fby += 1
                     Else
-                        If PCQuery = "" Then
-                            Where = Where & " or isPreviousCustomer = 'True'"
+                        MarkProdGeo = MarkProdGeo & "(" & "Enterlead.Product1 = '" & Me.chlstProducts.CheckedItems(x).ToString & "' or Enterlead.Product2 = '" & Me.chlstProducts.CheckedItems(x).ToString & "' or Enterlead.Product3 = '" & Me.chlstProducts.CheckedItems(x).ToString & "'))"       ''Last Item Dont Add comma to end of where 
+                        Fby += 1
+                    End If
+                Next
+            End If
+
+            ''Geo Tab 
+            If Me.chlstZipCity.CheckedItems.Count > 0 Then
+                If MarkProdGeo <> "" Then
+                    MarkProdGeo = MarkProdGeo & " and "
+                End If
+                Dim CorZ As String = ""
+                If Me.rdoZip.Checked = True Then
+                    CorZ = "Zip"
+                Else
+                    CorZ = "City"
+                End If
+                For x As Integer = 0 To Me.chlstZipCity.CheckedItems.Count - 1
+                    If x = 0 Then
+                        MarkProdGeo = MarkProdGeo & "("
+                    End If
+                    If x <> Me.chlstZipCity.CheckedItems.Count - 1 Then
+
+                        MarkProdGeo = MarkProdGeo & CorZ & " = '" & Me.chlstZipCity.CheckedItems(x).ToString & "' or "    ''Add Comma after each item until last item 
+                        Fby += 1
+                    Else
+                        MarkProdGeo = MarkProdGeo & CorZ & " = '" & Me.chlstZipCity.CheckedItems(x).ToString & "')"       ''Last Item Dont Add comma to end of where 
+                        Fby += 1
+                    End If
+                Next
+            End If
+
+            '' Warm Calling Tab 
+
+            If Me.chkWC.Checked = True Then
+                If WCQuery <> "" Then
+                    WCQuery = WCQuery & " and "
+                End If
+                For x As Integer = 0 To Me.chlstWC.CheckedItems.Count - 1
+                    If x = 0 Then
+                        WCQuery = WCQuery & "("
+                    End If
+                    Dim Field As String = ""
+                    If Me.chlstWC.CheckedItems(x) = "Reset" Or Me.chlstWC.CheckedItems(x) = "Not Hit" Or Me.chlstWC.CheckedItems(x) = "Not Issued" Then
+                        Field = "Result"
+                    Else
+                        Field = "MarketingResults"
+                    End If
+                    If x <> Me.chlstWC.CheckedItems.Count - 1 Then
+
+                        WCQuery = WCQuery & "(" & Field & " = '" & Me.chlstWC.CheckedItems(x).ToString & "' and isRecovery = 'False' and isPreviousCustomer = 'False') or "    ''Add Comma after each item until last item 
+                        Fby += 1
+                    Else
+                        WCQuery = WCQuery & "(" & Field & " = '" & Me.chlstWC.CheckedItems(x).ToString & "' and isRecovery = 'False' and isPreviousCustomer = 'False'))"       ''Last Item Dont Add comma to end of where 
+                        Fby += 1
+                    End If
+                Next
+            End If
+
+            '' Recovery
+            If Me.chRehash.Checked = True Then
+                Dim Per As Double = 0
+                If Me.numPar.Value = 0 Then
+                    Per = 100
+
+                End If
+                Per = Me.numPar.Value / 100
+                Per = 1 - Per
+                Dim Q As Integer = 0
+                If Me.txtQuoted.Text <> "" Then
+                    Q = CType(Me.txtQuoted.Text, Integer)
+                End If
+
+                For x As Integer = 0 To Me.chlstRehash.CheckedItems.Count - 1
+                    If x = 0 Then
+                        Rehash = Rehash & "("
+                    End If
+                    Dim Field As String = ""
+                    If Me.chlstRehash.CheckedItems(x) = "Reset" Or Me.chlstRehash.CheckedItems(x) = "Not Hit" Or Me.chlstRehash.CheckedItems(x) = "Not Issued" Or Me.chlstRehash.CheckedItems(x) = "Demo/No Sale" Or Me.chlstRehash.CheckedItems(x) = "Recission Cancel" Then
+                        Field = "Result"
+                    Else
+                        Field = "MarketingResults"
+                    End If
+                    If x <> Me.chlstRehash.CheckedItems.Count - 1 Then
+
+                        Rehash = Rehash & "(" & Field & " = '" & Me.chlstRehash.CheckedItems(x).ToString & "' and isRecovery = 'True' and isPreviousCustomer = 'False' and (QuotedSold *" & Per & ") >= ParPrice and QuotedSold >= " & Q & " ) or "    ''Add Comma after each item until last item 
+                        Fby += 1
+                    Else
+                        Rehash = Rehash & "(" & Field & " = '" & Me.chlstRehash.CheckedItems(x).ToString & "' and isRecovery = 'True' and isPreviousCustomer = 'False' and (QuotedSold *" & Per & ") >= ParPrice and QuotedSold >= " & Q & "))"       ''Last Item Dont Add comma to end of where 
+                        Fby += 1
+                    End If
+                Next
+
+
+
+
+            End If
+
+            ''Reconstruct Where Statement 
+            If WCQuery <> "" Then ''Constructs Query For Warm Calling 
+                If DateQuery <> "" And MarkProdGeo <> "" Then
+                    Where = "(" & DateQuery & " and " & MarkProdGeo & " and " & WCQuery & ")"
+                ElseIf DateQuery <> "" And MarkProdGeo = "" Then
+                    Where = "(" & DateQuery & " and " & WCQuery & ")"
+                ElseIf DateQuery = "" And MarkProdGeo <> "" Then
+                    Where = "(" & MarkProdGeo & " and " & WCQuery & ")"
+                ElseIf DateQuery = "" And MarkProdGeo = "" Then
+                    Where = WCQuery
+                End If
+            End If
+
+            If Where <> "" And Rehash <> "" Then
+                Where = Where & " or "
+            End If
+
+            If Rehash <> "" Then ''Constructs Query For Rehash 
+                If DateQuery <> "" And MarkProdGeo <> "" Then
+                    Where = Where & "(" & DateQuery & " and " & MarkProdGeo & " and " & Rehash & ")"
+                ElseIf DateQuery <> "" And MarkProdGeo = "" Then
+                    Where = Where & "(" & DateQuery & " and " & Rehash & ")"
+                ElseIf DateQuery = "" And MarkProdGeo <> "" Then
+                    Where = Where & "(" & MarkProdGeo & " and " & Rehash & ")"
+                ElseIf DateQuery = "" And MarkProdGeo = "" Then
+                    Where = Where & Rehash
+                End If
+            End If
+
+            If Me.chPC.Checked = True Then ''Build PC Query Here 
+
+                If Me.chFutureInterest.Checked = True Then
+                    PCQuery = PCQuery & "(Enterlead.Product1 <> '' and Enterlead.Product2 <> '' and Enterlead.Product3 <> '')"
+                End If
+
+                If Me.rdoCash.Checked = True Then
+                    If PCQuery <> "" Then
+                        PCQuery = PCQuery & " and "
+                    End If
+                    PCQuery = PCQuery & "Enterlead.Cash = 'True'"
+                End If
+
+                If Me.rdoLoan.Checked = True Then
+                    If PCQuery <> "" Then
+                        PCQuery = PCQuery & " and "
+                    End If
+                    PCQuery = PCQuery & "Enterlead.Finance = 'True'"
+                End If
+
+                If Me.chApprovedFor.Checked = True Then
+                    If PCQuery <> "" Then
+                        PCQuery = PCQuery & " and "
+                    End If
+                    PCQuery = PCQuery & "ApprovedFor >= " & CType(Me.txtApprovedDollars.Text, Integer)
+                End If
+
+                If Me.chLoanSatisfied.Checked = True Then
+                    If PCQuery <> "" Then
+                        PCQuery = PCQuery & " and "
+                    End If
+                    Dim Dt As Date = Today
+                    Dt = Dt.Month & "/1/" & Dt.Year
+                    If Me.numMonths.Value > 0 Then
+                        Dt = Dt.AddMonths(Me.numMonths.Value)
+                    End If
+                    PCQuery = PCQuery & "ExpectedPayOff <= '" & Dt.ToShortDateString & "'"
+                End If
+
+                If Me.numReferences.Value > 0 Then
+                    If PCQuery <> "" Then
+                        PCQuery = PCQuery & " and "
+                    End If
+                    PCQuery = PCQuery & "ReferenceRating >= " & Me.numReferences.Value
+                End If
+
+                If Me.dpDate1PC.Value.ToShortDateString <> "1/1/1900" Then
+                    If PCQuery <> "" Then
+                        PCQuery = PCQuery & " and "
+                    End If
+                    PCQuery = PCQuery & "JobClosed Between '" & Me.dpDate1PC.Value.ToShortDateString & "' and '" & Me.dpDate2PC.Value.ToShortDateString & "'"
+                End If
+
+                If PCQuery <> "" Then
+                    PCQuery = PCQuery & " and isPreviousCustomer = 'True'"
+                End If
+
+            End If
+
+
+
+
+            If PCQuery <> "" And (WCQuery <> "" Or Rehash <> "") Then
+                Where = Where & " or "
+            End If
+
+            If Me.chPC.Checked = True Then
+
+
+                If PCQuery <> "" Then ''Constructs Query For PC's 
+                    If MarkProdGeo <> "" Then
+                        Where = Where & "(" & MarkProdGeo & " and " & PCQuery & ")"
+                    Else
+                        Where = Where & PCQuery
+                    End If
+                Else
+                    If MarkProdGeo <> "" And Me.chPC.Checked = True Then
+                        Where = Where & "(" & MarkProdGeo & " and " & "isPreviousCustomer = 'True')"
+                    Else
+                        If Where = "" Then
+                            Where = "isPreviousCustomer = 'True'"
+                        Else
+                            If PCQuery = "" Then
+                                Where = Where & " or isPreviousCustomer = 'True'"
+                            End If
                         End If
                     End If
                 End If
             End If
-        End If
 
-        If Where <> "" Then
-            Where = " Where " & Where
-        End If
-        If Me.chkWC.Checked = False And Me.chRehash.Checked = False And Me.chPC.Checked = False Then
-            MsgBox("You Must Check At Least One Type Of Lead To Generate List!", MsgBoxStyle.Exclamation, "No Lead Types Checked")
-            Exit Sub
-        End If
-        Slct = Slct & Where
-        ''Add Order by Here
-        If Me.chGroupBy.Checked = True Then
-            Orderby = "ispreviouscustomer asc, isrecovery asc, "
-        End If
-        For x As Integer = 0 To Me.chlstOrderBy.CheckedItems.Count - 1
-            Select Case Me.chlstOrderBy.CheckedItems(x).ToString
-                Case Is = "City, State"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "City asc"
-                    Else
-                        Orderby = Orderby & "City asc, "
-                    End If
-                Case Is = "Zip Code"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "Zip desc"
-                    Else
-                        Orderby = Orderby & "Zip desc, "
-                    End If
-                Case Is = "Generated On"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "LeadGeneratedOn desc"
-                    Else
-                        Orderby = Orderby & "LeadGeneratedOn desc, "
-                    End If
-                Case Is = "Appointment Date"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "ApptDate desc"
-                    Else
-                        Orderby = Orderby & "ApptDate desc, "
-                    End If
-                Case Is = "Appointment Time"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "ApptTime desc"
-                    Else
-                        Orderby = Orderby & "ApptTime desc, "
-                    End If
-                Case Is = "Products"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "Enterlead.Product1 asc"
-                    Else
-                        Orderby = Orderby & "EnterLead.Product1 asc, "
-                    End If
-                Case Is = "Reference Rating"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "ReferenceRating desc"
-                    Else
-                        Orderby = Orderby & "ReferenceRating desc, "
-                    End If
-                Case Is = "Cash"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "Enterlead.Cash desc"
-                    Else
-                        Orderby = Orderby & "EnterLead.Cash desc, "
-                    End If
-                Case Is = "Finance"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "Enterlead.Finance desc"
-                    Else
-                        Orderby = Orderby & "EnterLead.Finance desc, "
-                    End If
-                Case Is = "Sale Closed Date"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "JobClosed desc"
-                    Else
-                        Orderby = Orderby & "JobClosed desc, "
-                    End If
-                Case Is = "Loan Satisfied Date"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "ExpectedPayOff desc"
-                    Else
-                        Orderby = Orderby & "ExpectedPayOff desc, "
-                    End If
-                Case Is = "Approved Loan Amount"
-                    If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
-                        Orderby = Orderby & "ApprovedFor desc"
-                    Else
-                        Orderby = Orderby & "ApprovedFor desc, "
-                    End If
-            End Select
-        Next
-        If Orderby <> "" Then
-            Orderby = " Order By " & Orderby
-            Slct = Slct & Orderby
-        End If
+            If Where <> "" Then
+                Where = " Where " & Where
+            End If
+            If Me.chkWC.Checked = False And Me.chRehash.Checked = False And Me.chPC.Checked = False Then
+                MsgBox("You Must Check At Least One Type Of Lead To Generate List!", MsgBoxStyle.Exclamation, "No Lead Types Checked")
+                Exit Sub
+            End If
+            Slct = Slct & Where
+            ''Add Order by Here
+            If Me.chGroupBy.Checked = True Then
+                Orderby = "ispreviouscustomer asc, isrecovery asc, "
+            End If
+            For x As Integer = 0 To Me.chlstOrderBy.CheckedItems.Count - 1
+                Select Case Me.chlstOrderBy.CheckedItems(x).ToString
+                    Case Is = "City, State"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "City asc"
+                        Else
+                            Orderby = Orderby & "City asc, "
+                        End If
+                    Case Is = "Zip Code"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "Zip desc"
+                        Else
+                            Orderby = Orderby & "Zip desc, "
+                        End If
+                    Case Is = "Generated On"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "LeadGeneratedOn desc"
+                        Else
+                            Orderby = Orderby & "LeadGeneratedOn desc, "
+                        End If
+                    Case Is = "Appointment Date"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "ApptDate desc"
+                        Else
+                            Orderby = Orderby & "ApptDate desc, "
+                        End If
+                    Case Is = "Appointment Time"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "ApptTime desc"
+                        Else
+                            Orderby = Orderby & "ApptTime desc, "
+                        End If
+                    Case Is = "Products"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "Enterlead.Product1 asc"
+                        Else
+                            Orderby = Orderby & "EnterLead.Product1 asc, "
+                        End If
+                    Case Is = "Reference Rating"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "ReferenceRating desc"
+                        Else
+                            Orderby = Orderby & "ReferenceRating desc, "
+                        End If
+                    Case Is = "Cash"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "Enterlead.Cash desc"
+                        Else
+                            Orderby = Orderby & "EnterLead.Cash desc, "
+                        End If
+                    Case Is = "Finance"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "Enterlead.Finance desc"
+                        Else
+                            Orderby = Orderby & "EnterLead.Finance desc, "
+                        End If
+                    Case Is = "Sale Closed Date"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "JobClosed desc"
+                        Else
+                            Orderby = Orderby & "JobClosed desc, "
+                        End If
+                    Case Is = "Loan Satisfied Date"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "ExpectedPayOff desc"
+                        Else
+                            Orderby = Orderby & "ExpectedPayOff desc, "
+                        End If
+                    Case Is = "Approved Loan Amount"
+                        If x = Me.chlstOrderBy.CheckedItems.Count - 1 Then
+                            Orderby = Orderby & "ApprovedFor desc"
+                        Else
+                            Orderby = Orderby & "ApprovedFor desc, "
+                        End If
+                End Select
+            Next
+            If Orderby <> "" Then
+                Orderby = " Order By " & Orderby
+                Slct = Slct & Orderby
+            End If
 
 
-        Me.RichTextBox1.Text = Slct
+            Me.RichTextBox1.Text = Slct
 
-        '''Done Now Must Debug the shit out of Select Statement 
-        '''Also need to Add Order By Statements to end 
-        ''' 
+            '''Done Now Must Debug the shit out of Select Statement 
+            '''Also need to Add Order By Statements to end 
+            ''' 
 
-        Dim cl As New createListPrintOperations
-        cl.CreateWireFrameHTML(Slct)
+            Dim cl As New createListPrintOperations
+            cl.CreateWireFrameHTML(Slct)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmCreateList", "FormCode", "Sub", "btnGenerate_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -1161,25 +1174,33 @@ Public Class frmCreateList
 
 
     Private Sub tabDate_Leave(sender As Object, e As EventArgs) Handles tabDate.Leave
-        Me.chlstMarketers.Items.Clear()
-        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet As SqlCommand
-        Dim r1 As SqlDataReader
-        If Me.chWeekdays.Checked = True Then
-            cmdGet = New SqlCommand("Select Distinct(Marketer) from enterlead where ApptDate Between '" & Me.dpFrom.Value.ToString & "' and '" & Me.dpTo.Value.ToString & "' and ApptTime Between '" & Me.tpFrom.Value.ToString & "' and '" & Me.tpTo.Value.ToString & "' and LeadGeneratedOn >= '" & Me.dpGenerated.Value.ToString & "' and (ApptDay <> 'Saturday' and ApptDay <> 'Sunday')", cnn)
-        Else
-            cmdGet = New SqlCommand("Select Distinct(Marketer) from enterlead where ApptDate Between '" & Me.dpFrom.Value.ToString & "' and '" & Me.dpTo.Value.ToString & "' and ApptTime Between '" & Me.tpFrom.Value.ToString & "' and '" & Me.tpTo.Value.ToString & "' and LeadGeneratedOn >= '" & Me.dpGenerated.Value.ToString & "'", cnn)
-        End If
+        Try
+            Me.chlstMarketers.Items.Clear()
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet As SqlCommand
+            Dim r1 As SqlDataReader
+            If Me.chWeekdays.Checked = True Then
+                cmdGet = New SqlCommand("Select Distinct(Marketer) from enterlead where ApptDate Between '" & Me.dpFrom.Value.ToString & "' and '" & Me.dpTo.Value.ToString & "' and ApptTime Between '" & Me.tpFrom.Value.ToString & "' and '" & Me.tpTo.Value.ToString & "' and LeadGeneratedOn >= '" & Me.dpGenerated.Value.ToString & "' and (ApptDay <> 'Saturday' and ApptDay <> 'Sunday')", cnn)
+            Else
+                cmdGet = New SqlCommand("Select Distinct(Marketer) from enterlead where ApptDate Between '" & Me.dpFrom.Value.ToString & "' and '" & Me.dpTo.Value.ToString & "' and ApptTime Between '" & Me.tpFrom.Value.ToString & "' and '" & Me.tpTo.Value.ToString & "' and LeadGeneratedOn >= '" & Me.dpGenerated.Value.ToString & "'", cnn)
+            End If
 
-        cmdGet.CommandType = CommandType.Text
-        cnn.Open()
-        r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-        While r1.Read()
-            Me.chlstMarketers.Items.Add(r1.Item(0))
-        End While
-        For x As Integer = 0 To Me.chlstMarketers.Items.Count - 1
-            Me.chlstMarketers.SetItemChecked(x, True)
-        Next
+            cmdGet.CommandType = CommandType.Text
+            cnn.Open()
+            r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+            While r1.Read()
+                Me.chlstMarketers.Items.Add(r1.Item(0))
+            End While
+            For x As Integer = 0 To Me.chlstMarketers.Items.Count - 1
+                Me.chlstMarketers.SetItemChecked(x, True)
+            Next
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "tabDate_Leave", "FormCode", "sub", "tabDate_Leave", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub checkMarketers_Click(sender As Object, e As EventArgs) Handles checkMarketers.Click

@@ -58,9 +58,12 @@ Public Class Attach2
                     r2.Close()
                     cnn.Close()
                 Catch ex As Exception
-                    Dim errp As New ErrorLogFlatFile
-                    errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
+                    'Dim errp As New ErrorLogFlatFile
+                    'errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
+                    Dim y As New ErrorLogging_V2
+                    y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach2", "Attach2", "Sub", "AttachFile(id,hash)", ID, ex.Message.ToString)
                     'MsgBox(ex.Message.ToString)
+                    y = Nothing
                 End Try
 
                 Dim x
@@ -73,8 +76,10 @@ Public Class Attach2
                 Try
                     System.IO.File.Move(d, "\\SERVER\Company\Computer Management\ISS\Attach Files\" + ID.ToString & "\" & z.ToString)
                 Catch ex As Exception
-                    Dim errp As New ErrorLogFlatFile
-                    errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
+                    'Dim errp As New ErrorLogFlatFile
+                    'errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
+                    Dim y As New ErrorLogging_V2
+                    y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach2", "Attach2", "Sub", "AttachFile(id,hash)", ID, ex.Message.ToString)
                 End Try
                 'Dim b As New GetIcons(d.ToString)
                 Dim k As Integer = InStr(z, ".")
@@ -91,13 +96,19 @@ Public Class Attach2
                 AttachAFile.txtLeadNumber.Text = ""
                 AttachAFile.Close()
             Catch ex As Exception
-                Dim errp As New ErrorLogFlatFile
-                errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
+                'Dim errp As New ErrorLogFlatFile
+                'errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
                 'MsgBox(ex.Message.ToString)
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach2", "Attach2", "Sub", "AttachFile(id,hash)", ID, ex.Message.ToString)
+                y = Nothing
             End Try
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "AttachFile")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "AttachFile")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach2", "Attach2", "Sub", "AttachFile(id,hash)", ID, ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -177,8 +188,11 @@ Public Class Attach2
             System.Diagnostics.Process.Start(loc.ToString)
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("Attach", "UserName as string, byval HASH as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "OpenFile")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("Attach", "UserName as string, byval HASH as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "OpenFile")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach2", "Attach2", "Sub", "OpenFile(file,id)", id, ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub

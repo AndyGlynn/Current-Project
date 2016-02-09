@@ -10,8 +10,15 @@ Public Class frmEditSpecialInstructions
         Me.MdiParent = Main
         Me.BringToFront()
         If RecID <> "" Then
-            Dim y As New GetSpecialInstructions(RecID)
-            Me.rtfSpecialInstructions.Text = y.SpecialInstructions
+            Try
+                Dim y As New GetSpecialInstructions(RecID)
+                Me.rtfSpecialInstructions.Text = y.SpecialInstructions
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEditSpecialInstructions", "FormCode", "Event", "frmEditSpecialInstructions_Load", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End If
     End Sub
 
@@ -38,14 +45,21 @@ Public Class frmEditSpecialInstructions
         End Sub
 
         Private Function Get_SPI(ByVal RecID As String)
-            Dim cnx As New SqlConnection(pro_cnx)
-            Dim retSTR As String = ""
-            cnx.Open()
-            Dim cmdGET As New SqlCommand("SELECT SpecialInstruction FROM EnterLead WHERE ID = '" & RecID & "';", cnx)
-            retSTR = cmdGET.ExecuteScalar
-            cnx.Close()
-            cnx = Nothing
-            Return retSTR
+            Try
+                Dim cnx As New SqlConnection(pro_cnx)
+                Dim retSTR As String = ""
+                cnx.Open()
+                Dim cmdGET As New SqlCommand("SELECT SpecialInstruction FROM EnterLead WHERE ID = '" & RecID & "';", cnx)
+                retSTR = cmdGET.ExecuteScalar
+                cnx.Close()
+                cnx = Nothing
+                Return retSTR
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEditSpecialInstructions.GetSpecialInstructions", "FormCode-Private Class", "Function", "Get_SPI(recID)", RecID, ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End Function
     End Class
 
@@ -57,12 +71,19 @@ Public Class frmEditSpecialInstructions
         End Sub
 
         Private Sub UpdateSPI(ByVal RecID As String, ByVal SPI As String)
-            Dim cnx As New SqlConnection(pro_cnx)
-            cnx.Open()
-            Dim cmdGET As New SqlCommand("UPDATE EnterLead SET SpecialInstruction = '" & SPI & "' WHERE ID = '" & RecID & "';", cnx)
-            cmdGET.ExecuteReader()
-            cnx.Close()
-            cnx = Nothing
+            Try
+                Dim cnx As New SqlConnection(pro_cnx)
+                cnx.Open()
+                Dim cmdGET As New SqlCommand("UPDATE EnterLead SET SpecialInstruction = '" & SPI & "' WHERE ID = '" & RecID & "';", cnx)
+                cmdGET.ExecuteReader()
+                cnx.Close()
+                cnx = Nothing
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEditSpecialInstructions.UpdateSpecialInstructions", "FormCode-Private Class", "Function", "Update_SPI(recID)", RecID, ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End Sub
 
     End Class

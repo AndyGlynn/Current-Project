@@ -12,55 +12,61 @@ Public Class frmBlastMail
     Private Lead_as_a_structure As convertLeadToStruct.EnterLead_Record
 
     Private Sub frmBlastMail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If Len(RecID) <= 0 Then
-            MsgBox("You must select a lead to use this function.", MsgBoxStyle.Exclamation, "No Lead Selected.")
-            Me.ResetFormLocal()
-            Exit Sub
-        End If
-        If RecID = " " Then
-            MsgBox("You must select a lead to use this function.", MsgBoxStyle.Exclamation, "No Lead Selected.")
-            Me.ResetFormLocal()
-            Exit Sub
-        End If
-        Me.Text = "Send Email To Rep For Lead#: " & RecID.ToString
-        Dim b As New GetReps
-        arListReps = b.List_Of_Reps
-        For Each x As GetReps.Rep In arListReps
-            Me.cboReps.Items.Add(x.FName & " " & x.LName)
-        Next
+        Try
+            If Len(RecID) <= 0 Then
+                MsgBox("You must select a lead to use this function.", MsgBoxStyle.Exclamation, "No Lead Selected.")
+                Me.ResetFormLocal()
+                Exit Sub
+            End If
+            If RecID = " " Then
+                MsgBox("You must select a lead to use this function.", MsgBoxStyle.Exclamation, "No Lead Selected.")
+                Me.ResetFormLocal()
+                Exit Sub
+            End If
+            Me.Text = "Send Email To Rep For Lead#: " & RecID.ToString
+            Dim b As New GetReps
+            arListReps = b.List_Of_Reps
+            For Each x As GetReps.Rep In arListReps
+                Me.cboReps.Items.Add(x.FName & " " & x.LName)
+            Next
 
-        Dim c As New GetLeadInfo(Me.RecID)
-        Lead_as_a_structure = c.Lead_As_Structure
+            Dim c As New GetLeadInfo(Me.RecID)
+            Lead_as_a_structure = c.Lead_As_Structure
 
-        Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-        Dim fname As String = name(0)
-        Dim lname As String = name(1)
+            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim fname As String = name(0)
+            Dim lname As String = name(1)
 
-        Dim d As New GetEmails(fname, lname)
-        User_Info = d.User_Information
-        Me.cboFromEmail.Items.Add(User_Info.CoEmail)
-        Company_Info = d.Company_Information
-        Me.cboFromEmail.Items.Add(Company_Info.Email)
+            Dim d As New GetEmails(fname, lname)
+            User_Info = d.User_Information
+            Me.cboFromEmail.Items.Add(User_Info.CoEmail)
+            Company_Info = d.Company_Information
+            Me.cboFromEmail.Items.Add(Company_Info.Email)
 
-        Dim strAutoPopInfo As String = ""
-        strAutoPopInfo += "-------------" & Me.RecID & "-------------" & vbCrLf & vbCrLf
-        strAutoPopInfo += "Customer Name(s): " & Lead_as_a_structure.C1FirstName & " " & Lead_as_a_structure.C1LastName & vbCrLf
-        strAutoPopInfo += "                    " & Lead_as_a_structure.C2FirstName & " " & Lead_as_a_structure.C2LastName & vbCrLf & vbCrLf
-        strAutoPopInfo += "Phone(s): " & Lead_as_a_structure.HousePhone & vbCrLf & Lead_as_a_structure.AltPhone2 & vbCrLf & Lead_as_a_structure.AltPhone2 & vbCrLf & vbCrLf
-        strAutoPopInfo += "Product(s):" & Lead_as_a_structure.Product1 & vbCrLf & Lead_as_a_structure.Product2 & vbCrLf & Lead_as_a_structure.Product3 & vbCrLf & vbCrLf
-        strAutoPopInfo += "Customer Email: " & Lead_as_a_structure.EmailAddress & vbCrLf & vbCrLf
-        Dim dateTimes() = Split(Lead_as_a_structure.ApptDate, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-        Dim dt As String = dateTimes(0)
-        Dim tms() As String = Split(Lead_as_a_structure.ApptTime, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-        Dim tm As String = tms(1)
-        strAutoPopInfo += "Appt. Time:" & tm & vbCrLf
-        strAutoPopInfo += "Appt. Date:" & dt & vbCrLf & vbCrLf
-        strAutoPopInfo += "Home Info:  Age-" & Lead_as_a_structure.HomeAge & vbCrLf & "Years Owned-" & Lead_as_a_structure.YearsOwned & vbCrLf
-        strAutoPopInfo += vbCrLf & "Street Address: " & Lead_as_a_structure.StAddress & " " & Lead_as_a_structure.City & "," & Lead_as_a_structure.State & " " & Lead_as_a_structure.Zip & vbCrLf & vbCrLf
-        strAutoPopInfo += "Special Instructions: " & Lead_as_a_structure.SpecialInstructions & vbCrLf & vbCrLf
-        strAutoPopInfo += "-------------------------------------" & vbCrLf
+            Dim strAutoPopInfo As String = ""
+            strAutoPopInfo += "-------------" & Me.RecID & "-------------" & vbCrLf & vbCrLf
+            strAutoPopInfo += "Customer Name(s): " & Lead_as_a_structure.C1FirstName & " " & Lead_as_a_structure.C1LastName & vbCrLf
+            strAutoPopInfo += "                    " & Lead_as_a_structure.C2FirstName & " " & Lead_as_a_structure.C2LastName & vbCrLf & vbCrLf
+            strAutoPopInfo += "Phone(s): " & Lead_as_a_structure.HousePhone & vbCrLf & Lead_as_a_structure.AltPhone2 & vbCrLf & Lead_as_a_structure.AltPhone2 & vbCrLf & vbCrLf
+            strAutoPopInfo += "Product(s):" & Lead_as_a_structure.Product1 & vbCrLf & Lead_as_a_structure.Product2 & vbCrLf & Lead_as_a_structure.Product3 & vbCrLf & vbCrLf
+            strAutoPopInfo += "Customer Email: " & Lead_as_a_structure.EmailAddress & vbCrLf & vbCrLf
+            Dim dateTimes() = Split(Lead_as_a_structure.ApptDate, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim dt As String = dateTimes(0)
+            Dim tms() As String = Split(Lead_as_a_structure.ApptTime, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim tm As String = tms(1)
+            strAutoPopInfo += "Appt. Time:" & tm & vbCrLf
+            strAutoPopInfo += "Appt. Date:" & dt & vbCrLf & vbCrLf
+            strAutoPopInfo += "Home Info:  Age-" & Lead_as_a_structure.HomeAge & vbCrLf & "Years Owned-" & Lead_as_a_structure.YearsOwned & vbCrLf
+            strAutoPopInfo += vbCrLf & "Street Address: " & Lead_as_a_structure.StAddress & " " & Lead_as_a_structure.City & "," & Lead_as_a_structure.State & " " & Lead_as_a_structure.Zip & vbCrLf & vbCrLf
+            strAutoPopInfo += "Special Instructions: " & Lead_as_a_structure.SpecialInstructions & vbCrLf & vbCrLf
+            strAutoPopInfo += "-------------------------------------" & vbCrLf
 
-        Me.rtfBody.Text = strAutoPopInfo
+            Me.rtfBody.Text = strAutoPopInfo
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmBlastMail", "FormCode", "Sub", "frmBlastMail_Load", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -148,14 +154,28 @@ Public Class frmBlastMail
         End If
 
         If Me.cboFromEmail.Text = Company_Info.Email Then
-            Dim abc As New EmailIssuedLeads
-            abc.Send_Blast_Mail_Confirming(Me.cboFromEmail.Text, Me.txtToEmail.Text, Me.rtfBody.Text, Me.txtSubject.Text, Company_Info.SMTP, Company_Info.SMTPPort, Company_Info.EmailPWD, Company_Info.Email, STATIC_VARIABLES.CurrentUser)
-            abc = Nothing
+            Try
+                Dim abc As New EmailIssuedLeads
+                abc.Send_Blast_Mail_Confirming(Me.cboFromEmail.Text, Me.txtToEmail.Text, Me.rtfBody.Text, Me.txtSubject.Text, Company_Info.SMTP, Company_Info.SMTPPort, Company_Info.EmailPWD, Company_Info.Email, STATIC_VARIABLES.CurrentUser)
+                abc = Nothing
+
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmBlastMail", "FormCode", "Sub", "btnSend_Click", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
 
         ElseIf Me.cboFromEmail.Text <> Company_Info.Email Then
-            Dim z As New EmailIssuedLeads
-            z.Send_Blast_Mail_Confirming(Me.cboFromEmail.Text, Me.txtToEmail.Text, Me.rtfBody.Text, Me.txtSubject.Text, User_Info.SMTP, User_Info.SMTPPort, User_Info.EmlPWD, User_Info.CoEmail, STATIC_VARIABLES.CurrentUser)
-            z = Nothing
+            Try
+                Dim z As New EmailIssuedLeads
+                z.Send_Blast_Mail_Confirming(Me.cboFromEmail.Text, Me.txtToEmail.Text, Me.rtfBody.Text, Me.txtSubject.Text, User_Info.SMTP, User_Info.SMTPPort, User_Info.EmlPWD, User_Info.CoEmail, STATIC_VARIABLES.CurrentUser)
+                z = Nothing
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmBlastMail", "FormCode", "Sub", "btnSend_Click(email options)", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End If
 
 
@@ -205,25 +225,32 @@ Public Class frmBlastMail
             arReps = Get_Reps()
         End Sub
         Private Function Get_Reps()
-            Dim reps As New List(Of Rep)
-            Dim cnx As New SqlConnection(pro_cnx)
-            cnx.Open()
-            Dim cmdGET As New SqlCommand("SELECT ID,Email,CanRecieveEmail,ExcludePrintInfo,FName,LName,SalesManager FROM salesreppull WHERE CanRecieveEmail = 1;", cnx)
-            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
-            While r1.Read
-                Dim a As New Rep
-                a.ID = r1.Item("ID")
-                a.FName = r1.Item("FName")
-                a.LName = r1.Item("LName")
-                a.Email = r1.Item("Email")
-                a.ExcludePrintInfo = r1.Item("ExcludePrintInfo")
-                a.SalesManager = r1.Item("SalesManager")
-                reps.Add(a)
-            End While
-            r1.Close()
-            cnx.Close()
-            cnx = Nothing
-            Return reps
+            Try
+                Dim reps As New List(Of Rep)
+                Dim cnx As New SqlConnection(pro_cnx)
+                cnx.Open()
+                Dim cmdGET As New SqlCommand("SELECT ID,Email,CanRecieveEmail,ExcludePrintInfo,FName,LName,SalesManager FROM salesreppull WHERE CanRecieveEmail = 1;", cnx)
+                Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+                While r1.Read
+                    Dim a As New Rep
+                    a.ID = r1.Item("ID")
+                    a.FName = r1.Item("FName")
+                    a.LName = r1.Item("LName")
+                    a.Email = r1.Item("Email")
+                    a.ExcludePrintInfo = r1.Item("ExcludePrintInfo")
+                    a.SalesManager = r1.Item("SalesManager")
+                    reps.Add(a)
+                End While
+                r1.Close()
+                cnx.Close()
+                cnx = Nothing
+                Return reps
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmBlastMail.GetReps", "FormCode-Private Class", "Function", "Get_Reps()", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End Function
 
     End Class
@@ -276,51 +303,65 @@ Public Class frmBlastMail
         End Sub
 
         Private Function Get_User_Info(ByVal FName As String, ByVal LName As String)
-            Dim a As New UserInfo
-            Dim cnx As New SqlConnection(pro_cnx)
-            cnx.Open()
-            Dim strCMD As String = ""
-            strCMD += "SELECT UserFirstName,UserLastName,Email,EmailLogon,EmailPassword,Incoming,Outgoing,IncomingPort,OutgoingPort,LogonUsing FROM UserPermissionTable WHERE UserFirstName = '" & FName & "' and UserLastName = '" & LName & "';"
-            Dim cmdGET As New SqlCommand(strCMD, cnx)
-            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
-            While r1.Read
-                a.FName = FName
-                a.LName = LName
-                a.CoEmail = r1.Item("Email")
-                a.EmlPWD = r1.Item("EmailPassword")
-                a.POP3 = r1.Item("Incoming")
-                a.SMTP = r1.Item("Outgoing")
-                a.POP3Port = r1.Item("IncomingPort")
-                a.SMTPPort = r1.Item("OutgoingPort")
-                a.LogonUsing = r1.Item("LogonUsing")
-            End While
-            r1.Close()
-            cnx.Close()
-            cnx = Nothing
-            Return a
+            Try
+                Dim a As New UserInfo
+                Dim cnx As New SqlConnection(pro_cnx)
+                cnx.Open()
+                Dim strCMD As String = ""
+                strCMD += "SELECT UserFirstName,UserLastName,Email,EmailLogon,EmailPassword,Incoming,Outgoing,IncomingPort,OutgoingPort,LogonUsing FROM UserPermissionTable WHERE UserFirstName = '" & FName & "' and UserLastName = '" & LName & "';"
+                Dim cmdGET As New SqlCommand(strCMD, cnx)
+                Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+                While r1.Read
+                    a.FName = FName
+                    a.LName = LName
+                    a.CoEmail = r1.Item("Email")
+                    a.EmlPWD = r1.Item("EmailPassword")
+                    a.POP3 = r1.Item("Incoming")
+                    a.SMTP = r1.Item("Outgoing")
+                    a.POP3Port = r1.Item("IncomingPort")
+                    a.SMTPPort = r1.Item("OutgoingPort")
+                    a.LogonUsing = r1.Item("LogonUsing")
+                End While
+                r1.Close()
+                cnx.Close()
+                cnx = Nothing
+                Return a
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmBlastMail.GetEmails", "FormCode-Private Class", "Function", "Get_User_Info(fname,lname)", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End Function
 
         Private Function Get_Company_Info()
-            Dim a As New CompanyInfo
-            Dim cnx As New SqlConnection(pro_cnx)
-            cnx.Open()
-            Dim cmdGET As New SqlCommand("SELECT CompanyName,Email,EmailLogin,Incoming,Outgoing,Iport,OPort,LogonUsing,EmailPassword FROM CompanyInfo;", cnx)
-            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
-            While r1.Read
-                a.Name = r1.Item("CompanyName")
-                a.Email = r1.Item("Email")
-                a.EmaiLogin = r1.Item("EmailLogin")
-                a.POP3 = r1.Item("Incoming")
-                a.SMTP = r1.Item("Outgoing")
-                a.POP3Port = r1.Item("Iport")
-                a.SMTPPort = r1.Item("Oport")
-                a.LogonUsing = r1.Item("LogonUsing")
-                a.EmailPWD = r1.Item("EmailPassword")
-            End While
-            r1.Close()
-            cnx.Close()
-            cnx = Nothing
-            Return a
+            Try
+                Dim a As New CompanyInfo
+                Dim cnx As New SqlConnection(pro_cnx)
+                cnx.Open()
+                Dim cmdGET As New SqlCommand("SELECT CompanyName,Email,EmailLogin,Incoming,Outgoing,Iport,OPort,LogonUsing,EmailPassword FROM CompanyInfo;", cnx)
+                Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+                While r1.Read
+                    a.Name = r1.Item("CompanyName")
+                    a.Email = r1.Item("Email")
+                    a.EmaiLogin = r1.Item("EmailLogin")
+                    a.POP3 = r1.Item("Incoming")
+                    a.SMTP = r1.Item("Outgoing")
+                    a.POP3Port = r1.Item("Iport")
+                    a.SMTPPort = r1.Item("Oport")
+                    a.LogonUsing = r1.Item("LogonUsing")
+                    a.EmailPWD = r1.Item("EmailPassword")
+                End While
+                r1.Close()
+                cnx.Close()
+                cnx = Nothing
+                Return a
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmBlastMail.Emails", "FormCode-Private Class", "Function", "Get_CompanyInfo()", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End Function
 
     End Class
@@ -338,9 +379,16 @@ Public Class frmBlastMail
             End Get
         End Property
         Public Sub New(ByVal RecID As String)
-            structOfLead = New convertLeadToStruct.EnterLead_Record
-            Dim b As New convertLeadToStruct
-            structOfLead = b.ConvertToStructure(RecID, False)
+            Try
+                structOfLead = New convertLeadToStruct.EnterLead_Record
+                Dim b As New convertLeadToStruct
+                structOfLead = b.ConvertToStructure(RecID, False)
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmBlastMail.GetLeadInfo", "FormCode-Private Class", "Constructor", "New(recID)", RecID, ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End Sub
 
     End Class

@@ -355,6 +355,7 @@ Public Class Edit_Verify_Address
     Public Function LookForValidAddress(ByVal Loc As MapPoint.Location)
         '' conditions: No addresses like "W Main st", "Ohio [OH] (Ohio)"
         ''             MUST begin with Numbers
+
         Valid = False ''' 
         Try
             Dim Name As String = Loc.Name
@@ -453,11 +454,12 @@ Public Class Edit_Verify_Address
             End Select
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("VerifyAddress", "ByVal City As String, ByVal State As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Mappoint", "CheckCity")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("VerifyAddress", "ByVal City As String, ByVal State As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Mappoint", "CheckCity")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Edit_Verify_Address", "Edit_Verify_Address", "Sub", "CheckCity(City,State)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
-
     End Sub
     Public Property MapPointVerifiedIt() As Boolean
         Get
@@ -559,8 +561,12 @@ Public Class Edit_Verify_Address
                     End If
             End Select
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("VerifyAddress", "ByVal StAddress As String, ByVal City As String, ByVal State As String, ByVal Zip As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Mappoint", "Filter1")
+            '    Dim err As New ErrorLogFlatFile
+            '    err.WriteLog("VerifyAddress", "ByVal StAddress As String, ByVal City As String, ByVal State As String, ByVal Zip As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Mappoint", "Filter1")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Edit_Verify_Address", "Edit_Verify_Address", "Sub", "Filter(StAddress,city,state,zip)", "0", ex.Message.ToString)
+            y = Nothing
+
         End Try
     End Sub
 End Class

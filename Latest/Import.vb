@@ -90,9 +90,11 @@ Module Import
             Next
             TargetPath = STATIC_VARIABLES.JobPicturesFileDirectory
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("Import", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "StripGarbage")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("Import", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "StripGarbage")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "imgLSTS", "imgLSTS", "Constructor", "StripGarbage()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
         ImportPictures.Dispose()
 
@@ -141,9 +143,11 @@ Module Import
             Next
             'MsgBox(FileName)
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("Import", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "StripOffLastDigit")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("Import", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "StripOffLastDigit")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "imgLSTS", "imgLSTS", "Constructor", "StripOffLastDigit()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub

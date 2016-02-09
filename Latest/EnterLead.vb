@@ -10,57 +10,70 @@ Public Class EnterLead
 
 
     Private Sub EnterLead_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Me.BackgroundWorker1_DoWork(Nothing, Nothing)
-        If STATIC_VARIABLES.ActiveChild IsNot Nothing Then
-            STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
-        End If
-        Me.epEnterLead.Clear() '' clear off old values passed to error provider
-        Dim c As New ENTER_LEAD
-        c.Loadup()
-        Me.dtpApptInfo.Value = Today.AddDays(1)
-        Me.txtApptTime.Value = CType("01/01/1900 " & Now.Hour.ToString & ":00", Date)
+        Try
+            'Me.BackgroundWorker1_DoWork(Nothing, Nothing)
+            If STATIC_VARIABLES.ActiveChild IsNot Nothing Then
+                STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
+            End If
+            Me.epEnterLead.Clear() '' clear off old values passed to error provider
+            Dim c As New ENTER_LEAD
+            c.Loadup()
+            Me.dtpApptInfo.Value = Today.AddDays(1)
+            Me.txtApptTime.Value = CType("01/01/1900 " & Now.Hour.ToString & ":00", Date)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "EnterLead_Load", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub cboPriLead_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboPriLead.SelectedValueChanged
-    
-        Dim c As String = ""
-        c = Me.cboPriLead.Text
-        If c.ToString.Length < 2 Then
-            Exit Sub
-        End If
-        Select Case c
-            Case Is = "<Add New>"
-                Dim f As New ENTER_LEAD.InsertPLS
-                Dim pri As String = ""
-                pri = InputBox$("Enter new Primary Lead Source.", "New Primary Lead Source")
-                If pri.ToString.Length < 2 Then
+        Try
+            Dim c As String = ""
+            c = Me.cboPriLead.Text
+            If c.ToString.Length < 2 Then
+                Exit Sub
+            End If
+            Select Case c
+                Case Is = "<Add New>"
+                    Dim f As New ENTER_LEAD.InsertPLS
+                    Dim pri As String = ""
+                    pri = InputBox$("Enter new Primary Lead Source.", "New Primary Lead Source")
+                    If pri.ToString.Length < 2 Then
+                        Me.cboPriLead.Text = ""
+                        Me.cboSecLead.Items.Clear()
+                        Exit Sub
+                    End If
+                    f.InsertNewPLS(pri)
+                    'Dim rq As New ENTER_LEAD.PopulatePrimaryLeadSource
+                    'rq.GetPrimaryLeadSource()
+                    'Me.cboPriLead.SelectedItem = pri
+                    Exit Select
+                Case Is = ""
+                    Me.cboSecLead.Items.Clear()
+                    Exit Select
+                Case Is = "_____________________________________________"
                     Me.cboPriLead.Text = ""
                     Me.cboSecLead.Items.Clear()
-                    Exit Sub
-                End If
-                f.InsertNewPLS(pri)
-                'Dim rq As New ENTER_LEAD.PopulatePrimaryLeadSource
-                'rq.GetPrimaryLeadSource()
-                'Me.cboPriLead.SelectedItem = pri
-                Exit Select
-            Case Is = ""
-                Me.cboSecLead.Items.Clear()
-                Exit Select
-            Case Is = "_____________________________________________"
-                Me.cboPriLead.Text = ""
-                Me.cboSecLead.Items.Clear()
-                Exit Select
-            Case Else
-                Dim d As New ENTER_LEAD.PopulateSecondaryLeadSource
-                d.GetSLS(c)
-                Exit Select
-        End Select
-        
+                    Exit Select
+                Case Else
+                    Dim d As New ENTER_LEAD.PopulateSecondaryLeadSource
+                    d.GetSLS(c)
+                    Exit Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboPriLead_SelectedValueChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
    
 
     Private Sub cboMarketer_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboMarketer.SelectedValueChanged
+
         Dim x As String = ""
         x = Me.cboMarketer.Text
         If x.ToString.Length < 2 Then
@@ -69,9 +82,15 @@ Public Class EnterLead
         Select Case x
             Case Is = "<Add New>"
                 '' add new marketer roll
+                Try
+                    Dim c As New ENTER_LEAD.InsertMarketer
+                    c.InsertMarketer(Me)
+                Catch ex As Exception
+                    Dim y As New ErrorLogging_V2
+                    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboMarketer_SelectedValueChanged(case <Add New>)", "0", ex.Message.ToString)
+                    y = Nothing
+                End Try
 
-                Dim c As New ENTER_LEAD.InsertMarketer
-                c.InsertMarketer(Me)
             Case Is = ""
                 Me.cboMarketer.Text = ""
                 Dim c As String = Me.cboMarketer.Text
@@ -96,24 +115,34 @@ Public Class EnterLead
                     name = Split(x, " ", 2)
                     fname = name(0)
                     lname = name(1)
+
                     Dim d As New ENTER_LEAD.PopulatePLSandSLSbyMarketer
                     d.GetMarketerLeadSources(fname, lname)
-                 
-                Catch ex As Exception
 
+                Catch ex As Exception
+                    Dim y As New ErrorLogging_V2
+                    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboMarketer_SelectedValueChanged(ENTER_LEAD.PopPLSandSLS)", "0", ex.Message.ToString)
+                    y = Nothing
                 End Try
                 Exit Select
         End Select
     End Sub
 
     Private Sub txtApptTime_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim b As String = Me.txtApptTime.Text
-        If b.ToString.Length < 2 Then
-            Exit Sub
-        End If
-        Dim tf As New TimeFormat
-        tf.CheckTimeFormat(b)
-        Me.txtApptTime.Text = tf.RetTime
+        Try
+            Dim b As String = Me.txtApptTime.Text
+            If b.ToString.Length < 2 Then
+                Exit Sub
+            End If
+            Dim tf As New TimeFormat
+            tf.CheckTimeFormat(b)
+            Me.txtApptTime.Text = tf.RetTime
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "txtApptTime_LostFocus", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub dtpApptInfo_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpApptInfo.LostFocus
@@ -154,69 +183,83 @@ Public Class EnterLead
     End Sub
 
     Private Sub cboSecLead_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboSecLead.SelectedValueChanged
-        Dim x As String = ""
-        x = Me.cboSecLead.Text
-        Dim y As String = ""
-        y = Me.cboPriLead.Text
-        If y.ToString.Length < 2 Then
-            Exit Sub
-        End If
-        If x.ToString.Length < 2 Then
-            Exit Sub
-        End If
-        Select Case x
-            Case Is = "<Add New>"
-                Dim b As New ENTER_LEAD.InsertSLS
-                Dim sec As String = ""
-                Dim cap As New ENTER_LEAD.Captilalize
-                sec = cap.CapitalizeText((InputBox$("Enter new Secondary Lead Source.", "New Secondary Lead Source")))
-                If sec = "" Then
+        Try
+            Dim x As String = ""
+            x = Me.cboSecLead.Text
+            Dim y As String = ""
+            y = Me.cboPriLead.Text
+            If y.ToString.Length < 2 Then
+                Exit Sub
+            End If
+            If x.ToString.Length < 2 Then
+                Exit Sub
+            End If
+            Select Case x
+                Case Is = "<Add New>"
+                    Dim b As New ENTER_LEAD.InsertSLS
+                    Dim sec As String = ""
+                    Dim cap As New ENTER_LEAD.Captilalize
+                    sec = cap.CapitalizeText((InputBox$("Enter new Secondary Lead Source.", "New Secondary Lead Source")))
+                    If sec = "" Then
+                        Me.cboSecLead.Text = ""
+                        Exit Sub
+                    End If
+                    b.InsertSLS(y, sec)
+                    Dim d As New ENTER_LEAD.PopulateSecondaryLeadSource
+                    d.GetSLS(y)
+                    Me.cboSecLead.SelectedItem = sec
+                    Exit Select
+                Case Is = ""
+                    Exit Select
+                Case Is = "_____________________________________________"
                     Me.cboSecLead.Text = ""
-                    Exit Sub
-                End If
-                b.InsertSLS(y, sec)
-                Dim d As New ENTER_LEAD.PopulateSecondaryLeadSource
-                d.GetSLS(y)
-                Me.cboSecLead.SelectedItem = sec
-                Exit Select
-            Case Is = ""
-                Exit Select
-            Case Is = "_____________________________________________"
-                Me.cboSecLead.Text = ""
-                Exit Select
-        End Select
+                    Exit Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cbosecLead_SelectedValueChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub cboProduct1_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboProduct1.SelectedValueChanged
-        Dim y As String = ""
-        y = Me.cboProduct1.SelectedItem
-        If y.ToString.Length < 2 Then
-            Exit Sub
-        End If
-        Select Case y
-            Case Is = "<Add New>"
-                Dim b As New ENTER_LEAD.InsertProduct
-                Dim pr As String = ""
-                Dim prA As String = ""
-                Dim cap As New ENTER_LEAD.Captilalize
-                pr = cap.CapitalizeText(InputBox$("Enter new product name", "New Product Name"))
-                If pr.ToString.Length < 2 Then
+        Try
+            Dim y As String = ""
+            y = Me.cboProduct1.SelectedItem
+            If y.ToString.Length < 2 Then
+                Exit Sub
+            End If
+            Select Case y
+                Case Is = "<Add New>"
+                    Dim b As New ENTER_LEAD.InsertProduct
+                    Dim pr As String = ""
+                    Dim prA As String = ""
+                    Dim cap As New ENTER_LEAD.Captilalize
+                    pr = cap.CapitalizeText(InputBox$("Enter new product name", "New Product Name"))
+                    If pr.ToString.Length < 2 Then
+                        Me.cboProduct1.Text = ""
+                        Exit Sub
+                    End If
+                    prA = cap.CapitalizeText(InputBox$("Enter product acronym.(2 Letters)", "Product Acronym"))
+                    If prA.ToString.Length < 2 Then
+                        Me.cboProduct1.Text = ""
+                        Exit Sub
+                    End If
+                    b.AddNewProduct(pr, prA, "CBO1")
+                    Exit Select
+                Case Is = ""
+                    Exit Select
+                Case Is = "_________________________"
                     Me.cboProduct1.Text = ""
-                    Exit Sub
-                End If
-                prA = cap.CapitalizeText(InputBox$("Enter product acronym.(2 Letters)", "Product Acronym"))
-                If prA.ToString.Length < 2 Then
-                    Me.cboProduct1.Text = ""
-                    Exit Sub
-                End If
-                b.AddNewProduct(pr, prA, "CBO1")
-                Exit Select
-            Case Is = ""
-                Exit Select
-            Case Is = "_________________________"
-                Me.cboProduct1.Text = ""
-                Exit Select
-        End Select
+                    Exit Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct1_SelectedValueChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub cboProduct2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboProduct2.SelectedIndexChanged
@@ -232,47 +275,60 @@ Public Class EnterLead
                 Me.cboProduct2.Text = ""
                 Exit Select
             Case Else
-                Dim x As New ENTER_LEAD
-                x.GetAcronym(Me.cboProduct2.Text, 2)
-                Exit Select
+                Try
+                    Dim x As New ENTER_LEAD
+                    x.GetAcronym(Me.cboProduct2.Text, 2)
+                    Exit Select
+                Catch ex As Exception
+                    Dim y As New ErrorLogging_V2
+                    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct2_SelectedIndexChanged", "0", ex.Message.ToString)
+                    y = Nothing
+                End Try
         End Select
     End Sub
 
     Private Sub cboProduct2_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboProduct2.SelectedValueChanged
-        Dim y As String = ""
-        y = Me.cboProduct2.SelectedItem
-        If y.ToString.Length < 2 Then
-            Exit Sub
-        End If
-        Select Case y
-            Case Is = "<Add New>"
-                Dim b As New ENTER_LEAD.InsertProduct
-                Dim pr As String = ""
-                Dim prA As String = ""
-                Dim cap As New ENTER_LEAD.Captilalize
-                pr = cap.CapitalizeText(InputBox$("Enter new product name", "New Product Name"))
-                If pr.ToString.Length < 2 Then
+        Try
+            Dim y As String = ""
+            y = Me.cboProduct2.SelectedItem
+            If y.ToString.Length < 2 Then
+                Exit Sub
+            End If
+            Select Case y
+                Case Is = "<Add New>"
+                    Dim b As New ENTER_LEAD.InsertProduct
+                    Dim pr As String = ""
+                    Dim prA As String = ""
+                    Dim cap As New ENTER_LEAD.Captilalize
+                    pr = cap.CapitalizeText(InputBox$("Enter new product name", "New Product Name"))
+                    If pr.ToString.Length < 2 Then
+                        Me.cboProduct2.Text = ""
+                        Exit Sub
+                    End If
+                    prA = cap.CapitalizeText(InputBox$("Enter product acronym.(2 Letters)", "Product Acronym"))
+                    If prA.ToString.Length < 2 Then
+                        Me.cboProduct2.Text = ""
+                        Exit Sub
+                    End If
+                    b.AddNewProduct(pr, prA, "CBO2")
+                    Exit Select
+                Case Is = ""
+                    Exit Select
+                Case Is = "_________________________"
                     Me.cboProduct2.Text = ""
-                    Exit Sub
-                End If
-                prA = cap.CapitalizeText(InputBox$("Enter product acronym.(2 Letters)", "Product Acronym"))
-                If prA.ToString.Length < 2 Then
-                    Me.cboProduct2.Text = ""
-                    Exit Sub
-                End If
-                b.AddNewProduct(pr, prA, "CBO2")
-                Exit Select
-            Case Is = ""
-                Exit Select
-            Case Is = "_________________________"
-                Me.cboProduct2.Text = ""
-                Exit Select
-        End Select
-        If Me.cboProduct2.Text <> "" Then
-            Dim x As New ENTER_LEAD
-            x.GetAcronym(Me.cboProduct2.Text, 2)
-        End If
-       
+                    Exit Select
+            End Select
+            If Me.cboProduct2.Text <> "" Then
+                Dim x As New ENTER_LEAD
+                x.GetAcronym(Me.cboProduct2.Text, 2)
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct2_SelectedValueChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+
     End Sub
 
     Private Sub cboProduct3_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboProduct3.SelectedIndexChanged
@@ -288,9 +344,16 @@ Public Class EnterLead
                 Me.cboProduct3.Text = ""
                 Exit Select
             Case Else
-                Dim x As New ENTER_LEAD
-                x.GetAcronym(Me.cboProduct3.Text, 3)
-                Exit Select
+                Try
+                    Dim x As New ENTER_LEAD
+                    x.GetAcronym(Me.cboProduct3.Text, 3)
+                    Exit Select
+                Catch ex As Exception
+                    Dim y As New ErrorLogging_V2
+                    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct3_SelectedINdexChanged", "0", ex.Message.ToString)
+                    y = Nothing
+                End Try
+
         End Select
     End Sub
 
@@ -302,22 +365,29 @@ Public Class EnterLead
         End If
         Select Case y
             Case Is = "<Add New>"
-                Dim b As New ENTER_LEAD.InsertProduct
-                Dim pr As String = ""
-                Dim prA As String = ""
-                Dim cap As New ENTER_LEAD.Captilalize
-                pr = cap.CapitalizeText(InputBox$("Enter new product name", "New Product Name"))
-                If pr.ToString.Length < 2 Then
-                    Me.cboProduct3.Text = ""
-                    Exit Sub
-                End If
-                prA = cap.CapitalizeText(InputBox$("Enter product acronym. (2 Letters)", "Product Acronym"))
-                If prA.ToString.Length < 2 Then
-                    Me.cboProduct3.Text = ""
-                    Exit Sub
-                End If
-                b.AddNewProduct(pr, prA, "CBO3")
-                Exit Select
+                Try
+                    Dim b As New ENTER_LEAD.InsertProduct
+                    Dim pr As String = ""
+                    Dim prA As String = ""
+                    Dim cap As New ENTER_LEAD.Captilalize
+                    pr = cap.CapitalizeText(InputBox$("Enter new product name", "New Product Name"))
+                    If pr.ToString.Length < 2 Then
+                        Me.cboProduct3.Text = ""
+                        Exit Sub
+                    End If
+                    prA = cap.CapitalizeText(InputBox$("Enter product acronym. (2 Letters)", "Product Acronym"))
+                    If prA.ToString.Length < 2 Then
+                        Me.cboProduct3.Text = ""
+                        Exit Sub
+                    End If
+                    b.AddNewProduct(pr, prA, "CBO3")
+                    Exit Select
+                Catch ex As Exception
+                    Dim yy As New ErrorLogging_V2
+                    yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct3_selectedValueChanged", "0", ex.Message.ToString)
+                    yy = Nothing
+                End Try
+
             Case Is = ""
                 Exit Select
             Case Is = "_________________________"
@@ -325,8 +395,15 @@ Public Class EnterLead
                 Exit Select
         End Select
         If Me.cboProduct3.Text <> "" Then
-            Dim x As New ENTER_LEAD
-            x.GetAcronym(Me.cboProduct3.Text, 3)
+            Try
+                Dim x As New ENTER_LEAD
+                x.GetAcronym(Me.cboProduct3.Text, 3)
+            Catch ex As Exception
+                Dim yy As New ErrorLogging_V2
+                yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct3_selectedValueChanged(ENTER_LEAD.GetAcroNym())", "0", ex.Message.ToString)
+                yy = Nothing
+            End Try
+
         End If
     End Sub
 
@@ -368,10 +445,17 @@ Public Class EnterLead
     End Sub
 
     Private Sub txtC1FName_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtC1FName.LostFocus
-        Dim y As New ENTER_LEAD.Captilalize
-        Me.txtC1FName.Text = y.CapitalizeText(Me.txtC1FName.Text)
-        Me.cboSpokeWith.Items.Clear()
-        Me.cboSpokeWith.Items.Add(Me.txtC1FName.Text)
+        Try
+            Dim y As New ENTER_LEAD.Captilalize
+            Me.txtC1FName.Text = y.CapitalizeText(Me.txtC1FName.Text)
+            Me.cboSpokeWith.Items.Clear()
+            Me.cboSpokeWith.Items.Add(Me.txtC1FName.Text)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "txtc1fname_lostfocus(enter_lead.capitalize)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub txtC2FName_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtC2FName.LostFocus
@@ -379,20 +463,27 @@ Public Class EnterLead
         '' IE: 'A' or a first initial // skips over logic because IF statement doesn't compensate for chars < 2.
         '' Is anyone ever going to just use a first initial for a contact 'First' name?
         ''
-        Dim y As New ENTER_LEAD.Captilalize
-        Dim z As String = ""
-        z = Me.txtC2FName.Text
-        If z.ToString.Length < 2 Then
-            Exit Sub
-        End If
-        If z.ToString.Length > 2 Then
-            Me.txtC2FName.Text = y.CapitalizeText(Me.txtC2FName.Text)
-            Me.cboSpokeWith.Items.Clear()
-            Me.cboSpokeWith.Items.Add(Me.txtC1FName.Text)
-            Me.cboSpokeWith.Items.Add(Me.txtC2FName.Text)
-            Me.cboSpokeWith.Items.Add(Me.txtC1FName.Text & " and " & Me.txtC2FName.Text)
-            'Me.cboSpokeWith.Items.Add("Both")
-        End If
+        Try
+            Dim y As New ENTER_LEAD.Captilalize
+            Dim z As String = ""
+            z = Me.txtC2FName.Text
+            If z.ToString.Length < 2 Then
+                Exit Sub
+            End If
+            If z.ToString.Length > 2 Then
+                Me.txtC2FName.Text = y.CapitalizeText(Me.txtC2FName.Text)
+                Me.cboSpokeWith.Items.Clear()
+                Me.cboSpokeWith.Items.Add(Me.txtC1FName.Text)
+                Me.cboSpokeWith.Items.Add(Me.txtC2FName.Text)
+                Me.cboSpokeWith.Items.Add(Me.txtC1FName.Text & " and " & Me.txtC2FName.Text)
+                'Me.cboSpokeWith.Items.Add("Both")
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "txtc2fname_lostfocus(enter_lead.capitalize)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub txtC1LName_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtC1LName.LostFocus
@@ -470,114 +561,121 @@ Public Class EnterLead
         '' 3.30.08 the error provider needs to catch the form before it even goes through the rest of its logic.
         '' NEED a method here for the errorprovider to bounce in and out of.
         '' must be replicated on Save as well.....
-        ExSub = False
-        Me.epEnterLead.Clear()
-        Me.CheckRequiredFields()
-        If Me.epEnterLeadSwitch = True Then
-            Exit Sub
-        End If
-        If Me.epEnterLeadSwitch = False Then
-            Dim c As New VerifyAddress(Me.txtStAddy.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text, 1)
-            'Dim verified As Boolean = c.MapPointVerified
-            'Me.MapPoint_PASSBACK = verified
-            '' if the user has chose to go back,
-            '' here is the logic to flip the switch back so that it continues last time
-            '' and resets the cursor to the StAddy feild on EnterLead Form
-            ' ''
-            'If AddressEnterLead.StopProcessing = True Then
-            '    AddressEnterLead.StopProcessing = False
-            '    DuplicateLead.CloseMethod = "SAVEANDNEW"
-            '    Me.Focus()
-            '    Me.txtStAddy.Focus()
-            '    Exit Sub
-            'End If
-            '' likewise, if the user has decided to push their address through
-            '' logic needs to go here to reflect that change
-            ''
-            'If AddressEnterLead.StopProcessing = False Then
-            '    If AddressEnterLead.ForceMappedToTrue = False Then
-            '        If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = False Then
-            '            DuplicateLead.CloseMethod = "SAVEANDNEW"
-            '            Dim STA As String = ""
-            '            Dim CTY As String = ""
-            '            Dim ST As String = ""
-            '            Dim ZP As String = ""
-
-            '            STA = AddressEnterLead.Update_StAddress
-            '            CTY = AddressEnterLead.Update_City
-            '            ST = AddressEnterLead.Update_State
-            '            ZP = AddressEnterLead.Update_Zip
-
-            '            'Dim b As New ENTER_LEAD.CheckDuplicateLead(STA, CTY, ST, ZP, "SAVEANDNEW", AddressEnterLead.ForceMappedToTrue) // CLAY
-            '            Dim b As New ENTER_LEAD.PopulateDuplicates
-            '            b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, STA, CTY, ST, ZP, "SAVEANDNEW", Me.MapPoint_Verified)
-
-            '        End If
-            'End If
-            'End If
-            '' need a method here to compensate for a scenario where the address is correct and it just needs to run through.
-            ''
-            '' Verify Address still needs to kick back what it found to this part
-            '' IE: One address found, address is correct, now just save and close the form.
-            ''
-            'If AddressEnterLead.StopProcessing = False Then
-            '    If AddressEnterLead.ForceMappedToTrue = True Then
-            '        If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = True Then
-            '            DuplicateLead.CloseMethod = "SAVE"
-            '            Dim sta As String = ""
-            '            Dim cty As String = ""
-            '            Dim st As String = ""
-            '            Dim zp As String = ""
-
-            '            sta = AddressEnterLead.Update_StAddress
-            '            cty = AddressEnterLead.Update_City
-            '            st = AddressEnterLead.Update_State
-            '            zp = AddressEnterLead.Update_Zip
-
-            '            Dim b As New ENTER_LEAD.PopulateDuplicates
-            '            b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, sta, cty, st, zp, "SAVEANDNEW", )
-            '        End If
-            '    End If
-            'End If
-
-            '' or the third switch going here to just edit the address
-            '' with one of the addresses comming out of mappoint and turning the @Mapped flag to true.
-            ' ''
-            'If AddressEnterLead.StopProcessing = False Then
-            '    If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = True Then
-            '        DuplicateLead.CloseMethod = "SAVEANDNEW"
-            '        Dim STA As String = ""
-            '        Dim CTY As String = ""
-            '        Dim ST As String = ""
-            '        Dim ZP As String = ""
-
-            '        STA = AddressEnterLead.Update_StAddress
-            '        CTY = AddressEnterLead.Update_City
-            '        ST = AddressEnterLead.Update_State
-            '        ZP = AddressEnterLead.Update_Zip
-
-            'Dim b As New ENTER_LEAD.CheckDuplicateLead(STA, CTY, ST, ZP, "SAVEANDNEW", True) // CLAY
-            If Me.ExSub = True Then
-                Me.txtStAddy.SelectAll()
-                Me.txtStAddy.Focus()
+        Try
+            ExSub = False
+            Me.epEnterLead.Clear()
+            Me.CheckRequiredFields()
+            If Me.epEnterLeadSwitch = True Then
                 Exit Sub
             End If
-            Dim b As New ENTER_LEAD.PopulateDuplicates
-            b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, Me.txtStAddy.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text, "SAVEANDNEW", Me.MapPoint_Verified)
+            If Me.epEnterLeadSwitch = False Then
+                Dim c As New VerifyAddress(Me.txtStAddy.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text, 1)
+                'Dim verified As Boolean = c.MapPointVerified
+                'Me.MapPoint_PASSBACK = verified
+                '' if the user has chose to go back,
+                '' here is the logic to flip the switch back so that it continues last time
+                '' and resets the cursor to the StAddy feild on EnterLead Form
+                ' ''
+                'If AddressEnterLead.StopProcessing = True Then
+                '    AddressEnterLead.StopProcessing = False
+                '    DuplicateLead.CloseMethod = "SAVEANDNEW"
+                '    Me.Focus()
+                '    Me.txtStAddy.Focus()
+                '    Exit Sub
+                'End If
+                '' likewise, if the user has decided to push their address through
+                '' logic needs to go here to reflect that change
+                ''
+                'If AddressEnterLead.StopProcessing = False Then
+                '    If AddressEnterLead.ForceMappedToTrue = False Then
+                '        If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = False Then
+                '            DuplicateLead.CloseMethod = "SAVEANDNEW"
+                '            Dim STA As String = ""
+                '            Dim CTY As String = ""
+                '            Dim ST As String = ""
+                '            Dim ZP As String = ""
 
-            'AddressEnterLead.StopProcessing = False
-            'AddressEnterLead.ForceMappedToTrue = False
-            'AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = False
-            'AddressEnterLead.SelectedAddress = Nothing
-            'AddressEnterLead.Update_Zip = ""
-            'AddressEnterLead.Update_State = ""
-            'AddressEnterLead.Update_City = ""
-            'AddressEnterLead.Update_StAddress = ""
-            'AddressEnterLead.lvAddresses.Items.Clear()
-            '    End If
-            'End If
-            DuplicateLead.CloseMethod = "SAVEANDNEW"
-        End If
+                '            STA = AddressEnterLead.Update_StAddress
+                '            CTY = AddressEnterLead.Update_City
+                '            ST = AddressEnterLead.Update_State
+                '            ZP = AddressEnterLead.Update_Zip
+
+                '            'Dim b As New ENTER_LEAD.CheckDuplicateLead(STA, CTY, ST, ZP, "SAVEANDNEW", AddressEnterLead.ForceMappedToTrue) // CLAY
+                '            Dim b As New ENTER_LEAD.PopulateDuplicates
+                '            b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, STA, CTY, ST, ZP, "SAVEANDNEW", Me.MapPoint_Verified)
+
+                '        End If
+                'End If
+                'End If
+                '' need a method here to compensate for a scenario where the address is correct and it just needs to run through.
+                ''
+                '' Verify Address still needs to kick back what it found to this part
+                '' IE: One address found, address is correct, now just save and close the form.
+                ''
+                'If AddressEnterLead.StopProcessing = False Then
+                '    If AddressEnterLead.ForceMappedToTrue = True Then
+                '        If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = True Then
+                '            DuplicateLead.CloseMethod = "SAVE"
+                '            Dim sta As String = ""
+                '            Dim cty As String = ""
+                '            Dim st As String = ""
+                '            Dim zp As String = ""
+
+                '            sta = AddressEnterLead.Update_StAddress
+                '            cty = AddressEnterLead.Update_City
+                '            st = AddressEnterLead.Update_State
+                '            zp = AddressEnterLead.Update_Zip
+
+                '            Dim b As New ENTER_LEAD.PopulateDuplicates
+                '            b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, sta, cty, st, zp, "SAVEANDNEW", )
+                '        End If
+                '    End If
+                'End If
+
+                '' or the third switch going here to just edit the address
+                '' with one of the addresses comming out of mappoint and turning the @Mapped flag to true.
+                ' ''
+                'If AddressEnterLead.StopProcessing = False Then
+                '    If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = True Then
+                '        DuplicateLead.CloseMethod = "SAVEANDNEW"
+                '        Dim STA As String = ""
+                '        Dim CTY As String = ""
+                '        Dim ST As String = ""
+                '        Dim ZP As String = ""
+
+                '        STA = AddressEnterLead.Update_StAddress
+                '        CTY = AddressEnterLead.Update_City
+                '        ST = AddressEnterLead.Update_State
+                '        ZP = AddressEnterLead.Update_Zip
+
+                'Dim b As New ENTER_LEAD.CheckDuplicateLead(STA, CTY, ST, ZP, "SAVEANDNEW", True) // CLAY
+                If Me.ExSub = True Then
+                    Me.txtStAddy.SelectAll()
+                    Me.txtStAddy.Focus()
+                    Exit Sub
+                End If
+                Dim b As New ENTER_LEAD.PopulateDuplicates
+                b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, Me.txtStAddy.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text, "SAVEANDNEW", Me.MapPoint_Verified)
+
+                'AddressEnterLead.StopProcessing = False
+                'AddressEnterLead.ForceMappedToTrue = False
+                'AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = False
+                'AddressEnterLead.SelectedAddress = Nothing
+                'AddressEnterLead.Update_Zip = ""
+                'AddressEnterLead.Update_State = ""
+                'AddressEnterLead.Update_City = ""
+                'AddressEnterLead.Update_StAddress = ""
+                'AddressEnterLead.lvAddresses.Items.Clear()
+                '    End If
+                'End If
+                DuplicateLead.CloseMethod = "SAVEANDNEW"
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "btnSaveNew_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnSaveClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveClose.Click
@@ -586,117 +684,124 @@ Public Class EnterLead
         '' must be replicated on Save and New as well.....
         ''
         '' first clear out old values on error provider if there are any present // REDUNDANCY
-        ExSub = False
-        Me.epEnterLead.Clear()
-        Me.CheckRequiredFields()
-        If Me.epEnterLeadSwitch = True Then
-            Exit Sub
-        End If
-        If Me.epEnterLeadSwitch = False Then
-
-            '' NOTES On Error Provider Enter Lead---
-            '' Two ways to do this, 1) check all fields at once or 2) check field by field.
-            '' first method would catch all at once and illuminate the error provider icon,
-            '' second method would provide a step down approach.....IE: caught one, run script, caught second one, run script
-            '' vs. caught field x,y,z,a,2 - run script. 
-            '' Feild by feild approach would let the user know right then and there on a "lost focus" scenario that they are expected to 
-            '' provide information. however i think that would be very annoying to a user especially if they didn't fill in 
-            '' a number of fields....
-            '' Also, need a list of required fields. I know this was changed so I'll have to get an updated list of what
-            '' information this is supposed to be checking/validating.
-            '' 
-            '' EnterLead [Form] error provider is going to encompass:
-            '' Primary Lead Source
-            '' Contact1First and Last name
-            '' Contact2First and Last name
-            '' House Phone
-            '' StAddress
-            '' City, State
-            '' Spoke with
-            '' Contact1Work
-            '' Product 1
-            ''
-            '' ALSO: per Andy - Validate all feilds at once or exit sub before rest of logic ensues. 4/1/08
-            ''
-            '' need to revise these steps here to reflect the additional changes that were made in saveandnew
-            ''
-
-            Dim c As New VerifyAddress(Me.txtStAddy.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text, 1)
-            'Dim verified As Boolean = c.MapPointVerified
-            'Me.MapPoint_PASSBACK = verified
-            '' if the user has chose to go back,
-            '' here is the logic to flip the switch back so that it continues last time
-            '' and resets the cursor to the StAddy feild on EnterLead Form
-            ' ''
-            'If AddressEnterLead.StopProcessing = True Then
-            '    AddressEnterLead.StopProcessing = False
-            '    DuplicateLead.CloseMethod = "SAVE"
-            '    Me.Focus()
-            '    Me.txtStAddy.Focus()
-            '    Exit Sub
-            'End If
-            ' '' likewise, if the user has decided to push their address through
-            ' '' logic needs to go here to reflect that change
-            ' ''
-            'If AddressEnterLead.StopProcessing = False Then
-            '    If AddressEnterLead.ForceMappedToTrue = False Then
-            '        If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = False Then
-            '            DuplicateLead.CloseMethod = "SAVE"
-            '            Dim STA As String = ""
-            '            Dim CTY As String = ""
-            '            Dim ST As String = ""
-            '            Dim ZP As String = ""
-
-            '            STA = AddressEnterLead.Update_StAddress
-            '            CTY = AddressEnterLead.Update_City
-            '            ST = AddressEnterLead.Update_State
-            '            ZP = AddressEnterLead.Update_Zip
-
-            '            'Dim b As New ENTER_LEAD.CheckDuplicateLead(STA, CTY, ST, ZP, "SAVEANDNEW", AddressEnterLead.ForceMappedToTrue) // CLAY
-            '            Dim b As New ENTER_LEAD.PopulateDuplicates
-            '            b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, STA, CTY, ST, ZP, "SAVE", Me.MapPoint_Verified)
-
-            '        End If
-            '    End If
-            'End If
-
-            ' '' or the third switch going here to just edit the address
-            ' '' with one of the addresses comming out of mappoint and turning the @Mapped flag to true.
-            ' ''
-            'If AddressEnterLead.StopProcessing = False Then
-            '    If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = True Then
-            '        DuplicateLead.CloseMethod = "SAVE"
-            '        Dim STA As String = ""
-            '        Dim CTY As String = ""
-            '        Dim ST As String = ""
-            '        Dim ZP As String = ""
-
-            '        STA = AddressEnterLead.Update_StAddress
-            '        CTY = AddressEnterLead.Update_City
-            '        ST = AddressEnterLead.Update_State
-            '        ZP = AddressEnterLead.Update_Zip
-            If Me.ExSub = True Then
-                Me.txtStAddy.SelectAll()
-                Me.txtStAddy.Focus()
+        Try
+            ExSub = False
+            Me.epEnterLead.Clear()
+            Me.CheckRequiredFields()
+            If Me.epEnterLeadSwitch = True Then
                 Exit Sub
             End If
-            'Dim b As New ENTER_LEAD.CheckDuplicateLead(STA, CTY, ST, ZP, "SAVE", True) '// CLAY
-            Dim b As New ENTER_LEAD.PopulateDuplicates
-            b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, Me.txtStAddy.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text, "SAVE", Me.MapPoint_Verified)
+            If Me.epEnterLeadSwitch = False Then
 
-            '        AddressEnterLead.StopProcessing = False
-            '        AddressEnterLead.ForceMappedToTrue = False
-            '        AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = False
-            '        AddressEnterLead.SelectedAddress = Nothing
-            '        AddressEnterLead.Update_Zip = ""
-            '        AddressEnterLead.Update_State = ""
-            '        AddressEnterLead.Update_City = ""
-            '        AddressEnterLead.Update_StAddress = ""
-            '        AddressEnterLead.lvAddresses.Items.Clear()
-            '    End If
-            'End If
-            DuplicateLead.CloseMethod = "SAVE"
-        End If
+                '' NOTES On Error Provider Enter Lead---
+                '' Two ways to do this, 1) check all fields at once or 2) check field by field.
+                '' first method would catch all at once and illuminate the error provider icon,
+                '' second method would provide a step down approach.....IE: caught one, run script, caught second one, run script
+                '' vs. caught field x,y,z,a,2 - run script. 
+                '' Feild by feild approach would let the user know right then and there on a "lost focus" scenario that they are expected to 
+                '' provide information. however i think that would be very annoying to a user especially if they didn't fill in 
+                '' a number of fields....
+                '' Also, need a list of required fields. I know this was changed so I'll have to get an updated list of what
+                '' information this is supposed to be checking/validating.
+                '' 
+                '' EnterLead [Form] error provider is going to encompass:
+                '' Primary Lead Source
+                '' Contact1First and Last name
+                '' Contact2First and Last name
+                '' House Phone
+                '' StAddress
+                '' City, State
+                '' Spoke with
+                '' Contact1Work
+                '' Product 1
+                ''
+                '' ALSO: per Andy - Validate all feilds at once or exit sub before rest of logic ensues. 4/1/08
+                ''
+                '' need to revise these steps here to reflect the additional changes that were made in saveandnew
+                ''
+
+                Dim c As New VerifyAddress(Me.txtStAddy.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text, 1)
+                'Dim verified As Boolean = c.MapPointVerified
+                'Me.MapPoint_PASSBACK = verified
+                '' if the user has chose to go back,
+                '' here is the logic to flip the switch back so that it continues last time
+                '' and resets the cursor to the StAddy feild on EnterLead Form
+                ' ''
+                'If AddressEnterLead.StopProcessing = True Then
+                '    AddressEnterLead.StopProcessing = False
+                '    DuplicateLead.CloseMethod = "SAVE"
+                '    Me.Focus()
+                '    Me.txtStAddy.Focus()
+                '    Exit Sub
+                'End If
+                ' '' likewise, if the user has decided to push their address through
+                ' '' logic needs to go here to reflect that change
+                ' ''
+                'If AddressEnterLead.StopProcessing = False Then
+                '    If AddressEnterLead.ForceMappedToTrue = False Then
+                '        If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = False Then
+                '            DuplicateLead.CloseMethod = "SAVE"
+                '            Dim STA As String = ""
+                '            Dim CTY As String = ""
+                '            Dim ST As String = ""
+                '            Dim ZP As String = ""
+
+                '            STA = AddressEnterLead.Update_StAddress
+                '            CTY = AddressEnterLead.Update_City
+                '            ST = AddressEnterLead.Update_State
+                '            ZP = AddressEnterLead.Update_Zip
+
+                '            'Dim b As New ENTER_LEAD.CheckDuplicateLead(STA, CTY, ST, ZP, "SAVEANDNEW", AddressEnterLead.ForceMappedToTrue) // CLAY
+                '            Dim b As New ENTER_LEAD.PopulateDuplicates
+                '            b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, STA, CTY, ST, ZP, "SAVE", Me.MapPoint_Verified)
+
+                '        End If
+                '    End If
+                'End If
+
+                ' '' or the third switch going here to just edit the address
+                ' '' with one of the addresses comming out of mappoint and turning the @Mapped flag to true.
+                ' ''
+                'If AddressEnterLead.StopProcessing = False Then
+                '    If AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = True Then
+                '        DuplicateLead.CloseMethod = "SAVE"
+                '        Dim STA As String = ""
+                '        Dim CTY As String = ""
+                '        Dim ST As String = ""
+                '        Dim ZP As String = ""
+
+                '        STA = AddressEnterLead.Update_StAddress
+                '        CTY = AddressEnterLead.Update_City
+                '        ST = AddressEnterLead.Update_State
+                '        ZP = AddressEnterLead.Update_Zip
+                If Me.ExSub = True Then
+                    Me.txtStAddy.SelectAll()
+                    Me.txtStAddy.Focus()
+                    Exit Sub
+                End If
+                'Dim b As New ENTER_LEAD.CheckDuplicateLead(STA, CTY, ST, ZP, "SAVE", True) '// CLAY
+                Dim b As New ENTER_LEAD.PopulateDuplicates
+                b.SetUp(Me.txtC1FName.Text, Me.txtC1LName.Text, Me.txtC2FName.Text, Me.txtC2LName.Text, Me.txtHousePhone.Text, Me.txtAltPhone1.Text, Me.txtAltPhone2.Text, Me.txtStAddy.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text, "SAVE", Me.MapPoint_Verified)
+
+                '        AddressEnterLead.StopProcessing = False
+                '        AddressEnterLead.ForceMappedToTrue = False
+                '        AddressEnterLead.USE_UPDATE_ADDRESS_INSTEAD = False
+                '        AddressEnterLead.SelectedAddress = Nothing
+                '        AddressEnterLead.Update_Zip = ""
+                '        AddressEnterLead.Update_State = ""
+                '        AddressEnterLead.Update_City = ""
+                '        AddressEnterLead.Update_StAddress = ""
+                '        AddressEnterLead.lvAddresses.Items.Clear()
+                '    End If
+                'End If
+                DuplicateLead.CloseMethod = "SAVE"
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "btnSaveClose_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Public Sub Reset()
         Me.cboMarketer.Text = ""
@@ -757,9 +862,16 @@ Public Class EnterLead
                 Me.cboProduct1.Text = ""
                 Exit Select
             Case Else
-                Dim x As New ENTER_LEAD
-                x.GetAcronym(Me.cboProduct1.Text, 1)
-                Exit Select
+                Try
+                    Dim x As New ENTER_LEAD
+                    x.GetAcronym(Me.cboProduct1.Text, 1)
+                    Exit Select
+                Catch ex As Exception
+                    Dim y As New ErrorLogging_V2
+                    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct1_selectedValueChangeD(enter_lead.getacronymn())", "0", ex.Message.ToString)
+                    y = Nothing
+                End Try
+
         End Select
     End Sub
 
@@ -850,11 +962,17 @@ Public Class EnterLead
         If Me.txtCity.Text = "" Then
             Exit Sub
         End If
-        Dim x As New ENTER_LEAD
-        x.AutoFillState(Me.txtCity.Text)
-        If Me.txtState.Text <> "" Then
-            Me.txtState.TabStop = False
-        End If
+        Try
+            Dim x As New ENTER_LEAD
+            x.AutoFillState(Me.txtCity.Text)
+            If Me.txtState.Text <> "" Then
+                Me.txtState.TabStop = False
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "txtcity_lostfocus", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -869,34 +987,41 @@ Public Class EnterLead
     End Sub
 
     Private Sub cboC1Work_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboC1Work.SelectedValueChanged
-        If sender.SelectedItem = "<Add New>" Then
-            Dim y As String = ""
-            y = sender.SelectedItem
-            If y.ToString.Length < 2 Then
-                Exit Sub
-            End If
-            Select Case y
-                Case Is = "<Add New>"
-                    Dim b As New ENTER_LEAD.PopulateWorkHours
-                    Dim x As New ENTER_LEAD.Captilalize
-                    Dim pr As String = ""
+        Try
+            If sender.SelectedItem = "<Add New>" Then
+                Dim y As String = ""
+                y = sender.SelectedItem
+                If y.ToString.Length < 2 Then
+                    Exit Sub
+                End If
+                Select Case y
+                    Case Is = "<Add New>"
+                        Dim b As New ENTER_LEAD.PopulateWorkHours
+                        Dim x As New ENTER_LEAD.Captilalize
+                        Dim pr As String = ""
 
 
-                    pr = x.CapitalizeText(InputBox$("Enter ""Work Hours"" name", "New Work Hours"))
-                    If pr.ToString.Length < 2 Then
+                        pr = x.CapitalizeText(InputBox$("Enter ""Work Hours"" name", "New Work Hours"))
+                        If pr.ToString.Length < 2 Then
+                            sender.Text = ""
+                            Exit Sub
+                        End If
+
+                        b.InsertWH(pr, sender)
+                        Exit Select
+                    Case Is = ""
+                        Exit Select
+                    Case Is = "___________________________________________"
                         sender.Text = ""
-                        Exit Sub
-                    End If
+                        Exit Select
+                End Select
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboc1work_selectedvaluechanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-                    b.InsertWH(pr, sender)
-                    Exit Select
-                Case Is = ""
-                    Exit Select
-                Case Is = "___________________________________________"
-                    sender.Text = ""
-                    Exit Select
-            End Select
-        End If
     End Sub
 
 
@@ -909,19 +1034,26 @@ Public Class EnterLead
             End If
             Select Case y
                 Case Is = "<Add New>"
-                    Dim b As New ENTER_LEAD.PopulateWorkHours
-                    Dim x As New ENTER_LEAD.Captilalize
-                    Dim pr As String = ""
+                    Try
+                        Dim b As New ENTER_LEAD.PopulateWorkHours
+                        Dim x As New ENTER_LEAD.Captilalize
+                        Dim pr As String = ""
 
 
-                    pr = x.CapitalizeText(InputBox$("Enter ""Work Hours"" name", "New Work Hours"))
-                    If pr.ToString.Length < 2 Then
-                        sender.Text = ""
-                        Exit Sub
-                    End If
+                        pr = x.CapitalizeText(InputBox$("Enter ""Work Hours"" name", "New Work Hours"))
+                        If pr.ToString.Length < 2 Then
+                            sender.Text = ""
+                            Exit Sub
+                        End If
 
-                    b.InsertWH(pr, sender)
-                    Exit Select
+                        b.InsertWH(pr, sender)
+                        Exit Select
+                    Catch ex As Exception
+                        Dim yy As New ErrorLogging_V2
+                        yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboc2work_selectedvaluechanged", "0", ex.Message.ToString)
+                        yy = Nothing
+                    End Try
+
                 Case Is = ""
                     Exit Select
                 Case Is = "___________________________________________"

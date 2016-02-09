@@ -27,9 +27,11 @@ Public Class DBASE_Backup
             Shell("sqlcmd -S EKG1\SQLEXPRESS -U Clay -P spoken1 -i " & Chr(34) & "\\ekg1\iss\Backups\backupscript.txt" & Chr(34) & "", AppWinStyle.NormalNoFocus, True, -1)
         Catch ex As Exception
             MsgBox("There was an error backing up the Data Base. Please contact your Administrator and try again.", MsgBoxStyle.Exclamation, "Error Backing Up Data Base")
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("DBASE_Backup", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "Backup")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("DBASE_Backup", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "Backup")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "DBASE_Backup", "DBASE_Backup", "Sub", "Backup", "0", ex.Message.ToString)
+            y = Nothing
             Exit Sub
         End Try
     End Sub
@@ -43,8 +45,12 @@ Public Class DBASE_Backup
                 frmBackup.ListView1.Items.Add(lv)
             Next
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("DBASE_Backup", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "Get_Existing")
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("DBASE_Backup", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "Get_Existing")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "DBASE_Backup", "DBASE_Backup", "Sub", "Get_Existing()", "0", ex.Message.ToString)
+            y = Nothing
+
         End Try
     End Sub
 End Class
