@@ -10,37 +10,44 @@ Public Class TruncateNotes
         End Set
     End Property
     Public Sub Truncate(ByVal notes As String, ByVal ctr As Control)
-        Dim i As Integer
-        If notes <> Nothing Then
-            Dim h As Integer = notes.Length / 35
-            Dim newstr As String = notes
+        Try
+            Dim i As Integer
+            If notes <> Nothing Then
+                Dim h As Integer = notes.Length / 35
+                Dim newstr As String = notes
 
-            If notes.Length > 35 Then
-                For i = 1 To h
-                    If i = 1 Then
-                        newstr = Microsoft.VisualBasic.Left(newstr, i * 35)
-                        Dim tr = InStrRev(newstr, " ")
-                        newstr = Microsoft.VisualBasic.Left(newstr, tr)
-                        newstr = RTrim(newstr)
-                        newstr = newstr & vbCr & Microsoft.VisualBasic.Mid(notes, tr + 1)
-                    Else
+                If notes.Length > 35 Then
+                    For i = 1 To h
+                        If i = 1 Then
+                            newstr = Microsoft.VisualBasic.Left(newstr, i * 35)
+                            Dim tr = InStrRev(newstr, " ")
+                            newstr = Microsoft.VisualBasic.Left(newstr, tr)
+                            newstr = RTrim(newstr)
+                            newstr = newstr & vbCr & Microsoft.VisualBasic.Mid(notes, tr + 1)
+                        Else
 
-                        Dim tr = InStrRev(newstr, Chr(13))
-                        If tr + 35 > notes.Length Then
-                            Exit For
+                            Dim tr = InStrRev(newstr, Chr(13))
+                            If tr + 35 > notes.Length Then
+                                Exit For
+                            End If
+                            newstr = Microsoft.VisualBasic.Left(newstr, tr + 35)
+                            Dim t = InStrRev(newstr, " ")
+                            newstr = Microsoft.VisualBasic.Left(newstr, t)
+                            newstr = RTrim(newstr)
+                            newstr = newstr & vbCr & Microsoft.VisualBasic.Mid(notes, t + 1)
                         End If
-                        newstr = Microsoft.VisualBasic.Left(newstr, tr + 35)
-                        Dim t = InStrRev(newstr, " ")
-                        newstr = Microsoft.VisualBasic.Left(newstr, t)
-                        newstr = RTrim(newstr)
-                        newstr = newstr & vbCr & Microsoft.VisualBasic.Mid(notes, t + 1)
-                    End If
-                Next
-                Me.NewSTRING = newstr
-            Else
-                Me.NewSTRING = notes
+                    Next
+                    Me.NewSTRING = newstr
+                Else
+                    Me.NewSTRING = notes
+                End If
             End If
-        End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "TruncateNotes", "TruncateNotes", "Sub", "Truncate(notes,ctr)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     
 End Class

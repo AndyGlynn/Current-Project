@@ -16,9 +16,11 @@ Public Class REG_LOGIC
             Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\WRLD", "0x1", "AAAAA-BBBBB-CCCCC-DDDDD-FFFFF-1")
             Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\WRLD", "0x2", "000-00000-001")
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("REG_LOGIC", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CreateKey")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("REG_LOGIC", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CreateKey")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "REG_LOGIC", "REG_LOGIC", "Sub", "CreateKey", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -71,9 +73,11 @@ Public Class REG_LOGIC
             ReadKey(LC_KEY, LS_KEY)
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("REG_LOGIC", "ByVal UserName As String, ByVal UserPWD As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetKeysFromTable")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("REG_LOGIC", "ByVal UserName As String, ByVal UserPWD As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetKeysFromTable")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "REG_LOGIC", "REG_LOGIC", "Sub", "GetKeysFromTable(user,userpwd)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub

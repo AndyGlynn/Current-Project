@@ -26,9 +26,11 @@ Public Class SCHEDULE_ACTION_LOGIC
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("SCHEDULE_ACTION_LOGIC.GetActionList", "ByVal Department as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetActionList")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("SCHEDULE_ACTION_LOGIC.GetActionList", "ByVal Department as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetActionList")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SCHEDULEDACTION_LOGIC", "SCHEDULEDACTION_LOGIC", "Sub", "GetActionList(department)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -49,9 +51,11 @@ Public Class SCHEDULE_ACTION_LOGIC
             'ScheduleAction.CboScheduledAction.SelectedItem = Action
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("SCHEDULE_ACTION_LOGIC.GetActionList", "ByVal Department as string, ByVal Action As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewAction")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("SCHEDULE_ACTION_LOGIC.GetActionList", "ByVal Department as string, ByVal Action As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewAction")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SCHEDULEDACTION_LOGIC", "SCHEDULEDACTION_LOGIC", "Sub", "InsertNewAction(department)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -135,46 +139,54 @@ Public Class SCHEDULE_ACTION_LOGIC
                 End Select
             Catch ex As Exception
                 cnn.Close()
-                Dim err As New ErrorLogFlatFile
-                err.WriteLog("SCHEDULE_ACTION_LOGIC.InsertSA", "ByVal LeadNum As String, ByVal Department As String, ByVal AssignedTo As String, ByVal ExecDate As Date, ByVal Notes As String, ByVal AttachedFiles As Boolean, ByVal scheduledAction As String, ByVal Hash As String, ByVal Completed As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewSchedAction")
-
+                'Dim err As New ErrorLogFlatFile
+                'err.WriteLog("SCHEDULE_ACTION_LOGIC.InsertSA", "ByVal LeadNum As String, ByVal Department As String, ByVal AssignedTo As String, ByVal ExecDate As Date, ByVal Notes As String, ByVal AttachedFiles As Boolean, ByVal scheduledAction As String, ByVal Hash As String, ByVal Completed As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewSchedAction")
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SCHEDULEDACTION_LOGIC", "SCHEDULEDACTION_LOGIC", "Sub", "InsertNewSchedAction(...)", "0", ex.Message.ToString)
+                y = Nothing
             End Try
 
         End Sub
         Public Sub UpdateSchedAction(ByVal id As String, ByVal LeadNum As String, ByVal Department As String, _
    ByVal AssignedTo As String, ByVal ExecDate As Date, ByVal Notes As String, ByVal AttachedFiles As Boolean, ByVal scheduledAction As String, ByVal Hash As String)
-            ScheduleAction.SAID = id
-            Dim cmdINS As SqlCommand = New SqlCommand("dbo.UpdateSA", cnn)
-            Dim param6 As SqlParameter = New SqlParameter("@LeadNum", LeadNum)
-            Dim param7 As SqlParameter = New SqlParameter("@Department", Department)
-            Dim param8 As SqlParameter = New SqlParameter("@AssignedTo", AssignedTo)
-            Dim param9 As SqlParameter = New SqlParameter("@ExecutionDate", ExecDate)
-            Dim param10 As SqlParameter = New SqlParameter("@Notes", Notes)
-            Dim param11 As SqlParameter = New SqlParameter("@AttachedFiles", AttachedFiles)
-            Dim param12 As SqlParameter = New SqlParameter("@SchedAction", scheduledAction)
-            Dim param13 As SqlParameter = New SqlParameter("@ID", id)
-            Dim param15 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
-            '' hash will not be blank as dictated by the logic on the front
-            '' end so there is no need to compensate for a blank value here.
-            Dim param14 As SqlParameter = New SqlParameter("@Hash", Hash)
-            cmdINS.CommandType = CommandType.StoredProcedure
-            cmdINS.Parameters.Add(param6)
-            cmdINS.Parameters.Add(param7)
-            cmdINS.Parameters.Add(param8)
-            cmdINS.Parameters.Add(param9)
-            cmdINS.Parameters.Add(param10)
-            cmdINS.Parameters.Add(param11)
-            cmdINS.Parameters.Add(param12)
-            cmdINS.Parameters.Add(param13)
-            cmdINS.Parameters.Add(param14)
-            cmdINS.Parameters.Add(param15)
-            cnn.Open()
-            Dim r2 As SqlDataReader
-            r2 = cmdINS.ExecuteReader(CommandBehavior.CloseConnection)
-            'ScheduleAction.SAID = r2.Item(0).ToString()
-            r2.Close()
-            cnn.Close()
-          
+            Try
+                ScheduleAction.SAID = id
+                Dim cmdINS As SqlCommand = New SqlCommand("dbo.UpdateSA", cnn)
+                Dim param6 As SqlParameter = New SqlParameter("@LeadNum", LeadNum)
+                Dim param7 As SqlParameter = New SqlParameter("@Department", Department)
+                Dim param8 As SqlParameter = New SqlParameter("@AssignedTo", AssignedTo)
+                Dim param9 As SqlParameter = New SqlParameter("@ExecutionDate", ExecDate)
+                Dim param10 As SqlParameter = New SqlParameter("@Notes", Notes)
+                Dim param11 As SqlParameter = New SqlParameter("@AttachedFiles", AttachedFiles)
+                Dim param12 As SqlParameter = New SqlParameter("@SchedAction", scheduledAction)
+                Dim param13 As SqlParameter = New SqlParameter("@ID", id)
+                Dim param15 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
+                '' hash will not be blank as dictated by the logic on the front
+                '' end so there is no need to compensate for a blank value here.
+                Dim param14 As SqlParameter = New SqlParameter("@Hash", Hash)
+                cmdINS.CommandType = CommandType.StoredProcedure
+                cmdINS.Parameters.Add(param6)
+                cmdINS.Parameters.Add(param7)
+                cmdINS.Parameters.Add(param8)
+                cmdINS.Parameters.Add(param9)
+                cmdINS.Parameters.Add(param10)
+                cmdINS.Parameters.Add(param11)
+                cmdINS.Parameters.Add(param12)
+                cmdINS.Parameters.Add(param13)
+                cmdINS.Parameters.Add(param14)
+                cmdINS.Parameters.Add(param15)
+                cnn.Open()
+                Dim r2 As SqlDataReader
+                r2 = cmdINS.ExecuteReader(CommandBehavior.CloseConnection)
+                'ScheduleAction.SAID = r2.Item(0).ToString()
+                r2.Close()
+                cnn.Close()
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SCHEDULEDACTION_LOGIC", "SCHEDULEDACTION_LOGIC", "Sub", "InsertNewSchedAction(id)", id, ex.Message.ToString)
+                y = Nothing
+            End Try
+
 
             'Me.Refresh_CustomerHistory()
         End Sub
@@ -188,42 +200,51 @@ Public Class SCHEDULE_ACTION_LOGIC
                 r2.Close()
                 cnn.Close()
             Catch ex As Exception
-
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SCHEDULEDACTION_LOGIC", "SCHEDULEDACTION_LOGIC", "Sub", "Update_AF_Path(hash,said)", "0", ex.Message.ToString)
+                y = Nothing
             End Try
         End Sub
         Private Sub Refresh_CustomerHistory()
-            Dim x As New CustomerHistory
-            Dim tscbo As ToolStripComboBox = Nothing
-            Select Case STATIC_VARIABLES.ActiveChild.Name
-                Case "Confirming"
-                    tscbo = Confirming.TScboCustomerHistory
-                Case "Sales"
-                    tscbo = Sales.TScboCustomerHistory
-                Case "Administration"
-                    tscbo = Administration.TScboCustomerHistory
-                Case "Finance"
-                    tscbo = Finance.TScboCustomerHistory
-                Case "WCaller"
-                    tscbo = WCaller.TScboCustomerHistory
-                Case "Recovery"
-                    tscbo = Recovery.TScboCustomerHistory
-                Case "PreviousCustomer"
-                    tscbo = PreviousCustomer.TScboCustomerHistory
-                Case "Installation"
-                    'tscbo = Installation.TScboCustomerHistory
-                Case "ConfirmingSingleRecord"
-                    tscbo = ConfirmingSingleRecord.TScboCustomerHistory
-                Case "SecondSource"
-                    tscbo = SecondSource.TScboCustomerHistory
-                Case "MarketingManager"
-                    tscbo = MarketingManager.TScboCustomerHistory
-                Case "ColdCalling"
-                    tscbo = ColdCalling.TScboCustomerHistory
-            End Select
-            If tscbo Is Nothing Then
-                Exit Sub
-            End If
-            x.SetUp(STATIC_VARIABLES.ActiveChild, STATIC_VARIABLES.CurrentID, tscbo)
+            Try
+                Dim x As New CustomerHistory
+                Dim tscbo As ToolStripComboBox = Nothing
+                Select Case STATIC_VARIABLES.ActiveChild.Name
+                    Case "Confirming"
+                        tscbo = Confirming.TScboCustomerHistory
+                    Case "Sales"
+                        tscbo = Sales.TScboCustomerHistory
+                    Case "Administration"
+                        tscbo = Administration.TScboCustomerHistory
+                    Case "Finance"
+                        tscbo = Finance.TScboCustomerHistory
+                    Case "WCaller"
+                        tscbo = WCaller.TScboCustomerHistory
+                    Case "Recovery"
+                        tscbo = Recovery.TScboCustomerHistory
+                    Case "PreviousCustomer"
+                        tscbo = PreviousCustomer.TScboCustomerHistory
+                    Case "Installation"
+                        'tscbo = Installation.TScboCustomerHistory
+                    Case "ConfirmingSingleRecord"
+                        tscbo = ConfirmingSingleRecord.TScboCustomerHistory
+                    Case "SecondSource"
+                        tscbo = SecondSource.TScboCustomerHistory
+                    Case "MarketingManager"
+                        tscbo = MarketingManager.TScboCustomerHistory
+                    Case "ColdCalling"
+                        tscbo = ColdCalling.TScboCustomerHistory
+                End Select
+                If tscbo Is Nothing Then
+                    Exit Sub
+                End If
+                x.SetUp(STATIC_VARIABLES.ActiveChild, STATIC_VARIABLES.CurrentID, tscbo)
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SCHEDULEDACTION_LOGIC", "SCHEDULEDACTION_LOGIC", "Sub", "Refresh_CustomerHistory()", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End Sub
     End Class
 

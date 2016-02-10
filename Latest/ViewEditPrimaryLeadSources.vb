@@ -27,9 +27,11 @@ Public Class ViewEditPrimaryLeadSources
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ViewEditPrimaryLeadSources", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateList")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ViewEditPrimaryLeadSources", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateList")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditPLS", "ViewEditPLS", "Sub", "PopulateList()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
     Public Sub Add_PLS(ByVal PLS As String)
@@ -56,6 +58,9 @@ Public Class ViewEditPrimaryLeadSources
                         Exit Select
                     Catch ex As Exception
                         cnn.Close()
+                        Dim y As New ErrorLogging_V2
+                        y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditPLS", "ViewEditPLS", "Sub", "ADD_PLS(PLS)", "0", ex.Message.ToString)
+                        y = Nothing
                     End Try
 
                 Case Is >= 1
@@ -68,9 +73,11 @@ Public Class ViewEditPrimaryLeadSources
         Catch ex As Exception
             cnn.Close()
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ViewEditPrimaryLeadSources", "ByVal PLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateList")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ViewEditPrimaryLeadSources", "ByVal PLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateList")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditPLS", "ViewEditPLS", "Sub", "ADD_PLS(PLS)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 

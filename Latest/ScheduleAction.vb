@@ -24,56 +24,67 @@ Public Class ScheduleAction
     '' 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Me.MdiParent = Main
-        If edit = True Then
-            Me.Populate_Edit()
-            Exit Sub
-        End If
-        Me.txtLeadNumber.Text = STATIC_VARIABLES.CurrentID.ToString
-        GetAutoCompleteSource()
-        'GetScheduledAction()
-        Dim a As New CUSTOMER_LABEL
-        a.GetINFO(Me.txtLeadNumber.Text)
-        Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, FontStyle.Bold, GraphicsUnit.Pixel, CType(0, Byte))
-        Me.lblPhoneInfo.Text = a.Contact1Name & vbCrLf & a.StAddress & vbCrLf & vbCrLf & a.HousePhone & vbCrLf & a.AltPhone1 & "     " & a.AltPhone1Type & vbCrLf & a.AltPhone2 & "     " & a.AltPhone2Type
-        'Me.lblContactInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
+        Try
+            If edit = True Then
+                Me.Populate_Edit()
+                Exit Sub
+            End If
+            Me.txtLeadNumber.Text = STATIC_VARIABLES.CurrentID.ToString
+            GetAutoCompleteSource()
+            'GetScheduledAction()
+            Dim a As New CUSTOMER_LABEL
+            a.GetINFO(Me.txtLeadNumber.Text)
+            Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, FontStyle.Bold, GraphicsUnit.Pixel, CType(0, Byte))
+            Me.lblPhoneInfo.Text = a.Contact1Name & vbCrLf & a.StAddress & vbCrLf & vbCrLf & a.HousePhone & vbCrLf & a.AltPhone1 & "     " & a.AltPhone1Type & vbCrLf & a.AltPhone2 & "     " & a.AltPhone2Type
+            'Me.lblContactInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
 
-        'Me.lblContactInfo.Text = "No Contact Information"
-        If Me.txtLeadNumber.Text = "" Then
-            Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
-            Me.lblPhoneInfo.Text = "No Contact Information Available" & vbCrLf & "(You must supply a valid Customer ID)"
-        End If
+            'Me.lblContactInfo.Text = "No Contact Information"
+            If Me.txtLeadNumber.Text = "" Then
+                Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
+                Me.lblPhoneInfo.Text = "No Contact Information Available" & vbCrLf & "(You must supply a valid Customer ID)"
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "SheduleAction_load", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
     End Sub
     Private Sub Populate_Edit()
-
-        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT * from iss.dbo.ScheduledTasks where id = '" & Me.EditId & "'", cnn)
-        Dim ArUsers As New ArrayList
-        cnn.Open()
-        Dim r1 As SqlDataReader
-        r1 = cmdGETUSR.ExecuteReader
-        While r1.Read
-            Me.txtLeadNumber.Text = r1.Item(1)
-            Dim a As New CUSTOMER_LABEL
-            a.GetINFO(Me.txtLeadNumber.Text)
-            Me.txtAssignedto.Text = r1.Item(3)
-            Me.cboDept.SelectedItem = r1.Item(2)
-            Dim x As SCHEDULE_ACTION_LOGIC
-            'x.GetActionList(Me.cboDept.Text)
-            Me.CboScheduledAction.SelectedItem = r1.Item(7)
-            Me.dtpSA.Value = r1.Item(4)
-            Me.rtfNotes.Text = r1.Item(5)
-            If r1.Item(6) = True Then
-                Me.Button3.Text = "Remove File..."
-                Me.Hash = r1.Item(9)
-                Me.AtFile = True
-            End If
-            Me.Button1.Text = "Edit"
-            Me.Text = "Edit Scheduled Task"
-        End While
-        r1.Close()
-        cnn.Close()
+        Try
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT * from iss.dbo.ScheduledTasks where id = '" & Me.EditId & "'", cnn)
+            Dim ArUsers As New ArrayList
+            cnn.Open()
+            Dim r1 As SqlDataReader
+            r1 = cmdGETUSR.ExecuteReader
+            While r1.Read
+                Me.txtLeadNumber.Text = r1.Item(1)
+                Dim a As New CUSTOMER_LABEL
+                a.GetINFO(Me.txtLeadNumber.Text)
+                Me.txtAssignedto.Text = r1.Item(3)
+                Me.cboDept.SelectedItem = r1.Item(2)
+                Dim x As SCHEDULE_ACTION_LOGIC
+                'x.GetActionList(Me.cboDept.Text)
+                Me.CboScheduledAction.SelectedItem = r1.Item(7)
+                Me.dtpSA.Value = r1.Item(4)
+                Me.rtfNotes.Text = r1.Item(5)
+                If r1.Item(6) = True Then
+                    Me.Button3.Text = "Remove File..."
+                    Me.Hash = r1.Item(9)
+                    Me.AtFile = True
+                End If
+                Me.Button1.Text = "Edit"
+                Me.Text = "Edit Scheduled Task"
+            End While
+            r1.Close()
+            cnn.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "Populate_Edit()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
     Private Sub txtLeadNumber_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLeadNumber.KeyPress
@@ -89,76 +100,96 @@ Public Class ScheduleAction
 
 
     Private Sub txtLeadNumber_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtLeadNumber.TextChanged
-        Dim str As String = ""
-        str = Me.txtLeadNumber.Text
-        If str.ToString.Length <= 2 Then
-            ' Me.lblContactInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
-            Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
-            ' Me.lblContactInfo.Text = "No Contact Information"
-            Me.lblPhoneInfo.Text = "No Contact Information Available" & vbCrLf & "(You must supply a valid Customer ID)"
-            Exit Sub
-        End If
-        If str.ToString.ToString <= 0 Then
-            'Me.lblContactInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
-            Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
-            'Me.lblContactInfo.Text = "No Contact Information"
-            Me.lblPhoneInfo.Text = "No Contact Information Available" & vbCrLf & "(You must supply a valid Customer ID)"
-        End If
-
-        If str.ToString.Length > 2 Then
-            ValidateLeadNumber(str)
-            If Me.RemoveErrP = True Then
-                Dim a As New CUSTOMER_LABEL
-                a.GetINFO(Me.txtLeadNumber.Text)
-                Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, FontStyle.Bold, GraphicsUnit.Pixel, CType(0, Byte))
-                Me.lblPhoneInfo.Text = a.Contact1Name & vbCrLf & a.StAddress & vbCrLf & vbCrLf & a.HousePhone & vbCrLf & a.AltPhone1 & "     " & a.AltPhone1Type & vbCrLf & a.AltPhone2 & "     " & a.AltPhone2Type
-                Me.ep.Clear()
+        Try
+            Dim str As String = ""
+            str = Me.txtLeadNumber.Text
+            If str.ToString.Length <= 2 Then
+                ' Me.lblContactInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
+                Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
+                ' Me.lblContactInfo.Text = "No Contact Information"
+                Me.lblPhoneInfo.Text = "No Contact Information Available" & vbCrLf & "(You must supply a valid Customer ID)"
+                Exit Sub
             End If
-        End If
+            If str.ToString.ToString <= 0 Then
+                'Me.lblContactInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
+                Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
+                'Me.lblContactInfo.Text = "No Contact Information"
+                Me.lblPhoneInfo.Text = "No Contact Information Available" & vbCrLf & "(You must supply a valid Customer ID)"
+            End If
+
+            If str.ToString.Length > 2 Then
+                ValidateLeadNumber(str)
+                If Me.RemoveErrP = True Then
+                    Dim a As New CUSTOMER_LABEL
+                    a.GetINFO(Me.txtLeadNumber.Text)
+                    Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, FontStyle.Bold, GraphicsUnit.Pixel, CType(0, Byte))
+                    Me.lblPhoneInfo.Text = a.Contact1Name & vbCrLf & a.StAddress & vbCrLf & vbCrLf & a.HousePhone & vbCrLf & a.AltPhone1 & "     " & a.AltPhone1Type & vbCrLf & a.AltPhone2 & "     " & a.AltPhone2Type
+                    Me.ep.Clear()
+                End If
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "txtleadNumber_textChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub GetAutoCompleteSource()
-        Me.txtAssignedto.AutoCompleteCustomSource.Clear()
-        Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT UserFirstName, UserLastName from iss.dbo.userpermissiontable", cnn)
-        Dim ArUsers As New ArrayList
-        cnn.Open()
-        Dim r1 As SqlDataReader
-        r1 = cmdGETUSR.ExecuteReader
-        While r1.Read
-            ArUsers.Add(r1.Item(0) & " " & r1.Item(1))
-        End While
-        r1.Close()
-        cnn.Close()
-        Dim g As Integer = 0
-        For g = 0 To ArUsers.Count - 1
-            If ArUsers(g).ToString = "Admin Admin" Then
-                Me.txtAssignedto.AutoCompleteCustomSource.Add("Admin")
-            ElseIf ArUsers(g).ToString <> "Admin" Then
-                Me.txtAssignedto.AutoCompleteCustomSource.Add(ArUsers(g).ToString)
-            End If
-        Next
+        Try
+            Me.txtAssignedto.AutoCompleteCustomSource.Clear()
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT UserFirstName, UserLastName from iss.dbo.userpermissiontable", cnn)
+            Dim ArUsers As New ArrayList
+            cnn.Open()
+            Dim r1 As SqlDataReader
+            r1 = cmdGETUSR.ExecuteReader
+            While r1.Read
+                ArUsers.Add(r1.Item(0) & " " & r1.Item(1))
+            End While
+            r1.Close()
+            cnn.Close()
+            Dim g As Integer = 0
+            For g = 0 To ArUsers.Count - 1
+                If ArUsers(g).ToString = "Admin Admin" Then
+                    Me.txtAssignedto.AutoCompleteCustomSource.Add("Admin")
+                ElseIf ArUsers(g).ToString <> "Admin" Then
+                    Me.txtAssignedto.AutoCompleteCustomSource.Add(ArUsers(g).ToString)
+                End If
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "GetAutoCompelteSource()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub GetScheduledAction()
-        Me.CboScheduledAction.Items.Clear()
-        Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdGET As SqlCommand = New SqlCommand("SELECT ScheduledAction from iss.dbo.actionlist", cnn)
-        Dim r1 As SqlDataReader
-        cnn.Open()
-        r1 = cmdGET.ExecuteReader
-        Dim ArActions As New ArrayList
-        While r1.Read
-            ArActions.Add(r1.Item(0))
-        End While
-        r1.Close()
-        cnn.Close()
-        Dim g As Integer = 0
-        Me.CboScheduledAction.Items.Add("<Add New>")
-        Me.CboScheduledAction.Items.Add("____________________________")
-        Me.CboScheduledAction.Items.Add("")
+        Try
+            Me.CboScheduledAction.Items.Clear()
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ScheduledAction from iss.dbo.actionlist", cnn)
+            Dim r1 As SqlDataReader
+            cnn.Open()
+            r1 = cmdGET.ExecuteReader
+            Dim ArActions As New ArrayList
+            While r1.Read
+                ArActions.Add(r1.Item(0))
+            End While
+            r1.Close()
+            cnn.Close()
+            Dim g As Integer = 0
+            Me.CboScheduledAction.Items.Add("<Add New>")
+            Me.CboScheduledAction.Items.Add("____________________________")
+            Me.CboScheduledAction.Items.Add("")
 
-        For g = 0 To ArActions.Count - 1
-            Me.CboScheduledAction.Items.Add(ArActions(g).ToString)
-        Next
+            For g = 0 To ArActions.Count - 1
+                Me.CboScheduledAction.Items.Add(ArActions(g).ToString)
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "GetAutoCompelteSource()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
     Private Sub ValidateLeadNumber(ByVal LeadNumber As String)
@@ -189,7 +220,9 @@ Public Class ScheduleAction
             r1.Close()
             cnn.Close()
         Catch ex As Exception
-
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "ValidateLeadNumber", LeadNumber, ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -209,6 +242,7 @@ Public Class ScheduleAction
 
     End Sub
     Private Sub remove_file()
+
         Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Dim cmdGETUSR As SqlCommand = New SqlCommand("update iss.dbo.ScheduledTasks set attachedfiles = 'False', attachedhashvalue = '0' where id = '" & Me.EditId & "'", cnn)
         Try
@@ -221,8 +255,11 @@ Public Class ScheduleAction
             Me.Button3.Text = "Attach a File..."
         Catch ex As Exception
             cnn.Close()
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "Remove_File", Me.EditId, ex.Message.ToString)
+            y = Nothing
         End Try
-     
+
     End Sub
 
     Private Sub CboScheduledAction_DropDown(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboScheduledAction.DropDown
@@ -236,110 +273,123 @@ Public Class ScheduleAction
   
 
     Private Sub CboScheduledAction_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboScheduledAction.SelectedValueChanged
-        Dim x As String = ""
-        x = Me.CboScheduledAction.Text
-        Select Case x
-            Case Is = "<Add New>"
-                Dim str As String = ""
-                str = InputBox$("Enter new Action to add for the " & Me.cboDept.Text & " department." & vbCr & "(Actions should be a short description of a standard action that is recurring & recyclable. If you need to supply more detail please use the notes field.", "New Action")
-                If str.ToString.Length < 2 Then
-                    Exit Sub
-                End If
-                Dim g As New SCHEDULE_ACTION_LOGIC
-                g.InsertNewAction(Me.cboDept.Text, str)
-                'Me.GetScheduledAction()
-                If str <> "" Then
-                    Me.CboScheduledAction.SelectedItem = str.ToString
-                Else
-                    Me.CboScheduledAction.SelectedItem = ""
-                End If
+        Try
+            Dim x As String = ""
+            x = Me.CboScheduledAction.Text
+            Select Case x
+                Case Is = "<Add New>"
+                    Dim str As String = ""
+                    str = InputBox$("Enter new Action to add for the " & Me.cboDept.Text & " department." & vbCr & "(Actions should be a short description of a standard action that is recurring & recyclable. If you need to supply more detail please use the notes field.", "New Action")
+                    If str.ToString.Length < 2 Then
+                        Exit Sub
+                    End If
+                    Dim g As New SCHEDULE_ACTION_LOGIC
+                    g.InsertNewAction(Me.cboDept.Text, str)
+                    'Me.GetScheduledAction()
+                    If str <> "" Then
+                        Me.CboScheduledAction.SelectedItem = str.ToString
+                    Else
+                        Me.CboScheduledAction.SelectedItem = ""
+                    End If
 
-                Exit Select
-            Case Is = ""
-                Exit Select
-            Case Is = "________________________"
-                Me.CboScheduledAction.Text = ""
-                Exit Select
-                'Case Else
-                '    Dim sal As New SCHEDULE_ACTION_LOGIC
-                '    sal.GetActionList(Me.saCboDepart.Text)
-        End Select
+                    Exit Select
+                Case Is = ""
+                    Exit Select
+                Case Is = "________________________"
+                    Me.CboScheduledAction.Text = ""
+                    Exit Select
+                    'Case Else
+                    '    Dim sal As New SCHEDULE_ACTION_LOGIC
+                    '    sal.GetActionList(Me.saCboDepart.Text)
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "CboScheduledAction_SelectedValueChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Dim leadNum As String = ""
-        Dim ExecDate As String = ""
-        Dim Notes As String = ""
-        Dim AssignedTo As String = ""
-        Dim Department As String = ""
-        Dim SchedAction As String = ""
-        leadNum = Me.txtLeadNumber.Text
-        If leadNum = "" Then
-            Exit Sub
-        End If
-        ExecDate = Me.dtpSA.Value.Date
-        Notes = Me.rtfNotes.Text
-        AssignedTo = Me.txtAssignedto.Text
-        Department = Me.cboDept.Text
-        SchedAction = Me.CboScheduledAction.Text
-        Me.ErrorProvider1.Clear()
-        Dim cnt As Integer = 0
-        If ExecDate = "" Then
-            Me.ErrorProvider1.SetError(Me.dtpSA, "Required Field")
-            cnt += 1
-            'Exit Sub
-        End If
-        If AssignedTo = "" Then
-            Me.ErrorProvider1.SetError(Me.txtAssignedto, "Required Field")
-            cnt += 1
-            'Exit Sub
-        End If
-        If Department = "" Then
-            Me.ErrorProvider1.SetError(Me.cboDept, "Required Field")
-            cnt += 1
-            'Exit Sub
-        End If
-        If SchedAction = "" Then
-            Me.ErrorProvider1.SetError(Me.CboScheduledAction, "Required Field")
-            cnt += 1
-        End If
-        If cnt >= 1 Then
-            Exit Sub
-        End If
-        '' do not use cmraude
-        '' use stored procedure method instead
-      
-        Dim x As New SCHEDULE_ACTION_LOGIC.InsertSA
-        Dim hash As String = ""
-        Dim aFile As String = ""
-        If AtFile = True Then
-            hash = Me.Hash
-            aFile = "1"
-        End If
-        If AtFile = False Then
-            hash = "0"
-            aFile = "0"
-        End If
-        If Me.Button1.Text.Contains("Edit") Then
-            x.UpdateSchedAction(Me.EditId, leadNum, Department, AssignedTo, ExecDate, Notes, AtFile, SchedAction, hash)
-        Else
-            x.InsertNewSchedAction(leadNum, Department, AssignedTo, ExecDate, Notes, AtFile, SchedAction, hash, False)
-        End If
+        Try
+            Dim leadNum As String = ""
+            Dim ExecDate As String = ""
+            Dim Notes As String = ""
+            Dim AssignedTo As String = ""
+            Dim Department As String = ""
+            Dim SchedAction As String = ""
+            leadNum = Me.txtLeadNumber.Text
+            If leadNum = "" Then
+                Exit Sub
+            End If
+            ExecDate = Me.dtpSA.Value.Date
+            Notes = Me.rtfNotes.Text
+            AssignedTo = Me.txtAssignedto.Text
+            Department = Me.cboDept.Text
+            SchedAction = Me.CboScheduledAction.Text
+            Me.ErrorProvider1.Clear()
+            Dim cnt As Integer = 0
+            If ExecDate = "" Then
+                Me.ErrorProvider1.SetError(Me.dtpSA, "Required Field")
+                cnt += 1
+                'Exit Sub
+            End If
+            If AssignedTo = "" Then
+                Me.ErrorProvider1.SetError(Me.txtAssignedto, "Required Field")
+                cnt += 1
+                'Exit Sub
+            End If
+            If Department = "" Then
+                Me.ErrorProvider1.SetError(Me.cboDept, "Required Field")
+                cnt += 1
+                'Exit Sub
+            End If
+            If SchedAction = "" Then
+                Me.ErrorProvider1.SetError(Me.CboScheduledAction, "Required Field")
+                cnt += 1
+            End If
+            If cnt >= 1 Then
+                Exit Sub
+            End If
+            '' do not use cmraude
+            '' use stored procedure method instead
 
-        If aFile = "1" Then
-            Me.AttachFile2()
-        End If
+            Dim x As New SCHEDULE_ACTION_LOGIC.InsertSA
+            Dim hash As String = ""
+            Dim aFile As String = ""
+            If AtFile = True Then
+                hash = Me.Hash
+                aFile = "1"
+            End If
+            If AtFile = False Then
+                hash = "0"
+                aFile = "0"
+            End If
+            If Me.Button1.Text.Contains("Edit") Then
+                x.UpdateSchedAction(Me.EditId, leadNum, Department, AssignedTo, ExecDate, Notes, AtFile, SchedAction, hash)
+            Else
+                x.InsertNewSchedAction(leadNum, Department, AssignedTo, ExecDate, Notes, AtFile, SchedAction, hash, False)
+            End If
 
-        Me.txtLeadNumber.Text = ""
-        Me.txtAssignedto.Text = ""
-        Me.rtfNotes.Text = ""
-        Me.CboScheduledAction.Items.Clear()
-        Me.CboScheduledAction.Text = ""
-        Me.cboDept.Items.Clear()
-        Me.cboDept.Text = ""
-        Me.dtpSA.Value = Date.Today.Date
-        Me.AtFile = False
-        Me.Close()
+            If aFile = "1" Then
+                Me.AttachFile2()
+            End If
+
+            Me.txtLeadNumber.Text = ""
+            Me.txtAssignedto.Text = ""
+            Me.rtfNotes.Text = ""
+            Me.CboScheduledAction.Items.Clear()
+            Me.CboScheduledAction.Text = ""
+            Me.cboDept.Items.Clear()
+            Me.cboDept.Text = ""
+            Me.dtpSA.Value = Date.Today.Date
+            Me.AtFile = False
+            Me.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "Button1_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
     Dim path As String = STATIC_VARIABLES.SAAttachedFileDirectory
     Private cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
@@ -364,6 +414,7 @@ Public Class ScheduleAction
 
     End Sub
     Public Sub AttachFile2()
+
         Dim d = Me.Hash
         Dim e
         Dim cnt As Integer = 0
@@ -387,32 +438,47 @@ Public Class ScheduleAction
         Dim sfp As String = Replace(d.ToString, "\" & z, "")
         '''' create directory 
         Dim file As String = path
-        System.IO.Directory.CreateDirectory(path + ID.ToString)
-        file = file + ID.ToString + "\" + z.ToString
+        System.IO.Directory.CreateDirectory(path + id.ToString)
+        file = file + id.ToString + "\" + z.ToString
         Hash = file
-      
 
-    
+
+
 
         'Dim x
         'Dim icnt As Integer = 0
 
-     
+
 
         Try
-            System.IO.File.Copy(d, path + ID.ToString & "\" & z.ToString)
+            System.IO.File.Copy(d, path + id.ToString & "\" & z.ToString)
         Catch ex As Exception
-            Dim errp As New ErrorLogFlatFile
-            errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
+            '    Dim errp As New ErrorLogFlatFile
+            '    errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "ScheduleAction_AttachFile2", "0", ex.Message.ToString)
+            y = Nothing
         End Try
-        Dim x As New SCHEDULE_ACTION_LOGIC.InsertSA
-        x.Update_AF_path(Hash, SAID)
-      
-    
+        Try
+            Dim x As New SCHEDULE_ACTION_LOGIC.InsertSA
+            x.Update_AF_path(Hash, SAID)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "AttacheFile2", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub cboDept_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDept.SelectedValueChanged
-        Dim x As New SCHEDULE_ACTION_LOGIC
-        x.GetActionList(Me.cboDept.Text)
+        Try
+            Dim x As New SCHEDULE_ACTION_LOGIC
+            x.GetActionList(Me.cboDept.Text)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleAction", "ScheduleAction", "Sub", "cbo_Dept_SelectedValueChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 End Class

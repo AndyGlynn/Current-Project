@@ -8,6 +8,12 @@ Imports System.Windows.Forms
 Imports System.IO
 
 Public Class XFerOBJ
+    '' Notes: 2-10-16
+    '' not used any more. xfer lead was tossed to wayside.
+    '' 
+    '' here for reference only.
+    '' AC
+
     Public TM As String = ""
     Public TIP As String = ""
     Public Sub New(ByVal msg As String, ByVal tm As String, ByVal tip As String)

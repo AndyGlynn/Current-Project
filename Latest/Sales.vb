@@ -159,720 +159,741 @@ Public Class Sales
 
 #Region "My Procedures"
     Private Sub ButtonConfig()
-        ''Issue Tab Buttons 
-        Me.btnCCIssue.Image = Me.ilToolbarButtons.Images(11)
-        Me.btnCCIssue.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnCCIssue.Name = "btnCCIssue"
-        Me.btnCCIssue.Size = New System.Drawing.Size(110, 22)
-        Me.btnCCIssue.Text = "Log Appt. as Called and Cancelled"
+        Try
+            ''Issue Tab Buttons 
+            Me.btnCCIssue.Image = Me.ilToolbarButtons.Images(11)
+            Me.btnCCIssue.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnCCIssue.Name = "btnCCIssue"
+            Me.btnCCIssue.Size = New System.Drawing.Size(110, 22)
+            Me.btnCCIssue.Text = "Log Appt. as Called and Cancelled"
 
-        Me.btnEditCustIssue.Image = Me.ilToolbarButtons.Images(1)
-        Me.btnEditCustIssue.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnEditCustIssue.Name = "btnEditCustIssue"
-        Me.btnEditCustIssue.Size = New System.Drawing.Size(110, 22)
-        Me.btnEditCustIssue.Text = "Edit Customer"
+            Me.btnEditCustIssue.Image = Me.ilToolbarButtons.Images(1)
+            Me.btnEditCustIssue.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnEditCustIssue.Name = "btnEditCustIssue"
+            Me.btnEditCustIssue.Size = New System.Drawing.Size(110, 22)
+            Me.btnEditCustIssue.Text = "Edit Customer"
 
-        Me.btnExclude.Image = Me.ilToolbarButtons.Images(13)
-        Me.btnExclude.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnExclude.Name = "btnExclude"
-        Me.btnExclude.Size = New System.Drawing.Size(110, 22)
-        Me.btnExclude.Text = "Turn Off Exclusions"
-        Me.btnExclude.DropDownItems.Add(Me.btnExcludeManage)
+            Me.btnExclude.Image = Me.ilToolbarButtons.Images(13)
+            Me.btnExclude.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnExclude.Name = "btnExclude"
+            Me.btnExclude.Size = New System.Drawing.Size(110, 22)
+            Me.btnExclude.Text = "Turn Off Exclusions"
+            Me.btnExclude.DropDownItems.Add(Me.btnExcludeManage)
 
-        Me.btnExcludeManage.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnExcludeManage.Name = "btnExcludeManage"
-        Me.btnExcludeManage.Size = New System.Drawing.Size(110, 22)
-        Me.btnExcludeManage.Text = "Manage Rep Info Exclusions"
-
-
-        Me.btnPrintIssue.Image = Me.ilToolbarButtons.Images(3)
-        Me.btnPrintIssue.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnPrintIssue.Name = "btnPrintIssue"
-        Me.btnPrintIssue.Size = New System.Drawing.Size(110, 22)
-        Me.btnPrintIssue.Text = "Print"
-        Me.btnPrintIssue.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPrintAllIssue, Me.btnPrintNoEmailIssue, Me.btnPrintThisIssue, Me.btnPrintIssuedAppts})
-
-        Me.btnEmailIssue.Image = Me.ilToolbarButtons.Images(6)
-        Me.btnEmailIssue.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnEmailIssue.Name = "btnEmailIssue"
-        Me.btnEmailIssue.Size = New System.Drawing.Size(110, 22)
-        Me.btnEmailIssue.Text = "Email"
-        Me.btnEmailIssue.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEmailAllIssue, Me.btnEmailThisIssue})
-
-        'Me.btnPrintAllIssue.Image = Me.ilToolbarButtons.Images(1)
-        Me.btnPrintAllIssue.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnPrintAllIssue.Name = "btnPrintAllIssue"
-        Me.btnPrintAllIssue.Size = New System.Drawing.Size(110, 22)
-        Me.btnPrintAllIssue.Text = "Print All Leads"
-
-        Me.btnPrintNoEmailIssue.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnPrintNoEmailIssue.Name = "btnPrintNoEmailIssue"
-        Me.btnPrintNoEmailIssue.Size = New System.Drawing.Size(110, 22)
-        Me.btnPrintNoEmailIssue.Text = "Print Leads for Reps that do not recieve emails"
-
-        Me.btnPrintThisIssue.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnPrintThisIssue.Name = "btnPrintThisIssue"
-        Me.btnPrintThisIssue.Size = New System.Drawing.Size(110, 22)
-        Me.btnPrintThisIssue.Text = "Print Selected Lead"
-
-        Me.btnPrintIssuedAppts.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnPrintIssuedAppts.Name = "btnPrintIssuedAppts"
-        Me.btnPrintIssuedAppts.Size = New System.Drawing.Size(110, 22)
-        Me.btnPrintIssuedAppts.Text = "Print Issued Leads List" ''
-
-        Me.btnEmailAllIssue.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnEmailAllIssue.Name = "btnEmailAllIssue"
-        Me.btnEmailAllIssue.Size = New System.Drawing.Size(110, 22)
-        Me.btnEmailAllIssue.Text = "Email Leads to all Reps that recieve email"
-
-        Me.btnEmailThisIssue.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnEmailThisIssue.Name = "btnEmailThisIssue"
-        Me.btnEmailThisIssue.Size = New System.Drawing.Size(110, 22)
-        Me.btnEmailThisIssue.Text = "Email Selected Lead"
-
-        Me.btnEmailIssuedAppts.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnEmailIssuedAppts.Name = "btnEmailIssuedAppts"
-        Me.btnEmailIssuedAppts.Size = New System.Drawing.Size(110, 22)
-        Me.btnEmailIssuedAppts.Text = "Email Issued Leads List to Sales Manager"
+            Me.btnExcludeManage.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnExcludeManage.Name = "btnExcludeManage"
+            Me.btnExcludeManage.Size = New System.Drawing.Size(110, 22)
+            Me.btnExcludeManage.Text = "Manage Rep Info Exclusions"
 
 
-        '' Summary Tab Buttons
-        '' btnSalesResult
-        Me.btnSalesResult.Image = Me.ilToolbarButtons.Images(0)
-        Me.btnSalesResult.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnSalesResult.Name = "btnSalesResult"
-        Me.btnSalesResult.Size = New System.Drawing.Size(110, 22)
-        Me.btnSalesResult.Text = "Enter sales result"
-        'btnScheduledTasks
-        '
-        Me.btnScheduledTasks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMarkTaskAsDone, Me.btnEditScheduledTask, Me.btnRemoveThisCompletedTask, Me.btnRemoveAllScheduledTask, Me.btnShowAllCompletedTasks, Me.sepScheduledTasks, Me.btnSAPreferences})
-        Me.btnScheduledTasks.Image = Me.ilToolbarButtons.Images(2)
-        Me.btnScheduledTasks.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnScheduledTasks.Name = "btnScheduledTasks"
-        Me.btnScheduledTasks.Size = New System.Drawing.Size(131, 22)
-        Me.btnScheduledTasks.Text = "Edit Scheduled Task"
-        'btnMarkTaskAsDone
-        '
-        Me.btnMarkTaskAsDone.Name = "btnMarkTaskAsDone"
-        Me.btnMarkTaskAsDone.Size = New System.Drawing.Size(209, 22)
-        Me.btnMarkTaskAsDone.Text = "Mark Task as Done"
-        'btnEditScheduledTask
-        '
-        Me.btnEditScheduledTask.Name = "btnEditScheduledTask"
-        Me.btnEditScheduledTask.Size = New System.Drawing.Size(209, 22)
-        Me.btnEditScheduledTask.Text = "Edit Scheduled Task"
-        '
-        'btnRemoveThisCompletedTask
-        '
-        Me.btnRemoveThisCompletedTask.Name = "btnRemoveThisCompletedTask"
-        Me.btnRemoveThisCompletedTask.Size = New System.Drawing.Size(209, 22)
-        Me.btnRemoveThisCompletedTask.Text = "Hide This Completed Task"
-        Me.btnRemoveThisCompletedTask.Visible = False
-        '
-        'btnRemoveAllScheduledTask
-        '
-        Me.btnRemoveAllScheduledTask.Name = "btnRemoveAllScheduledTask"
-        Me.btnRemoveAllScheduledTask.Size = New System.Drawing.Size(209, 22)
-        Me.btnRemoveAllScheduledTask.Text = "Hide All Completed Tasks"
-        '
-        'btnShowAllCompletedTasks
-        '
-        Me.btnShowAllCompletedTasks.Checked = True
-        Me.btnShowAllCompletedTasks.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.btnShowAllCompletedTasks.Name = "btnShowAllCompletedTasks"
-        Me.btnShowAllCompletedTasks.Size = New System.Drawing.Size(209, 22)
-        Me.btnShowAllCompletedTasks.Text = "Show All Completed Tasks"
-        'btnSAPreferences
-        '
-        Me.btnSAPreferences.Name = "btnSAPreferences"
-        Me.btnSAPreferences.Size = New System.Drawing.Size(209, 22)
-        Me.btnSAPreferences.Text = "Preferences"
-        'btnPrintSummary
-        '
-        Me.btnPrintSummary.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPrintPerformanceReport, Me.btnPrintPerformanceReport, Me.btnPrintScheduledTasks})
-        Me.btnPrintSummary.Image = Me.ilToolbarButtons.Images(3)
-        Me.btnPrintSummary.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnPrintSummary.Name = "btnPrintSummary"
-        Me.btnPrintSummary.Size = New System.Drawing.Size(58, 22)
-        Me.btnPrintSummary.Text = "Print"
-        'btnPrintPerformanceReport
-        Me.btnPrintPerformanceReport.Name = "btnPrintPerformanceReport"
-        Me.btnPrintPerformanceReport.Size = New System.Drawing.Size(233, 22)
-        Me.btnPrintPerformanceReport.Text = "Print Daily Performance Report"
-        'btnPrintPerformanceReport
-        '
-        Me.btnPrintPerformanceReport.Name = "btnPrintPerformanceReport"
-        Me.btnPrintPerformanceReport.Size = New System.Drawing.Size(233, 22)
-        Me.btnPrintPerformanceReport.Text = "Print ""No Sales Results"" List"
-        'btnPrintScheduledTasks
-        '
-        Me.btnPrintScheduledTasks.Name = "btnPrintScheduledTasks"
-        Me.btnPrintScheduledTasks.Size = New System.Drawing.Size(233, 22)
-        Me.btnPrintScheduledTasks.Text = "Print ""Scheduled Task"" List"
-        'lblSummary
-        '
-        Me.lblSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblSummary.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        'Me.lblSummary.Margin = New System.Windows.Forms.Padding(0, 1, 115, 2)
-        Me.lblSummary.Name = "tslblPerformance"
-        Me.lblSummary.Size = New System.Drawing.Size(215, 22)
-        Me.lblSummary.Text = "Performance Report Dates:"
-        'dtpSummary
-        '
-        Me.dtpSummary.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dtpSummary.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpSummary.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpSummary.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpSummary.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
-        Me.dtpSummary.Name = "dtpSummary"
-        Me.dtpSummary.Size = New System.Drawing.Size(98, 21)
-        Me.dtpSummary.TabIndex = 443
-        'Dim ts As New TimeSpan(1, 0, 0, 0)
-        'Me.dtpSummary.Value = Me.dtpSummary.Value.Subtract(ts)
+            Me.btnPrintIssue.Image = Me.ilToolbarButtons.Images(3)
+            Me.btnPrintIssue.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnPrintIssue.Name = "btnPrintIssue"
+            Me.btnPrintIssue.Size = New System.Drawing.Size(110, 22)
+            Me.btnPrintIssue.Text = "Print"
+            Me.btnPrintIssue.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPrintAllIssue, Me.btnPrintNoEmailIssue, Me.btnPrintThisIssue, Me.btnPrintIssuedAppts})
 
-        Me.dtpSummary2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dtpSummary2.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpSummary2.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpSummary2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpSummary2.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2)
-        Me.dtpSummary2.Name = "dtpSummary2"
-        Me.dtpSummary2.Size = New System.Drawing.Size(98, 21)
-        Me.dtpSummary2.TabIndex = 444
-        'Dim ts As New TimeSpan(1, 0, 0, 0)
-        'Me.dtpSummary2.Value = Me.dtpSummary2.Value.Subtract(ts)
-        Me.cboDateRangeSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.cboDateRangeSummary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboDateRangeSummary.FlatStyle = System.Windows.Forms.FlatStyle.Standard
-        Me.cboDateRangeSummary.Items.AddRange(New Object() {"Today", "Yesterday", "This Week", "This Week - to date", "This Month", "This Month - to date", "This Year", "This Year - to date", "Last Week", "Last Week - to date", "Last Month", "Last Month - to date", "Last Year", "Last Year - to date", "Custom"})
-        Me.cboDateRangeSummary.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
-        Me.cboDateRangeSummary.Name = "cboDateRangeSummary"
-        Me.cboDateRangeSummary.Size = New System.Drawing.Size(123, 25)
+            Me.btnEmailIssue.Image = Me.ilToolbarButtons.Images(6)
+            Me.btnEmailIssue.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnEmailIssue.Name = "btnEmailIssue"
+            Me.btnEmailIssue.Size = New System.Drawing.Size(110, 22)
+            Me.btnEmailIssue.Text = "Email"
+            Me.btnEmailIssue.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEmailAllIssue, Me.btnEmailThisIssue})
 
-        Me.lblFromSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblFromSummary.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFromSummary.Margin = New System.Windows.Forms.Padding(0, 1, 120, 2)
-        Me.lblFromSummary.Name = "lblFromSummary"
-        Me.lblFromSummary.Size = New System.Drawing.Size(39, 22)
-        Me.lblFromSummary.Text = "From"
+            'Me.btnPrintAllIssue.Image = Me.ilToolbarButtons.Images(1)
+            Me.btnPrintAllIssue.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnPrintAllIssue.Name = "btnPrintAllIssue"
+            Me.btnPrintAllIssue.Size = New System.Drawing.Size(110, 22)
+            Me.btnPrintAllIssue.Text = "Print All Leads"
 
-        Me.lblToSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblToSummary.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblToSummary.Margin = New System.Windows.Forms.Padding(0, 1, 115, 2)
-        Me.lblToSummary.Name = "lblToSummary"
-        Me.lblToSummary.Size = New System.Drawing.Size(23, 22)
-        Me.lblToSummary.Text = "To"
+            Me.btnPrintNoEmailIssue.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnPrintNoEmailIssue.Name = "btnPrintNoEmailIssue"
+            Me.btnPrintNoEmailIssue.Size = New System.Drawing.Size(110, 22)
+            Me.btnPrintNoEmailIssue.Text = "Print Leads for Reps that do not recieve emails"
+
+            Me.btnPrintThisIssue.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnPrintThisIssue.Name = "btnPrintThisIssue"
+            Me.btnPrintThisIssue.Size = New System.Drawing.Size(110, 22)
+            Me.btnPrintThisIssue.Text = "Print Selected Lead"
+
+            Me.btnPrintIssuedAppts.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnPrintIssuedAppts.Name = "btnPrintIssuedAppts"
+            Me.btnPrintIssuedAppts.Size = New System.Drawing.Size(110, 22)
+            Me.btnPrintIssuedAppts.Text = "Print Issued Leads List" ''
+
+            Me.btnEmailAllIssue.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnEmailAllIssue.Name = "btnEmailAllIssue"
+            Me.btnEmailAllIssue.Size = New System.Drawing.Size(110, 22)
+            Me.btnEmailAllIssue.Text = "Email Leads to all Reps that recieve email"
+
+            Me.btnEmailThisIssue.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnEmailThisIssue.Name = "btnEmailThisIssue"
+            Me.btnEmailThisIssue.Size = New System.Drawing.Size(110, 22)
+            Me.btnEmailThisIssue.Text = "Email Selected Lead"
+
+            Me.btnEmailIssuedAppts.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnEmailIssuedAppts.Name = "btnEmailIssuedAppts"
+            Me.btnEmailIssuedAppts.Size = New System.Drawing.Size(110, 22)
+            Me.btnEmailIssuedAppts.Text = "Email Issued Leads List to Sales Manager"
 
 
-        '' Customer List Tab Buttons
-        'btnSalesResult2
-        '
-        Me.btnSalesResult2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMemorize})
-        Me.btnSalesResult2.Image = Me.ilToolbarButtons.Images(0)
-        Me.btnSalesResult2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnSalesResult2.Name = "btnSalesResult2"
-        Me.btnSalesResult2.Size = New System.Drawing.Size(122, 22)
-        Me.btnSalesResult2.Text = "Enter sales result"
-        '' Email template wizard button adds
-        '' 11-3-15 AC
-        ''
-        'cboTemplateLists   '' combo box with a list of templates per department to quick apply
-        'btnEmailWizard   '' lead in button for all other choices
-        'btnEmailTemplateAll   '' will take a list of recID's , apply template, and bulk mail
-        'btnEmailTemplateOne 
+            '' Summary Tab Buttons
+            '' btnSalesResult
+            Me.btnSalesResult.Image = Me.ilToolbarButtons.Images(0)
+            Me.btnSalesResult.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnSalesResult.Name = "btnSalesResult"
+            Me.btnSalesResult.Size = New System.Drawing.Size(110, 22)
+            Me.btnSalesResult.Text = "Enter sales result"
+            'btnScheduledTasks
+            '
+            Me.btnScheduledTasks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMarkTaskAsDone, Me.btnEditScheduledTask, Me.btnRemoveThisCompletedTask, Me.btnRemoveAllScheduledTask, Me.btnShowAllCompletedTasks, Me.sepScheduledTasks, Me.btnSAPreferences})
+            Me.btnScheduledTasks.Image = Me.ilToolbarButtons.Images(2)
+            Me.btnScheduledTasks.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnScheduledTasks.Name = "btnScheduledTasks"
+            Me.btnScheduledTasks.Size = New System.Drawing.Size(131, 22)
+            Me.btnScheduledTasks.Text = "Edit Scheduled Task"
+            'btnMarkTaskAsDone
+            '
+            Me.btnMarkTaskAsDone.Name = "btnMarkTaskAsDone"
+            Me.btnMarkTaskAsDone.Size = New System.Drawing.Size(209, 22)
+            Me.btnMarkTaskAsDone.Text = "Mark Task as Done"
+            'btnEditScheduledTask
+            '
+            Me.btnEditScheduledTask.Name = "btnEditScheduledTask"
+            Me.btnEditScheduledTask.Size = New System.Drawing.Size(209, 22)
+            Me.btnEditScheduledTask.Text = "Edit Scheduled Task"
+            '
+            'btnRemoveThisCompletedTask
+            '
+            Me.btnRemoveThisCompletedTask.Name = "btnRemoveThisCompletedTask"
+            Me.btnRemoveThisCompletedTask.Size = New System.Drawing.Size(209, 22)
+            Me.btnRemoveThisCompletedTask.Text = "Hide This Completed Task"
+            Me.btnRemoveThisCompletedTask.Visible = False
+            '
+            'btnRemoveAllScheduledTask
+            '
+            Me.btnRemoveAllScheduledTask.Name = "btnRemoveAllScheduledTask"
+            Me.btnRemoveAllScheduledTask.Size = New System.Drawing.Size(209, 22)
+            Me.btnRemoveAllScheduledTask.Text = "Hide All Completed Tasks"
+            '
+            'btnShowAllCompletedTasks
+            '
+            Me.btnShowAllCompletedTasks.Checked = True
+            Me.btnShowAllCompletedTasks.CheckState = System.Windows.Forms.CheckState.Checked
+            Me.btnShowAllCompletedTasks.Name = "btnShowAllCompletedTasks"
+            Me.btnShowAllCompletedTasks.Size = New System.Drawing.Size(209, 22)
+            Me.btnShowAllCompletedTasks.Text = "Show All Completed Tasks"
+            'btnSAPreferences
+            '
+            Me.btnSAPreferences.Name = "btnSAPreferences"
+            Me.btnSAPreferences.Size = New System.Drawing.Size(209, 22)
+            Me.btnSAPreferences.Text = "Preferences"
+            'btnPrintSummary
+            '
+            Me.btnPrintSummary.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPrintPerformanceReport, Me.btnPrintPerformanceReport, Me.btnPrintScheduledTasks})
+            Me.btnPrintSummary.Image = Me.ilToolbarButtons.Images(3)
+            Me.btnPrintSummary.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnPrintSummary.Name = "btnPrintSummary"
+            Me.btnPrintSummary.Size = New System.Drawing.Size(58, 22)
+            Me.btnPrintSummary.Text = "Print"
+            'btnPrintPerformanceReport
+            Me.btnPrintPerformanceReport.Name = "btnPrintPerformanceReport"
+            Me.btnPrintPerformanceReport.Size = New System.Drawing.Size(233, 22)
+            Me.btnPrintPerformanceReport.Text = "Print Daily Performance Report"
+            'btnPrintPerformanceReport
+            '
+            Me.btnPrintPerformanceReport.Name = "btnPrintPerformanceReport"
+            Me.btnPrintPerformanceReport.Size = New System.Drawing.Size(233, 22)
+            Me.btnPrintPerformanceReport.Text = "Print ""No Sales Results"" List"
+            'btnPrintScheduledTasks
+            '
+            Me.btnPrintScheduledTasks.Name = "btnPrintScheduledTasks"
+            Me.btnPrintScheduledTasks.Size = New System.Drawing.Size(233, 22)
+            Me.btnPrintScheduledTasks.Text = "Print ""Scheduled Task"" List"
+            'lblSummary
+            '
+            Me.lblSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+            Me.lblSummary.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            'Me.lblSummary.Margin = New System.Windows.Forms.Padding(0, 1, 115, 2)
+            Me.lblSummary.Name = "tslblPerformance"
+            Me.lblSummary.Size = New System.Drawing.Size(215, 22)
+            Me.lblSummary.Text = "Performance Report Dates:"
+            'dtpSummary
+            '
+            Me.dtpSummary.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.dtpSummary.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpSummary.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpSummary.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+            Me.dtpSummary.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
+            Me.dtpSummary.Name = "dtpSummary"
+            Me.dtpSummary.Size = New System.Drawing.Size(98, 21)
+            Me.dtpSummary.TabIndex = 443
+            'Dim ts As New TimeSpan(1, 0, 0, 0)
+            'Me.dtpSummary.Value = Me.dtpSummary.Value.Subtract(ts)
+
+            Me.dtpSummary2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.dtpSummary2.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpSummary2.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpSummary2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+            Me.dtpSummary2.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2)
+            Me.dtpSummary2.Name = "dtpSummary2"
+            Me.dtpSummary2.Size = New System.Drawing.Size(98, 21)
+            Me.dtpSummary2.TabIndex = 444
+            'Dim ts As New TimeSpan(1, 0, 0, 0)
+            'Me.dtpSummary2.Value = Me.dtpSummary2.Value.Subtract(ts)
+            Me.cboDateRangeSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+            Me.cboDateRangeSummary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboDateRangeSummary.FlatStyle = System.Windows.Forms.FlatStyle.Standard
+            Me.cboDateRangeSummary.Items.AddRange(New Object() {"Today", "Yesterday", "This Week", "This Week - to date", "This Month", "This Month - to date", "This Year", "This Year - to date", "Last Week", "Last Week - to date", "Last Month", "Last Month - to date", "Last Year", "Last Year - to date", "Custom"})
+            Me.cboDateRangeSummary.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
+            Me.cboDateRangeSummary.Name = "cboDateRangeSummary"
+            Me.cboDateRangeSummary.Size = New System.Drawing.Size(123, 25)
+
+            Me.lblFromSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+            Me.lblFromSummary.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblFromSummary.Margin = New System.Windows.Forms.Padding(0, 1, 120, 2)
+            Me.lblFromSummary.Name = "lblFromSummary"
+            Me.lblFromSummary.Size = New System.Drawing.Size(39, 22)
+            Me.lblFromSummary.Text = "From"
+
+            Me.lblToSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+            Me.lblToSummary.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblToSummary.Margin = New System.Windows.Forms.Padding(0, 1, 115, 2)
+            Me.lblToSummary.Name = "lblToSummary"
+            Me.lblToSummary.Size = New System.Drawing.Size(23, 22)
+            Me.lblToSummary.Text = "To"
 
 
-        '' EDITS: 12-14-2015 
-        '' Item 14: punchlist.pdf
-        ''        Menu(Struct)
-        ''-----------------------------------------------
-        ''|Email Wizard          v|
-        ''|Choose Email template->| [cbo list of templates]
-        ''| [separator]		      |  create new template  |
-        ''|Email This customer    |
-        ''
-        ''{send off to choose template and so on } 
-        ''
+            '' Customer List Tab Buttons
+            'btnSalesResult2
+            '
+            Me.btnSalesResult2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMemorize})
+            Me.btnSalesResult2.Image = Me.ilToolbarButtons.Images(0)
+            Me.btnSalesResult2.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnSalesResult2.Name = "btnSalesResult2"
+            Me.btnSalesResult2.Size = New System.Drawing.Size(122, 22)
+            Me.btnSalesResult2.Text = "Enter sales result"
+            '' Email template wizard button adds
+            '' 11-3-15 AC
+            ''
+            'cboTemplateLists   '' combo box with a list of templates per department to quick apply
+            'btnEmailWizard   '' lead in button for all other choices
+            'btnEmailTemplateAll   '' will take a list of recID's , apply template, and bulk mail
+            'btnEmailTemplateOne 
 
 
-        '' Items:
-        ''------------------------------------------------
-        '' Friend WithEvents btnEmailWizard As New ToolStripDropDownButton
-        '' Friend WithEvents btnEmailTemplateBuilder As New ToolStripMenuItem
-        '' Friend WithEvents cboEmailTemplates As New ToolStripComboBox
-        '' Friend WithEvents btnCreateNewEmailTemplate As New ToolStripMenuItem
-        '' Friend WithEvents btnEmailThisCustomer As New ToolStripMenuItem
+            '' EDITS: 12-14-2015 
+            '' Item 14: punchlist.pdf
+            ''        Menu(Struct)
+            ''-----------------------------------------------
+            ''|Email Wizard          v|
+            ''|Choose Email template->| [cbo list of templates]
+            ''| [separator]		      |  create new template  |
+            ''|Email This customer    |
+            ''
+            ''{send off to choose template and so on } 
+            ''
 
 
-
-        Me.btnEmailWizard.Name = "btnEmailWizard" '' drop down button
-        Me.btnEmailWizard.Size = New System.Drawing.Size(122, 22)
-        Me.btnEmailWizard.Image = Me.ilToolbarButtons.Images(6)
-        '' icon  for btnEmailWizard ? -> confirming.  IDX = me.ilToolBarButtons(7) Nope.  6? 
-        Me.btnEmailWizard.Text = "Email Wizard" '' drop down menu item
-
-        Me.btnEmailTemplateBuilder.Name = "btnEmailTemplateBuilder"
-        Me.btnEmailTemplateBuilder.Size = New System.Drawing.Point(122, 22)
-        Me.btnEmailTemplateBuilder.Text = "Choose Email Template"
-
-
-        Me.btnCreateNewEmailTemplate.Name = "btnCreateNewEmailTemplate"
-        Me.btnCreateNewEmailTemplate.Text = "Create New Template"
-
-        Me.btnEmailThisCustomer.Name = "btnEmailThisCustomer"
-        Me.btnEmailThisCustomer.Text = "Email This Customer"
-
-        Me.cboEmailTemplates.Name = "cboEmailTemplates"
-        Me.cboEmailTemplates.Size = New System.Drawing.Size(122, 22)
-        '' => Get Templates => populate cbo.
-        '' 
-        Get_ToolStrip_Templates()
-        Me.btnEmailWizard.DropDownItems.Add(btnEmailTemplateBuilder)
-        Me.btnEmailTemplateBuilder.DropDownItems.Add(cboEmailTemplates)
-        Me.btnEmailTemplateBuilder.DropDownItems.Add(btnCreateNewEmailTemplate)
-        Me.btnEmailWizard.DropDown.Items.Add(tsSeparatorEmail)
-        Me.btnEmailWizard.DropDown.Items.Add(btnEmailThisCustomer)
-
-        '' END -> GOTO Line 7750 for events / subs 
+            '' Items:
+            ''------------------------------------------------
+            '' Friend WithEvents btnEmailWizard As New ToolStripDropDownButton
+            '' Friend WithEvents btnEmailTemplateBuilder As New ToolStripMenuItem
+            '' Friend WithEvents cboEmailTemplates As New ToolStripComboBox
+            '' Friend WithEvents btnCreateNewEmailTemplate As New ToolStripMenuItem
+            '' Friend WithEvents btnEmailThisCustomer As New ToolStripMenuItem
 
 
 
+            Me.btnEmailWizard.Name = "btnEmailWizard" '' drop down button
+            Me.btnEmailWizard.Size = New System.Drawing.Size(122, 22)
+            Me.btnEmailWizard.Image = Me.ilToolbarButtons.Images(6)
+            '' icon  for btnEmailWizard ? -> confirming.  IDX = me.ilToolBarButtons(7) Nope.  6? 
+            Me.btnEmailWizard.Text = "Email Wizard" '' drop down menu item
 
-        '
-        'btnMemorize
-        '
-        Me.btnMemorize.Image = Me.ilToolbarButtons.Images(4)
-        Me.btnMemorize.Name = "btnMemorize"
-        Me.btnMemorize.Size = New System.Drawing.Size(182, 22)
-        Me.btnMemorize.Text = "Memorize This Record"
-        'btnCustomerTools
-        '
-        Me.btnCustomerTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEditCustomer, Me.sepCustomerTools, Me.btnCallCustomer, Me.btnEMailCustomer, Me.btnLetter, Me.sep, Me.btnSetAppt, Me.btnAssignRep})
-        Me.btnCustomerTools.Image = Me.ilToolbarButtons.Images(1)
-        Me.btnCustomerTools.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnCustomerTools.Name = "btnCustomerTools"
-        Me.btnCustomerTools.Size = New System.Drawing.Size(110, 22)
-        Me.btnCustomerTools.Text = "Customer Tools"
-        '
-        'btnEditCustomer
-        '
+            Me.btnEmailTemplateBuilder.Name = "btnEmailTemplateBuilder"
+            Me.btnEmailTemplateBuilder.Size = New System.Drawing.Point(122, 22)
+            Me.btnEmailTemplateBuilder.Text = "Choose Email Template"
 
-        Me.btnEditCustomer.Image = Me.ilToolbarButtons.Images(1)
-        Me.btnEditCustomer.Name = "btnEditCustomer"
-        Me.btnEditCustomer.Size = New System.Drawing.Size(173, 22)
-        Me.btnEditCustomer.Text = "Edit Customer"
-        '
-        'sepCustomerTools
-        '
-        Me.sepCustomerTools.Name = "Me.sepCustomerTools"
-        Me.sepCustomerTools.Size = New System.Drawing.Size(170, 6)
-        '
-        'btnCallCustomer
-        '
-        Me.btnCallCustomer.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMain, Me.btnAltPhone1, Me.btnAltPhone2})
-        Me.btnCallCustomer.Image = Me.ilToolbarButtons.Images(5)
-        Me.btnCallCustomer.Name = "btnCallCustomer"
-        Me.btnCallCustomer.Size = New System.Drawing.Size(173, 22)
-        Me.btnCallCustomer.Text = "Call This Customer"
-        '
-        'btnMainPhone
-        '
-        Me.btnMainPhone.Name = "btnMainPhone"
-        Me.btnMainPhone.Size = New System.Drawing.Size(248, 22)
-        Me.btnMainPhone.Text = ""
-        '
-        'btnAltPhone1
-        '
-        Me.btnAltPhone1.Name = "btnAltPhone1"
-        Me.btnAltPhone1.Size = New System.Drawing.Size(248, 22)
-        Me.btnAltPhone1.Text = ""
-        '
-        'btnAltPhone2
-        '
-        Me.btnAltPhone2.Name = "btnAltPhone2"
-        Me.btnAltPhone2.Size = New System.Drawing.Size(248, 22)
-        Me.btnAltPhone2.Text = ""
-        '
-        'btnEmailCustomer
-        '
-        'Me.btnEmailCustomer.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {    ''add range later           })
-        Me.btnEMailCustomer.Image = Me.ilToolbarButtons.Images(6)
-        Me.btnEMailCustomer.Name = "btnEmailCustomer"
-        Me.btnEMailCustomer.Size = New System.Drawing.Size(173, 22)
-        Me.btnEMailCustomer.Text = "Email Customer"
 
-        '
-        'btnLetter
-        '
-        Me.btnLetter.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cboLetterWizardTemplates, Me.btnCreateNewLetterTemplate})
+            Me.btnCreateNewEmailTemplate.Name = "btnCreateNewEmailTemplate"
+            Me.btnCreateNewEmailTemplate.Text = "Create New Template"
 
-        Me.btnCreateNewLetterTemplate.Name = "btnCreateNewLetterTemplate"
-        Me.btnCreateNewLetterTemplate.Text = "Create New Letter Template"
+            Me.btnEmailThisCustomer.Name = "btnEmailThisCustomer"
+            Me.btnEmailThisCustomer.Text = "Email This Customer"
 
-        Me.btnLetter.Image = Me.ilToolbarButtons.Images(7)
-        Me.btnLetter.Name = "btnLetter"
-        Me.btnLetter.Size = New System.Drawing.Size(173, 22)
-        Me.btnLetter.Text = "Letter Wizard"
-        'btnSetAppt
-        '
-        Me.btnSetAppt.Image = Me.ilToolbarButtons.Images(8)
-        Me.btnSetAppt.Name = "btnSetAppt"
-        Me.btnSetAppt.Size = New System.Drawing.Size(173, 22)
-        Me.btnSetAppt.Text = "Set Appointment"
-        'btnAssignRep
-        '
-        Me.btnAssignRep.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cboRep1, Me.cboRep2, Me.sep2, Me.btnSaveRep})
-        Me.btnAssignRep.Name = "btnAssignRep"
-        Me.btnAssignRep.Size = New System.Drawing.Size(173, 22)
-        Me.btnAssignRep.Text = "Assign/Change Sales Rep(s)"
-        'btnSaveRep
-        '
-        Me.btnSaveRep.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveRep.Name = "btnAssignRep"
-        Me.btnSaveRep.Size = New System.Drawing.Size(173, 22)
-        Me.btnSaveRep.Text = "Save Changes"
-        Me.btnSaveRep.TextAlign = ContentAlignment.MiddleCenter
+            Me.cboEmailTemplates.Name = "cboEmailTemplates"
+            Me.cboEmailTemplates.Size = New System.Drawing.Size(122, 22)
+            '' => Get Templates => populate cbo.
+            '' 
+            Get_ToolStrip_Templates()
+            Me.btnEmailWizard.DropDownItems.Add(btnEmailTemplateBuilder)
+            Me.btnEmailTemplateBuilder.DropDownItems.Add(cboEmailTemplates)
+            Me.btnEmailTemplateBuilder.DropDownItems.Add(btnCreateNewEmailTemplate)
+            Me.btnEmailWizard.DropDown.Items.Add(tsSeparatorEmail)
+            Me.btnEmailWizard.DropDown.Items.Add(btnEmailThisCustomer)
 
-        'cborep1 and cborep2
-        Me.cboRep1.DropDownStyle = ComboBoxStyle.DropDownList
-        Me.cboRep1.FlatStyle = FlatStyle.Standard
-        Me.cboRep2.DropDownStyle = ComboBoxStyle.DropDownList
-        Me.cboRep2.FlatStyle = FlatStyle.Standard
-        Me.cboRep1.Size = New System.Drawing.Size(150, Me.cboRep1.Size.Height)
-        Me.cboRep2.Size = New System.Drawing.Size(150, Me.cboRep1.Size.Height)
-        'btnBuildList
-        '
-        Me.btnBuildList.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.txtSingleRecordInput, Me.sepBuildList, Me.btnSingleRecord})
-        Me.btnBuildList.Image = Me.ilToolbarButtons.Images(9)
-        Me.btnBuildList.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnBuildList.Name = "btnBuildList"
-        Me.btnBuildList.Size = New System.Drawing.Size(118, 22)
-        Me.btnBuildList.Text = "Create Custom List"
-        'txtSingleRecordInput
-        '
-
-        Me.txtSingleRecordInput.Name = "txtSingleRecordInput"
-        Me.txtSingleRecordInput.Size = New System.Drawing.Size(118, 22)
-        Me.txtSingleRecordInput.Text = "[Enter Record ID]"
-        Me.txtSingleRecordInput.BorderStyle = BorderStyle.FixedSingle
-        'btnSingleRecord
-        '
-        Me.btnSingleRecord.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSingleRecord.TextAlign = ContentAlignment.MiddleCenter
-        Me.btnSingleRecord.Name = "btnSingleRecord"
-        Me.btnSingleRecord.Size = New System.Drawing.Size(118, 22)
-        Me.btnSingleRecord.Text = "Get Record"
-        Me.btnSingleRecord.Enabled = False
-        'btnPrintCustomerList
-        '
-        Me.btnPrintCustomerList.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPrintApptSheet, Me.btnPrintCustomerInfoSheet, Me.btnPrintCurrentList})
-        Me.btnPrintCustomerList.Image = Me.ilToolbarButtons.Images(3)
-        Me.btnPrintCustomerList.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnPrintCustomerList.Name = "btnPrintCustomerList"
-        Me.btnPrintCustomerList.Size = New System.Drawing.Size(58, 22)
-        Me.btnPrintCustomerList.Text = "Print"
-        'btnPrintApptSheet
-        Me.btnPrintApptSheet.Name = "btnPrintApptSheet"
-        Me.btnPrintApptSheet.Size = New System.Drawing.Size(233, 22)
-        Me.btnPrintApptSheet.Text = "Print Appointment Sheet"
-        'btnPrintCustomerInfoSheet
-        Me.btnPrintCustomerInfoSheet.Name = "btnPrintCustomerInfoSheet"
-        Me.btnPrintCustomerInfoSheet.Size = New System.Drawing.Size(233, 22)
-        Me.btnPrintCustomerInfoSheet.Text = "Print Customer Information Sheet"
-        '' btnPrintCurrentList
-        Me.btnPrintCurrentList.Name = "btnPrintCurrentList"
-        Me.btnPrintCurrentList.Size = New System.Drawing.Size(233, 22)
-        Me.btnPrintCurrentList.Text = "Print Contact List From The Current Customer List"
-        'lblDateRangeCustomerList
-        '
-        Me.lblDateRangeCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblDateRangeCustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDateRangeCustomerList.Name = "lblDateRangeCustomerList"
-        Me.lblDateRangeCustomerList.Size = New System.Drawing.Size(86, 22)
-        Me.lblDateRangeCustomerList.Text = "Appt. Dates"
-        'cboDateRangeCustomerList
-        '
-        Me.cboDateRangeCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.cboDateRangeCustomerList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboDateRangeCustomerList.FlatStyle = System.Windows.Forms.FlatStyle.Standard
-        Me.cboDateRangeCustomerList.Items.AddRange(New Object() {"All", "Today", "Yesterday", "This Week", "This Week - to date", "This Month", "This Month - to date", "This Year", "This Year - to date", "Next Week", "Next Month", "Last Week", "Last Week - to date", "Last Month", "Last Month - to date", "Last Year", "Last Year - to date", "Custom"})
-        Me.cboDateRangeCustomerList.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
-        Me.cboDateRangeCustomerList.Name = "cboDateRangeCustomerList"
-        Me.cboDateRangeCustomerList.Size = New System.Drawing.Size(123, 25)
-        'lblToCustomerList
-        '
-        Me.lblToCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblToCustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblToCustomerList.Margin = New System.Windows.Forms.Padding(0, 1, 115, 2)
-        Me.lblToCustomerList.Name = "lblToCustomerList"
-        Me.lblToCustomerList.Size = New System.Drawing.Size(23, 22)
-        Me.lblToCustomerList.Text = "To"
-        '
-        'lblFromCustomerList
-        '
-        Me.lblFromCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblFromCustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFromCustomerList.Margin = New System.Windows.Forms.Padding(0, 1, 120, 2)
-        Me.lblFromCustomerList.Name = "lblFromCustomerList"
-        Me.lblFromCustomerList.Size = New System.Drawing.Size(39, 22)
-        Me.lblFromCustomerList.Text = "From"
-        'dtp1CustomerList
-        '
-        Me.dtp1CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dtp1CustomerList.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtp1CustomerList.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtp1CustomerList.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtp1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2) '745
-        Me.dtp1CustomerList.Name = "dtp1CustomerList"
-        Me.dtp1CustomerList.Size = New System.Drawing.Size(98, 21)
-        Me.dtp1CustomerList.TabIndex = 442
-        Me.dtp1CustomerList.Visible = False
-        'dtp2CustomerList
-        '
-        Me.dtp2CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dtp2CustomerList.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtp2CustomerList.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtp2CustomerList.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtp2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2) '882
-        Me.dtp2CustomerList.Name = "dtp2CustomerList"
-        Me.dtp2CustomerList.Size = New System.Drawing.Size(98, 21)
-        Me.dtp2CustomerList.TabIndex = 443
-        Me.dtp2CustomerList.Visible = False
-        'txt1CustomerList
-        '
-        Me.txt1CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt1CustomerList.BackColor = System.Drawing.Color.White
-        Me.txt1CustomerList.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txt1CustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt1CustomerList.ForeColor = System.Drawing.Color.Black
-        Me.txt1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 246, 4) '747
-        Me.txt1CustomerList.Name = "txt1CustomerList"
-        Me.txt1CustomerList.ReadOnly = True
-        Me.txt1CustomerList.Size = New System.Drawing.Size(60, 16)
-        Me.txt1CustomerList.TabIndex = 179
-        Me.txt1CustomerList.TabStop = False
-        Me.txt1CustomerList.Visible = False
-        'txt2CustomerList
-        '
-        Me.txt2CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt2CustomerList.BackColor = System.Drawing.Color.White
-        Me.txt2CustomerList.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txt2CustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt2CustomerList.ForeColor = System.Drawing.Color.Black
-        Me.txt2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 107, 4) '885
-        Me.txt2CustomerList.Name = "txt2CustomerList"
-        Me.txt2CustomerList.ReadOnly = True
-        Me.txt2CustomerList.Size = New System.Drawing.Size(60, 16)
-        Me.txt2CustomerList.TabIndex = 180
-        Me.txt2CustomerList.TabStop = False
-        Me.txt2CustomerList.Visible = False
-
-        ''IssueLeads Tab
-        Me.dtpIssueLeads.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dtpIssueLeads.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpIssueLeads.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpIssueLeads.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpIssueLeads.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
-        Me.dtpIssueLeads.Name = "dtpIssueLeads"
-        Me.dtpIssueLeads.Size = New System.Drawing.Size(98, 21)
-        Me.dtpIssueLeads.TabIndex = 442
-        Me.dtpIssueLeads.Visible = False
-        Me.dtpIssueLeads.Value = Today
-
-        Me.lblIssue.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblIssue.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblIssue.Name = "lblIssue"
-        Me.lblIssue.Size = New System.Drawing.Size(296, 22)
-        Me.lblIssue.Text = "Issue Appointments For"
-        Me.lblIssue.Padding = New Padding(0, 0, 228, 0)
+            '' END -> GOTO Line 7750 for events / subs 
 
 
 
-        '' Add controls overlaying toolbar
-        Me.Controls.Add(Me.dtpSummary)
-        Me.Controls.Add(Me.dtpSummary2)
-        Me.Controls.Add(Me.dtp1CustomerList)
-        Me.Controls.Add(Me.dtp2CustomerList)
-        Me.Controls.Add(Me.txt1CustomerList)
-        Me.Controls.Add(Me.txt2CustomerList)
-        Me.Controls.Add(Me.dtpIssueLeads)
 
-        '' add more datepickers and textboxes as needed for additional tabs
+            '
+            'btnMemorize
+            '
+            Me.btnMemorize.Image = Me.ilToolbarButtons.Images(4)
+            Me.btnMemorize.Name = "btnMemorize"
+            Me.btnMemorize.Size = New System.Drawing.Size(182, 22)
+            Me.btnMemorize.Text = "Memorize This Record"
+            'btnCustomerTools
+            '
+            Me.btnCustomerTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEditCustomer, Me.sepCustomerTools, Me.btnCallCustomer, Me.btnEMailCustomer, Me.btnLetter, Me.sep, Me.btnSetAppt, Me.btnAssignRep})
+            Me.btnCustomerTools.Image = Me.ilToolbarButtons.Images(1)
+            Me.btnCustomerTools.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnCustomerTools.Name = "btnCustomerTools"
+            Me.btnCustomerTools.Size = New System.Drawing.Size(110, 22)
+            Me.btnCustomerTools.Text = "Customer Tools"
+            '
+            'btnEditCustomer
+            '
+
+            Me.btnEditCustomer.Image = Me.ilToolbarButtons.Images(1)
+            Me.btnEditCustomer.Name = "btnEditCustomer"
+            Me.btnEditCustomer.Size = New System.Drawing.Size(173, 22)
+            Me.btnEditCustomer.Text = "Edit Customer"
+            '
+            'sepCustomerTools
+            '
+            Me.sepCustomerTools.Name = "Me.sepCustomerTools"
+            Me.sepCustomerTools.Size = New System.Drawing.Size(170, 6)
+            '
+            'btnCallCustomer
+            '
+            Me.btnCallCustomer.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMain, Me.btnAltPhone1, Me.btnAltPhone2})
+            Me.btnCallCustomer.Image = Me.ilToolbarButtons.Images(5)
+            Me.btnCallCustomer.Name = "btnCallCustomer"
+            Me.btnCallCustomer.Size = New System.Drawing.Size(173, 22)
+            Me.btnCallCustomer.Text = "Call This Customer"
+            '
+            'btnMainPhone
+            '
+            Me.btnMainPhone.Name = "btnMainPhone"
+            Me.btnMainPhone.Size = New System.Drawing.Size(248, 22)
+            Me.btnMainPhone.Text = ""
+            '
+            'btnAltPhone1
+            '
+            Me.btnAltPhone1.Name = "btnAltPhone1"
+            Me.btnAltPhone1.Size = New System.Drawing.Size(248, 22)
+            Me.btnAltPhone1.Text = ""
+            '
+            'btnAltPhone2
+            '
+            Me.btnAltPhone2.Name = "btnAltPhone2"
+            Me.btnAltPhone2.Size = New System.Drawing.Size(248, 22)
+            Me.btnAltPhone2.Text = ""
+            '
+            'btnEmailCustomer
+            '
+            'Me.btnEmailCustomer.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {    ''add range later           })
+            Me.btnEMailCustomer.Image = Me.ilToolbarButtons.Images(6)
+            Me.btnEMailCustomer.Name = "btnEmailCustomer"
+            Me.btnEMailCustomer.Size = New System.Drawing.Size(173, 22)
+            Me.btnEMailCustomer.Text = "Email Customer"
+
+            '
+            'btnLetter
+            '
+            Me.btnLetter.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cboLetterWizardTemplates, Me.btnCreateNewLetterTemplate})
+
+            Me.btnCreateNewLetterTemplate.Name = "btnCreateNewLetterTemplate"
+            Me.btnCreateNewLetterTemplate.Text = "Create New Letter Template"
+
+            Me.btnLetter.Image = Me.ilToolbarButtons.Images(7)
+            Me.btnLetter.Name = "btnLetter"
+            Me.btnLetter.Size = New System.Drawing.Size(173, 22)
+            Me.btnLetter.Text = "Letter Wizard"
+            'btnSetAppt
+            '
+            Me.btnSetAppt.Image = Me.ilToolbarButtons.Images(8)
+            Me.btnSetAppt.Name = "btnSetAppt"
+            Me.btnSetAppt.Size = New System.Drawing.Size(173, 22)
+            Me.btnSetAppt.Text = "Set Appointment"
+            'btnAssignRep
+            '
+            Me.btnAssignRep.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cboRep1, Me.cboRep2, Me.sep2, Me.btnSaveRep})
+            Me.btnAssignRep.Name = "btnAssignRep"
+            Me.btnAssignRep.Size = New System.Drawing.Size(173, 22)
+            Me.btnAssignRep.Text = "Assign/Change Sales Rep(s)"
+            'btnSaveRep
+            '
+            Me.btnSaveRep.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.btnSaveRep.Name = "btnAssignRep"
+            Me.btnSaveRep.Size = New System.Drawing.Size(173, 22)
+            Me.btnSaveRep.Text = "Save Changes"
+            Me.btnSaveRep.TextAlign = ContentAlignment.MiddleCenter
+
+            'cborep1 and cborep2
+            Me.cboRep1.DropDownStyle = ComboBoxStyle.DropDownList
+            Me.cboRep1.FlatStyle = FlatStyle.Standard
+            Me.cboRep2.DropDownStyle = ComboBoxStyle.DropDownList
+            Me.cboRep2.FlatStyle = FlatStyle.Standard
+            Me.cboRep1.Size = New System.Drawing.Size(150, Me.cboRep1.Size.Height)
+            Me.cboRep2.Size = New System.Drawing.Size(150, Me.cboRep1.Size.Height)
+            'btnBuildList
+            '
+            Me.btnBuildList.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.txtSingleRecordInput, Me.sepBuildList, Me.btnSingleRecord})
+            Me.btnBuildList.Image = Me.ilToolbarButtons.Images(9)
+            Me.btnBuildList.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnBuildList.Name = "btnBuildList"
+            Me.btnBuildList.Size = New System.Drawing.Size(118, 22)
+            Me.btnBuildList.Text = "Create Custom List"
+            'txtSingleRecordInput
+            '
+
+            Me.txtSingleRecordInput.Name = "txtSingleRecordInput"
+            Me.txtSingleRecordInput.Size = New System.Drawing.Size(118, 22)
+            Me.txtSingleRecordInput.Text = "[Enter Record ID]"
+            Me.txtSingleRecordInput.BorderStyle = BorderStyle.FixedSingle
+            'btnSingleRecord
+            '
+            Me.btnSingleRecord.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.btnSingleRecord.TextAlign = ContentAlignment.MiddleCenter
+            Me.btnSingleRecord.Name = "btnSingleRecord"
+            Me.btnSingleRecord.Size = New System.Drawing.Size(118, 22)
+            Me.btnSingleRecord.Text = "Get Record"
+            Me.btnSingleRecord.Enabled = False
+            'btnPrintCustomerList
+            '
+            Me.btnPrintCustomerList.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPrintApptSheet, Me.btnPrintCustomerInfoSheet, Me.btnPrintCurrentList})
+            Me.btnPrintCustomerList.Image = Me.ilToolbarButtons.Images(3)
+            Me.btnPrintCustomerList.ImageTransparentColor = System.Drawing.Color.Magenta
+            Me.btnPrintCustomerList.Name = "btnPrintCustomerList"
+            Me.btnPrintCustomerList.Size = New System.Drawing.Size(58, 22)
+            Me.btnPrintCustomerList.Text = "Print"
+            'btnPrintApptSheet
+            Me.btnPrintApptSheet.Name = "btnPrintApptSheet"
+            Me.btnPrintApptSheet.Size = New System.Drawing.Size(233, 22)
+            Me.btnPrintApptSheet.Text = "Print Appointment Sheet"
+            'btnPrintCustomerInfoSheet
+            Me.btnPrintCustomerInfoSheet.Name = "btnPrintCustomerInfoSheet"
+            Me.btnPrintCustomerInfoSheet.Size = New System.Drawing.Size(233, 22)
+            Me.btnPrintCustomerInfoSheet.Text = "Print Customer Information Sheet"
+            '' btnPrintCurrentList
+            Me.btnPrintCurrentList.Name = "btnPrintCurrentList"
+            Me.btnPrintCurrentList.Size = New System.Drawing.Size(233, 22)
+            Me.btnPrintCurrentList.Text = "Print Contact List From The Current Customer List"
+            'lblDateRangeCustomerList
+            '
+            Me.lblDateRangeCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+            Me.lblDateRangeCustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblDateRangeCustomerList.Name = "lblDateRangeCustomerList"
+            Me.lblDateRangeCustomerList.Size = New System.Drawing.Size(86, 22)
+            Me.lblDateRangeCustomerList.Text = "Appt. Dates"
+            'cboDateRangeCustomerList
+            '
+            Me.cboDateRangeCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+            Me.cboDateRangeCustomerList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboDateRangeCustomerList.FlatStyle = System.Windows.Forms.FlatStyle.Standard
+            Me.cboDateRangeCustomerList.Items.AddRange(New Object() {"All", "Today", "Yesterday", "This Week", "This Week - to date", "This Month", "This Month - to date", "This Year", "This Year - to date", "Next Week", "Next Month", "Last Week", "Last Week - to date", "Last Month", "Last Month - to date", "Last Year", "Last Year - to date", "Custom"})
+            Me.cboDateRangeCustomerList.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
+            Me.cboDateRangeCustomerList.Name = "cboDateRangeCustomerList"
+            Me.cboDateRangeCustomerList.Size = New System.Drawing.Size(123, 25)
+            'lblToCustomerList
+            '
+            Me.lblToCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+            Me.lblToCustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblToCustomerList.Margin = New System.Windows.Forms.Padding(0, 1, 115, 2)
+            Me.lblToCustomerList.Name = "lblToCustomerList"
+            Me.lblToCustomerList.Size = New System.Drawing.Size(23, 22)
+            Me.lblToCustomerList.Text = "To"
+            '
+            'lblFromCustomerList
+            '
+            Me.lblFromCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+            Me.lblFromCustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblFromCustomerList.Margin = New System.Windows.Forms.Padding(0, 1, 120, 2)
+            Me.lblFromCustomerList.Name = "lblFromCustomerList"
+            Me.lblFromCustomerList.Size = New System.Drawing.Size(39, 22)
+            Me.lblFromCustomerList.Text = "From"
+            'dtp1CustomerList
+            '
+            Me.dtp1CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.dtp1CustomerList.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtp1CustomerList.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtp1CustomerList.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+            Me.dtp1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2) '745
+            Me.dtp1CustomerList.Name = "dtp1CustomerList"
+            Me.dtp1CustomerList.Size = New System.Drawing.Size(98, 21)
+            Me.dtp1CustomerList.TabIndex = 442
+            Me.dtp1CustomerList.Visible = False
+            'dtp2CustomerList
+            '
+            Me.dtp2CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.dtp2CustomerList.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtp2CustomerList.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtp2CustomerList.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+            Me.dtp2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2) '882
+            Me.dtp2CustomerList.Name = "dtp2CustomerList"
+            Me.dtp2CustomerList.Size = New System.Drawing.Size(98, 21)
+            Me.dtp2CustomerList.TabIndex = 443
+            Me.dtp2CustomerList.Visible = False
+            'txt1CustomerList
+            '
+            Me.txt1CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.txt1CustomerList.BackColor = System.Drawing.Color.White
+            Me.txt1CustomerList.BorderStyle = System.Windows.Forms.BorderStyle.None
+            Me.txt1CustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.txt1CustomerList.ForeColor = System.Drawing.Color.Black
+            Me.txt1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 246, 4) '747
+            Me.txt1CustomerList.Name = "txt1CustomerList"
+            Me.txt1CustomerList.ReadOnly = True
+            Me.txt1CustomerList.Size = New System.Drawing.Size(60, 16)
+            Me.txt1CustomerList.TabIndex = 179
+            Me.txt1CustomerList.TabStop = False
+            Me.txt1CustomerList.Visible = False
+            'txt2CustomerList
+            '
+            Me.txt2CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.txt2CustomerList.BackColor = System.Drawing.Color.White
+            Me.txt2CustomerList.BorderStyle = System.Windows.Forms.BorderStyle.None
+            Me.txt2CustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.txt2CustomerList.ForeColor = System.Drawing.Color.Black
+            Me.txt2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 107, 4) '885
+            Me.txt2CustomerList.Name = "txt2CustomerList"
+            Me.txt2CustomerList.ReadOnly = True
+            Me.txt2CustomerList.Size = New System.Drawing.Size(60, 16)
+            Me.txt2CustomerList.TabIndex = 180
+            Me.txt2CustomerList.TabStop = False
+            Me.txt2CustomerList.Visible = False
+
+            ''IssueLeads Tab
+            Me.dtpIssueLeads.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.dtpIssueLeads.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpIssueLeads.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpIssueLeads.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+            Me.dtpIssueLeads.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
+            Me.dtpIssueLeads.Name = "dtpIssueLeads"
+            Me.dtpIssueLeads.Size = New System.Drawing.Size(98, 21)
+            Me.dtpIssueLeads.TabIndex = 442
+            Me.dtpIssueLeads.Visible = False
+            Me.dtpIssueLeads.Value = Today
+
+            Me.lblIssue.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+            Me.lblIssue.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblIssue.Name = "lblIssue"
+            Me.lblIssue.Size = New System.Drawing.Size(296, 22)
+            Me.lblIssue.Text = "Issue Appointments For"
+            Me.lblIssue.Padding = New Padding(0, 0, 228, 0)
+
+
+
+            '' Add controls overlaying toolbar
+            Me.Controls.Add(Me.dtpSummary)
+            Me.Controls.Add(Me.dtpSummary2)
+            Me.Controls.Add(Me.dtp1CustomerList)
+            Me.Controls.Add(Me.dtp2CustomerList)
+            Me.Controls.Add(Me.txt1CustomerList)
+            Me.Controls.Add(Me.txt2CustomerList)
+            Me.Controls.Add(Me.dtpIssueLeads)
+
+            '' add more datepickers and textboxes as needed for additional tabs
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "ButtonConfig(idx)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Public Sub ToolbarConfig(ByVal Toolbar As Integer)
-        Me.tsSalesDepartment.Items.Clear()
-        Select Case Toolbar
-            Case Is = 1  ''Summary Tab
-                Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult, Me.btnScheduledTasks, Me.btnPrintSummary, Me.lblToSummary, Me.lblFromSummary, Me.cboDateRangeSummary, Me.lblSummary})
-                Me.dtpSummary.Visible = True
-                Me.dtpSummary.BringToFront()
-                Me.dtpSummary2.Visible = True
-                Me.dtpSummary2.BringToFront()
-                Me.dtp1CustomerList.Visible = False
-                Me.dtp2CustomerList.Visible = False
-                Me.txt1CustomerList.Visible = False
-                Me.txt2CustomerList.Visible = False
-                Me.dtpIssueLeads.Visible = False
+        Try
+            Me.tsSalesDepartment.Items.Clear()
+            Select Case Toolbar
+                Case Is = 1  ''Summary Tab
+                    Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult, Me.btnScheduledTasks, Me.btnPrintSummary, Me.lblToSummary, Me.lblFromSummary, Me.cboDateRangeSummary, Me.lblSummary})
+                    Me.dtpSummary.Visible = True
+                    Me.dtpSummary.BringToFront()
+                    Me.dtpSummary2.Visible = True
+                    Me.dtpSummary2.BringToFront()
+                    Me.dtp1CustomerList.Visible = False
+                    Me.dtp2CustomerList.Visible = False
+                    Me.txt1CustomerList.Visible = False
+                    Me.txt2CustomerList.Visible = False
+                    Me.dtpIssueLeads.Visible = False
 
-            Case Is = 2  '' Customer List Tab , Sales List Tab 
-                Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult2, Me.btnCustomerTools, Me.btnBuildList, Me.btnPrintCustomerList, Me.lblToCustomerList, Me.lblFromCustomerList, Me.cboDateRangeCustomerList, Me.lblDateRangeCustomerList, Me.btnEmailWizard})
-                Me.btnMemorize.Text = "Memorize This Record"
-                Me.btnMemorize.Image = Me.ilToolbarButtons.Images(4)
-                Me.dtpSummary.Visible = False
-                Me.dtpSummary2.Visible = False
-                Me.dtpIssueLeads.Visible = False
-                Me.dtp1CustomerList.Visible = True
-                Me.dtp1CustomerList.BringToFront()
-                Me.dtp2CustomerList.Visible = True
-                Me.dtp2CustomerList.BringToFront()
-                Me.txt1CustomerList.BringToFront()
-                Me.txt2CustomerList.BringToFront()
-                If Me.txt1CustomerList.Text = "" Then
-                    Me.txt1CustomerList.Visible = True
-                End If
-                If Me.txt2CustomerList.Text = "" Then
-                    Me.txt2CustomerList.Visible = True
-                End If
-                Me.ShowNotesToolStripMenuItem.Visible = False
-                Me.ToolStripSeparator1.Visible = False
-                Me.RemoveThisApptToolStripMenuItem.Visible = False
-                Me.MemorizeThisApptToolStripMenuItem.Visible = True
+                Case Is = 2  '' Customer List Tab , Sales List Tab 
+                    Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult2, Me.btnCustomerTools, Me.btnBuildList, Me.btnPrintCustomerList, Me.lblToCustomerList, Me.lblFromCustomerList, Me.cboDateRangeCustomerList, Me.lblDateRangeCustomerList, Me.btnEmailWizard})
+                    Me.btnMemorize.Text = "Memorize This Record"
+                    Me.btnMemorize.Image = Me.ilToolbarButtons.Images(4)
+                    Me.dtpSummary.Visible = False
+                    Me.dtpSummary2.Visible = False
+                    Me.dtpIssueLeads.Visible = False
+                    Me.dtp1CustomerList.Visible = True
+                    Me.dtp1CustomerList.BringToFront()
+                    Me.dtp2CustomerList.Visible = True
+                    Me.dtp2CustomerList.BringToFront()
+                    Me.txt1CustomerList.BringToFront()
+                    Me.txt2CustomerList.BringToFront()
+                    If Me.txt1CustomerList.Text = "" Then
+                        Me.txt1CustomerList.Visible = True
+                    End If
+                    If Me.txt2CustomerList.Text = "" Then
+                        Me.txt2CustomerList.Visible = True
+                    End If
+                    Me.ShowNotesToolStripMenuItem.Visible = False
+                    Me.ToolStripSeparator1.Visible = False
+                    Me.RemoveThisApptToolStripMenuItem.Visible = False
+                    Me.MemorizeThisApptToolStripMenuItem.Visible = True
 
-                '' will probably have to revisit this 
+                    '' will probably have to revisit this 
 
-                ''Need code to deselect any tasks in the task manager
-            Case Is = 3 '' Customer List Tab , Memorized Appts Tab
+                    ''Need code to deselect any tasks in the task manager
+                Case Is = 3 '' Customer List Tab , Memorized Appts Tab
 
-                Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult2, Me.btnCustomerTools, Me.btnPrintCustomerList, Me.btnEmailWizard})
-                
-                Me.btnMemorize.Text = "Remove This Record"
-                Me.btnMemorize.Image = Me.ilToolbarButtons.Images(10)
-                Me.txt1CustomerList.Visible = False
-                Me.txt2CustomerList.Visible = False
-                Me.dtp1CustomerList.Visible = False
-                Me.dtp2CustomerList.Visible = False
-                Me.dtpSummary.Visible = False
-                Me.dtpSummary2.Visible = False
-                Me.dtpIssueLeads.Visible = False
-                Me.ShowNotesToolStripMenuItem.Visible = True
-                Me.ToolStripSeparator1.Visible = True
-                Me.RemoveThisApptToolStripMenuItem.Visible = True
-                Me.MemorizeThisApptToolStripMenuItem.Visible = False
-                '' add email associated buttons here for 
-                '' email templates and bulk mailing per list
-                '' 11-3-2015 AC
-                ''
+                    Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult2, Me.btnCustomerTools, Me.btnPrintCustomerList, Me.btnEmailWizard})
 
-                '' cboTemplateList 
+                    Me.btnMemorize.Text = "Remove This Record"
+                    Me.btnMemorize.Image = Me.ilToolbarButtons.Images(10)
+                    Me.txt1CustomerList.Visible = False
+                    Me.txt2CustomerList.Visible = False
+                    Me.dtp1CustomerList.Visible = False
+                    Me.dtp2CustomerList.Visible = False
+                    Me.dtpSummary.Visible = False
+                    Me.dtpSummary2.Visible = False
+                    Me.dtpIssueLeads.Visible = False
+                    Me.ShowNotesToolStripMenuItem.Visible = True
+                    Me.ToolStripSeparator1.Visible = True
+                    Me.RemoveThisApptToolStripMenuItem.Visible = True
+                    Me.MemorizeThisApptToolStripMenuItem.Visible = False
+                    '' add email associated buttons here for 
+                    '' email templates and bulk mailing per list
+                    '' 11-3-2015 AC
+                    ''
 
-                '' GetTemplates() -> list of templates
-                
+                    '' cboTemplateList 
 
+                    '' GetTemplates() -> list of templates
 
 
-            Case Is = 4 '' Issue Leads Tab 
-                Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCCIssue, Me.btnEditCustIssue, Me.btnPrintIssue, Me.btnEmailIssue, Me.btnExclude, Me.lblIssue})
-                Me.txt1CustomerList.Visible = False
-                Me.txt2CustomerList.Visible = False
-                Me.dtp1CustomerList.Visible = False
-                Me.dtp2CustomerList.Visible = False
-                Me.dtpSummary.Visible = False
-                Me.dtpSummary2.Visible = False
-                Me.dtpIssueLeads.Visible = True
-                Me.dtpIssueLeads.BringToFront()
 
-            Case Is = 5 ''References Tab 
-                Me.txt1CustomerList.Visible = False
-                Me.txt2CustomerList.Visible = False
-                Me.dtp1CustomerList.Visible = False
-                Me.dtp2CustomerList.Visible = False
-                Me.dtpSummary.Visible = False
-                Me.dtpSummary2.Visible = False
-                Me.dtpIssueLeads.Visible = False
 
-            Case Is = 6  '' Reports Tab 
-                Me.txt1CustomerList.Visible = False
-                Me.txt2CustomerList.Visible = False
-                Me.dtp1CustomerList.Visible = False
-                Me.dtp2CustomerList.Visible = False
-                Me.dtpSummary.Visible = False
-                Me.dtpSummary2.Visible = False
-                Me.dtpIssueLeads.Visible = False
+                Case Is = 4 '' Issue Leads Tab 
+                    Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCCIssue, Me.btnEditCustIssue, Me.btnPrintIssue, Me.btnEmailIssue, Me.btnExclude, Me.lblIssue})
+                    Me.txt1CustomerList.Visible = False
+                    Me.txt2CustomerList.Visible = False
+                    Me.dtp1CustomerList.Visible = False
+                    Me.dtp2CustomerList.Visible = False
+                    Me.dtpSummary.Visible = False
+                    Me.dtpSummary2.Visible = False
+                    Me.dtpIssueLeads.Visible = True
+                    Me.dtpIssueLeads.BringToFront()
 
-        End Select
+                Case Is = 5 ''References Tab 
+                    Me.txt1CustomerList.Visible = False
+                    Me.txt2CustomerList.Visible = False
+                    Me.dtp1CustomerList.Visible = False
+                    Me.dtp2CustomerList.Visible = False
+                    Me.dtpSummary.Visible = False
+                    Me.dtpSummary2.Visible = False
+                    Me.dtpIssueLeads.Visible = False
+
+                Case Is = 6  '' Reports Tab 
+                    Me.txt1CustomerList.Visible = False
+                    Me.txt2CustomerList.Visible = False
+                    Me.dtp1CustomerList.Visible = False
+                    Me.dtp2CustomerList.Visible = False
+                    Me.dtpSummary.Visible = False
+                    Me.dtpSummary2.Visible = False
+                    Me.dtpIssueLeads.Visible = False
+
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "ToolbarConfig(idx)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Public Sub PopulateNoResults()
-        'Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        'Dim cmdGet As SqlCommand = New SqlCommand("dbo.NoResultsSummary", Cnn)
-        'cmdGet.CommandType = CommandType.StoredProcedure
-        'Cnn.Open()
-        'Dim r1 As SqlDataReader
-        'r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-        Dim x As String
-        If Me.lvnoresults.SelectedItems.Count <> 0 Then
-            x = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
-        End If
-        Me.lvnoresults.Items.Clear()
-        Dim cntNoResults As Integer = 0
-
-        Dim a As New PullNoResults
-        Dim _lsNoRes As New List(Of PullNoResults.NoResultRecord)
-        _lsNoRes = a.NoResultsSummary
-        Dim lvCol As New ListView.ListViewItemCollection(Me.lvnoresults)
-        cntNoResults = _lsNoRes.Count
-        a = Nothing
-        For Each b As PullNoResults.NoResultRecord In _lsNoRes
-            Dim c As New ListViewItem
-            Dim aptDate() = Split(b.ApptDate, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-            c.Text = aptDate(0)
-            c.Tag = b.ID
-            c.SubItems.Add(b.ID)
-            If b.Rep2 <> "" And b.Rep2 <> " " Then
-                c.SubItems.Add(b.Rep1 & " and " & b.Rep2)
-            Else
-                c.SubItems.Add(b.Rep1)
+        Try
+            'Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            'Dim cmdGet As SqlCommand = New SqlCommand("dbo.NoResultsSummary", Cnn)
+            'cmdGet.CommandType = CommandType.StoredProcedure
+            'Cnn.Open()
+            'Dim r1 As SqlDataReader
+            'r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+            Dim x As String
+            If Me.lvnoresults.SelectedItems.Count <> 0 Then
+                x = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
             End If
-            lvCol.Add(c)
-        Next
+            Me.lvnoresults.Items.Clear()
+            Dim cntNoResults As Integer = 0
+
+            Dim a As New PullNoResults
+            Dim _lsNoRes As New List(Of PullNoResults.NoResultRecord)
+            _lsNoRes = a.NoResultsSummary
+            Dim lvCol As New ListView.ListViewItemCollection(Me.lvnoresults)
+            cntNoResults = _lsNoRes.Count
+            a = Nothing
+            For Each b As PullNoResults.NoResultRecord In _lsNoRes
+                Dim c As New ListViewItem
+                Dim aptDate() = Split(b.ApptDate, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                c.Text = aptDate(0)
+                c.Tag = b.ID
+                c.SubItems.Add(b.ID)
+                If b.Rep2 <> "" And b.Rep2 <> " " Then
+                    c.SubItems.Add(b.Rep1 & " and " & b.Rep2)
+                Else
+                    c.SubItems.Add(b.Rep1)
+                End If
+                lvCol.Add(c)
+            Next
 
 
 
-        'While r1.Read
-        '    cntNoResults += 1
-        '    Dim lv As New ListViewItem
-        '    Dim d
-        '    Dim rep1 As String
-        '    Dim rep2 As String
-        '    Try
-        '        rep1 = r1.Item(2).ToString
-        '    Catch ex As Exception
-        '        rep1 = ""
-        '    End Try
-        '    Try
-        '        rep2 = r1.Item(3).ToString
-        '    Catch ex As Exception
-        '        rep2 = ""
-        '    End Try
+            'While r1.Read
+            '    cntNoResults += 1
+            '    Dim lv As New ListViewItem
+            '    Dim d
+            '    Dim rep1 As String
+            '    Dim rep2 As String
+            '    Try
+            '        rep1 = r1.Item(2).ToString
+            '    Catch ex As Exception
+            '        rep1 = ""
+            '    End Try
+            '    Try
+            '        rep2 = r1.Item(3).ToString
+            '    Catch ex As Exception
+            '        rep2 = ""
+            '    End Try
 
-        '    d = Split(r1.Item(0), " ", 2)
-        '    lv.Text = d(0)
-        '    lv.Tag = r1.Item(1)
-        '    lv.SubItems.Add(r1.Item(1).ToString)
-        '    If rep2 <> "" Then
-        '        lv.SubItems.Add(rep1 & " & " & rep2)
-        '    Else
-        '        lv.SubItems.Add(rep1)
-        '    End If
+            '    d = Split(r1.Item(0), " ", 2)
+            '    lv.Text = d(0)
+            '    lv.Tag = r1.Item(1)
+            '    lv.SubItems.Add(r1.Item(1).ToString)
+            '    If rep2 <> "" Then
+            '        lv.SubItems.Add(rep1 & " & " & rep2)
+            '    Else
+            '        lv.SubItems.Add(rep1)
+            '    End If
 
-        'Me.lvnoresults.Items.Add(lv)
-        'If lv.SubItems(1).Text = x Then
-        '    lv.Selected = True
-        '    lv.EnsureVisible()
-        'End If
-        ''End While
-        'R1.Close()
-        'Cnn.Close()
+            'Me.lvnoresults.Items.Add(lv)
+            'If lv.SubItems(1).Text = x Then
+            '    lv.Selected = True
+            '    lv.EnsureVisible()
+            'End If
+            ''End While
+            'R1.Close()
+            'Cnn.Close()
 
-        Me.Label38.Text = (Me.Label38.Text & " -[ Records: " & cntNoResults & " ]")
+            Me.Label38.Text = (Me.Label38.Text & " -[ Records: " & cntNoResults & " ]")
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PopulateNoResults()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Class PullNoResults
@@ -920,6 +941,9 @@ Public Class Sales
             Catch ex As Exception
                 cnx.Close()
                 cnx = Nothing
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode-Private Class", "Function", "Get_No_Results()", "0", ex.Message.ToString)
+                y = Nothing
             End Try
             Return _NoRes
         End Function
@@ -927,6 +951,7 @@ Public Class Sales
 
 
     Public Sub PullInfo(ByVal ID As String)
+
         If Me.ID = ID And Me.ForceRefresh = False Then
             Exit Sub
         End If
@@ -982,13 +1007,13 @@ Public Class Sales
         End If
 
         Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet As SqlCommand = New SqlCommand("dbo.GetCustomerINFO", Cnn)
+        Dim cmdGet As SqlCommand = New SqlCommand("dbo.GetCustomerINFO", cnn)
 
         Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
         cmdGet.CommandType = CommandType.StoredProcedure
         cmdGet.Parameters.Add(param1)
         Try
-            Cnn.Open()
+            cnn.Open()
             Dim r1 As SqlDataReader
             r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
             While r1.Read
@@ -1093,7 +1118,7 @@ Public Class Sales
                 Me.rtbSpecialInstructions.Text = r1.Item(32)
             End While
             r1.Close()
-            Cnn.Close()
+            cnn.Close()
 
         Catch ex As Exception
             'Cnn.Close()
@@ -1101,6 +1126,9 @@ Public Class Sales
             'MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
             Dim err As String = ex.Message
             MsgBox("Error: " & vbCrLf & err, MsgBoxStyle.Critical, "DEBUG INFO - ERROR PULLInfo()")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo(id)", ID, ex.Message.ToString)
+            y = Nothing
         End Try
         If Me.txtHousePhone.Text <> "" Then
             Me.btnMain.Text = "Call Main Phone - " & Me.txtHousePhone.Text
@@ -1116,13 +1144,13 @@ Public Class Sales
         End If
         ''Populate current reps
 
-        Dim cnn2 As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+        Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Dim cmdGet1 As SqlCommand
         Dim r2 As SqlDataReader
         cmdGet1 = New SqlCommand("Select Rep1, Rep2 from enterlead where ID = " & Me.ID, cnn2)
         cmdGet1.CommandType = CommandType.Text
         cnn2.Open()
-        R2 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
+        r2 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
         r2.Read()
         '' Loads Names of Latest Rep from sales rep pull list and will also add 
         '' the name to rep combos if they are not part of the current rep list 
@@ -1141,6 +1169,9 @@ Public Class Sales
         Catch ex As Exception
             Me.cboRep1.Text = ""
             Me.ToolStripComboBox1.Text = ""
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo-rep 1 & rep2 logic", "0", ex.Message.ToString)
+            y = Nothing
         End Try
         Try
             Me.cboRep2.Text = r2.Item(1)
@@ -1156,7 +1187,9 @@ Public Class Sales
             End If
         Catch ex As Exception
             Me.cboRep2.Text = ""
-
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo-rep1 & rep2 logic", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
         r2.Close()
@@ -1179,270 +1212,468 @@ Public Class Sales
 
     End Sub
     Private Sub DisplayColumn(ByVal Column As String, ByVal LV As ListView)
-        Dim x As Integer = 0
-        Dim Y As Integer = 0
-        Dim Z As Integer = 0
-        If LV Is Me.lvMemorized Then
-            x = 1
-            Y = 45
-            Z = 33
-        End If
+        Try
+            Dim x As Integer = 0
+            Dim Y As Integer = 0
+            Dim Z As Integer = 0
+            If LV Is Me.lvMemorized Then
+                x = 1
+                Y = 45
+                Z = 33
+            End If
 
-        Select Case Column
-            Case Is = "Contact(s)"
+            Select Case Column
+                Case Is = "Contact(s)"
 
-                LV.Columns(0 + x).DisplayIndex = 1 + x
-                LV.Columns(1 + x).DisplayIndex = 0 + x
-                LV.Columns(2 + x).DisplayIndex = 2 + x
-                LV.Columns(3 + x).DisplayIndex = 3 + x
-                LV.Columns(4 + x).DisplayIndex = 4 + x
-                LV.Columns(5 + x).DisplayIndex = 5 + x
-                LV.Columns(6 + x).DisplayIndex = 6 + x
-                LV.Columns(0 + x).Width = 60
-                LV.Columns(1 + x).Width = 218 - Y
-                LV.Columns(2 + x).Width = 255
-                LV.Columns(3 + x).Width = 101
-                LV.Columns(4 + x).Width = 82
-                LV.Columns(5 + x).Width = 144
-                LV.Columns(6 + x).Width = 99
-                LV.Refresh()
-            Case Is = "House Phone"
-                LV.Columns(0 + x).DisplayIndex = 1 + x
-                LV.Columns(1 + x).DisplayIndex = 2 + x
-                LV.Columns(2 + x).DisplayIndex = 3 + x
-                LV.Columns(3 + x).DisplayIndex = 0 + x
-                LV.Columns(4 + x).DisplayIndex = 4 + x
-                LV.Columns(5 + x).DisplayIndex = 5 + x
-                LV.Columns(6 + x).DisplayIndex = 6 + x
-                LV.Columns(0 + x).Width = 60
-                LV.Columns(1 + x).Width = 160
-                LV.Columns(2 + x).Width = 255
-                LV.Columns(3 + x).Width = 218 - Y
-                LV.Columns(4 + x).Width = 82
-                LV.Columns(5 + x).Width = 144
-                LV.Columns(6 + x).Width = 99
-                LV.Refresh()
+                    LV.Columns(0 + x).DisplayIndex = 1 + x
+                    LV.Columns(1 + x).DisplayIndex = 0 + x
+                    LV.Columns(2 + x).DisplayIndex = 2 + x
+                    LV.Columns(3 + x).DisplayIndex = 3 + x
+                    LV.Columns(4 + x).DisplayIndex = 4 + x
+                    LV.Columns(5 + x).DisplayIndex = 5 + x
+                    LV.Columns(6 + x).DisplayIndex = 6 + x
+                    LV.Columns(0 + x).Width = 60
+                    LV.Columns(1 + x).Width = 218 - Y
+                    LV.Columns(2 + x).Width = 255
+                    LV.Columns(3 + x).Width = 101
+                    LV.Columns(4 + x).Width = 82
+                    LV.Columns(5 + x).Width = 144
+                    LV.Columns(6 + x).Width = 99
+                    LV.Refresh()
+                Case Is = "House Phone"
+                    LV.Columns(0 + x).DisplayIndex = 1 + x
+                    LV.Columns(1 + x).DisplayIndex = 2 + x
+                    LV.Columns(2 + x).DisplayIndex = 3 + x
+                    LV.Columns(3 + x).DisplayIndex = 0 + x
+                    LV.Columns(4 + x).DisplayIndex = 4 + x
+                    LV.Columns(5 + x).DisplayIndex = 5 + x
+                    LV.Columns(6 + x).DisplayIndex = 6 + x
+                    LV.Columns(0 + x).Width = 60
+                    LV.Columns(1 + x).Width = 160
+                    LV.Columns(2 + x).Width = 255
+                    LV.Columns(3 + x).Width = 218 - Y
+                    LV.Columns(4 + x).Width = 82
+                    LV.Columns(5 + x).Width = 144
+                    LV.Columns(6 + x).Width = 99
+                    LV.Refresh()
 
-            Case Is = "Products"
-                LV.Columns(0 + x).DisplayIndex = 1 + x
-                LV.Columns(1 + x).DisplayIndex = 2 + x
-                LV.Columns(2 + x).DisplayIndex = 3 + x
-                LV.Columns(3 + x).DisplayIndex = 4 + x
-                LV.Columns(4 + x).DisplayIndex = 0 + x
-                LV.Columns(5 + x).DisplayIndex = 5 + x
-                LV.Columns(6 + x).DisplayIndex = 6 + x
-                LV.Columns(0 + x).Width = 60
-                LV.Columns(1 + x).Width = 160
-                LV.Columns(2 + x).Width = 255 - Y
-                LV.Columns(3 + x).Width = 101
-                LV.Columns(4 + x).Width = 218
-                LV.Columns(5 + x).Width = 144
-                LV.Columns(6 + x).Width = 99
-                LV.Refresh()
-            Case Is = "Appt. Date/Time"
-                LV.Columns(0 + x).DisplayIndex = 1 + x
-                LV.Columns(1 + x).DisplayIndex = 2 + x
-                LV.Columns(2 + x).DisplayIndex = 3 + x
-                LV.Columns(3 + x).DisplayIndex = 4 + x
-                LV.Columns(4 + x).DisplayIndex = 5 + x
-                LV.Columns(5 + x).DisplayIndex = 0 + x
-                LV.Columns(6 + x).DisplayIndex = 6 + x
-                LV.Columns(0 + x).Width = 60 + x
-                LV.Columns(1 + x).Width = 160
-                LV.Columns(2 + x).Width = 255 - Y
-                LV.Columns(3 + x).Width = 101
-                LV.Columns(4 + x).Width = 82
-                LV.Columns(5 + x).Width = 218
-                LV.Columns(6 + x).Width = 99
-                LV.Refresh()
+                Case Is = "Products"
+                    LV.Columns(0 + x).DisplayIndex = 1 + x
+                    LV.Columns(1 + x).DisplayIndex = 2 + x
+                    LV.Columns(2 + x).DisplayIndex = 3 + x
+                    LV.Columns(3 + x).DisplayIndex = 4 + x
+                    LV.Columns(4 + x).DisplayIndex = 0 + x
+                    LV.Columns(5 + x).DisplayIndex = 5 + x
+                    LV.Columns(6 + x).DisplayIndex = 6 + x
+                    LV.Columns(0 + x).Width = 60
+                    LV.Columns(1 + x).Width = 160
+                    LV.Columns(2 + x).Width = 255 - Y
+                    LV.Columns(3 + x).Width = 101
+                    LV.Columns(4 + x).Width = 218
+                    LV.Columns(5 + x).Width = 144
+                    LV.Columns(6 + x).Width = 99
+                    LV.Refresh()
+                Case Is = "Appt. Date/Time"
+                    LV.Columns(0 + x).DisplayIndex = 1 + x
+                    LV.Columns(1 + x).DisplayIndex = 2 + x
+                    LV.Columns(2 + x).DisplayIndex = 3 + x
+                    LV.Columns(3 + x).DisplayIndex = 4 + x
+                    LV.Columns(4 + x).DisplayIndex = 5 + x
+                    LV.Columns(5 + x).DisplayIndex = 0 + x
+                    LV.Columns(6 + x).DisplayIndex = 6 + x
+                    LV.Columns(0 + x).Width = 60 + x
+                    LV.Columns(1 + x).Width = 160
+                    LV.Columns(2 + x).Width = 255 - Y
+                    LV.Columns(3 + x).Width = 101
+                    LV.Columns(4 + x).Width = 82
+                    LV.Columns(5 + x).Width = 218
+                    LV.Columns(6 + x).Width = 99
+                    LV.Refresh()
 
-            Case Is = "Rep(s)"
-                LV.Columns(0 + x + x).DisplayIndex = 1 + x
-                LV.Columns(1 + x).DisplayIndex = 2 + x
-                LV.Columns(2 + x).DisplayIndex = 3 + x
-                LV.Columns(3 + x).DisplayIndex = 4 + x
-                LV.Columns(4 + x).DisplayIndex = 5 + x
-                LV.Columns(5 + x).DisplayIndex = 6 + x
-                LV.Columns(6 + x).DisplayIndex = 0 + x
-                LV.Columns(0 + x).Width = 60
-                LV.Columns(1 + x).Width = 160
-                LV.Columns(2 + x).Width = 255 - Y
-                LV.Columns(3 + x).Width = 101
-                LV.Columns(4 + x).Width = 82
-                LV.Columns(5 + x).Width = 144
-                LV.Columns(6 + x).Width = 218
-                LV.Refresh()
+                Case Is = "Rep(s)"
+                    LV.Columns(0 + x + x).DisplayIndex = 1 + x
+                    LV.Columns(1 + x).DisplayIndex = 2 + x
+                    LV.Columns(2 + x).DisplayIndex = 3 + x
+                    LV.Columns(3 + x).DisplayIndex = 4 + x
+                    LV.Columns(4 + x).DisplayIndex = 5 + x
+                    LV.Columns(5 + x).DisplayIndex = 6 + x
+                    LV.Columns(6 + x).DisplayIndex = 0 + x
+                    LV.Columns(0 + x).Width = 60
+                    LV.Columns(1 + x).Width = 160
+                    LV.Columns(2 + x).Width = 255 - Y
+                    LV.Columns(3 + x).Width = 101
+                    LV.Columns(4 + x).Width = 82
+                    LV.Columns(5 + x).Width = 144
+                    LV.Columns(6 + x).Width = 218
+                    LV.Refresh()
 
-            Case Else
-                LV.Columns(0 + x).DisplayIndex = 0 + x
-                LV.Columns(1 + x).DisplayIndex = 1 + x
-                LV.Columns(2 + x).DisplayIndex = 2 + x
-                LV.Columns(3 + x).DisplayIndex = 3 + x
-                LV.Columns(4 + x).DisplayIndex = 4 + x
-                LV.Columns(5 + x).DisplayIndex = 5 + x
-                LV.Columns(6 + x).DisplayIndex = 6 + x
-                LV.Columns(0 + x).Width = 60
-                LV.Columns(1 + x).Width = 160 - Z
-                LV.Columns(2 + x).Width = 255
-                LV.Columns(3 + x).Width = 101
-                LV.Columns(4 + x).Width = 82
-                LV.Columns(5 + x).Width = 144
-                LV.Columns(6 + x).Width = 99
-                LV.Refresh()
+                Case Else
+                    LV.Columns(0 + x).DisplayIndex = 0 + x
+                    LV.Columns(1 + x).DisplayIndex = 1 + x
+                    LV.Columns(2 + x).DisplayIndex = 2 + x
+                    LV.Columns(3 + x).DisplayIndex = 3 + x
+                    LV.Columns(4 + x).DisplayIndex = 4 + x
+                    LV.Columns(5 + x).DisplayIndex = 5 + x
+                    LV.Columns(6 + x).DisplayIndex = 6 + x
+                    LV.Columns(0 + x).Width = 60
+                    LV.Columns(1 + x).Width = 160 - Z
+                    LV.Columns(2 + x).Width = 255
+                    LV.Columns(3 + x).Width = 101
+                    LV.Columns(4 + x).Width = 82
+                    LV.Columns(5 + x).Width = 144
+                    LV.Columns(6 + x).Width = 99
+                    LV.Refresh()
 
 
-        End Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "DisplayColumn()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
     Private Sub LoadReps()
         '' Load Current Rep List 
-        Dim cnn1 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet2 As SqlCommand
-        Dim r As SqlDataReader
-        cmdGet2 = New SqlCommand("dbo.GetSalesReps", cnn1)
-        cmdGet2.CommandType = CommandType.StoredProcedure
+        Try
+            Dim cnn1 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet2 As SqlCommand
+            Dim r As SqlDataReader
+            cmdGet2 = New SqlCommand("dbo.GetSalesReps", cnn1)
+            cmdGet2.CommandType = CommandType.StoredProcedure
 
-        cnn1.Open()
-        r = cmdGet2.ExecuteReader(CommandBehavior.CloseConnection)
-        Me.cboRep1.Items.Clear()
-        Me.cboRep2.Items.Clear()
-        Me.ToolStripComboBox1.Items.Clear()
-        Me.ToolStripComboBox2.Items.Clear()
-        Me.cboRep1.Items.Add("")
-        Me.cboRep2.Items.Add("")
-        Me.ToolStripComboBox1.Items.Add("")
-        Me.ToolStripComboBox2.Items.Add("")
-        While r.Read
-            Me.cboRep1.Items.Add(r.Item(0) & " " & r.Item(1))
-            Me.cboRep2.Items.Add(r.Item(0) & " " & r.Item(1))
-            Me.ToolStripComboBox1.Items.Add(r.Item(0) & " " & r.Item(1))
-            Me.ToolStripComboBox2.Items.Add(r.Item(0) & " " & r.Item(1))
-        End While
-        r.Close()
-        cnn1.Close()
+            cnn1.Open()
+            r = cmdGet2.ExecuteReader(CommandBehavior.CloseConnection)
+            Me.cboRep1.Items.Clear()
+            Me.cboRep2.Items.Clear()
+            Me.ToolStripComboBox1.Items.Clear()
+            Me.ToolStripComboBox2.Items.Clear()
+            Me.cboRep1.Items.Add("")
+            Me.cboRep2.Items.Add("")
+            Me.ToolStripComboBox1.Items.Add("")
+            Me.ToolStripComboBox2.Items.Add("")
+            While r.Read
+                Me.cboRep1.Items.Add(r.Item(0) & " " & r.Item(1))
+                Me.cboRep2.Items.Add(r.Item(0) & " " & r.Item(1))
+                Me.ToolStripComboBox1.Items.Add(r.Item(0) & " " & r.Item(1))
+                Me.ToolStripComboBox2.Items.Add(r.Item(0) & " " & r.Item(1))
+            End While
+            r.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "LoadReps()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub LoadGroups()
-        Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdIns As SqlCommand = New SqlCommand("Select GroupName from MemorizedGroupPull Where Department = '" & Me.Name & "'", cnn)
-        cmdIns.CommandType = CommandType.Text
+        Try
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdIns As SqlCommand = New SqlCommand("Select GroupName from MemorizedGroupPull Where Department = '" & Me.Name & "'", cnn)
+            cmdIns.CommandType = CommandType.Text
 
-        Me.cboFilterGroups.Items.Clear()
-        Me.cboFilterGroups.Items.Add("")
-        cnn.Open()
-        Dim R1 As SqlDataReader
-        R1 = cmdIns.ExecuteReader(CommandBehavior.CloseConnection)
-        While R1.Read()
-            Me.cboFilterGroups.Items.Add(R1.Item(0))
-        End While
-        R1.Close()
-        cnn.Close()
-        Me.cboFilterGroups.Items.Add("No Group Assigned")
+            Me.cboFilterGroups.Items.Clear()
+            Me.cboFilterGroups.Items.Add("")
+            cnn.Open()
+            Dim R1 As SqlDataReader
+            R1 = cmdIns.ExecuteReader(CommandBehavior.CloseConnection)
+            While R1.Read()
+                Me.cboFilterGroups.Items.Add(R1.Item(0))
+            End While
+            R1.Close()
+            cnn.Close()
+            Me.cboFilterGroups.Items.Add("No Group Assigned")
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "LoadGroups()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub MemorizedGroupBy()
-        Dim cnn1 As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdGet1 As SqlCommand
-        Dim r1 As SqlDataReader
-        Dim param1 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
-        Dim param2 As SqlParameter = New SqlParameter("@Group", Me.cboFilterGroups.Text)
-        Dim param3 As SqlParameter = New SqlParameter("@Groupby", Me.cboGroupByMemorized.Text)
-        cmdGet1 = New SqlCommand("dbo.SalesDepartmentMemorizedGroupBy", cnn1)
-        cmdGet1.CommandType = CommandType.StoredProcedure
-        cmdGet1.Parameters.Add(param1)
-        cmdGet1.Parameters.Add(param2)
-        cmdGet1.Parameters.Add(param3)
-        cnn1.Open()
-        r1 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
-        While r1.Read
-            Me.lvMemorized.Groups.Add(r1.Item(0), r1.Item(0))
-
-        End While
-        Me.lvMemorized.Groups.Add("No Group Assigned", "No Group Assigned")
-        r1.Close()
-        cnn1.Close()
-    End Sub
-    Public Sub PopulateMemorized()
-        If Me.lvMemorized.SelectedItems.Count <> 0 Then
-            Me.lvMemorized.Tag = Me.lvMemorized.SelectedItems(0).Tag
-        Else
-            Me.lvMemorized.Tag = ""
-        End If
-        Me.lvMemorized.Groups.Clear()
-        Me.lvMemorized.Items.Clear()
-        If Me.cboFilterGroups.Text = "" Then
-            Dim cnn1 As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+        Try
+            Dim cnn1 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
             Dim cmdGet1 As SqlCommand
             Dim r1 As SqlDataReader
-            cmdGet1 = New SqlCommand("Select Distinct (Groups) from memorizedappts where Form = 'Sales' and userloggedon = '" & STATIC_VARIABLES.CurrentUser & "'", cnn1)
-            cmdGet1.CommandType = CommandType.Text
+            Dim param1 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
+            Dim param2 As SqlParameter = New SqlParameter("@Group", Me.cboFilterGroups.Text)
+            Dim param3 As SqlParameter = New SqlParameter("@Groupby", Me.cboGroupByMemorized.Text)
+            cmdGet1 = New SqlCommand("dbo.SalesDepartmentMemorizedGroupBy", cnn1)
+            cmdGet1.CommandType = CommandType.StoredProcedure
+            cmdGet1.Parameters.Add(param1)
+            cmdGet1.Parameters.Add(param2)
+            cmdGet1.Parameters.Add(param3)
             cnn1.Open()
             r1 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
             While r1.Read
                 Me.lvMemorized.Groups.Add(r1.Item(0), r1.Item(0))
+
             End While
             Me.lvMemorized.Groups.Add("No Group Assigned", "No Group Assigned")
             r1.Close()
             cnn1.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "MemorizedGroupBy()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        End If
-        If Me.cboGroupByMemorized.Text = "" Then
-
-        Else
-            Me.MemorizedGroupBy()
-        End If
-        Dim grp As String
-        If Me.cboFilterGroups.Text = "" Or Me.cboFilterGroups.Text = Nothing Then
-            grp = "%"
-        ElseIf Me.cboFilterGroups.SelectedItem = "No Group Assigned" Then
-            grp = ""
-        Else
-            grp = Me.cboFilterGroups.Text
-        End If
-        Dim x As String
-        If Me.lnkOrderbyMem.Text = "Order By Appt. Date" Then
-            x = "ID"
-        Else
-            x = "ApptDate"
-        End If
-        Dim param1 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
-        Dim param2 As SqlParameter = New SqlParameter("@Group", grp)
-        Dim param3 As SqlParameter = New SqlParameter("@Sortby", x)
-
-        Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdGet As SqlCommand
-        Dim r As SqlDataReader
-        cmdGet = New SqlCommand("dbo.GetMemorizedSales", cnn)
-        cmdGet.CommandType = CommandType.StoredProcedure
-        cmdGet.Parameters.Add(param1)
-        cmdGet.Parameters.Add(param2)
-        cmdGet.Parameters.Add(param3)
-        cnn.Open()
-        r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-        Dim cnt As Integer = 0
-        While r.Read
-            Dim lv As New ListViewItem
-            lv.Tag = r.Item(0).ToString
-            If r.Item(23) <> "" Then
-                lv.ToolTipText = r.Item(23)
-                lv.ImageIndex = 8
+    End Sub
+    Public Sub PopulateMemorized()
+        Try
+            If Me.lvMemorized.SelectedItems.Count <> 0 Then
+                Me.lvMemorized.Tag = Me.lvMemorized.SelectedItems(0).Tag
+            Else
+                Me.lvMemorized.Tag = ""
             End If
-            lv.SubItems.Add(r.Item(0))
+            Me.lvMemorized.Groups.Clear()
+            Me.lvMemorized.Items.Clear()
+            If Me.cboFilterGroups.Text = "" Then
+                Dim cnn1 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+                Dim cmdGet1 As SqlCommand
+                Dim r1 As SqlDataReader
+                cmdGet1 = New SqlCommand("Select Distinct (Groups) from memorizedappts where Form = 'Sales' and userloggedon = '" & STATIC_VARIABLES.CurrentUser & "'", cnn1)
+                cmdGet1.CommandType = CommandType.Text
+                cnn1.Open()
+                r1 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
+                While r1.Read
+                    Me.lvMemorized.Groups.Add(r1.Item(0), r1.Item(0))
+                End While
+                Me.lvMemorized.Groups.Add("No Group Assigned", "No Group Assigned")
+                r1.Close()
+                cnn1.Close()
+
+            End If
+            If Me.cboGroupByMemorized.Text = "" Then
+
+            Else
+                Me.MemorizedGroupBy()
+            End If
+            Dim grp As String
+            If Me.cboFilterGroups.Text = "" Or Me.cboFilterGroups.Text = Nothing Then
+                grp = "%"
+            ElseIf Me.cboFilterGroups.SelectedItem = "No Group Assigned" Then
+                grp = ""
+            Else
+                grp = Me.cboFilterGroups.Text
+            End If
+            Dim x As String
+            If Me.lnkOrderbyMem.Text = "Order By Appt. Date" Then
+                x = "ID"
+            Else
+                x = "ApptDate"
+            End If
+            Dim param1 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
+            Dim param2 As SqlParameter = New SqlParameter("@Group", grp)
+            Dim param3 As SqlParameter = New SqlParameter("@Sortby", x)
+
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet As SqlCommand
+            Dim r As SqlDataReader
+            cmdGet = New SqlCommand("dbo.GetMemorizedSales", cnn)
+            cmdGet.CommandType = CommandType.StoredProcedure
+            cmdGet.Parameters.Add(param1)
+            cmdGet.Parameters.Add(param2)
+            cmdGet.Parameters.Add(param3)
+            cnn.Open()
+            r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+            Dim cnt As Integer = 0
+            While r.Read
+                Dim lv As New ListViewItem
+                lv.Tag = r.Item(0).ToString
+                If r.Item(23) <> "" Then
+                    lv.ToolTipText = r.Item(23)
+                    lv.ImageIndex = 8
+                End If
+                lv.SubItems.Add(r.Item(0))
+                If r.Item(3) = "" And r.Item(4) = "" Then
+                    lv.SubItems.Add(r.Item(2) & ", " & r.Item(1))
+                ElseIf r.Item(3) <> "" And r.Item(4) <> "" And r.Item(2) = r.Item(4) Then
+                    lv.SubItems.Add(r.Item(2) & ", " & r.Item(1) & " & " & r.Item(3))
+                ElseIf r.Item(3) <> "" And r.Item(4) <> "" And r.Item(2) <> r.Item(4) Then
+                    lv.SubItems.Add(r.Item(2) & ", " & r.Item(1) & " & " & r.Item(4) & ", " & r.Item(3))
+                End If
+                lv.SubItems.Add(r.Item(5) & " " & r.Item(6) & ", " & r.Item(7) & " " & r.Item(8))
+                lv.SubItems.Add(r.Item(17))
+                If r.Item(10) = "" And r.Item(11) = "" Then
+                    lv.SubItems.Add(r.Item(9))
+                ElseIf r.Item(10) <> "" And r.Item(11) = "" Then
+                    lv.SubItems.Add(r.Item(9) & " - " & r.Item(10))
+                ElseIf r.Item(10) = "" And r.Item(11) <> "" Then
+                    lv.SubItems.Add(r.Item(9) & " - " & r.Item(11))
+                ElseIf r.Item(10) <> "" And r.Item(11) <> "" Then
+                    lv.SubItems.Add(r.Item(9) & " - " & r.Item(10) & " - " & r.Item(11))
+                End If
+                Dim u As String = r.Item(16).ToString
+                Dim w = InStr(u, " ")
+                u = Microsoft.VisualBasic.Right(u, w + 2)
+                Trim(u)
+                Dim u2 As String
+                Dim u3 As String
+                If u.Length = 11 Then
+                    u2 = Microsoft.VisualBasic.Left(u, 5)
+                    u3 = Microsoft.VisualBasic.Right(u, 3)
+                    u = u2 & u3
+                Else
+                    u2 = Microsoft.VisualBasic.Left(u, 4)
+                    u3 = Microsoft.VisualBasic.Right(u, 3)
+                    u = u2 & u3
+                End If
+                Dim ApptTime As String = u
+                Dim ApptDate As Date = r.Item(15)
+                ApptDate.ToShortDateString()
+                lv.SubItems.Add(ApptDate & " - " & ApptTime)
+                Dim Rep1 As String
+                Dim Rep2 As String
+                Try
+                    Rep1 = r.Item(18)
+                Catch ex As Exception
+                    Rep1 = ""
+                End Try
+                Try
+                    Rep2 = r.Item(19)
+                Catch ex As Exception
+                    Rep2 = ""
+                End Try
+                If Rep1 <> "" And Rep2 <> "" Then
+                    lv.SubItems.Add(Rep1 & " - " & Rep2)
+                ElseIf Rep1 <> "" And Rep2 = "" Then
+                    lv.SubItems.Add(Rep1)
+                ElseIf Rep1 = "" And Rep2 <> "" Then
+                    lv.SubItems.Add(Rep2)
+                ElseIf Rep1 = "" And Rep2 = "" Then
+                    lv.SubItems.Add("")
+                End If
+                If Me.cboGroupByMemorized.Text = "Primary Product" Then
+                    If r.Item(9) <> "" Then
+                        Me.lvMemorized.Groups.Add(r.Item(9), r.Item(9))
+                        lv.Group = Me.lvMemorized.Groups(r.Item(9))
+                    Else
+                        Me.lvMemorized.Groups.Add("", "")
+                        lv.Group = Me.lvMemorized.Groups("")
+                    End If
+                ElseIf Me.cboGroupByMemorized.Text = "Appt. Date" Then
+                    Me.lvMemorized.Groups.Add(ApptDate, ApptDate)
+                    lv.Group = Me.lvMemorized.Groups(ApptDate)
+                ElseIf Me.cboGroupByMemorized.Text = "Sales Result" Then
+                    If Trim(r.Item(21)) = "" Then
+                        Me.lvMemorized.Groups.Add("No Result", "No Result")
+                        lv.Group = Me.lvMemorized.Groups("No Result")
+                    Else
+                        Me.lvMemorized.Groups.Add(r.Item(21), r.Item(21))
+                        lv.Group = Me.lvMemorized.Groups(r.Item(21))
+                    End If
+                ElseIf Me.cboGroupByMemorized.Text = "Marketing Result" Then
+                    If Trim(r.Item(22)) = "" Then
+                        Me.lvMemorized.Groups.Add("No Result", "No Result")
+                        lv.Group = Me.lvMemorized.Groups("No Result")
+                    Else
+                        Me.lvMemorized.Groups.Add(r.Item(22), r.Item(22))
+                        lv.Group = Me.lvMemorized.Groups(r.Item(22))
+                    End If
+                ElseIf Me.cboGroupByMemorized.Text = "Sales Rep" Then
+                    If Trim(r.Item(18)) = "" Then
+                        Me.lvMemorized.Groups.Add("No Sales Rep Assigned", "No Sales Rep Assigned")
+                        lv.Group = Me.lvMemorized.Groups("No Sales Rep Assigned")
+                    Else
+                        Me.lvMemorized.Groups.Add(r.Item(18), r.Item(18))
+                        lv.Group = Me.lvMemorized.Groups(r.Item(18))
+                    End If
+                ElseIf Me.cboGroupByMemorized.Text = "City, State" Then
+                    Me.lvMemorized.Groups.Add(r.Item(6) & ", " & r.Item(7), r.Item(6) & ", " & r.Item(7))
+                    lv.Group = Me.lvMemorized.Groups(r.Item(6) & ", " & r.Item(7))
+                ElseIf Me.cboGroupByMemorized.Text = "Zip Code" Then
+                    If Trim(r.Item(8)) = "" Then
+                        Me.lvMemorized.Groups.Add("No Zip Code", "No Zip Code")
+                        lv.Group = Me.lvMemorized.Groups("No Zip Code")
+                    Else
+                        Me.lvMemorized.Groups.Add(r.Item(8), r.Item(8))
+                        lv.Group = Me.lvMemorized.Groups(r.Item(8))
+                    End If
+                Else
+                    If r.Item(24) = "" Then
+                        lv.Group = Me.lvMemorized.Groups("No Group Assigned")
+                    Else
+                        lv.Group = Me.lvMemorized.Groups(r.Item(24))
+                    End If
+                End If
+                lv.SubItems.Add(r.Item(20))
+                Me.lvMemorized.Items.Add(lv)
+                If lv.Tag = Me.lvMemorized.Tag Then
+                    lv.Selected = True
+                    lv.EnsureVisible()
+                End If
+            End While
+            r.Close()
+            cnn.Close()
+            If Me.lvMemorized.SelectedItems.Count = 0 And Me.lvMemorized.Items.Count <> 0 Then
+                Me.lvMemorized.TopItem.Selected = True
+            End If
+            If Me.lvMemorized.Items.Count = 0 Then
+                Me.PullInfo("")
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PopulateMemorized()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+
+    End Sub
+    Private Sub RefreshSelectedItem(ByVal Listview As ListView, ByVal ID As String)
+        Try
+            Dim cnn1 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim x As Integer = 0
+            If Listview Is Me.lvMemorized Then
+                x = 1
+            End If
+            If ID = "" Then
+                Exit Sub
+            End If
+            Dim cmdGet1 As SqlCommand
+            Dim r As SqlDataReader
+            cmdGet1 = New SqlCommand("Select Id, Contact1FirstName, Contact1Lastname, Contact2FirstName, Contact2LastName,StAddress, City, State, Zip, Product1, Product2, Product3,Productacro1, Productacro2,Productacro3, ApptDate, ApptTime, HousePhone, Rep1, Rep2, NeedsSaleResult, Result, MarketingResults from enterlead where id = '" & ID & "'", cnn1)
+            cmdGet1.CommandType = CommandType.Text
+            cnn1.Open()
+            r = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
+            r.Read()
+            Dim lv As ListViewItem = Listview.SelectedItems(0)
             If r.Item(3) = "" And r.Item(4) = "" Then
-                lv.SubItems.Add(r.Item(2) & ", " & r.Item(1))
+                lv.SubItems(1 + x).Text = (r.Item(2) & ", " & r.Item(1))
             ElseIf r.Item(3) <> "" And r.Item(4) <> "" And r.Item(2) = r.Item(4) Then
-                lv.SubItems.Add(r.Item(2) & ", " & r.Item(1) & " & " & r.Item(3))
+                lv.SubItems(1 + x).Text = (r.Item(2) & ", " & r.Item(1) & " & " & r.Item(3))
             ElseIf r.Item(3) <> "" And r.Item(4) <> "" And r.Item(2) <> r.Item(4) Then
-                lv.SubItems.Add(r.Item(2) & ", " & r.Item(1) & " & " & r.Item(4) & ", " & r.Item(3))
+                lv.SubItems(1 + x).Text = (r.Item(2) & ", " & r.Item(1) & " & " & r.Item(4) & ", " & r.Item(3))
             End If
-            lv.SubItems.Add(r.Item(5) & " " & r.Item(6) & ", " & r.Item(7) & " " & r.Item(8))
-            lv.SubItems.Add(r.Item(17))
+
+
+            lv.SubItems(2 + x).Text = (r.Item(5) & " " & r.Item(6) & ", " & r.Item(7) & " " & r.Item(8))
+            lv.SubItems(3 + x).Text = (r.Item(17))
             If r.Item(10) = "" And r.Item(11) = "" Then
-                lv.SubItems.Add(r.Item(9))
+                If r.Item(9).ToString.Length > 8 Then
+                    lv.SubItems(4 + x).Text = r.Item(12)
+                Else
+                    lv.SubItems(4 + x).Text = (r.Item(9))
+                End If
             ElseIf r.Item(10) <> "" And r.Item(11) = "" Then
-                lv.SubItems.Add(r.Item(9) & " - " & r.Item(10))
+                If (r.Item(9) & " - " & r.Item(10)).ToString.Length > 8 Then
+                    lv.SubItems(4 + x).Text = r.Item(12) & " - " & r.Item(13)
+                Else
+                    lv.SubItems(4 + x).Text = r.Item(9) & " - " & r.Item(10)
+                End If
             ElseIf r.Item(10) = "" And r.Item(11) <> "" Then
-                lv.SubItems.Add(r.Item(9) & " - " & r.Item(11))
+                If (r.Item(9) & " - " & r.Item(11)).ToString.Length > 8 Then
+                    lv.SubItems(4 + x).Text = r.Item(12) & " - " & r.Item(14)
+                Else
+                    lv.SubItems(4 + x).Text = r.Item(9) & " - " & r.Item(11)
+                End If
             ElseIf r.Item(10) <> "" And r.Item(11) <> "" Then
-                lv.SubItems.Add(r.Item(9) & " - " & r.Item(10) & " - " & r.Item(11))
+                If (r.Item(9) & " - " & r.Item(10) & " - " & r.Item(11)).ToString.Length > 8 Then
+                    lv.SubItems(4 + x).Text = r.Item(12) & " - " & r.Item(13) & " - " & r.Item(14)
+                Else
+                    lv.SubItems(4 + x).Text = r.Item(9) & " - " & r.Item(10) & " - " & r.Item(11)
+                End If
             End If
             Dim u As String = r.Item(16).ToString
             Dim w = InStr(u, " ")
@@ -1462,7 +1693,7 @@ Public Class Sales
             Dim ApptTime As String = u
             Dim ApptDate As Date = r.Item(15)
             ApptDate.ToShortDateString()
-            lv.SubItems.Add(ApptDate & " - " & ApptTime)
+            lv.SubItems(5 + x).Text = (ApptDate & " - " & ApptTime)
             Dim Rep1 As String
             Dim Rep2 As String
             Try
@@ -1476,182 +1707,24 @@ Public Class Sales
                 Rep2 = ""
             End Try
             If Rep1 <> "" And Rep2 <> "" Then
-                lv.SubItems.Add(Rep1 & " - " & Rep2)
+                lv.SubItems(6 + x).Text = (Rep1 & " - " & Rep2)
             ElseIf Rep1 <> "" And Rep2 = "" Then
-                lv.SubItems.Add(Rep1)
+                lv.SubItems(6 + x).Text = (Rep1)
             ElseIf Rep1 = "" And Rep2 <> "" Then
-                lv.SubItems.Add(Rep2)
+                lv.SubItems(6 + x).Text = (Rep2)
             ElseIf Rep1 = "" And Rep2 = "" Then
-                lv.SubItems.Add("")
+                lv.SubItems(7 + x).Text = ("")
             End If
-            If Me.cboGroupByMemorized.Text = "Primary Product" Then
-                If r.Item(9) <> "" Then
-                    Me.lvMemorized.Groups.Add(r.Item(9), r.Item(9))
-                    lv.Group = Me.lvMemorized.Groups(r.Item(9))
-                Else
-                    Me.lvMemorized.Groups.Add("", "")
-                    lv.Group = Me.lvMemorized.Groups("")
-                End If
-            ElseIf Me.cboGroupByMemorized.Text = "Appt. Date" Then
-                Me.lvMemorized.Groups.Add(ApptDate, ApptDate)
-                lv.Group = Me.lvMemorized.Groups(ApptDate)
-            ElseIf Me.cboGroupByMemorized.Text = "Sales Result" Then
-                If Trim(r.Item(21)) = "" Then
-                    Me.lvMemorized.Groups.Add("No Result", "No Result")
-                    lv.Group = Me.lvMemorized.Groups("No Result")
-                Else
-                    Me.lvMemorized.Groups.Add(r.Item(21), r.Item(21))
-                    lv.Group = Me.lvMemorized.Groups(r.Item(21))
-                End If
-            ElseIf Me.cboGroupByMemorized.Text = "Marketing Result" Then
-                If Trim(r.Item(22)) = "" Then
-                    Me.lvMemorized.Groups.Add("No Result", "No Result")
-                    lv.Group = Me.lvMemorized.Groups("No Result")
-                Else
-                    Me.lvMemorized.Groups.Add(r.Item(22), r.Item(22))
-                    lv.Group = Me.lvMemorized.Groups(r.Item(22))
-                End If
-            ElseIf Me.cboGroupByMemorized.Text = "Sales Rep" Then
-                If Trim(r.Item(18)) = "" Then
-                    Me.lvMemorized.Groups.Add("No Sales Rep Assigned", "No Sales Rep Assigned")
-                    lv.Group = Me.lvMemorized.Groups("No Sales Rep Assigned")
-                Else
-                    Me.lvMemorized.Groups.Add(r.Item(18), r.Item(18))
-                    lv.Group = Me.lvMemorized.Groups(r.Item(18))
-                End If
-            ElseIf Me.cboGroupByMemorized.Text = "City, State" Then
-                Me.lvMemorized.Groups.Add(r.Item(6) & ", " & r.Item(7), r.Item(6) & ", " & r.Item(7))
-                lv.Group = Me.lvMemorized.Groups(r.Item(6) & ", " & r.Item(7))
-            ElseIf Me.cboGroupByMemorized.Text = "Zip Code" Then
-                If Trim(r.Item(8)) = "" Then
-                    Me.lvMemorized.Groups.Add("No Zip Code", "No Zip Code")
-                    lv.Group = Me.lvMemorized.Groups("No Zip Code")
-                Else
-                    Me.lvMemorized.Groups.Add(r.Item(8), r.Item(8))
-                    lv.Group = Me.lvMemorized.Groups(r.Item(8))
-                End If
-            Else
-                If r.Item(24) = "" Then
-                    lv.Group = Me.lvMemorized.Groups("No Group Assigned")
-                Else
-                    lv.Group = Me.lvMemorized.Groups(r.Item(24))
-                End If
-            End If
-            lv.SubItems.Add(r.Item(20))
-            Me.lvMemorized.Items.Add(lv)
-            If lv.Tag = Me.lvMemorized.Tag Then
-                lv.Selected = True
-                lv.EnsureVisible()
-            End If
-        End While
-        r.Close()
-        cnn.Close()
-        If Me.lvMemorized.SelectedItems.Count = 0 And Me.lvMemorized.Items.Count <> 0 Then
-            Me.lvMemorized.TopItem.Selected = True
-        End If
-        If Me.lvMemorized.Items.Count = 0 Then
-            Me.PullInfo("")
-        End If
+            lv.SubItems(7 + x).Text = r.Item(20)
 
-
-    End Sub
-    Private Sub RefreshSelectedItem(ByVal Listview As ListView, ByVal ID As String)
-        Dim cnn1 As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim x As Integer = 0
-        If Listview Is Me.lvMemorized Then
-            x = 1
-        End If
-        If ID = "" Then
-            Exit Sub
-        End If
-        Dim cmdGet1 As SqlCommand
-        Dim r As SqlDataReader
-        cmdGet1 = New SqlCommand("Select Id, Contact1FirstName, Contact1Lastname, Contact2FirstName, Contact2LastName,StAddress, City, State, Zip, Product1, Product2, Product3,Productacro1, Productacro2,Productacro3, ApptDate, ApptTime, HousePhone, Rep1, Rep2, NeedsSaleResult, Result, MarketingResults from enterlead where id = '" & ID & "'", cnn1)
-        cmdGet1.CommandType = CommandType.Text
-        cnn1.Open()
-        r = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
-        r.Read()
-        Dim lv As ListViewItem = Listview.SelectedItems(0)
-        If r.Item(3) = "" And r.Item(4) = "" Then
-            lv.SubItems(1 + x).Text = (r.Item(2) & ", " & r.Item(1))
-        ElseIf r.Item(3) <> "" And r.Item(4) <> "" And r.Item(2) = r.Item(4) Then
-            lv.SubItems(1 + x).Text = (r.Item(2) & ", " & r.Item(1) & " & " & r.Item(3))
-        ElseIf r.Item(3) <> "" And r.Item(4) <> "" And r.Item(2) <> r.Item(4) Then
-            lv.SubItems(1 + x).Text = (r.Item(2) & ", " & r.Item(1) & " & " & r.Item(4) & ", " & r.Item(3))
-        End If
-
-
-        lv.SubItems(2 + x).Text = (r.Item(5) & " " & r.Item(6) & ", " & r.Item(7) & " " & r.Item(8))
-        lv.SubItems(3 + x).Text = (r.Item(17))
-        If r.Item(10) = "" And r.Item(11) = "" Then
-            If r.Item(9).ToString.Length > 8 Then
-                lv.SubItems(4 + x).Text = r.Item(12)
-            Else
-                lv.SubItems(4 + x).Text = (r.Item(9))
-            End If
-        ElseIf r.Item(10) <> "" And r.Item(11) = "" Then
-            If (r.Item(9) & " - " & r.Item(10)).ToString.Length > 8 Then
-                lv.SubItems(4 + x).Text = r.Item(12) & " - " & r.Item(13)
-            Else
-                lv.SubItems(4 + x).Text = r.Item(9) & " - " & r.Item(10)
-            End If
-        ElseIf r.Item(10) = "" And r.Item(11) <> "" Then
-            If (r.Item(9) & " - " & r.Item(11)).ToString.Length > 8 Then
-                lv.SubItems(4 + x).Text = r.Item(12) & " - " & r.Item(14)
-            Else
-                lv.SubItems(4 + x).Text = r.Item(9) & " - " & r.Item(11)
-            End If
-        ElseIf r.Item(10) <> "" And r.Item(11) <> "" Then
-            If (r.Item(9) & " - " & r.Item(10) & " - " & r.Item(11)).ToString.Length > 8 Then
-                lv.SubItems(4 + x).Text = r.Item(12) & " - " & r.Item(13) & " - " & r.Item(14)
-            Else
-                lv.SubItems(4 + x).Text = r.Item(9) & " - " & r.Item(10) & " - " & r.Item(11)
-            End If
-        End If
-        Dim u As String = r.Item(16).ToString
-        Dim w = InStr(u, " ")
-        u = Microsoft.VisualBasic.Right(u, w + 2)
-        Trim(u)
-        Dim u2 As String
-        Dim u3 As String
-        If u.Length = 11 Then
-            u2 = Microsoft.VisualBasic.Left(u, 5)
-            u3 = Microsoft.VisualBasic.Right(u, 3)
-            u = u2 & u3
-        Else
-            u2 = Microsoft.VisualBasic.Left(u, 4)
-            u3 = Microsoft.VisualBasic.Right(u, 3)
-            u = u2 & u3
-        End If
-        Dim ApptTime As String = u
-        Dim ApptDate As Date = r.Item(15)
-        ApptDate.ToShortDateString()
-        lv.SubItems(5 + x).Text = (ApptDate & " - " & ApptTime)
-        Dim Rep1 As String
-        Dim Rep2 As String
-        Try
-            Rep1 = r.Item(18)
+            r.Close()
+            cnn1.Close()
         Catch ex As Exception
-            Rep1 = ""
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "RefreshSelectedItem()", ID, ex.Message.ToString)
+            y = Nothing
         End Try
-        Try
-            Rep2 = r.Item(19)
-        Catch ex As Exception
-            Rep2 = ""
-        End Try
-        If Rep1 <> "" And Rep2 <> "" Then
-            lv.SubItems(6 + x).Text = (Rep1 & " - " & Rep2)
-        ElseIf Rep1 <> "" And Rep2 = "" Then
-            lv.SubItems(6 + x).Text = (Rep1)
-        ElseIf Rep1 = "" And Rep2 <> "" Then
-            lv.SubItems(6 + x).Text = (Rep2)
-        ElseIf Rep1 = "" And Rep2 = "" Then
-            lv.SubItems(7 + x).Text = ("")
-        End If
-        lv.SubItems(7 + x).Text = r.Item(20)
 
-        r.Close()
-        cnn1.Close()
     End Sub
 #End Region
 
@@ -1673,77 +1746,83 @@ Public Class Sales
         'Dim th2 As New Thread(AddressOf Get_Dirs)
         'th2.Start()
 
+        Try
 
+            'Me.Parent = Main
+            Me.Text = "Sales Department"
+            Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
+            ' Me.lvAttachedFiles.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvAttachedFiles.Height)
+            ' Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
+            Me.ButtonConfig()
+            Me.LoadReps()
+            '' Set Up Summary Tab 
 
-        'Me.Parent = Main
-        Me.Text = "Sales Department"
-        Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
-        ' Me.lvAttachedFiles.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvAttachedFiles.Height)
-        ' Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
-        Me.ButtonConfig()
-        Me.LoadReps()
-        '' Set Up Summary Tab 
-
-        '' Set up Sales List Tab 
-        Me.TScboCustomerHistory.Text = "All"
-        Me.tscboAFPicsFilter.Text = "All"
-        Me.tsCustomerLog.Visible = True
-        Me.tsAFPics.Visible = False
-        Me.pnlCustomerHistory.Visible = True
-        Me.pnlAFPics.Visible = False
-
-
-
-        Me.SplitContainer1.SplitterDistance = 218
-        Me.SplitContainer1.IsSplitterFixed = True
-        Me.btnExpandSalesList.Text = Chr(187)
-        'Me.cboDateRangeCustomerList.Text = "All"
+            '' Set up Sales List Tab 
+            Me.TScboCustomerHistory.Text = "All"
+            Me.tscboAFPicsFilter.Text = "All"
+            Me.tsCustomerLog.Visible = True
+            Me.tsAFPics.Visible = False
+            Me.pnlCustomerHistory.Visible = True
+            Me.pnlAFPics.Visible = False
 
 
 
-        Me.ToolbarConfig(1)
-        Me.PopulateNoResults()
-        Me.LoadGroups()
-        Dim x As New ScheduledActions
-
-        x.SetUp(Me)
+            Me.SplitContainer1.SplitterDistance = 218
+            Me.SplitContainer1.IsSplitterFixed = True
+            Me.btnExpandSalesList.Text = Chr(187)
+            'Me.cboDateRangeCustomerList.Text = "All"
 
 
 
-        '' old
-        dtp1CustomerList.Value = Date.Today.ToShortDateString
+            Me.ToolbarConfig(1)
+            Me.PopulateNoResults()
+            Me.LoadGroups()
+            Dim x As New ScheduledActions
 
-        '' new -- why are we running the query for the entire year on load? 
-        'dtp1CustomerList.Value = Date.Today
-        dtp2CustomerList.Value = Date.Today
-
-
-
-        Me.cboSalesList.Text = "Unfiltered Sales Dept. List"
-        Me.PopulateMemorized()
-        If Me.lvnoresults.Items.Count <> 0 Then
-            Me.lvnoresults.TopItem.Selected = True
-        End If
-        If Me.lvMemorized.Items.Count <> 0 Then
-            Me.lvMemorized.TopItem.Selected = True
-        End If
-
-        ' Me.lvAttachedFiles.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvAttachedFiles.Height)
-        'Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
-
-        Me.cboDateRangeSummary.Text = "Last Week"
-        Dim r As New Sales_Performance_Report()
+            x.SetUp(Me)
 
 
-        Me.LoadComplete = True
-        Me.cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
-        If Me.WindowState <> FormWindowState.Normal Then
 
-        End If
-        Me.tbMain.TabPages(0).Font = New Font("Verdana", 12, FontStyle.Strikeout)
+            '' old
+            dtp1CustomerList.Value = Date.Today.ToShortDateString
+
+            '' new -- why are we running the query for the entire year on load? 
+            'dtp1CustomerList.Value = Date.Today
+            dtp2CustomerList.Value = Date.Today
 
 
-        'MsgBox(Me.tsSalesDepartment.Width.ToString & " - " & Me.txt2CustomerList.Location.X.ToString)
+
+            Me.cboSalesList.Text = "Unfiltered Sales Dept. List"
+            Me.PopulateMemorized()
+            If Me.lvnoresults.Items.Count <> 0 Then
+                Me.lvnoresults.TopItem.Selected = True
+            End If
+            If Me.lvMemorized.Items.Count <> 0 Then
+                Me.lvMemorized.TopItem.Selected = True
+            End If
+
+            ' Me.lvAttachedFiles.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvAttachedFiles.Height)
+            'Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
+
+            Me.cboDateRangeSummary.Text = "Last Week"
+            Dim r As New Sales_Performance_Report()
+
+
+            Me.LoadComplete = True
+            Me.cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
+            If Me.WindowState <> FormWindowState.Normal Then
+
+            End If
+            Me.tbMain.TabPages(0).Font = New Font("Verdana", 12, FontStyle.Strikeout)
+
+
+            'MsgBox(Me.tsSalesDepartment.Width.ToString & " - " & Me.txt2CustomerList.Location.X.ToString)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "Sales_Load", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
@@ -1768,202 +1847,244 @@ Public Class Sales
 
   
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tbMain.SelectedIndexChanged
-        Dim x As Integer = 0
-        x = Me.tbMain.SelectedIndex
+        Try
+            Dim x As Integer = 0
+            x = Me.tbMain.SelectedIndex
 
-        'MsgBox("Tab Changed.", MsgBoxStyle.Information, "DEBUG INFO")
-        Select Case x
-            Case 0
-                Me.tbMain.TabPages(x).ImageKey = "Summary- Selected.png"
-                Me.tbMain.TabPages(1).ImageKey = "Customer List.png"
-                Me.tbMain.TabPages(2).ImageKey = "Issue Leads.png"
-                Me.tbMain.TabPages(3).ImageKey = "References.png"
-                Me.tbMain.TabPages(4).ImageKey = "Reports.png"
-                Me.ToolbarConfig(1)
-                Me.PopulateNoResults()
-                If Me.lvnoresults.SelectedItems.Count = 0 Then
-                    Me.ID = ""
-                    STATIC_VARIABLES.CurrentID = Me.ID
-                Else
-                    Me.ID = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
-                    STATIC_VARIABLES.CurrentID = Me.ID
-                End If
-
-                Exit Select
-            Case 1
-                Me.tbMain.TabPages(x).ImageKey = "Customer List- Selected.png"
-                Me.tbMain.TabPages(0).ImageKey = "Summary.png"
-                Me.tbMain.TabPages(2).ImageKey = "Issue Leads.png"
-                Me.tbMain.TabPages(3).ImageKey = "References.png"
-                Me.tbMain.TabPages(4).ImageKey = "Reports.png"
-                'Me.lvAttachedFiles.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvAttachedFiles.Height)
-                'Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
-                If Me.TabControl2.SelectedIndex = 0 Then
-                    'If Me.lvSales.Items.Count <> 0 And Me.lvSales.SelectedItems.Count = 0 Then
-                    '    Me.lvSales.TopItem.Selected = True
-                    'End If
-                    Me.ToolbarConfig(2)
-                    'If Me.lvSales.SelectedItems.Count = 0 Then
-                    '    Me.ID = ""
-                    '    STATIC_VARIABLES.CurrentID = Me.ID
-                    'Else
-                    '    Me.ID = Me.lvSales.SelectedItems(0).Text
-                    '    STATIC_VARIABLES.CurrentID = Me.ID
-                    'End If
-                Else
-                    Me.ToolbarConfig(3)
-                    If Me.lvMemorized.SelectedItems.Count = 0 Then
+            'MsgBox("Tab Changed.", MsgBoxStyle.Information, "DEBUG INFO")
+            Select Case x
+                Case 0
+                    Me.tbMain.TabPages(x).ImageKey = "Summary- Selected.png"
+                    Me.tbMain.TabPages(1).ImageKey = "Customer List.png"
+                    Me.tbMain.TabPages(2).ImageKey = "Issue Leads.png"
+                    Me.tbMain.TabPages(3).ImageKey = "References.png"
+                    Me.tbMain.TabPages(4).ImageKey = "Reports.png"
+                    Me.ToolbarConfig(1)
+                    Me.PopulateNoResults()
+                    If Me.lvnoresults.SelectedItems.Count = 0 Then
                         Me.ID = ""
                         STATIC_VARIABLES.CurrentID = Me.ID
                     Else
-                        Me.ID = Me.lvMemorized.SelectedItems(0).Tag
+                        Me.ID = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
                         STATIC_VARIABLES.CurrentID = Me.ID
                     End If
-                End If
+
+                    Exit Select
+                Case 1
+                    Me.tbMain.TabPages(x).ImageKey = "Customer List- Selected.png"
+                    Me.tbMain.TabPages(0).ImageKey = "Summary.png"
+                    Me.tbMain.TabPages(2).ImageKey = "Issue Leads.png"
+                    Me.tbMain.TabPages(3).ImageKey = "References.png"
+                    Me.tbMain.TabPages(4).ImageKey = "Reports.png"
+                    'Me.lvAttachedFiles.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvAttachedFiles.Height)
+                    'Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
+                    If Me.TabControl2.SelectedIndex = 0 Then
+                        'If Me.lvSales.Items.Count <> 0 And Me.lvSales.SelectedItems.Count = 0 Then
+                        '    Me.lvSales.TopItem.Selected = True
+                        'End If
+                        Me.ToolbarConfig(2)
+                        'If Me.lvSales.SelectedItems.Count = 0 Then
+                        '    Me.ID = ""
+                        '    STATIC_VARIABLES.CurrentID = Me.ID
+                        'Else
+                        '    Me.ID = Me.lvSales.SelectedItems(0).Text
+                        '    STATIC_VARIABLES.CurrentID = Me.ID
+                        'End If
+                    Else
+                        Me.ToolbarConfig(3)
+                        If Me.lvMemorized.SelectedItems.Count = 0 Then
+                            Me.ID = ""
+                            STATIC_VARIABLES.CurrentID = Me.ID
+                        Else
+                            Me.ID = Me.lvMemorized.SelectedItems(0).Tag
+                            STATIC_VARIABLES.CurrentID = Me.ID
+                        End If
+                    End If
 
 
-                Exit Select
-            Case 2
-                Me.tbMain.TabPages(x).ImageKey = "Issue Leads- Selected.png"
-                Me.tbMain.TabPages(0).ImageKey = "Summary.png"
-                Me.tbMain.TabPages(1).ImageKey = "Customer List.png"
-                Me.tbMain.TabPages(3).ImageKey = "References.png"
-                Me.tbMain.TabPages(4).ImageKey = "Reports.png"
-                Me.ID = ""
-                STATIC_VARIABLES.CurrentID = Me.ID
-                ToolbarConfig(4)
+                    Exit Select
+                Case 2
+                    Me.tbMain.TabPages(x).ImageKey = "Issue Leads- Selected.png"
+                    Me.tbMain.TabPages(0).ImageKey = "Summary.png"
+                    Me.tbMain.TabPages(1).ImageKey = "Customer List.png"
+                    Me.tbMain.TabPages(3).ImageKey = "References.png"
+                    Me.tbMain.TabPages(4).ImageKey = "Reports.png"
+                    Me.ID = ""
+                    STATIC_VARIABLES.CurrentID = Me.ID
+                    ToolbarConfig(4)
 
-                Dim d As New Issue_Leads(True, "")
+                    Dim d As New Issue_Leads(True, "")
 
-                Exit Select
-            Case 3
-                Me.tbMain.TabPages(x).ImageKey = "References- Selected.png"
-                Me.tbMain.TabPages(0).ImageKey = "Summary.png"
-                Me.tbMain.TabPages(2).ImageKey = "Issue Leads.png"
-                Me.tbMain.TabPages(1).ImageKey = "Customer List.png"
-                Me.tbMain.TabPages(4).ImageKey = "Reports.png"
-                Me.ID = ""
-                STATIC_VARIABLES.CurrentID = Me.ID
-                Exit Select
-            Case 4
-                Me.tbMain.TabPages(x).ImageKey = "Reports- Selected.png"
-                Me.tbMain.TabPages(0).ImageKey = "Summary.png"
-                Me.tbMain.TabPages(2).ImageKey = "Issue Leads.png"
-                Me.tbMain.TabPages(3).ImageKey = "References.png"
-                Me.tbMain.TabPages(1).ImageKey = "Customer List.png"
-                Me.ID = ""
-                STATIC_VARIABLES.CurrentID = Me.ID
-                Exit Select
-        End Select
-        If Me.tbMain.SelectedIndex <> 0 Then
-            Dim c As Integer = Me.pnlScheduledTasks.Controls.Count
-            Dim i As Integer
-            For i = 1 To c
-                Dim all As Panel = Me.pnlScheduledTasks.Controls(i - 1)
-                If all.BorderStyle = BorderStyle.FixedSingle Then
-                    all.BorderStyle = BorderStyle.None
-                End If
-            Next
-        End If
+                    Exit Select
+                Case 3
+                    Me.tbMain.TabPages(x).ImageKey = "References- Selected.png"
+                    Me.tbMain.TabPages(0).ImageKey = "Summary.png"
+                    Me.tbMain.TabPages(2).ImageKey = "Issue Leads.png"
+                    Me.tbMain.TabPages(1).ImageKey = "Customer List.png"
+                    Me.tbMain.TabPages(4).ImageKey = "Reports.png"
+                    Me.ID = ""
+                    STATIC_VARIABLES.CurrentID = Me.ID
+                    Exit Select
+                Case 4
+                    Me.tbMain.TabPages(x).ImageKey = "Reports- Selected.png"
+                    Me.tbMain.TabPages(0).ImageKey = "Summary.png"
+                    Me.tbMain.TabPages(2).ImageKey = "Issue Leads.png"
+                    Me.tbMain.TabPages(3).ImageKey = "References.png"
+                    Me.tbMain.TabPages(1).ImageKey = "Customer List.png"
+                    Me.ID = ""
+                    STATIC_VARIABLES.CurrentID = Me.ID
+                    Exit Select
+            End Select
+            If Me.tbMain.SelectedIndex <> 0 Then
+                Dim c As Integer = Me.pnlScheduledTasks.Controls.Count
+                Dim i As Integer
+                For i = 1 To c
+                    Dim all As Panel = Me.pnlScheduledTasks.Controls(i - 1)
+                    If all.BorderStyle = BorderStyle.FixedSingle Then
+                        all.BorderStyle = BorderStyle.None
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tbMain_SelectedIndexChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 #End Region
 
 #Region "Summary Page Events"
     ''Scheduled Tasks Controls
     Private Sub btnMarkTaskAsDone_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnMarkTaskAsDone.Click
-        Dim counter As Integer
-        Dim cnt = Me.pnlScheduledTasks.Controls.Count
-        Dim i As Integer
-        For i = 1 To cnt
-            Dim t As Panel = Me.pnlScheduledTasks.Controls(i - 1)
-            If t.BorderStyle = BorderStyle.FixedSingle Then
-                counter = counter + 1
-            End If
-            If t.BorderStyle = BorderStyle.FixedSingle Then
-                t.BorderStyle = BorderStyle.None
-                Dim name = t.Name.Substring(3)
-                Dim c As New ScheduledActions
-                If Me.btnMarkTaskAsDone.Text = "Mark Task as Done" Then
-                    c.Completed(CInt(name))
-                Else
-                    c.UndoCompleted(CInt(name))
+        Try
+            Dim counter As Integer
+            Dim cnt = Me.pnlScheduledTasks.Controls.Count
+            Dim i As Integer
+            For i = 1 To cnt
+                Dim t As Panel = Me.pnlScheduledTasks.Controls(i - 1)
+                If t.BorderStyle = BorderStyle.FixedSingle Then
+                    counter = counter + 1
                 End If
-                Exit For
+                If t.BorderStyle = BorderStyle.FixedSingle Then
+                    t.BorderStyle = BorderStyle.None
+                    Dim name = t.Name.Substring(3)
+                    Dim c As New ScheduledActions
+                    If Me.btnMarkTaskAsDone.Text = "Mark Task as Done" Then
+                        c.Completed(CInt(name))
+                    Else
+                        c.UndoCompleted(CInt(name))
+                    End If
+                    Exit For
+                End If
+            Next
+            If counter = 0 Then
+                MsgBox("You must select a Task.", MsgBoxStyle.Exclamation, "Please Select a Task")
+                Exit Sub
             End If
-        Next
-        If counter = 0 Then
-            MsgBox("You must select a Task.", MsgBoxStyle.Exclamation, "Please Select a Task")
-            Exit Sub
-        End If
 
-        Me.pnlScheduledTasks.Controls.Clear()
-        Dim x As New ScheduledActions
-        x.SetUp(Me)
+            Me.pnlScheduledTasks.Controls.Clear()
+            Dim x As New ScheduledActions
+            x.SetUp(Me)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnMarkTaskAsDone_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub btnSAPreferences_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSAPreferences.Click
-        Dim y As Integer
         Try
-            y = InputBox$("Enter the number of days from Today and back you would like ""Completed Tasks"" to display.", "Enter Number of Days")
+            Dim y As Integer
+            Try
+                y = InputBox$("Enter the number of days from Today and back you would like ""Completed Tasks"" to display.", "Enter Number of Days")
 
+            Catch ex As Exception
+                'MsgBox("This field only accepts numbers!" & vbCr & "Operation Aborted!", MsgBoxStyle.Exclamation, "You Must Enter a Number")
+                Exit Sub
+            End Try
+            If y <= 0 Then
+                'MsgBox("You must enter a number!" & vbCr & "Operation Aborted!", MsgBoxStyle.Exclamation, "Cannot Write Blank Value")
+                Exit Sub
+            End If
+            Dim x As New ScheduledActions
+            x.Preferences(y, Me)
+            Me.pnlScheduledTasks.Controls.Clear()
+            x.SetUp(Me)
+            If Me.cboSalesList.Text = "Scheduled Tasks List" Then
+                Me.cboSalesList_SelectedIndexChanged(Nothing, Nothing)
+            End If
         Catch ex As Exception
-            'MsgBox("This field only accepts numbers!" & vbCr & "Operation Aborted!", MsgBoxStyle.Exclamation, "You Must Enter a Number")
-            Exit Sub
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnSAPreferences_Click", "0", ex.Message.ToString)
+            y = Nothing
         End Try
-        If y <= 0 Then
-            'MsgBox("You must enter a number!" & vbCr & "Operation Aborted!", MsgBoxStyle.Exclamation, "Cannot Write Blank Value")
-            Exit Sub
-        End If
-        Dim x As New ScheduledActions
-        x.Preferences(y, Me)
-        Me.pnlScheduledTasks.Controls.Clear()
-        x.SetUp(Me)
-        If Me.cboSalesList.Text = "Scheduled Tasks List" Then
-            Me.cboSalesList_SelectedIndexChanged(Nothing, Nothing)
-        End If
+
     End Sub
     Private Sub btnShowAllCompletedTasks_Click1(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowAllCompletedTasks.Click
-        Me.btnShowAllCompletedTasks.CheckState = CheckState.Checked
-        Me.btnRemoveAllScheduledTask.CheckState = CheckState.Unchecked
-        Dim x As New ScheduledActions
-        x.ShowAll(Me)
-        Me.pnlScheduledTasks.Controls.Clear()
-        x.SetUp(Me)
+        Try
+            Me.btnShowAllCompletedTasks.CheckState = CheckState.Checked
+            Me.btnRemoveAllScheduledTask.CheckState = CheckState.Unchecked
+            Dim x As New ScheduledActions
+            x.ShowAll(Me)
+            Me.pnlScheduledTasks.Controls.Clear()
+            x.SetUp(Me)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnShowAllCompletedTasks_click1", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub btnRemoveAllScheduledTask_Click1(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRemoveAllScheduledTask.Click
-        Me.btnShowAllCompletedTasks.CheckState = CheckState.Unchecked
-        Me.btnRemoveAllScheduledTask.CheckState = CheckState.Checked
-        Dim x As New ScheduledActions
-        x.HideAll(Me)
-        Me.pnlScheduledTasks.Controls.Clear()
-        x.SetUp(Me)
+        Try
+            Me.btnShowAllCompletedTasks.CheckState = CheckState.Unchecked
+            Me.btnRemoveAllScheduledTask.CheckState = CheckState.Checked
+            Dim x As New ScheduledActions
+            x.HideAll(Me)
+            Me.pnlScheduledTasks.Controls.Clear()
+            x.SetUp(Me)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnRemoveAllScheduledTasks_Click1", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub btnRemoveThisCompletedTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRemoveThisCompletedTask.Click
-        Me.btnRemoveThisCompletedTask.Visible = False
-        Dim counter As Integer
-        Dim cnt = Me.pnlScheduledTasks.Controls.Count
-        Dim i As Integer
-        For i = 1 To cnt
-            Dim t As Panel = Me.pnlScheduledTasks.Controls(i - 1)
-            If t.BorderStyle = BorderStyle.FixedSingle Then
-                counter = counter + 1
-            End If
-            If t.BorderStyle = BorderStyle.FixedSingle Then
-                t.BorderStyle = BorderStyle.None
-                Dim ID = t.Name.Substring(3)
-                Dim c As New ScheduledActions
-                c.HideTask(CInt(ID))
-                Exit For
+        Try
+            Me.btnRemoveThisCompletedTask.Visible = False
+            Dim counter As Integer
+            Dim cnt = Me.pnlScheduledTasks.Controls.Count
+            Dim i As Integer
+            For i = 1 To cnt
+                Dim t As Panel = Me.pnlScheduledTasks.Controls(i - 1)
+                If t.BorderStyle = BorderStyle.FixedSingle Then
+                    counter = counter + 1
+                End If
+                If t.BorderStyle = BorderStyle.FixedSingle Then
+                    t.BorderStyle = BorderStyle.None
+                    Dim ID = t.Name.Substring(3)
+                    Dim c As New ScheduledActions
+                    c.HideTask(CInt(ID))
+                    Exit For
+                End If
+
+            Next
+            If counter = 0 Then
+                MsgBox("You must select a Task.", MsgBoxStyle.Exclamation, "Please Select a Task")
+                Exit Sub
             End If
 
-        Next
-        If counter = 0 Then
-            MsgBox("You must select a Task.", MsgBoxStyle.Exclamation, "Please Select a Task")
-            Exit Sub
-        End If
+            Me.pnlScheduledTasks.Controls.Clear()
+            Dim x As New ScheduledActions
+            x.SetUp(Me)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnRemoveThisCompletedTask_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        Me.pnlScheduledTasks.Controls.Clear()
-        Dim x As New ScheduledActions
-        x.SetUp(Me)
     End Sub
     ''Sales Result Controls
     Private Sub btnSalesResult_Click1(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalesResult.Click
@@ -2049,20 +2170,26 @@ Public Class Sales
         Me.cboDateRangeCustomerList.Text = "Custom"
     End Sub
     Private Sub dtp2CustomerList_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2CustomerList.LostFocus
+        Try
+            If Me.LastD1 = txt1CustomerList.Text And Me.LastD2 = txt2CustomerList.Text Then
+                Exit Sub
+            End If
+            bgSalesQuery_DoWork(Nothing, Nothing)
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
+            'Me.Cursor = Cursors.WaitCursor
+            'Dim c As New SalesListManager(sender)
+            'arItemCache = New ArrayList
+            'arItemCache = c.LV_Sales_Items
+            'Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "dtp2CustomerList_LostFocus", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        If Me.LastD1 = txt1CustomerList.Text And Me.LastD2 = txt2CustomerList.Text Then
-            Exit Sub
-        End If
-        bgSalesQuery_DoWork(Nothing, Nothing)
-        If current_Item IsNot Nothing Then
-            PullInfo(current_Item.Text)
-            RaiseEvent PopCustHistory()
-        End If
-        'Me.Cursor = Cursors.WaitCursor
-        'Dim c As New SalesListManager(sender)
-        'arItemCache = New ArrayList
-        'arItemCache = c.LV_Sales_Items
-        'Me.Cursor = Cursors.Default
     End Sub
     Private Sub dtp2CustomerList_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2CustomerList.ValueChanged
 
@@ -2079,24 +2206,30 @@ Public Class Sales
         Me.cboDateRangeCustomerList.Text = "Custom"
     End Sub
     Private Sub dtp1CustomerList_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1CustomerList.LostFocus
+        Try
+            If txt1CustomerList.Text = Me.LastD1 And txt2CustomerList.Text = Me.LastD2 Then
+                Exit Sub
+            End If
+            ''Dim c As New SalesListManager
+            bgSalesQuery_DoWork(Nothing, Nothing)
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
 
-        If txt1CustomerList.Text = Me.LastD1 And txt2CustomerList.Text = Me.LastD2 Then
-            Exit Sub
-        End If
-        ''Dim c As New SalesListManager
-        bgSalesQuery_DoWork(Nothing, Nothing)
-        If current_Item IsNot Nothing Then
-            PullInfo(current_Item.Text)
-            RaiseEvent PopCustHistory()
-        End If
+            '' Make them choose both dates in an instance for only querying for ONE day.
+            '' 
+            'Me.Cursor = Cursors.WaitCursor
+            'Dim c As New SalesListManager(sender)
+            'arItemCache = New ArrayList
+            'arItemCache = c.LV_Sales_Items
+            'Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "dtp1CustomerList_lostfocus", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        '' Make them choose both dates in an instance for only querying for ONE day.
-        '' 
-        'Me.Cursor = Cursors.WaitCursor
-        'Dim c As New SalesListManager(sender)
-        'arItemCache = New ArrayList
-        'arItemCache = c.LV_Sales_Items
-        'Me.Cursor = Cursors.Default
     End Sub
     Private Sub dtp1CustomerList_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1CustomerList.ValueChanged
 
@@ -2107,40 +2240,47 @@ Public Class Sales
     End Sub
 #End Region
     Private Sub cboDateRangeCustomerList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDateRangeCustomerList.SelectedIndexChanged
-        If Me.LoadComplete = False Then
-            Exit Sub
-        End If
-        If Me.cboDateRangeCustomerList.Text = "All" Then
-            txt1CustomerList.Text = ""
-            txt1CustomerList.Visible = True
-            txt2CustomerList.Text = ""
-            txt2CustomerList.Visible = True
+        Try
+            If Me.LoadComplete = False Then
+                Exit Sub
+            End If
+            If Me.cboDateRangeCustomerList.Text = "All" Then
+                txt1CustomerList.Text = ""
+                txt1CustomerList.Visible = True
+                txt2CustomerList.Text = ""
+                txt2CustomerList.Visible = True
 
-        End If
+            End If
 
-        If Me.cboDateRangeCustomerList.Text <> "All" And Me.cboDateRangeCustomerList.Text <> "Custom" Then
-            Dim d As New DTPManipulation(Me.cboDateRangeCustomerList.Text)
-            dtp1CustomerList.Value = d.retDateFrom
-            Me.dtp2CustomerList.Value = d.retDateTo
-            txt1CustomerList.Visible = False
-            txt2CustomerList.Visible = False
-            txt1CustomerList.Text = d.retDateFrom.ToString
-            txt2CustomerList.Text = d.retDateTo.ToString
-        End If
-        If Me.LastD1 = txt1CustomerList.Text And Me.LastD2 = txt2CustomerList.Text Then
-            Exit Sub
-        End If
-        ''Dim c As New SalesListManager
-        bgSalesQuery_DoWork(Nothing, Nothing)
-        If current_Item IsNot Nothing Then
-            PullInfo(current_Item.Text)
-             RaiseEvent PopCustHistory()
-        End If
-        'Me.Cursor = Cursors.WaitCursor
-        'Dim c As New SalesListManager(sender)
-        'arItemCache = New ArrayList
-        'arItemCache = c.LV_Sales_Items
-        'Me.Cursor = Cursors.Default
+            If Me.cboDateRangeCustomerList.Text <> "All" And Me.cboDateRangeCustomerList.Text <> "Custom" Then
+                Dim d As New DTPManipulation(Me.cboDateRangeCustomerList.Text)
+                dtp1CustomerList.Value = d.retDateFrom
+                Me.dtp2CustomerList.Value = d.retDateTo
+                txt1CustomerList.Visible = False
+                txt2CustomerList.Visible = False
+                txt1CustomerList.Text = d.retDateFrom.ToString
+                txt2CustomerList.Text = d.retDateTo.ToString
+            End If
+            If Me.LastD1 = txt1CustomerList.Text And Me.LastD2 = txt2CustomerList.Text Then
+                Exit Sub
+            End If
+            ''Dim c As New SalesListManager
+            bgSalesQuery_DoWork(Nothing, Nothing)
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
+            'Me.Cursor = Cursors.WaitCursor
+            'Dim c As New SalesListManager(sender)
+            'arItemCache = New ArrayList
+            'arItemCache = c.LV_Sales_Items
+            'Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboDateRangeCustomerList_selectedIndexChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 #End Region
@@ -2156,25 +2296,32 @@ Public Class Sales
         Me.cboGroupSales.DroppedDown = True
     End Sub
     Private Sub cboGroupSales_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboGroupSales.SelectedIndexChanged
-        If Me.cboGroupSales.Text <> "" Then
-            Me.lblGroupBy.Text = Me.cboGroupSales.Text
-            Me.lblGroupBy.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblGroupBy.ForeColor = Color.Black
-        Else
-            Me.lblGroupBy.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblGroupBy.ForeColor = Color.Gray
-            Me.lblGroupBy.Text = "Group By"
-        End If
-        bgSalesQuery_DoWork(Nothing, Nothing)
-        If current_Item IsNot Nothing Then
-            PullInfo(current_Item.Text)
-             RaiseEvent PopCustHistory()
-        End If
-        'Me.Cursor = Cursors.WaitCursor
-        'Dim c As New SalesListManager(sender)
-        'arItemCache = New ArrayList
-        'arItemCache = c.LV_Sales_Items
-        'Me.Cursor = Cursors.Default
+        Try
+            If Me.cboGroupSales.Text <> "" Then
+                Me.lblGroupBy.Text = Me.cboGroupSales.Text
+                Me.lblGroupBy.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblGroupBy.ForeColor = Color.Black
+            Else
+                Me.lblGroupBy.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblGroupBy.ForeColor = Color.Gray
+                Me.lblGroupBy.Text = "Group By"
+            End If
+            bgSalesQuery_DoWork(Nothing, Nothing)
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
+            'Me.Cursor = Cursors.WaitCursor
+            'Dim c As New SalesListManager(sender)
+            'arItemCache = New ArrayList
+            'arItemCache = c.LV_Sales_Items
+            'Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboGroupSales_SelectedIndexChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
@@ -2219,30 +2366,37 @@ Public Class Sales
         End If
     End Sub
     Private Sub cboSalesList_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboSalesList.SelectedIndexChanged
-        If Me.cboSalesList.Text = "Unconfirmed Appts. For Today" Then
-            cboDateRangeCustomerList.Text = "Today"
-        ElseIf Me.cboSalesList.Text = "Custom..." Then
-            SalesListBuilder.ShowDialog()
-            Exit Sub
-        ElseIf Me.cboSalesList.Text = "Issue Leads List" Then
-            If Me.dtpIssueLeads.Value = Today Then
-                Me.cboDateRangeCustomerList.SelectedItem = "Today"
-            Else
-                Me.dtp1CustomerList.Value = Me.dtpIssueLeads.Value
-                Me.dtp2CustomerList.Value = Me.dtpIssueLeads.Value
-                Me.cboDateRangeCustomerList.SelectedItem = "Custom"
+        Try
+            If Me.cboSalesList.Text = "Unconfirmed Appts. For Today" Then
+                cboDateRangeCustomerList.Text = "Today"
+            ElseIf Me.cboSalesList.Text = "Custom..." Then
+                SalesListBuilder.ShowDialog()
+                Exit Sub
+            ElseIf Me.cboSalesList.Text = "Issue Leads List" Then
+                If Me.dtpIssueLeads.Value = Today Then
+                    Me.cboDateRangeCustomerList.SelectedItem = "Today"
+                Else
+                    Me.dtp1CustomerList.Value = Me.dtpIssueLeads.Value
+                    Me.dtp2CustomerList.Value = Me.dtpIssueLeads.Value
+                    Me.cboDateRangeCustomerList.SelectedItem = "Custom"
+                End If
             End If
-        End If
-        bgSalesQuery_DoWork(Nothing, Nothing)
-        If current_Item IsNot Nothing Then
-            PullInfo(current_Item.Text)
-             RaiseEvent PopCustHistory()
-        End If
-        'Me.Cursor = Cursors.WaitCursor
-        'Dim c As New SalesListManager(sender)
-        'arItemCache = New ArrayList
-        'arItemCache = c.LV_Sales_Items
-        'Me.Cursor = Cursors.Default
+            bgSalesQuery_DoWork(Nothing, Nothing)
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
+            'Me.Cursor = Cursors.WaitCursor
+            'Dim c As New SalesListManager(sender)
+            'arItemCache = New ArrayList
+            'arItemCache = c.LV_Sales_Items
+            'Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboSalesList_SelectedIndexChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
@@ -2262,6 +2416,9 @@ Public Class Sales
         Catch ex As Exception
             Dim err As String = ex.Message
             MsgBox("Error:" & err, MsgBoxStyle.Exclamation, "LVSales_MouseClick()")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvSales_MouseClick", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
     Private Sub lvSales_RetrieveVirtualItem(sender As Object, e As RetrieveVirtualItemEventArgs) Handles lvSales.RetrieveVirtualItem
@@ -2274,6 +2431,9 @@ Public Class Sales
         Catch ex As Exception
             Dim err As String = ex.Message
             MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "LvSales_RetrievewVirtualItem()")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvSales_RetrieveVirtualItem", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
 
@@ -2290,6 +2450,9 @@ Public Class Sales
         Catch ex As Exception
             Dim err As String = ex.Message
             MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "CachVirtualItems")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvsales_cachevirtaulitems", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
 
@@ -2301,6 +2464,9 @@ Public Class Sales
         Catch ex As Exception
             Dim err As String = ex.Message
             MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "SearchForVirtualItem()")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvsales_searchforvirtualitem", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 
@@ -2308,142 +2474,168 @@ Public Class Sales
 
 #Region "Customer Log & Attached Files"
     Private Sub TScboCustomerHistory_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TScboCustomerHistory.SelectedIndexChanged
-        If Me.lvSales.SelectedItems.Count <> 0 Then
-            ' Dim c As New CustomerHistory
-            'c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
-            bgCustomerHistory_DoWork(Nothing, Nothing)
+        Try
+            If Me.lvSales.SelectedItems.Count <> 0 Then
+                ' Dim c As New CustomerHistory
+                'c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                bgCustomerHistory_DoWork(Nothing, Nothing)
 
 
-        End If
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tscbocustomerhistory_selectedindexchanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub tsbtnAFPics_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnAFPics.Click
+        Try
+            Me.tsCustomerLog.Visible = False
+            Me.tsAFPics.Visible = True
+            Me.pnlCustomerHistory.Visible = False
+            Me.pnlAFPics.Visible = True
+            Me.tsAttachedFilesNAV.Enabled = True
 
-        Me.tsCustomerLog.Visible = False
-        Me.tsAFPics.Visible = True
-        Me.pnlCustomerHistory.Visible = False
-        Me.pnlAFPics.Visible = True
-        Me.tsAttachedFilesNAV.Enabled = True
+            ''Dim x As New PopulateAF(Me)
+            'Me.GetRidOfOldAndPutNew()
+            'Dim InitPoint As System.Drawing.Point = New System.Drawing.Point(0, 0)
+            'Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(364, 0)
 
-        ''Dim x As New PopulateAF(Me)
-        'Me.GetRidOfOldAndPutNew()
-        'Dim InitPoint As System.Drawing.Point = New System.Drawing.Point(0, 0)
-        'Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(364, 0)
-
-        '' edit 8-29-15 
-        '' need a calculation here to determine size of panel the control(s) are going into
-        '' and to size the controls accordingly with a 10-15 px buffer per andy
-        '' 
-        '' 
-        Dim widthOfParent As Integer = pnlAFPics.Width
-        Dim widthOfControl As Integer = (widthOfParent / 2) - 20
-        Dim heightOfParent As Integer = pnlAFPics.Height
-        Dim heightOfControl As Integer = (heightOfParent - 30)
-        Dim InitPoint As System.Drawing.Point = New System.Drawing.Point((0 + 10), (0 + 10))
-        Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(((widthOfParent / 2) + 10), (0 + 10))
+            '' edit 8-29-15 
+            '' need a calculation here to determine size of panel the control(s) are going into
+            '' and to size the controls accordingly with a 10-15 px buffer per andy
+            '' 
+            '' 
+            Dim widthOfParent As Integer = pnlAFPics.Width
+            Dim widthOfControl As Integer = (widthOfParent / 2) - 20
+            Dim heightOfParent As Integer = pnlAFPics.Height
+            Dim heightOfControl As Integer = (heightOfParent - 30)
+            Dim InitPoint As System.Drawing.Point = New System.Drawing.Point((0 + 10), (0 + 10))
+            Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(((widthOfParent / 2) + 10), (0 + 10))
 
 
-        '' EDIT 11-15-2015
-        '' Going back to a static control design with
-        '' multi-threads. AC
-        'Dim rc As ReusableListViewControl = New ReusableListViewControl
-        'rc.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint, "lsAF", heightOfControl, widthOfControl)
-        'Dim rc2 As ReusableListViewControl = New ReusableListViewControl
-        'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
-        ''END EDIT 
+            '' EDIT 11-15-2015
+            '' Going back to a static control design with
+            '' multi-threads. AC
+            'Dim rc As ReusableListViewControl = New ReusableListViewControl
+            'rc.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint, "lsAF", heightOfControl, widthOfControl)
+            'Dim rc2 As ReusableListViewControl = New ReusableListViewControl
+            'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
+            ''END EDIT 
 
-        'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
-        'th1.Start()
-        'th1.Join()
-        bgGetImages_DoWork(Me, Nothing)
-        'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
+            'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
+            'th1.Start()
+            'th1.Join()
+            bgGetImages_DoWork(Me, Nothing)
+            'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tsbtnAFPics_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub tsbtnShowCH_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbtnShowCH.Click
-        Me.tsCustomerLog.Visible = True
-        Me.tsAFPics.Visible = False
-        Me.pnlCustomerHistory.Visible = True
-        Me.pnlAFPics.Visible = False
-        Me.tsAttachedFilesNAV.Enabled = False
-        If Me.ID <> "" Then
-            'Dim x As New CustomerHistory
-            'x.SetUp(Me, ID, Me.TScboCustomerHistory)
-            STATIC_VARIABLES.CurrentID = ID
-            bgCustomerHistory_DoWork(Nothing, Nothing)
-        End If
+        Try
+            Me.tsCustomerLog.Visible = True
+            Me.tsAFPics.Visible = False
+            Me.pnlCustomerHistory.Visible = True
+            Me.pnlAFPics.Visible = False
+            Me.tsAttachedFilesNAV.Enabled = False
+            If Me.ID <> "" Then
+                'Dim x As New CustomerHistory
+                'x.SetUp(Me, ID, Me.TScboCustomerHistory)
+                STATIC_VARIABLES.CurrentID = ID
+                bgCustomerHistory_DoWork(Nothing, Nothing)
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tsbtnShowCH_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub tscboAFPicsFilter_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscboAFPicsFilter.SelectedIndexChanged
+        Try
+            Dim p_width As Integer = Me.pnlAFPics.Width
+            Dim p_height As Integer = Me.pnlAFPics.Height
+            ''
+            '' change tslblAFPIC text to respective 'filter'
+            '' 
+            '' tslblAFPic
+            ''
 
-        Dim p_width As Integer = Me.pnlAFPics.Width
-        Dim p_height As Integer = Me.pnlAFPics.Height
-        ''
-        '' change tslblAFPIC text to respective 'filter'
-        '' 
-        '' tslblAFPic
-        ''
-
-        Select Case Me.tscboAFPicsFilter.Text
-            Case Is = "All"
-                Me.tslblAFPic.Text = "Attached Files and Job Pictures..."
-                Dim x As Control
+            Select Case Me.tscboAFPicsFilter.Text
+                Case Is = "All"
+                    Me.tslblAFPic.Text = "Attached Files and Job Pictures..."
+                    Dim x As Control
 
 
-                For Each x In Me.pnlAFPics.Controls
-                    If x.Name.ToString = "lsAttachedFiles" Then
-                        Dim prevLocX As Integer = x.Location.X
-                        Dim prevLocY As Integer = x.Location.Y
-                        x.Size = New System.Drawing.Point((p_width / 2) - 10, p_height - 10)
-                        x.Location = New Point(prevLocX + 5, 5)
+                    For Each x In Me.pnlAFPics.Controls
+                        If x.Name.ToString = "lsAttachedFiles" Then
+                            Dim prevLocX As Integer = x.Location.X
+                            Dim prevLocY As Integer = x.Location.Y
+                            x.Size = New System.Drawing.Point((p_width / 2) - 10, p_height - 10)
+                            x.Location = New Point(prevLocX + 5, 5)
 
-                    End If
-                    If x.Name.ToString = "lsJobPictures" Then
+                        End If
+                        If x.Name.ToString = "lsJobPictures" Then
 
-                        x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
-                        x.Location = New Point((p_width / 2) + 5, 5)
-                    End If
-                Next
-                '        Me.lvAttachedFiles.Dock = DockStyle.Left
-                '        Me.lvJobPics.Dock = DockStyle.Right
-                '        Me.lvAttachedFiles.Visible = True
-                '        Me.lvJobPics.Visible = True
-                '        Me.tslblAFPic.Text = "Attached Files and Job Pictures..."
-            Case Is = "Job Pictures"
-                Me.tslblAFPic.Text = "Job Pictures"
-                ''737,172 
+                            x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
+                            x.Location = New Point((p_width / 2) + 5, 5)
+                        End If
+                    Next
+                    '        Me.lvAttachedFiles.Dock = DockStyle.Left
+                    '        Me.lvJobPics.Dock = DockStyle.Right
+                    '        Me.lvAttachedFiles.Visible = True
+                    '        Me.lvJobPics.Visible = True
+                    '        Me.tslblAFPic.Text = "Attached Files and Job Pictures..."
+                Case Is = "Job Pictures"
+                    Me.tslblAFPic.Text = "Job Pictures"
+                    ''737,172 
 
-                Dim x As Control
-                For Each x In Me.pnlAFPics.Controls
-                    If x.Name.ToString = "lsAttachedFiles" Then
-                        x.Size = New System.Drawing.Point(0, 0)
-                    End If
-                    If x.Name.ToString = "lsJobPictures" Then
-                        x.Size = New System.Drawing.Point((p_width - 20), (p_height - 10))
-                        x.Location = New Point(5, 5)
-                    End If
-                Next
-                '        Me.lvAttachedFiles.Visible = False
-                '        Me.lvJobPics.Visible = True
-                '        Me.lvJobPics.Dock = DockStyle.Fill
-                '        Me.tslblAFPic.Text = "Job Pictures..."
-            Case Is = "Attached Files"
-                Me.tslblAFPic.Text = "Attached Files"
-                Dim x As Control
-                For Each x In Me.pnlAFPics.Controls
-                    If x.Name.ToString = "lsAttachedFiles" Then
-                        x.Size = New System.Drawing.Point((p_width - 20), (p_height - 10))
-                        x.Location = New Point(5, 5)
+                    Dim x As Control
+                    For Each x In Me.pnlAFPics.Controls
+                        If x.Name.ToString = "lsAttachedFiles" Then
+                            x.Size = New System.Drawing.Point(0, 0)
+                        End If
+                        If x.Name.ToString = "lsJobPictures" Then
+                            x.Size = New System.Drawing.Point((p_width - 20), (p_height - 10))
+                            x.Location = New Point(5, 5)
+                        End If
+                    Next
+                    '        Me.lvAttachedFiles.Visible = False
+                    '        Me.lvJobPics.Visible = True
+                    '        Me.lvJobPics.Dock = DockStyle.Fill
+                    '        Me.tslblAFPic.Text = "Job Pictures..."
+                Case Is = "Attached Files"
+                    Me.tslblAFPic.Text = "Attached Files"
+                    Dim x As Control
+                    For Each x In Me.pnlAFPics.Controls
+                        If x.Name.ToString = "lsAttachedFiles" Then
+                            x.Size = New System.Drawing.Point((p_width - 20), (p_height - 10))
+                            x.Location = New Point(5, 5)
 
-                    End If
-                    If x.Name.ToString = "lsJobPictures" Then
-                        x.Size = New System.Drawing.Point(0, 0)
-                    End If
-                Next
-                '        Me.lvJobPics.Visible = False
-                '        Me.lvAttachedFiles.Visible = True
-                '        Me.lvAttachedFiles.Dock = DockStyle.Fill
-                '        Me.tslblAFPic.Text = "Attached Files..."
-        End Select
+                        End If
+                        If x.Name.ToString = "lsJobPictures" Then
+                            x.Size = New System.Drawing.Point(0, 0)
+                        End If
+                    Next
+                    '        Me.lvJobPics.Visible = False
+                    '        Me.lvAttachedFiles.Visible = True
+                    '        Me.lvAttachedFiles.Dock = DockStyle.Fill
+                    '        Me.tslblAFPic.Text = "Attached Files..."
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tscboAFPicsFilter_SelectedIndexChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnLogCall_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogCall.ButtonClick
@@ -2490,21 +2682,27 @@ Public Class Sales
     End Sub
 
     Private Sub lvMemorized_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvMemorized.DoubleClick
-        Me.TT = New ToolTip
-        Me.IfExists = True
-        If Me.SelItem Is Nothing Then
-            Exit Sub
-        End If
-        Dim p As System.Drawing.Point = New System.Drawing.Point(10, Me.ycordinate + 15)
-        Dim notes As String
-        If Me.SelItem.ToolTipText <> "" Then
-            Dim c As New TruncateNotes
-            c.Truncate(Me.SelItem.ToolTipText, Me.lvMemorized)
-            notes = c.NewSTRING
-            TT.ToolTipIcon = ToolTipIcon.Info
-            TT.ToolTipTitle = "Memorized Record Notes"
-            Me.TT.Show(notes, Me.lvMemorized, p, 30000)
-        End If
+        Try
+            Me.TT = New ToolTip
+            Me.IfExists = True
+            If Me.SelItem Is Nothing Then
+                Exit Sub
+            End If
+            Dim p As System.Drawing.Point = New System.Drawing.Point(10, Me.ycordinate + 15)
+            Dim notes As String
+            If Me.SelItem.ToolTipText <> "" Then
+                Dim c As New TruncateNotes
+                c.Truncate(Me.SelItem.ToolTipText, Me.lvMemorized)
+                notes = c.NewSTRING
+                TT.ToolTipIcon = ToolTipIcon.Info
+                TT.ToolTipTitle = "Memorized Record Notes"
+                Me.TT.Show(notes, Me.lvMemorized, p, 30000)
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvMemorized_DoubleClick", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
 
@@ -2571,23 +2769,29 @@ Public Class Sales
     End Sub
 
     Public Sub btnSingleRecord_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSingleRecord.Click
-        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet As SqlCommand
-        Dim r As SqlDataReader
-        cmdGet = New SqlCommand("Select Count (ID)from enterlead where ID  = " & Me.txtSingleRecordInput.Text, cnn)
-        cmdGet.CommandType = CommandType.Text
-        cnn.Open()
-        r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-        r.Read()
-        If r.Item(0) = 0 Then
-            MsgBox("Record Doesn't Exist!", MsgBoxStyle.Exclamation, "Record # Invalid")
-            Me.txtSingleRecordInput.Text = "[Enter Record ID]"
-            Me.btnSingleRecord.Enabled = False
-            Me.btnBuildList.HideDropDown()
-            Exit Sub
-        End If
-        r.Close()
-        cnn.Close()
+        Try
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet As SqlCommand
+            Dim r As SqlDataReader
+            cmdGet = New SqlCommand("Select Count (ID)from enterlead where ID  = " & Me.txtSingleRecordInput.Text, cnn)
+            cmdGet.CommandType = CommandType.Text
+            cnn.Open()
+            r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+            r.Read()
+            If r.Item(0) = 0 Then
+                MsgBox("Record Doesn't Exist!", MsgBoxStyle.Exclamation, "Record # Invalid")
+                Me.txtSingleRecordInput.Text = "[Enter Record ID]"
+                Me.btnSingleRecord.Enabled = False
+                Me.btnBuildList.HideDropDown()
+                Exit Sub
+            End If
+            r.Close()
+            cnn.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnSingleRecord_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
         Try
             Me.lvSales.Items(Me.txtSingleRecordInput.Text).Selected = True
@@ -2639,22 +2843,25 @@ Public Class Sales
 
 
     Private Sub btnSaveRep_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSaveRep.Click
-        Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet1 As SqlCommand
-        Dim r2 As SqlDataReader
-        cmdGet1 = New SqlCommand("Update enterlead set rep1 = " & "'" & Me.cboRep1.Text & "'" & ", rep2 = " & "'" & Me.cboRep2.Text & "'" & ",lastupdated = 'true' where ID = " & Me.ID, cnn2)
-        cmdGet1.CommandType = CommandType.Text
-        cnn2.Open()
-        r2 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
-        r2.Read()
-        '' Loads Names of Latest Rep from sales rep pull list and will also add 
-        '' the name to rep combos if they are not part of the current rep list 
         Try
-            Me.cboRep1.Text = r2.Item(0)
-            If Me.cboRep1.Text = "" And r2.Item(0) <> "" Then
-                Me.cboRep1.Items.Add(r2.Item(0))
-                Me.cboRep2.Items.Add(r2.Item(0))
-                Me.cboRep1.Text = r2.Item(0)
+            Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet1 As SqlCommand
+            Dim r2 As SqlDataReader
+            cmdGet1 = New SqlCommand("Update enterlead set rep1 = " & "'" & Me.cboRep1.Text & "'" & ", rep2 = " & "'" & Me.cboRep2.Text & "'" & ",lastupdated = 'true' where ID = " & Me.ID, cnn2)
+            cmdGet1.CommandType = CommandType.Text
+            cnn2.Open()
+            r2 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
+            r2.Read()
+            '' Loads Names of Latest Rep from sales rep pull list and will also add 
+            '' the name to rep combos if they are not part of the current rep list 
+        
+
+        Try
+            Me.cboRep1.Text = R2.Item(0)
+            If Me.cboRep1.Text = "" And R2.Item(0) <> "" Then
+                Me.cboRep1.Items.Add(R2.Item(0))
+                Me.cboRep2.Items.Add(R2.Item(0))
+                Me.cboRep1.Text = R2.Item(0)
 
             End If
         Catch ex As Exception
@@ -2662,11 +2869,11 @@ Public Class Sales
 
         End Try
         Try
-            Me.cboRep2.Text = r2.Item(1)
-            If Me.cboRep2.Text = "" And r2.Item(1) <> "" Then
-                Me.cboRep2.Items.Add(r2.Item(1))
-                Me.cboRep1.Items.Add(r2.Item(1))
-                Me.cboRep2.Text = r2.Item(1)
+            Me.cboRep2.Text = R2.Item(1)
+            If Me.cboRep2.Text = "" And R2.Item(1) <> "" Then
+                Me.cboRep2.Items.Add(R2.Item(1))
+                Me.cboRep1.Items.Add(R2.Item(1))
+                Me.cboRep2.Text = R2.Item(1)
 
             End If
         Catch ex As Exception
@@ -2674,7 +2881,7 @@ Public Class Sales
 
         End Try
 
-        r2.Close()
+        R2.Close()
         cnn2.Close()
         If Me.TabControl2.SelectedIndex = 1 Then
             Me.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
@@ -2682,7 +2889,11 @@ Public Class Sales
             'Me.lvSales_SelectedIndexChanged(Nothing, Nothing)
         End If
 
-
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnSaveRep_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -2695,29 +2906,36 @@ Public Class Sales
     End Sub
 
     Private Sub btnMemorize_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnMemorize.Click
-        If Me.ID = "" Then
-            MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
+        Try
+            If Me.ID = "" Then
+                MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
+                Exit Sub
+            End If
 
-        If Me.btnMemorize.Text = "Memorize This Record" Then
+            If Me.btnMemorize.Text = "Memorize This Record" Then
 
-            MemorizeNotes.ShowDialog()
-        Else
-            Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdGet1 As SqlCommand
-            Dim r2 As SqlDataReader
-            cmdGet1 = New SqlCommand("Delete memorizedappts where leadnum = " & "'" & STATIC_VARIABLES.CurrentID & "'" & " and UserLoggedOn = " & "'" & STATIC_VARIABLES.CurrentUser & "'" & " and Form = 'Sales' ", cnn2)
-            cmdGet1.CommandType = CommandType.Text
-            cnn2.Open()
-            r2 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
-            r2.Read()
-            r2.Close()
-            cnn2.Close()
-            Me.PopulateMemorized()
+                MemorizeNotes.ShowDialog()
+            Else
+                Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+                Dim cmdGet1 As SqlCommand
+                Dim r2 As SqlDataReader
+                cmdGet1 = New SqlCommand("Delete memorizedappts where leadnum = " & "'" & STATIC_VARIABLES.CurrentID & "'" & " and UserLoggedOn = " & "'" & STATIC_VARIABLES.CurrentUser & "'" & " and Form = 'Sales' ", cnn2)
+                cmdGet1.CommandType = CommandType.Text
+                cnn2.Open()
+                r2 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
+                r2.Read()
+                r2.Close()
+                cnn2.Close()
+                Me.PopulateMemorized()
 
 
-        End If
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnMemorize_click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
@@ -2921,22 +3139,28 @@ Public Class Sales
     End Sub
 
     Private Sub btnEditScheduledTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditScheduledTask.Click
-        ScheduleAction.edit = True
-        Dim c As Integer = Me.pnlScheduledTasks.Controls.Count
-        Dim i As Integer
-        For i = 1 To c
-            Dim all As Panel = Me.pnlScheduledTasks.Controls(i - 1)
-            If all.BorderStyle = BorderStyle.FixedSingle Then
-                ScheduleAction.EditId = all.Name.ToString.Substring(3)
+        Try
+            ScheduleAction.edit = True
+            Dim c As Integer = Me.pnlScheduledTasks.Controls.Count
+            Dim i As Integer
+            For i = 1 To c
+                Dim all As Panel = Me.pnlScheduledTasks.Controls(i - 1)
+                If all.BorderStyle = BorderStyle.FixedSingle Then
+                    ScheduleAction.EditId = all.Name.ToString.Substring(3)
+                End If
+            Next
+            If ScheduleAction.EditId = "" Then
+                MsgBox("You must select a Task.", MsgBoxStyle.Exclamation, "Please Select a Task")
+                Exit Sub
             End If
-        Next
-        If ScheduleAction.EditId = "" Then
-            MsgBox("You must select a Task.", MsgBoxStyle.Exclamation, "Please Select a Task")
-            Exit Sub
-        End If
-        ScheduleAction.ShowDialog()
-        Dim x As New ScheduledActions
-        x.SetUp(Me)
+            ScheduleAction.ShowDialog()
+            Dim x As New ScheduledActions
+            x.SetUp(Me)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEditScheduledTask_click", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -2986,19 +3210,24 @@ Public Class Sales
         End If
 
 
+        Try
+            If Me.cboDateRangeSummary.Text <> "Custom" Then
+                Dim d As New DTPManipulation(Me.cboDateRangeSummary.Text)
+                Me.dtpSummary2.Value = d.retDateFrom
+                Me.dtpSummary.Value = d.retDateTo
+                Dim r As New Sales_Performance_Report
+                Dim accuracy As String = r.ReportAccuracy
+                Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
+                r = Nothing
+                x = Nothing
 
-        If Me.cboDateRangeSummary.Text <> "Custom" Then
-            Dim d As New DTPManipulation(Me.cboDateRangeSummary.Text)
-            Me.dtpSummary2.Value = d.retDateFrom
-            Me.dtpSummary.Value = d.retDateTo
-            Dim r As New Sales_Performance_Report
-            Dim accuracy As String = r.ReportAccuracy
-            Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
-            r = Nothing
-            x = Nothing
+            End If
 
-        End If
-
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboDateRangeSummary_SelectedIndexChanged", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
     End Sub
@@ -3113,36 +3342,46 @@ Public Class Sales
     End Function
 
     Private Function GetTheFiles(ByVal LeadNum As String)
+        Try
+            Dim b As New AF_And_JP_Logic(LeadNum, "AF") '' af AND jp
+            ar_files = b.Files
+            AddListItem_Files(ar_files, Me.lsAttachedFiles)
 
-        Dim b As New AF_And_JP_Logic(LeadNum, "AF") '' af AND jp
-        ar_files = b.Files
-        AddListItem_Files(ar_files, Me.lsAttachedFiles)
-
-        Dim d As New AF_And_JP_Logic(LeadNum, "JP")
-        ar_files = d.Files
-        AddListItem_Files(ar_files, Me.lsJobPictures)
+            Dim d As New AF_And_JP_Logic(LeadNum, "JP")
+            ar_files = d.Files
+            AddListItem_Files(ar_files, Me.lsJobPictures)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "GetTheFiles(leadNum)", LeadNum, ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Function
 
     Private Function GetTheDirs(ByVal LeadNum As String)
 
 
+        Try
+            Dim c As New AF_And_JP_Logic(LeadNum, "AF") '' af AND jp
+            ar_dir = c.Directories
+            AddListItem_Directories(ar_dir, Me.lsAttachedFiles)
 
-        Dim c As New AF_And_JP_Logic(LeadNum, "AF") '' af AND jp
-        ar_dir = c.Directories
-        AddListItem_Directories(ar_dir, Me.lsAttachedFiles)
-
-        Dim d As New AF_And_JP_Logic(LeadNum, "JP")
-        ar_dir = d.Directories
-        AddListItem_Directories(ar_dir, Me.lsJobPictures)
+            Dim d As New AF_And_JP_Logic(LeadNum, "JP")
+            ar_dir = d.Directories
+            AddListItem_Directories(ar_dir, Me.lsJobPictures)
 
 
-        Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
-        Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
-        Me.lsAttachedFiles.Invalidate()
-        Me.lsJobPictures.SmallImageList = Me.ImgLst32
-        Me.lsJobPictures.LargeImageList = Me.ImgLst32
-        Me.lsJobPictures.Invalidate()
+            Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
+            Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
+            Me.lsAttachedFiles.Invalidate()
+            Me.lsJobPictures.SmallImageList = Me.ImgLst32
+            Me.lsJobPictures.LargeImageList = Me.ImgLst32
+            Me.lsJobPictures.Invalidate()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "getthedirs(leadnum)", LeadNum, ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
 
@@ -3228,6 +3467,9 @@ Public Class Sales
         Catch ex As Exception
             'Dim err As String = ex.Message
             'MsgBox("Error: " & vbCrLf & ex.Message.ToString, MsgBoxStyle.Critical, "DEBUG INFO - AddListItem_Directories()")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "AddListItem_Files(Itemlist,control)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Function
 
@@ -3256,6 +3498,9 @@ Public Class Sales
         Catch ex As Exception
             'Dim err As String = ex.Message
             'MsgBox("Error: " & vbCrLf & ex.Message.ToString, MsgBoxStyle.Critical, "DEBUG INFO - AddListItem_Directories()")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "AddListItem_Directories(itemlist,control)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Function
 
@@ -3264,130 +3509,157 @@ Public Class Sales
 #Region "Context Menu - OPEN - LS and JP"
     Private Sub btnOpen_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOpen.Click
         If sel_Item_right IsNot Nothing Then
-            System.Diagnostics.Process.Start(sel_Item_right.Tag)
+            Try
+                System.Diagnostics.Process.Start(sel_Item_right.Tag)
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnOpen_Click", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End If
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
         If sel_Item_Right_Jp IsNot Nothing Then
-            System.Diagnostics.Process.Start(sel_Item_Right_Jp.Tag)
+            Try
+                System.Diagnostics.Process.Start(sel_Item_Right_Jp.Tag)
+
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "ToolStripMenuItem1_click", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
         End If
     End Sub
 #End Region
 
 #Region "Delete Context Menus - LS and JP"
     Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDelete.Click
-        If sel_Item_right IsNot Nothing Then
-            If sel_Item_right.SubItems(3).Text = "File" Then
-                If System.IO.File.Exists(sel_Item_right.Tag) = True Then
-                    System.IO.File.Delete(sel_Item_right.Tag)
-                    ' now repop
-                    Dim whereToCreate As String = lsAttachedFiles.Tag
-                    If Len(whereToCreate) <= 0 Then
-                        whereToCreate = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                    ElseIf Len(whereToCreate) >= 1 Then
-                        whereToCreate = Me.lsJobPictures.Tag
+        Try
+            If sel_Item_right IsNot Nothing Then
+                If sel_Item_right.SubItems(3).Text = "File" Then
+                    If System.IO.File.Exists(sel_Item_right.Tag) = True Then
+                        System.IO.File.Delete(sel_Item_right.Tag)
+                        ' now repop
+                        Dim whereToCreate As String = lsAttachedFiles.Tag
+                        If Len(whereToCreate) <= 0 Then
+                            whereToCreate = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                        ElseIf Len(whereToCreate) >= 1 Then
+                            whereToCreate = Me.lsJobPictures.Tag
+                        End If
+                        Dim repop As New AF_And_JP_Logic(whereToCreate)
+                        Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+                        arFiles = repop.Files
+                        Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+                        arDirs = repop.Directories
+                        repop = Nothing
+                        Me.lsJobPictures.Items.Clear()
+                        AddListItem_Directories(arDirs, Me.lsAttachedFiles)
+                        AddListItem_Files(arFiles, Me.lsAttachedFiles)
+                        sel_Item_left = Nothing
+                        sel_Item_right = Nothing
                     End If
-                    Dim repop As New AF_And_JP_Logic(whereToCreate)
-                    Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
-                    arFiles = repop.Files
-                    Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
-                    arDirs = repop.Directories
-                    repop = Nothing
-                    Me.lsJobPictures.Items.Clear()
-                    AddListItem_Directories(arDirs, Me.lsAttachedFiles)
-                    AddListItem_Files(arFiles, Me.lsAttachedFiles)
-                    sel_Item_left = Nothing
-                    sel_Item_right = Nothing
-                End If
-            End If
-        End If
-
-        If sel_Item_right IsNot Nothing Then
-            If sel_Item_right.SubItems(3).Text = "Folder" Then
-                If System.IO.Directory.Exists(sel_Item_right.Tag) = True Then
-                    System.IO.Directory.Delete(sel_Item_right.Tag, True)
-                    Dim whereToCreate As String = lsAttachedFiles.Tag
-                    If Len(whereToCreate) <= 0 Then
-                        whereToCreate = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                    ElseIf Len(whereToCreate) >= 1 Then
-                        whereToCreate = Me.lsAttachedFiles.Tag
-                    End If
-                    Dim repop As New AF_And_JP_Logic(whereToCreate)
-                    Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
-                    arFiles = repop.Files
-                    Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
-                    arDirs = repop.Directories
-                    repop = Nothing
-                    Me.lsAttachedFiles.Items.Clear()
-                    AddListItem_Directories(arDirs, Me.lsAttachedFiles)
-                    AddListItem_Files(arFiles, Me.lsAttachedFiles)
-                    sel_Item_left = Nothing
-                    sel_Item_right = Nothing
                 End If
             End If
 
-        ElseIf sel_Item_right Is Nothing Then
-            sel_Item_left = Nothing
-            Exit Sub
-        End If
+            If sel_Item_right IsNot Nothing Then
+                If sel_Item_right.SubItems(3).Text = "Folder" Then
+                    If System.IO.Directory.Exists(sel_Item_right.Tag) = True Then
+                        System.IO.Directory.Delete(sel_Item_right.Tag, True)
+                        Dim whereToCreate As String = lsAttachedFiles.Tag
+                        If Len(whereToCreate) <= 0 Then
+                            whereToCreate = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                        ElseIf Len(whereToCreate) >= 1 Then
+                            whereToCreate = Me.lsAttachedFiles.Tag
+                        End If
+                        Dim repop As New AF_And_JP_Logic(whereToCreate)
+                        Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+                        arFiles = repop.Files
+                        Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+                        arDirs = repop.Directories
+                        repop = Nothing
+                        Me.lsAttachedFiles.Items.Clear()
+                        AddListItem_Directories(arDirs, Me.lsAttachedFiles)
+                        AddListItem_Files(arFiles, Me.lsAttachedFiles)
+                        sel_Item_left = Nothing
+                        sel_Item_right = Nothing
+                    End If
+                End If
+
+            ElseIf sel_Item_right Is Nothing Then
+                sel_Item_left = Nothing
+                Exit Sub
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnDelete_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
     Private Sub btnDeleteJP_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDeleteJP.Click
-        If sel_Item_Right_Jp IsNot Nothing Then
-            If sel_Item_Right_Jp.SubItems(3).Text = "File" Then
-                If System.IO.File.Exists(sel_Item_Right_Jp.Tag) = True Then
-                    System.IO.File.Delete(sel_Item_Right_Jp.Tag)
-                    ' now repop
-                    Dim whereToCreate As String = lsJobPictures.Tag
-                    If Len(whereToCreate) <= 0 Then
-                        whereToCreate = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                    ElseIf Len(whereToCreate) >= 1 Then
-                        whereToCreate = Me.lsJobPictures.Tag
+        Try
+            If sel_Item_Right_Jp IsNot Nothing Then
+                If sel_Item_Right_Jp.SubItems(3).Text = "File" Then
+                    If System.IO.File.Exists(sel_Item_Right_Jp.Tag) = True Then
+                        System.IO.File.Delete(sel_Item_Right_Jp.Tag)
+                        ' now repop
+                        Dim whereToCreate As String = lsJobPictures.Tag
+                        If Len(whereToCreate) <= 0 Then
+                            whereToCreate = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                        ElseIf Len(whereToCreate) >= 1 Then
+                            whereToCreate = Me.lsJobPictures.Tag
+                        End If
+                        Dim repop As New AF_And_JP_Logic(whereToCreate)
+                        Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+                        arFiles = repop.Files
+                        Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+                        arDirs = repop.Directories
+                        repop = Nothing
+                        Me.lsJobPictures.Items.Clear()
+                        AddListItem_Directories(arDirs, Me.lsJobPictures)
+                        AddListItem_Files(arFiles, Me.lsJobPictures)
+                        sel_Item_Left_Jp = Nothing
+                        sel_Item_Right_Jp = Nothing
                     End If
-                    Dim repop As New AF_And_JP_Logic(whereToCreate)
-                    Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
-                    arFiles = repop.Files
-                    Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
-                    arDirs = repop.Directories
-                    repop = Nothing
-                    Me.lsJobPictures.Items.Clear()
-                    AddListItem_Directories(arDirs, Me.lsJobPictures)
-                    AddListItem_Files(arFiles, Me.lsJobPictures)
-                    sel_Item_Left_Jp = Nothing
-                    sel_Item_Right_Jp = Nothing
-                End If
-            End If
-        End If
-
-        If sel_Item_Right_Jp IsNot Nothing Then
-            If sel_Item_Right_Jp.SubItems(3).Text = "Folder" Then
-                If System.IO.Directory.Exists(sel_Item_Right_Jp.Tag) = True Then
-                    System.IO.Directory.Delete(sel_Item_Right_Jp.Tag, True)
-                    Dim whereToCreate As String = lsJobPictures.Tag
-                    If Len(whereToCreate) <= 0 Then
-                        whereToCreate = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                    ElseIf Len(whereToCreate) >= 1 Then
-                        whereToCreate = Me.lsJobPictures.Tag
-                    End If
-                    Dim repop As New AF_And_JP_Logic(whereToCreate)
-                    Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
-                    arFiles = repop.Files
-                    Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
-                    arDirs = repop.Directories
-                    repop = Nothing
-                    Me.lsJobPictures.Items.Clear()
-                    AddListItem_Directories(arDirs, Me.lsJobPictures)
-                    AddListItem_Files(arFiles, Me.lsJobPictures)
-                    sel_Item_Left_Jp = Nothing
-                    sel_Item_Right_Jp = Nothing
                 End If
             End If
 
-        ElseIf sel_Item_Right_Jp Is Nothing Then
-            sel_Item_Left_Jp = Nothing
-            Exit Sub
-        End If
+            If sel_Item_Right_Jp IsNot Nothing Then
+                If sel_Item_Right_Jp.SubItems(3).Text = "Folder" Then
+                    If System.IO.Directory.Exists(sel_Item_Right_Jp.Tag) = True Then
+                        System.IO.Directory.Delete(sel_Item_Right_Jp.Tag, True)
+                        Dim whereToCreate As String = lsJobPictures.Tag
+                        If Len(whereToCreate) <= 0 Then
+                            whereToCreate = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                        ElseIf Len(whereToCreate) >= 1 Then
+                            whereToCreate = Me.lsJobPictures.Tag
+                        End If
+                        Dim repop As New AF_And_JP_Logic(whereToCreate)
+                        Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+                        arFiles = repop.Files
+                        Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+                        arDirs = repop.Directories
+                        repop = Nothing
+                        Me.lsJobPictures.Items.Clear()
+                        AddListItem_Directories(arDirs, Me.lsJobPictures)
+                        AddListItem_Files(arFiles, Me.lsJobPictures)
+                        sel_Item_Left_Jp = Nothing
+                        sel_Item_Right_Jp = Nothing
+                    End If
+                End If
+
+            ElseIf sel_Item_Right_Jp Is Nothing Then
+                sel_Item_Left_Jp = Nothing
+                Exit Sub
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnDeleteJP_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -3395,446 +3667,460 @@ Public Class Sales
 
 #Region "Rename Context Menu - LS and JP"
     Private Sub btnRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRename.Click
-        If sel_Item_right IsNot Nothing Then
-            Select Case sel_Item_right.SubItems(3).Text
-                Case "File"
-                    ''
-                    '' 1) rename file
-                    ''    msdn: no =>  system.io.fileRename()             ?   https://msdn.microsoft.com/en-us/library/system.io.file%28v=vs.100%29.aspx
-                    ''          yes => my.computer.filesystem.RenameFile()    https://msdn.microsoft.com/en-us/library/5w05844e%28v=vs.120%29.aspx
-                    '' wtf.
-                    ''
-                    '' 2) repop control with renamed file(s)
-                    '' 3) set the selected items to nothing
-                    '' 4) exit 
-                    ''
-                    Dim new_name As String = InputBox("Please enter the NEW name of the file to be renamed.", "Rename File")
-                    If Len(new_name) >= 1 Then
-                        '' acceptable
-                        '' does it already exits ? 
-                        Select Case System.IO.File.Exists(new_name)
-                            Case Is = True
-                                '' already there
-                                sel_Item_left = Nothing
-                                sel_Item_right = Nothing
-                                Exit Select
-                            Case Is = False
-                                '' not there
-                                '' get file extenstion
-                                '' 
-                                Dim fileExt As String = SplitApartFileExt(sel_Item_right.Tag)
-                                My.Computer.FileSystem.RenameFile(sel_Item_right.Tag, new_name & "." & fileExt)
-                                '' now repop
-                                Dim cur_dir As String = Me.lsAttachedFiles.Tag
-                                If Len(cur_dir) <= 0 Then
-                                    cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                                ElseIf Len(cur_dir) >= 1 Then
-                                    cur_dir = cur_dir
-                                End If
-                                Dim af As New AF_And_JP_Logic(cur_dir)
-                                Me.lsAttachedFiles.Items.Clear()
-                                For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                    Dim lvItem As New ListViewItem
-                                    '' Name | Date Mod | Size | Type
-                                    lvItem.Text = x.FileName
-                                    lvItem.Tag = x.FullPath
-                                    lvItem.SubItems.Add(x.DateModified)
-                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                    Dim sz_str As String = sz.ToString & " KB"
-                                    lvItem.SubItems.Add(sz_str)
-                                    lvItem.SubItems.Add("File")
-
-                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                    If x.smThumb IsNot Nothing Then
-                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                    ElseIf x.smThumb Is Nothing Then
-                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+        Try
+            If sel_Item_right IsNot Nothing Then
+                Select Case sel_Item_right.SubItems(3).Text
+                    Case "File"
+                        ''
+                        '' 1) rename file
+                        ''    msdn: no =>  system.io.fileRename()             ?   https://msdn.microsoft.com/en-us/library/system.io.file%28v=vs.100%29.aspx
+                        ''          yes => my.computer.filesystem.RenameFile()    https://msdn.microsoft.com/en-us/library/5w05844e%28v=vs.120%29.aspx
+                        '' wtf.
+                        ''
+                        '' 2) repop control with renamed file(s)
+                        '' 3) set the selected items to nothing
+                        '' 4) exit 
+                        ''
+                        Dim new_name As String = InputBox("Please enter the NEW name of the file to be renamed.", "Rename File")
+                        If Len(new_name) >= 1 Then
+                            '' acceptable
+                            '' does it already exits ? 
+                            Select Case System.IO.File.Exists(new_name)
+                                Case Is = True
+                                    '' already there
+                                    sel_Item_left = Nothing
+                                    sel_Item_right = Nothing
+                                    Exit Select
+                                Case Is = False
+                                    '' not there
+                                    '' get file extenstion
+                                    '' 
+                                    Dim fileExt As String = SplitApartFileExt(sel_Item_right.Tag)
+                                    My.Computer.FileSystem.RenameFile(sel_Item_right.Tag, new_name & "." & fileExt)
+                                    '' now repop
+                                    Dim cur_dir As String = Me.lsAttachedFiles.Tag
+                                    If Len(cur_dir) <= 0 Then
+                                        cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                                    ElseIf Len(cur_dir) >= 1 Then
+                                        cur_dir = cur_dir
                                     End If
+                                    Dim af As New AF_And_JP_Logic(cur_dir)
+                                    Me.lsAttachedFiles.Items.Clear()
+                                    For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                        Dim lvItem As New ListViewItem
+                                        '' Name | Date Mod | Size | Type
+                                        lvItem.Text = x.FileName
+                                        lvItem.Tag = x.FullPath
+                                        lvItem.SubItems.Add(x.DateModified)
+                                        Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                        Dim sz_str As String = sz.ToString & " KB"
+                                        lvItem.SubItems.Add(sz_str)
+                                        lvItem.SubItems.Add("File")
 
-                                    If x.mdThumb IsNot Nothing Then
-                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                    ElseIf x.mdThumb Is Nothing Then
-                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                        Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                        If x.smThumb IsNot Nothing Then
+                                            Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                        ElseIf x.smThumb Is Nothing Then
+                                            Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                        End If
+
+                                        If x.mdThumb IsNot Nothing Then
+                                            Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                        ElseIf x.mdThumb Is Nothing Then
+                                            Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                        End If
+
+                                        If x.lgThumb IsNot Nothing Then
+                                            Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                        ElseIf x.lgThumb Is Nothing Then
+                                            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                        End If
+
+                                        If x.jbThumb IsNot Nothing Then
+                                            Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                        ElseIf x.jbThumb Is Nothing Then
+                                            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                        End If
+
+                                        If x.Tile IsNot Nothing Then
+                                            Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                        ElseIf x.Tile Is Nothing Then
+                                            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                        End If
+
+                                        lvItem.ImageKey = x.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+
+                                    Next
+
+                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                        Dim lvItem As New ListViewItem
+                                        lvItem.Text = y.FileName
+                                        lvItem.Tag = y.FullPath
+                                        lvItem.SubItems.Add(y.DateModified)
+                                        lvItem.SubItems.Add("")
+                                        lvItem.SubItems.Add("Folder")
+                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                        lvItem.ImageKey = y.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
+
+                                    sel_Item_left = Nothing
+                                    sel_Item_right = Nothing
+                                    Exit Select
+                                Case Else
+                                    '' dunno
+                                    sel_Item_left = Nothing
+                                    sel_Item_right = Nothing
+                                    Exit Select
+                            End Select
+
+                        ElseIf Len(new_name) <= 0 Then
+                            '' unacceptable
+                        End If
+
+                    Case "Folder"
+                        Dim new_name As String = InputBox("Please enter the NEW name of the Folder to be renamed.", "Rename Folder")
+                        If Len(new_name) >= 1 Then
+                            '' acceptable
+                            '' does it already exits ? 
+                            Select Case System.IO.Directory.Exists(new_name)
+                                Case Is = True
+                                    '' already there
+                                    sel_Item_left = Nothing
+                                    sel_Item_right = Nothing
+                                    Exit Select
+                                Case Is = False
+                                    '' not there
+                                    My.Computer.FileSystem.RenameDirectory(sel_Item_right.Tag, new_name)
+                                    '' now repop
+                                    Dim cur_dir As String = Me.lsAttachedFiles.Tag
+                                    If Len(cur_dir) <= 0 Then
+                                        cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                                    ElseIf Len(cur_dir) >= 1 Then
+                                        cur_dir = cur_dir
                                     End If
+                                    Dim af As New AF_And_JP_Logic(cur_dir)
+                                    Me.lsAttachedFiles.Items.Clear()
+                                    For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                        Dim lvItem As New ListViewItem
+                                        '' Name | Date Mod | Size | Type
+                                        lvItem.Text = x.FileName
+                                        lvItem.Tag = x.FullPath
+                                        lvItem.SubItems.Add(x.DateModified)
+                                        Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                        Dim sz_str As String = sz.ToString & " KB"
+                                        lvItem.SubItems.Add(sz_str)
+                                        lvItem.SubItems.Add("File")
+                                        Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                        If x.smThumb IsNot Nothing Then
+                                            Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                        ElseIf x.smThumb Is Nothing Then
+                                            Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                        End If
 
-                                    If x.lgThumb IsNot Nothing Then
-                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                    ElseIf x.lgThumb Is Nothing Then
-                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                    End If
+                                        If x.mdThumb IsNot Nothing Then
+                                            Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                        ElseIf x.mdThumb Is Nothing Then
+                                            Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                        End If
 
-                                    If x.jbThumb IsNot Nothing Then
-                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                    ElseIf x.jbThumb Is Nothing Then
-                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                    End If
+                                        If x.lgThumb IsNot Nothing Then
+                                            Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                        ElseIf x.lgThumb Is Nothing Then
+                                            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                        End If
 
-                                    If x.Tile IsNot Nothing Then
-                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                    ElseIf x.Tile Is Nothing Then
-                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                    End If
+                                        If x.jbThumb IsNot Nothing Then
+                                            Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                        ElseIf x.jbThumb Is Nothing Then
+                                            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                        End If
 
-                                    lvItem.ImageKey = x.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                        If x.Tile IsNot Nothing Then
+                                            Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                        ElseIf x.Tile Is Nothing Then
+                                            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                        End If
 
-                                Next
+                                        lvItem.ImageKey = x.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
 
-                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                    Dim lvItem As New ListViewItem
-                                    lvItem.Text = y.FileName
-                                    lvItem.Tag = y.FullPath
-                                    lvItem.SubItems.Add(y.DateModified)
-                                    lvItem.SubItems.Add("")
-                                    lvItem.SubItems.Add("Folder")
-                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                    lvItem.ImageKey = y.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
+                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                        Dim lvItem As New ListViewItem
+                                        lvItem.Text = y.FileName
+                                        lvItem.Tag = y.FullPath
+                                        lvItem.SubItems.Add(y.DateModified)
+                                        lvItem.SubItems.Add("")
+                                        lvItem.SubItems.Add("Folder")
+                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                        lvItem.ImageKey = y.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
 
-                                sel_Item_left = Nothing
-                                sel_Item_right = Nothing
-                                Exit Select
-                            Case Else
-                                '' dunno
-                                sel_Item_left = Nothing
-                                sel_Item_right = Nothing
-                                Exit Select
-                        End Select
+                                    sel_Item_left = Nothing
+                                    sel_Item_right = Nothing
+                                    Exit Select
+                                Case Else
+                                    '' dunno
+                                    sel_Item_left = Nothing
+                                    sel_Item_right = Nothing
+                                    Exit Select
+                            End Select
+                        End If
 
-                    ElseIf Len(new_name) <= 0 Then
-                        '' unacceptable
-                    End If
-
-                Case "Folder"
-                    Dim new_name As String = InputBox("Please enter the NEW name of the Folder to be renamed.", "Rename Folder")
-                    If Len(new_name) >= 1 Then
-                        '' acceptable
-                        '' does it already exits ? 
-                        Select Case System.IO.Directory.Exists(new_name)
-                            Case Is = True
-                                '' already there
-                                sel_Item_left = Nothing
-                                sel_Item_right = Nothing
-                                Exit Select
-                            Case Is = False
-                                '' not there
-                                My.Computer.FileSystem.RenameDirectory(sel_Item_right.Tag, new_name)
-                                '' now repop
-                                Dim cur_dir As String = Me.lsAttachedFiles.Tag
-                                If Len(cur_dir) <= 0 Then
-                                    cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                                ElseIf Len(cur_dir) >= 1 Then
-                                    cur_dir = cur_dir
-                                End If
-                                Dim af As New AF_And_JP_Logic(cur_dir)
-                                Me.lsAttachedFiles.Items.Clear()
-                                For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                    Dim lvItem As New ListViewItem
-                                    '' Name | Date Mod | Size | Type
-                                    lvItem.Text = x.FileName
-                                    lvItem.Tag = x.FullPath
-                                    lvItem.SubItems.Add(x.DateModified)
-                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                    Dim sz_str As String = sz.ToString & " KB"
-                                    lvItem.SubItems.Add(sz_str)
-                                    lvItem.SubItems.Add("File")
-                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                    If x.smThumb IsNot Nothing Then
-                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                    ElseIf x.smThumb Is Nothing Then
-                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                    End If
-
-                                    If x.mdThumb IsNot Nothing Then
-                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                    ElseIf x.mdThumb Is Nothing Then
-                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                    End If
-
-                                    If x.lgThumb IsNot Nothing Then
-                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                    ElseIf x.lgThumb Is Nothing Then
-                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                    End If
-
-                                    If x.jbThumb IsNot Nothing Then
-                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                    ElseIf x.jbThumb Is Nothing Then
-                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                    End If
-
-                                    If x.Tile IsNot Nothing Then
-                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                    ElseIf x.Tile Is Nothing Then
-                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                    End If
-
-                                    lvItem.ImageKey = x.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-
-                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                    Dim lvItem As New ListViewItem
-                                    lvItem.Text = y.FileName
-                                    lvItem.Tag = y.FullPath
-                                    lvItem.SubItems.Add(y.DateModified)
-                                    lvItem.SubItems.Add("")
-                                    lvItem.SubItems.Add("Folder")
-                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                    lvItem.ImageKey = y.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-
-                                sel_Item_left = Nothing
-                                sel_Item_right = Nothing
-                                Exit Select
-                            Case Else
-                                '' dunno
-                                sel_Item_left = Nothing
-                                sel_Item_right = Nothing
-                                Exit Select
-                        End Select
-                    End If
-
-                Case Else
-                    Exit Select
-            End Select
+                    Case Else
+                        Exit Select
+                End Select
 
 
-        ElseIf sel_Item_right Is Nothing Then
-            sel_Item_left = Nothing
-        End If
+            ElseIf sel_Item_right Is Nothing Then
+                sel_Item_left = Nothing
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnRename_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
     Private Sub btnRenameJP_Click(sender As Object, e As EventArgs) Handles btnRenameJP.Click
-        If sel_Item_Right_Jp IsNot Nothing Then
-            Select Case sel_Item_Right_Jp.SubItems(3).Text
-                Case "File"
-                    ''
-                    '' 1) rename file
-                    ''    msdn: no =>  system.io.fileRename()             ?   https://msdn.microsoft.com/en-us/library/system.io.file%28v=vs.100%29.aspx
-                    ''          yes => my.computer.filesystem.RenameFile()    https://msdn.microsoft.com/en-us/library/5w05844e%28v=vs.120%29.aspx
-                    '' wtf.
-                    ''
-                    '' 2) repop control with renamed file(s)
-                    '' 3) set the selected items to nothing
-                    '' 4) exit 
-                    ''
-                    Dim new_name As String = InputBox("Please enter the NEW name of the file to be renamed.", "Rename File")
-                    If Len(new_name) >= 1 Then
-                        '' acceptable
-                        '' does it already exits ? 
-                        Select Case System.IO.File.Exists(new_name)
-                            Case Is = True
-                                '' already there
-                                sel_Item_Left_Jp = Nothing
-                                sel_Item_Right_Jp = Nothing
-                                Exit Select
-                            Case Is = False
-                                '' not there
-                                '' get file extenstion
-                                '' 
-                                Dim fileExt As String = SplitApartFileExt(sel_Item_Right_Jp.Tag)
-                                My.Computer.FileSystem.RenameFile(sel_Item_Right_Jp.Tag, new_name & "." & fileExt)
-                                '' now repop
-                                Dim cur_dir As String = Me.lsJobPictures.Tag
-                                If Len(cur_dir) <= 0 Then
-                                    cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                                ElseIf Len(cur_dir) >= 1 Then
-                                    cur_dir = cur_dir
-                                End If
-                                Dim af As New AF_And_JP_Logic(cur_dir)
-                                Me.lsJobPictures.Items.Clear()
-                                For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                    Dim lvItem As New ListViewItem
-                                    '' Name | Date Mod | Size | Type
-                                    lvItem.Text = x.FileName
-                                    lvItem.Tag = x.FullPath
-                                    lvItem.SubItems.Add(x.DateModified)
-                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                    Dim sz_str As String = sz.ToString & " KB"
-                                    lvItem.SubItems.Add(sz_str)
-                                    lvItem.SubItems.Add("File")
-
-                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                    If x.smThumb IsNot Nothing Then
-                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                    ElseIf x.smThumb Is Nothing Then
-                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+        Try
+            If sel_Item_Right_Jp IsNot Nothing Then
+                Select Case sel_Item_Right_Jp.SubItems(3).Text
+                    Case "File"
+                        ''
+                        '' 1) rename file
+                        ''    msdn: no =>  system.io.fileRename()             ?   https://msdn.microsoft.com/en-us/library/system.io.file%28v=vs.100%29.aspx
+                        ''          yes => my.computer.filesystem.RenameFile()    https://msdn.microsoft.com/en-us/library/5w05844e%28v=vs.120%29.aspx
+                        '' wtf.
+                        ''
+                        '' 2) repop control with renamed file(s)
+                        '' 3) set the selected items to nothing
+                        '' 4) exit 
+                        ''
+                        Dim new_name As String = InputBox("Please enter the NEW name of the file to be renamed.", "Rename File")
+                        If Len(new_name) >= 1 Then
+                            '' acceptable
+                            '' does it already exits ? 
+                            Select Case System.IO.File.Exists(new_name)
+                                Case Is = True
+                                    '' already there
+                                    sel_Item_Left_Jp = Nothing
+                                    sel_Item_Right_Jp = Nothing
+                                    Exit Select
+                                Case Is = False
+                                    '' not there
+                                    '' get file extenstion
+                                    '' 
+                                    Dim fileExt As String = SplitApartFileExt(sel_Item_Right_Jp.Tag)
+                                    My.Computer.FileSystem.RenameFile(sel_Item_Right_Jp.Tag, new_name & "." & fileExt)
+                                    '' now repop
+                                    Dim cur_dir As String = Me.lsJobPictures.Tag
+                                    If Len(cur_dir) <= 0 Then
+                                        cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                    ElseIf Len(cur_dir) >= 1 Then
+                                        cur_dir = cur_dir
                                     End If
+                                    Dim af As New AF_And_JP_Logic(cur_dir)
+                                    Me.lsJobPictures.Items.Clear()
+                                    For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                        Dim lvItem As New ListViewItem
+                                        '' Name | Date Mod | Size | Type
+                                        lvItem.Text = x.FileName
+                                        lvItem.Tag = x.FullPath
+                                        lvItem.SubItems.Add(x.DateModified)
+                                        Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                        Dim sz_str As String = sz.ToString & " KB"
+                                        lvItem.SubItems.Add(sz_str)
+                                        lvItem.SubItems.Add("File")
 
-                                    If x.mdThumb IsNot Nothing Then
-                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                    ElseIf x.mdThumb Is Nothing Then
-                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                        Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                        If x.smThumb IsNot Nothing Then
+                                            Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                        ElseIf x.smThumb Is Nothing Then
+                                            Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                        End If
+
+                                        If x.mdThumb IsNot Nothing Then
+                                            Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                        ElseIf x.mdThumb Is Nothing Then
+                                            Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                        End If
+
+                                        If x.lgThumb IsNot Nothing Then
+                                            Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                        ElseIf x.lgThumb Is Nothing Then
+                                            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                        End If
+
+                                        If x.jbThumb IsNot Nothing Then
+                                            Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                        ElseIf x.jbThumb Is Nothing Then
+                                            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                        End If
+
+                                        If x.Tile IsNot Nothing Then
+                                            Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                        ElseIf x.Tile Is Nothing Then
+                                            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                        End If
+
+                                        lvItem.ImageKey = x.FileName
+                                        Me.lsJobPictures.Items.Add(lvItem)
+
+                                    Next
+
+                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                        Dim lvItem As New ListViewItem
+                                        lvItem.Text = y.FileName
+                                        lvItem.Tag = y.FullPath
+                                        lvItem.SubItems.Add(y.DateModified)
+                                        lvItem.SubItems.Add("")
+                                        lvItem.SubItems.Add("Folder")
+                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                        lvItem.ImageKey = y.FileName
+                                        Me.lsJobPictures.Items.Add(lvItem)
+                                    Next
+
+                                    sel_Item_Left_Jp = Nothing
+                                    sel_Item_Right_Jp = Nothing
+                                    Exit Select
+                                Case Else
+                                    '' dunno
+                                    sel_Item_Left_Jp = Nothing
+                                    sel_Item_Right_Jp = Nothing
+                                    Exit Select
+                            End Select
+
+                        ElseIf Len(new_name) <= 0 Then
+                            '' unacceptable
+                        End If
+
+                    Case "Folder"
+                        Dim new_name As String = InputBox("Please enter the NEW name of the Folder to be renamed.", "Rename Folder")
+                        If Len(new_name) >= 1 Then
+                            '' acceptable
+                            '' does it already exits ? 
+                            Select Case System.IO.Directory.Exists(new_name)
+                                Case Is = True
+                                    '' already there
+                                    sel_Item_Left_Jp = Nothing
+                                    sel_Item_Right_Jp = Nothing
+                                    Exit Select
+                                Case Is = False
+                                    '' not there
+                                    My.Computer.FileSystem.RenameDirectory(sel_Item_Right_Jp.Tag, new_name)
+                                    '' now repop
+                                    Dim cur_dir As String = Me.lsJobPictures.Tag
+                                    If Len(cur_dir) <= 0 Then
+                                        cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                    ElseIf Len(cur_dir) >= 1 Then
+                                        cur_dir = cur_dir
                                     End If
+                                    Dim af As New AF_And_JP_Logic(cur_dir)
+                                    Me.lsJobPictures.Items.Clear()
+                                    For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                        Dim lvItem As New ListViewItem
+                                        '' Name | Date Mod | Size | Type
+                                        lvItem.Text = x.FileName
+                                        lvItem.Tag = x.FullPath
+                                        lvItem.SubItems.Add(x.DateModified)
+                                        Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                        Dim sz_str As String = sz.ToString & " KB"
+                                        lvItem.SubItems.Add(sz_str)
+                                        lvItem.SubItems.Add("File")
+                                        Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                        If x.smThumb IsNot Nothing Then
+                                            Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                        ElseIf x.smThumb Is Nothing Then
+                                            Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                        End If
 
-                                    If x.lgThumb IsNot Nothing Then
-                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                    ElseIf x.lgThumb Is Nothing Then
-                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                    End If
+                                        If x.mdThumb IsNot Nothing Then
+                                            Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                        ElseIf x.mdThumb Is Nothing Then
+                                            Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                        End If
 
-                                    If x.jbThumb IsNot Nothing Then
-                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                    ElseIf x.jbThumb Is Nothing Then
-                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                    End If
+                                        If x.lgThumb IsNot Nothing Then
+                                            Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                        ElseIf x.lgThumb Is Nothing Then
+                                            Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                        End If
 
-                                    If x.Tile IsNot Nothing Then
-                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                    ElseIf x.Tile Is Nothing Then
-                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                    End If
+                                        If x.jbThumb IsNot Nothing Then
+                                            Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                        ElseIf x.jbThumb Is Nothing Then
+                                            Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                        End If
 
-                                    lvItem.ImageKey = x.FileName
-                                    Me.lsJobPictures.Items.Add(lvItem)
+                                        If x.Tile IsNot Nothing Then
+                                            Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                        ElseIf x.Tile Is Nothing Then
+                                            Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                        End If
 
-                                Next
+                                        lvItem.ImageKey = x.FileName
+                                        Me.lsJobPictures.Items.Add(lvItem)
+                                    Next
 
-                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                    Dim lvItem As New ListViewItem
-                                    lvItem.Text = y.FileName
-                                    lvItem.Tag = y.FullPath
-                                    lvItem.SubItems.Add(y.DateModified)
-                                    lvItem.SubItems.Add("")
-                                    lvItem.SubItems.Add("Folder")
-                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                    lvItem.ImageKey = y.FileName
-                                    Me.lsJobPictures.Items.Add(lvItem)
-                                Next
+                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                        Dim lvItem As New ListViewItem
+                                        lvItem.Text = y.FileName
+                                        lvItem.Tag = y.FullPath
+                                        lvItem.SubItems.Add(y.DateModified)
+                                        lvItem.SubItems.Add("")
+                                        lvItem.SubItems.Add("Folder")
+                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                        lvItem.ImageKey = y.FileName
+                                        Me.lsJobPictures.Items.Add(lvItem)
+                                    Next
 
-                                sel_Item_Left_Jp = Nothing
-                                sel_Item_Right_Jp = Nothing
-                                Exit Select
-                            Case Else
-                                '' dunno
-                                sel_Item_Left_Jp = Nothing
-                                sel_Item_Right_Jp = Nothing
-                                Exit Select
-                        End Select
+                                    sel_Item_Left_Jp = Nothing
+                                    sel_Item_Right_Jp = Nothing
+                                    Exit Select
+                                Case Else
+                                    '' dunno
+                                    sel_Item_Left_Jp = Nothing
+                                    sel_Item_Right_Jp = Nothing
+                                    Exit Select
+                            End Select
+                        End If
 
-                    ElseIf Len(new_name) <= 0 Then
-                        '' unacceptable
-                    End If
-
-                Case "Folder"
-                    Dim new_name As String = InputBox("Please enter the NEW name of the Folder to be renamed.", "Rename Folder")
-                    If Len(new_name) >= 1 Then
-                        '' acceptable
-                        '' does it already exits ? 
-                        Select Case System.IO.Directory.Exists(new_name)
-                            Case Is = True
-                                '' already there
-                                sel_Item_Left_Jp = Nothing
-                                sel_Item_Right_Jp = Nothing
-                                Exit Select
-                            Case Is = False
-                                '' not there
-                                My.Computer.FileSystem.RenameDirectory(sel_Item_Right_Jp.Tag, new_name)
-                                '' now repop
-                                Dim cur_dir As String = Me.lsJobPictures.Tag
-                                If Len(cur_dir) <= 0 Then
-                                    cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                                ElseIf Len(cur_dir) >= 1 Then
-                                    cur_dir = cur_dir
-                                End If
-                                Dim af As New AF_And_JP_Logic(cur_dir)
-                                Me.lsJobPictures.Items.Clear()
-                                For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                    Dim lvItem As New ListViewItem
-                                    '' Name | Date Mod | Size | Type
-                                    lvItem.Text = x.FileName
-                                    lvItem.Tag = x.FullPath
-                                    lvItem.SubItems.Add(x.DateModified)
-                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                    Dim sz_str As String = sz.ToString & " KB"
-                                    lvItem.SubItems.Add(sz_str)
-                                    lvItem.SubItems.Add("File")
-                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                    If x.smThumb IsNot Nothing Then
-                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                    ElseIf x.smThumb Is Nothing Then
-                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                    End If
-
-                                    If x.mdThumb IsNot Nothing Then
-                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                    ElseIf x.mdThumb Is Nothing Then
-                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                    End If
-
-                                    If x.lgThumb IsNot Nothing Then
-                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                    ElseIf x.lgThumb Is Nothing Then
-                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                    End If
-
-                                    If x.jbThumb IsNot Nothing Then
-                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                    ElseIf x.jbThumb Is Nothing Then
-                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                    End If
-
-                                    If x.Tile IsNot Nothing Then
-                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                    ElseIf x.Tile Is Nothing Then
-                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                    End If
-
-                                    lvItem.ImageKey = x.FileName
-                                    Me.lsJobPictures.Items.Add(lvItem)
-                                Next
-
-                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                    Dim lvItem As New ListViewItem
-                                    lvItem.Text = y.FileName
-                                    lvItem.Tag = y.FullPath
-                                    lvItem.SubItems.Add(y.DateModified)
-                                    lvItem.SubItems.Add("")
-                                    lvItem.SubItems.Add("Folder")
-                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                    lvItem.ImageKey = y.FileName
-                                    Me.lsJobPictures.Items.Add(lvItem)
-                                Next
-
-                                sel_Item_Left_Jp = Nothing
-                                sel_Item_Right_Jp = Nothing
-                                Exit Select
-                            Case Else
-                                '' dunno
-                                sel_Item_Left_Jp = Nothing
-                                sel_Item_Right_Jp = Nothing
-                                Exit Select
-                        End Select
-                    End If
-
-                Case Else
-                    Exit Select
-            End Select
+                    Case Else
+                        Exit Select
+                End Select
 
 
-        ElseIf sel_Item_Right_Jp Is Nothing Then
-            sel_Item_Left_Jp = Nothing
-        End If
+            ElseIf sel_Item_Right_Jp Is Nothing Then
+                sel_Item_Left_Jp = Nothing
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnRenameJP_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 #End Region
@@ -3892,29 +4178,57 @@ Public Class Sales
 
 #Region "List View Sorts - LS and JP"
     Private Sub btnAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAscending.Click
-        Dim y As New ListSortAscending
-        Me.lsAttachedFiles.ListViewItemSorter = y
-        Me.btnAscending.Checked = True
-        Me.btnDescending.Checked = False
+        Try
+            Dim y As New ListSortAscending
+            Me.lsAttachedFiles.ListViewItemSorter = y
+            Me.btnAscending.Checked = True
+            Me.btnDescending.Checked = False
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnAscending_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub btnAscendingJP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAscendingJP.Click
-        Dim y As New ListSortAscending
-        Me.lsJobPictures.ListViewItemSorter = y
-        Me.btnAscendingJP.Checked = True
-        Me.btnDescJP.Checked = False
+        Try
+            Dim y As New ListSortAscending
+            Me.lsJobPictures.ListViewItemSorter = y
+            Me.btnAscendingJP.Checked = True
+            Me.btnDescJP.Checked = False
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnAscendingJP_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnDesc_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDescending.Click
-        Dim z As New ListSortDescending
-        Me.lsAttachedFiles.ListViewItemSorter = z
-        Me.btnAscending.Checked = False
-        Me.btnDescending.Checked = True
+        Try
+            Dim z As New ListSortDescending
+            Me.lsAttachedFiles.ListViewItemSorter = z
+            Me.btnAscending.Checked = False
+            Me.btnDescending.Checked = True
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnDesc_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub btnDescending_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDescJP.Click
-        Dim z As New ListSortDescending
-        Me.lsJobPictures.ListViewItemSorter = z
-        Me.btnAscendingJP.Checked = False
-        Me.btnDescJP.Checked = True
+        Try
+            Dim z As New ListSortDescending
+            Me.lsJobPictures.ListViewItemSorter = z
+            Me.btnAscendingJP.Checked = False
+            Me.btnDescJP.Checked = True
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnDescending_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 #End Region
 
@@ -4034,210 +4348,221 @@ Public Class Sales
 
 #Region "Context Menu New Folder - LS and JP"
     Private Sub btnNewFolder_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolder.Click
-
-        Dim cur_Dir As String = Me.lsAttachedFiles.Tag
-        If Len(cur_Dir) <= 0 Then
-            cur_Dir = (af_dir & STATIC_VARIABLES.CurrentID)
-        ElseIf Len(cur_Dir) >= 1 Then
-            cur_Dir = cur_Dir
-        End If
-
-        '' LEGACY CODE FROM DYNAMIC Control
-        '' 
-        Dim iteration As Integer = 0
-        'lsCollection.Clear()
-        Dim dir_ As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
-        Dim cnt = dir_.GetDirectories("New fo*", IO.SearchOption.AllDirectories)
-
-        Dim xyz As System.IO.DirectoryInfo
-        For Each xyz In cnt
-            iteration += 1
-        Next
-
-        Dim next1 As Integer = (iteration + 1)
-        If next1 <= 1 Then
-            System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder")
-        ElseIf next1 > 1 Then
-            System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder (" & next1.ToString & ")")
-        End If
-
-        Dim dir_2 As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
-
-        Dim af As New AF_And_JP_Logic(cur_Dir)
-        Me.lsAttachedFiles.Items.Clear()
-        For Each x As AF_And_JP_Logic.FileObject In af.Files
-            Dim lvItem As New ListViewItem
-            '' Name | Date Mod | Size | Type
-            lvItem.Text = x.FileName
-            lvItem.Tag = x.FullPath
-            lvItem.SubItems.Add(x.DateModified)
-            Dim sz = Math.Round(x.FileSize / 1024, 0)
-            Dim sz_str As String = sz.ToString & " KB"
-            lvItem.SubItems.Add(sz_str)
-            lvItem.SubItems.Add("File")
-            Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-            If x.smThumb IsNot Nothing Then
-                Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-            ElseIf x.smThumb Is Nothing Then
-                Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+        Try
+            Dim cur_Dir As String = Me.lsAttachedFiles.Tag
+            If Len(cur_Dir) <= 0 Then
+                cur_Dir = (af_dir & STATIC_VARIABLES.CurrentID)
+            ElseIf Len(cur_Dir) >= 1 Then
+                cur_Dir = cur_Dir
             End If
 
-            If x.mdThumb IsNot Nothing Then
-                Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-            ElseIf x.mdThumb Is Nothing Then
-                Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+            '' LEGACY CODE FROM DYNAMIC Control
+            '' 
+            Dim iteration As Integer = 0
+            'lsCollection.Clear()
+            Dim dir_ As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
+            Dim cnt = dir_.GetDirectories("New fo*", IO.SearchOption.AllDirectories)
+
+            Dim xyz As System.IO.DirectoryInfo
+            For Each xyz In cnt
+                iteration += 1
+            Next
+
+            Dim next1 As Integer = (iteration + 1)
+            If next1 <= 1 Then
+                System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder")
+            ElseIf next1 > 1 Then
+                System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder (" & next1.ToString & ")")
             End If
 
-            If x.lgThumb IsNot Nothing Then
-                Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-            ElseIf x.lgThumb Is Nothing Then
-                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+            Dim dir_2 As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
+
+            Dim af As New AF_And_JP_Logic(cur_Dir)
+            Me.lsAttachedFiles.Items.Clear()
+            For Each x As AF_And_JP_Logic.FileObject In af.Files
+                Dim lvItem As New ListViewItem
+                '' Name | Date Mod | Size | Type
+                lvItem.Text = x.FileName
+                lvItem.Tag = x.FullPath
+                lvItem.SubItems.Add(x.DateModified)
+                Dim sz = Math.Round(x.FileSize / 1024, 0)
+                Dim sz_str As String = sz.ToString & " KB"
+                lvItem.SubItems.Add(sz_str)
+                lvItem.SubItems.Add("File")
+                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                If x.smThumb IsNot Nothing Then
+                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                ElseIf x.smThumb Is Nothing Then
+                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                End If
+
+                If x.mdThumb IsNot Nothing Then
+                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                ElseIf x.mdThumb Is Nothing Then
+                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                End If
+
+                If x.lgThumb IsNot Nothing Then
+                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                ElseIf x.lgThumb Is Nothing Then
+                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                End If
+
+                If x.jbThumb IsNot Nothing Then
+                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                ElseIf x.jbThumb Is Nothing Then
+                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                End If
+
+                If x.Tile IsNot Nothing Then
+                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                ElseIf x.Tile Is Nothing Then
+                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                End If
+
+                lvItem.ImageKey = x.FileName
+                Me.lsAttachedFiles.Items.Add(lvItem)
+            Next
+
+            For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                Dim lvItem As New ListViewItem
+                lvItem.Text = y.FileName
+                lvItem.Tag = y.FullPath
+                lvItem.SubItems.Add(y.DateModified)
+                lvItem.SubItems.Add("")
+                lvItem.SubItems.Add("Folder")
+                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                lvItem.ImageKey = y.FileName
+                Me.lsAttachedFiles.Items.Add(lvItem)
+            Next
+
+            sel_Item_left = Nothing
+            sel_Item_right = Nothing
+
+            Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID)
+            If rootDir_Lead = af_dir & STATIC_VARIABLES.CurrentID Then
+                Me.tsAttachedFilesNAV.Enabled = False
+            ElseIf rootDir_Lead <> af_dir & STATIC_VARIABLES.CurrentID Then
+                Me.tsAttachedFilesNAV.Enabled = True
             End If
-
-            If x.jbThumb IsNot Nothing Then
-                Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-            ElseIf x.jbThumb Is Nothing Then
-                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-            End If
-
-            If x.Tile IsNot Nothing Then
-                Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-            ElseIf x.Tile Is Nothing Then
-                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-            End If
-
-            lvItem.ImageKey = x.FileName
-            Me.lsAttachedFiles.Items.Add(lvItem)
-        Next
-
-        For Each y As AF_And_JP_Logic.DirObject In af.Directories
-            Dim lvItem As New ListViewItem
-            lvItem.Text = y.FileName
-            lvItem.Tag = y.FullPath
-            lvItem.SubItems.Add(y.DateModified)
-            lvItem.SubItems.Add("")
-            lvItem.SubItems.Add("Folder")
-            Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-            Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-            Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-            Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-            Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-            lvItem.ImageKey = y.FileName
-            Me.lsAttachedFiles.Items.Add(lvItem)
-        Next
-
-        sel_Item_left = Nothing
-        sel_Item_right = Nothing
-
-        Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID)
-        If rootDir_Lead = af_dir & STATIC_VARIABLES.CurrentID Then
-            Me.tsAttachedFilesNAV.Enabled = False
-        ElseIf rootDir_Lead <> af_dir & STATIC_VARIABLES.CurrentID Then
-            Me.tsAttachedFilesNAV.Enabled = True
-        End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnNewFolder_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
     Private Sub btnNewFolderJP_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolderJP.Click
-        Dim cur_Dir As String = Me.lsJobPictures.Tag
-        If Len(cur_Dir) <= 0 Then
-            cur_Dir = (jp_dir & STATIC_VARIABLES.CurrentID)
-        ElseIf Len(cur_Dir) >= 1 Then
-            cur_Dir = cur_Dir
-        End If
-
-        '' LEGACY CODE FROM DYNAMIC Control
-        '' 
-        Dim iteration As Integer = 0
-        'lsCollection.Clear()
-        Dim dir_ As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
-        Dim cnt = dir_.GetDirectories("New fo*", IO.SearchOption.AllDirectories)
-
-        Dim xyz As System.IO.DirectoryInfo
-        For Each xyz In cnt
-            iteration += 1
-        Next
-
-        Dim next1 As Integer = (iteration + 1)
-        If next1 <= 1 Then
-            System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder")
-        ElseIf next1 > 1 Then
-            System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder (" & next1.ToString & ")")
-        End If
-
-        Dim dir_2 As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
-
-        Dim af As New AF_And_JP_Logic(cur_Dir)
-        Me.lsJobPictures.Items.Clear()
-        For Each x As AF_And_JP_Logic.FileObject In af.Files
-            Dim lvItem As New ListViewItem
-            '' Name | Date Mod | Size | Type
-            lvItem.Text = x.FileName
-            lvItem.Tag = x.FullPath
-            lvItem.SubItems.Add(x.DateModified)
-            Dim sz = Math.Round(x.FileSize / 1024, 0)
-            Dim sz_str As String = sz.ToString & " KB"
-            lvItem.SubItems.Add(sz_str)
-            lvItem.SubItems.Add("File")
-            Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-            If x.smThumb IsNot Nothing Then
-                Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-            ElseIf x.smThumb Is Nothing Then
-                Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+        Try
+            Dim cur_Dir As String = Me.lsJobPictures.Tag
+            If Len(cur_Dir) <= 0 Then
+                cur_Dir = (jp_dir & STATIC_VARIABLES.CurrentID)
+            ElseIf Len(cur_Dir) >= 1 Then
+                cur_Dir = cur_Dir
             End If
 
-            If x.mdThumb IsNot Nothing Then
-                Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-            ElseIf x.mdThumb Is Nothing Then
-                Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+            '' LEGACY CODE FROM DYNAMIC Control
+            '' 
+            Dim iteration As Integer = 0
+            'lsCollection.Clear()
+            Dim dir_ As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
+            Dim cnt = dir_.GetDirectories("New fo*", IO.SearchOption.AllDirectories)
+
+            Dim xyz As System.IO.DirectoryInfo
+            For Each xyz In cnt
+                iteration += 1
+            Next
+
+            Dim next1 As Integer = (iteration + 1)
+            If next1 <= 1 Then
+                System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder")
+            ElseIf next1 > 1 Then
+                System.IO.Directory.CreateDirectory(cur_Dir & "\" & "New folder (" & next1.ToString & ")")
             End If
 
-            If x.lgThumb IsNot Nothing Then
-                Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-            ElseIf x.lgThumb Is Nothing Then
-                Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-            End If
+            Dim dir_2 As System.IO.DirectoryInfo = New System.IO.DirectoryInfo(cur_Dir)
 
-            If x.jbThumb IsNot Nothing Then
-                Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-            ElseIf x.jbThumb Is Nothing Then
-                Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-            End If
+            Dim af As New AF_And_JP_Logic(cur_Dir)
+            Me.lsJobPictures.Items.Clear()
+            For Each x As AF_And_JP_Logic.FileObject In af.Files
+                Dim lvItem As New ListViewItem
+                '' Name | Date Mod | Size | Type
+                lvItem.Text = x.FileName
+                lvItem.Tag = x.FullPath
+                lvItem.SubItems.Add(x.DateModified)
+                Dim sz = Math.Round(x.FileSize / 1024, 0)
+                Dim sz_str As String = sz.ToString & " KB"
+                lvItem.SubItems.Add(sz_str)
+                lvItem.SubItems.Add("File")
+                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                If x.smThumb IsNot Nothing Then
+                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                ElseIf x.smThumb Is Nothing Then
+                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                End If
 
-            If x.Tile IsNot Nothing Then
-                Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-            ElseIf x.Tile Is Nothing Then
-                Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-            End If
+                If x.mdThumb IsNot Nothing Then
+                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                ElseIf x.mdThumb Is Nothing Then
+                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                End If
 
-            lvItem.ImageKey = x.FileName
-            Me.lsJobPictures.Items.Add(lvItem)
-        Next
+                If x.lgThumb IsNot Nothing Then
+                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                ElseIf x.lgThumb Is Nothing Then
+                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                End If
 
-        For Each y As AF_And_JP_Logic.DirObject In af.Directories
-            Dim lvItem As New ListViewItem
-            lvItem.Text = y.FileName
-            lvItem.Tag = y.FullPath
-            lvItem.SubItems.Add(y.DateModified)
-            lvItem.SubItems.Add("")
-            lvItem.SubItems.Add("Folder")
-            Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-            Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-            Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-            Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-            Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-            lvItem.ImageKey = y.FileName
-            Me.lsJobPictures.Items.Add(lvItem)
-        Next
+                If x.jbThumb IsNot Nothing Then
+                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                ElseIf x.jbThumb Is Nothing Then
+                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                End If
 
-        sel_Item_Left_Jp = Nothing
-        sel_Item_Right_Jp = Nothing
+                If x.Tile IsNot Nothing Then
+                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                ElseIf x.Tile Is Nothing Then
+                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                End If
 
-        'Dim rootDir_Lead As String = (jp_dir & STATIC_VARIABLES.CurrentID)
-        'If rootDir_Lead = jp_dir & STATIC_VARIABLES.CurrentID Then
-        '    Me.tsAttachedFilesNAV.Enabled = False
-        'ElseIf rootDir_Lead <> jp_dir & STATIC_VARIABLES.CurrentID Then
-        '    Me.tsAttachedFilesNAV.Enabled = True
-        'End If
+                lvItem.ImageKey = x.FileName
+                Me.lsJobPictures.Items.Add(lvItem)
+            Next
+
+            For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                Dim lvItem As New ListViewItem
+                lvItem.Text = y.FileName
+                lvItem.Tag = y.FullPath
+                lvItem.SubItems.Add(y.DateModified)
+                lvItem.SubItems.Add("")
+                lvItem.SubItems.Add("Folder")
+                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                lvItem.ImageKey = y.FileName
+                Me.lsJobPictures.Items.Add(lvItem)
+            Next
+
+            sel_Item_Left_Jp = Nothing
+            sel_Item_Right_Jp = Nothing
+
+            'Dim rootDir_Lead As String = (jp_dir & STATIC_VARIABLES.CurrentID)
+            'If rootDir_Lead = jp_dir & STATIC_VARIABLES.CurrentID Then
+            '    Me.tsAttachedFilesNAV.Enabled = False
+            'ElseIf rootDir_Lead <> jp_dir & STATIC_VARIABLES.CurrentID Then
+            '    Me.tsAttachedFilesNAV.Enabled = True
+            'End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnNewFolderJP_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 #End Region
@@ -4248,7 +4573,13 @@ Public Class Sales
 
     Private Sub dtpIssueLeads_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpIssueLeads.ValueChanged
         If Me.LoadComplete = True Then
-            Dim x As New Issue_Leads(True, "")
+            Try
+                Dim x As New Issue_Leads(True, "")
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "dtpIssueLeads_ValueChanged()", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
         End If
 
     End Sub
@@ -4268,17 +4599,23 @@ Public Class Sales
     End Sub
 
     Private Sub pnlIssue_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlIssue.SizeChanged
-        If LoadComplete = True Then
-            If Me.panelsize < Me.pnlIssue.Width Then
-                Dim x As New Issue_Leads(False, "grow")
-            Else
-                Dim x As New Issue_Leads(False, "shrink")
+        Try
+            If LoadComplete = True Then
+                If Me.panelsize < Me.pnlIssue.Width Then
+                    Dim x As New Issue_Leads(False, "grow")
+                Else
+                    Dim x As New Issue_Leads(False, "shrink")
+                End If
+
+
+                Me.panelsize = Me.pnlIssue.Width
+
             End If
-
-
-            Me.panelsize = Me.pnlIssue.Width
-
-        End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "pnlIssue_sizechanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -4463,6 +4800,9 @@ Public Class Sales
                 Next
             Catch ex As Exception
                 ' MsgBox("Fail If True")
+                Dim yy As New ErrorLogging_V2
+                yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "pnlPerformanceReport_SizeChanged", "0", ex.Message.ToString)
+                yy = Nothing
             End Try
 
         Else
@@ -4609,6 +4949,9 @@ Public Class Sales
 
             Catch ex As Exception
                 ' MsgBox("Fail Else")
+                Dim yy As New ErrorLogging_V2
+                yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "pnlPerformanceReport_SizeChanged", "0", ex.Message.ToString)
+                yy = Nothing
             End Try
         End If
 
@@ -4658,83 +5001,89 @@ Public Class Sales
         '' if the button text is 'this' do this
         '' elseif the button text is 'that' do that
         '' 
+        Try
+            Dim myBtn As ToolStripButton = sender
+            Dim buttonText As String = myBtn.Text
+            Dim cnt As Integer = 0
+            If buttonText = "Undo Called and Cancelled" Then
 
-        Dim myBtn As ToolStripButton = sender
-        Dim buttonText As String = myBtn.Text
-        Dim cnt As Integer = 0
-        If buttonText = "Undo Called and Cancelled" Then
+                '' get the lead number
+                Dim leadNum As String = ""
+                Dim y As Panel
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.FixedSingle Then
+                        cnt += 1
+                        Dim t As Control
+                        For Each t In y.Controls
+                            If TypeOf t Is LinkLabel Then
+                                leadNum = t.Text
 
-            '' get the lead number
-            Dim leadNum As String = ""
-            Dim y As Panel
-            For Each y In pnlIssue.Controls
-                If y.BorderStyle = BorderStyle.FixedSingle Then
-                    cnt += 1
-                    Dim t As Control
-                    For Each t In y.Controls
-                        If TypeOf t Is LinkLabel Then
-                            leadNum = t.Text
-
-                        End If
-                    Next
-                End If
-            Next
-
-            If cnt <= 0 Then
-                MsgBox("You must select a record to ' Undo Called and Cancelled ' . ", MsgBoxStyle.Critical, "Select a record")
-                Exit Sub
-            ElseIf cnt >= 1 Then
-                ' MsgBox("LeadNumber : " & leadNum, MsgBoxStyle.Information, "DEBUG INFO")
-                Dim b As New ToggleUndoCandC
-                Dim rec_ID As String = b.Get_ID_OF_CandC(leadNum)
-                b.Delete_CandC(rec_ID, leadNum, Date.Now.ToString)
-                Dim c = New Issue_Leads(True, "")
-            End If
-
-
-
-        ElseIf buttonText = "Log Appt. as Called and Cancelled" Then
-
-            Dim lead As String = ""
-            For t As Integer = 0 To Me.pnlIssue.Controls.Count - 1
-                If Me.pnlIssue.Controls.Item(t).Name.Contains("pnl") Then
-                    Dim z As Panel = Me.pnlIssue.Controls.Item(t)
-                    If z.BorderStyle = BorderStyle.FixedSingle Then
-                        lead = z.Controls.Item(2).Text
+                            End If
+                        Next
                     End If
+                Next
+
+                If cnt <= 0 Then
+                    MsgBox("You must select a record to ' Undo Called and Cancelled ' . ", MsgBoxStyle.Critical, "Select a record")
+                    Exit Sub
+                ElseIf cnt >= 1 Then
+                    ' MsgBox("LeadNumber : " & leadNum, MsgBoxStyle.Information, "DEBUG INFO")
+                    Dim b As New ToggleUndoCandC
+                    Dim rec_ID As String = b.Get_ID_OF_CandC(leadNum)
+                    b.Delete_CandC(rec_ID, leadNum, Date.Now.ToString)
+                    Dim c = New Issue_Leads(True, "")
                 End If
-            Next
-            If lead = "" Then
-                MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-                Exit Sub
+
+
+
+            ElseIf buttonText = "Log Appt. as Called and Cancelled" Then
+
+                Dim lead As String = ""
+                For t As Integer = 0 To Me.pnlIssue.Controls.Count - 1
+                    If Me.pnlIssue.Controls.Item(t).Name.Contains("pnl") Then
+                        Dim z As Panel = Me.pnlIssue.Controls.Item(t)
+                        If z.BorderStyle = BorderStyle.FixedSingle Then
+                            lead = z.Controls.Item(2).Text
+                        End If
+                    End If
+                Next
+                If lead = "" Then
+                    MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
+                    Exit Sub
+                End If
+                'Me.cboSalesList.SelectedItem = "Issue Leads List"
+                'For x As Integer = 0 To Me.lvSales.Items.Count - 1
+                '    If Me.lvSales.Items(x).Text = lead Then
+                '        Me.lvSales.Items(x).Selected = True
+                '        If Me.lvSales.Items(x).Selected = True Then
+                '            Me.PullInfo(lead)
+                '        End If
+                '    End If
+                'Next
+                Me.PullInfo(lead)
+
+                Dim s = Split(Me.txtContact1.Text, " ")
+                Dim c1 = s(0)
+                Dim s2 = Split(Me.txtContact2.Text, " ")
+                Dim c2 = s2(0)
+                CandCNotes.ID = lead
+                CandCNotes.Contact1 = c1
+                CandCNotes.Contact2 = c2
+                CandCNotes.OrigApptDate = Me.txtApptDate.Text
+                CandCNotes.OrigApptTime = Me.txtApptTime.Text
+                CandCNotes.frm = Me
+
+
+                CandCNotes.ShowInTaskbar = False
+                CandCNotes.ShowDialog()
+
             End If
-            'Me.cboSalesList.SelectedItem = "Issue Leads List"
-            'For x As Integer = 0 To Me.lvSales.Items.Count - 1
-            '    If Me.lvSales.Items(x).Text = lead Then
-            '        Me.lvSales.Items(x).Selected = True
-            '        If Me.lvSales.Items(x).Selected = True Then
-            '            Me.PullInfo(lead)
-            '        End If
-            '    End If
-            'Next
-            Me.PullInfo(lead)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnCCIssue_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-            Dim s = Split(Me.txtContact1.Text, " ")
-            Dim c1 = s(0)
-            Dim s2 = Split(Me.txtContact2.Text, " ")
-            Dim c2 = s2(0)
-            CandCNotes.ID = lead
-            CandCNotes.Contact1 = c1
-            CandCNotes.Contact2 = c2
-            CandCNotes.OrigApptDate = Me.txtApptDate.Text
-            CandCNotes.OrigApptTime = Me.txtApptTime.Text
-            CandCNotes.frm = Me
-
-
-            CandCNotes.ShowInTaskbar = False
-            CandCNotes.ShowDialog()
-
-        End If
     End Sub
 
     Private Sub PrintThisLeadToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PrintThisLeadToolStripMenuItem.Click
@@ -4760,149 +5109,155 @@ Public Class Sales
 
     Private Sub Sales_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
         'Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
-        If Me.lvSales.SelectedItems.Count <> 0 Then
-            'Dim c As New CustomerHistory
-            'c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
-            bgCustomerHistory_DoWork(Nothing, Nothing)
-        End If
-        Dim x As New ScheduledActions
-        ' x.SetUp("Sales")
-        'Me.SplitContainer1.SplitterDistance = 2500
-        Me.SplitContainer1.SplitterDistance = 218
-        Me.SplitContainer1.SplitterWidth = 1
-        Me.btnExpandSalesList.Text = Chr(187)
-        Me.btnExpandMemorize.Text = Chr(187)
+        Try
+            If Me.lvSales.SelectedItems.Count <> 0 Then
+                'Dim c As New CustomerHistory
+                'c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                bgCustomerHistory_DoWork(Nothing, Nothing)
+            End If
+            Dim x As New ScheduledActions
+            ' x.SetUp("Sales")
+            'Me.SplitContainer1.SplitterDistance = 2500
+            Me.SplitContainer1.SplitterDistance = 218
+            Me.SplitContainer1.SplitterWidth = 1
+            Me.btnExpandSalesList.Text = Chr(187)
+            Me.btnExpandMemorize.Text = Chr(187)
 
 
-        '' EDIT: 
-        '' 9-13-2015 
-        '' work around for resize of control
-        '' on size changed event
-        '' 
+            '' EDIT: 
+            '' 9-13-2015 
+            '' work around for resize of control
+            '' on size changed event
+            '' 
 
-        ''EDIT:
-        '' 9-16-2015
-        '' Need to redraw respective container on size changed
-        '' If job pictures is active filter, only redraw job pictures
-        '' If Attached Files is active filter......
-        '' 
+            ''EDIT:
+            '' 9-16-2015
+            '' Need to redraw respective container on size changed
+            '' If job pictures is active filter, only redraw job pictures
+            '' If Attached Files is active filter......
+            '' 
 
-        Dim active_filter_text As String = Me.tscboAFPicsFilter.Text
-        Select Case active_filter_text
-            Case "All"
-                Try
-                    Dim a As Control
-                    Dim p_width As Integer = Me.pnlAFPics.Width
-                    Dim p_height As Integer = Me.pnlAFPics.Height
-                    'x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
-                    'x.Location = New Point((p_width / 2) + 5, 0)
-                    For Each a In Me.pnlAFPics.Controls
+            Dim active_filter_text As String = Me.tscboAFPicsFilter.Text
+            Select Case active_filter_text
+                Case "All"
+                    Try
+                        Dim a As Control
+                        Dim p_width As Integer = Me.pnlAFPics.Width
+                        Dim p_height As Integer = Me.pnlAFPics.Height
+                        'x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
+                        'x.Location = New Point((p_width / 2) + 5, 0)
+                        For Each a In Me.pnlAFPics.Controls
 
-                        If TypeOf (a) Is ListView Then
-                            If a.Name.ToString = "lsAttachedFiles" Then
-                                Dim pLocX As Integer = a.Location.X
-                                Dim pLocY As Integer = a.Location.Y
-                                a.Width = (p_width / 2) - 20
-                                a.Height = p_height - 10
-                                a.Location = New Point(5, 5)
+                            If TypeOf (a) Is ListView Then
+                                If a.Name.ToString = "lsAttachedFiles" Then
+                                    Dim pLocX As Integer = a.Location.X
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width / 2) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(5, 5)
 
-                            ElseIf a.Name.ToString = "lsJobPictures" Then
-                                '' for list view lsJP the offset of X has to be counted in as well
-                                '' 
-                                Dim pLocX As Integer = (p_width / 2)
-                                Dim pLocY As Integer = a.Location.Y
-                                a.Width = (p_width / 2) - 20
-                                a.Height = p_height - 10
-                                a.Location = New Point(pLocX + 5, 5)
+                                ElseIf a.Name.ToString = "lsJobPictures" Then
+                                    '' for list view lsJP the offset of X has to be counted in as well
+                                    '' 
+                                    Dim pLocX As Integer = (p_width / 2)
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width / 2) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(pLocX + 5, 5)
+                                End If
                             End If
-                        End If
-                    Next
-                Catch ex As Exception
-                    '' just trap it
+                        Next
+                    Catch ex As Exception
+                        '' just trap it
 
-                End Try
-                Exit Select
-            Case "Job Pictures"
-                Try
-                    Dim a As Control
-                    Dim p_width As Integer = Me.pnlAFPics.Width
-                    Dim p_height As Integer = Me.pnlAFPics.Height
+                    End Try
+                    Exit Select
+                Case "Job Pictures"
+                    Try
+                        Dim a As Control
+                        Dim p_width As Integer = Me.pnlAFPics.Width
+                        Dim p_height As Integer = Me.pnlAFPics.Height
 
-                    For Each a In Me.pnlAFPics.Controls
+                        For Each a In Me.pnlAFPics.Controls
 
-                        If TypeOf (a) Is ListView Then
+                            If TypeOf (a) Is ListView Then
 
-                            If a.Name.ToString = "lsJobPictures" Then
-                                Dim pLocX As Integer = (p_width)
-                                Dim pLocY As Integer = a.Location.Y
-                                a.Width = (p_width - 20)
-                                a.Height = (p_height - 10)
-                                a.Location = New Point(5, 5)
+                                If a.Name.ToString = "lsJobPictures" Then
+                                    Dim pLocX As Integer = (p_width)
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width - 20)
+                                    a.Height = (p_height - 10)
+                                    a.Location = New Point(5, 5)
+                                End If
                             End If
-                        End If
-                    Next
-                Catch ex As Exception
+                        Next
+                    Catch ex As Exception
 
-                End Try
-                Exit Select
-            Case "Attached Files"
-                Try
-                    Dim a As Control
-                    Dim p_width As Integer = Me.pnlAFPics.Width
-                    Dim p_height As Integer = Me.pnlAFPics.Height
+                    End Try
+                    Exit Select
+                Case "Attached Files"
+                    Try
+                        Dim a As Control
+                        Dim p_width As Integer = Me.pnlAFPics.Width
+                        Dim p_height As Integer = Me.pnlAFPics.Height
 
-                    For Each a In Me.pnlAFPics.Controls
+                        For Each a In Me.pnlAFPics.Controls
 
-                        If TypeOf (a) Is ListView Then
+                            If TypeOf (a) Is ListView Then
 
-                            If a.Name.ToString = "lsAttachedFiles" Then
-                                Dim pLocX As Integer = a.Location.X
-                                Dim pLocY As Integer = a.Location.Y
-                                a.Width = (p_width) - 20
-                                a.Height = p_height - 10
-                                a.Location = New Point(5, 5)
+                                If a.Name.ToString = "lsAttachedFiles" Then
+                                    Dim pLocX As Integer = a.Location.X
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(5, 5)
 
+                                End If
                             End If
-                        End If
-                    Next
-                Catch ex As Exception
+                        Next
+                    Catch ex As Exception
 
-                End Try
-                Exit Select
-            Case Else
-                Try
-                    Dim a As Control
-                    Dim p_width As Integer = Me.pnlAFPics.Width
-                    Dim p_height As Integer = Me.pnlAFPics.Height
-                    'x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
-                    'x.Location = New Point((p_width / 2) + 5, 0)
-                    For Each a In Me.pnlAFPics.Controls
+                    End Try
+                    Exit Select
+                Case Else
+                    Try
+                        Dim a As Control
+                        Dim p_width As Integer = Me.pnlAFPics.Width
+                        Dim p_height As Integer = Me.pnlAFPics.Height
+                        'x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
+                        'x.Location = New Point((p_width / 2) + 5, 0)
+                        For Each a In Me.pnlAFPics.Controls
 
-                        If TypeOf (a) Is ListView Then
-                            If a.Name.ToString = "lsAttachedFiles" Then
-                                Dim pLocX As Integer = a.Location.X
-                                Dim pLocY As Integer = a.Location.Y
-                                a.Width = (p_width / 2) - 20
-                                a.Height = p_height - 10
-                                a.Location = New Point(5, 5)
+                            If TypeOf (a) Is ListView Then
+                                If a.Name.ToString = "lsAttachedFiles" Then
+                                    Dim pLocX As Integer = a.Location.X
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width / 2) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(5, 5)
 
-                            ElseIf a.Name.ToString = "lsJobPictures" Then
-                                '' for list view lsJP the offset of X has to be counted in as well
-                                '' 
-                                Dim pLocX As Integer = (p_width / 2)
-                                Dim pLocY As Integer = a.Location.Y
-                                a.Width = (p_width / 2) - 20
-                                a.Height = p_height - 10
-                                a.Location = New Point(pLocX, 5)
+                                ElseIf a.Name.ToString = "lsJobPictures" Then
+                                    '' for list view lsJP the offset of X has to be counted in as well
+                                    '' 
+                                    Dim pLocX As Integer = (p_width / 2)
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width / 2) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(pLocX, 5)
+                                End If
                             End If
-                        End If
-                    Next
-                Catch ex As Exception
-                    '' just trap it
+                        Next
+                    Catch ex As Exception
+                        '' just trap it
 
-                End Try
-                Exit Select
-        End Select
+                    End Try
+                    Exit Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "Sales_SizeChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -4960,166 +5315,180 @@ Public Class Sales
 
     Private Sub btnEmailIssuedAppts_Click(sender As Object, e As EventArgs) Handles btnEmailIssuedAppts.Click
         'MsgBox("test hit btnEmailIssuedAppts - marketing manager button")
-        Dim xyz As New EmailIssuedLeads
-        Dim arMSGS As New ArrayList
-        arMSGS = xyz.Generate_MarketingManager_List(Me.dtpIssueLeads.Value.ToString)
-        Dim mmOBJ As EmailIssuedLeads.MarketingManagerOBJ
-        xyz.MailTheListToMarketingManager(arMSGS, mmOBJ.FName, mmOBJ.LName, mmOBJ.EmailAddress, Me.dtpIssueLeads.Value.ToString)
-        '' marketing manager list
+        Try
+            Dim xyz As New EmailIssuedLeads
+            Dim arMSGS As New ArrayList
+            arMSGS = xyz.Generate_MarketingManager_List(Me.dtpIssueLeads.Value.ToString)
+            Dim mmOBJ As EmailIssuedLeads.MarketingManagerOBJ
+            xyz.MailTheListToMarketingManager(arMSGS, mmOBJ.FName, mmOBJ.LName, mmOBJ.EmailAddress, Me.dtpIssueLeads.Value.ToString)
+            '' marketing manager list
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEmailIssuedAppts_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnEmailAllIssue_Click(sender As Object, e As EventArgs) Handles btnEmailAllIssue.Click
         ' MsgBox("test hit btnEmailallIssue ")
         '' email to all reps that can get
-        Dim z As New EmailIssuedLeads
-        Dim arRepsThatCanGetEmail As New ArrayList
-        Dim arRepsThatDontGetEmail As New ArrayList
-        Dim arLeadNum As New ArrayList
-        Dim emlBody As String = ""
-        Dim iteration As Integer = 0
-        If Me.btnExclude.Text.Contains("Off") Then
-            Dim y As Panel
-            Dim leadNum As String = "0"
-            For Each y In pnlIssue.Controls
-                If y.BorderStyle = BorderStyle.None Then
-                    '' this is the selected record now determine rep and can they get email and so on. . . . . 
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
-                        If TypeOf ctrl Is LinkLabel Then
-                            leadNum = ctrl.Text
-                            '' if its a called an cancelled, dont do anything with it. 
-                            '' called and cancelled will come from enter lead
-                            '' proc = GetIssuedCancels
+        Try
+            Dim z As New EmailIssuedLeads
+            Dim arRepsThatCanGetEmail As New ArrayList
+            Dim arRepsThatDontGetEmail As New ArrayList
+            Dim arLeadNum As New ArrayList
+            Dim emlBody As String = ""
+            Dim iteration As Integer = 0
+            If Me.btnExclude.Text.Contains("Off") Then
+                Dim y As Panel
+                Dim leadNum As String = "0"
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.None Then
+                        '' this is the selected record now determine rep and can they get email and so on. . . . . 
+                        Dim ctrl As Control
+                        For Each ctrl In y.Controls
+                            If TypeOf ctrl Is LinkLabel Then
+                                leadNum = ctrl.Text
+                                '' if its a called an cancelled, dont do anything with it. 
+                                '' called and cancelled will come from enter lead
+                                '' proc = GetIssuedCancels
 
-                        End If
-                        If TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
-                            If y.Controls.ContainsKey("lnk" & leadNum.ToString) = True Then
-
-                                Dim splitName() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                                Dim canGetEmail As Boolean = z.CanRepGetEmail(splitName(0), splitName(1))
-                                If canGetEmail = True Then
-                                    arRepsThatCanGetEmail.Add(splitName(0) & " " & splitName(1) & " | " & leadNum.ToString)
-                                ElseIf canGetEmail = False Then
-                                    arRepsThatDontGetEmail.Add(splitName(0) & " " & splitName(1) & " | " & leadNum.ToString)
-                                End If
                             End If
+                            If TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
+                                If y.Controls.ContainsKey("lnk" & leadNum.ToString) = True Then
 
-                        End If
-                    Next
-                End If
-            Next
-
-            Dim iii As Integer = 0
-            Dim _doo As String = ""
-            For iii = 0 To arRepsThatCanGetEmail.Count - 1
-                _doo += arRepsThatCanGetEmail(iii) & vbCrLf
-            Next
-            Dim aaa As Integer = 0
-            Dim _dontt As String
-            For aaa = 0 To arRepsThatDontGetEmail.Count - 1
-                _dontt += arRepsThatDontGetEmail(aaa) & vbCrLf
-            Next
-            ' MsgBox("DO: " & vbCrLf & _doo & vbCrLf & "DONT:" & vbCrLf & _dontt, MsgBoxStyle.Information, "Debug NFO - Reps that DO: With Exclusions")
-            Dim xyz As New EmailIssuedLeads
-            Dim arStripLeadOut As New ArrayList
-
-            '' now strip off called an cancelled from array
-
-            Dim dd As Integer = 0
-            Dim iterationR As Integer = 0
-            For dd = 0 To arRepsThatCanGetEmail.Count - 1
-                iterationR += 1
-                Dim recID = Split(arRepsThatCanGetEmail(dd), " | ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                Dim id_ = recID(1)
-                If xyz.GetEnterLeadMarketingResult(id_) = True Then
-                    arStripLeadOut.Add(iterationR - 1)
-                End If
-            Next
-
-            Dim ff As Integer = 0
-            For ff = 0 To arStripLeadOut.Count - 1
-                arRepsThatCanGetEmail.RemoveAt(arStripLeadOut(ff))
-            Next
-
-            '' after its all said and done, mail what is left.
-
-            xyz.BulkMailWithExclusions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
-
-
-
-
-
-        End If
-        If Me.btnExclude.Text.Contains("On") Then
-            Dim y As Panel
-            Dim leadNum As String = "0"
-            For Each y In pnlIssue.Controls
-                If y.BorderStyle = BorderStyle.None Then
-                    '' this is the selected record now determine rep and can they get email and so on. . . . . 
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
-                        If TypeOf ctrl Is LinkLabel Then
-                            leadNum = ctrl.Text
-
-                            '' if its a called an cancelled, dont do anything with it. 
-                            '' called and cancelled will come from enter lead
-                            '' proc = GetIssuedCancels
-
-
-
-                        End If
-                        If TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
-                            If y.Controls.ContainsKey("lnk" & leadNum.ToString) = True Then
-
-                                Dim splitName() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                                Dim canGetEmail As Boolean = z.CanRepGetEmail(splitName(0), splitName(1))
-                                If canGetEmail = True Then
-                                    arRepsThatCanGetEmail.Add(splitName(0) & " " & splitName(1) & " | " & leadNum.ToString)
-                                ElseIf canGetEmail = False Then
-                                    arRepsThatDontGetEmail.Add(splitName(0) & " " & splitName(1) & " | " & leadNum.ToString)
+                                    Dim splitName() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                    Dim canGetEmail As Boolean = z.CanRepGetEmail(splitName(0), splitName(1))
+                                    If canGetEmail = True Then
+                                        arRepsThatCanGetEmail.Add(splitName(0) & " " & splitName(1) & " | " & leadNum.ToString)
+                                    ElseIf canGetEmail = False Then
+                                        arRepsThatDontGetEmail.Add(splitName(0) & " " & splitName(1) & " | " & leadNum.ToString)
+                                    End If
                                 End If
+
                             End If
+                        Next
+                    End If
+                Next
 
-                        End If
-                    Next
-                End If
-            Next
-            Dim ii As Integer = 0
-            Dim _do As String = ""
-            For ii = 0 To arRepsThatCanGetEmail.Count - 1
-                _do += arRepsThatCanGetEmail(ii) & vbCrLf
-            Next
-            Dim aa As Integer = 0
-            Dim _dont As String
-            For aa = 0 To arRepsThatDontGetEmail.Count - 1
-                _dont += arRepsThatDontGetEmail(aa) & vbCrLf
-            Next
-            '' DEBUG INFO
-            'MsgBox("DO: " & vbCrLf & _do & vbCrLf & "DONT:" & vbCrLf & _dont, MsgBoxStyle.Information, "Debug NFO - Reps That DO: No Exclusions")
+                Dim iii As Integer = 0
+                Dim _doo As String = ""
+                For iii = 0 To arRepsThatCanGetEmail.Count - 1
+                    _doo += arRepsThatCanGetEmail(iii) & vbCrLf
+                Next
+                Dim aaa As Integer = 0
+                Dim _dontt As String
+                For aaa = 0 To arRepsThatDontGetEmail.Count - 1
+                    _dontt += arRepsThatDontGetEmail(aaa) & vbCrLf
+                Next
+                ' MsgBox("DO: " & vbCrLf & _doo & vbCrLf & "DONT:" & vbCrLf & _dontt, MsgBoxStyle.Information, "Debug NFO - Reps that DO: With Exclusions")
+                Dim xyz As New EmailIssuedLeads
+                Dim arStripLeadOut As New ArrayList
 
-            Dim xyz As New EmailIssuedLeads
-            Dim arStripLeadOut As New ArrayList
+                '' now strip off called an cancelled from array
 
-            '' now strip off called an cancelled from array
+                Dim dd As Integer = 0
+                Dim iterationR As Integer = 0
+                For dd = 0 To arRepsThatCanGetEmail.Count - 1
+                    iterationR += 1
+                    Dim recID = Split(arRepsThatCanGetEmail(dd), " | ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                    Dim id_ = recID(1)
+                    If xyz.GetEnterLeadMarketingResult(id_) = True Then
+                        arStripLeadOut.Add(iterationR - 1)
+                    End If
+                Next
 
-            Dim dd As Integer = 0
-            Dim iterationR As Integer = 0
-            For dd = 0 To arRepsThatCanGetEmail.Count - 1
-                iterationR += 1
-                Dim recID = Split(arRepsThatCanGetEmail(dd), " | ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                Dim id_ = recID(1)
-                If xyz.GetEnterLeadMarketingResult(id_) = True Then
-                    arStripLeadOut.Add(iterationR - 1)
-                End If
-            Next
+                Dim ff As Integer = 0
+                For ff = 0 To arStripLeadOut.Count - 1
+                    arRepsThatCanGetEmail.RemoveAt(arStripLeadOut(ff))
+                Next
 
-            Dim ff As Integer = 0
-            For ff = 0 To arStripLeadOut.Count - 1
-                arRepsThatCanGetEmail.RemoveAt(arStripLeadOut(ff))
-            Next
+                '' after its all said and done, mail what is left.
 
-            xyz.BulkEmailWithoutExceptions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
-        End If
+                xyz.BulkMailWithExclusions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
+
+
+
+
+
+            End If
+            If Me.btnExclude.Text.Contains("On") Then
+                Dim y As Panel
+                Dim leadNum As String = "0"
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.None Then
+                        '' this is the selected record now determine rep and can they get email and so on. . . . . 
+                        Dim ctrl As Control
+                        For Each ctrl In y.Controls
+                            If TypeOf ctrl Is LinkLabel Then
+                                leadNum = ctrl.Text
+
+                                '' if its a called an cancelled, dont do anything with it. 
+                                '' called and cancelled will come from enter lead
+                                '' proc = GetIssuedCancels
+
+
+
+                            End If
+                            If TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
+                                If y.Controls.ContainsKey("lnk" & leadNum.ToString) = True Then
+
+                                    Dim splitName() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                    Dim canGetEmail As Boolean = z.CanRepGetEmail(splitName(0), splitName(1))
+                                    If canGetEmail = True Then
+                                        arRepsThatCanGetEmail.Add(splitName(0) & " " & splitName(1) & " | " & leadNum.ToString)
+                                    ElseIf canGetEmail = False Then
+                                        arRepsThatDontGetEmail.Add(splitName(0) & " " & splitName(1) & " | " & leadNum.ToString)
+                                    End If
+                                End If
+
+                            End If
+                        Next
+                    End If
+                Next
+                Dim ii As Integer = 0
+                Dim _do As String = ""
+                For ii = 0 To arRepsThatCanGetEmail.Count - 1
+                    _do += arRepsThatCanGetEmail(ii) & vbCrLf
+                Next
+                Dim aa As Integer = 0
+                Dim _dont As String
+                For aa = 0 To arRepsThatDontGetEmail.Count - 1
+                    _dont += arRepsThatDontGetEmail(aa) & vbCrLf
+                Next
+                '' DEBUG INFO
+                'MsgBox("DO: " & vbCrLf & _do & vbCrLf & "DONT:" & vbCrLf & _dont, MsgBoxStyle.Information, "Debug NFO - Reps That DO: No Exclusions")
+
+                Dim xyz As New EmailIssuedLeads
+                Dim arStripLeadOut As New ArrayList
+
+                '' now strip off called an cancelled from array
+
+                Dim dd As Integer = 0
+                Dim iterationR As Integer = 0
+                For dd = 0 To arRepsThatCanGetEmail.Count - 1
+                    iterationR += 1
+                    Dim recID = Split(arRepsThatCanGetEmail(dd), " | ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                    Dim id_ = recID(1)
+                    If xyz.GetEnterLeadMarketingResult(id_) = True Then
+                        arStripLeadOut.Add(iterationR - 1)
+                    End If
+                Next
+
+                Dim ff As Integer = 0
+                For ff = 0 To arStripLeadOut.Count - 1
+                    arRepsThatCanGetEmail.RemoveAt(arStripLeadOut(ff))
+                Next
+
+                xyz.BulkEmailWithoutExceptions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEmailAllIssue_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
     End Sub
@@ -5128,9 +5497,14 @@ Public Class Sales
 
         '' individual selected lead to be emailed 
         '' 
+        Try
+            EmailSingleRecord()
 
-        EmailSingleRecord()
-
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEmailThisIssue_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
     End Sub
@@ -5140,372 +5514,382 @@ Public Class Sales
 
 
     Private Sub tsAttachedFilesNAV_Click(sender As Object, e As EventArgs) Handles tsAttachedFilesNAV.Click
-
-        Dim x As Control
-        For Each x In Me.pnlAFPics.Controls
-            If TypeOf (x) Is ListView Then
-                If x.Name = "lsAttachedFiles" Then
-                    '' 11-17-2015 AC
-                    '' now do logic to check whether or not to lock up one level button
-                    Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                    ''
-                    '' get current directory
-                    Dim cur_dir As String = x.Tag
-                    '' get 'up one directory
-                    Dim pieces() = Split(cur_dir, "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                    Dim cnt As Integer = -1 '' zero based index
-                    Dim up_one As String = ""
-                    Dim arItems As New ArrayList
-                    For Each pc As String In pieces
-                        cnt += 1
-                    Next
-                    If pieces(cnt) = "" Then '' if the last item is blank -> "\" then move the index back another one to compensate
-                        cnt = (cnt - 1)
-                    End If
-                    Dim iter As Integer = 0
-                    For iter = 0 To (cnt - 1)
-                        If pieces(iter) = "" Then
-                            up_one += "\"
-                        ElseIf pieces(iter) <> "" Then
-                            up_one += (pieces(iter) & "\")
+        Try
+            Dim x As Control
+            For Each x In Me.pnlAFPics.Controls
+                If TypeOf (x) Is ListView Then
+                    If x.Name = "lsAttachedFiles" Then
+                        '' 11-17-2015 AC
+                        '' now do logic to check whether or not to lock up one level button
+                        Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                        ''
+                        '' get current directory
+                        Dim cur_dir As String = x.Tag
+                        '' get 'up one directory
+                        Dim pieces() = Split(cur_dir, "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                        Dim cnt As Integer = -1 '' zero based index
+                        Dim up_one As String = ""
+                        Dim arItems As New ArrayList
+                        For Each pc As String In pieces
+                            cnt += 1
+                        Next
+                        If pieces(cnt) = "" Then '' if the last item is blank -> "\" then move the index back another one to compensate
+                            cnt = (cnt - 1)
                         End If
-                    Next
-                    '' move to the up one
-                    x.Tag = up_one
-                    '' process images and whatnot
+                        Dim iter As Integer = 0
+                        For iter = 0 To (cnt - 1)
+                            If pieces(iter) = "" Then
+                                up_one += "\"
+                            ElseIf pieces(iter) <> "" Then
+                                up_one += (pieces(iter) & "\")
+                            End If
+                        Next
+                        '' move to the up one
+                        x.Tag = up_one
+                        '' process images and whatnot
+                        Dim a As ListView = x
+                        'bgGetImages_DoWork(Me, Nothing)
+                        If sel_Item_left IsNot Nothing Then
+                            Select Case sel_Item_left.SubItems(3).Text
+                                Case Is = "File"
+                                    Dim af As New AF_And_JP_Logic(x.Tag)
+
+                                    Me.lsAttachedFiles.Items.Clear()
+                                    For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                        Dim lvItem As New ListViewItem
+                                        '' Name | Date Mod | Size | Type
+                                        lvItem.Text = xy.FileName
+                                        lvItem.Tag = xy.FullPath
+                                        lvItem.SubItems.Add(xy.DateModified)
+                                        Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                        Dim sz_str As String = sz.ToString & " KB"
+                                        lvItem.SubItems.Add(sz_str)
+                                        lvItem.SubItems.Add("File")
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                        If xy.smThumb IsNot Nothing Then
+                                            Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                        ElseIf xy.smThumb Is Nothing Then
+                                            Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                        End If
+
+                                        If xy.mdThumb IsNot Nothing Then
+                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                        ElseIf xy.mdThumb Is Nothing Then
+                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        If xy.lgThumb IsNot Nothing Then
+                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                        ElseIf xy.lgThumb Is Nothing Then
+                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        If xy.jbThumb IsNot Nothing Then
+                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                        ElseIf xy.jbThumb Is Nothing Then
+                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                        End If
+
+                                        If xy.Tile IsNot Nothing Then
+                                            Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                        ElseIf xy.Tile Is Nothing Then
+                                            Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        lvItem.ImageKey = xy.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
+
+                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                        Dim lvItem As New ListViewItem
+                                        lvItem.Text = y.FileName
+                                        lvItem.Tag = y.FullPath
+                                        lvItem.SubItems.Add(y.DateModified)
+                                        lvItem.SubItems.Add("")
+                                        lvItem.SubItems.Add("Folder")
+                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                        lvItem.ImageKey = y.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
+                                    Exit Select
+                                Case Is = "Folder"
+                                    '' 
+                                    '' have lsAF nav to this directory and repop.
+                                    '' 
+
+                                    Dim af As New AF_And_JP_Logic(x.Tag)
+
+                                    Me.lsAttachedFiles.Items.Clear()
+                                    For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                        Dim lvItem As New ListViewItem
+                                        '' Name | Date Mod | Size | Type
+                                        lvItem.Text = xy.FileName
+                                        lvItem.Tag = xy.FullPath
+                                        lvItem.SubItems.Add(xy.DateModified)
+                                        Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                        Dim sz_str As String = sz.ToString & " KB"
+                                        lvItem.SubItems.Add(sz_str)
+                                        lvItem.SubItems.Add("File")
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                        If xy.smThumb IsNot Nothing Then
+                                            Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                        ElseIf xy.smThumb Is Nothing Then
+                                            Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                        End If
+
+                                        If xy.mdThumb IsNot Nothing Then
+                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                        ElseIf xy.mdThumb Is Nothing Then
+                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        If xy.lgThumb IsNot Nothing Then
+                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                        ElseIf xy.lgThumb Is Nothing Then
+                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        If xy.jbThumb IsNot Nothing Then
+                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                        ElseIf xy.jbThumb Is Nothing Then
+                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                        End If
+
+                                        If xy.Tile IsNot Nothing Then
+                                            Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                        ElseIf xy.Tile Is Nothing Then
+                                            Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        lvItem.ImageKey = xy.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
+
+                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                        Dim lvItem As New ListViewItem
+                                        lvItem.Text = y.FileName
+                                        lvItem.Tag = y.FullPath
+                                        lvItem.SubItems.Add(y.DateModified)
+                                        lvItem.SubItems.Add("")
+                                        lvItem.SubItems.Add("Folder")
+                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                        lvItem.ImageKey = y.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
+
+                                    'sel_Item_left = Nothing
+                                    'sel_Item_right = Nothing
+                                    ''
+                                    '' 1 clear out list view
+                                    '' 2 set the directory of the listview
+                                    '' 3 check to see if the button should be locked
+                                    '' 4 clear out/append image lists for new folder/file icon associations
+                                    '' 5 loop through and repopulate the listview with the 'new' items.
+                                    '' 5 reset sel_item_left & sel_item_right vars
+                                    '' 
+
+
+                                    Exit Select
+                                Case Else
+                                    '' just fail it
+                                    Exit Select
+                            End Select
+                        ElseIf sel_Item_left Is Nothing Then
+                            '' 
+                            '' where is the cur dir pointing?
+                            '' if its at root
+                            ''     keep at root to repop
+                            '' if its not at root
+                            ''     move it up one to repop
+                            '' 
+                            If cur_dir = (af_dir & STATIC_VARIABLES.CurrentID) Then
+                                Dim af As New AF_And_JP_Logic(x.Tag)
+
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = xy.FileName
+                                    lvItem.Tag = xy.FullPath
+                                    lvItem.SubItems.Add(xy.DateModified)
+                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                    If xy.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                    ElseIf xy.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                    End If
+
+                                    If xy.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                    ElseIf xy.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                    End If
+
+                                    If xy.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                    ElseIf xy.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = xy.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+                            ElseIf cur_dir <> (af_dir & STATIC_VARIABLES.CurrentID) Then
+                                Dim af As New AF_And_JP_Logic(up_one)
+
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = xy.FileName
+                                    lvItem.Tag = xy.FullPath
+                                    lvItem.SubItems.Add(xy.DateModified)
+                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                    If xy.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                    ElseIf xy.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                    End If
+
+                                    If xy.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                    ElseIf xy.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                    End If
+
+                                    If xy.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                    ElseIf xy.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = xy.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+                            End If
+
+
+
+                        End If
+
+                        '' now check to enable/disable nav button
+                        '' 
+                        If Len(x.Tag) <= 0 Then
+                            If x.Tag = rootDir_Lead Then
+                                Me.tsAttachedFilesNAV.Enabled = False
+                            ElseIf x.Tag <> rootDir_Lead Then
+                                Me.tsAttachedFilesNAV.Enabled = True
+                            End If
+                        ElseIf Len(x.Tag) >= 1 Then
+                            If x.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
+                                If x.Tag = rootDir_Lead Then
+                                    Me.tsAttachedFilesNAV.Enabled = False
+                                ElseIf x.Tag <> rootDir_Lead Then
+                                    Me.tsAttachedFilesNAV.Enabled = True
+                                End If
+                            ElseIf x.Tag <> (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
+                                If x.Tag = rootDir_Lead Then
+                                    Me.tsAttachedFilesNAV.Enabled = False
+                                ElseIf x.Tag <> rootDir_Lead Then
+                                    Me.tsAttachedFilesNAV.Enabled = True
+                                End If
+                            End If
+
+                        End If
+
+                    End If
+                ElseIf x.Name = "lsJobPictures" Then
                     Dim a As ListView = x
-                    'bgGetImages_DoWork(Me, Nothing)
-                    If sel_Item_left IsNot Nothing Then
-                        Select Case sel_Item_left.SubItems(3).Text
-                            Case Is = "File"
-                                Dim af As New AF_And_JP_Logic(x.Tag)
-
-                                Me.lsAttachedFiles.Items.Clear()
-                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
-                                    Dim lvItem As New ListViewItem
-                                    '' Name | Date Mod | Size | Type
-                                    lvItem.Text = xy.FileName
-                                    lvItem.Tag = xy.FullPath
-                                    lvItem.SubItems.Add(xy.DateModified)
-                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
-                                    Dim sz_str As String = sz.ToString & " KB"
-                                    lvItem.SubItems.Add(sz_str)
-                                    lvItem.SubItems.Add("File")
-                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                    If xy.smThumb IsNot Nothing Then
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
-                                    ElseIf xy.smThumb Is Nothing Then
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
-                                    End If
-
-                                    If xy.mdThumb IsNot Nothing Then
-                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
-                                    ElseIf xy.mdThumb Is Nothing Then
-                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    If xy.lgThumb IsNot Nothing Then
-                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
-                                    ElseIf xy.lgThumb Is Nothing Then
-                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    If xy.jbThumb IsNot Nothing Then
-                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
-                                    ElseIf xy.jbThumb Is Nothing Then
-                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
-                                    End If
-
-                                    If xy.Tile IsNot Nothing Then
-                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
-                                    ElseIf xy.Tile Is Nothing Then
-                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    lvItem.ImageKey = xy.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-
-                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                    Dim lvItem As New ListViewItem
-                                    lvItem.Text = y.FileName
-                                    lvItem.Tag = y.FullPath
-                                    lvItem.SubItems.Add(y.DateModified)
-                                    lvItem.SubItems.Add("")
-                                    lvItem.SubItems.Add("Folder")
-                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                    lvItem.ImageKey = y.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-                                Exit Select
-                            Case Is = "Folder"
-                                '' 
-                                '' have lsAF nav to this directory and repop.
-                                '' 
-
-                                Dim af As New AF_And_JP_Logic(x.Tag)
-
-                                Me.lsAttachedFiles.Items.Clear()
-                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
-                                    Dim lvItem As New ListViewItem
-                                    '' Name | Date Mod | Size | Type
-                                    lvItem.Text = xy.FileName
-                                    lvItem.Tag = xy.FullPath
-                                    lvItem.SubItems.Add(xy.DateModified)
-                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
-                                    Dim sz_str As String = sz.ToString & " KB"
-                                    lvItem.SubItems.Add(sz_str)
-                                    lvItem.SubItems.Add("File")
-                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                    If xy.smThumb IsNot Nothing Then
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
-                                    ElseIf xy.smThumb Is Nothing Then
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
-                                    End If
-
-                                    If xy.mdThumb IsNot Nothing Then
-                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
-                                    ElseIf xy.mdThumb Is Nothing Then
-                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    If xy.lgThumb IsNot Nothing Then
-                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
-                                    ElseIf xy.lgThumb Is Nothing Then
-                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    If xy.jbThumb IsNot Nothing Then
-                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
-                                    ElseIf xy.jbThumb Is Nothing Then
-                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
-                                    End If
-
-                                    If xy.Tile IsNot Nothing Then
-                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
-                                    ElseIf xy.Tile Is Nothing Then
-                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    lvItem.ImageKey = xy.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-
-                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                    Dim lvItem As New ListViewItem
-                                    lvItem.Text = y.FileName
-                                    lvItem.Tag = y.FullPath
-                                    lvItem.SubItems.Add(y.DateModified)
-                                    lvItem.SubItems.Add("")
-                                    lvItem.SubItems.Add("Folder")
-                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                    lvItem.ImageKey = y.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-
-                                'sel_Item_left = Nothing
-                                'sel_Item_right = Nothing
-                                ''
-                                '' 1 clear out list view
-                                '' 2 set the directory of the listview
-                                '' 3 check to see if the button should be locked
-                                '' 4 clear out/append image lists for new folder/file icon associations
-                                '' 5 loop through and repopulate the listview with the 'new' items.
-                                '' 5 reset sel_item_left & sel_item_right vars
-                                '' 
-
-
-                                Exit Select
-                            Case Else
-                                '' just fail it
-                                Exit Select
-                        End Select
-                    ElseIf sel_Item_left Is Nothing Then
-                        '' 
-                        '' where is the cur dir pointing?
-                        '' if its at root
-                        ''     keep at root to repop
-                        '' if its not at root
-                        ''     move it up one to repop
-                        '' 
-                        If cur_dir = (af_dir & STATIC_VARIABLES.CurrentID) Then
-                            Dim af As New AF_And_JP_Logic(x.Tag)
-
-                            Me.lsAttachedFiles.Items.Clear()
-                            For Each xy As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = xy.FileName
-                                lvItem.Tag = xy.FullPath
-                                lvItem.SubItems.Add(xy.DateModified)
-                                Dim sz = Math.Round(xy.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                If xy.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
-                                ElseIf xy.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
-                                End If
-
-                                If xy.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
-                                ElseIf xy.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
-                                End If
-
-                                If xy.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
-                                ElseIf xy.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                End If
-
-                                If xy.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
-                                ElseIf xy.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
-                                End If
-
-                                If xy.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
-                                ElseIf xy.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = xy.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-                        ElseIf cur_dir <> (af_dir & STATIC_VARIABLES.CurrentID) Then
-                            Dim af As New AF_And_JP_Logic(up_one)
-
-                            Me.lsAttachedFiles.Items.Clear()
-                            For Each xy As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = xy.FileName
-                                lvItem.Tag = xy.FullPath
-                                lvItem.SubItems.Add(xy.DateModified)
-                                Dim sz = Math.Round(xy.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                If xy.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
-                                ElseIf xy.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
-                                End If
-
-                                If xy.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
-                                ElseIf xy.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
-                                End If
-
-                                If xy.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
-                                ElseIf xy.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                End If
-
-                                If xy.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
-                                ElseIf xy.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
-                                End If
-
-                                If xy.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
-                                ElseIf xy.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = xy.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-                        End If
-
-
-
-                    End If
-
-                    '' now check to enable/disable nav button
-                    '' 
-                    If Len(x.Tag) <= 0 Then
-                        If x.Tag = rootDir_Lead Then
-                            Me.tsAttachedFilesNAV.Enabled = False
-                        ElseIf x.Tag <> rootDir_Lead Then
-                            Me.tsAttachedFilesNAV.Enabled = True
-                        End If
-                    ElseIf Len(x.Tag) >= 1 Then
-                        If x.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
-                            If x.Tag = rootDir_Lead Then
-                                Me.tsAttachedFilesNAV.Enabled = False
-                            ElseIf x.Tag <> rootDir_Lead Then
-                                Me.tsAttachedFilesNAV.Enabled = True
-                            End If
-                        ElseIf x.Tag <> (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
-                            If x.Tag = rootDir_Lead Then
-                                Me.tsAttachedFilesNAV.Enabled = False
-                            ElseIf x.Tag <> rootDir_Lead Then
-                                Me.tsAttachedFilesNAV.Enabled = True
-                            End If
-                        End If
-
-                    End If
+                    bgGetImages_DoWork(Me, Nothing)
 
                 End If
-            ElseIf x.Name = "lsJobPictures" Then
-                Dim a As ListView = x
-                bgGetImages_DoWork(Me, Nothing)
-
-            End If
-        Next
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tsAttachedFilesNAV_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
     Private Sub GetRidOfOldAndPutNew()
+        '' notes: 2-10-2016
+        '' not used.
+        '' left as a point of reference.
+        '' not wrapping with error handlers.
+        '' 
         Dim x As Integer = 0
         Dim y As Integer = 0
         Dim height As Integer = 0
@@ -5584,7 +5968,7 @@ Public Class Sales
 #Region "Printing Options"
 
     Private Sub btnPrintIssuedAppts_Click(sender As Object, e As EventArgs) Handles btnPrintIssuedAppts.Click
-        MsgBox("btnPrintIssuedAppts")
+        'MsgBox("btnPrintIssuedAppts")
     End Sub
 
     Private Sub btnPrintAllIssue_Click(sender As Object, e As EventArgs) Handles btnPrintAllIssue.Click
@@ -5644,114 +6028,140 @@ Public Class Sales
 
     Private Sub btnPrintApptSheet_Click(sender As Object, e As EventArgs) Handles btnPrintApptSheet.Click
         'MsgBox("btnPrintApptSheet")
-        Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
+        Try
+            Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
     Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click
         'MsgBox("btnPrintCurrentList")
-        Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
-        Dim x As New printToPrinterContactList(arItemCache)
-        x.ShowDoc()
+        Try
+            Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
+            Dim x As New printToPrinterContactList(arItemCache)
+            x.ShowDoc()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCurrentList_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub btnPrintCustomerList_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerList.Click
         'MsgBox("btnPrintCustomerList")
     End Sub
     Private Sub btnPrintCustomerInfoSheet_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerInfoSheet.Click
-        Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
+        Try
+            Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCustomerInfoSheet_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnPrintNoEmailIssue_Click(sender As Object, e As EventArgs) Handles btnPrintNoEmailIssue.Click
-        ''MsgBox("btnPrintNoEmailIssue")
-        If Me.btnExclude.Text.Contains("On") Then
-            frmPrint.Exclusions = False
-            Dim y As Panel
-            Dim arRepNames As New ArrayList
-            Dim arLeadNums As New ArrayList
-            Dim _leadNum As String = ""
-            For Each y In pnlIssue.Controls
-                Dim ctrl As Control
-                For Each ctrl In y.Controls
+        Try
+            ''MsgBox("btnPrintNoEmailIssue")
+            If Me.btnExclude.Text.Contains("On") Then
+                frmPrint.Exclusions = False
+                Dim y As Panel
+                Dim arRepNames As New ArrayList
+                Dim arLeadNums As New ArrayList
+                Dim _leadNum As String = ""
+                For Each y In pnlIssue.Controls
+                    Dim ctrl As Control
+                    For Each ctrl In y.Controls
 
-                    If TypeOf ctrl Is LinkLabel Then
-                        _leadNum = ctrl.Text
-                    End If
-                    If TypeOf ctrl Is ComboBox Then
-                        If ctrl.Text <> "" Then
-                            Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                            Dim fname As String = strName(0)
-                            Dim lname As String = strName(1)
-                            Dim g As New bulkPrintOperations
-                            Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
-                            If canGetMail = False Then
-                                arRepNames.Add(fname & " " & lname)
-                                arLeadNums.Add(_leadNum)
+                        If TypeOf ctrl Is LinkLabel Then
+                            _leadNum = ctrl.Text
+                        End If
+                        If TypeOf ctrl Is ComboBox Then
+                            If ctrl.Text <> "" Then
+                                Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                Dim fname As String = strName(0)
+                                Dim lname As String = strName(1)
+                                Dim g As New bulkPrintOperations
+                                Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+                                If canGetMail = False Then
+                                    arRepNames.Add(fname & " " & lname)
+                                    arLeadNums.Add(_leadNum)
+                                End If
                             End If
                         End If
-                    End If
+                    Next
                 Next
-            Next
 
-            Dim gg As Integer = 0
-            ''Dim strMSG As String = ""
-            frmPrint.ClearListView()
+                Dim gg As Integer = 0
+                ''Dim strMSG As String = ""
+                frmPrint.ClearListView()
 
-            For gg = 0 To arRepNames.Count - 1
-                '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
-                Dim lv As New ListViewItem
-                lv.Text = arLeadNums(gg)
-                frmPrint.lsLeadIds.Items.Add(lv)
-            Next
+                For gg = 0 To arRepNames.Count - 1
+                    '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
+                    Dim lv As New ListViewItem
+                    lv.Text = arLeadNums(gg)
+                    frmPrint.lsLeadIds.Items.Add(lv)
+                Next
 
-            frmPrint.ShowDialog()
+                frmPrint.ShowDialog()
 
 
-        ElseIf btnExclude.Text.Contains("Off") Then
-            '' MsgBox("exclusions on")
-            frmPrint.Exclusions = True
-            Dim b As New bulkPrintOperations
-            Dim ex_set As bulkPrintOperations.Exclusions
-            ex_set = b.GetExclusions()
-            Dim y As Panel
-            Dim arRepNames As New ArrayList
-            Dim arLeadNums As New ArrayList
-            Dim _leadNum As String = ""
-            For Each y In pnlIssue.Controls
-                Dim ctrl As Control
-                For Each ctrl In y.Controls
+            ElseIf btnExclude.Text.Contains("Off") Then
+                '' MsgBox("exclusions on")
+                frmPrint.Exclusions = True
+                Dim b As New bulkPrintOperations
+                Dim ex_set As bulkPrintOperations.Exclusions
+                ex_set = b.GetExclusions()
+                Dim y As Panel
+                Dim arRepNames As New ArrayList
+                Dim arLeadNums As New ArrayList
+                Dim _leadNum As String = ""
+                For Each y In pnlIssue.Controls
+                    Dim ctrl As Control
+                    For Each ctrl In y.Controls
 
-                    If TypeOf ctrl Is LinkLabel Then
-                        _leadNum = ctrl.Text
-                    End If
-                    If TypeOf ctrl Is ComboBox Then
-                        If ctrl.Text <> "" Then
-                            Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                            Dim fname As String = strName(0)
-                            Dim lname As String = strName(1)
-                            Dim g As New bulkPrintOperations
-                            Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
-                            If canGetMail = False Then
-                                arRepNames.Add(fname & " " & lname)
-                                arLeadNums.Add(_leadNum)
+                        If TypeOf ctrl Is LinkLabel Then
+                            _leadNum = ctrl.Text
+                        End If
+                        If TypeOf ctrl Is ComboBox Then
+                            If ctrl.Text <> "" Then
+                                Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                Dim fname As String = strName(0)
+                                Dim lname As String = strName(1)
+                                Dim g As New bulkPrintOperations
+                                Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+                                If canGetMail = False Then
+                                    arRepNames.Add(fname & " " & lname)
+                                    arLeadNums.Add(_leadNum)
+                                End If
                             End If
                         End If
-                    End If
+                    Next
                 Next
-            Next
-            Dim gg As Integer = 0
-            ''Dim strMSG As String = ""
-            frmPrint.ClearListView()
+                Dim gg As Integer = 0
+                ''Dim strMSG As String = ""
+                frmPrint.ClearListView()
 
-            For gg = 0 To arRepNames.Count - 1
-                '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
-                Dim lv As New ListViewItem
-                lv.Text = arLeadNums(gg)
-                frmPrint.lsLeadIds.Items.Add(lv)
-            Next
+                For gg = 0 To arRepNames.Count - 1
+                    '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
+                    Dim lv As New ListViewItem
+                    lv.Text = arLeadNums(gg)
+                    frmPrint.lsLeadIds.Items.Add(lv)
+                Next
 
 
-            frmPrint.ShowDialog()
-        End If
+                frmPrint.ShowDialog()
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintNoEmailIssue_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
     End Sub
@@ -5762,46 +6172,52 @@ Public Class Sales
         '' 
         ''MsgBox("btnPrintThisIssue")
         ''
-        If btnExclude.Text.Contains("On") Then
-            frmPrint.Exclusions = False
-            Dim y As Panel
-            For Each y In pnlIssue.Controls
-                If y.BorderStyle = BorderStyle.FixedSingle Then
-                    Dim yy As Control
-                    For Each yy In y.Controls
-                        If TypeOf yy Is LinkLabel Then
-                            ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
-                            Dim lead_id As String = yy.Text
-                            Dim lv As New ListViewItem
-                            lv.Text = lead_id
-                            frmPrint.ClearListView()
-                            frmPrint.lsLeadIds.Items.Add(lv)
-                            frmPrint.ShowDialog()
+        Try
+            If btnExclude.Text.Contains("On") Then
+                frmPrint.Exclusions = False
+                Dim y As Panel
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.FixedSingle Then
+                        Dim yy As Control
+                        For Each yy In y.Controls
+                            If TypeOf yy Is LinkLabel Then
+                                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                                Dim lead_id As String = yy.Text
+                                Dim lv As New ListViewItem
+                                lv.Text = lead_id
+                                frmPrint.ClearListView()
+                                frmPrint.lsLeadIds.Items.Add(lv)
+                                frmPrint.ShowDialog()
 
-                        End If
-                    Next
-                End If
-            Next
-        ElseIf btnExclude.Text.Contains("Off") Then
-            frmPrint.Exclusions = True
-            Dim y As Panel
-            For Each y In pnlIssue.Controls
-                If y.BorderStyle = BorderStyle.FixedSingle Then
-                    Dim yy As Control
-                    For Each yy In y.Controls
-                        If TypeOf yy Is LinkLabel Then
-                            ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
-                            Dim lead_id As String = yy.Text
-                            Dim lv As New ListViewItem
-                            lv.Text = lead_id
-                            frmPrint.ClearListView()
-                            frmPrint.lsLeadIds.Items.Add(lv)
-                            frmPrint.ShowDialog()
-                        End If
-                    Next
-                End If
-            Next
-        End If
+                            End If
+                        Next
+                    End If
+                Next
+            ElseIf btnExclude.Text.Contains("Off") Then
+                frmPrint.Exclusions = True
+                Dim y As Panel
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.FixedSingle Then
+                        Dim yy As Control
+                        For Each yy In y.Controls
+                            If TypeOf yy Is LinkLabel Then
+                                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                                Dim lead_id As String = yy.Text
+                                Dim lv As New ListViewItem
+                                lv.Text = lead_id
+                                frmPrint.ClearListView()
+                                frmPrint.lsLeadIds.Items.Add(lv)
+                                frmPrint.ShowDialog()
+                            End If
+                        Next
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintThisIssue", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
@@ -5811,14 +6227,19 @@ Public Class Sales
 
 #Region "Email Templating Stuff"
     Public Function GetTemplates()
-
-        Dim y As New emlTemplateLogic
-        Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-        Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
-        Dim g As List(Of emlTemplateLogic.TemplateInfo)
-        g = y.GetTemplatesByDepartment(False, depart_)
-        Dim a As emlTemplateLogic.TemplateInfo
-        Return g
+        Try
+            Dim y As New emlTemplateLogic
+            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
+            Dim g As List(Of emlTemplateLogic.TemplateInfo)
+            g = y.GetTemplatesByDepartment(False, depart_)
+            Dim a As emlTemplateLogic.TemplateInfo
+            Return g
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "GetTemplates()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Function
 #End Region
@@ -5833,144 +6254,157 @@ Public Class Sales
         'Public LeadToShow As convertLeadToStruct.EnterLead_Record
         'Public TemplateName As String = ""
         'Public Department As String = ""
-        Dim emailAddress As String = Me.lnkEmail.Text
-        If Len(emailAddress) <= 0 Then
-            MsgBox("This customer doesn't have a valid email address to send email to.", MsgBoxStyle.Critical, "No Valid Email Address")
-            Exit Sub
-        ElseIf Len(emailAddress) >= 1 Then
-            Dim obj_ As New convertLeadToStruct
-            Dim y As New emlTemplateLogic
-            Dim _lead As New convertLeadToStruct.EnterLead_Record
-            Dim recID As String = STATIC_VARIABLES.CurrentID.ToString
-            If Len(recID) <= 0 Then
-                '' take first lead in dbase | testing 
-                recID = y.GetMaxID(False)
-            ElseIf Len(recID) >= 1 Then
-                '' use current recID
-                recID = recID
-            End If
-            _lead = obj_.ConvertToStructure(recID, False)
-            frmEmailPreview.LeadToShow = _lead
-            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-            Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
+        Try
+            Dim emailAddress As String = Me.lnkEmail.Text
+            If Len(emailAddress) <= 0 Then
+                MsgBox("This customer doesn't have a valid email address to send email to.", MsgBoxStyle.Critical, "No Valid Email Address")
+                Exit Sub
+            ElseIf Len(emailAddress) >= 1 Then
+                Dim obj_ As New convertLeadToStruct
+                Dim y As New emlTemplateLogic
+                Dim _lead As New convertLeadToStruct.EnterLead_Record
+                Dim recID As String = STATIC_VARIABLES.CurrentID.ToString
+                If Len(recID) <= 0 Then
+                    '' take first lead in dbase | testing 
+                    recID = y.GetMaxID(False)
+                ElseIf Len(recID) >= 1 Then
+                    '' use current recID
+                    recID = recID
+                End If
+                _lead = obj_.ConvertToStructure(recID, False)
+                frmEmailPreview.LeadToShow = _lead
+                Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
 
-            frmEmailTemplateChoice.ShowDialog()
-        End If
+                frmEmailTemplateChoice.ShowDialog()
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "btnEmailCustomer_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
     Private Sub EmailSingleRecord()
-        Dim z As New EmailIssuedLeads
-        Dim emlBody As String = ""
-        If Me.btnExclude.Text.Contains("Off") Then
-            Dim y As Panel
-            Dim leadNum As String = "0"
-            For Each y In pnlIssue.Controls
-                If y.BorderStyle = BorderStyle.FixedSingle Then
-                    '' this is the selected record now determine rep and can they get email and so on. . . . . 
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
-                        If TypeOf ctrl Is LinkLabel Then
-                            'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
-                            leadNum = ctrl.Text
-                            '' check last m result here to make sure it can be done. 
-                            '' 
-                            ''--8-25-2015 Per Andy Edit
-                            '' needs to filter down to ALL print options, all Email options
-                            '' 
+        Try
+            Dim z As New EmailIssuedLeads
+            Dim emlBody As String = ""
+            If Me.btnExclude.Text.Contains("Off") Then
+                Dim y As Panel
+                Dim leadNum As String = "0"
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.FixedSingle Then
+                        '' this is the selected record now determine rep and can they get email and so on. . . . . 
+                        Dim ctrl As Control
+                        For Each ctrl In y.Controls
+                            If TypeOf ctrl Is LinkLabel Then
+                                'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
+                                leadNum = ctrl.Text
+                                '' check last m result here to make sure it can be done. 
+                                '' 
+                                ''--8-25-2015 Per Andy Edit
+                                '' needs to filter down to ALL print options, all Email options
+                                '' 
 
 
 
-                        ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
-                            Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                            Dim fname As String = strRep(0)
-                            Dim lname As String = strRep(1)
+                            ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
+                                Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                Dim fname As String = strRep(0)
+                                Dim lname As String = strRep(1)
 
-                            Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
-                            If canGetEmail = False Then
-                                MsgBox("This sales rep cannot recieve emails.", MsgBoxStyle.Critical, "Can't Recieve Email")
-                                Exit Sub
-                            End If
-                            Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
-                            Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
-                            STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
-                            'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
-                            If canGetEmail = True Then
-                                '' check here to make sure not called an cancelled
-                                '' 8-26-2014
-
-                                If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
-                                    MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
+                                Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
+                                If canGetEmail = False Then
+                                    MsgBox("This sales rep cannot recieve emails.", MsgBoxStyle.Critical, "Can't Recieve Email")
                                     Exit Sub
                                 End If
+                                Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
+                                Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
+                                STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
+                                'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
+                                If canGetEmail = True Then
+                                    '' check here to make sure not called an cancelled
+                                    '' 8-26-2014
 
-                                emlBody = z.ConstructMessageWithExclusions(fname, lname, leadNum, exclusionSet, emailAddy)
-                                'MsgBox(emlBody)
-                                '' uncomment here to actually send
-                                z.EMAIL_SINGLE_MarkupEmail_WITH_EXCLUSIONS(fname, lname, leadNum, exclusionSet, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
-                            ElseIf canGetEmail = False Then
-                                '' do nothing for now. 
-                                ''
-                            End If
+                                    If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
+                                        MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
+                                        Exit Sub
+                                    End If
 
-                        End If '' end type of control 
-
-                    Next
-                End If
-            Next
-        ElseIf Me.btnExclude.Text.Contains("On") Then
-            Dim y As Panel
-            Dim leadNum As String = "0"
-            For Each y In pnlIssue.Controls
-                If y.BorderStyle = BorderStyle.FixedSingle Then
-                    '' this is the selected record now determine rep and can they get email and so on. . . . . 
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
-                        If TypeOf ctrl Is LinkLabel Then
-                            'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
-                            leadNum = ctrl.Text
-
-                        ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
-                            Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                            Dim fname As String = strRep(0)
-                            Dim lname As String = strRep(1)
-                            Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
-                            If canGetEmail = False Then
-                                MsgBox("This Sales Rep cannot recieve Email.", MsgBoxStyle.Critical, "Can't Recieve Email")
-                                Exit Sub
-                            End If
-                            Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
-                            Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
-                            STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
-                            'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
-                            If canGetEmail = True Then
-                                '' check here to make sure not called an cancelled
-                                '' 8-26-2014
-
-                                If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
-                                    MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
-                                    Exit Sub
+                                    emlBody = z.ConstructMessageWithExclusions(fname, lname, leadNum, exclusionSet, emailAddy)
+                                    'MsgBox(emlBody)
+                                    '' uncomment here to actually send
+                                    z.EMAIL_SINGLE_MarkupEmail_WITH_EXCLUSIONS(fname, lname, leadNum, exclusionSet, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
+                                ElseIf canGetEmail = False Then
+                                    '' do nothing for now. 
+                                    ''
                                 End If
 
+                            End If '' end type of control 
+
+                        Next
+                    End If
+                Next
+            ElseIf Me.btnExclude.Text.Contains("On") Then
+                Dim y As Panel
+                Dim leadNum As String = "0"
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.FixedSingle Then
+                        '' this is the selected record now determine rep and can they get email and so on. . . . . 
+                        Dim ctrl As Control
+                        For Each ctrl In y.Controls
+                            If TypeOf ctrl Is LinkLabel Then
+                                'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
+                                leadNum = ctrl.Text
+
+                            ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
+                                Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                Dim fname As String = strRep(0)
+                                Dim lname As String = strRep(1)
+                                Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
+                                If canGetEmail = False Then
+                                    MsgBox("This Sales Rep cannot recieve Email.", MsgBoxStyle.Critical, "Can't Recieve Email")
+                                    Exit Sub
+                                End If
+                                Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
+                                Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
+                                STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
+                                'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
+                                If canGetEmail = True Then
+                                    '' check here to make sure not called an cancelled
+                                    '' 8-26-2014
+
+                                    If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
+                                        MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
+                                        Exit Sub
+                                    End If
 
 
-                                emlBody = z.ConstructMessageWithoutExclusions(fname, lname, leadNum, emailAddy)
-                                'MsgBox(emlBody)
-                                '' uncomment here to actually send
-                                z.EMAIL_SINGLE_MarkupEmail_WITHOUT_EXCLUSIONS(fname, lname, leadNum, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
-                            ElseIf canGetEmail = False Then
-                                '' do nothing for now. 
+
+                                    emlBody = z.ConstructMessageWithoutExclusions(fname, lname, leadNum, emailAddy)
+                                    'MsgBox(emlBody)
+                                    '' uncomment here to actually send
+                                    z.EMAIL_SINGLE_MarkupEmail_WITHOUT_EXCLUSIONS(fname, lname, leadNum, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
+                                ElseIf canGetEmail = False Then
+                                    '' do nothing for now. 
+                                End If
                             End If
-                        End If
 
-                        'End If
-
+                            'End If
 
 
-                    Next
-                End If
-            Next
-        End If
+
+                        Next
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "EmailSingleRecord()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
     End Sub
@@ -7233,6 +7667,9 @@ Public Class Sales
         Catch ex As Exception
             '' fail it here
             'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split File Ext Error")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitApartFileExt(fullpath)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Function
@@ -7248,6 +7685,9 @@ Public Class Sales
         Catch ex As Exception
             '' fail it here
             'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split Folder Name Error")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitFolderName(fullpath)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Function
@@ -7256,727 +7696,741 @@ Public Class Sales
 #Region "Context Menu Paste - LS and JP"
 
     Private Sub btnPaste_Click(sender As Object, e As EventArgs) Handles btnPaste.Click
-        Dim itemToCCP As String = My.Computer.Clipboard.GetText(TextDataFormat.Text)
-        If Len(itemToCCP) <= 0 Then
-            '' nothng here
-            sel_Item_left = Nothing
-            sel_Item_right = Nothing
-            Me.btnPaste.Enabled = False
-        ElseIf Len(itemToCCP) >= 1 Then
-            Dim parts() = Split(itemToCCP, "|", -1, Microsoft.VisualBasic.CompareMethod.Text)
-            Dim operation As String = parts(0)
-            Dim performOpOn As String = parts(1)
+        Try
+            Dim itemToCCP As String = My.Computer.Clipboard.GetText(TextDataFormat.Text)
+            If Len(itemToCCP) <= 0 Then
+                '' nothng here
+                sel_Item_left = Nothing
+                sel_Item_right = Nothing
+                Me.btnPaste.Enabled = False
+            ElseIf Len(itemToCCP) >= 1 Then
+                Dim parts() = Split(itemToCCP, "|", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                Dim operation As String = parts(0)
+                Dim performOpOn As String = parts(1)
 
-            ''MsgBox("Operation: " & operation & vbCrLf & "Perform Operation On: " & performOpOn, MsgBoxStyle.Information, "DEBUG CCP Operations")
+                ''MsgBox("Operation: " & operation & vbCrLf & "Perform Operation On: " & performOpOn, MsgBoxStyle.Information, "DEBUG CCP Operations")
 
-            Dim src_dir As String = sel_Item_right.Tag
-
-
-            Dim dest_dir As String = Me.lsAttachedFiles.Tag
-            Dim fname As String = ""
-            Dim folname As String = ""
-            Dim fileExt As String = ""
+                Dim src_dir As String = sel_Item_right.Tag
 
 
-            '' need file ext for file copy
-            '' IF is file
-            If Len(dest_dir) <= 0 Then
-                '' change to root dir
-                dest_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                fname = SplitApartFileName(sel_Item_right.Tag)
-                folname = SplitFolderName(sel_Item_right.Tag)
-                fileExt = SplitApartFileExt(sel_Item_right.Tag)
-            ElseIf Len(dest_dir) >= 1 Then
-                dest_dir = dest_dir
-                fname = SplitApartFileName(sel_Item_right.Tag)
-                folname = SplitFolderName(sel_Item_right.Tag)
-                fileExt = SplitApartFileExt(sel_Item_right.Tag)
+                Dim dest_dir As String = Me.lsAttachedFiles.Tag
+                Dim fname As String = ""
+                Dim folname As String = ""
+                Dim fileExt As String = ""
+
+
+                '' need file ext for file copy
+                '' IF is file
+                If Len(dest_dir) <= 0 Then
+                    '' change to root dir
+                    dest_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                    fname = SplitApartFileName(sel_Item_right.Tag)
+                    folname = SplitFolderName(sel_Item_right.Tag)
+                    fileExt = SplitApartFileExt(sel_Item_right.Tag)
+                ElseIf Len(dest_dir) >= 1 Then
+                    dest_dir = dest_dir
+                    fname = SplitApartFileName(sel_Item_right.Tag)
+                    folname = SplitFolderName(sel_Item_right.Tag)
+                    fileExt = SplitApartFileExt(sel_Item_right.Tag)
+                End If
+
+                Select Case operation
+                    Case Is = "CUT"
+                        Select Case sel_Item_right.SubItems(3).Text
+                            Case Is = "File"
+                                System.IO.File.Move(src_dir, dest_dir & "\" & fname & "." & fileExt)
+                                '' now repop
+                                Dim cur_dir As String = Me.lsAttachedFiles.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+                                Exit Select
+                            Case Is = "Folder"
+                                ''  need logic here to determine if source and dest are the same 
+                                '' if so, some how change dir name
+                                '' aka: scerio where folder is being brought out of 1 level down folder
+                                '' to root directory of attached files for lead 
+                                '' 
+
+                                If src_dir = (dest_dir & "\" & fname) Then
+                                    Dim root_dir As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                                    System.IO.Directory.Move(src_dir, root_dir & fname)
+                                ElseIf src_dir <> (dest_dir & "\" & fname) Then
+                                    System.IO.Directory.Move(src_dir, dest_dir & "\" & fname)
+                                End If
+
+
+                                '' now repop
+                                Dim cur_dir As String = Me.lsAttachedFiles.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+                                Exit Select
+                            Case Else
+
+                        End Select
+                    Case Is = "COPY"
+                        Select Case sel_Item_right.SubItems(3).Text
+                            Case Is = "File"
+                                System.IO.File.Copy(src_dir, dest_dir & "\ Copy Of - " & fname & "." & fileExt)
+                                '' now repop
+                                Dim cur_dir As String = Me.lsAttachedFiles.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+                                Exit Select
+                            Case Is = "Folder"
+                                My.Computer.FileSystem.CopyDirectory(src_dir, dest_dir & "\ Copy Of -" & fname)
+                                '' now repop
+                                Dim cur_dir As String = Me.lsAttachedFiles.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+                                Exit Select
+                            Case Else
+
+                        End Select
+                    Case Else
+
+                        Exit Select
+
+                End Select
+
+                sel_Item_left = Nothing
+                sel_Item_right = Nothing
+                Me.btnPaste.Enabled = False
             End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "btnPaste_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-            Select Case operation
-                Case Is = "CUT"
-                    Select Case sel_Item_right.SubItems(3).Text
-                        Case Is = "File"
-                            System.IO.File.Move(src_dir, dest_dir & "\" & fname & "." & fileExt)
-                            '' now repop
-                            Dim cur_dir As String = Me.lsAttachedFiles.Tag
-                            If Len(cur_dir) <= 0 Then
-                                cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                            ElseIf Len(cur_dir) >= 1 Then
-                                cur_dir = cur_dir
-                            End If
-                            Dim af As New AF_And_JP_Logic(cur_dir)
-                            Me.lsAttachedFiles.Items.Clear()
-                            For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = x.FileName
-                                lvItem.Tag = x.FullPath
-                                lvItem.SubItems.Add(x.DateModified)
-                                Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                If x.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                ElseIf x.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                End If
-
-                                If x.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                ElseIf x.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                End If
-
-                                If x.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                ElseIf x.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = x.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-                            Exit Select
-                        Case Is = "Folder"
-                            ''  need logic here to determine if source and dest are the same 
-                            '' if so, some how change dir name
-                            '' aka: scerio where folder is being brought out of 1 level down folder
-                            '' to root directory of attached files for lead 
-                            '' 
-
-                            If src_dir = (dest_dir & "\" & fname) Then
-                                Dim root_dir As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                                System.IO.Directory.Move(src_dir, root_dir & fname)
-                            ElseIf src_dir <> (dest_dir & "\" & fname) Then
-                                System.IO.Directory.Move(src_dir, dest_dir & "\" & fname)
-                            End If
-
-
-                            '' now repop
-                            Dim cur_dir As String = Me.lsAttachedFiles.Tag
-                            If Len(cur_dir) <= 0 Then
-                                cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                            ElseIf Len(cur_dir) >= 1 Then
-                                cur_dir = cur_dir
-                            End If
-                            Dim af As New AF_And_JP_Logic(cur_dir)
-                            Me.lsAttachedFiles.Items.Clear()
-                            For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = x.FileName
-                                lvItem.Tag = x.FullPath
-                                lvItem.SubItems.Add(x.DateModified)
-                                Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                If x.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                ElseIf x.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                End If
-
-                                If x.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                ElseIf x.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                End If
-
-                                If x.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                ElseIf x.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = x.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-                            Exit Select
-                        Case Else
-
-                    End Select
-                Case Is = "COPY"
-                    Select Case sel_Item_right.SubItems(3).Text
-                        Case Is = "File"
-                            System.IO.File.Copy(src_dir, dest_dir & "\ Copy Of - " & fname & "." & fileExt)
-                            '' now repop
-                            Dim cur_dir As String = Me.lsAttachedFiles.Tag
-                            If Len(cur_dir) <= 0 Then
-                                cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                            ElseIf Len(cur_dir) >= 1 Then
-                                cur_dir = cur_dir
-                            End If
-                            Dim af As New AF_And_JP_Logic(cur_dir)
-                            Me.lsAttachedFiles.Items.Clear()
-                            For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = x.FileName
-                                lvItem.Tag = x.FullPath
-                                lvItem.SubItems.Add(x.DateModified)
-                                Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                If x.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                ElseIf x.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                End If
-
-                                If x.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                ElseIf x.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                End If
-
-                                If x.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                ElseIf x.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = x.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-                            Exit Select
-                        Case Is = "Folder"
-                            My.Computer.FileSystem.CopyDirectory(src_dir, dest_dir & "\ Copy Of -" & fname)
-                            '' now repop
-                            Dim cur_dir As String = Me.lsAttachedFiles.Tag
-                            If Len(cur_dir) <= 0 Then
-                                cur_dir = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                            ElseIf Len(cur_dir) >= 1 Then
-                                cur_dir = cur_dir
-                            End If
-                            Dim af As New AF_And_JP_Logic(cur_dir)
-                            Me.lsAttachedFiles.Items.Clear()
-                            For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = x.FileName
-                                lvItem.Tag = x.FullPath
-                                lvItem.SubItems.Add(x.DateModified)
-                                Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                If x.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                ElseIf x.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                End If
-
-                                If x.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                ElseIf x.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                End If
-
-                                If x.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                ElseIf x.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = x.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsAttachedFiles.Items.Add(lvItem)
-                            Next
-                            Exit Select
-                        Case Else
-
-                    End Select
-                Case Else
-
-                    Exit Select
-
-            End Select
-
-            sel_Item_left = Nothing
-            sel_Item_right = Nothing
-            Me.btnPaste.Enabled = False
-        End If
     End Sub
 
     Private Sub btnPasteJP_Click(sender As Object, e As EventArgs) Handles btnPasteJP.Click
-        Dim itemToCCP As String = My.Computer.Clipboard.GetText(TextDataFormat.Text)
-        If Len(itemToCCP) <= 0 Then
-            '' nothng here
-            sel_Item_Left_Jp = Nothing
-            sel_Item_Right_Jp = Nothing
-            Me.btnPasteJP.Enabled = False
-        ElseIf Len(itemToCCP) >= 1 Then
-            Dim parts() = Split(itemToCCP, "|", -1, Microsoft.VisualBasic.CompareMethod.Text)
-            Dim operation As String = parts(0)
-            Dim performOpOn As String = parts(1)
+        Try
+            Dim itemToCCP As String = My.Computer.Clipboard.GetText(TextDataFormat.Text)
+            If Len(itemToCCP) <= 0 Then
+                '' nothng here
+                sel_Item_Left_Jp = Nothing
+                sel_Item_Right_Jp = Nothing
+                Me.btnPasteJP.Enabled = False
+            ElseIf Len(itemToCCP) >= 1 Then
+                Dim parts() = Split(itemToCCP, "|", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                Dim operation As String = parts(0)
+                Dim performOpOn As String = parts(1)
 
-            ''MsgBox("Operation: " & operation & vbCrLf & "Perform Operation On: " & performOpOn, MsgBoxStyle.Information, "DEBUG CCP Operations")
+                ''MsgBox("Operation: " & operation & vbCrLf & "Perform Operation On: " & performOpOn, MsgBoxStyle.Information, "DEBUG CCP Operations")
 
-            Dim src_dir As String = sel_Item_Right_Jp.Tag
-
-
-            Dim dest_dir As String = Me.lsJobPictures.Tag
-            Dim fname As String = ""
-            Dim folname As String = ""
-            Dim fileExt As String = ""
+                Dim src_dir As String = sel_Item_Right_Jp.Tag
 
 
-            '' need file ext for file copy
-            '' IF is file
-            If Len(dest_dir) <= 0 Then
-                '' change to root dir
-                dest_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                fname = SplitApartFileName(sel_Item_Right_Jp.Tag)
-                folname = SplitFolderName(sel_Item_Right_Jp.Tag)
-                fileExt = SplitApartFileExt(sel_Item_Right_Jp.Tag)
-            ElseIf Len(dest_dir) >= 1 Then
-                dest_dir = dest_dir
-                fname = SplitApartFileName(sel_Item_Right_Jp.Tag)
-                folname = SplitFolderName(sel_Item_Right_Jp.Tag)
-                fileExt = SplitApartFileExt(sel_Item_Right_Jp.Tag)
+                Dim dest_dir As String = Me.lsJobPictures.Tag
+                Dim fname As String = ""
+                Dim folname As String = ""
+                Dim fileExt As String = ""
+
+
+                '' need file ext for file copy
+                '' IF is file
+                If Len(dest_dir) <= 0 Then
+                    '' change to root dir
+                    dest_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                    fname = SplitApartFileName(sel_Item_Right_Jp.Tag)
+                    folname = SplitFolderName(sel_Item_Right_Jp.Tag)
+                    fileExt = SplitApartFileExt(sel_Item_Right_Jp.Tag)
+                ElseIf Len(dest_dir) >= 1 Then
+                    dest_dir = dest_dir
+                    fname = SplitApartFileName(sel_Item_Right_Jp.Tag)
+                    folname = SplitFolderName(sel_Item_Right_Jp.Tag)
+                    fileExt = SplitApartFileExt(sel_Item_Right_Jp.Tag)
+                End If
+
+                Select Case operation
+                    Case Is = "CUT"
+                        Select Case sel_Item_Right_Jp.SubItems(3).Text
+                            Case Is = "File"
+                                System.IO.File.Move(src_dir, dest_dir & "\" & fname & "." & fileExt)
+                                '' now repop
+                                Dim cur_dir As String = Me.lsJobPictures.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsJobPictures.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+                                Exit Select
+                            Case Is = "Folder"
+                                ''  need logic here to determine if source and dest are the same 
+                                '' if so, some how change dir name
+                                '' aka: scerio where folder is being brought out of 1 level down folder
+                                '' to root directory of attached files for lead 
+                                '' 
+
+                                If src_dir = (dest_dir & "\" & fname) Then
+                                    Dim root_dir As String = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                    System.IO.Directory.Move(src_dir, root_dir & fname)
+                                ElseIf src_dir <> (dest_dir & "\" & fname) Then
+                                    System.IO.Directory.Move(src_dir, dest_dir & "\" & fname)
+                                End If
+
+
+                                '' now repop
+                                Dim cur_dir As String = Me.lsJobPictures.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsJobPictures.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+                                Exit Select
+                            Case Else
+
+                        End Select
+                    Case Is = "COPY"
+                        Select Case sel_Item_Right_Jp.SubItems(3).Text
+                            Case Is = "File"
+                                System.IO.File.Copy(src_dir, dest_dir & "\ Copy Of - " & fname & "." & fileExt)
+                                '' now repop
+                                Dim cur_dir As String = Me.lsJobPictures.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsJobPictures.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+                                Exit Select
+                            Case Is = "Folder"
+                                My.Computer.FileSystem.CopyDirectory(src_dir, dest_dir & "\ Copy Of -" & fname)
+                                '' now repop
+                                Dim cur_dir As String = Me.lsJobPictures.Tag
+                                If Len(cur_dir) <= 0 Then
+                                    cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+                                ElseIf Len(cur_dir) >= 1 Then
+                                    cur_dir = cur_dir
+                                End If
+                                Dim af As New AF_And_JP_Logic(cur_dir)
+                                Me.lsJobPictures.Items.Clear()
+                                For Each x As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = x.FileName
+                                    lvItem.Tag = x.FullPath
+                                    lvItem.SubItems.Add(x.DateModified)
+                                    Dim sz = Math.Round(x.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(x.FileName, x.smIcon)
+                                    If x.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.smThumb)
+                                    ElseIf x.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
+                                    End If
+
+                                    If x.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
+                                    ElseIf x.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    If x.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
+                                    ElseIf x.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
+                                    End If
+
+                                    If x.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.Tile)
+                                    ElseIf x.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = x.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsJobPictures.Items.Add(lvItem)
+                                Next
+                                Exit Select
+                            Case Else
+
+                        End Select
+                    Case Else
+
+                        Exit Select
+
+                End Select
+
+                sel_Item_Left_Jp = Nothing
+                sel_Item_Right_Jp = Nothing
+                Me.btnPasteJP.Enabled = False
             End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "btnPasteJP_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-            Select Case operation
-                Case Is = "CUT"
-                    Select Case sel_Item_Right_Jp.SubItems(3).Text
-                        Case Is = "File"
-                            System.IO.File.Move(src_dir, dest_dir & "\" & fname & "." & fileExt)
-                            '' now repop
-                            Dim cur_dir As String = Me.lsJobPictures.Tag
-                            If Len(cur_dir) <= 0 Then
-                                cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                            ElseIf Len(cur_dir) >= 1 Then
-                                cur_dir = cur_dir
-                            End If
-                            Dim af As New AF_And_JP_Logic(cur_dir)
-                            Me.lsJobPictures.Items.Clear()
-                            For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = x.FileName
-                                lvItem.Tag = x.FullPath
-                                lvItem.SubItems.Add(x.DateModified)
-                                Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                If x.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                ElseIf x.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                End If
-
-                                If x.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                ElseIf x.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                End If
-
-                                If x.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                ElseIf x.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = x.FileName
-                                Me.lsJobPictures.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsJobPictures.Items.Add(lvItem)
-                            Next
-                            Exit Select
-                        Case Is = "Folder"
-                            ''  need logic here to determine if source and dest are the same 
-                            '' if so, some how change dir name
-                            '' aka: scerio where folder is being brought out of 1 level down folder
-                            '' to root directory of attached files for lead 
-                            '' 
-
-                            If src_dir = (dest_dir & "\" & fname) Then
-                                Dim root_dir As String = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                                System.IO.Directory.Move(src_dir, root_dir & fname)
-                            ElseIf src_dir <> (dest_dir & "\" & fname) Then
-                                System.IO.Directory.Move(src_dir, dest_dir & "\" & fname)
-                            End If
-
-
-                            '' now repop
-                            Dim cur_dir As String = Me.lsJobPictures.Tag
-                            If Len(cur_dir) <= 0 Then
-                                cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                            ElseIf Len(cur_dir) >= 1 Then
-                                cur_dir = cur_dir
-                            End If
-                            Dim af As New AF_And_JP_Logic(cur_dir)
-                            Me.lsJobPictures.Items.Clear()
-                            For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = x.FileName
-                                lvItem.Tag = x.FullPath
-                                lvItem.SubItems.Add(x.DateModified)
-                                Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                If x.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                ElseIf x.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                End If
-
-                                If x.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                ElseIf x.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                End If
-
-                                If x.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                ElseIf x.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = x.FileName
-                                Me.lsJobPictures.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsJobPictures.Items.Add(lvItem)
-                            Next
-                            Exit Select
-                        Case Else
-
-                    End Select
-                Case Is = "COPY"
-                    Select Case sel_Item_Right_Jp.SubItems(3).Text
-                        Case Is = "File"
-                            System.IO.File.Copy(src_dir, dest_dir & "\ Copy Of - " & fname & "." & fileExt)
-                            '' now repop
-                            Dim cur_dir As String = Me.lsJobPictures.Tag
-                            If Len(cur_dir) <= 0 Then
-                                cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                            ElseIf Len(cur_dir) >= 1 Then
-                                cur_dir = cur_dir
-                            End If
-                            Dim af As New AF_And_JP_Logic(cur_dir)
-                            Me.lsJobPictures.Items.Clear()
-                            For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = x.FileName
-                                lvItem.Tag = x.FullPath
-                                lvItem.SubItems.Add(x.DateModified)
-                                Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                If x.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                ElseIf x.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                End If
-
-                                If x.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                ElseIf x.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                End If
-
-                                If x.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                ElseIf x.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = x.FileName
-                                Me.lsJobPictures.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsJobPictures.Items.Add(lvItem)
-                            Next
-                            Exit Select
-                        Case Is = "Folder"
-                            My.Computer.FileSystem.CopyDirectory(src_dir, dest_dir & "\ Copy Of -" & fname)
-                            '' now repop
-                            Dim cur_dir As String = Me.lsJobPictures.Tag
-                            If Len(cur_dir) <= 0 Then
-                                cur_dir = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-                            ElseIf Len(cur_dir) >= 1 Then
-                                cur_dir = cur_dir
-                            End If
-                            Dim af As New AF_And_JP_Logic(cur_dir)
-                            Me.lsJobPictures.Items.Clear()
-                            For Each x As AF_And_JP_Logic.FileObject In af.Files
-                                Dim lvItem As New ListViewItem
-                                '' Name | Date Mod | Size | Type
-                                lvItem.Text = x.FileName
-                                lvItem.Tag = x.FullPath
-                                lvItem.SubItems.Add(x.DateModified)
-                                Dim sz = Math.Round(x.FileSize / 1024, 0)
-                                Dim sz_str As String = sz.ToString & " KB"
-                                lvItem.SubItems.Add(sz_str)
-                                lvItem.SubItems.Add("File")
-                                Me.imgLst16.Images.Add(x.FileName, x.smIcon)
-                                If x.smThumb IsNot Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.smThumb)
-                                ElseIf x.smThumb Is Nothing Then
-                                    Me.imgLst16.Images.Add(x.FileName, x.mdIcon)
-                                End If
-
-                                If x.mdThumb IsNot Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.mdThumb Is Nothing Then
-                                    Me.ImgLst32.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.lgThumb IsNot Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgThumb)
-                                ElseIf x.lgThumb Is Nothing Then
-                                    Me.ImgLst48.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                If x.jbThumb IsNot Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbThumb)
-                                ElseIf x.jbThumb Is Nothing Then
-                                    Me.ImgLst256.Images.Add(x.FileName, x.jbIcon)
-                                End If
-
-                                If x.Tile IsNot Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.Tile)
-                                ElseIf x.Tile Is Nothing Then
-                                    Me.ImgLst128.Images.Add(x.FileName, x.lgIcon)
-                                End If
-
-                                lvItem.ImageKey = x.FileName
-                                Me.lsJobPictures.Items.Add(lvItem)
-                            Next
-
-                            For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                Dim lvItem As New ListViewItem
-                                lvItem.Text = y.FileName
-                                lvItem.Tag = y.FullPath
-                                lvItem.SubItems.Add(y.DateModified)
-                                lvItem.SubItems.Add("")
-                                lvItem.SubItems.Add("Folder")
-                                Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                lvItem.ImageKey = y.FileName
-                                Me.lsJobPictures.Items.Add(lvItem)
-                            Next
-                            Exit Select
-                        Case Else
-
-                    End Select
-                Case Else
-
-                    Exit Select
-
-            End Select
-
-            sel_Item_Left_Jp = Nothing
-            sel_Item_Right_Jp = Nothing
-            Me.btnPasteJP.Enabled = False
-        End If
     End Sub
 
 
@@ -7994,6 +8448,9 @@ Public Class Sales
         Catch ex As Exception
             '' fail it here
             'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split File Name Error")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitApartFileName(fullpath)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Function
 
@@ -8044,46 +8501,60 @@ Public Class Sales
     End Sub
 
     Public Sub Get_ToolStrip_Templates()
-        Me.cboEmailTemplates.Items.Clear()
-        Dim y As New emlTemplateLogic
-        Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-        Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
-        Dim g As List(Of emlTemplateLogic.TemplateInfo)
-        g = y.GetTemplatesByDepartment(False, depart_)
-        Dim a As emlTemplateLogic.TemplateInfo
-        For Each a In g
-            Me.cboEmailTemplates.Items.Add(a.TemplateName)
-        Next
-    End Sub
-
-    Private Sub cboEmailTemplates_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEmailTemplates.SelectedIndexChanged
-        Dim tsCBO As ToolStripComboBox = sender
-        Dim ts_txt As String = tsCBO.Text
-        If Len(ts_txt) <= 0 Then
-            Exit Sub
-        ElseIf Len(ts_txt) >= 1 Then
-            'MsgBox("Template Name: " & ts_txt, MsgBoxStyle.Information, "DEBUG INFO")
+        Try
+            Me.cboEmailTemplates.Items.Clear()
             Dim y As New emlTemplateLogic
             Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
             Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
+            Dim g As List(Of emlTemplateLogic.TemplateInfo)
+            g = y.GetTemplatesByDepartment(False, depart_)
             Dim a As emlTemplateLogic.TemplateInfo
-            a = y.GetSingleTemplate(ts_txt, False)
-            'MsgBox("Template Name: '" & a.TemplateName & "'" & vbCrLf & "Template Subject: '" & a.Subject & "'" & vbCrLf & "Template Body: '" & a.Body & "'", MsgBoxStyle.Information, "DEBUG INFO")
-            Dim b As New emlTemplateLogic
-            Dim id As String = STATIC_VARIABLES.CurrentID
-            If Len(id) <= 0 Then
-                MsgBox("No lead selected to apply template to.", MsgBoxStyle.Critical, "No Lead Selected")
+            For Each a In g
+                Me.cboEmailTemplates.Items.Add(a.TemplateName)
+            Next
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "Get_Toolstrip_Templates()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub cboEmailTemplates_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEmailTemplates.SelectedIndexChanged
+        Try
+            Dim tsCBO As ToolStripComboBox = sender
+            Dim ts_txt As String = tsCBO.Text
+            If Len(ts_txt) <= 0 Then
                 Exit Sub
-            ElseIf Len(id) >= 1 Then
-                id = id
+            ElseIf Len(ts_txt) >= 1 Then
+                'MsgBox("Template Name: " & ts_txt, MsgBoxStyle.Information, "DEBUG INFO")
+                Dim y As New emlTemplateLogic
+                Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
+                Dim a As emlTemplateLogic.TemplateInfo
+                a = y.GetSingleTemplate(ts_txt, False)
+                'MsgBox("Template Name: '" & a.TemplateName & "'" & vbCrLf & "Template Subject: '" & a.Subject & "'" & vbCrLf & "Template Body: '" & a.Body & "'", MsgBoxStyle.Information, "DEBUG INFO")
+                Dim b As New emlTemplateLogic
+                Dim id As String = STATIC_VARIABLES.CurrentID
+                If Len(id) <= 0 Then
+                    MsgBox("No lead selected to apply template to.", MsgBoxStyle.Critical, "No Lead Selected")
+                    Exit Sub
+                ElseIf Len(id) >= 1 Then
+                    id = id
+                End If
+                'Dim scrubbedText As String = b.TestTemplateScrub(id, False, "TEST TEMPLATE", "Administration")
+                Dim aa As New convertLeadToStruct
+                Dim Lead_ As convertLeadToStruct.EnterLead_Record = aa.ConvertToStructure(id, False)
+                frmEmailPreview.LeadToShow = Lead_
+                frmEmailPreview.TemplateName = ts_txt
+                frmEmailPreview.ShowDialog()
             End If
-            'Dim scrubbedText As String = b.TestTemplateScrub(id, False, "TEST TEMPLATE", "Administration")
-            Dim aa As New convertLeadToStruct
-            Dim Lead_ As convertLeadToStruct.EnterLead_Record = aa.ConvertToStructure(id, False)
-            frmEmailPreview.LeadToShow = Lead_
-            frmEmailPreview.TemplateName = ts_txt
-            frmEmailPreview.ShowDialog()
-        End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "cboEmailTemplates_SelectedIndexChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnCreateNewEmailTemplate_Click(sender As Object, e As EventArgs) Handles btnCreateNewEmailTemplate.Click
@@ -8126,26 +8597,39 @@ Public Class Sales
     End Sub
 
     Private Sub bgSalesQuery_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgSalesQuery.DoWork
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim c As New SalesListManager(sender)
+            arItemCache = New ArrayList
+            arItemCache = c.LV_Sales_Items
+            bgSalesQuery_RunWorkerCompleted(Me, Nothing)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_DoWork", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-        Me.Cursor = Cursors.WaitCursor
-        Dim c As New SalesListManager(sender)
-        arItemCache = New ArrayList
-        arItemCache = c.LV_Sales_Items
-        bgSalesQuery_RunWorkerCompleted(Me, Nothing)
     End Sub
 
-    
+
     Private Sub bgSalesQuery_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles bgSalesQuery.RunWorkerCompleted
-        If arItemCache.Count > 1 Then
-            Dim a As ListViewItem = arItemCache(0)
-            STATIC_VARIABLES.CurrentID = a.Text
-            Me.Text = "Sales Department Record ID: " & a.Text
-            PullInfo(a.Text)
-            AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-            Me.lvSales.EnsureVisible(0)
-            RaiseEvent PopCustHistory()
-        End If
-        Me.Cursor = Cursors.Default
+        Try
+            If arItemCache.Count > 1 Then
+                Dim a As ListViewItem = arItemCache(0)
+                STATIC_VARIABLES.CurrentID = a.Text
+                Me.Text = "Sales Department Record ID: " & a.Text
+                PullInfo(a.Text)
+                AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                Me.lvSales.EnsureVisible(0)
+                RaiseEvent PopCustHistory()
+            End If
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_RunworkerCompleted", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
@@ -8161,7 +8645,14 @@ Public Class Sales
     End Sub
 
     Private Sub bgCustomerHistory_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgCustomerHistory.DoWork
-        Dim c As New CustomerHistory
-        c.SetUp(Me, STATIC_VARIABLES.CurrentID, Me.TScboCustomerHistory)
+        Try
+            Dim c As New CustomerHistory
+            c.SetUp(Me, STATIC_VARIABLES.CurrentID, Me.TScboCustomerHistory)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgCustomerHistory_DoWork", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 End Class

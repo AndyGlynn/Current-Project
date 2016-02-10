@@ -12,6 +12,14 @@ Imports System.Runtime.InteropServices
 Imports System.String
 Imports System.Text
 
+'' Notes: 2-10-16
+'' This class is NO LONGER being used.
+'' Due to a redraw issue on the front end, all of this was switched over
+'' to static controls.
+'' This class is left for a point of reference ONLY.
+'' Not going to wrap in error handlers.
+'' AC 
+
 
 Public Class ReusableListViewControl
 #Region "structures"

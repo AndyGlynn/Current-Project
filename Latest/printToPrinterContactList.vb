@@ -98,6 +98,9 @@ Public Class printToPrinterContactList
         Catch ex As Exception
             Dim err As String = ex.Message
             MsgBox("Error:" & err, MsgBoxStyle.Exclamation, "Print Preview Error")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "printToPrinterContactList", "printToPrinterContactList", "Sub", "ShowDoc()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 
@@ -105,99 +108,105 @@ Public Class printToPrinterContactList
 
         '' layout rectangles -> e.graphics.drawRectangle() is for debug purpose only.
         ''
+        Try
+            Dim ttlcnt As Integer = arRecs.Count - 1
+            Dim currentIteration As Integer = -1
+            Dim linesPerPage As Single = CInt(e.MarginBounds.Height / pr_font.GetHeight(e.Graphics)) - 1
+            Dim yPos As Integer = 0
+            Dim a As Integer = 0
+            Dim totalRect As New System.Drawing.Rectangle(e.MarginBounds.Left + 5, e.MarginBounds.Top + 5, e.MarginBounds.Width - 10, e.MarginBounds.Height - 10)
 
-        Dim ttlcnt As Integer = arRecs.Count - 1
-        Dim currentIteration As Integer = -1
-        Dim linesPerPage As Single = CInt(e.MarginBounds.Height / pr_font.GetHeight(e.Graphics)) - 1
-        Dim yPos As Integer = 0
-        Dim a As Integer = 0
-        Dim totalRect As New System.Drawing.Rectangle(e.MarginBounds.Left + 5, e.MarginBounds.Top + 5, e.MarginBounds.Width - 10, e.MarginBounds.Height - 10)
+            'e.Graphics.DrawRectangle(Pens.Blue, totalRect)
+            'For a = 0 To linesPerPage - 1
+            Dim numPages As Integer = CInt(ttlcnt / (linesPerPage - 1)) + 1
+            ttlPages = numPages
 
-        'e.Graphics.DrawRectangle(Pens.Blue, totalRect)
-        'For a = 0 To linesPerPage - 1
-        Dim numPages As Integer = CInt(ttlcnt / (linesPerPage - 1)) + 1
-        ttlPages = numPages
+            For a = 0 To linesPerPage - 1
+                posIDX += 1
+                curIDX += 1
 
-        For a = 0 To linesPerPage - 1
-            posIDX += 1
-            curIDX += 1
+                currentIteration += 1
+                yPos = (currentIteration * pr_font.GetHeight(e.Graphics)) + e.MarginBounds.Top + 10
+                Dim height As Integer = CInt(pr_font.GetHeight(e.Graphics))
 
-            currentIteration += 1
-            yPos = (currentIteration * pr_font.GetHeight(e.Graphics)) + e.MarginBounds.Top + 10
-            Dim height As Integer = CInt(pr_font.GetHeight(e.Graphics))
+                '' ID Rect
+                Dim rectF As New System.Drawing.Rectangle(e.MarginBounds.Left + 10, yPos, 70, height)
+                'e.Graphics.DrawRectangle(Pens.Blue, rectF)
+                e.Graphics.DrawString(arRecs(curIDX).ID.ToString, pr_font, Brushes.Black, rectF)
 
-            '' ID Rect
-            Dim rectF As New System.Drawing.Rectangle(e.MarginBounds.Left + 10, yPos, 70, height)
-            'e.Graphics.DrawRectangle(Pens.Blue, rectF)
-            e.Graphics.DrawString(arRecs(curIDX).ID.ToString, pr_font, Brushes.Black, rectF)
+                '' contacts
+                Dim rectG As New System.Drawing.Rectangle(e.MarginBounds.Left + 80, yPos, 200, height)
+                'e.Graphics.DrawRectangle(Pens.Blue, rectG)
+                e.Graphics.DrawString(arRecs(curIDX).ContactInfo, pr_font, Brushes.Black, rectG)
 
-            '' contacts
-            Dim rectG As New System.Drawing.Rectangle(e.MarginBounds.Left + 80, yPos, 200, height)
-            'e.Graphics.DrawRectangle(Pens.Blue, rectG)
-            e.Graphics.DrawString(arRecs(curIDX).ContactInfo, pr_font, Brushes.Black, rectG)
+                '' address
+                Dim rectA As New System.Drawing.Rectangle(e.MarginBounds.Left + 280, yPos, 250, height)
+                'e.Graphics.DrawRectangle(Pens.Blue, rectA)
+                e.Graphics.DrawString(arRecs(curIDX).Address, pr_font, Brushes.Black, rectA)
 
-            '' address
-            Dim rectA As New System.Drawing.Rectangle(e.MarginBounds.Left + 280, yPos, 250, height)
-            'e.Graphics.DrawRectangle(Pens.Blue, rectA)
-            e.Graphics.DrawString(arRecs(curIDX).Address, pr_font, Brushes.Black, rectA)
+                ''house phone
+                Dim rectP As New System.Drawing.Rectangle(e.MarginBounds.Left + 530, yPos, 125, height)
+                ' e.Graphics.DrawRectangle(Pens.Blue, rectP)
+                e.Graphics.DrawString(arRecs(curIDX).Phone, pr_font, Brushes.Black, rectP)
 
-            ''house phone
-            Dim rectP As New System.Drawing.Rectangle(e.MarginBounds.Left + 530, yPos, 125, height)
-            ' e.Graphics.DrawRectangle(Pens.Blue, rectP)
-            e.Graphics.DrawString(arRecs(curIDX).Phone, pr_font, Brushes.Black, rectP)
+                ''products
+                Dim rectPR As New System.Drawing.Rectangle(e.MarginBounds.Left + 655, yPos, 75, height)
+                'e.Graphics.DrawRectangle(Pens.Blue, rectPR)
+                e.Graphics.DrawString(arRecs(curIDX).Products, pr_font, Brushes.Black, rectPR)
 
-            ''products
-            Dim rectPR As New System.Drawing.Rectangle(e.MarginBounds.Left + 655, yPos, 75, height)
-            'e.Graphics.DrawRectangle(Pens.Blue, rectPR)
-            e.Graphics.DrawString(arRecs(curIDX).Products, pr_font, Brushes.Black, rectPR)
+                '' appt date/time
+                Dim rectDT As New System.Drawing.Rectangle(e.MarginBounds.Left + 730, yPos, 200, height)
+                'e.Graphics.DrawRectangle(Pens.Blue, rectDT)
+                e.Graphics.DrawString(arRecs(curIDX).ApptDateAndTime, pr_font, Brushes.Black, rectDT)
 
-            '' appt date/time
-            Dim rectDT As New System.Drawing.Rectangle(e.MarginBounds.Left + 730, yPos, 200, height)
-            'e.Graphics.DrawRectangle(Pens.Blue, rectDT)
-            e.Graphics.DrawString(arRecs(curIDX).ApptDateAndTime, pr_font, Brushes.Black, rectDT)
+                ''Rep(s)
+                Dim rectREP As New System.Drawing.Rectangle(e.MarginBounds.Left + 930, yPos, 160, height)
+                'e.Graphics.DrawRectangle(Pens.Blue, rectREP)
+                e.Graphics.DrawString(arRecs(curIDX).Reps, pr_font, Brushes.Black, rectREP)
 
-            ''Rep(s)
-            Dim rectREP As New System.Drawing.Rectangle(e.MarginBounds.Left + 930, yPos, 160, height)
-            'e.Graphics.DrawRectangle(Pens.Blue, rectREP)
-            e.Graphics.DrawString(arRecs(curIDX).Reps, pr_font, Brushes.Black, rectREP)
-
-            If posIDX = ttlcnt Then
-                Exit For
-            End If
-        Next
-        page += 1
-
-        e.HasMorePages = page < numPages
-
-        '' according to msdn and various forum posts
-        '' the 'build document' portion is run 2x
-        '' once for preview, once for actual print
-        '' have to reinitialize the variables (reset them) for when you actually
-        '' decide to hit 'print' from print preview.
-        '' 
-
-        '' resetting of the vars
-        '' for actual print call
-        If Not e.HasMorePages Then
-            ttlPages = 0
-            page = 0
-            posIDX = 0
-            curIDX = -1
-            arRecs = New List(Of RecordOBJ)
-            '' repop list of structs
-            For Each y As ListViewItem In lvCol
-                '' convert to struct here
-                Dim b As New RecordOBJ
-                b.ID = y.Text
-                b.ContactInfo = y.SubItems(1).Text
-                b.Address = y.SubItems(2).Text
-                b.Phone = y.SubItems(3).Text
-                b.Products = y.SubItems(4).Text
-                b.ApptDateAndTime = y.SubItems(5).Text
-                b.Reps = y.SubItems(6).Text
-                arRecs.Add(b)
+                If posIDX = ttlcnt Then
+                    Exit For
+                End If
             Next
-        End If
+            page += 1
+
+            e.HasMorePages = page < numPages
+
+            '' according to msdn and various forum posts
+            '' the 'build document' portion is run 2x
+            '' once for preview, once for actual print
+            '' have to reinitialize the variables (reset them) for when you actually
+            '' decide to hit 'print' from print preview.
+            '' 
+
+            '' resetting of the vars
+            '' for actual print call
+            If Not e.HasMorePages Then
+                ttlPages = 0
+                page = 0
+                posIDX = 0
+                curIDX = -1
+                arRecs = New List(Of RecordOBJ)
+                '' repop list of structs
+                For Each y As ListViewItem In lvCol
+                    '' convert to struct here
+                    Dim b As New RecordOBJ
+                    b.ID = y.Text
+                    b.ContactInfo = y.SubItems(1).Text
+                    b.Address = y.SubItems(2).Text
+                    b.Phone = y.SubItems(3).Text
+                    b.Products = y.SubItems(4).Text
+                    b.ApptDateAndTime = y.SubItems(5).Text
+                    b.Reps = y.SubItems(6).Text
+                    arRecs.Add(b)
+                Next
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "printToPrinterContactList", "printToPrinterContactList", "Sub", "PD_PrintPage()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 End Class

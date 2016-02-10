@@ -23,9 +23,11 @@ Public Class ViewEditAutoNotes
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ViewEditAutoNotes", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Client", "PopulateList")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ViewEditAutoNotes", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Client", "PopulateList")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditAutoNotes", "ViewEditAutoNotes", "Sub", "PopulateList()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
     Public Sub InsertAutoNote(ByVal Response As String)
@@ -52,8 +54,12 @@ Public Class ViewEditAutoNotes
                         cnn.Close()
                         '' now repopulate list
                         'Me.PopuluateList()
+
                     Catch ex As Exception
                         cnn.Close()
+                        Dim y As New ErrorLogging_V2
+                        y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditAutoNotes", "ViewEditAutoNotes", "Sub", "InsertAutoNotes(response)", "0", ex.Message.ToString)
+                        y = Nothing
                     End Try
                     Exit Select
                 Case Is >= 1
@@ -67,9 +73,11 @@ Public Class ViewEditAutoNotes
             End Select
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ViewEditAutoNotes", "ByVal Response As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Client", "InsertAutoNote")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ViewEditAutoNotes", "ByVal Response As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Client", "InsertAutoNote")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditAutoNotes", "ViewEditAutoNotes", "Sub", "InsertAutoNote(response)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
     Public Sub DeleteNote(ByVal Response As String)
@@ -83,9 +91,11 @@ Public Class ViewEditAutoNotes
             'Me.PopuluateList()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("DeleteNote", "ByVal Response as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "DeleteNote")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("DeleteNote", "ByVal Response as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "DeleteNote")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditAutoNotes", "ViewEditAutoNotes", "Sub", "DeleteNote(response)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 End Class

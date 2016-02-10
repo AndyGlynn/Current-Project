@@ -28,9 +28,11 @@ Public Class ViewEditProducts
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ViewEditProducts", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateList")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ViewEditProducts", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateList")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditProducts", "ViewEditProducts", "Sub", "PopulateList()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 
@@ -69,9 +71,11 @@ Public Class ViewEditProducts
             End Select
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ViewEditProducts", "ByVal ProductName As String, ByVal ProdAcro As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "Add_Product")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ViewEditProducts", "ByVal ProductName As String, ByVal ProdAcro As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "Add_Product")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditProducts", "ViewEditProducts", "Sub", "Add_Product()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 End Class

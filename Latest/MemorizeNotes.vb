@@ -13,37 +13,38 @@ Public Class MemorizeNotes
 
     Private Sub btnsave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnsave.Click
         Try
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet As SqlCommand = New SqlCommand("dbo.MemorizeAppt", cnn)
+            Dim r1 As SqlDataReader
+            Dim param1 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
+            Dim param2 As SqlParameter = New SqlParameter("@Form", STATIC_VARIABLES.ActiveChild.Name)
+            Dim param3 As SqlParameter = New SqlParameter("@ID", STATIC_VARIABLES.CurrentID)
+            Dim param4 As SqlParameter = New SqlParameter("@Notes", Me.RichTextBox1.Text)
+            Dim param5 As SqlParameter = New SqlParameter("@Group", Me.cboGroup.Text)
 
+            cmdGet.Parameters.Add(param1)
+            cmdGet.Parameters.Add(param2)
+            cmdGet.Parameters.Add(param3)
+            cmdGet.Parameters.Add(param4)
+            cmdGet.Parameters.Add(param5)
+            cmdGet.CommandType = CommandType.StoredProcedure
+            cnn.Open()
+            r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+            r1.Read()
+            r1.Close()
+            cnn.Close()
+            Me.Close()
+            Me.Dispose()
+            If STATIC_VARIABLES.ActiveChild.Name = "WCaller" Then
+                Dim c As New WarmCalling.MyApptsTab.Populate(WCaller.cboFilter.Text)
+            ElseIf STATIC_VARIABLES.ActiveChild.Name = "Sales" Then
+                Sales.PopulateMemorized()
+            End If
         Catch ex As Exception
-
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MemorizeNotes", "FormCode", "Event", "btnSave_Click", "0", ex.Message.ToString)
+            y = Nothing
         End Try
-        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet As SqlCommand = New SqlCommand("dbo.MemorizeAppt", cnn)
-        Dim r1 As SqlDataReader
-        Dim param1 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
-        Dim param2 As SqlParameter = New SqlParameter("@Form", STATIC_VARIABLES.ActiveChild.Name)
-        Dim param3 As SqlParameter = New SqlParameter("@ID", STATIC_VARIABLES.CurrentID)
-        Dim param4 As SqlParameter = New SqlParameter("@Notes", Me.RichTextBox1.Text)
-        Dim param5 As SqlParameter = New SqlParameter("@Group", Me.cboGroup.Text)
-
-        cmdGet.Parameters.Add(param1)
-        cmdGet.Parameters.Add(param2)
-        cmdGet.Parameters.Add(param3)
-        cmdGet.Parameters.Add(param4)
-        cmdGet.Parameters.Add(param5)
-        cmdGet.CommandType = CommandType.StoredProcedure
-        cnn.Open()
-        r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-        r1.Read()
-        r1.Close()
-        cnn.Close()
-        Me.Close()
-        Me.Dispose()
-        If STATIC_VARIABLES.ActiveChild.Name = "WCaller" Then
-            Dim c As New WarmCalling.MyApptsTab.Populate(WCaller.cboFilter.Text)
-        ElseIf STATIC_VARIABLES.ActiveChild.Name = "Sales" Then
-            Sales.PopulateMemorized()
-        End If
 
     End Sub
 
@@ -71,7 +72,9 @@ Public Class MemorizeNotes
             r1.Close()
             cnn.Close()
         Catch ex As Exception
-
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MemorizeNotes", "FormCode", "Sub", "Populate_Groups", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
     Private Sub Add_Group()
@@ -115,7 +118,9 @@ Public Class MemorizeNotes
             cnn.Close()
             Me.cboGroup.SelectedItem = i
         Catch ex As Exception
-
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MemorizeNotes", "FormCode", "Sub", "Add_Group()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
   
 

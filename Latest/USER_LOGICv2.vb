@@ -147,15 +147,22 @@ Public Class USER_LOGICv2
         End Get
     End Property
     Public Function GET_arIPV4s_FROM_LOCAL_MACHINE() As ArrayList
-        Dim arIPs() = Dns.GetHostAddresses(My.Computer.Name.ToString)
-        arIPV4s = New ArrayList
-        Dim x
-        For Each x In arIPs
-            If x.AddressFamily = AddressFamily.InterNetwork Then
-                arIPV4s.add(x.ToString)
-            End If
-        Next
-        Return arIPV4s
+        Try
+            Dim arIPs() = Dns.GetHostAddresses(My.Computer.Name.ToString)
+            arIPV4s = New ArrayList
+            Dim x
+            For Each x In arIPs
+                If x.AddressFamily = AddressFamily.InterNetwork Then
+                    arIPV4s.add(x.ToString)
+                End If
+            Next
+            Return arIPV4s
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Function", "GET_arIPV4s_FROM_LOCAL_MACHINE", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 #End Region
 
@@ -168,59 +175,72 @@ Public Class USER_LOGICv2
 
 #Region "Login To System"
     Public Function Check_User_Exists(ByVal FName As String, ByVal LName As String)
-        Dim Exists As Boolean = False
-        Dim usr_cnx As SqlConnection = New SqlConnection(cnx)
-        Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from UserPermissionTable where UserFirstName = '" & FName & "' and UserLastName = '" & LName & "';", usr_cnx)
-        usr_cnx.Open()
-        Dim cnt As Integer = cmdCNT.ExecuteScalar
-        usr_cnx.Close()
-        usr_cnx = Nothing
-        If cnt = 0 Then
-            Exists = False
-        ElseIf cnt = 1 Then
-            Exists = True
-        End If
-        Return Exists
+        Try
+            Dim Exists As Boolean = False
+            Dim usr_cnx As SqlConnection = New SqlConnection(cnx)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from UserPermissionTable where UserFirstName = '" & FName & "' and UserLastName = '" & LName & "';", usr_cnx)
+            usr_cnx.Open()
+            Dim cnt As Integer = cmdCNT.ExecuteScalar
+            usr_cnx.Close()
+            usr_cnx = Nothing
+            If cnt = 0 Then
+                Exists = False
+            ElseIf cnt = 1 Then
+                Exists = True
+            End If
+            Return Exists
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Function", "Check_User_exists(fname,lname)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
 
     Public Function Check_Password(ByVal PWD As String, ByVal FName As String, ByVal LName As String)
-        Dim connect_or_not As Boolean = False
+        Try
+            Dim connect_or_not As Boolean = False
 
-        Dim num_errors As Integer = 0
+            Dim num_errors As Integer = 0
 
-        If PWD.ToString.Length <= 0 Then
-            num_errors += 1
-        End If
-
-        If FName.ToString.Length <= 0 Then
-            num_errors += 1
-        End If
-
-        If LName.ToString.Length <= 0 Then
-            num_errors += 1
-        End If
-
-        If num_errors >= 1 Then
-            MsgBox("Please check your entry and try again. " & vbCrLf & "You need to make sure you First Name, Last Name, and Password are not blank.", MsgBoxStyle.Critical, "Check Errors")
-            Return connect_or_not
-            Exit Function
-        ElseIf num_errors <= 0 Then
-
-            Dim usr_cnx As SqlConnection = New SqlConnection(cnx)
-            Dim cmdCheckPW As SqlCommand = New SqlCommand("SELECT count(ID) from UserPermissionTable where UserFirstName = '" & FName & "' and UserLastName = '" & LName & "' and UserPWD = '" & PWD & "';", usr_cnx)
-            usr_cnx.Open()
-            Dim validation_cnt As Integer = 0
-            validation_cnt = cmdCheckPW.ExecuteScalar
-            usr_cnx.Close()
-            usr_cnx = Nothing
-            If validation_cnt = 1 Then
-                connect_or_not = True
-            ElseIf validation_cnt <= 0 Then
-                connect_or_not = False
+            If PWD.ToString.Length <= 0 Then
+                num_errors += 1
             End If
-            Return connect_or_not
-        End If
 
+            If FName.ToString.Length <= 0 Then
+                num_errors += 1
+            End If
+
+            If LName.ToString.Length <= 0 Then
+                num_errors += 1
+            End If
+
+            If num_errors >= 1 Then
+                MsgBox("Please check your entry and try again. " & vbCrLf & "You need to make sure you First Name, Last Name, and Password are not blank.", MsgBoxStyle.Critical, "Check Errors")
+                Return connect_or_not
+                Exit Function
+            ElseIf num_errors <= 0 Then
+
+                Dim usr_cnx As SqlConnection = New SqlConnection(cnx)
+                Dim cmdCheckPW As SqlCommand = New SqlCommand("SELECT count(ID) from UserPermissionTable where UserFirstName = '" & FName & "' and UserLastName = '" & LName & "' and UserPWD = '" & PWD & "';", usr_cnx)
+                usr_cnx.Open()
+                Dim validation_cnt As Integer = 0
+                validation_cnt = cmdCheckPW.ExecuteScalar
+                usr_cnx.Close()
+                usr_cnx = Nothing
+                If validation_cnt = 1 Then
+                    connect_or_not = True
+                ElseIf validation_cnt <= 0 Then
+                    connect_or_not = False
+                End If
+                Return connect_or_not
+            End If
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Function", "Check_Password(pwd,ufname,ulname)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
     End Function
@@ -250,65 +270,68 @@ Public Class USER_LOGICv2
     '' new GetUserObj Function()
     '' 
     Public Function Get_User_Obj(ByVal UserFirstName As String, ByVal PWD As String)
-        'Try
-        Dim usr As New UserObj
-        Using cnx_ As New SqlConnection(cnx)
-            cnx_.Open()
-            Dim strGET As String = "SELECT * FROM UserPermissionTable WHERE UserFirstName = '" & UserFirstName & "';"
-            Dim cmdGET As New SqlCommand(strGET, cnx_)
-            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
-            While r1.Read
-                usr.UserFirstName = UserFirstName
-                usr.UserLastName = r1.Item("UserLastName")
-                usr.UserPWD = PWD
-                usr.ColdCall = r1.Item("ColdCall")
-                usr.WarmCall = r1.Item("WarmCall")
-                usr.PreviousCust = r1.Item("PreviousCust")
-                usr.Recovery = r1.Item("Recovery")
-                usr.Confirmer = r1.Item("Confirmer")
-                usr.SalesManager = r1.Item("SalesManager")
-                usr.MarketingManager = r1.Item("MarketingManager")
-                usr.Finance = r1.Item("Finance")
-                usr.Install = r1.Item("Install")
-                usr.Administration = r1.Item("Administration")
-                usr.StartUpForm = r1.Item("StartUpForm")
-                usr.LoggedOn = r1.Item("LoggedOn")
-                usr.DoNotShowMapWarning = r1.Item("DoNotShowMapWarning")
-                usr.MachineName = Get_MACH_NAME()
-                usr.ManagerFirstName = r1.Item("ManagerFirstName")
-                usr.ManagerLastName = r1.Item("ManagerLastName")
-                usr.IP = r1.Item("IP")
-                usr.LEASE_KEY = r1.Item("LEASE_KEY")
-                usr.LIC_KEY = r1.Item("LIC_KEY")
-                usr.Email = r1.Item("Email")
-                usr.EmailLogon = r1.Item("EmailLogon")
-                usr.EmailPassword = r1.Item("EmailPassword")
-                usr.Incoming = r1.Item("Incoming")
-                usr.Outgoing = r1.Item("Outgoing")
-                usr.IncomingPort = r1.Item("IncomingPort")
-                usr.OutgoingPort = r1.Item("OutgoingPort")
-                usr.IncomePortSSL = r1.Item("IncomePortSSL")
-                usr.OutgoPortSSL = r1.Item("OutgoPortSSL")
-                usr.LogonUsing = r1.Item("LogonUsing")
-                usr.OutgoServAuthen = r1.Item("OutgoServAuthen")
-                usr.SameSettings = r1.Item("SameSettings")
-                usr.OutGoUserName = r1.Item("OutgoUserName")
-                usr.OutgoPassword = r1.Item("OutgoPassword")
-                usr.OutGOSSL = r1.Item("OutgoSSL")
-                usr.CanEmail = r1.Item("CanEmail")
-                usr.ScreenPOSX = r1.Item("ScreenPosX")
-                usr.ScreenPOSY = r1.Item("ScreenPoxy")
-                usr.ScreenH = r1.Item("ScreenHeight")
-                usr.ScreenW = r1.Item("ScreenWidth")
-                usr.LastForm = r1.Item("LastForm")
-            End While
-            r1.Close()
-            cnx_.Close()
-        End Using
-        Return usr
-        'Catch ex As Exception
-        '' write to error log here.
-        ' End Try
+        Try
+            Dim usr As New UserObj
+            Using cnx_ As New SqlConnection(cnx)
+                cnx_.Open()
+                Dim strGET As String = "SELECT * FROM UserPermissionTable WHERE UserFirstName = '" & UserFirstName & "';"
+                Dim cmdGET As New SqlCommand(strGET, cnx_)
+                Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+                While r1.Read
+                    usr.UserFirstName = UserFirstName
+                    usr.UserLastName = r1.Item("UserLastName")
+                    usr.UserPWD = PWD
+                    usr.ColdCall = r1.Item("ColdCall")
+                    usr.WarmCall = r1.Item("WarmCall")
+                    usr.PreviousCust = r1.Item("PreviousCust")
+                    usr.Recovery = r1.Item("Recovery")
+                    usr.Confirmer = r1.Item("Confirmer")
+                    usr.SalesManager = r1.Item("SalesManager")
+                    usr.MarketingManager = r1.Item("MarketingManager")
+                    usr.Finance = r1.Item("Finance")
+                    usr.Install = r1.Item("Install")
+                    usr.Administration = r1.Item("Administration")
+                    usr.StartUpForm = r1.Item("StartUpForm")
+                    usr.LoggedOn = r1.Item("LoggedOn")
+                    usr.DoNotShowMapWarning = r1.Item("DoNotShowMapWarning")
+                    usr.MachineName = Get_MACH_NAME()
+                    usr.ManagerFirstName = r1.Item("ManagerFirstName")
+                    usr.ManagerLastName = r1.Item("ManagerLastName")
+                    usr.IP = r1.Item("IP")
+                    usr.LEASE_KEY = r1.Item("LEASE_KEY")
+                    usr.LIC_KEY = r1.Item("LIC_KEY")
+                    usr.Email = r1.Item("Email")
+                    usr.EmailLogon = r1.Item("EmailLogon")
+                    usr.EmailPassword = r1.Item("EmailPassword")
+                    usr.Incoming = r1.Item("Incoming")
+                    usr.Outgoing = r1.Item("Outgoing")
+                    usr.IncomingPort = r1.Item("IncomingPort")
+                    usr.OutgoingPort = r1.Item("OutgoingPort")
+                    usr.IncomePortSSL = r1.Item("IncomePortSSL")
+                    usr.OutgoPortSSL = r1.Item("OutgoPortSSL")
+                    usr.LogonUsing = r1.Item("LogonUsing")
+                    usr.OutgoServAuthen = r1.Item("OutgoServAuthen")
+                    usr.SameSettings = r1.Item("SameSettings")
+                    usr.OutGoUserName = r1.Item("OutgoUserName")
+                    usr.OutgoPassword = r1.Item("OutgoPassword")
+                    usr.OutGOSSL = r1.Item("OutgoSSL")
+                    usr.CanEmail = r1.Item("CanEmail")
+                    usr.ScreenPOSX = r1.Item("ScreenPosX")
+                    usr.ScreenPOSY = r1.Item("ScreenPoxy")
+                    usr.ScreenH = r1.Item("ScreenHeight")
+                    usr.ScreenW = r1.Item("ScreenWidth")
+                    usr.LastForm = r1.Item("LastForm")
+                End While
+                r1.Close()
+                cnx_.Close()
+            End Using
+            Return usr
+        Catch ex As Exception
+            '' write to error log here.
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Function", "Get_User_Obj", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Function
     '' End edit 11-14-2015
 
@@ -388,64 +411,85 @@ Public Class USER_LOGICv2
     ''Edit 11-14-2015
     '' AC
     Public Sub LogOutOfSystem(ByVal UserFName As String, ByVal UserLName As String, ByVal ScreenX As String, ByVal ScreenY As String, ByVal ScreenW As String, ByVal ScreenH As String, ByVal LastForm As String)
-        Dim cnx_ As New SqlConnection(cnx)
-        cnx_.Open()
-        Dim mach_Name As String = Get_MACH_NAME()
-        Dim strUP As String = "UPDATE UserPermissionTable"
-        strUP += " SET ScreenPosX ='" & ScreenX & "', "
-        strUP += "     ScreenPoxY = '" & ScreenY & "', "
-        strUP += "     ScreenHeight = '" & ScreenH & "', "
-        strUP += "     ScreenWidth = '" & ScreenW & "', "
-        strUP += "     MachineName = '" & mach_Name & "', "
-        strUP += "     LastForm = '" & LastForm & "', "
-        strUP += "     LoggedOn = 0"
-        strUP += " WHERE UserFirstName = '" & UserFName & "' and UserLastName = '" & UserLName & "';"
+        Try
+            Dim cnx_ As New SqlConnection(cnx)
+            cnx_.Open()
+            Dim mach_Name As String = Get_MACH_NAME()
+            Dim strUP As String = "UPDATE UserPermissionTable"
+            strUP += " SET ScreenPosX ='" & ScreenX & "', "
+            strUP += "     ScreenPoxY = '" & ScreenY & "', "
+            strUP += "     ScreenHeight = '" & ScreenH & "', "
+            strUP += "     ScreenWidth = '" & ScreenW & "', "
+            strUP += "     MachineName = '" & mach_Name & "', "
+            strUP += "     LastForm = '" & LastForm & "', "
+            strUP += "     LoggedOn = 0"
+            strUP += " WHERE UserFirstName = '" & UserFName & "' and UserLastName = '" & UserLName & "';"
 
-        Dim cmdGET As New SqlCommand(strUP, cnx_)
-        cmdGET.ExecuteScalar()
-        cnx_.Close()
-        cnx_ = Nothing
+            Dim cmdGET As New SqlCommand(strUP, cnx_)
+            cmdGET.ExecuteScalar()
+            cnx_.Close()
+            cnx_ = Nothing
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Sub", "LogOutOfSystem(fname,lname,scrx,scry...)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     '' end edit 
 
 
     Public Sub LogOut(ByVal EmployeeID As String, ByVal ScreenX As String, ByVal ScreenY As String, ByVal ScreenW As String, ByVal ScreenH As String, ByVal LastForm As String, ByVal LastQuery As String, _
                       ByVal MachineName As String, ByVal PWD As String)
-        Dim usr_CNX As SqlConnection = New SqlConnection(cnx)
-        usr_CNX.Open()
-        Dim cmdUP As SqlCommand = New SqlCommand("UPDATE tblTestEmployee set ScreenPositionX = '" & ScreenX & "', ScreenPositionY = '" & ScreenY & "', screenwidth = '" & ScreenW & "', screenheight = '" & ScreenH & "', LastForm = '" & LastForm & "', LastQuery = '" & LastQuery & "', HostMachineName = '" & Environment.MachineName.ToString & "', LastPasswordUsed = '" & PWD & "' WHERE EmployeeID = '" & EmployeeID & "';", usr_CNX)
-        cmdUP.ExecuteScalar()
-        usr_CNX.Close()
-        usr_CNX = Nothing
-        '' edit 11-14-2015 
-        'Update_LAST_LOGIN(EmployeeID, PWD)
-        '' not using anymore.
-        '' end edit
+        Try
+            Dim usr_CNX As SqlConnection = New SqlConnection(cnx)
+            usr_CNX.Open()
+            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE tblTestEmployee set ScreenPositionX = '" & ScreenX & "', ScreenPositionY = '" & ScreenY & "', screenwidth = '" & ScreenW & "', screenheight = '" & ScreenH & "', LastForm = '" & LastForm & "', LastQuery = '" & LastQuery & "', HostMachineName = '" & Environment.MachineName.ToString & "', LastPasswordUsed = '" & PWD & "' WHERE EmployeeID = '" & EmployeeID & "';", usr_CNX)
+            cmdUP.ExecuteScalar()
+            usr_CNX.Close()
+            usr_CNX = Nothing
+            '' edit 11-14-2015 
+            'Update_LAST_LOGIN(EmployeeID, PWD)
+            '' not using anymore.
+            '' end edit
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Sub", "Logout(...)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 #End Region
 #Region "Get Last Form and SIZE - OVERLOADED"
     Public Function Get_LAST_FORM_AND_SIZES(ByVal Fname As String, ByVal LName As String, ByVal PWD As String)
-        Dim last_form_name As String
-        Dim scrX As String
-        Dim scrY As String
-        Dim scrH As String
-        Dim scrW As String
-        Dim usr_cnx As SqlConnection = New SqlConnection(cnx)
-        usr_cnx.Open()
-        Dim cmdGET As SqlCommand = New SqlCommand("SELECT LastForm,ScreenPosX,ScreenPoxY,ScreenHeight,ScreenWidth from UserPermissionTable WHERE UserFirstName = '" & Fname & "' and UserLastName = '" & LName & "';", usr_cnx)
-        Dim r1 As SqlDataReader = cmdGET.ExecuteReader
-        Dim z As New LAST_FORM_AND_SCREEN_SIZE
-        While r1.Read
-            z.FormName = r1.Item("LastForm")
-            z.ScreenX = r1.Item("ScreenPosX")
-            z.ScreenY = r1.Item("ScreenPoxY")
-            z.ScreenH = r1.Item("ScreenHeight")
-            z.ScreenW = r1.Item("ScreenWidth")
-        End While
-        r1.Close()
-        usr_cnx.Close()
-        usr_cnx = Nothing
-        Return z
+        Try
+            Dim last_form_name As String
+            Dim scrX As String
+            Dim scrY As String
+            Dim scrH As String
+            Dim scrW As String
+            Dim usr_cnx As SqlConnection = New SqlConnection(cnx)
+            usr_cnx.Open()
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT LastForm,ScreenPosX,ScreenPoxY,ScreenHeight,ScreenWidth from UserPermissionTable WHERE UserFirstName = '" & Fname & "' and UserLastName = '" & LName & "';", usr_cnx)
+            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+            Dim z As New LAST_FORM_AND_SCREEN_SIZE
+            While r1.Read
+                z.FormName = r1.Item("LastForm")
+                z.ScreenX = r1.Item("ScreenPosX")
+                z.ScreenY = r1.Item("ScreenPoxY")
+                z.ScreenH = r1.Item("ScreenHeight")
+                z.ScreenW = r1.Item("ScreenWidth")
+            End While
+            r1.Close()
+            usr_cnx.Close()
+            usr_cnx = Nothing
+            Return z
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Sub", "Get_Last_form_and_sizes(fname,lname,pwd)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Function
     'Public Function Get_LAST_FORM_AND_SIZES(ByVal EmployeeID As String, ByVal PWD As String)
     '    Dim last_form_name As String

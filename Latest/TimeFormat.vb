@@ -316,9 +316,11 @@ Public Class TimeFormat
             Return RetTime
         Catch ex As Exception
             Return RetTime
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("TimeFormat", "ByVal time As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CheckTimeFormat")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("TimeFormat", "ByVal time As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CheckTimeFormat")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "TimeFormat", "TimeFormat", "Function", "CheckTimeFormat()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Function
@@ -348,9 +350,11 @@ Public Class TimeFormat
             Designator = AMPM(1).ToString
             CorrectTime = Hour & ":" & minute & " " & Designator
         Catch ex As Exception
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("TimeFormat", "ByVal Time As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "ConvertTimeFromSQL")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("TimeFormat", "ByVal Time As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "ConvertTimeFromSQL")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "TimeFormat", "TimeFormat", "Function", "ConvertTimeFromSQL(time)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
 

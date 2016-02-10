@@ -13,6 +13,15 @@ Imports System.Collections.Generic
 Imports Microsoft.Reporting.Winforms
 
 Public Class SALES_REPORTING_LOGIC
+
+    '' notes: 2-10-16
+    '' this code is NOT used.
+    '' Old code circa: 2005-2008
+    '' 
+    '' left for reference. 
+    '' not going to wrap with handlers 
+    '' 
+
     Implements IDisposable
     '
     ' 1) Run the query
@@ -24,7 +33,7 @@ Public Class SALES_REPORTING_LOGIC
     ' 7) print report / or don't print report
     '
 
-    Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+    Private cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
 
     Private m_CurrentPageIndex As Integer
     Private m_streams As IList(Of Stream)
@@ -171,9 +180,9 @@ Public Class SALES_REPORTING_LOGIC
         Dim dataset As New DataSet
         Try
             dataset.ReadXml(FileName)
-            Return DataSet.Tables(0)
+            Return dataset.Tables(0)
         Catch ex As Exception
-            Return DataSet.Tables(0)
+            Return dataset.Tables(0)
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal FileName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "Generate_DATASET")
         End Try
@@ -189,7 +198,7 @@ Public Class SALES_REPORTING_LOGIC
             m_streams.Add(stream)
             Return stream
         Catch ex As Exception
-            Return Stream
+            Return stream
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal Name As String, ByVal FileNameExtension As String, ByVal encoding As Encoding, ByVal MimeType As String, ByVal WillSeek As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CreateStream")
         End Try
@@ -751,7 +760,7 @@ Public Class SALES_REPORTING_LOGIC
 
         Implements IDisposable
 
-        Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+        Private cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Private m_CurrentPageIndex As Integer
         Private m_streams As IList(Of Stream)
 
@@ -1661,7 +1670,7 @@ Public Class SALES_REPORTING_LOGIC
         Private m_CurrentPageIndex As Integer
         Private m_streams As IList(Of Stream)
 
-        Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+        Private cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
 
         Public Sub GetSQL_TO_XML_Information_Tasks()
             Try

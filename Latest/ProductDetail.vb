@@ -17,6 +17,9 @@ Public Class ProductDetail
 #Region "My Sub Procedures"
 
     Private Sub Setup()
+        Try
+
+        
         Me.GetItems(Me.cboUnit)
         Me.Text = "Product Detail for " & Me.Product
         Select Case Me.Prodnum
@@ -215,89 +218,108 @@ Public Class ProductDetail
                         Me.cboUnit.Text = SDResult.Unit5
                     End If
                 End If
-        End Select
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ProductDetail", "FormCode", "Sub", "Setup()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub AddNew(ByVal sender As ComboBox)
-        Dim y As String
-        Select Case sender.Name
-            Case Is = "cboMan"
-                y = "Manufacturer"
-            Case Is = "cboMake"
-                y = "Model"
-            Case Is = "cboStyle"
-                y = "Style"
-            Case Is = "cboColor"
-                y = "Color"
-            Case Is = "cboUnit"
-                y = "Unit"
-        End Select
-        Dim x As String = InputBox("Enter New " & y & ".", "Add New " & y)
-        x = Trim(x)
-        x = StrConv(x, VbStrConv.ProperCase)
-        If x = "" Then
-            Exit Sub
-        End If
-        Dim Cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdGet As SqlCommand = New SqlCommand("dbo.AddNewProductDetail", Cnn)
-        Dim param1 As SqlParameter = New SqlParameter("@Control", y)
-        Dim param2 As SqlParameter = New SqlParameter("@Product", Me.Product)
-        Dim param3 As SqlParameter = New SqlParameter("@Manufacturer", Me.cboMan.Text)
-        Dim param4 As SqlParameter = New SqlParameter("@Model", Me.cboMake.Text)
-        Dim param5 As SqlParameter = New SqlParameter("@New", x)
-        cmdGet.CommandType = CommandType.StoredProcedure
-        cmdGet.Parameters.Add(param1)
-        cmdGet.Parameters.Add(param2)
-        cmdGet.Parameters.Add(param3)
-        cmdGet.Parameters.Add(param4)
-        cmdGet.Parameters.Add(param5)
-        Cnn.Open()
-        Dim R1 As SqlDataReader
-        R1 = cmdGet.ExecuteReader
-        R1.Read()
-        sender.Items.Add(R1.Item(0))
-        sender.Text = R1.Item(0)
-        R1.Close()
-        Cnn.Close()
+        Try
+            Dim y As String
+            Select Case sender.Name
+                Case Is = "cboMan"
+                    y = "Manufacturer"
+                Case Is = "cboMake"
+                    y = "Model"
+                Case Is = "cboStyle"
+                    y = "Style"
+                Case Is = "cboColor"
+                    y = "Color"
+                Case Is = "cboUnit"
+                    y = "Unit"
+            End Select
+            Dim x As String = InputBox("Enter New " & y & ".", "Add New " & y)
+            x = Trim(x)
+            x = StrConv(x, VbStrConv.ProperCase)
+            If x = "" Then
+                Exit Sub
+            End If
+            Dim Cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet As SqlCommand = New SqlCommand("dbo.AddNewProductDetail", Cnn)
+            Dim param1 As SqlParameter = New SqlParameter("@Control", y)
+            Dim param2 As SqlParameter = New SqlParameter("@Product", Me.Product)
+            Dim param3 As SqlParameter = New SqlParameter("@Manufacturer", Me.cboMan.Text)
+            Dim param4 As SqlParameter = New SqlParameter("@Model", Me.cboMake.Text)
+            Dim param5 As SqlParameter = New SqlParameter("@New", x)
+            cmdGet.CommandType = CommandType.StoredProcedure
+            cmdGet.Parameters.Add(param1)
+            cmdGet.Parameters.Add(param2)
+            cmdGet.Parameters.Add(param3)
+            cmdGet.Parameters.Add(param4)
+            cmdGet.Parameters.Add(param5)
+            Cnn.Open()
+            Dim R1 As SqlDataReader
+            R1 = cmdGet.ExecuteReader
+            R1.Read()
+            sender.Items.Add(R1.Item(0))
+            sender.Text = R1.Item(0)
+            R1.Close()
+            Cnn.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ProductDetail", "FormCode", "Sub", "AddNew(sender)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
 
     Private Sub GetItems(ByVal sender As ComboBox)
-        Dim col As String
-        Select Case sender.Name
-            Case Is = "cboMan"
-                col = "Manufacturer"
-            Case Is = "cboMake"
-                col = "Model"
-            Case Is = "cboStyle"
-                col = "Style"
-            Case Is = "cboColor"
-                col = "Color"
-            Case Is = "cboUnit"
-                col = "Unit"
-        End Select
-        Dim Cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdGet As SqlCommand = New SqlCommand("dbo.PopulateProductDetail", Cnn)
-        Dim param1 As SqlParameter = New SqlParameter("@Col", col)
-        Dim param2 As SqlParameter = New SqlParameter("@Product", Me.Product)
-        Dim param3 As SqlParameter = New SqlParameter("@Manufacturer", Me.cboMan.Text)
-        Dim param4 As SqlParameter = New SqlParameter("@Model", Me.cboMake.Text)
-        cmdGet.CommandType = CommandType.StoredProcedure
-        cmdGet.Parameters.Add(param1)
-        cmdGet.Parameters.Add(param2)
-        cmdGet.Parameters.Add(param3)
-        cmdGet.Parameters.Add(param4)
-        Cnn.Open()
-        Dim R1 As SqlDataReader
-        R1 = cmdGet.ExecuteReader
-        sender.Items.Clear()
-        sender.Items.Add("<Add New>")
-        sender.Items.Add("___________________________________________________")
-        sender.Items.Add("")
-        While R1.Read
-            sender.Items.Add(R1.Item(0))
-        End While
-        R1.Close()
-        Cnn.Close()
+        Try
+            Dim col As String
+            Select Case sender.Name
+                Case Is = "cboMan"
+                    col = "Manufacturer"
+                Case Is = "cboMake"
+                    col = "Model"
+                Case Is = "cboStyle"
+                    col = "Style"
+                Case Is = "cboColor"
+                    col = "Color"
+                Case Is = "cboUnit"
+                    col = "Unit"
+            End Select
+            Dim Cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet As SqlCommand = New SqlCommand("dbo.PopulateProductDetail", Cnn)
+            Dim param1 As SqlParameter = New SqlParameter("@Col", col)
+            Dim param2 As SqlParameter = New SqlParameter("@Product", Me.Product)
+            Dim param3 As SqlParameter = New SqlParameter("@Manufacturer", Me.cboMan.Text)
+            Dim param4 As SqlParameter = New SqlParameter("@Model", Me.cboMake.Text)
+            cmdGet.CommandType = CommandType.StoredProcedure
+            cmdGet.Parameters.Add(param1)
+            cmdGet.Parameters.Add(param2)
+            cmdGet.Parameters.Add(param3)
+            cmdGet.Parameters.Add(param4)
+            Cnn.Open()
+            Dim R1 As SqlDataReader
+            R1 = cmdGet.ExecuteReader
+            sender.Items.Clear()
+            sender.Items.Add("<Add New>")
+            sender.Items.Add("___________________________________________________")
+            sender.Items.Add("")
+            While R1.Read
+                sender.Items.Add(R1.Item(0))
+            End While
+            R1.Close()
+            Cnn.Close()
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ProductDetail", "FormCode", "Sub", "GetItems(sender)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 #End Region

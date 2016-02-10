@@ -26,9 +26,11 @@ Public Class ViewEditWorkHours
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ViewEditWorkHours", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateWorkHours")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ViewEditWorkHours", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateWorkHours")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditWorkHours", "ViewEditWorkHours", "Sub", "PopulateWorkHours()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
     Public Sub DeleteWorkHour(ByVal Hour As String)
@@ -41,9 +43,11 @@ Public Class ViewEditWorkHours
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ViewEditWorkHours", "ByVal Hour As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "DeleteWorkHour")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ViewEditWorkHours", "ByVal Hour As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "DeleteWorkHour")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditWorkHours", "ViewEditWorkHours", "Sub", "DeleteWorkHour()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
     Public Sub InsertHour(ByVal Hour As String)
@@ -72,6 +76,9 @@ Public Class ViewEditWorkHours
                         'Me.PopuluateList()
                     Catch ex As Exception
                         cnn.Close()
+                        Dim y As New ErrorLogging_V2
+                        y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditWorkHours", "ViewEditWorkHours", "Sub", "InsertHour()", "0", ex.Message.ToString)
+                        y = Nothing
                     End Try
                     Exit Select
                 Case Is >= 1
@@ -86,9 +93,11 @@ Public Class ViewEditWorkHours
         Catch ex As Exception
             cnn.Close()
 
-            Dim err As New ErrorLogFlatFile
-            err.WriteLog("ViewEditWorkHours", "ByVal Hour As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertHour")
-
+            'Dim err As New ErrorLogFlatFile
+            'err.WriteLog("ViewEditWorkHours", "ByVal Hour As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertHour")
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ViewEditWorkHours", "ViewEditWorkHours", "Sub", "InsertHour()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
     End Sub
 End Class

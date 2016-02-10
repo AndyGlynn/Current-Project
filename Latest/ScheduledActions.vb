@@ -251,7 +251,7 @@ Public Class ScheduledActions
 
                     fl = s(index - 1)
                 End If
-             
+
                 ttStatus.SetToolTip(pctAF, "This Icon is a Shortcut to an attached" & vbCr & "file needed to complete this task." & vbCr & "(Click icon to open file)" & vbCr & fl)
                 AddHandler pctAF.Click, AddressOf OpenFile
                 AddHandler pctAF.MouseDown, AddressOf Labels
@@ -301,6 +301,9 @@ Public Class ScheduledActions
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "SetUp()", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
 
@@ -308,37 +311,43 @@ Public Class ScheduledActions
     End Sub
     Dim i As ListViewItem
     Private Sub Link(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim frm As String = sender.findform.name
-        Select Case frm
-            Case "Sales"
-                If Sales.cboSalesList.Text <> "Scheduled Tasks List" Then
-                    Sales.cboSalesList.SelectedItem = "Scheduled Tasks List"
-                End If
-                For Each i In Sales.lvSales.Items
-                    If i.Text = sender.text Then
-                        i.Selected = True
+        Try
+            Dim frm As String = sender.findform.name
+            Select Case frm
+                Case "Sales"
+                    If Sales.cboSalesList.Text <> "Scheduled Tasks List" Then
+                        Sales.cboSalesList.SelectedItem = "Scheduled Tasks List"
                     End If
-                Next
-                If Sales.tbMain.SelectedIndex <> 1 Then
-                    Sales.tbMain.SelectedIndex = 1
-                End If
-                If Sales.TabControl2.SelectedIndex <> 0 Then
-                    Sales.TabControl2.SelectedIndex = 0
-                End If
-            Case "MarketingManager"
-                ''comeback 
+                    For Each i In Sales.lvSales.Items
+                        If i.Text = sender.text Then
+                            i.Selected = True
+                        End If
+                    Next
+                    If Sales.tbMain.SelectedIndex <> 1 Then
+                        Sales.tbMain.SelectedIndex = 1
+                    End If
+                    If Sales.TabControl2.SelectedIndex <> 0 Then
+                        Sales.TabControl2.SelectedIndex = 0
+                    End If
+                Case "MarketingManager"
+                    ''comeback 
 
-            Case "Installation"
-
-
-            Case "Finance"
-
-
-            Case "Administration"
+                Case "Installation"
 
 
+                Case "Finance"
 
-        End Select
+
+                Case "Administration"
+
+
+
+            End Select
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "Link()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
 
 
@@ -352,138 +361,145 @@ Public Class ScheduledActions
         Me.panel.Select()
     End Sub
     Public Sub PanelControl(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-        'MsgBox(sender.ToString)
-        Dim m = sender.findform
-        Dim who As Panel = sender
-        Dim selected As Boolean
-        If who.BorderStyle = BorderStyle.FixedSingle And e.Button = MouseButtons.Left Then
-            selected = True
-        Else
-            selected = False
-        End If
+        Try
+            'MsgBox(sender.ToString)
+            Dim m = sender.findform
+            Dim who As Panel = sender
+            Dim selected As Boolean
+            If who.BorderStyle = BorderStyle.FixedSingle And e.Button = MouseButtons.Left Then
+                selected = True
+            Else
+                selected = False
+            End If
 
-        If who.BorderStyle = BorderStyle.FixedSingle Then
-            who.BorderStyle = BorderStyle.None
-        Else
-            who.BorderStyle = BorderStyle.FixedSingle
-        End If
-        If m.name = "Sales" Then
-            Dim c As Integer = Sales.pnlScheduledTasks.Controls.Count
-            Dim i As Integer
-            For i = 1 To c
-                Dim all As Panel = Sales.pnlScheduledTasks.Controls(i - 1)
-                If all.BorderStyle = BorderStyle.FixedSingle Then
-                    all.BorderStyle = BorderStyle.None
-                End If
-            Next
-            If selected = True Then
+            If who.BorderStyle = BorderStyle.FixedSingle Then
                 who.BorderStyle = BorderStyle.None
             Else
                 who.BorderStyle = BorderStyle.FixedSingle
             End If
-            If who.Controls(0).Tag = "True" Then
-                Sales.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
-                Sales.MarkTaskAsDoneToolStripMenuItem.Text = "Undo ""Mark Task as Done"""
-                Sales.HideThisCompletedTaskToolStripMenuItem.Visible = True
-                Sales.btnRemoveThisCompletedTask.Visible = True
-            ElseIf who.Controls(0).Tag = "False" Then
-                Sales.btnMarkTaskAsDone.Text = "Mark Task as Done"
-                Sales.MarkTaskAsDoneToolStripMenuItem.Text = "Mark Task as Done"
-                Sales.HideThisCompletedTaskToolStripMenuItem.Visible = False
-                Sales.btnRemoveThisCompletedTask.Visible = False
-            End If
-            'Sales.btnScheduledTasks.ShowDropDown()
+            If m.name = "Sales" Then
+                Dim c As Integer = Sales.pnlScheduledTasks.Controls.Count
+                Dim i As Integer
+                For i = 1 To c
+                    Dim all As Panel = Sales.pnlScheduledTasks.Controls(i - 1)
+                    If all.BorderStyle = BorderStyle.FixedSingle Then
+                        all.BorderStyle = BorderStyle.None
+                    End If
+                Next
+                If selected = True Then
+                    who.BorderStyle = BorderStyle.None
+                Else
+                    who.BorderStyle = BorderStyle.FixedSingle
+                End If
+                If who.Controls(0).Tag = "True" Then
+                    Sales.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
+                    Sales.MarkTaskAsDoneToolStripMenuItem.Text = "Undo ""Mark Task as Done"""
+                    Sales.HideThisCompletedTaskToolStripMenuItem.Visible = True
+                    Sales.btnRemoveThisCompletedTask.Visible = True
+                ElseIf who.Controls(0).Tag = "False" Then
+                    Sales.btnMarkTaskAsDone.Text = "Mark Task as Done"
+                    Sales.MarkTaskAsDoneToolStripMenuItem.Text = "Mark Task as Done"
+                    Sales.HideThisCompletedTaskToolStripMenuItem.Visible = False
+                    Sales.btnRemoveThisCompletedTask.Visible = False
+                End If
+                'Sales.btnScheduledTasks.ShowDropDown()
 
-            'changed code
-        ElseIf m.name = "MarketingManager" Then
-            Dim c As Integer = MarketingManager.pnlScheduledTasks.Controls.Count
-            Dim i As Integer
-            For i = 1 To c
-                Dim all As Panel = MarketingManager.pnlScheduledTasks.Controls(i - 1)
-                If all.BorderStyle = BorderStyle.FixedSingle Then
-                    all.BorderStyle = BorderStyle.None
+                'changed code
+            ElseIf m.name = "MarketingManager" Then
+                Dim c As Integer = MarketingManager.pnlScheduledTasks.Controls.Count
+                Dim i As Integer
+                For i = 1 To c
+                    Dim all As Panel = MarketingManager.pnlScheduledTasks.Controls(i - 1)
+                    If all.BorderStyle = BorderStyle.FixedSingle Then
+                        all.BorderStyle = BorderStyle.None
+                    End If
+                Next
+                If selected = True Then
+                    who.BorderStyle = BorderStyle.None
+                Else
+                    who.BorderStyle = BorderStyle.FixedSingle
                 End If
-            Next
-            If selected = True Then
-                who.BorderStyle = BorderStyle.None
-            Else
-                who.BorderStyle = BorderStyle.FixedSingle
-            End If
-            If who.Controls(0).Tag = "True" Then
-                MarketingManager.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
-                MarketingManager.btnRemoveThisCompletedTask.Visible = True
-            ElseIf who.Controls(0).Tag = "False" Then
-                MarketingManager.btnMarkTaskAsDone.Text = "Mark Task as Done"
-                MarketingManager.btnRemoveThisCompletedTask.Visible = False
-            End If
-            'MarketingManager.ScheduledTasks.ShowDropDown()
-        ElseIf m.name = "Finance" Then
-            Dim c As Integer = Finance.pnlScheduledTasks.Controls.Count
-            Dim i As Integer
-            For i = 1 To c
-                Dim all As Panel = Finance.pnlScheduledTasks.Controls(i - 1)
-                If all.BorderStyle = BorderStyle.FixedSingle Then
-                    all.BorderStyle = BorderStyle.None
+                If who.Controls(0).Tag = "True" Then
+                    MarketingManager.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
+                    MarketingManager.btnRemoveThisCompletedTask.Visible = True
+                ElseIf who.Controls(0).Tag = "False" Then
+                    MarketingManager.btnMarkTaskAsDone.Text = "Mark Task as Done"
+                    MarketingManager.btnRemoveThisCompletedTask.Visible = False
                 End If
-            Next
-            If selected = True Then
-                who.BorderStyle = BorderStyle.None
-            Else
-                who.BorderStyle = BorderStyle.FixedSingle
-            End If
-            If who.Controls(0).Tag = "True" Then
-                Finance.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
-                Finance.btnRemoveThisCompletedTask.Visible = True
-            ElseIf who.Controls(0).Tag = "False" Then
-                Finance.btnEditScheduledTask.Text = "Mark Task as Done"
-                Finance.btnRemoveThisCompletedTask.Visible = False
-            End If
-            'Finance.ScheduledTasks.ShowDropDown()
-        ElseIf m.name = "Installation" Then
-            Dim c As Integer = Installation.pnlScheduledTasks.Controls.Count
-            Dim i As Integer
-            For i = 1 To c
-                Dim all As Panel = Installation.pnlScheduledTasks.Controls(i - 1)
-                If all.BorderStyle = BorderStyle.FixedSingle Then
-                    all.BorderStyle = BorderStyle.None
+                'MarketingManager.ScheduledTasks.ShowDropDown()
+            ElseIf m.name = "Finance" Then
+                Dim c As Integer = Finance.pnlScheduledTasks.Controls.Count
+                Dim i As Integer
+                For i = 1 To c
+                    Dim all As Panel = Finance.pnlScheduledTasks.Controls(i - 1)
+                    If all.BorderStyle = BorderStyle.FixedSingle Then
+                        all.BorderStyle = BorderStyle.None
+                    End If
+                Next
+                If selected = True Then
+                    who.BorderStyle = BorderStyle.None
+                Else
+                    who.BorderStyle = BorderStyle.FixedSingle
                 End If
-            Next
-            If selected = True Then
-                who.BorderStyle = BorderStyle.None
-            Else
-                who.BorderStyle = BorderStyle.FixedSingle
-            End If
-            If who.Controls(0).Tag = "True" Then
-                Installation.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
-                Installation.btnRemoveThisCompletedTask.Visible = True
-            ElseIf who.Controls(0).Tag = "False" Then
-                Installation.btnMarkTaskAsDone.Text = "Mark Task as Done"
-                Installation.btnRemoveThisCompletedTask.Visible = False
-            End If
-            'Installation.ScheduledTasks.ShowDropDown()
-        ElseIf m.name = "Administation" Then
-            Dim c As Integer = Administration.pnlScheduledTasks.Controls.Count
-            Dim i As Integer
-            For i = 1 To c
-                Dim all As Panel = Administration.pnlScheduledTasks.Controls(i - 1)
-                If all.BorderStyle = BorderStyle.FixedSingle Then
-                    all.BorderStyle = BorderStyle.None
+                If who.Controls(0).Tag = "True" Then
+                    Finance.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
+                    Finance.btnRemoveThisCompletedTask.Visible = True
+                ElseIf who.Controls(0).Tag = "False" Then
+                    Finance.btnEditScheduledTask.Text = "Mark Task as Done"
+                    Finance.btnRemoveThisCompletedTask.Visible = False
                 End If
-            Next
-            If selected = True Then
-                who.BorderStyle = BorderStyle.None
-            Else
-                who.BorderStyle = BorderStyle.FixedSingle
+                'Finance.ScheduledTasks.ShowDropDown()
+            ElseIf m.name = "Installation" Then
+                Dim c As Integer = Installation.pnlScheduledTasks.Controls.Count
+                Dim i As Integer
+                For i = 1 To c
+                    Dim all As Panel = Installation.pnlScheduledTasks.Controls(i - 1)
+                    If all.BorderStyle = BorderStyle.FixedSingle Then
+                        all.BorderStyle = BorderStyle.None
+                    End If
+                Next
+                If selected = True Then
+                    who.BorderStyle = BorderStyle.None
+                Else
+                    who.BorderStyle = BorderStyle.FixedSingle
+                End If
+                If who.Controls(0).Tag = "True" Then
+                    Installation.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
+                    Installation.btnRemoveThisCompletedTask.Visible = True
+                ElseIf who.Controls(0).Tag = "False" Then
+                    Installation.btnMarkTaskAsDone.Text = "Mark Task as Done"
+                    Installation.btnRemoveThisCompletedTask.Visible = False
+                End If
+                'Installation.ScheduledTasks.ShowDropDown()
+            ElseIf m.name = "Administation" Then
+                Dim c As Integer = Administration.pnlScheduledTasks.Controls.Count
+                Dim i As Integer
+                For i = 1 To c
+                    Dim all As Panel = Administration.pnlScheduledTasks.Controls(i - 1)
+                    If all.BorderStyle = BorderStyle.FixedSingle Then
+                        all.BorderStyle = BorderStyle.None
+                    End If
+                Next
+                If selected = True Then
+                    who.BorderStyle = BorderStyle.None
+                Else
+                    who.BorderStyle = BorderStyle.FixedSingle
+                End If
+                If who.Controls(0).Tag = "True" Then
+                    Administration.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
+                    Administration.btnRemoveThisCompletedTask.Visible = True
+                ElseIf who.Controls(0).Tag = "False" Then
+                    Administration.btnMarkTaskAsDone.Text = "Mark Task as Done"
+                    Administration.btnRemoveThisCompletedTask.Visible = False
+                End If
+                'Administration.ScheduledTasks.ShowDropDown()
             End If
-            If who.Controls(0).Tag = "True" Then
-                Administration.btnMarkTaskAsDone.Text = "Undo ""Mark Task as Done"""
-                Administration.btnRemoveThisCompletedTask.Visible = True
-            ElseIf who.Controls(0).Tag = "False" Then
-                Administration.btnMarkTaskAsDone.Text = "Mark Task as Done"
-                Administration.btnRemoveThisCompletedTask.Visible = False
-            End If
-            'Administration.ScheduledTasks.ShowDropDown()
-        End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "PanelControl", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
     Private Sub OpenFile(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim who As PictureBox = sender
@@ -520,6 +536,9 @@ Public Class ScheduledActions
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "Completed(Id)", ID, ex.Message.ToString)
+            y = Nothing
         End Try
 
 
@@ -537,6 +556,9 @@ Public Class ScheduledActions
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "UndoCompleted(id)", ID, ex.Message.ToString)
+            y = Nothing
         End Try
      
 
@@ -554,6 +576,9 @@ Public Class ScheduledActions
 
         Catch ex As Exception
             cnn.Close()
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "HideTask(id)", ID, ex.Message.ToString)
+            y = Nothing
         End Try
    
 
@@ -571,6 +596,9 @@ Public Class ScheduledActions
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "HideAll(form)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -587,6 +615,9 @@ Public Class ScheduledActions
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "ShowAll(form)", "0", ex.Message.ToString)
+            y = Nothing
         End Try
 
     End Sub
@@ -605,6 +636,9 @@ Public Class ScheduledActions
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Dim yy As New ErrorLogging_V2
+            yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "Preferences(y,form)", "0", ex.Message.ToString)
+            yy = Nothing
         End Try
 
 
