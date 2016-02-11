@@ -33,6 +33,7 @@ Partial Class ImportPictures
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.OpenPics = New System.Windows.Forms.OpenFileDialog()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.bgImporThePic = New System.ComponentModel.BackgroundWorker()
         Me.GroupBox1.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -156,6 +157,9 @@ Partial Class ImportPictures
         Me.ErrorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'bgImporThePic
+        '
+        '
         'ImportPictures
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
@@ -194,5 +198,6 @@ Partial Class ImportPictures
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents OpenPics As System.Windows.Forms.OpenFileDialog
     Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
+    Friend WithEvents bgImporThePic As System.ComponentModel.BackgroundWorker
 
 End Class

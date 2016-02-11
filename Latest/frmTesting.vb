@@ -138,7 +138,7 @@
             Dim a As New convertLeadToStruct.EnterLead_Record
             If Len(str) <= 0 Then
                 Dim y As New convertLeadToStruct
-                a = y.ConvertToStructure("11779", False)
+                a = y.ConvertToStructure("83137", False)
                 MsgBox(a.RecID & vbCrLf & "Name: " & a.C1FirstName & " " & a.C1LastName, MsgBoxStyle.Information, "DEBUG INFO")
                 Exit Sub
             ElseIf Len(str) >= 1 Then
@@ -164,9 +164,9 @@
                 id = id
             End If
             'Dim scrubbedText As String = b.TestTemplateScrub(id, False, "TEST TEMPLATE", "Administration")
-            Dim nonScrubbedTemplate As emlTemplateLogic.TemplateInfo = b.GetSingleTemplate("TEST TEMPLATE", False)
+            Dim nonScrubbedTemplate As emlTemplateLogic.TemplateInfo = b.GetSingleTemplate("TEST TEMPLATE3", False)
             Me.rtfUnscrubbed.Text = nonScrubbedTemplate.Body
-            Me.rtfScrubbed.Text = b.TestTemplateScrub(id, False, "TEST TEMPLATE")
+            Me.rtfScrubbed.Text = b.TestTemplateScrub(id, False, "TEST TEMPLATE3")
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmTesting", "FormCode", "Event", "Button11_click", "0", ex.Message.ToString)

@@ -40,7 +40,31 @@ Public Class ImportPictures
     End Sub
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
+        Me.Cursor = Cursors.WaitCursor
+        bgImporThePic_DoWork(Nothing, Nothing)
+        Me.Cursor = Cursors.Default
+    End Sub
+
+
+
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        ClearForm()
+        Me.Close()
+
+    End Sub
+    Private Sub ClearForm()
+        Me.txtLeadNum.Text = ""
+        Me.ProdAcro = ""
+        Me.rdoAfter.Checked = False
+        Me.rdoBefore.Checked = False
+        Me.rdoMiddle.Checked = False
+        Me.cboProductSel.Text = ""
+
+    End Sub
+    Private Sub bgImporThePic_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgImporThePic.DoWork
         Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim y As New Import_V2
             Dim chkrdos As Integer
             chkrdos = 0
             If Me.txtLeadNum.Text = "" Then
@@ -123,6 +147,8 @@ Public Class ImportPictures
                         '' 
                         '' then call a refresh method to repop the list view control for added job pictures
                         '' 
+                        Me.Cursor = Cursors.WaitCursor
+                        Application.DoEvents()
                         Dim g As New Import_V2.ImportPicObj
                         g.LeadNum = Me.txtLeadNum.Text
                         g.FullPath = fName(i)
@@ -131,8 +157,11 @@ Public Class ImportPictures
                         g.FileNumSequence = i
                         g.BeginMidEnd = ProgressVal
 
-                        Dim y As New Import_V2
+
                         y.ImportThePictures(g)
+
+                        Me.Cursor = Cursors.Default
+                        Application.DoEvents()
 
                         Dim strConstructed As String = (g.LeadNum & "-" & g.BeginMidEnd & "-" & ProdAcro & "-" & g.FileNumSequence & "." & g.FileExt)
 
@@ -161,35 +190,44 @@ Public Class ImportPictures
 
                             End If
                         Next
-                        y = Nothing
+
                     Next
 
                     Me.txtLeadNum.Text = ""
                     Me.cboProductSel.Text = ""
                     ProdAcro = ""
                     Import.FileName = ""
-                    Dim v As New Import_V2
-                    v.CloseImportPictures()
-                    Sales.btnRefreshJP_Click(Nothing, Nothing)
-
+                    ' Dim v As New Import_V2
+                    y.CloseImportPictures()
+                    'Sales.btnRefreshJP_Click(Nothing, Nothing)
+                    Dim yy As Form
+                    Dim cntOpen As Integer = Main.MdiChildren.Length '' num of open forms
+                    If Main.MdiChildren.Length >= 1 Then
+                        For Each yy In Main.MdiChildren
+                            If yy.Name = "Sales" Then
+                                Me.Cursor = Cursors.WaitCursor
+                                Sales.btnRefreshJP_Click(Me, Nothing)
+                                Me.Cursor = Cursors.Default
+                            ElseIf yy.Name <> "Sales" Then
+                                '' do nothing 
+                                '' may have to come back depending on what forms need a refresh. 
+                                '' 
+                            End If
+                        Next
+                    End If
                     Exit Select
                 Case Is < 1
                     Me.ErrorProvider1.SetError(Me.GroupBox1, "You must select job picture status.")
                     Exit Select
             End Select
+            y = Nothing
+            Me.Cursor = Cursors.WaitCursor
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportPictures", "FormCode", "Event", "btnOK_click", "0", ex.Message.ToString)
             y = Nothing
         End Try
-
-
-    End Sub
-
-
-
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Me.Close()
-
+        Me.ClearForm()
     End Sub
 End Class

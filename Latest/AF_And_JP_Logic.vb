@@ -402,9 +402,12 @@ Public Class AF_And_JP_Logic
             ico.Dispose()
             Return ico2
         Catch ex As Exception
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetJumbos(path)", "0", ex.Message.ToString)
-            y = Nothing
+            '' the error reporter here spams the logs with unessecary
+            '' errors
+            '' 2-11-2016
+            'Dim y As New ErrorLogging_V2
+            'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetJumbos(path)", "0", ex.Message.ToString)
+            'y = Nothing
         End Try
 
     End Function
@@ -427,9 +430,12 @@ Public Class AF_And_JP_Logic
             Return ico2
 
         Catch ex As Exception
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetLarges(path)", "0", ex.Message.ToString)
-            y = Nothing
+            '' the error reporter here spams the logs with unessecary
+            '' errors
+            '' 2-11-2016
+            'Dim y As New ErrorLogging_V2
+            'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetLarges(path)", "0", ex.Message.ToString)
+            'y = Nothing
         End Try
 
     End Function
@@ -452,9 +458,12 @@ Public Class AF_And_JP_Logic
             Return ico2
 
         Catch ex As Exception
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetSmalls(Path)", "0", ex.Message.ToString)
-            y = Nothing
+            '' the error reporter here spams the logs with unessecary
+            '' errors
+            '' 2-11-2016
+            'Dim y As New ErrorLogging_V2
+            'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetSmalls(Path)", "0", ex.Message.ToString)
+            'y = Nothing
         End Try
 
     End Function
@@ -477,9 +486,12 @@ Public Class AF_And_JP_Logic
             Return ico2
 
         Catch ex As Exception
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetMediums(path)", "0", ex.Message.ToString)
-            y = Nothing
+            '' the error reporter here spams the logs with unessecary
+            '' errors
+            '' 2-11-2016
+            'Dim y As New ErrorLogging_V2
+            'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetMediums(path)", "0", ex.Message.ToString)
+            'y = Nothing
         End Try
 
     End Function

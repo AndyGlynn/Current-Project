@@ -377,6 +377,13 @@ Public Class emlTemplateLogic
     End Function
 
     Public Function TestTemplateScrub(ByVal RecID As String, ByVal Dev_Or_Pro As Boolean, ByVal TemplateName As String)
+        '' 
+        ''Reference to Error in log: 2/10/2016 3:48:45 PM,PC-101,192.168.0.8,emlTemplateLogic,emlTemplateLogic,Function,TestTemplateScrub(recID,templatename,depart),83137,Object reference not set to an instance of an object.
+        '' 
+        '' 2-11-2016 AC
+        '' 
+
+
         Try
             Dim Scrubbed_TEXT As String = ""
 
@@ -441,6 +448,7 @@ Public Class emlTemplateLogic
 
             Return template_text
         Catch ex As Exception
+            Return ""
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "TestTemplateScrub(recID,templatename,depart)", RecID, ex.Message.ToString)
             y = Nothing
