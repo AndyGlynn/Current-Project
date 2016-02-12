@@ -3,18 +3,51 @@ Imports System.Data.SqlClient
 Imports System.Data
 Imports System
 
+Imports System.Net.Mail
 
 Public Class frmRolodex
     Public SelItem As ListViewItem
-    Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
+    Private cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+
+    ' public Emp_OBJ As Rolodex_Logic_V2.EmployeeOBJ
+
+    Private Sub PopululateCarrierList()
+        '' list of common sms free gateways per carrier
+        '' 
+        'Me.cboCarrier.Items.Clear()
+        'Me.cboCarrier.Items.Add("@text.wireless.alltel.com") '' AllTel
+        'Me.cboCarrier.Items.Add("@txt.att.net") '' AT & T
+        'Me.cboCarrier.Items.Add("@myboostmobile.com") '' Boost Mobile
+        'Me.cboCarrier.Items.Add("@sms.mycricket.com") '' Cricket
+        'Me.cboCarrier.Items.Add("@messaging.sprintpcs.com") '' sprint
+        'Me.cboCarrier.Items.Add("@tmomail.net") '' T-Mobile
+        'Me.cboCarrier.Items.Add("@email.uscc.net") '' US Cellular
+        'Me.cboCarrier.Items.Add("@vtext.com") '' Verizon
+        'Me.cboCarrier.Items.Add("@vmobl.com") '' Virgin Mobile
+    End Sub
+    Private Sub Populate_Phone_And_Carrier(ByVal EmployeeOBJ As Rolodex_Logic_V2.EmployeeOBJ)
+     
+    End Sub
+    Private Sub ResetForm()
+        'Me.cboCarrier.Text = ""
+        'Me.cboPhoneNumbers.Items.Clear()
+        'Me.cboCarrier.Items.Clear()
+        'Me.txtSubject.Text = ""
+        'Me.rtfSMS.Text = ""
+        'Me.txtLocation.Text = ""
+        'Me.txtLeadNumberLookup.Text = ""
+    End Sub
     Private Sub frmRolodex_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'Me.cboDepartment.Items.Clear()
+        ''Me.cboDepartment.Items.Clear()
         Me.cboDepartment.SelectedIndex = 0
 
-        'PopulateDefaultList(Me.cboDepartment.SelectedItem.ToString)
+        ''PopulateDefaultList(Me.cboDepartment.SelectedItem.ToString)
+
+       
+
 
     End Sub
-
+    
     Private Sub frmRolodex_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint
         Dim g As Graphics = e.Graphics
         g.DrawLine(Pens.SlateGray, 10, 10, 550, 10)
@@ -25,11 +58,12 @@ Public Class frmRolodex
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+        Me.ListView1.Items.Clear()
         Me.Close()
     End Sub
     Public Sub PopulateDefaultList(ByVal Department As String)
         Try
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ID,EmpFirstName,EmpLastName,Department,PrimaryPhone FROM iss.dbo.companyrolodex where Department like @DEP order by EmpLastName asc", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ID,EmpFirstName,EmpLastName,Department,PrimaryPhone FROM iss.dbo.tblCompanyRolodex2 where Department like @DEP order by LName asc", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@DEP", Department)
             cmdGET.Parameters.Add(param1)
             cnn.Open()
@@ -109,7 +143,7 @@ Public Class frmRolodex
             result = MsgBox("Are you sure you wish to delete this employee?", MsgBoxStyle.YesNo, "Delete Employee")
             Select Case result
                 Case Is = 6
-                    Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.companyrolodex where ID = @ID", cnn)
+                    Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.tblCompanyRolodex2 where ID = @ID", cnn)
                     Dim param1 As SqlParameter = New SqlParameter("@ID", SelItem.Text)
                     cmdDEL.Parameters.Add(param1)
                     cnn.Open()

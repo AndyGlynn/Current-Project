@@ -1650,20 +1650,27 @@ Public Class Issue_Leads
 
     Dim i As ListViewItem
     Private Sub Link(ByVal sender As Object, ByVal e As System.EventArgs)
-        If Sales.cboSalesList.Text <> "Issue Leads List" Then
-            Sales.cboSalesList.SelectedItem = "Issue Leads List"
-        End If
-        For Each i In Sales.lvSales.Items
-            If i.Text = sender.text Then
-                i.Selected = True
+        Try
+            If Sales.cboSalesList.Text <> "Issue Leads List" Then
+                Sales.cboSalesList.SelectedItem = "Issue Leads List"
             End If
-        Next
-        If Sales.tbMain.SelectedIndex <> 1 Then
-            Sales.tbMain.SelectedIndex = 1
-        End If
-        If Sales.TabControl2.SelectedIndex <> 0 Then
-            Sales.TabControl2.SelectedIndex = 0
-        End If
+            For Each i In Sales.lvSales.Items
+                If i.Text = sender.text Then
+                    i.Selected = True
+                End If
+            Next
+            If Sales.tbMain.SelectedIndex <> 1 Then
+                Sales.tbMain.SelectedIndex = 1
+            End If
+            If Sales.TabControl2.SelectedIndex <> 0 Then
+                Sales.TabControl2.SelectedIndex = 0
+            End If
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "Link", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub Cbo(ByVal sender As Object, ByVal e As System.EventArgs)

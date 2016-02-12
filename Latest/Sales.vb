@@ -3300,45 +3300,51 @@ Public Class Sales
     End Function
 
     Private Function GetImages_Files_And_Folders(ByVal LeadNum As String)
+        Try
+            'CheckForIllegalCrossThreadCalls = False
+            Me.Cursor = Cursors.WaitCursor
+            Me.tsAttachedFilesNAV.Enabled = False
 
-        'CheckForIllegalCrossThreadCalls = False
+            Me.imgLst16.ColorDepth = ColorDepth.Depth32Bit
+            Me.imgLst16.ImageSize = New Size(16, 16)
+            Me.imgLst16.Images.Clear()
 
-        Me.tsAttachedFilesNAV.Enabled = False
+            Me.ImgLst32.ColorDepth = ColorDepth.Depth32Bit
+            Me.ImgLst32.ImageSize = New Size(32, 32)
+            Me.ImgLst32.Images.Clear()
 
-        Me.imgLst16.ColorDepth = ColorDepth.Depth32Bit
-        Me.imgLst16.ImageSize = New Size(16, 16)
-        Me.imgLst16.Images.Clear()
+            Me.ImgLst48.Images.Clear()
+            Me.ImgLst48.ColorDepth = ColorDepth.Depth32Bit
+            Me.ImgLst48.ImageSize = New Size(64, 64)
 
-        Me.ImgLst32.ColorDepth = ColorDepth.Depth32Bit
-        Me.ImgLst32.ImageSize = New Size(32, 32)
-        Me.ImgLst32.Images.Clear()
+            Me.ImgLst128.Images.Clear()
+            Me.ImgLst128.ColorDepth = ColorDepth.Depth32Bit
+            Me.ImgLst128.ImageSize = New Size(64, 64)
 
-        Me.ImgLst48.Images.Clear()
-        Me.ImgLst48.ColorDepth = ColorDepth.Depth32Bit
-        Me.ImgLst48.ImageSize = New Size(64, 64)
+            Me.ImgLst256.Images.Clear()
+            Me.ImgLst256.ColorDepth = ColorDepth.Depth32Bit
+            Me.ImgLst256.ImageSize = New Size(256, 256)
 
-        Me.ImgLst128.Images.Clear()
-        Me.ImgLst128.ColorDepth = ColorDepth.Depth32Bit
-        Me.ImgLst128.ImageSize = New Size(64, 64)
-
-        Me.ImgLst256.Images.Clear()
-        Me.ImgLst256.ColorDepth = ColorDepth.Depth32Bit
-        Me.ImgLst256.ImageSize = New Size(256, 256)
-
-        Me.lsAttachedFiles.Items.Clear()
-        Me.lsJobPictures.Items.Clear()
+            Me.lsAttachedFiles.Items.Clear()
+            Me.lsJobPictures.Items.Clear()
 
 
 
-        Get_Dirs(LeadNum)
-        Get_Files_And_Dirs(LeadNum)
+            Get_Dirs(LeadNum)
+            Get_Files_And_Dirs(LeadNum)
 
-        Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
-        Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
+            Me.lsAttachedFiles.LargeImageList = Me.ImgLst32
+            Me.lsAttachedFiles.SmallImageList = Me.ImgLst32
 
-        Me.lsJobPictures.LargeImageList = Me.ImgLst32
-        Me.lsJobPictures.SmallImageList = Me.ImgLst32
-
+            Me.lsJobPictures.LargeImageList = Me.ImgLst32
+            Me.lsJobPictures.SmallImageList = Me.ImgLst32
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "GetImages_Files_And_Folders(leadnum)", LeadNum, ex.Message.ToString)
+            y = Nothing
+        End Try
     End Function
 
     Private Function GetTheFiles(ByVal LeadNum As String)
@@ -3467,9 +3473,16 @@ Public Class Sales
         Catch ex As Exception
             'Dim err As String = ex.Message
             'MsgBox("Error: " & vbCrLf & ex.Message.ToString, MsgBoxStyle.Critical, "DEBUG INFO - AddListItem_Directories()")
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "AddListItem_Files(Itemlist,control)", "0", ex.Message.ToString)
-            y = Nothing
+            ' Dim y As New ErrorLogging_V2
+            'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "AddListItem_Files(Itemlist,control)", "0", ex.Message.ToString)
+            ' y = Nothing
+
+            '' Notes:
+            '' don't report these
+            '' they may or may not be there (directories and files)
+            '' if they are blank arrays it will throw an error and spam the logs.
+            '' is by design and doesn't necessarily need reporting
+            '' 2-11-16 AC
         End Try
     End Function
 
@@ -3498,9 +3511,16 @@ Public Class Sales
         Catch ex As Exception
             'Dim err As String = ex.Message
             'MsgBox("Error: " & vbCrLf & ex.Message.ToString, MsgBoxStyle.Critical, "DEBUG INFO - AddListItem_Directories()")
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "AddListItem_Directories(itemlist,control)", "0", ex.Message.ToString)
-            y = Nothing
+            'Dim y As New ErrorLogging_V2
+            'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "AddListItem_Directories(itemlist,control)", "0", ex.Message.ToString)
+            'y = Nothing
+
+            ' '' Notes:
+            '' don't report these
+            '' they may or may not be there (directories and files)
+            '' if they are blank arrays it will throw an error and spam the logs.
+            '' is by design and doesn't necessarily need reporting
+            '' 2-11-16 AC
         End Try
     End Function
 
@@ -7606,49 +7626,69 @@ Public Class Sales
 
 #Region "Context Menu Refresh - LS and JP"
     Public Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            sel_Item_left = Nothing
+            sel_Item_right = Nothing
 
-        sel_Item_left = Nothing
-        sel_Item_right = Nothing
+            Dim whereToCreate As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+            Me.lsAttachedFiles.Tag = whereToCreate
 
-        Dim whereToCreate As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-        Me.lsAttachedFiles.Tag = whereToCreate
+            Dim repop As New AF_And_JP_Logic(whereToCreate)
+            Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+            arFiles = repop.Files
+            Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+            arDirs = repop.Directories
+            repop = Nothing
+            Me.lsAttachedFiles.Items.Clear()
+            AddListItem_Directories(arDirs, Me.lsAttachedFiles)
+            AddListItem_Files(arFiles, Me.lsAttachedFiles)
 
-        Dim repop As New AF_And_JP_Logic(whereToCreate)
-        Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
-        arFiles = repop.Files
-        Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
-        arDirs = repop.Directories
-        repop = Nothing
-        Me.lsAttachedFiles.Items.Clear()
-        AddListItem_Directories(arDirs, Me.lsAttachedFiles)
-        AddListItem_Files(arFiles, Me.lsAttachedFiles)
-
-        Me.tsAttachedFilesNAV.Enabled = False
+            Me.tsAttachedFilesNAV.Enabled = False
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            sel_Item_Left_Jp = Nothing
+            sel_Item_Right_Jp = Nothing
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnRefresh_Click", STATIC_VARIABLES.CurrentID, ex.Message.ToString)
+            y = Nothing
+            Me.Cursor = Cursors.Default
+        End Try
 
 
 
     End Sub
 
     Public Sub btnRefreshJP_Click(ByVal sender As Object, e As EventArgs) Handles btnRefreshJP.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            sel_Item_Left_Jp = Nothing
+            sel_Item_Right_Jp = Nothing
 
-        sel_Item_Left_Jp = Nothing
-        sel_Item_Right_Jp = Nothing
+            Dim whereToCreate As String = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
+            Me.lsJobPictures.Tag = whereToCreate
 
-        Dim whereToCreate As String = (jp_dir & STATIC_VARIABLES.CurrentID & "\")
-        Me.lsJobPictures.Tag = whereToCreate
-
-        Dim repop As New AF_And_JP_Logic(whereToCreate)
-        Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
-        arFiles = repop.Files
-        Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
-        arDirs = repop.Directories
-        repop = Nothing
-        Me.lsJobPictures.Items.Clear()
+            Dim repop As New AF_And_JP_Logic(whereToCreate)
+            Dim arFiles As New List(Of AF_And_JP_Logic.FileObject)
+            arFiles = repop.Files
+            Dim arDirs As New List(Of AF_And_JP_Logic.DirObject)
+            arDirs = repop.Directories
+            repop = Nothing
+            Me.lsJobPictures.Items.Clear()
 
 
 
-        AddListItem_Directories(arDirs, Me.lsJobPictures)
-        AddListItem_Files(arFiles, Me.lsJobPictures)
+            AddListItem_Directories(arDirs, Me.lsJobPictures)
+            AddListItem_Files(arFiles, Me.lsJobPictures)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            sel_Item_Left_Jp = Nothing
+            sel_Item_Right_Jp = Nothing
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnRefreshJP_Click", STATIC_VARIABLES.CurrentID, ex.Message.ToString)
+            y = Nothing
+            Me.Cursor = Cursors.Default
+        End Try
 
     End Sub
 

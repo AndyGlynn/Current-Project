@@ -39,8 +39,11 @@ Public Class WCaller
 
     Private Sub WCaller_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
+            Me.Cursor = Cursors.WaitCursor
             Dim c As New WarmCalling.LoadProcedure()
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "WCaller_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -758,6 +761,7 @@ Public Class WCaller
 
     Public Sub btnZipCity_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnZipCity.Click
         Try
+            Me.Cursor = Cursors.WaitCursor
             Me.pbRadiusSearch.Value = 0
             Me.pbRadiusSearch.Visible = True
             Me.btnZipCity.Enabled = False
@@ -773,10 +777,17 @@ Public Class WCaller
                 c.DoIt(Me.nupMiles.Value, Me.txtZipCode.Text)
             Else
                 Dim b As New GetStateFromCity(Me.txtZipCode.Text)
+
+                '' private class : getstatefromcity(arg) 
+                '' lines: 1038-1069
+                '' 
+
                 c.DoItCity(Me.nupMiles.Value, Me.txtZipCode.Text, b.StatePulled)
             End If
             Me.btnZipCity.Enabled = True
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "btnZipCity_click", "0", ex.Message.ToString)
             y = Nothing
@@ -843,6 +854,7 @@ Public Class WCaller
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Try
+            Me.Cursor = Cursors.WaitCursor
             If Me.lbZipCity.Items.Count > 0 And Me.lbZipCity.CheckedItems.Count = 0 Then
                 MsgBox("You must check at least 1 Zip/City to Search", MsgBoxStyle.Exclamation, "No Zip/City Selected")
                 Me.lbZipCity.SetSelected(0, True)
@@ -855,7 +867,9 @@ Public Class WCaller
             End If
             Dim c As New WarmCalling
             c.Populate()
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "btnSearch_Click", "0", ex.Message.ToString)
             y = Nothing

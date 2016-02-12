@@ -1166,7 +1166,7 @@ Public Class EmailIssuedLeads
             End With
             smptSERV.Send(eml_msg)
 
-            MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
+            MsgBox("Email Sent to: " & vbCrLf & Recipient.ToString & " .", MsgBoxStyle.Information, "Mail Was Sent.")
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Sub", "Send_BLAST_MAIL(from,recipient,msg,subject)", "0", ex.Message.ToString)

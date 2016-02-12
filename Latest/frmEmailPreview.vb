@@ -104,7 +104,12 @@
                 ElseIf Len(STATIC_VARIABLES.CurrentLoggedInEmployee.Email) >= 1 Then
                     y.Send_BLAST_MAIL(STATIC_VARIABLES.CurrentLoggedInEmployee.Email, CustEmail, Me.rtfPreview.Text, Me.lblSubject.Text)
                     y = Nothing
-                    MsgBox("Email Sent.", MsgBoxStyle.Information, "SENT EMAIL")
+                    '' Notes:
+                    '' was double "confirming" that message was sent.
+                    '' class notifies of mail sent. no need for form code here.
+                    '' class: EmailIssueLeads=>Send_BLAST_MAIL=>Line 1169
+                    '' 2-11-2016 AC 
+                    'MsgBox("Email Sent.", MsgBoxStyle.Information, "SENT EMAIL")
                 End If
             End If
             Me.ResetForm()

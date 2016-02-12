@@ -109,8 +109,11 @@ Public Class Main
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         Try
+            Me.Cursor = Cursors.WaitCursor
             Application.Exit()
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "ExitToolStripMenuItem", "0", ex.Message.ToString)
             y = Nothing
@@ -162,7 +165,8 @@ Public Class Main
     Private Sub tsbrolodex_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbrolodex.Click
         Try
             Dim x As Form
-            x = frmRolodex 'Employee_Contacts
+            ' x = frmRolodex 'Employee_Contacts  => OLD CODE 
+            x = frmExpandedRolodex  '' NEW CODE => 2-12-2016 AC Forms:={frmExpandedRolodex,prntChoice,frmSMS,RolodexEdit}  Class:={printClassRolodex,Rolodex_Logic_V2}
             'x.MdiParent = Me
             x.ShowInTaskbar = False
             x.ShowDialog()
