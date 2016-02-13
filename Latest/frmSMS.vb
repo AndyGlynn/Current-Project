@@ -105,9 +105,19 @@ Public Class frmSMS
             credentials.Password = obj.coEmailPWD
             credentials.UserName = obj.coEmail
             smptSERV.UseDefaultCredentials = False
-            smptSERV.EnableSsl = True
+            'smptSERV.EnableSsl = True
             smptSERV.Port = 587
-            smptSERV.Host = obj.coSMTP
+
+            '' Notes: 2-13-2016 AC
+            '' have to use a static assigned mail server 
+            '' from banana hosting according to 
+            '' 'Johnny' from support to send SMS/Text. We also are not supposed to use SSL
+            '' but according to him it shouldn't be a security issue.
+            '' 
+            smptSERV.Host = "mail6.gohsphere.com"
+            'smptSERV.Host = obj.coSMTP
+
+
             smptSERV.Credentials = credentials
             Dim numAndCarrier As String = (telNum & CarrierGateway)
 
@@ -122,7 +132,7 @@ Public Class frmSMS
             End With
             smptSERV.Send(eml_msg)
 
-
+            MsgBox("Text message has been sent to: " & vbCrLf & numAndCarrier & " .", MsgBoxStyle.Information, "SMS Message Sent.")
 
             ''**NON WORKING CODE FOR REFERENCE**
             'Dim smtp As New SmtpClient
