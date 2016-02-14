@@ -3217,10 +3217,18 @@ Public Class Sales
                 Me.dtpSummary.Value = d.retDateTo
                 Dim r As New Sales_Performance_Report
                 Dim accuracy As String = r.ReportAccuracy
-                Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
+                Dim response As Integer = MsgBox("Would you like to view in a web browser for styled printing?", MsgBoxStyle.YesNo, "Styled Printing?")
+                Select Case response
+                    Case Is = vbYes
+                        Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
+                        x = Nothing
+                        Exit Select
+                    Case Is = vbNo
+                        '' no nothing 
+                        '' just let it run. 
+                        Exit Select
+                End Select
                 r = Nothing
-                x = Nothing
-
             End If
 
         Catch ex As Exception

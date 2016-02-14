@@ -737,8 +737,11 @@ Public Class Main
         'System.Diagnostics.Process.Start("C:\Users\Andy\Documents\Programming Files\ISSMappointEXE\ISSMappointEXE\bin\Debug\ISSMappointEXE.exe")
         'MsgBox("Place holder for external mappoint.")
         Try
-            frmMappoint.Show()
-            frmMappoint.BringToFront()
+            'frmMappoint.Show()
+            'frmMappoint.BringToFront()
+            'frmMappoint.MdiParent = Me
+            frmMappointEX.Show()
+            frmMappointEX.BringToFront()
             frmMappoint.MdiParent = Me
         Catch ex As Exception
             Dim y As New ErrorLogging_V2

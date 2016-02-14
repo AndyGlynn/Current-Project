@@ -116,7 +116,7 @@ Partial Class frmMappoint
         Me.TabControl1.Location = New System.Drawing.Point(12, 30)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(417, 386)
+        Me.TabControl1.Size = New System.Drawing.Size(417, 660)
         Me.TabControl1.TabIndex = 11
         '
         'TabPage1
@@ -136,14 +136,14 @@ Partial Class frmMappoint
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(409, 360)
+        Me.TabPage1.Size = New System.Drawing.Size(409, 634)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Single Address Lookup"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'btnResetSingle
         '
-        Me.btnResetSingle.Location = New System.Drawing.Point(26, 325)
+        Me.btnResetSingle.Location = New System.Drawing.Point(39, 603)
         Me.btnResetSingle.Name = "btnResetSingle"
         Me.btnResetSingle.Size = New System.Drawing.Size(113, 23)
         Me.btnResetSingle.TabIndex = 6
@@ -168,7 +168,7 @@ Partial Class frmMappoint
         '
         'btnMapSingle
         '
-        Me.btnMapSingle.Location = New System.Drawing.Point(231, 325)
+        Me.btnMapSingle.Location = New System.Drawing.Point(244, 603)
         Me.btnMapSingle.Name = "btnMapSingle"
         Me.btnMapSingle.Size = New System.Drawing.Size(113, 23)
         Me.btnMapSingle.TabIndex = 7
@@ -266,14 +266,14 @@ Partial Class frmMappoint
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(409, 360)
+        Me.TabPage2.Size = New System.Drawing.Size(409, 634)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Point To Point Directions"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'btnResetPointToPoint
         '
-        Me.btnResetPointToPoint.Location = New System.Drawing.Point(26, 325)
+        Me.btnResetPointToPoint.Location = New System.Drawing.Point(39, 605)
         Me.btnResetPointToPoint.Name = "btnResetPointToPoint"
         Me.btnResetPointToPoint.Size = New System.Drawing.Size(113, 23)
         Me.btnResetPointToPoint.TabIndex = 18
@@ -378,7 +378,7 @@ Partial Class frmMappoint
         '
         'btnMapPointToPoint
         '
-        Me.btnMapPointToPoint.Location = New System.Drawing.Point(231, 325)
+        Me.btnMapPointToPoint.Location = New System.Drawing.Point(244, 605)
         Me.btnMapPointToPoint.Name = "btnMapPointToPoint"
         Me.btnMapPointToPoint.Size = New System.Drawing.Size(113, 23)
         Me.btnMapPointToPoint.TabIndex = 19
@@ -463,7 +463,7 @@ Partial Class frmMappoint
         Me.TabPage3.Controls.Add(Me.Label15)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(409, 360)
+        Me.TabPage3.Size = New System.Drawing.Size(409, 634)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Plot Sales Results"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -520,7 +520,7 @@ Partial Class frmMappoint
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(17, 325)
+        Me.Button3.Location = New System.Drawing.Point(29, 598)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(327, 23)
         Me.Button3.TabIndex = 26
@@ -596,7 +596,7 @@ Partial Class frmMappoint
         Me.TabPage4.Controls.Add(Me.Label9)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(409, 360)
+        Me.TabPage4.Size = New System.Drawing.Size(409, 634)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Distances"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -653,7 +653,7 @@ Partial Class frmMappoint
         '
         'btnCalc
         '
-        Me.btnCalc.Location = New System.Drawing.Point(17, 325)
+        Me.btnCalc.Location = New System.Drawing.Point(35, 598)
         Me.btnCalc.Name = "btnCalc"
         Me.btnCalc.Size = New System.Drawing.Size(327, 23)
         Me.btnCalc.TabIndex = 33

@@ -81,12 +81,6 @@ Public Class frmSMS
     
         Try
 
-            
-
-       
-
-
-
             Dim g As New GetCompanyInfo
             Dim obj As GetCompanyInfo.CoInfo = g.CompanyInfo
 
@@ -105,18 +99,18 @@ Public Class frmSMS
             credentials.Password = obj.coEmailPWD
             credentials.UserName = obj.coEmail
             smptSERV.UseDefaultCredentials = False
-            'smptSERV.EnableSsl = True
             smptSERV.Port = 587
 
             '' Notes: 2-13-2016 AC
             '' have to use a static assigned mail server 
             '' from banana hosting according to 
-            '' 'Johnny' from support to send SMS/Text. We also are not supposed to use SSL
+            '' 'Johnny' from support to send SMS/Text. 
+            '' We also are not supposed to use SSL
             '' but according to him it shouldn't be a security issue.
             '' 
             smptSERV.Host = "mail6.gohsphere.com"
             'smptSERV.Host = obj.coSMTP
-
+            'smptSERV.EnableSsl = True
 
             smptSERV.Credentials = credentials
             Dim numAndCarrier As String = (telNum & CarrierGateway)
@@ -155,6 +149,7 @@ Public Class frmSMS
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmSMS", "FormCode", "Sub", "SendMSG(args)", "0", ex.Message.ToString)
             y = Nothing
+            MsgBox("Message Failed to send. Please check the logs for further information.", MsgBoxStyle.Exclamation, "Text Not Sent")
         End Try
 
     End Sub

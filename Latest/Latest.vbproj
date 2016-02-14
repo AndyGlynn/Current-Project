@@ -137,6 +137,7 @@
     <Compile Include="CandCNotes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="companyInfoSQL.vb" />
     <Compile Include="convertLeadToStruct.vb" />
     <Compile Include="createAShortCut.vb" />
     <Compile Include="createListPrintOperations.vb" />
@@ -245,6 +246,12 @@
     <Compile Include="frmMappoint.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMappointEX.Designer.vb">
+      <DependentUpon>frmMappointEX.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMappointEX.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPrint.Designer.vb">
       <DependentUpon>frmPrint.vb</DependentUpon>
     </Compile>
@@ -263,6 +270,9 @@
     <Compile Include="frmTesting.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="generateCSVForDataMap.vb" />
+    <Compile Include="generateDataSets.vb" />
+    <Compile Include="generateLists.vb" />
     <Compile Include="imgLSTS.vb" />
     <Compile Include="ColdCalling.Designer.vb">
       <DependentUpon>ColdCalling.vb</DependentUpon>
@@ -439,6 +449,7 @@
     <Compile Include="Issue_Leads.vb" />
     <Compile Include="ItemEndDragObj.vb" />
     <Compile Include="jbPicsAttachedFiles.vb" />
+    <Compile Include="launchSeparateMap.vb" />
     <Compile Include="listAF_and_listJP.vb" />
     <Compile Include="Locked_for_Editing.vb" />
     <Compile Include="LOGIN.Designer.vb">
@@ -504,6 +515,7 @@
     </Compile>
     <Compile Include="PENDING_REQUEST_INFO.vb" />
     <Compile Include="PopulateAF.vb" />
+    <Compile Include="primaryVSsecondary.vb" />
     <Compile Include="printClassRolodex.vb" />
     <Compile Include="printingOperations.vb" />
     <Compile Include="printToPrinterApptSheet.vb" />
@@ -516,6 +528,7 @@
     <Compile Include="prntChoice.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="quickINFO.vb" />
     <Compile Include="ReusableListViewControl.vb" />
     <Compile Include="RolodexEdit.Designer.vb">
       <DependentUpon>RolodexEdit.vb</DependentUpon>
@@ -937,6 +950,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMappoint.resx">
       <DependentUpon>frmMappoint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMappointEX.resx">
+      <DependentUpon>frmMappointEX.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrint.resx">
       <DependentUpon>frmPrint.vb</DependentUpon>
