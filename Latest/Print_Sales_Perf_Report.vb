@@ -2171,7 +2171,7 @@ Public Class Print_Sales_Perf_Report
                 sr.WriteLine("</head>")
                 sr.WriteLine("<body>")
                 sr.WriteLine("<div class='screen'> <!--- Screen Div --->")
-                sr.WriteLine("<span class='lblAccuracyHeader'>This report is " & accuracyPer & "% accurate.</span><span class='lblTitleHeader'>Performance Report</span><span class='lblDateRangeHeader'>Report Date Range: " & StartDate & " to " & EndDate & "</span>")
+                sr.WriteLine("<span class='lblAccuracyHeader'>" & accuracyPer & "</span><span class='lblTitleHeader'>Performance Report</span><span class='lblDateRangeHeader'>Report Date Range: " & StartDate & " to " & EndDate & "</span>")
                 sr.WriteLine("<div class='hdrLbls'> <!-- headers --><span class='lblSalesRep'>Sales Rep</span><span class='lblNumIssued'>Issued</span><span class='lblDemoNoSales'>Demo/No Sales</span><span class='lblNotHits'>Not Hits</span><span class='lblResets'>Resets</span><span class='lblNoDemos'>No Demos</span><span class='lblSales'>Sales</span><span class='lblRecissionCancels'>Recission Cancels</span><span class='lblTotalSold'>Sold</span>")
                 sr.WriteLine("<div class='subCont'><!-- Rows of data -->")
 

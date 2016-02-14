@@ -48,6 +48,7 @@ Public Class Sales
     Friend WithEvents sepScheduledTasks As New ToolStripSeparator
     Friend WithEvents btnPrintSummary As New ToolStripDropDownButton
     Friend WithEvents btnPrintPerformanceReport As New ToolStripMenuItem
+    Friend WithEvents btnPrintDPerformanceReport As New ToolStripMenuItem
     Friend WithEvents btnPrintNoResultsList As New ToolStripMenuItem
     Friend WithEvents btnPrintScheduledTasks As New ToolStripMenuItem
     Friend WithEvents lblSummary As New ToolStripLabel
@@ -290,22 +291,29 @@ Public Class Sales
             Me.btnSAPreferences.Text = "Preferences"
             'btnPrintSummary
             '
-            Me.btnPrintSummary.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPrintPerformanceReport, Me.btnPrintPerformanceReport, Me.btnPrintScheduledTasks})
+
+
+           
+
+
+            Me.btnPrintSummary.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPrintPerformanceReport, Me.btnPrintDPerformanceReport, Me.btnPrintScheduledTasks})
             Me.btnPrintSummary.Image = Me.ilToolbarButtons.Images(3)
             Me.btnPrintSummary.ImageTransparentColor = System.Drawing.Color.Magenta
             Me.btnPrintSummary.Name = "btnPrintSummary"
             Me.btnPrintSummary.Size = New System.Drawing.Size(58, 22)
             Me.btnPrintSummary.Text = "Print"
             'btnPrintPerformanceReport
-            Me.btnPrintPerformanceReport.Name = "btnPrintPerformanceReport"
-            Me.btnPrintPerformanceReport.Size = New System.Drawing.Size(233, 22)
-            Me.btnPrintPerformanceReport.Text = "Print Daily Performance Report"
-            'btnPrintPerformanceReport
+           
             '
             Me.btnPrintPerformanceReport.Name = "btnPrintPerformanceReport"
             Me.btnPrintPerformanceReport.Size = New System.Drawing.Size(233, 22)
             Me.btnPrintPerformanceReport.Text = "Print ""No Sales Results"" List"
             'btnPrintScheduledTasks
+
+            Me.btnPrintDPerformanceReport.Name = "btnPrintDPerformanceReport"
+            Me.btnPrintDPerformanceReport.Size = New System.Drawing.Size(233, 22)
+            Me.btnPrintDPerformanceReport.Text = "Print ""Daily Performance Report"""
+            'btnPrintDPerformanceReport
             '
             Me.btnPrintScheduledTasks.Name = "btnPrintScheduledTasks"
             Me.btnPrintScheduledTasks.Size = New System.Drawing.Size(233, 22)
@@ -3217,17 +3225,18 @@ Public Class Sales
                 Me.dtpSummary.Value = d.retDateTo
                 Dim r As New Sales_Performance_Report
                 Dim accuracy As String = r.ReportAccuracy
-                Dim response As Integer = MsgBox("Would you like to view in a web browser for styled printing?", MsgBoxStyle.YesNo, "Styled Printing?")
-                Select Case response
-                    Case Is = vbYes
-                        Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
-                        x = Nothing
-                        Exit Select
-                    Case Is = vbNo
-                        '' no nothing 
-                        '' just let it run. 
-                        Exit Select
-                End Select
+                'Me.lblPrintReport.Visible = True
+                'Dim response As Integer = MsgBox("Would you like to view in a web browser for styled printing?", MsgBoxStyle.YesNo, "Styled Printing?")
+                'Select Case response
+                '    Case Is = vbYes
+                '        Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
+                '        x = Nothing
+                '        Exit Select
+                '    Case Is = vbNo
+                '        '' no nothing 
+                '        '' just let it run. 
+                '        Exit Select
+                'End Select
                 r = Nothing
             End If
 
@@ -8702,5 +8711,27 @@ Public Class Sales
             y = Nothing
         End Try
 
+    End Sub
+
+  
+    
+    
+    Private Sub btnPrintDPerformanceReport_Click(sender As Object, e As EventArgs) Handles btnPrintDPerformanceReport.Click
+        Try
+            Dim d As New DTPManipulation(Me.cboDateRangeSummary.Text)
+            Me.dtpSummary2.Value = d.retDateFrom
+            Me.dtpSummary.Value = d.retDateTo
+            ' Dim r As New Sales_Performance_Report
+            Dim accuracy As String = Me.lblAccuracy.Text
+            Me.Cursor = Cursors.WaitCursor
+            Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
+            x = Nothing
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lnkPrintReport_LinkClicked", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
 End Class

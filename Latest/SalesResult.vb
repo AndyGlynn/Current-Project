@@ -2512,6 +2512,21 @@ Public Class SDResult
             Dim param59 As SqlParameter = New SqlParameter("@ID", Me.ID)
             Dim param60 As SqlParameter = New SqlParameter("@description", description)
             Dim param61 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
+
+            '' Notes: 2-14-2016 AC
+            '' This stored procedure expects '@Delay' param
+            '' which is not being supplied causing 
+            '' the update/save to fail for 'moving lead to being recoverable'.
+            '' The unknown of it is 'how long to delay for' so i know what to set the params default as
+            '' IE: @Delay = TimeSpan(date.today + 1 day || 1 week || 1 month )
+            '' @Delay = choice
+            '' cmdGet.Parameters.add(@Delay) 
+            ''
+            Dim timeVar As Date = Date.Today.AddDays(7)
+            Dim stopPoint As String = timeVar.ToString
+            Dim paramADD As SqlParameter = New SqlParameter("@Delay", timeVar)
+            ''
+
             Dim cmdGet As SqlCommand
             cmdGet = New SqlCommand("dbo.SalesResult", cnn)
             cmdGet.Parameters.Add(param1)
@@ -2575,6 +2590,18 @@ Public Class SDResult
             cmdGet.Parameters.Add(param59)
             cmdGet.Parameters.Add(param60)
             cmdGet.Parameters.Add(param61)
+
+            '' Added: 2-14-2015 AC
+            cmdGet.Parameters.Add(paramADD)
+            '' FROM THE LOG AFTER EXECUTING:
+            '' 
+            '2/14/2016 2:23:07 PM,PC-101,192.168.0.8,SalesResult,FormCode,Sub,btnSave_Click,0,Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
+            'Cannot insert the value NULL into column 'QuotedSold', table 'iss.dbo.LeadHistory'; column does not allow nulls. INSERT fails.
+            'The statement has been terminated.
+            'The statement has been terminated.
+            ''
+            ''problem in the stored procedure. 
+
             cmdGet.CommandType = CommandType.StoredProcedure
             Dim r As SqlDataReader
             cnn.Open()

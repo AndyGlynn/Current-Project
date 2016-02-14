@@ -296,6 +296,7 @@ Public Class ScheduledActions
 
 
             End While
+            Sales.GroupBox4.Text = "Scheduled Tasks - Sales Department"
             Sales.GroupBox4.Text = (Sales.GroupBox4.Text & " - [ Records: " & cntRecords.ToString & " ]")
             R1.Close()
             cnn.Close()
