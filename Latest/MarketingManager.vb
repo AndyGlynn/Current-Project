@@ -142,9 +142,9 @@ Public Class MarketingManager
 
     End Sub
 
-    Private Sub tsCreateList_Click(sender As Object, e As EventArgs) Handles tsCreateList.Click
-        frmCreateList.Show()
-        frmCreateList.MdiParent = Main
+    Private Sub tsCreateList_Click(sender As Object, e As EventArgs)
+        'frmCreateList.Show()
+        'frmCreateList.MdiParent = Main
 
     End Sub
 
@@ -159,5 +159,20 @@ Public Class MarketingManager
         frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
         frmEditSpecialInstructions.CallingForm = "MarketingManager"
         frmEditSpecialInstructions.Show()
+    End Sub
+
+    Private Sub PreviewCustomerListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PreviewCustomerListToolStripMenuItem.Click
+        frmPCList.MdiParent = Main
+        frmPCList.Show()
+    End Sub
+
+    Private Sub RecoveryListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecoveryListToolStripMenuItem.Click
+        frmRList.MdiParent = Main
+        frmRList.Show()
+    End Sub
+
+    Private Sub GenerateWarmCallingListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateWarmCallingListToolStripMenuItem.Click
+        frmWCList.MdiParent = Main
+        frmWCList.Show()
     End Sub
 End Class

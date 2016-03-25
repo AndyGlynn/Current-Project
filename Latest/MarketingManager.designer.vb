@@ -21,12 +21,6 @@ Partial Class MarketingManager
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MarketingManager))
         Me.tsMarketingDepartment = New System.Windows.Forms.ToolStrip()
-        Me.ScheduledTasks = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.btnMarkTaskAsDone = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnEditScheduledTask = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnRemoveThisCompletedTask = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnRemoveAllScheduledTask = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsCreateList = New System.Windows.Forms.ToolStripButton()
         Me.tbMain = New System.Windows.Forms.TabControl()
         Me.tpSummary = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -72,10 +66,7 @@ Partial Class MarketingManager
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripComboBox3 = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
         Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
         Me.gbContactInfo = New System.Windows.Forms.GroupBox()
@@ -89,7 +80,6 @@ Partial Class MarketingManager
         Me.txtAlt2Type = New System.Windows.Forms.TextBox()
         Me.lblAltPhone2 = New System.Windows.Forms.Label()
         Me.lblAltPhone1 = New System.Windows.Forms.Label()
-        Me.pctVerified = New System.Windows.Forms.PictureBox()
         Me.lblHousePhone = New System.Windows.Forms.Label()
         Me.lblWorkHours = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
@@ -131,21 +121,34 @@ Partial Class MarketingManager
         Me.tsCustomerLog = New System.Windows.Forms.ToolStrip()
         Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
         Me.tslblShowDepartment = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbtnAFPics = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton()
-        Me.btnCalledandCancelled = New System.Windows.Forms.ToolStripMenuItem()
         Me.tslblCustomerHistory = New System.Windows.Forms.ToolStripLabel()
         Me.tsAFPics = New System.Windows.Forms.ToolStrip()
         Me.tscboAFPicsFilter = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbtnShowCH = New System.Windows.Forms.ToolStripButton()
-        Me.tsAttachedFilesNAV = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tslblAFPic = New System.Windows.Forms.ToolStripLabel()
         Me.tpIssueLeads = New System.Windows.Forms.TabPage()
         Me.tpReferences = New System.Windows.Forms.TabPage()
         Me.tpReports = New System.Windows.Forms.TabPage()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.pctVerified = New System.Windows.Forms.PictureBox()
+        Me.tsbtnAFPics = New System.Windows.Forms.ToolStripButton()
+        Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton()
+        Me.btnCalledandCancelled = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbtnShowCH = New System.Windows.Forms.ToolStripButton()
+        Me.tsAttachedFilesNAV = New System.Windows.Forms.ToolStripButton()
+        Me.ScheduledTasks = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.btnMarkTaskAsDone = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnEditScheduledTask = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRemoveThisCompletedTask = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRemoveAllScheduledTask = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.GenerateWarmCallingListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RecoveryListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PreviewCustomerListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsMarketingDepartment.SuspendLayout()
         Me.tbMain.SuspendLayout()
         Me.tpSummary.SuspendLayout()
@@ -160,66 +163,24 @@ Partial Class MarketingManager
         Me.TabPage2.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.gbContactInfo.SuspendLayout()
-        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbHomeInfo.SuspendLayout()
         Me.gbSpecialInstructions.SuspendLayout()
         Me.gbProductInfo.SuspendLayout()
         Me.gbApptInfo.SuspendLayout()
         Me.tsCustomerLog.SuspendLayout()
         Me.tsAFPics.SuspendLayout()
+        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tsMarketingDepartment
         '
         Me.tsMarketingDepartment.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.tsMarketingDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ScheduledTasks, Me.tsCreateList})
+        Me.tsMarketingDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ScheduledTasks, Me.ToolStripDropDownButton1})
         Me.tsMarketingDepartment.Location = New System.Drawing.Point(0, 0)
         Me.tsMarketingDepartment.Name = "tsMarketingDepartment"
         Me.tsMarketingDepartment.Size = New System.Drawing.Size(990, 25)
         Me.tsMarketingDepartment.TabIndex = 250
         Me.tsMarketingDepartment.Text = "ToolStrip1"
-        '
-        'ScheduledTasks
-        '
-        Me.ScheduledTasks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMarkTaskAsDone, Me.btnEditScheduledTask, Me.btnRemoveThisCompletedTask, Me.btnRemoveAllScheduledTask})
-        Me.ScheduledTasks.Image = CType(resources.GetObject("ScheduledTasks.Image"), System.Drawing.Image)
-        Me.ScheduledTasks.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ScheduledTasks.Name = "ScheduledTasks"
-        Me.ScheduledTasks.Size = New System.Drawing.Size(141, 22)
-        Me.ScheduledTasks.Text = "Edit Scheduled Task"
-        '
-        'btnMarkTaskAsDone
-        '
-        Me.btnMarkTaskAsDone.Name = "btnMarkTaskAsDone"
-        Me.btnMarkTaskAsDone.Size = New System.Drawing.Size(231, 22)
-        Me.btnMarkTaskAsDone.Text = "Mark Task as Done"
-        '
-        'btnEditScheduledTask
-        '
-        Me.btnEditScheduledTask.Name = "btnEditScheduledTask"
-        Me.btnEditScheduledTask.Size = New System.Drawing.Size(231, 22)
-        Me.btnEditScheduledTask.Text = "Edit Scheduled Task"
-        '
-        'btnRemoveThisCompletedTask
-        '
-        Me.btnRemoveThisCompletedTask.Name = "btnRemoveThisCompletedTask"
-        Me.btnRemoveThisCompletedTask.Size = New System.Drawing.Size(231, 22)
-        Me.btnRemoveThisCompletedTask.Text = "Remove This Completed Task"
-        '
-        'btnRemoveAllScheduledTask
-        '
-        Me.btnRemoveAllScheduledTask.Name = "btnRemoveAllScheduledTask"
-        Me.btnRemoveAllScheduledTask.Size = New System.Drawing.Size(231, 22)
-        Me.btnRemoveAllScheduledTask.Text = "Remove All Completed Tasks"
-        '
-        'tsCreateList
-        '
-        Me.tsCreateList.Image = CType(resources.GetObject("tsCreateList.Image"), System.Drawing.Image)
-        Me.tsCreateList.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsCreateList.Name = "tsCreateList"
-        Me.tsCreateList.Size = New System.Drawing.Size(139, 22)
-        Me.tsCreateList.Text = "Create Marketing List"
-        Me.tsCreateList.ToolTipText = "Create Marketing List"
         '
         'tbMain
         '
@@ -693,7 +654,7 @@ Partial Class MarketingManager
         Me.ToolStrip1.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ToolStrip1.Size = New System.Drawing.Size(768, 33)
+        Me.ToolStrip1.Size = New System.Drawing.Size(771, 33)
         Me.ToolStrip1.TabIndex = 202
         Me.ToolStrip1.Text = "ToolStrip1"
         Me.ToolStrip1.Visible = False
@@ -717,36 +678,10 @@ Partial Class MarketingManager
         Me.ToolStripLabel2.Size = New System.Drawing.Size(43, 30)
         Me.ToolStripLabel2.Text = "Show"
         '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
-        Me.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(36, 30)
-        Me.ToolStripButton2.Text = "ShowAFPics"
-        Me.ToolStripButton2.ToolTipText = "Show Attached Files and Job Pictures for this Customer"
-        '
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
         Me.ToolStripSeparator13.Size = New System.Drawing.Size(6, 33)
-        '
-        'ToolStripSplitButton1
-        '
-        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
-        Me.ToolStripSplitButton1.Image = CType(resources.GetObject("ToolStripSplitButton1.Image"), System.Drawing.Image)
-        Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
-        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(272, 30)
-        Me.ToolStripSplitButton1.Text = "Log Phone Conversation with this Customer"
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(254, 22)
-        Me.ToolStripMenuItem1.Text = "Log Appt. as Called and Cancelled"
         '
         'ToolStripLabel3
         '
@@ -764,7 +699,7 @@ Partial Class MarketingManager
         Me.pnlCustomerHistory.AutoScroll = True
         Me.pnlCustomerHistory.Location = New System.Drawing.Point(4, 390)
         Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(767, 171)
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(770, 171)
         Me.pnlCustomerHistory.TabIndex = 200
         '
         'gbContactInfo
@@ -797,7 +732,7 @@ Partial Class MarketingManager
         Me.gbContactInfo.ForeColor = System.Drawing.Color.Gray
         Me.gbContactInfo.Location = New System.Drawing.Point(5, 3)
         Me.gbContactInfo.Name = "gbContactInfo"
-        Me.gbContactInfo.Size = New System.Drawing.Size(645, 198)
+        Me.gbContactInfo.Size = New System.Drawing.Size(648, 198)
         Me.gbContactInfo.TabIndex = 191
         Me.gbContactInfo.TabStop = False
         Me.gbContactInfo.Text = "Contact Info:"
@@ -809,7 +744,7 @@ Partial Class MarketingManager
         Me.txtHousePhone.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtHousePhone.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHousePhone.ForeColor = System.Drawing.Color.Black
-        Me.txtHousePhone.Location = New System.Drawing.Point(437, 33)
+        Me.txtHousePhone.Location = New System.Drawing.Point(440, 33)
         Me.txtHousePhone.Name = "txtHousePhone"
         Me.txtHousePhone.ReadOnly = True
         Me.txtHousePhone.Size = New System.Drawing.Size(116, 16)
@@ -823,7 +758,7 @@ Partial Class MarketingManager
         Me.txtaltphone2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone2.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone2.Location = New System.Drawing.Point(437, 96)
+        Me.txtaltphone2.Location = New System.Drawing.Point(440, 96)
         Me.txtaltphone2.Name = "txtaltphone2"
         Me.txtaltphone2.ReadOnly = True
         Me.txtaltphone2.Size = New System.Drawing.Size(116, 16)
@@ -836,7 +771,7 @@ Partial Class MarketingManager
         Me.txtaltphone1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone1.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone1.Location = New System.Drawing.Point(437, 64)
+        Me.txtaltphone1.Location = New System.Drawing.Point(440, 64)
         Me.txtaltphone1.Name = "txtaltphone1"
         Me.txtaltphone1.ReadOnly = True
         Me.txtaltphone1.Size = New System.Drawing.Size(116, 16)
@@ -848,7 +783,7 @@ Partial Class MarketingManager
         Me.lnkEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkEmail.AutoSize = True
         Me.lnkEmail.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lnkEmail.Location = New System.Drawing.Point(384, 144)
+        Me.lnkEmail.Location = New System.Drawing.Point(387, 144)
         Me.lnkEmail.Name = "lnkEmail"
         Me.lnkEmail.Size = New System.Drawing.Size(144, 16)
         Me.lnkEmail.TabIndex = 136
@@ -862,7 +797,7 @@ Partial Class MarketingManager
         Me.lblEmail.BackColor = System.Drawing.Color.Transparent
         Me.lblEmail.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmail.ForeColor = System.Drawing.Color.Gray
-        Me.lblEmail.Location = New System.Drawing.Point(333, 144)
+        Me.lblEmail.Location = New System.Drawing.Point(336, 144)
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.Size = New System.Drawing.Size(45, 16)
         Me.lblEmail.TabIndex = 135
@@ -888,7 +823,7 @@ Partial Class MarketingManager
         Me.txtAlt1Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt1Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt1Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt1Type.Location = New System.Drawing.Point(569, 64)
+        Me.txtAlt1Type.Location = New System.Drawing.Point(572, 64)
         Me.txtAlt1Type.Name = "txtAlt1Type"
         Me.txtAlt1Type.ReadOnly = True
         Me.txtAlt1Type.Size = New System.Drawing.Size(57, 16)
@@ -902,7 +837,7 @@ Partial Class MarketingManager
         Me.txtAlt2Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt2Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt2Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt2Type.Location = New System.Drawing.Point(569, 96)
+        Me.txtAlt2Type.Location = New System.Drawing.Point(572, 96)
         Me.txtAlt2Type.Name = "txtAlt2Type"
         Me.txtAlt2Type.ReadOnly = True
         Me.txtAlt2Type.Size = New System.Drawing.Size(57, 16)
@@ -916,7 +851,7 @@ Partial Class MarketingManager
         Me.lblAltPhone2.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone2.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone2.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone2.Location = New System.Drawing.Point(333, 96)
+        Me.lblAltPhone2.Location = New System.Drawing.Point(336, 96)
         Me.lblAltPhone2.Name = "lblAltPhone2"
         Me.lblAltPhone2.Size = New System.Drawing.Size(84, 16)
         Me.lblAltPhone2.TabIndex = 83
@@ -929,21 +864,11 @@ Partial Class MarketingManager
         Me.lblAltPhone1.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone1.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone1.Location = New System.Drawing.Point(333, 64)
+        Me.lblAltPhone1.Location = New System.Drawing.Point(336, 64)
         Me.lblAltPhone1.Name = "lblAltPhone1"
         Me.lblAltPhone1.Size = New System.Drawing.Size(88, 16)
         Me.lblAltPhone1.TabIndex = 81
         Me.lblAltPhone1.Text = "Alt Phone 1:"
-        '
-        'pctVerified
-        '
-        Me.pctVerified.Location = New System.Drawing.Point(29, 114)
-        Me.pctVerified.Name = "pctVerified"
-        Me.pctVerified.Size = New System.Drawing.Size(24, 24)
-        Me.pctVerified.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pctVerified.TabIndex = 133
-        Me.pctVerified.TabStop = False
-        Me.pctVerified.Visible = False
         '
         'lblHousePhone
         '
@@ -952,7 +877,7 @@ Partial Class MarketingManager
         Me.lblHousePhone.BackColor = System.Drawing.Color.Transparent
         Me.lblHousePhone.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHousePhone.ForeColor = System.Drawing.Color.Gray
-        Me.lblHousePhone.Location = New System.Drawing.Point(333, 33)
+        Me.lblHousePhone.Location = New System.Drawing.Point(336, 33)
         Me.lblHousePhone.Name = "lblHousePhone"
         Me.lblHousePhone.Size = New System.Drawing.Size(97, 16)
         Me.lblHousePhone.TabIndex = 78
@@ -1075,7 +1000,7 @@ Partial Class MarketingManager
         Me.gbHomeInfo.Controls.Add(Me.txtYrBuilt)
         Me.gbHomeInfo.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbHomeInfo.ForeColor = System.Drawing.Color.Gray
-        Me.gbHomeInfo.Location = New System.Drawing.Point(656, 3)
+        Me.gbHomeInfo.Location = New System.Drawing.Point(659, 3)
         Me.gbHomeInfo.Name = "gbHomeInfo"
         Me.gbHomeInfo.Size = New System.Drawing.Size(113, 198)
         Me.gbHomeInfo.TabIndex = 183
@@ -1168,7 +1093,7 @@ Partial Class MarketingManager
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
         Me.gbSpecialInstructions.Location = New System.Drawing.Point(445, 207)
         Me.gbSpecialInstructions.Name = "gbSpecialInstructions"
-        Me.gbSpecialInstructions.Size = New System.Drawing.Size(324, 144)
+        Me.gbSpecialInstructions.Size = New System.Drawing.Size(327, 144)
         Me.gbSpecialInstructions.TabIndex = 188
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions:"
@@ -1190,7 +1115,7 @@ Partial Class MarketingManager
         Me.rtbSpecialInstructions.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(6, 22)
         Me.rtbSpecialInstructions.Name = "rtbSpecialInstructions"
-        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(243, 116)
+        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(246, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
         Me.rtbSpecialInstructions.Text = "The customer only wants a rough frame in the basement and they are interested in " & _
     "upper grids in the windows"
@@ -1441,7 +1366,7 @@ Partial Class MarketingManager
         Me.tsCustomerLog.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsCustomerLog.Name = "tsCustomerLog"
         Me.tsCustomerLog.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsCustomerLog.Size = New System.Drawing.Size(842, 33)
+        Me.tsCustomerLog.Size = New System.Drawing.Size(845, 33)
         Me.tsCustomerLog.TabIndex = 189
         Me.tsCustomerLog.Text = "ToolStrip1"
         Me.tsCustomerLog.Visible = False
@@ -1465,37 +1390,10 @@ Partial Class MarketingManager
         Me.tslblShowDepartment.Size = New System.Drawing.Size(43, 30)
         Me.tslblShowDepartment.Text = "Show"
         '
-        'tsbtnAFPics
-        '
-        Me.tsbtnAFPics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbtnAFPics.Image = CType(resources.GetObject("tsbtnAFPics.Image"), System.Drawing.Image)
-        Me.tsbtnAFPics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsbtnAFPics.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnAFPics.Name = "tsbtnAFPics"
-        Me.tsbtnAFPics.Size = New System.Drawing.Size(36, 30)
-        Me.tsbtnAFPics.Text = "ShowAFPics"
-        Me.tsbtnAFPics.ToolTipText = "Show Attached Files and Job Pictures for this Customer"
-        '
         'ToolStripButton3
         '
         Me.ToolStripButton3.Name = "ToolStripButton3"
         Me.ToolStripButton3.Size = New System.Drawing.Size(6, 33)
-        '
-        'btnLogCall
-        '
-        Me.btnLogCall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCalledandCancelled})
-        Me.btnLogCall.Image = CType(resources.GetObject("btnLogCall.Image"), System.Drawing.Image)
-        Me.btnLogCall.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnLogCall.Name = "btnLogCall"
-        Me.btnLogCall.Size = New System.Drawing.Size(272, 30)
-        Me.btnLogCall.Text = "Log Phone Conversation with this Customer"
-        '
-        'btnCalledandCancelled
-        '
-        Me.btnCalledandCancelled.Image = Global.Latest.My.Resources.Resources.Call_Cancel48
-        Me.btnCalledandCancelled.Name = "btnCalledandCancelled"
-        Me.btnCalledandCancelled.Size = New System.Drawing.Size(254, 22)
-        Me.btnCalledandCancelled.Text = "Log Appt. as Called and Cancelled"
         '
         'tslblCustomerHistory
         '
@@ -1517,7 +1415,7 @@ Partial Class MarketingManager
         Me.tsAFPics.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsAFPics.Name = "tsAFPics"
         Me.tsAFPics.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsAFPics.Size = New System.Drawing.Size(774, 33)
+        Me.tsAFPics.Size = New System.Drawing.Size(777, 33)
         Me.tsAFPics.TabIndex = 201
         Me.tsAFPics.Text = "ToolStrip1"
         '
@@ -1539,29 +1437,6 @@ Partial Class MarketingManager
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
         Me.ToolStripLabel1.Size = New System.Drawing.Size(43, 30)
         Me.ToolStripLabel1.Text = "Show"
-        '
-        'tsbtnShowCH
-        '
-        Me.tsbtnShowCH.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbtnShowCH.Image = CType(resources.GetObject("tsbtnShowCH.Image"), System.Drawing.Image)
-        Me.tsbtnShowCH.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsbtnShowCH.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnShowCH.Name = "tsbtnShowCH"
-        Me.tsbtnShowCH.Size = New System.Drawing.Size(36, 30)
-        Me.tsbtnShowCH.Text = "ShowAFPics"
-        Me.tsbtnShowCH.ToolTipText = "Go Back to Customer History"
-        '
-        'tsAttachedFilesNAV
-        '
-        Me.tsAttachedFilesNAV.AutoSize = False
-        Me.tsAttachedFilesNAV.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsAttachedFilesNAV.Enabled = False
-        Me.tsAttachedFilesNAV.Image = CType(resources.GetObject("tsAttachedFilesNAV.Image"), System.Drawing.Image)
-        Me.tsAttachedFilesNAV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsAttachedFilesNAV.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsAttachedFilesNAV.Name = "tsAttachedFilesNAV"
-        Me.tsAttachedFilesNAV.Size = New System.Drawing.Size(36, 30)
-        Me.tsAttachedFilesNAV.Text = "Up One Level"
         '
         'ToolStripSeparator2
         '
@@ -1607,6 +1482,153 @@ Partial Class MarketingManager
         Me.tpReports.TabIndex = 4
         Me.tpReports.UseVisualStyleBackColor = True
         '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
+        Me.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(36, 30)
+        Me.ToolStripButton2.Text = "ShowAFPics"
+        Me.ToolStripButton2.ToolTipText = "Show Attached Files and Job Pictures for this Customer"
+        '
+        'ToolStripSplitButton1
+        '
+        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
+        Me.ToolStripSplitButton1.Image = CType(resources.GetObject("ToolStripSplitButton1.Image"), System.Drawing.Image)
+        Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
+        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(272, 30)
+        Me.ToolStripSplitButton1.Text = "Log Phone Conversation with this Customer"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(254, 22)
+        Me.ToolStripMenuItem1.Text = "Log Appt. as Called and Cancelled"
+        '
+        'pctVerified
+        '
+        Me.pctVerified.Location = New System.Drawing.Point(29, 114)
+        Me.pctVerified.Name = "pctVerified"
+        Me.pctVerified.Size = New System.Drawing.Size(24, 24)
+        Me.pctVerified.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pctVerified.TabIndex = 133
+        Me.pctVerified.TabStop = False
+        Me.pctVerified.Visible = False
+        '
+        'tsbtnAFPics
+        '
+        Me.tsbtnAFPics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnAFPics.Image = CType(resources.GetObject("tsbtnAFPics.Image"), System.Drawing.Image)
+        Me.tsbtnAFPics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tsbtnAFPics.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnAFPics.Name = "tsbtnAFPics"
+        Me.tsbtnAFPics.Size = New System.Drawing.Size(36, 30)
+        Me.tsbtnAFPics.Text = "ShowAFPics"
+        Me.tsbtnAFPics.ToolTipText = "Show Attached Files and Job Pictures for this Customer"
+        '
+        'btnLogCall
+        '
+        Me.btnLogCall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCalledandCancelled})
+        Me.btnLogCall.Image = CType(resources.GetObject("btnLogCall.Image"), System.Drawing.Image)
+        Me.btnLogCall.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnLogCall.Name = "btnLogCall"
+        Me.btnLogCall.Size = New System.Drawing.Size(272, 30)
+        Me.btnLogCall.Text = "Log Phone Conversation with this Customer"
+        '
+        'btnCalledandCancelled
+        '
+        Me.btnCalledandCancelled.Image = Global.Latest.My.Resources.Resources.Call_Cancel48
+        Me.btnCalledandCancelled.Name = "btnCalledandCancelled"
+        Me.btnCalledandCancelled.Size = New System.Drawing.Size(254, 22)
+        Me.btnCalledandCancelled.Text = "Log Appt. as Called and Cancelled"
+        '
+        'tsbtnShowCH
+        '
+        Me.tsbtnShowCH.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnShowCH.Image = CType(resources.GetObject("tsbtnShowCH.Image"), System.Drawing.Image)
+        Me.tsbtnShowCH.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tsbtnShowCH.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnShowCH.Name = "tsbtnShowCH"
+        Me.tsbtnShowCH.Size = New System.Drawing.Size(36, 30)
+        Me.tsbtnShowCH.Text = "ShowAFPics"
+        Me.tsbtnShowCH.ToolTipText = "Go Back to Customer History"
+        '
+        'tsAttachedFilesNAV
+        '
+        Me.tsAttachedFilesNAV.AutoSize = False
+        Me.tsAttachedFilesNAV.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsAttachedFilesNAV.Enabled = False
+        Me.tsAttachedFilesNAV.Image = CType(resources.GetObject("tsAttachedFilesNAV.Image"), System.Drawing.Image)
+        Me.tsAttachedFilesNAV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tsAttachedFilesNAV.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsAttachedFilesNAV.Name = "tsAttachedFilesNAV"
+        Me.tsAttachedFilesNAV.Size = New System.Drawing.Size(36, 30)
+        Me.tsAttachedFilesNAV.Text = "Up One Level"
+        '
+        'ScheduledTasks
+        '
+        Me.ScheduledTasks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMarkTaskAsDone, Me.btnEditScheduledTask, Me.btnRemoveThisCompletedTask, Me.btnRemoveAllScheduledTask})
+        Me.ScheduledTasks.Image = CType(resources.GetObject("ScheduledTasks.Image"), System.Drawing.Image)
+        Me.ScheduledTasks.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ScheduledTasks.Name = "ScheduledTasks"
+        Me.ScheduledTasks.Size = New System.Drawing.Size(141, 22)
+        Me.ScheduledTasks.Text = "Edit Scheduled Task"
+        '
+        'btnMarkTaskAsDone
+        '
+        Me.btnMarkTaskAsDone.Name = "btnMarkTaskAsDone"
+        Me.btnMarkTaskAsDone.Size = New System.Drawing.Size(231, 22)
+        Me.btnMarkTaskAsDone.Text = "Mark Task as Done"
+        '
+        'btnEditScheduledTask
+        '
+        Me.btnEditScheduledTask.Name = "btnEditScheduledTask"
+        Me.btnEditScheduledTask.Size = New System.Drawing.Size(231, 22)
+        Me.btnEditScheduledTask.Text = "Edit Scheduled Task"
+        '
+        'btnRemoveThisCompletedTask
+        '
+        Me.btnRemoveThisCompletedTask.Name = "btnRemoveThisCompletedTask"
+        Me.btnRemoveThisCompletedTask.Size = New System.Drawing.Size(231, 22)
+        Me.btnRemoveThisCompletedTask.Text = "Remove This Completed Task"
+        '
+        'btnRemoveAllScheduledTask
+        '
+        Me.btnRemoveAllScheduledTask.Name = "btnRemoveAllScheduledTask"
+        Me.btnRemoveAllScheduledTask.Size = New System.Drawing.Size(231, 22)
+        Me.btnRemoveAllScheduledTask.Text = "Remove All Completed Tasks"
+        '
+        'ToolStripDropDownButton1
+        '
+        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GenerateWarmCallingListToolStripMenuItem, Me.RecoveryListToolStripMenuItem, Me.PreviewCustomerListToolStripMenuItem})
+        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
+        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(29, 22)
+        Me.ToolStripDropDownButton1.Text = "ToolStripDropDownButton1"
+        '
+        'GenerateWarmCallingListToolStripMenuItem
+        '
+        Me.GenerateWarmCallingListToolStripMenuItem.Name = "GenerateWarmCallingListToolStripMenuItem"
+        Me.GenerateWarmCallingListToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.GenerateWarmCallingListToolStripMenuItem.Text = "Warm Calling List"
+        '
+        'RecoveryListToolStripMenuItem
+        '
+        Me.RecoveryListToolStripMenuItem.Name = "RecoveryListToolStripMenuItem"
+        Me.RecoveryListToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.RecoveryListToolStripMenuItem.Text = "Recovery List"
+        '
+        'PreviewCustomerListToolStripMenuItem
+        '
+        Me.PreviewCustomerListToolStripMenuItem.Name = "PreviewCustomerListToolStripMenuItem"
+        Me.PreviewCustomerListToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.PreviewCustomerListToolStripMenuItem.Text = "Preview Customer List"
+        '
         'MarketingManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1637,7 +1659,6 @@ Partial Class MarketingManager
         Me.ToolStrip1.PerformLayout()
         Me.gbContactInfo.ResumeLayout(False)
         Me.gbContactInfo.PerformLayout()
-        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbHomeInfo.ResumeLayout(False)
         Me.gbHomeInfo.PerformLayout()
         Me.gbSpecialInstructions.ResumeLayout(False)
@@ -1649,6 +1670,7 @@ Partial Class MarketingManager
         Me.tsCustomerLog.PerformLayout()
         Me.tsAFPics.ResumeLayout(False)
         Me.tsAFPics.PerformLayout()
+        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1659,7 +1681,6 @@ Partial Class MarketingManager
     Friend WithEvents btnEditScheduledTask As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnRemoveThisCompletedTask As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnRemoveAllScheduledTask As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tsCreateList As System.Windows.Forms.ToolStripButton
     Friend WithEvents tbMain As System.Windows.Forms.TabControl
     Friend WithEvents tpSummary As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
@@ -1779,4 +1800,8 @@ Partial Class MarketingManager
     Friend WithEvents tpReferences As System.Windows.Forms.TabPage
     Friend WithEvents tpReports As System.Windows.Forms.TabPage
     Friend WithEvents btnEditSPI As System.Windows.Forms.Button
+    Friend WithEvents ToolStripDropDownButton1 As System.Windows.Forms.ToolStripDropDownButton
+    Friend WithEvents GenerateWarmCallingListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RecoveryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PreviewCustomerListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

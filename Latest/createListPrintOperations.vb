@@ -119,6 +119,36 @@ Public Class createListPrintOperations
         arListOfLeadsToDisplay = New List(Of LeadToPrint)
     End Sub
 
+
+
+    '' Notes: 3-24-2016
+    '' Merge code: Objective=> Split off Warm Calling List and recovery
+    '' for two separate lists
+    '' Per Request Of AG
+
+    'New General Flow: 3-22-2016
+    '-----------------
+    'Determine what Criteria is selected. 
+    'Determine if Warm Calling is selected.
+    'Determine if Recovery is selected.
+
+    'Generate Default Criteria HTML Render
+
+    'If WarmCalling criteria is selected Generate Warm Calling HTML Render
+
+    'if Recovery criteria is selected Generate Recovery HTML Render
+
+    'Display Default HTML Page
+    'If warmcalling is there as well, create target='_blank' page for Warm calling List
+    'If recovery is there as well, create target='_blank' page for Recovery List 
+
+    Public Sub CreateWireFrameHTML_WarmCalling(ByVal QueryString As String)
+
+    End Sub
+    Public Sub CreateWireFrameHTML_Rehash(ByVal QueryString As String)
+
+    End Sub
+
     Public Sub CreateWireFrameHTML(ByVal QueryString As String)
         Try
             arListOfLeadsToDisplay = GrabRowsForHTML(QueryString)

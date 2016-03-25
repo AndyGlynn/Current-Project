@@ -252,10 +252,22 @@
     <Compile Include="frmMappointEX.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPCList.Designer.vb">
+      <DependentUpon>frmPCList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPCList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPrint.Designer.vb">
       <DependentUpon>frmPrint.vb</DependentUpon>
     </Compile>
     <Compile Include="frmPrint.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRList.Designer.vb">
+      <DependentUpon>frmRList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSMS.Designer.vb">
@@ -268,6 +280,12 @@
       <DependentUpon>frmTesting.vb</DependentUpon>
     </Compile>
     <Compile Include="frmTesting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWCList.Designer.vb">
+      <DependentUpon>frmWCList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmWCList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="generateCSVForDataMap.vb" />
@@ -954,8 +972,14 @@
     <EmbeddedResource Include="frmMappointEX.resx">
       <DependentUpon>frmMappointEX.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPCList.resx">
+      <DependentUpon>frmPCList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrint.resx">
       <DependentUpon>frmPrint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRList.resx">
+      <DependentUpon>frmRList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRolodex.resx">
       <DependentUpon>frmRolodex.vb</DependentUpon>
@@ -982,6 +1006,9 @@
     <EmbeddedResource Include="frmViewEditWorkHours.resx">
       <DependentUpon>frmViewEditWorkHours.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWCList.resx">
+      <DependentUpon>frmWCList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportPictures.resx">
       <DependentUpon>ImportPictures.vb</DependentUpon>
