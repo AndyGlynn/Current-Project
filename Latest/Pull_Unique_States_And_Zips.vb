@@ -10,13 +10,13 @@ Public Class Pull_Unique_States_And_Zips
     '' 
 
     Public Structure UniqueCityStateZip
-        Public EL_ID As String
+
         Public Zip As String
         Public State As String
         Public City As String
     End Structure
 
-    Private cmdTXT As String = "select Distinct(dbo.[EnterLead].[Zip]),dbo.[EnterLead].[ID], dbo.[EnterLead].[City], dbo.[EnterLead].[State] from dbo.[EnterLead] Right Join dbo.[CityPull] On dbo.[EnterLead].[State] = dbo.[CityPull].[State] and dbo.[EnterLead].Zip is not null and dbo.[EnterLead].Zip <> ' ' and dbo.[EnterLead].[State] is not null and dbo.[EnterLead].[State] <> ' ';"
+    Private cmdTXT As String = "select Distinct(dbo.[EnterLead].[Zip]), dbo.[EnterLead].[City], dbo.[EnterLead].[State] from dbo.[EnterLead] Right Join dbo.[CityPull] On dbo.[EnterLead].[State] = dbo.[CityPull].[State] and dbo.[EnterLead].Zip is not null and dbo.[EnterLead].Zip <> ' ' and dbo.[EnterLead].[State] is not null and dbo.[EnterLead].[State] <> ' ' and dbo.[EnterLead].[City] is not null and dbo.[EnterLead].[City] <> '' and dbo.[EnterLead].[City] <> ' ';"
     Private cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
 
     Public ar_UniqueCityStateZip As List(Of UniqueCityStateZip)
@@ -35,7 +35,7 @@ Public Class Pull_Unique_States_And_Zips
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
             While r1.Read
                 Dim a As New UniqueCityStateZip
-                a.EL_ID = r1.Item("ID")
+
                 a.City = r1.Item("City")
                 a.Zip = r1.Item("Zip")
                 a.State = r1.Item("State")

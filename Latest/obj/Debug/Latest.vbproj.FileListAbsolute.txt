@@ -536,7 +536,6 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.prntChoice.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.RolodexEdit.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmMappointEX.resources
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmPCList.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmRList.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmWCList.resources

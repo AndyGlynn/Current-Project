@@ -92,6 +92,10 @@ Partial Class frmWCList
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.tabGeo = New System.Windows.Forms.TabPage()
         Me.btnRecordCount = New System.Windows.Forms.Button()
+        Me.pbSearch = New System.Windows.Forms.ProgressBar()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblUniques = New System.Windows.Forms.Label()
         Me.grpGeo.SuspendLayout()
         CType(Me.numMiles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabWC.SuspendLayout()
@@ -780,6 +784,10 @@ Partial Class frmWCList
         '
         'tabGeo
         '
+        Me.tabGeo.Controls.Add(Me.lblUniques)
+        Me.tabGeo.Controls.Add(Me.Label8)
+        Me.tabGeo.Controls.Add(Me.Label7)
+        Me.tabGeo.Controls.Add(Me.pbSearch)
         Me.tabGeo.Controls.Add(Me.grpGeo)
         Me.tabGeo.Location = New System.Drawing.Point(4, 23)
         Me.tabGeo.Name = "tabGeo"
@@ -796,6 +804,40 @@ Partial Class frmWCList
         Me.btnRecordCount.TabIndex = 59
         Me.btnRecordCount.Text = "Record Count"
         Me.btnRecordCount.UseVisualStyleBackColor = True
+        '
+        'pbSearch
+        '
+        Me.pbSearch.Location = New System.Drawing.Point(72, 254)
+        Me.pbSearch.Name = "pbSearch"
+        Me.pbSearch.Size = New System.Drawing.Size(306, 23)
+        Me.pbSearch.TabIndex = 40
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(15, 260)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(51, 13)
+        Me.Label7.TabIndex = 41
+        Me.Label7.Text = "Progress:"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(426, 260)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(150, 13)
+        Me.Label8.TabIndex = 42
+        Me.Label8.Text = "Unique Cities/Zips To Search:"
+        '
+        'lblUniques
+        '
+        Me.lblUniques.AutoSize = True
+        Me.lblUniques.Location = New System.Drawing.Point(613, 260)
+        Me.lblUniques.Name = "lblUniques"
+        Me.lblUniques.Size = New System.Drawing.Size(10, 13)
+        Me.lblUniques.TabIndex = 43
+        Me.lblUniques.Text = " "
         '
         'frmWCList
         '
@@ -833,6 +875,7 @@ Partial Class frmWCList
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.tabGeo.ResumeLayout(False)
+        Me.tabGeo.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -905,4 +948,8 @@ Partial Class frmWCList
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Friend WithEvents btnRecordCount As System.Windows.Forms.Button
     Friend WithEvents epGeo As System.Windows.Forms.ErrorProvider
+    Friend WithEvents lblUniques As System.Windows.Forms.Label
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents pbSearch As System.Windows.Forms.ProgressBar
 End Class
