@@ -1,7 +1,9 @@
 ﻿Imports System.Data
 Imports System.Data.Sql
 Imports System.Data.SqlClient
-
+Imports MapPoint
+Imports System.Text
+Imports System.Text.RegularExpressions
 
 Public Class frmWCList
 
@@ -13,6 +15,7 @@ Public Class frmWCList
     Private Criteria As String = ""
 
     Private selectedTab_IDX As Integer = 0
+    Private _arUniques As List(Of Pull_Unique_States_And_Zips.UniqueCityStateZip)
 
 #End Region
 
@@ -35,6 +38,114 @@ Public Class frmWCList
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         Me.ResetForm()
     End Sub
+
+#Region "Validate Geo Tab"
+
+
+    Private Sub btnShow_Click(sender As Object, e As EventArgs) Handles btnShow.Click
+        ValidateGeo_Tab()
+    End Sub
+
+    Private Sub ValidateGeo_Tab()
+
+        Me.epGeo.Clear()
+
+        If rdoCity.Checked = False And rdoZip.Checked = False Then
+
+            Me.epGeo.SetError(Me.rdoZip, "You must select either City or Zip to search by.")
+            Exit Sub
+        End If
+
+        If Len(txtZipCity.Text) <= 0 Or Me.txtZipCity.Text = "" Or Me.txtZipCity.Text = " " Then
+            Me.epGeo.SetError(Me.txtZipCity, "You cannot have a blank Starting Zip code.")
+        ElseIf Len(Me.txtZipCity.Text) > 0 And Me.txtZipCity.Text <> " " And Me.txtZipCity.Text <> "" Then
+            '' regex for 5 digit zip code.
+            If Regex.IsMatch(Me.txtZipCity.Text, "^[0-9]{5}(?:-[0-9]{4})?$") Then
+                '' valid
+                '' carry on
+            Else
+                '' invalid
+                '' throw error, kick out
+                Me.epGeo.SetError(Me.txtZipCity, "Incorrect format for zip code. IE: '12345' ")
+                Exit Sub
+            End If
+        End If
+
+        Dim ctrlZ As Control = Me.grpGeo.Controls("txtZipCity")
+        If ctrlZ IsNot Nothing Then
+            If Len(Me.grpGeo.Controls("txtZipCity").Text) <= 0 Or Me.grpGeo.Controls("txtZipCity").Text = "" Or Me.grpGeo.Controls("txtZipCity").Text = " " Then
+                Me.epGeo.SetError(Me.grpGeo.Controls("txtZipCity"), "You cannot have a blank Starting Zip code.")
+            ElseIf Len(Me.grpGeo.Controls("txtZipCity").Text) > 0 And Me.grpGeo.Controls("txtZipCity").Text <> " " And Me.grpGeo.Controls("txtZipCity").Text <> "" Then
+                '' regex for 5 digit zip code.
+                If Regex.IsMatch(Me.grpGeo.Controls("txtZipCity").Text, "^[0-9]{5}(?:-[0-9]{4})?$") Then
+                    '' valid
+                    '' carry on
+                Else
+                    '' invalid
+                    '' throw error, kick out
+                    Me.epGeo.SetError(Me.grpGeo.Controls("txtZipCity"), "Incorrect format for zip code. IE: '12345' ")
+                    Exit Sub
+                End If
+            End If
+        End If
+
+
+        Dim ctrl As Control = Me.grpGeo.Controls("cboZipCity")
+        If ctrl IsNot Nothing Then
+            ctrl = Nothing
+            If Len(Me.grpGeo.Controls("cboZipCity").Text) <= 0 Or Me.grpGeo.Controls("cboZipCity").Text = "" Or Me.grpGeo.Controls("cboZipCity").Text = " " Then
+                Me.epGeo.SetError(Me.grpGeo.Controls("cboZipCity"), "This is not a valid starting city.")
+                Exit Sub
+            End If
+        ElseIf ctrl Is Nothing Then
+            '' do nothing 
+        End If
+
+        If Len(Me.cboStateSelection.Text) > 0 And Me.cboStateSelection.Text <> "" And Me.cboStateSelection.Text <> " " Then
+            '' valid
+            '' carry on
+        ElseIf Len(Me.cboStateSelection.Text) <= 0 Or Me.cboStateSelection.Text = "" Or Me.cboStateSelection.Text = " " Then
+            '' invalid
+            Me.epGeo.SetError(Me.cboStateSelection, "You must select a State.")
+            Exit Sub
+        End If
+
+        If Me.numMiles.Value <= 0 Then
+            Me.epGeo.SetError(Me.numMiles, "You must select a radius (in miles) to search from.")
+            Exit Sub
+        End If
+
+        '' now validate the zip code against mappoint.
+        ''
+        Me.Cursor = Cursors.No
+        Dim isItValid As Boolean
+        Dim z As New Validate_Zip_Code_Mappoint(Me.txtZipCity.Text)
+        isItValid = z.Valid
+        Me.Cursor = Cursors.Default
+
+        If isItValid = True Then
+            '' carry on
+        ElseIf isItValid = False Then
+            '' not a valid zip code
+            '' throw error and kick out
+            Me.epGeo.SetError(Me.txtZipCity, "This zip code cannot be found because it either doesn't exist, or it is an invalid format. Please check entry and try again.")
+            Exit Sub
+        End If
+
+        ''
+        '' assuming all passes this point for user entry,
+        '' perform radius search and pull back the list of zip
+        '' codes that meet the specified criteria. 
+        '' 
+
+
+
+
+
+
+    End Sub
+
+#End Region
 
 #Region "Form Load Events and Stuffs"
     Private Sub frmWCList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -68,6 +179,13 @@ Public Class frmWCList
         For Each zz As String In arStates
             Me.cboStateSelection.Items.Add(zz)
         Next
+
+        '' pull unique zips / city / state => Util class
+        Dim un As New Pull_Unique_States_And_Zips
+        Me._arUniques = New List(Of Pull_Unique_States_And_Zips.UniqueCityStateZip)
+        Me._arUniques = un.ar_UniqueCityStateZip
+
+
 
         Me.dpGenerated.Value = Date.Today
         Me.tpFrom.Value = ("1/1/1900 " & Date.Now.Hour & ":00")
@@ -349,6 +467,19 @@ Public Class frmWCList
 
         selectedTab_IDX = 0
 
+        '' for dynamicaly replaced controls
+        '' 
+        Dim ctrlT As Control = Me.grpGeo.Controls("txtZipCity")
+        If ctrlT IsNot Nothing Then
+            ctrlT.Text = ""
+        End If
+        Dim ctrlZ As ComboBox = Me.grpGeo.Controls("cboZipCity")
+        If ctrlZ IsNot Nothing Then
+            ctrlZ.Items.Clear()
+            ctrlZ.Text = ""
+        End If
+        '' end dynamic controls
+
         Me.dpGenerated.Value = Date.Today
         Me.txtGenerated.Text = (Date.Today.Month & "-" & Date.Today.Day & "-" & Date.Today.Year)
         Me.tpFrom.Value = ("1/1/1900 " & Date.Now.Hour & ":00")
@@ -361,7 +492,8 @@ Public Class frmWCList
 
         Me.chlstMarketers.Items.Clear()
         Me.chlstProducts.Items.Clear()
-        Me.lblStateSelect.Text = ""
+        'Me.lblStateSelect.Text = ""
+        Me.cboStateSelection.Text = ""
         Me.txtRecordCount.Text = ""
         Me.chGroupBy.CheckState = CheckState.Unchecked
 
@@ -659,6 +791,80 @@ Public Class frmWCList
 
 #End Region
 
+#Region "Rdo's Check Change  - Zip / City Search"
+
+    Private Sub rdoZip_CheckedChanged(sender As Object, e As EventArgs) Handles rdoZip.CheckedChanged
+
+        '' target control to toggle: txtZipCity  [textbox]
+        ''                           cboZipCity  [comboBox]
+
+        '' default location {x,y} = 191, 67
+        '' default size     {w,h} = 137, 20
+
+        If Me.rdoZip.Checked = True Then
+            '' control name: lblCityZip 
+            '' default text: "Enter Starting Zip Code:"
+            Me.lblCityZip.Text = "Enter Starting Zip Code:"
+            Dim tControl As Control = Me.grpGeo.Controls("cboZipCity")
+            For Each ctrl As Control In Me.grpGeo.Controls
+                If ctrl.Name = "cboZipCity" Then
+                    Me.grpGeo.Controls.Remove(tControl)
+                End If
+            Next
+            Dim txtCityZip As New TextBox
+            txtCityZip.Name = "txtZipCity"
+            txtCityZip.Size = New Size(137, 20)
+            txtCityZip.Location = New Point(191, 67)
+            Me.grpGeo.Controls.Add(txtCityZip)
+        End If
+
+
+
+
+
+    End Sub
+
+    Private Sub rdoCity_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCity.CheckedChanged
+        '' target control to toggle: txtZipCity  [textbox]
+        ''                           cboZipCity  [comboBox]
+
+        '' default location {x,y} = 191, 67
+        '' default size     {w,h} = 137, 20
+
+        If Me.rdoCity.Checked = True Then
+            Me.lblCityZip.Text = "Enter Starting City: "
+            Dim tControl As Control = Me.grpGeo.Controls("txtZipCity")
+            For Each ctrl As Control In Me.grpGeo.Controls
+                If ctrl.Name = "txtZipCity" Then
+                    ctrl.Visible = False
+                    Me.grpGeo.Controls.Remove(tControl)
+                End If
+            Next
+            Dim cboCity As New ComboBox
+            cboCity.SuspendLayout()
+            cboCity.Name = "cboZipCity"
+            cboCity.Size = New Size(137, 20)
+            cboCity.Location = New Point(191, 67)
+            cboCity.AutoCompleteMode = AutoCompleteMode.Suggest
+            cboCity.AllowDrop = True
+            cboCity.DropDownStyle = ComboBoxStyle.DropDown
+            For Each x As Pull_Unique_States_And_Zips.UniqueCityStateZip In Me._arUniques
+                '' attempt to weed out duplicates(city) for combo box Items.
+                If cboCity.Items.Contains(Trim(x.City)) = True Then
+                    '' dont add it
+                ElseIf cboCity.Items.Contains(Trim(x.City)) = False Then
+                    If x.City <> " " And x.City <> "" Then
+                        cboCity.Items.Add(Trim(x.City))
+                    End If
+                End If
+            Next
+            Me.grpGeo.Controls.Add(cboCity)
+            cboCity.ResumeLayout()
+        End If
+
+    End Sub
+#End Region
+
     Private Sub tbCriteria_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbCriteria.SelectedIndexChanged
         selectedTab_IDX = Me.tbCriteria.SelectedIndex
         CheckTab(selectedTab_IDX)
@@ -692,8 +898,10 @@ Public Class frmWCList
 
 
 
-    
-    
-    
-    
+
+
+
+
+
+
 End Class

@@ -24,7 +24,7 @@ Partial Class frmWCList
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmWCList))
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.grpGeo = New System.Windows.Forms.GroupBox()
         Me.cboStateSelection = New System.Windows.Forms.ComboBox()
         Me.lblStateSelect = New System.Windows.Forms.Label()
         Me.btnShow = New System.Windows.Forms.Button()
@@ -35,7 +35,7 @@ Partial Class frmWCList
         Me.numMiles = New System.Windows.Forms.NumericUpDown()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtZipCity = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.lblCityZip = New System.Windows.Forms.Label()
         Me.rdoCity = New System.Windows.Forms.RadioButton()
         Me.rdoZip = New System.Windows.Forms.RadioButton()
         Me.btnUncheckProducts = New System.Windows.Forms.Label()
@@ -92,7 +92,7 @@ Partial Class frmWCList
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.tabGeo = New System.Windows.Forms.TabPage()
         Me.btnRecordCount = New System.Windows.Forms.Button()
-        Me.GroupBox3.SuspendLayout()
+        Me.grpGeo.SuspendLayout()
         CType(Me.numMiles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabWC.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -109,27 +109,27 @@ Partial Class frmWCList
         Me.tabGeo.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox3
+        'grpGeo
         '
-        Me.GroupBox3.Controls.Add(Me.cboStateSelection)
-        Me.GroupBox3.Controls.Add(Me.lblStateSelect)
-        Me.GroupBox3.Controls.Add(Me.btnShow)
-        Me.GroupBox3.Controls.Add(Me.btnUncheckZip)
-        Me.GroupBox3.Controls.Add(Me.btnCheckZip)
-        Me.GroupBox3.Controls.Add(Me.chlstZipCity)
-        Me.GroupBox3.Controls.Add(Me.Label11)
-        Me.GroupBox3.Controls.Add(Me.numMiles)
-        Me.GroupBox3.Controls.Add(Me.Label10)
-        Me.GroupBox3.Controls.Add(Me.txtZipCity)
-        Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Controls.Add(Me.rdoCity)
-        Me.GroupBox3.Controls.Add(Me.rdoZip)
-        Me.GroupBox3.Location = New System.Drawing.Point(14, 11)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(638, 237)
-        Me.GroupBox3.TabIndex = 39
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Geography"
+        Me.grpGeo.Controls.Add(Me.cboStateSelection)
+        Me.grpGeo.Controls.Add(Me.lblStateSelect)
+        Me.grpGeo.Controls.Add(Me.btnShow)
+        Me.grpGeo.Controls.Add(Me.btnUncheckZip)
+        Me.grpGeo.Controls.Add(Me.btnCheckZip)
+        Me.grpGeo.Controls.Add(Me.chlstZipCity)
+        Me.grpGeo.Controls.Add(Me.Label11)
+        Me.grpGeo.Controls.Add(Me.numMiles)
+        Me.grpGeo.Controls.Add(Me.Label10)
+        Me.grpGeo.Controls.Add(Me.txtZipCity)
+        Me.grpGeo.Controls.Add(Me.lblCityZip)
+        Me.grpGeo.Controls.Add(Me.rdoCity)
+        Me.grpGeo.Controls.Add(Me.rdoZip)
+        Me.grpGeo.Location = New System.Drawing.Point(14, 11)
+        Me.grpGeo.Name = "grpGeo"
+        Me.grpGeo.Size = New System.Drawing.Size(638, 237)
+        Me.grpGeo.TabIndex = 39
+        Me.grpGeo.TabStop = False
+        Me.grpGeo.Text = "Geography"
         '
         'cboStateSelection
         '
@@ -223,14 +223,14 @@ Partial Class frmWCList
         Me.txtZipCity.Size = New System.Drawing.Size(137, 20)
         Me.txtZipCity.TabIndex = 3
         '
-        'Label9
+        'lblCityZip
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(15, 70)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(120, 13)
-        Me.Label9.TabIndex = 2
-        Me.Label9.Text = "Enter Starting Zip Code:"
+        Me.lblCityZip.AutoSize = True
+        Me.lblCityZip.Location = New System.Drawing.Point(15, 70)
+        Me.lblCityZip.Name = "lblCityZip"
+        Me.lblCityZip.Size = New System.Drawing.Size(120, 13)
+        Me.lblCityZip.TabIndex = 2
+        Me.lblCityZip.Text = "Enter Starting Zip Code:"
         '
         'rdoCity
         '
@@ -780,7 +780,7 @@ Partial Class frmWCList
         '
         'tabGeo
         '
-        Me.tabGeo.Controls.Add(Me.GroupBox3)
+        Me.tabGeo.Controls.Add(Me.grpGeo)
         Me.tabGeo.Location = New System.Drawing.Point(4, 23)
         Me.tabGeo.Name = "tabGeo"
         Me.tabGeo.Size = New System.Drawing.Size(666, 287)
@@ -812,8 +812,8 @@ Partial Class frmWCList
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Create Warm Calling List"
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.grpGeo.ResumeLayout(False)
+        Me.grpGeo.PerformLayout()
         CType(Me.numMiles, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabWC.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
@@ -837,7 +837,7 @@ Partial Class frmWCList
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpGeo As System.Windows.Forms.GroupBox
     Friend WithEvents cboStateSelection As System.Windows.Forms.ComboBox
     Friend WithEvents lblStateSelect As System.Windows.Forms.Label
     Friend WithEvents btnShow As System.Windows.Forms.Button
@@ -848,7 +848,7 @@ Partial Class frmWCList
     Friend WithEvents numMiles As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents txtZipCity As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents lblCityZip As System.Windows.Forms.Label
     Friend WithEvents rdoCity As System.Windows.Forms.RadioButton
     Friend WithEvents rdoZip As System.Windows.Forms.RadioButton
     Friend WithEvents btnUncheckProducts As System.Windows.Forms.Label

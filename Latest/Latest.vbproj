@@ -546,7 +546,9 @@
     <Compile Include="prntChoice.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Pull_Unique_States_And_Zips.vb" />
     <Compile Include="quickINFO.vb" />
+    <Compile Include="Radius_Search.vb" />
     <Compile Include="ReusableListViewControl.vb" />
     <Compile Include="RolodexEdit.Designer.vb">
       <DependentUpon>RolodexEdit.vb</DependentUpon>
@@ -664,6 +666,7 @@
     <Compile Include="ToggleUndoCandC.vb" />
     <Compile Include="USER_LOGIC.vb" />
     <Compile Include="USER_LOGICv2.vb" />
+    <Compile Include="Validate_Zip_Code_Mappoint.vb" />
     <Compile Include="VerifyAddress.vb" />
     <Compile Include="VerifyAddressBulk.vb" />
     <Compile Include="ViewEditAutoNotes.vb" />
