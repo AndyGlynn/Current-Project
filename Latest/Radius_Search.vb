@@ -104,31 +104,33 @@ Public Class Radius_Search
         For Each y As Pull_Unique_States_And_Zips.UniqueCityStateZip In Unique_List
             Dim itemLoc As MapPoint.Location
             Dim itemRes As MapPoint.FindResults
-            itemRes = oMap.FindAddressResults(, , , y.State, y.Zip, GeoMapRegion.geoMapNorthAmerica)
-            itemLoc = itemRes.Item(1)
-            Dim itemP As MapPoint.Pushpin = oMap.AddPushpin(itemLoc, y.Zip)
-            Dim stWaypoint As MapPoint.Waypoint
-            Dim oRoute As MapPoint.Route
-            oRoute = oMap.ActiveRoute
-            oRoute.Waypoints.Add(start_loc, "start")
-            oRoute.Waypoints.Add(itemLoc, "end")
-            Try
-                oRoute.Calculate()
-            Catch ex As Exception
+            Dim st_zip As String = CType(y.Zip, String)
+            itemRes = oMap.FindAddressResults(, , , , st_zip, GeoCountry.geoCountryUnitedStates)
+            If itemRes.Count >= 1 Then
+                Dim itemP As MapPoint.Pushpin = oMap.AddPushpin(itemRes.Item(1), y.Zip)
+                Dim stWaypoint As MapPoint.Waypoint
+                Dim oRoute As MapPoint.Route
+                oRoute = oMap.ActiveRoute
+                oRoute.Waypoints.Add(start_loc, "start")
+                oRoute.Waypoints.Add(itemRes.Item(1), "end")
+                Try
+                    oRoute.Calculate()
+                Catch ex As Exception
 
-            End Try
-            Dim distance As Double = oRoute.Distance
-            If distance < (CType(Radius, Double)) Then
-                If arZips.Contains(y.Zip) = False Then
-                    arZips.Add(y.Zip)
+                End Try
+                Dim distance As Double = oRoute.Distance
+                If distance < (CType(Radius, Double)) Then
+                    If arZips.Contains(y.Zip) = False Then
+                        arZips.Add(y.Zip)
+                    End If
                 End If
+                oRoute.Clear()
+                Select Case Form
+                    Case Is = "frmWCList.vb"
+                        frmWCList.pbSearch.Increment(1)
+                        Exit Select
+                End Select
             End If
-            oRoute.Clear()
-            Select Case Form
-                Case Is = "frmWCList.vb"
-                    frmWCList.pbSearch.Increment(1)
-                    Exit Select
-            End Select
         Next
 
         oMap.Saved = True

@@ -172,7 +172,9 @@ Public Class MarketingManager
     End Sub
 
     Private Sub GenerateWarmCallingListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateWarmCallingListToolStripMenuItem.Click
+        Me.Cursor = Cursors.WaitCursor
         frmWCList.MdiParent = Main
         frmWCList.Show()
+        Me.Cursor = Cursors.Default
     End Sub
 End Class

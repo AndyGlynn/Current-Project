@@ -16,7 +16,10 @@ Public Class frmWCList
 
     Private selectedTab_IDX As Integer = 0
     Private _arUniques As List(Of Pull_Unique_States_And_Zips.UniqueCityStateZip)
-
+    Private Structure ZipOrCity
+        Public Category As String
+        Public Value As String
+    End Structure
 #End Region
 
 
@@ -181,157 +184,6 @@ Public Class frmWCList
             Me.Cursor = Cursors.Default
         End If
  
-
-
-
-
-
-
-        'Me.epGeo.Clear()
-
-        'If rdoCity.Checked = False And rdoZip.Checked = False Then
-
-        '    Me.epGeo.SetError(Me.rdoZip, "You must select either City or Zip to search by.")
-        '    Exit Sub
-        'End If
-
-        'If Len(txtZipCity.Text) <= 0 Or Me.txtZipCity.Text = "" Or Me.txtZipCity.Text = " " Then
-        '    Me.epGeo.SetError(Me.txtZipCity, "You cannot have a blank Starting Zip code.")
-        'ElseIf Len(Me.txtZipCity.Text) > 0 And Me.txtZipCity.Text <> " " And Me.txtZipCity.Text <> "" Then
-        '    '' regex for 5 digit zip code.
-        '    If Regex.IsMatch(Me.txtZipCity.Text, "^[0-9]{5}(?:-[0-9]{4})?$") Then
-        '        '' valid
-        '        '' carry on
-        '    Else
-        '        '' invalid
-        '        '' throw error, kick out
-        '        Me.epGeo.SetError(Me.txtZipCity, "Incorrect format for zip code. IE: '12345' ")
-        '        Exit Sub
-        '    End If
-        'End If
-
-        'Dim ctrlZ As Control = Me.grpGeo.Controls("txtZipCity")
-        'If ctrlZ IsNot Nothing Then
-        '    If Len(Me.grpGeo.Controls("txtZipCity").Text) <= 0 Or Me.grpGeo.Controls("txtZipCity").Text = "" Or Me.grpGeo.Controls("txtZipCity").Text = " " Then
-        '        Me.epGeo.SetError(Me.grpGeo.Controls("txtZipCity"), "You cannot have a blank Starting Zip code.")
-        '    ElseIf Len(Me.grpGeo.Controls("txtZipCity").Text) > 0 And Me.grpGeo.Controls("txtZipCity").Text <> " " And Me.grpGeo.Controls("txtZipCity").Text <> "" Then
-        '        '' regex for 5 digit zip code.
-        '        If Regex.IsMatch(Me.grpGeo.Controls("txtZipCity").Text, "^[0-9]{5}(?:-[0-9]{4})?$") Then
-        '            '' valid
-        '            '' carry on
-        '        Else
-        '            '' invalid
-        '            '' throw error, kick out
-        '            Me.epGeo.SetError(Me.grpGeo.Controls("txtZipCity"), "Incorrect format for zip code. IE: '12345' ")
-        '            Exit Sub
-        '        End If
-        '    End If
-        'End If
-
-
-        'Dim ctrl As Control = Me.grpGeo.Controls("cboZipCity")
-        'If ctrl IsNot Nothing Then
-        '    ctrl = Nothing
-        '    If Len(Me.grpGeo.Controls("cboZipCity").Text) <= 0 Or Me.grpGeo.Controls("cboZipCity").Text = "" Or Me.grpGeo.Controls("cboZipCity").Text = " " Then
-        '        Me.epGeo.SetError(Me.grpGeo.Controls("cboZipCity"), "This is not a valid starting city.")
-        '        Exit Sub
-        '    End If
-        'ElseIf ctrl Is Nothing Then
-        '    '' do nothing 
-        'End If
-
-        'If Len(Me.cboStateSelection.Text) > 0 And Me.cboStateSelection.Text <> "" And Me.cboStateSelection.Text <> " " Then
-        '    '' valid
-        '    '' carry on
-        'ElseIf Len(Me.cboStateSelection.Text) <= 0 Or Me.cboStateSelection.Text = "" Or Me.cboStateSelection.Text = " " Then
-        '    '' invalid
-        '    Me.epGeo.SetError(Me.cboStateSelection, "You must select a State.")
-        '    Exit Sub
-        'End If
-
-        'If Me.numMiles.Value <= 0 Then
-        '    Me.epGeo.SetError(Me.numMiles, "You must select a radius (in miles) to search from.")
-        '    Exit Sub
-        'End If
-
-        ' '' now validate the zip code against mappoint.
-        ' ''
-        'Me.Cursor = Cursors.No
-        'Dim isItValid As Boolean
-        'Dim z As New Validate_Zip_Code_Mappoint(Me.txtZipCity.Text)
-        'isItValid = z.Valid
-        'Me.Cursor = Cursors.Default
-
-        'If isItValid = True Then
-        '    '' carry on
-        'ElseIf isItValid = False Then
-        '    '' not a valid zip code
-        '    '' throw error and kick out
-        '    Me.epGeo.SetError(Me.txtZipCity, "This zip code cannot be found because it either doesn't exist, or it is an invalid format. Please check entry and try again.")
-        '    Exit Sub
-        'End If
-
-        ' ''
-        ' '' assuming all passes this point for user entry,
-        ' '' perform radius search and pull back the list of zip
-        ' '' codes that meet the specified criteria. 
-        ' '' 
-
-        'Me.chlstZipCity.Items.Clear()
-        'If Me.rdoCity.Checked = True Then
-        '    Dim ctrlF As ComboBox
-        '    For Each C As Control In Me.grpGeo.Controls
-        '        If TypeOf C Is ComboBox Then
-        '            If C.Name = "cboZipCity" Then
-        '                ctrlF = C
-        '            End If
-        '        End If
-        '    Next
-        '    ' Try
-        '    Me.Cursor = Cursors.WaitCursor
-        '    Me.pbSearch.Value = 1
-        '    Dim a As New Radius_Search(CType(ctrlF.Text, String), Me._arUniques, Me.numMiles.Value, "frmWCList.vb")
-        '    Dim arZip As New ArrayList
-        '    arZip = a.arZips
-        '    For Each aa As String In arZip
-        '        Me.chlstZipCity.Items.Add(aa, False)
-        '    Next
-        '    a = Nothing
-        '    Me.Cursor = Cursors.Default
-        '    'Catch ex As Exception
-        '    '    Me.Cursor = Cursors.Default
-        '    '    Dim c As New ErrorLogging_V2
-        '    '    c.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmWClist.vb", "FormCode", "Class Call", "Radius_Search(zip).New()", "0", ex.Message.ToString)
-        '    'End Try
-
-        'End If
-
-        'If Me.rdoZip.Checked = True Then
-        '    Dim ctrlF As TextBox
-        '    For Each C As Control In Me.grpGeo.Controls
-        '        If TypeOf C Is TextBox Then
-        '            If C.Name = "txtZipCity" Then
-        '                ctrlF = C
-        '            End If
-        '        End If
-        '    Next
-        '    'Try
-        '    Me.Cursor = Cursors.WaitCursor
-        '    Me.pbSearch.Value = 1
-        '    Dim a As New Radius_Search(ctrlF.Text, Me.cboStateSelection.Text, Me._arUniques, Me.numMiles.Value, "frmWCList.vb")
-        '    Dim arCities As New ArrayList
-        '    arCities = a.arCities
-        '    For Each aa As String In arCities
-        '        Me.chlstZipCity.Items.Add(aa, False)
-        '    Next
-        '    a = Nothing
-        '    Me.Cursor = Cursors.Default
-        '    'Catch ex As Exception
-        '    '    Me.Cursor = Cursors.Default
-        '    '    Dim c As New ErrorLogging_V2
-        '    '    c.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmWClist.vb", "FormCode", "Class Call", "Radius_Search(City).New()", "0", ex.Message.ToString)
-        '    'End Try
-        'End If
     End Sub
 
 #End Region
@@ -387,6 +239,7 @@ Public Class frmWCList
         Me.cboDateRange.Items.AddRange(New Object() {"All", "Today", "Yesterday", "This Week", "This Week - to date", "This Month", "This Month - to date", "This Year", "This Year - to date", "Next Week", "Next Month", "Last Week", "Last Week - to date", "Last Month", "Last Month - to date", "Last Year", "Last Year - to date", "Custom"})
 
 
+        Me.Cursor = Cursors.Default
 
     End Sub
 #End Region
@@ -530,7 +383,7 @@ Public Class frmWCList
                 Dim cnxM As New SqlConnection(cnx)
                 Dim lstMark As New List(Of Marketer)
                 cnxM.Open()
-                Dim cmdGET As New SqlCommand("SELECT * from MarketerPullList WHERE ACTIVE=1;", cnxM)
+                Dim cmdGET As New SqlCommand("SELECT * from MarketerPullList;", cnxM)
                 Dim r1 As SqlDataReader = cmdGET.ExecuteReader
                 While r1.Read
                     Dim a As New Marketer
@@ -568,6 +421,7 @@ Public Class frmWCList
         End Structure
         Public lstProducts As List(Of Product)
         Private Const cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+        Dim cmdTXT As String = "select product1 as AllProducts FROM EnterLead WHERE product1 is not null and product1 <> '' and product1 <> ' ' UNION select product2 FROM EnterLead WHERE product2 is not null and product2 <> '' and product2 <> ' ' UNION select product3 FROM EnterLead WHERE product3 is not null and product3 <> '' and product3 <> ' ' UNION select Product FROM Products ORDER BY AllProducts ASC;"
         Public Sub New()
             lstProducts = New List(Of Product)
             lstProducts = GetProducts()
@@ -576,14 +430,14 @@ Public Class frmWCList
             Try
                 Dim cnxP As New SqlConnection(cnx)
                 cnxP.Open()
-                Dim cmdGET As New SqlCommand("SELECT * FROM Products ORDER BY Product ASC;", cnxP)
+                Dim cmdGET As New SqlCommand(cmdTXT, cnxP)
                 Dim r1 As SqlDataReader = cmdGET.ExecuteReader
                 Dim lstP As New List(Of Product)
                 While r1.Read
                     Dim a As New Product
-                    a.RecID = r1.Item("ID")
-                    a.PName = r1.Item("Product")
-                    a.PAcro = r1.Item("ProdAcronym")
+                    a.RecID = "0"
+                    a.PName = r1.Item("AllProducts")
+                    a.PAcro = ""
                     lstP.Add(a)
                 End While
                 r1.Close()
@@ -1115,6 +969,170 @@ Public Class frmWCList
 
 
 
+
+
+    Private Sub btnGenerate_Click(sender As Object, e As EventArgs) Handles btnGenerate.Click
+        MsgBox("Query: " & vbCrLf & vbCrLf & BuildQuery(), MsgBoxStyle.Information, "Query String")
+    End Sub
+
+
+#Region "Build The Select Query"
+
+    Private Function BuildQuery()
+        '' date(s)
+        ''  need to be represented as "#date#"
+        Dim slct As String = ""
+        Dim _gen As Date = CType(Me.txtGenerated.Text, Date)
+        _gen = _gen.ToShortDateString
+        slct += ("Gen: " & _gen) & vbCrLf
+        Dim _from As Date = CType(Me.txtFrom.Text, Date)
+        _from = _from.ToShortDateString
+        slct += ("From: " & _from) & vbCrLf
+        Dim _to As Date = CType(Me.txtTo.Text, Date)
+        _to = _to.ToShortDateString
+        slct += ("To: " & _to) & vbCrLf
+        Dim _TimeFrom As Date = CType(Me.txtTimeFrom.Text, Date)
+        _TimeFrom = _TimeFrom.ToShortTimeString
+        slct += ("Time From: " & _TimeFrom) & vbCrLf
+        Dim _TimeTo As Date = CType(Me.txtTimeTo.Text, Date)
+        _TimeTo = _TimeTo.ToShortTimeString
+        slct += ("Time To: " & _TimeTo) & vbCrLf
+        Dim Weekdays As Boolean = Me.chWeekdays.CheckState
+        slct += ("Weekdays: " & Weekdays.ToString) & vbCrLf
+
+        '' marketers
+        Dim arMarketers As New ArrayList
+        Dim y As CheckedListBox.CheckedItemCollection = Me.chlstMarketers.CheckedItems
+        Dim z As String
+        For Each z In y
+            arMarketers.Add(z)
+        Next
+
+        '' DEBUG purposes only
+        Dim cnt As Integer = arMarketers.Count
+        slct += "Marketers Selected:(" & cnt.ToString & ")" & vbCrLf
+        Dim mark As String = ""
+        For Each zz As String In arMarketers
+            mark += (zz) & vbCrLf
+        Next
+        slct += mark
+        '' END DEBUG
+
+        '' products
+        Dim arProducts As New ArrayList
+        Dim p As CheckedListBox.CheckedItemCollection = Me.chlstProducts.CheckedItems
+        Dim pp As String
+        For Each pp In p
+            arProducts.Add(pp)
+        Next
+
+        '' DEBUG purposes only
+        Dim cntP As Integer = arProducts.Count
+        slct += ("Product(s):(" & cntP.ToString & ")" & vbCrLf)
+        Dim pro As String = ""
+        For Each pr As String In arProducts
+            pro += (pr) & vbCrLf
+        Next
+        slct += pro
+
+        '' Geo
+        '' city or zip
+        ''
+        Dim arZipCity As New ArrayList
+        If Me.btnShow.Text = "Show Zip Codes" Then
+            Dim zc As CheckedListBox.CheckedItemCollection = Me.chlstZipCity.CheckedItems
+            Dim cntZ As Integer = zc.Count
+            Dim zci As String = ""
+            For Each zci In zc
+                Dim x As New ZipOrCity
+                x.Category = "Zip"
+                x.Value = zci.ToString
+                arZipCity.Add(x)
+            Next
+            slct += ("Zip(s):(" & cntZ & ")") & vbCrLf
+            Dim gc As ZipOrCity
+            Dim zps As String = ""
+            For Each gc In arZipCity
+                zps += (gc.Category & ":=" & gc.Value) & vbCrLf
+            Next
+            slct += zps
+        Else
+            Dim zc As CheckedListBox.CheckedItemCollection = Me.chlstZipCity.CheckedItems
+            Dim cntZ As Integer = zc.Count
+            Dim zci As String = ""
+            For Each zci In zc
+                Dim x As New ZipOrCity
+                x.Category = "City"
+                x.Value = zci.ToString
+                arZipCity.Add(x)
+            Next
+            slct += ("City(s):(" & cntZ & ")") & vbCrLf
+            Dim ga As ZipOrCity
+            Dim zps As String = ""
+            For Each ga In arZipCity
+                zps += (ga.Category & ":=" & ga.Value) & vbCrLf
+            Next
+            slct += zps
+        End If
+
+
+        '' marketing results
+        '' 
+        Dim arMarketing As New ArrayList
+        Dim m As CheckedListBox.CheckedItemCollection = Me.chlstWC.CheckedItems
+        Dim mm As String
+        For Each mm In m
+            arMarketing.Add(mm)
+        Next
+
+        ''DEBUG purposes only
+        '' 
+        Dim cntM As Integer = arMarketing.Count
+        slct += ("Marketing Results(s):(" & cntM.ToString & ")" & vbCrLf)
+        Dim mar As String = ""
+        For Each bc As String In arMarketing
+            mar += (bc) & vbCrLf
+        Next
+        slct += mar
+        '' END DEBUG
+
+
+        '' Group By / Sorting
+
+        Dim arGroups As New ArrayList
+        Dim g As CheckedListBox.CheckedItemCollection = Me.chlstOrderBy.CheckedItems
+        Dim gg As String
+        For Each gg In g
+            arGroups.Add(gg)
+        Next
+
+        ''DEBUG purposes only
+        '' 
+        Dim cntG As Integer = arGroups.Count
+        Dim grp As String = ""
+        For Each pr As String In arGroups
+            grp += ("Sort Item: " & pr) & vbCrLf
+        Next
+        '' END DEBUG
+
+        If Me.chGroupBy.CheckState = CheckState.Checked Then
+            slct += "Group Top Item?: True" & vbCrLf
+            slct += "Grouping: " & arGroups(0).ToString & vbCrLf
+            Dim selSTR As String = ""
+            For cntG = 1 To arGroups.Count - 1
+                selSTR += ("Sort Item: " & arGroups(cntG).ToString) & vbCrLf
+            Next
+            slct += selSTR
+        Else
+            slct += "Group Top Item?: False" & vbCrLf
+            slct += grp
+        End If
+
+        Return slct
+
+    End Function
+
+#End Region
 
 
 End Class
