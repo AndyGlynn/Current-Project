@@ -31,6 +31,7 @@ Public Class createListPrintOperations
         Public MarketingResults As String
         Public IsPreviousCustomer As String
         Public IsRecovery As String
+        Public Marketer As String '' added 4-1-2016 for Order By Clause
     End Structure
 
     Public Structure PCInfoToPrint '' in the instance that a previous sale exists for LeadNumber this is the additional info that needs to be pulled 
@@ -142,13 +143,754 @@ Public Class createListPrintOperations
     'If warmcalling is there as well, create target='_blank' page for Warm calling List
     'If recovery is there as well, create target='_blank' page for Recovery List 
 
+#Region "Notes 3-30-2016"
+    '' 
+    '' Per AG, now we need to not 'Mash' up lists anymore
+    '' just take one list per form that calls it.
+    '' also, need a way to display 'headings' per 
+    '' group  IF  'group by' selected
+    '' 
+    '' Also, no cross referencing sales for nested rows. 
+    '' 
+    '' keeping 'legacy' methods just for shits and giggles.
+    '' 
+
+
+#End Region
+
     Public Sub CreateWireFrameHTML_WarmCalling(ByVal QueryString As String)
+        '' 
+        '' no group by / sort top item here
+        '' 
+        '' 
+        CreateWireFrameHTML(QueryString)
 
     End Sub
-    Public Sub CreateWireFrameHTML_Rehash(ByVal QueryString As String)
+
+    Public Sub CreateWireFrameHTML_WarmCalling(ByVal QueryString As String, ByVal Grouped As Boolean, ByVal GroupHeading As ArrayList, ByVal HeadingData_QRY As String)
+        '' list a heading depeding on group
+        '' 
+        '' [Example] 
+        '' 
+        '' heading
+        ''-------------------
+        '' Row item x
+        ''   --Sub Item a
+        '' Row item y
+        '' Row item z
+        ''   --Sub Item b
+        '' 
+        '' heading
+        '' ------------------
+        '' Row item x
+        '' Row item y 
+        '' Row item z
+        '' 
+        ''
+
+        '' two queries:
+        '' one) subquery to get Unique [order by] field => For headers on HTML doc
+        '' Example:
+        '' 
+        '' 
+        'select distinct(City), State FROM (
+        'Select Distinct(Enterlead.ID), Contact1LastName, Contact1FirstName, Contact2LastName, Contact2FirstName, StAddress, City, State, Zip, HousePhone, AltPhone1, AltPhone2, Enterlead.Product1, Enterlead.Product2, Enterlead.Product3, LeadGeneratedOn, ApptDate, ApptDay, ApptTime, MarketingResults  From Enterlead join tblWhereCanLeadGo on enterlead.id = tblWhereCanLeadGo.LeadNumber 
+        'Where (LeadGeneratedOn >= '1/1/2009 12:00:00 AM' and ApptDate Between '1/1/2010 12:00:00 AM' and '4/1/2016 12:00:00 AM' and ApptTime Between '1/1/1900 11:00:00 AM' And '1/1/1900 7:00:00 PM' and ApptDay <> 'Saturday' and ApptDay <> 'Sunday' and (Zip = '43542' or Zip = '43528' or Zip = '43537' or Zip = '43615' or Zip = '43504' or Zip = '49276' or Zip = '43617' or Zip = '43560' or Zip = '43560' or Zip = '49267' or Zip = '43614' or Zip = '43607' or Zip = '43609' or Zip = '43623' or Zip = '43606' or Zip = '43613' or Zip = '48144' or Zip = '48144' or Zip = '43620' or Zip = '43610' or Zip = '43612') and tblWhereCanLeadGo.WarmCall = 'True') 
+        ') AS SUBQUERY
+        '' Produces: List of Unique Cities WHERE "Group By" Selected for "City,State"
+        '' 
+        '' two) the result set of the encompassing query => Actual Rows of data
+        '' Produces: The result set of the Initial Criteria {Data Rows} 
+        ''
+
+        'Try
+
+        frmWCList.Cursor = Cursors.WaitCursor
+
+
+        arListOfLeadsToDisplay = GrabRowsForHTML(QueryString)
+        Dim arHeadingData As New Hashtable
+        arHeadingData = GrabUniqueHeadings(HeadingData_QRY)
+        Dim g As DictionaryEntry
+        Dim target_column As String = ""
+        Dim target_headings As New ArrayList
+        For Each g In arHeadingData '' should only be one entry here.
+            target_column = g.Key
+            target_headings = g.Value
+        Next
+        Dim guid As Guid = guid.NewGuid
+        Dim dateTime As String = Date.Now
+        Dim ext As String = ".htm"
+
+        Dim doc As String = "" '' var for ENTIRE html doc after built and to write to disk once complete
+
+        'Dim style As String = "<style type='text/css'>.elem1{font-family:""Verdana"",sans-serif;font-size:1.2em;color:blue;}.fancyTable{position:fixed;left:2em;top:3em;padding:2px;margin:3px;text-align:center;"
+        'style = style + "border-right-style:solid;border-right-width:1px;border-right-color:black;box-shadow:2px 2px 2px grey;border-collapse: collapse;}"
+        'style = style + "th{padding:3px;border-bottom-style:solid;border-bottom-color:black;border-bottom-width:1px;border-right-style:solid;border-right-color:grey;border-right-width:1px;"
+        'style = style + "background-color:hsl(30,75%,74%);color:hsl(30,100%,33%);font-family:""Verdana"",sans-serif;font-size:1.1em;}"
+        'style = style + "td{padding:3px;font-family:""Verdana"",sans-serif;font-size:0.7em;}"
+        'style = style + "tr:nth-child(even){background-color:hsl(30,100%,94%);}tr:nth-child(odd){background-color:hsl(30,100%,80%);}"
+        'style = style + "</style>"
+
+        Dim title As String = "<title>Create List For " & Date.Today.ToShortDateString & "</title>"
+
+        Dim style As String = "<style type='text/css'>" & vbCrLf
+        style += "span.data {font-family:""Verdana"",sans-serif;font-size:1.3em;color:black;}" & vbCrLf
+        style += ".elem1 {font-family:""Verdana"",sans-serif;color:blue;font-size:1.3em;}" & vbCrLf
+        style += ".tbl {font-family:""Verdana"",sans-serif;color:black;border-collapse:collapse;margin:5px;box-shadow:2px 2px 2px grey;}" & vbCrLf
+        style += "tr {padding:3px;}" & vbCrLf
+        style += "tr:nth-child(odd) {background-color:white;}" & vbCrLf
+        style += "tr:nth-child(even) {background-color:hsl(0,0%,90%);}" & vbCrLf
+        style += "th {font-family:""Verdana"",sans-serif;font-size:1.1em;color:black;padding:3px;text-align:center;background-color:hsl(0,0%,80%);}" & vbCrLf
+        style += "td {font-family:""Verdana"",sans-serif;font-size:0.8em;padding:7px;text-align:center;}" & vbCrLf
+        style += "tr.sale {font-family:""Verdana"",sans-serif;font-weight:normal;font-size:1em;background-color:hsl(120,100%,75%);}" & vbCrLf
+        style += "@media print { span.data {display:none;} tr:nth-child(even){background-color:white;}tr:nth-child(odd){background-color:white;}" & vbCrLf
+        style += "tr.sale{background-color:white;font-size:0.8em;}th{font-size:0.7em;}td{font-size:0.5em;}.tbl{box-shadow:0px 0px 0px white;} @page{size:landscape;}}" & vbCrLf
+        style += "</style>"
+
+
+        Dim jScript As String = "<script type='text/javascript'></script>"
+
+        Dim streamWriter As New StreamWriter(Production_Directory & guid.ToString & ext)
+
+        doc += "<!DOCTYPE html>" & vbCrLf
+        doc += "<head>" & vbCrLf
+        doc += "" & title & "" & vbCrLf
+        doc += "" & style & "" & vbCrLf
+        doc += "" & jScript & "" & vbCrLf
+        doc += " " & vbCrLf
+        doc += " " & vbCrLf
+        doc += "<!-- AUTO GENERATED CODE FOR: " & Date.Now.ToString & " -->" & vbCrLf
+        doc += "<!-- Header Query: " & vbCrLf
+        doc += "" & HeadingData_QRY.ToString & "-->" & vbCrLf
+        doc += " " & vbCrLf
+        doc += " " & vbCrLf
+        doc += "<!-- Query ACTUAL: " & vbCrLf
+        doc += "" & QueryString.ToString & "-->"
+        doc += " " & vbCrLf
+        doc += " " & vbCrLf
+        doc += "</head>" & vbCrLf
+        doc += "<body>" & vbCrLf
+        doc += "<span id='elem1' class='elem1'>Customer List For: " & Date.Today.ToShortDateString & "</span><br /><br /><br /><span>" & QueryString.ToString & "</span>" & vbCrLf
+        doc += "<br /><br />" & vbCrLf
+        doc += "<table id='tbDat' class='tbl'>" & vbCrLf
+        doc += "<tr><th></th><th>ID</th><th>Name</th><th>Address</th><th>Phone</th><th>Product(s)</th><th>Generated On</th><th>Appt. Date</th><th>Appt. Day</th><th>Appt. Time</th><th>Result</th></tr>" & vbCrLf
+
+        '' for each 'Heading' determine if the lead.field is = to heading , if it is=> put row 'under heading'
+        '' if it isnt => do nothing with it
+
+        Dim arFilteredRows As New ArrayList
+
+        For Each xx As LeadToPrint In arListOfLeadsToDisplay
+
+            Select Case target_column
+                Case Is = "City"
+                    For Each y As String In target_headings
+                        For Each yy As LeadToPrint In arListOfLeadsToDisplay
+
+                            Dim timeSplit() = Split(yy.ApptTime, " ", 2)
+                            Dim apptTime As String = timeSplit(1).ToString
+                            Dim LeadGenSplit() = Split(yy.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = yy.ID
+                            Dim prodString = (yy.Prod1 & "<br />" & yy.Prod2 & "<br />" & yy.Prod3)
+                            Dim PhoneString = (yy.Phone1 & "<br />" & yy.Phone2 & "<br />" & yy.Phone3)
+                            Dim AddyString = (yy.StAddress & "<br />" & yy.City & ", " & yy.State & " " & yy.Zip)
+
+
+
+                            Dim strRowHeading As String = "<tr><td colspan=""11"" style=""text-align:center;"">" & "City, State" & "</td></tr>"
+                            Dim strRowData As String = ""
+                            If yy.City = y Then
+                                '' this lead belongs under this heading.
+                                '' <tr><th></th><th>ID</th><th>Name</th><th>Address</th><th>Phone</th><th>Product(s)</th><th>Generated On</th><th>Appt. Date</th><th>Appt. Day</th><th>Appt. Time</th><th>Result</th></tr>
+                                strRowData = "<!--BEGIN ROW--><tr><td></td><td>" & xx.ID & "</td>"
+                                strRowData += "<td>" & yy.FName & " " & yy.LName & "</td>"
+                                strRowData += "<td>" & yy.StAddress & " " & yy.City & " " & yy.State & " " & yy.Zip & "</td>"
+                                strRowData += "<td>" & yy.Phone1 & " " & yy.Phone2 & " " & yy.Phone3 & "</td>"
+                                strRowData += "<td>" & yy.Prod1 & " " & xx.Prod2 & " " & yy.Prod3 & "</td>"
+                                strRowData += "<td>" & yy.LeadGeneratedOn & "</td>"
+                                strRowData += "<td>" & yy.ApptDate & "</td>"
+                                strRowData += "<td>" & yy.ApptDay & "</td>"
+                                strRowData += "<td>" & yy.ApptTime & "</td>"
+                                strRowData += "<td>" & yy.Result & "</td></tr><!-- END ROW -->"
+                                '' now, does this lead have any Previous sales or what not? 
+
+                                Dim saleData As String = ""
+                                Select Case yy.Result
+
+                                    Case Is = "Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\sale28x28.jpg' alt='Sale' title='Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        '' grab sales cross query
+                                        Dim gg As New List(Of PCInfoToPrint)
+                                        gg = GrabSaleInfo(yy.ID)
+                                        Dim a As PCInfoToPrint
+                                        Dim cnt As Integer = 0
+                                        For Each a In gg
+                                            cnt += 1
+                                            Dim p_String As String = (a.Product1 & "<br />" & a.Product2 & "<br />" & a.Product3)
+                                            If a.Cash = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Cash</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            ElseIf a.Finance = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Finance</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            End If
+                                        Next
+                                        Exit Select
+                                    Case Is = "Demo/No Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\DemoNoSale28x28.jpg' alt='Demo/No Sale' title='Demo/No Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Is = "Reset"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\reset28x28.jpg' alt='Reset' title='Reset'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Else
+                                        saleData += "<!--BEGIN ROW --><tr><td /><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                End Select
+                                strRowData += saleData & vbCrLf
+                            End If
+                            arFilteredRows.Add(strRowData)
+                        Next
+                    Next
+                    Exit Select
+                Case Is = "Zip"
+                    For Each y As String In target_headings
+                        For Each yy As LeadToPrint In arListOfLeadsToDisplay
+
+                            Dim timeSplit() = Split(yy.ApptTime, " ", 2)
+                            Dim apptTime As String = timeSplit(1).ToString
+                            Dim LeadGenSplit() = Split(yy.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = yy.ID
+                            Dim prodString = (yy.Prod1 & "<br />" & yy.Prod2 & "<br />" & yy.Prod3)
+                            Dim PhoneString = (yy.Phone1 & "<br />" & yy.Phone2 & "<br />" & yy.Phone3)
+                            Dim AddyString = (yy.StAddress & "<br />" & yy.City & ", " & yy.State & " " & yy.Zip)
+
+
+
+
+                            Dim strRowHeading As String = "<tr><td colspan=""11"" style=""text-align:center;"">" & "Zip Code" & "</td></tr>"
+                            Dim strRowData As String = ""
+                            If yy.Zip = y Then
+                                strRowData = "<!--BEGIN ROW--><tr><td></td><td>" & xx.ID & "</td>"
+                                strRowData += "<td>" & yy.FName & " " & yy.LName & "</td>"
+                                strRowData += "<td>" & yy.StAddress & " " & yy.City & " " & yy.State & " " & yy.Zip & "</td>"
+                                strRowData += "<td>" & yy.Phone1 & " " & yy.Phone2 & " " & yy.Phone3 & "</td>"
+                                strRowData += "<td>" & yy.Prod1 & " " & xx.Prod2 & " " & yy.Prod3 & "</td>"
+                                strRowData += "<td>" & yy.LeadGeneratedOn & "</td>"
+                                strRowData += "<td>" & yy.ApptDate & "</td>"
+                                strRowData += "<td>" & yy.ApptDay & "</td>"
+                                strRowData += "<td>" & yy.ApptTime & "</td>"
+                                strRowData += "<td>" & yy.Result & "</td></tr><!-- END ROW -->"
+                                '' now, does this lead have any Previous sales or what not? 
+                                Dim saleData As String = ""
+                                Select Case yy.Result
+
+                                    Case Is = "Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\sale28x28.jpg' alt='Sale' title='Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        '' grab sales cross query
+                                        Dim gg As New List(Of PCInfoToPrint)
+                                        gg = GrabSaleInfo(yy.ID)
+                                        Dim a As PCInfoToPrint
+                                        Dim cnt As Integer = 0
+                                        For Each a In gg
+                                            cnt += 1
+                                            Dim p_String As String = (a.Product1 & "<br />" & a.Product2 & "<br />" & a.Product3)
+                                            If a.Cash = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Cash</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            ElseIf a.Finance = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Finance</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            End If
+                                        Next
+                                        Exit Select
+                                    Case Is = "Demo/No Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\DemoNoSale28x28.jpg' alt='Demo/No Sale' title='Demo/No Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Is = "Reset"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\reset28x28.jpg' alt='Reset' title='Reset'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Else
+                                        saleData += "<!--BEGIN ROW --><tr><td /><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                End Select
+                                strRowData += saleData & vbCrLf
+                            End If
+                            arFilteredRows.Add(strRowData)
+                        Next
+                    Next
+                    Exit Select
+                Case Is = "LeadGeneratedOn"
+                    For Each y As String In target_headings
+                        For Each yy As LeadToPrint In arListOfLeadsToDisplay
+
+
+                            Dim timeSplit() = Split(yy.ApptTime, " ", 2)
+                            Dim apptTime As String = timeSplit(1).ToString
+                            Dim LeadGenSplit() = Split(yy.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = yy.ID
+                            Dim prodString = (yy.Prod1 & "<br />" & yy.Prod2 & "<br />" & yy.Prod3)
+                            Dim PhoneString = (yy.Phone1 & "<br />" & yy.Phone2 & "<br />" & yy.Phone3)
+                            Dim AddyString = (yy.StAddress & "<br />" & yy.City & ", " & yy.State & " " & yy.Zip)
+
+
+
+                            Dim strRowHeading As String = "<tr><td colspan=""11"" style=""text-align:center;"">" & "Lead Generated On" & "</td></tr>"
+                            Dim strRowData As String = ""
+                            If yy.LeadGeneratedOn = y Then
+                                strRowData = "<!--BEGIN ROW--><tr><td></td><td>" & xx.ID & "</td>"
+                                strRowData += "<td>" & yy.FName & " " & yy.LName & "</td>"
+                                strRowData += "<td>" & yy.StAddress & " " & yy.City & " " & yy.State & " " & yy.Zip & "</td>"
+                                strRowData += "<td>" & yy.Phone1 & " " & yy.Phone2 & " " & yy.Phone3 & "</td>"
+                                strRowData += "<td>" & yy.Prod1 & " " & xx.Prod2 & " " & yy.Prod3 & "</td>"
+                                strRowData += "<td>" & yy.LeadGeneratedOn & "</td>"
+                                strRowData += "<td>" & yy.ApptDate & "</td>"
+                                strRowData += "<td>" & yy.ApptDay & "</td>"
+                                strRowData += "<td>" & yy.ApptTime & "</td>"
+                                strRowData += "<td>" & yy.Result & "</td></tr><!-- END ROW -->"
+                                '' now, does this lead have any Previous sales or what not? 
+                                Dim saleData As String = ""
+                                Select Case yy.Result
+
+                                    Case Is = "Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\sale28x28.jpg' alt='Sale' title='Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        '' grab sales cross query
+                                        Dim gg As New List(Of PCInfoToPrint)
+                                        gg = GrabSaleInfo(yy.ID)
+                                        Dim a As PCInfoToPrint
+                                        Dim cnt As Integer = 0
+                                        For Each a In gg
+                                            cnt += 1
+                                            Dim p_String As String = (a.Product1 & "<br />" & a.Product2 & "<br />" & a.Product3)
+                                            If a.Cash = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Cash</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            ElseIf a.Finance = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Finance</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            End If
+                                        Next
+                                        Exit Select
+                                    Case Is = "Demo/No Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\DemoNoSale28x28.jpg' alt='Demo/No Sale' title='Demo/No Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Is = "Reset"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\reset28x28.jpg' alt='Reset' title='Reset'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Else
+                                        saleData += "<!--BEGIN ROW --><tr><td /><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                End Select
+                                strRowData += saleData & vbCrLf
+                            End If
+                            arFilteredRows.Add(strRowData)
+                        Next
+                    Next
+                    Exit Select
+                Case Is = "ApptDate"
+                    For Each y As String In target_headings
+                        For Each yy As LeadToPrint In arListOfLeadsToDisplay
+
+                            Dim timeSplit() = Split(yy.ApptTime, " ", 2)
+                            Dim apptTime As String = timeSplit(1).ToString
+                            Dim LeadGenSplit() = Split(yy.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = yy.ID
+                            Dim prodString = (yy.Prod1 & "<br />" & yy.Prod2 & "<br />" & yy.Prod3)
+                            Dim PhoneString = (yy.Phone1 & "<br />" & yy.Phone2 & "<br />" & yy.Phone3)
+                            Dim AddyString = (yy.StAddress & "<br />" & yy.City & ", " & yy.State & " " & yy.Zip)
+
+
+
+                            Dim strRowHeading As String = "<tr><td colspan=""11"" style=""text-align:center;"">" & "Appointment Date" & "</td></tr>"
+                            Dim strRowData As String = ""
+                            If yy.ApptDate = y Then
+                                strRowData = "<!--BEGIN ROW--><tr><td></td><td>" & xx.ID & "</td>"
+                                strRowData += "<td>" & yy.FName & " " & yy.LName & "</td>"
+                                strRowData += "<td>" & yy.StAddress & " " & yy.City & " " & yy.State & " " & yy.Zip & "</td>"
+                                strRowData += "<td>" & yy.Phone1 & " " & yy.Phone2 & " " & yy.Phone3 & "</td>"
+                                strRowData += "<td>" & yy.Prod1 & " " & xx.Prod2 & " " & yy.Prod3 & "</td>"
+                                strRowData += "<td>" & yy.LeadGeneratedOn & "</td>"
+                                strRowData += "<td>" & yy.ApptDate & "</td>"
+                                strRowData += "<td>" & yy.ApptDay & "</td>"
+                                strRowData += "<td>" & yy.ApptTime & "</td>"
+                                strRowData += "<td>" & yy.Result & "</td></tr><!-- END ROW -->"
+                                '' now, does this lead have any Previous sales or what not? 
+                                Dim saleData As String = ""
+                                Select Case yy.Result
+
+                                    Case Is = "Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\sale28x28.jpg' alt='Sale' title='Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        '' grab sales cross query
+                                        Dim gg As New List(Of PCInfoToPrint)
+                                        gg = GrabSaleInfo(yy.ID)
+                                        Dim a As PCInfoToPrint
+                                        Dim cnt As Integer = 0
+                                        For Each a In gg
+                                            cnt += 1
+                                            Dim p_String As String = (a.Product1 & "<br />" & a.Product2 & "<br />" & a.Product3)
+                                            If a.Cash = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Cash</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            ElseIf a.Finance = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Finance</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            End If
+                                        Next
+                                        Exit Select
+                                    Case Is = "Demo/No Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\DemoNoSale28x28.jpg' alt='Demo/No Sale' title='Demo/No Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Is = "Reset"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\reset28x28.jpg' alt='Reset' title='Reset'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Else
+                                        saleData += "<!--BEGIN ROW --><tr><td /><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                End Select
+                                strRowData += saleData & vbCrLf
+                            End If
+                            arFilteredRows.Add(strRowData)
+                        Next
+                    Next
+                    Exit Select
+                Case Is = "ApptTime"
+                    For Each y As String In target_headings
+                        For Each yy As LeadToPrint In arListOfLeadsToDisplay
+
+                            Dim timeSplit() = Split(yy.ApptTime, " ", 2)
+                            Dim apptTime As String = timeSplit(1).ToString
+                            Dim LeadGenSplit() = Split(yy.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = yy.ID
+                            Dim prodString = (yy.Prod1 & "<br />" & yy.Prod2 & "<br />" & yy.Prod3)
+                            Dim PhoneString = (yy.Phone1 & "<br />" & yy.Phone2 & "<br />" & yy.Phone3)
+                            Dim AddyString = (yy.StAddress & "<br />" & yy.City & ", " & yy.State & " " & yy.Zip)
+
+
+                            Dim strRowHeading As String = "<tr><td colspan=""11"" style=""text-align:center;"">" & "Appointment Time" & "</td></tr>"
+                            Dim strRowData As String = ""
+                            If yy.ApptTime = y Then
+                                '' this lead belongs under this heading.
+                                '' <tr><th></th><th>ID</th><th>Name</th><th>Address</th><th>Phone</th><th>Product(s)</th><th>Generated On</th><th>Appt. Date</th><th>Appt. Day</th><th>Appt. Time</th><th>Result</th></tr>
+                                strRowData = "<!--BEGIN ROW--><tr><td></td><td>" & xx.ID & "</td>"
+                                strRowData += "<td>" & yy.FName & " " & yy.LName & "</td>"
+                                strRowData += "<td>" & yy.StAddress & " " & yy.City & " " & yy.State & " " & yy.Zip & "</td>"
+                                strRowData += "<td>" & yy.Phone1 & " " & yy.Phone2 & " " & yy.Phone3 & "</td>"
+                                strRowData += "<td>" & yy.Prod1 & " " & xx.Prod2 & " " & yy.Prod3 & "</td>"
+                                strRowData += "<td>" & yy.LeadGeneratedOn & "</td>"
+                                strRowData += "<td>" & yy.ApptDate & "</td>"
+                                strRowData += "<td>" & yy.ApptDay & "</td>"
+                                strRowData += "<td>" & yy.ApptTime & "</td>"
+                                strRowData += "<td>" & yy.Result & "</td></tr><!-- END ROW -->"
+                                '' now, does this lead have any Previous sales or what not? 
+                                Dim saleData As String = ""
+                                Select Case yy.Result
+
+                                    Case Is = "Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\sale28x28.jpg' alt='Sale' title='Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        '' grab sales cross query
+                                        Dim gg As New List(Of PCInfoToPrint)
+                                        gg = GrabSaleInfo(yy.ID)
+                                        Dim a As PCInfoToPrint
+                                        Dim cnt As Integer = 0
+                                        For Each a In gg
+                                            cnt += 1
+                                            Dim p_String As String = (a.Product1 & "<br />" & a.Product2 & "<br />" & a.Product3)
+                                            If a.Cash = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Cash</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            ElseIf a.Finance = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Finance</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            End If
+                                        Next
+                                        Exit Select
+                                    Case Is = "Demo/No Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\DemoNoSale28x28.jpg' alt='Demo/No Sale' title='Demo/No Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Is = "Reset"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\reset28x28.jpg' alt='Reset' title='Reset'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Else
+                                        saleData += "<!--BEGIN ROW --><tr><td /><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                End Select
+                                strRowData += saleData & vbCrLf
+                            End If
+                            arFilteredRows.Add(strRowData)
+                        Next
+                    Next
+                    Exit Select
+                Case Is = "Product1"
+                    For Each y As String In target_headings
+                        For Each yy As LeadToPrint In arListOfLeadsToDisplay
+
+
+                            Dim timeSplit() = Split(yy.ApptTime, " ", 2)
+                            Dim apptTime As String = timeSplit(1).ToString
+                            Dim LeadGenSplit() = Split(yy.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = yy.ID
+                            Dim prodString = (yy.Prod1 & "<br />" & yy.Prod2 & "<br />" & yy.Prod3)
+                            Dim PhoneString = (yy.Phone1 & "<br />" & yy.Phone2 & "<br />" & yy.Phone3)
+                            Dim AddyString = (yy.StAddress & "<br />" & yy.City & ", " & yy.State & " " & yy.Zip)
+
+
+
+                            Dim strRowHeading As String = "<tr><td colspan=""11"" style=""text-align:center;"">" & "Primary Product" & "</td></tr>"
+                            Dim strRowData As String = ""
+                            If yy.Prod1 = y Then
+                                strRowData = "<!--BEGIN ROW--><tr><td></td><td>" & xx.ID & "</td>"
+                                strRowData += "<td>" & yy.FName & " " & yy.LName & "</td>"
+                                strRowData += "<td>" & yy.StAddress & " " & yy.City & " " & yy.State & " " & yy.Zip & "</td>"
+                                strRowData += "<td>" & yy.Phone1 & " " & yy.Phone2 & " " & yy.Phone3 & "</td>"
+                                strRowData += "<td>" & yy.Prod1 & " " & xx.Prod2 & " " & yy.Prod3 & "</td>"
+                                strRowData += "<td>" & yy.LeadGeneratedOn & "</td>"
+                                strRowData += "<td>" & yy.ApptDate & "</td>"
+                                strRowData += "<td>" & yy.ApptDay & "</td>"
+                                strRowData += "<td>" & yy.ApptTime & "</td>"
+                                strRowData += "<td>" & yy.Result & "</td></tr><!-- END ROW -->"
+                                '' now, does this lead have any Previous sales or what not? 
+                                Dim saleData As String = ""
+                                Select Case yy.Result
+
+                                    Case Is = "Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\sale28x28.jpg' alt='Sale' title='Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        '' grab sales cross query
+                                        Dim gg As New List(Of PCInfoToPrint)
+                                        gg = GrabSaleInfo(yy.ID)
+                                        Dim a As PCInfoToPrint
+                                        Dim cnt As Integer = 0
+                                        For Each a In gg
+                                            cnt += 1
+                                            Dim p_String As String = (a.Product1 & "<br />" & a.Product2 & "<br />" & a.Product3)
+                                            If a.Cash = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Cash</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            ElseIf a.Finance = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Finance</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            End If
+                                        Next
+                                        Exit Select
+                                    Case Is = "Demo/No Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\DemoNoSale28x28.jpg' alt='Demo/No Sale' title='Demo/No Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Is = "Reset"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\reset28x28.jpg' alt='Reset' title='Reset'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Else
+                                        saleData += "<!--BEGIN ROW --><tr><td /><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                End Select
+                                strRowData += saleData & vbCrLf
+                            End If
+                            arFilteredRows.Add(strRowData)
+                        Next
+                    Next
+                    Exit Select
+                Case Is = "Marketer"
+                    For Each y As String In target_headings
+                        For Each yy As LeadToPrint In arListOfLeadsToDisplay
+
+
+                            Dim timeSplit() = Split(yy.ApptTime, " ", 2)
+                            Dim apptTime As String = timeSplit(1).ToString
+                            Dim LeadGenSplit() = Split(yy.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = yy.ID
+                            Dim prodString = (yy.Prod1 & "<br />" & yy.Prod2 & "<br />" & yy.Prod3)
+                            Dim PhoneString = (yy.Phone1 & "<br />" & yy.Phone2 & "<br />" & yy.Phone3)
+                            Dim AddyString = (yy.StAddress & "<br />" & yy.City & ", " & yy.State & " " & yy.Zip)
+
+
+
+                            Dim strRowHeading As String = "<tr><td colspan=""11"" style=""text-align:center;"">" & "Marketer" & "</td></tr>"
+                            Dim strRowData As String = ""
+                            If yy.Marketer = y Then
+                               strRowData = "<!--BEGIN ROW--><tr><td></td><td>" & xx.ID & "</td>"
+                                strRowData += "<td>" & yy.FName & " " & yy.LName & "</td>"
+                                strRowData += "<td>" & yy.StAddress & " " & yy.City & " " & yy.State & " " & yy.Zip & "</td>"
+                                strRowData += "<td>" & yy.Phone1 & " " & yy.Phone2 & " " & yy.Phone3 & "</td>"
+                                strRowData += "<td>" & yy.Prod1 & " " & xx.Prod2 & " " & yy.Prod3 & "</td>"
+                                strRowData += "<td>" & yy.LeadGeneratedOn & "</td>"
+                                strRowData += "<td>" & yy.ApptDate & "</td>"
+                                strRowData += "<td>" & yy.ApptDay & "</td>"
+                                strRowData += "<td>" & yy.ApptTime & "</td>"
+                                strRowData += "<td>" & yy.Result & "</td></tr><!-- END ROW -->"
+                                '' now, does this lead have any Previous sales or what not? 
+                                Dim saleData As String = ""
+                                Select Case yy.Result
+
+                                    Case Is = "Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\sale28x28.jpg' alt='Sale' title='Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        '' grab sales cross query
+                                        Dim gg As New List(Of PCInfoToPrint)
+                                        gg = GrabSaleInfo(yy.ID)
+                                        Dim a As PCInfoToPrint
+                                        Dim cnt As Integer = 0
+                                        For Each a In gg
+                                            cnt += 1
+                                            Dim p_String As String = (a.Product1 & "<br />" & a.Product2 & "<br />" & a.Product3)
+                                            If a.Cash = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Cash</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            ElseIf a.Finance = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Finance</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            End If
+                                        Next
+                                        Exit Select
+                                    Case Is = "Demo/No Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\DemoNoSale28x28.jpg' alt='Demo/No Sale' title='Demo/No Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Is = "Reset"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\reset28x28.jpg' alt='Reset' title='Reset'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Else
+                                        saleData += "<!--BEGIN ROW --><tr><td /><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                End Select
+                                strRowData += saleData & vbCrLf
+                            End If
+                            arFilteredRows.Add(strRowData)
+                        Next
+                    Next
+                    Exit Select
+                Case Is = "MarketingResults"
+                    For Each y As String In target_headings
+                        For Each yy As LeadToPrint In arListOfLeadsToDisplay
+
+
+                            Dim timeSplit() = Split(yy.ApptTime, " ", 2)
+                            Dim apptTime As String = timeSplit(1).ToString
+                            Dim LeadGenSplit() = Split(yy.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = yy.ID
+                            Dim prodString = (yy.Prod1 & "<br />" & yy.Prod2 & "<br />" & yy.Prod3)
+                            Dim PhoneString = (yy.Phone1 & "<br />" & yy.Phone2 & "<br />" & yy.Phone3)
+                            Dim AddyString = (yy.StAddress & "<br />" & yy.City & ", " & yy.State & " " & yy.Zip)
+
+
+
+                            Dim strRowHeading As String = "<tr><td colspan=""11"" style=""text-align:center;"">" & "Marketing Results" & "</td></tr>"
+                            Dim strRowData As String = ""
+                            If yy.MarketingResults = y Then
+                                strRowData = "<!--BEGIN ROW--><tr><td></td><td>" & xx.ID & "</td>"
+                                strRowData += "<td>" & yy.FName & " " & yy.LName & "</td>"
+                                strRowData += "<td>" & yy.StAddress & " " & yy.City & " " & yy.State & " " & yy.Zip & "</td>"
+                                strRowData += "<td>" & yy.Phone1 & " " & yy.Phone2 & " " & yy.Phone3 & "</td>"
+                                strRowData += "<td>" & yy.Prod1 & " " & xx.Prod2 & " " & yy.Prod3 & "</td>"
+                                strRowData += "<td>" & yy.LeadGeneratedOn & "</td>"
+                                strRowData += "<td>" & yy.ApptDate & "</td>"
+                                strRowData += "<td>" & yy.ApptDay & "</td>"
+                                strRowData += "<td>" & yy.ApptTime & "</td>"
+                                strRowData += "<td>" & yy.Result & "</td></tr><!-- END ROW -->"
+                                '' now, does this lead have any Previous sales or what not? 
+                                Dim saleData As String = ""
+                                Select Case yy.Result
+
+                                    Case Is = "Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\sale28x28.jpg' alt='Sale' title='Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        '' grab sales cross query
+                                        Dim gg As New List(Of PCInfoToPrint)
+                                        gg = GrabSaleInfo(yy.ID)
+                                        Dim a As PCInfoToPrint
+                                        Dim cnt As Integer = 0
+                                        For Each a In gg
+                                            cnt += 1
+                                            Dim p_String As String = (a.Product1 & "<br />" & a.Product2 & "<br />" & a.Product3)
+                                            If a.Cash = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Cash</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            ElseIf a.Finance = True Then
+                                                Dim f_currency As String = FormatCurrency(a.ContractAmount, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault)
+                                                saleData += "<!--BEGIN ROW --><tr class='sale'><td/><td /><td >Job " & cnt & "</td><td>" & p_String & "</td><td>Job Closed<br />" & a.JobCloseDate & "</td><td>Contract Amt<br />" & f_currency & "</td><td>Finance</td><td/><td/><td/><td/></tr><!-- END ROW -->" & vbCrLf
+                                            End If
+                                        Next
+                                        Exit Select
+                                    Case Is = "Demo/No Sale"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\DemoNoSale28x28.jpg' alt='Demo/No Sale' title='Demo/No Sale'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Is = "Reset"
+                                        saleData += "<!--BEGIN ROW --><tr><td><img src='IMGS\reset28x28.jpg' alt='Reset' title='Reset'/><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                    Case Else
+                                        saleData += "<!--BEGIN ROW --><tr><td /><td>" & yy.ID & "</td><td>" & yy.FName & " " & yy.LName & "<br />" & yy.FName2 & " " & yy.LName2 & "</td><td>" & AddyString & "</td><td>" & PhoneString & "</td><td>" & prodString & "</td><td>" & leadGen & "</td><td>" & yy.ApptDate & "</td><td>" & yy.ApptDay & "</td><td>" & apptTime & "</td><td>" & yy.Result & "</td></tr><!-- END ROW -->" & vbCrLf
+                                        Exit Select
+                                End Select
+                                strRowData += saleData & vbCrLf
+                            End If
+                            arFilteredRows.Add(strRowData)
+                        Next
+                    Next
+                    Exit Select
+            End Select
+        Next
+
+        For Each line_ As String In arFilteredRows
+            doc += line_ & vbCrLf
+        Next
+
+        doc += "</table></body></html>" & vbCrLf
+
+        streamWriter.Write(doc)
+        streamWriter.Flush()
+        streamWriter.Close()
+
+        System.Diagnostics.Process.Start(Production_Directory & guid.ToString & ext)
+
+
+        'Catch ex As Exception
+        '    Dim y As New ErrorLogging_V2
+        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Sub", "CreateWireFrameHTML_WarmCalling(ByVal QueryString As String, ByVal Grouped As Boolean, ByVal GroupHeading As ArrayList)", "0", ex.Message.ToString)
+        '    y = Nothing
+        'End Try
+
+        frmWCList.Cursor = Cursors.Default
 
     End Sub
 
+    Private Function GrabUniqueHeadings(ByVal HeadingData_QRY As String)
+        Try
+            Dim arHeadings As New ArrayList
+            Dim cnx As New SqlConnection(sql_cnx)
+            Dim cmdG As New SqlCommand(HeadingData_QRY, cnx)
+            cnx.Open()
+            Dim hsh As New Hashtable
+
+            Dim r1 As SqlDataReader = cmdG.ExecuteReader
+            Dim colName As String = ""
+            While r1.Read
+                colName = r1.GetName(0)
+                arHeadings.Add(r1.Item(0))
+            End While
+            hsh.Add(colName, arHeadings)
+            r1.Close()
+            cnx.Close()
+            cnx = Nothing
+            Return hsh
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Func", " GrabUniqueHeadings(ByVal HeadingData_QRY As String)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+    End Function
+
+
+    
     Public Sub CreateWireFrameHTML(ByVal QueryString As String)
         Try
             arListOfLeadsToDisplay = GrabRowsForHTML(QueryString)
@@ -308,6 +1050,7 @@ Public Class createListPrintOperations
                 y.MarketingResults = r1.Item("MarketingResults")
                 y.IsPreviousCustomer = r1.Item("IsPreviousCustomer")
                 y.IsRecovery = r1.Item("IsRecovery")
+                y.Marketer = r1.Item("Marketer")
                 arResults.Add(y)
             End While
             r1.Close()
@@ -322,6 +1065,8 @@ Public Class createListPrintOperations
 
     End Function
 
+ 
+
     Private Function GrabSaleInfo(ByVal LeadNum As String)
         Try
             Dim cnxS As New SqlConnection(sql_cnx)
@@ -330,22 +1075,27 @@ Public Class createListPrintOperations
             Dim arResults As New List(Of PCInfoToPrint)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
             While r1.Read
-                Dim y As New PCInfoToPrint
-                y.recID = r1.Item("ID")
-                y.LeadNum = r1.Item("LeadNum")
-                y.LeadHistoryID = r1.Item("LeadHistoryID")
-                y.Product1 = r1.Item("Product1")
-                y.Product2 = r1.Item("Product2")
-                y.Product3 = r1.Item("Product3")
-                y.JobCloseDate = r1.Item("JobClosed")
-                y.ContractAmount = r1.Item("ContractAmount")
-                y.Cash = r1.Item("Cash")
-                y.Finance = r1.Item("Finance")
-                arResults.Add(y)
+                Try
+                    Dim y As New PCInfoToPrint
+                    y.recID = r1.Item("ID")
+                    y.LeadNum = r1.Item("LeadNum")
+                    y.LeadHistoryID = r1.Item("LeadHistoryID")
+                    y.Product1 = r1.Item("Product1")
+                    y.Product2 = r1.Item("Product2")
+                    y.Product3 = r1.Item("Product3")
+                    y.JobCloseDate = r1.Item("JobClosed")
+                    y.ContractAmount = r1.Item("ContractAmount")
+                    y.Cash = r1.Item("Cash")
+                    y.Finance = r1.Item("Finance")
+                    arResults.Add(y)
+                Catch ex As Exception
+                    '' just fail it
+                End Try
             End While
             r1.Close()
             cnxS.Close()
             cnxS = Nothing
+
             Return arResults
         Catch ex As Exception
             Dim y As New ErrorLogging_V2

@@ -60,7 +60,7 @@ Public Class Radius_Search
             oRoute.Clear()
             Select Case Form
                 Case Is = "frmWCList.vb"
-                    frmWCList.pbSearch.Increment(1)
+                    'frmWCList.pbSearch.Increment(1)
                     Exit Select
             End Select
         Next
@@ -127,7 +127,7 @@ Public Class Radius_Search
                 oRoute.Clear()
                 Select Case Form
                     Case Is = "frmWCList.vb"
-                        frmWCList.pbSearch.Increment(1)
+                        'frmWCList.pbSearch.Increment(1)
                         Exit Select
                 End Select
             End If

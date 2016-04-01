@@ -55,8 +55,6 @@ Partial Class frmRList
         Me.tabSort = New System.Windows.Forms.TabPage()
         Me.btnUnCheckOrderBy = New System.Windows.Forms.Label()
         Me.btnCheckOrderBy = New System.Windows.Forms.Label()
-        Me.btnDown = New System.Windows.Forms.Button()
-        Me.btnUp = New System.Windows.Forms.Button()
         Me.chlstOrderBy = New System.Windows.Forms.CheckedListBox()
         Me.chGroupBy = New System.Windows.Forms.CheckBox()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
@@ -94,6 +92,8 @@ Partial Class frmRList
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.btnUncheckProducts = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnDown = New System.Windows.Forms.Button()
+        Me.btnUp = New System.Windows.Forms.Button()
         Me.tabGeo.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.numMiles, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -436,24 +436,6 @@ Partial Class frmRList
         Me.btnCheckOrderBy.Size = New System.Drawing.Size(67, 16)
         Me.btnCheckOrderBy.TabIndex = 39
         Me.btnCheckOrderBy.Text = "Check All"
-        '
-        'btnDown
-        '
-        Me.btnDown.Image = CType(resources.GetObject("btnDown.Image"), System.Drawing.Image)
-        Me.btnDown.Location = New System.Drawing.Point(23, 100)
-        Me.btnDown.Name = "btnDown"
-        Me.btnDown.Size = New System.Drawing.Size(26, 38)
-        Me.btnDown.TabIndex = 3
-        Me.btnDown.UseVisualStyleBackColor = True
-        '
-        'btnUp
-        '
-        Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
-        Me.btnUp.Location = New System.Drawing.Point(23, 56)
-        Me.btnUp.Name = "btnUp"
-        Me.btnUp.Size = New System.Drawing.Size(26, 38)
-        Me.btnUp.TabIndex = 2
-        Me.btnUp.UseVisualStyleBackColor = True
         '
         'chlstOrderBy
         '
@@ -814,6 +796,24 @@ Partial Class frmRList
         Me.btnCancel.TabIndex = 55
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnDown
+        '
+        Me.btnDown.Image = CType(resources.GetObject("btnDown.Image"), System.Drawing.Image)
+        Me.btnDown.Location = New System.Drawing.Point(23, 100)
+        Me.btnDown.Name = "btnDown"
+        Me.btnDown.Size = New System.Drawing.Size(26, 38)
+        Me.btnDown.TabIndex = 3
+        Me.btnDown.UseVisualStyleBackColor = True
+        '
+        'btnUp
+        '
+        Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
+        Me.btnUp.Location = New System.Drawing.Point(23, 56)
+        Me.btnUp.Name = "btnUp"
+        Me.btnUp.Size = New System.Drawing.Size(26, 38)
+        Me.btnUp.TabIndex = 2
+        Me.btnUp.UseVisualStyleBackColor = True
         '
         'frmRList
         '

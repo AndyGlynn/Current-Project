@@ -24,45 +24,17 @@ Partial Class frmWCList
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmWCList))
-        Me.grpGeo = New System.Windows.Forms.GroupBox()
-        Me.cboStateSelection = New System.Windows.Forms.ComboBox()
-        Me.lblStateSelect = New System.Windows.Forms.Label()
-        Me.btnShow = New System.Windows.Forms.Button()
-        Me.btnUncheckZip = New System.Windows.Forms.Label()
-        Me.btnCheckZip = New System.Windows.Forms.Label()
-        Me.chlstZipCity = New System.Windows.Forms.CheckedListBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.numMiles = New System.Windows.Forms.NumericUpDown()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtZipCity = New System.Windows.Forms.TextBox()
-        Me.lblCityZip = New System.Windows.Forms.Label()
-        Me.rdoCity = New System.Windows.Forms.RadioButton()
-        Me.rdoZip = New System.Windows.Forms.RadioButton()
-        Me.btnUncheckProducts = New System.Windows.Forms.Label()
-        Me.tabWC = New System.Windows.Forms.TabPage()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.btnUncheckWC = New System.Windows.Forms.Label()
-        Me.btnCheckWC = New System.Windows.Forms.Label()
-        Me.chlstWC = New System.Windows.Forms.CheckedListBox()
         Me.txtRecordCount = New System.Windows.Forms.TextBox()
         Me.BackgroundWorkerCity = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerZip = New System.ComponentModel.BackgroundWorker()
         Me.epForm = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.chGroupBy = New System.Windows.Forms.CheckBox()
-        Me.btnUnCheckOrderBy = New System.Windows.Forms.Label()
-        Me.btnCheckOrderBy = New System.Windows.Forms.Label()
         Me.epGeo = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
-        Me.btnCheckProducts = New System.Windows.Forms.Label()
-        Me.tabSort = New System.Windows.Forms.TabPage()
-        Me.btnDown = New System.Windows.Forms.Button()
-        Me.btnUp = New System.Windows.Forms.Button()
-        Me.chlstOrderBy = New System.Windows.Forms.CheckedListBox()
-        Me.chlstProducts = New System.Windows.Forms.CheckedListBox()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
-        Me.tbCriteria = New System.Windows.Forms.TabControl()
+        Me.btnRecordCount = New System.Windows.Forms.Button()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabDate = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtGenerated = New System.Windows.Forms.TextBox()
@@ -90,20 +62,39 @@ Partial Class frmWCList
         Me.chlstMarketers = New System.Windows.Forms.CheckedListBox()
         Me.tabProducts = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.btnUncheckProducts = New System.Windows.Forms.Label()
+        Me.btnCheckProducts = New System.Windows.Forms.Label()
+        Me.chlstProducts = New System.Windows.Forms.CheckedListBox()
         Me.tabGeo = New System.Windows.Forms.TabPage()
-        Me.btnRecordCount = New System.Windows.Forms.Button()
-        Me.pbSearch = New System.Windows.Forms.ProgressBar()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.lblUniques = New System.Windows.Forms.Label()
-        Me.grpGeo.SuspendLayout()
-        CType(Me.numMiles, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabWC.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.cboStateSelection = New System.Windows.Forms.ComboBox()
+        Me.lblStateSelect = New System.Windows.Forms.Label()
+        Me.btnShow = New System.Windows.Forms.Button()
+        Me.btnUncheckZip = New System.Windows.Forms.Label()
+        Me.btnCheckZip = New System.Windows.Forms.Label()
+        Me.chlstZipCity = New System.Windows.Forms.CheckedListBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.numMiles = New System.Windows.Forms.NumericUpDown()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtZipCity = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.rdoCity = New System.Windows.Forms.RadioButton()
+        Me.rdoZip = New System.Windows.Forms.RadioButton()
+        Me.tabWC = New System.Windows.Forms.TabPage()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnUncheckWC = New System.Windows.Forms.Label()
+        Me.btnCheckWC = New System.Windows.Forms.Label()
+        Me.chlstWC = New System.Windows.Forms.CheckedListBox()
+        Me.tabSort = New System.Windows.Forms.TabPage()
+        Me.chGroupBy = New System.Windows.Forms.CheckBox()
+        Me.btnUnCheckOrderBy = New System.Windows.Forms.Label()
+        Me.btnCheckOrderBy = New System.Windows.Forms.Label()
+        Me.btnDown = New System.Windows.Forms.Button()
+        Me.btnUp = New System.Windows.Forms.Button()
+        Me.chlstOrderBy = New System.Windows.Forms.CheckedListBox()
         CType(Me.epForm, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.epGeo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabSort.SuspendLayout()
-        Me.tbCriteria.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
         Me.tabDate.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.tabMarketers.SuspendLayout()
@@ -111,220 +102,12 @@ Partial Class frmWCList
         Me.tabProducts.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.tabGeo.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        CType(Me.numMiles, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabWC.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.tabSort.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'grpGeo
-        '
-        Me.grpGeo.Controls.Add(Me.cboStateSelection)
-        Me.grpGeo.Controls.Add(Me.lblStateSelect)
-        Me.grpGeo.Controls.Add(Me.btnShow)
-        Me.grpGeo.Controls.Add(Me.btnUncheckZip)
-        Me.grpGeo.Controls.Add(Me.btnCheckZip)
-        Me.grpGeo.Controls.Add(Me.chlstZipCity)
-        Me.grpGeo.Controls.Add(Me.Label11)
-        Me.grpGeo.Controls.Add(Me.numMiles)
-        Me.grpGeo.Controls.Add(Me.Label10)
-        Me.grpGeo.Controls.Add(Me.txtZipCity)
-        Me.grpGeo.Controls.Add(Me.lblCityZip)
-        Me.grpGeo.Controls.Add(Me.rdoCity)
-        Me.grpGeo.Controls.Add(Me.rdoZip)
-        Me.grpGeo.Location = New System.Drawing.Point(14, 11)
-        Me.grpGeo.Name = "grpGeo"
-        Me.grpGeo.Size = New System.Drawing.Size(638, 237)
-        Me.grpGeo.TabIndex = 39
-        Me.grpGeo.TabStop = False
-        Me.grpGeo.Text = "Geography"
-        '
-        'cboStateSelection
-        '
-        Me.cboStateSelection.FormattingEnabled = True
-        Me.cboStateSelection.Location = New System.Drawing.Point(266, 99)
-        Me.cboStateSelection.Name = "cboStateSelection"
-        Me.cboStateSelection.Size = New System.Drawing.Size(62, 21)
-        Me.cboStateSelection.TabIndex = 12
-        '
-        'lblStateSelect
-        '
-        Me.lblStateSelect.AutoSize = True
-        Me.lblStateSelect.Location = New System.Drawing.Point(15, 102)
-        Me.lblStateSelect.Name = "lblStateSelect"
-        Me.lblStateSelect.Size = New System.Drawing.Size(110, 13)
-        Me.lblStateSelect.TabIndex = 11
-        Me.lblStateSelect.Text = "Select Starting State :"
-        '
-        'btnShow
-        '
-        Me.btnShow.Location = New System.Drawing.Point(492, 200)
-        Me.btnShow.Name = "btnShow"
-        Me.btnShow.Size = New System.Drawing.Size(140, 24)
-        Me.btnShow.TabIndex = 10
-        Me.btnShow.Text = "Show Zip Codes"
-        Me.btnShow.UseVisualStyleBackColor = True
-        '
-        'btnUncheckZip
-        '
-        Me.btnUncheckZip.AutoSize = True
-        Me.btnUncheckZip.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnUncheckZip.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUncheckZip.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.btnUncheckZip.Location = New System.Drawing.Point(521, 164)
-        Me.btnUncheckZip.Name = "btnUncheckZip"
-        Me.btnUncheckZip.Size = New System.Drawing.Size(83, 16)
-        Me.btnUncheckZip.TabIndex = 9
-        Me.btnUncheckZip.Text = "Uncheck All"
-        '
-        'btnCheckZip
-        '
-        Me.btnCheckZip.AutoSize = True
-        Me.btnCheckZip.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCheckZip.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCheckZip.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.btnCheckZip.Location = New System.Drawing.Point(430, 164)
-        Me.btnCheckZip.Name = "btnCheckZip"
-        Me.btnCheckZip.Size = New System.Drawing.Size(67, 16)
-        Me.btnCheckZip.TabIndex = 8
-        Me.btnCheckZip.Text = "Check All"
-        '
-        'chlstZipCity
-        '
-        Me.chlstZipCity.FormattingEnabled = True
-        Me.chlstZipCity.Location = New System.Drawing.Point(412, 22)
-        Me.chlstZipCity.Name = "chlstZipCity"
-        Me.chlstZipCity.Size = New System.Drawing.Size(213, 124)
-        Me.chlstZipCity.TabIndex = 7
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(227, 136)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(128, 13)
-        Me.Label11.TabIndex = 6
-        Me.Label11.Text = "Miles of Starting Zip Code"
-        '
-        'numMiles
-        '
-        Me.numMiles.Location = New System.Drawing.Point(179, 134)
-        Me.numMiles.Name = "numMiles"
-        Me.numMiles.Size = New System.Drawing.Size(42, 20)
-        Me.numMiles.TabIndex = 5
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(15, 136)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(115, 13)
-        Me.Label10.TabIndex = 4
-        Me.Label10.Text = "Show Zip Codes within"
-        '
-        'txtZipCity
-        '
-        Me.txtZipCity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtZipCity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtZipCity.Location = New System.Drawing.Point(191, 67)
-        Me.txtZipCity.Name = "txtZipCity"
-        Me.txtZipCity.Size = New System.Drawing.Size(137, 20)
-        Me.txtZipCity.TabIndex = 3
-        '
-        'lblCityZip
-        '
-        Me.lblCityZip.AutoSize = True
-        Me.lblCityZip.Location = New System.Drawing.Point(15, 70)
-        Me.lblCityZip.Name = "lblCityZip"
-        Me.lblCityZip.Size = New System.Drawing.Size(120, 13)
-        Me.lblCityZip.TabIndex = 2
-        Me.lblCityZip.Text = "Enter Starting Zip Code:"
-        '
-        'rdoCity
-        '
-        Me.rdoCity.AutoSize = True
-        Me.rdoCity.Location = New System.Drawing.Point(235, 35)
-        Me.rdoCity.Name = "rdoCity"
-        Me.rdoCity.Size = New System.Drawing.Size(129, 17)
-        Me.rdoCity.TabIndex = 1
-        Me.rdoCity.Text = "Search by City Radius"
-        Me.rdoCity.UseVisualStyleBackColor = True
-        '
-        'rdoZip
-        '
-        Me.rdoZip.AutoSize = True
-        Me.rdoZip.Checked = True
-        Me.rdoZip.Location = New System.Drawing.Point(18, 35)
-        Me.rdoZip.Name = "rdoZip"
-        Me.rdoZip.Size = New System.Drawing.Size(155, 17)
-        Me.rdoZip.TabIndex = 0
-        Me.rdoZip.TabStop = True
-        Me.rdoZip.Text = "Search by Zip Code Radius"
-        Me.rdoZip.UseVisualStyleBackColor = True
-        '
-        'btnUncheckProducts
-        '
-        Me.btnUncheckProducts.AutoSize = True
-        Me.btnUncheckProducts.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnUncheckProducts.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUncheckProducts.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.btnUncheckProducts.Location = New System.Drawing.Point(323, 204)
-        Me.btnUncheckProducts.Name = "btnUncheckProducts"
-        Me.btnUncheckProducts.Size = New System.Drawing.Size(83, 16)
-        Me.btnUncheckProducts.TabIndex = 9
-        Me.btnUncheckProducts.Text = "Uncheck All"
-        '
-        'tabWC
-        '
-        Me.tabWC.Controls.Add(Me.GroupBox2)
-        Me.tabWC.Location = New System.Drawing.Point(4, 23)
-        Me.tabWC.Name = "tabWC"
-        Me.tabWC.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabWC.Size = New System.Drawing.Size(666, 287)
-        Me.tabWC.TabIndex = 1
-        Me.tabWC.Text = "Marketing Results"
-        Me.tabWC.UseVisualStyleBackColor = True
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.btnUncheckWC)
-        Me.GroupBox2.Controls.Add(Me.btnCheckWC)
-        Me.GroupBox2.Controls.Add(Me.chlstWC)
-        Me.GroupBox2.Location = New System.Drawing.Point(14, 11)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(638, 237)
-        Me.GroupBox2.TabIndex = 35
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Last Known Marketing Result"
-        '
-        'btnUncheckWC
-        '
-        Me.btnUncheckWC.AutoSize = True
-        Me.btnUncheckWC.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnUncheckWC.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUncheckWC.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.btnUncheckWC.Location = New System.Drawing.Point(323, 205)
-        Me.btnUncheckWC.Name = "btnUncheckWC"
-        Me.btnUncheckWC.Size = New System.Drawing.Size(83, 16)
-        Me.btnUncheckWC.TabIndex = 27
-        Me.btnUncheckWC.Text = "Uncheck All"
-        '
-        'btnCheckWC
-        '
-        Me.btnCheckWC.AutoSize = True
-        Me.btnCheckWC.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCheckWC.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCheckWC.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.btnCheckWC.Location = New System.Drawing.Point(232, 205)
-        Me.btnCheckWC.Name = "btnCheckWC"
-        Me.btnCheckWC.Size = New System.Drawing.Size(67, 16)
-        Me.btnCheckWC.TabIndex = 26
-        Me.btnCheckWC.Text = "Check All"
-        '
-        'chlstWC
-        '
-        Me.chlstWC.FormattingEnabled = True
-        Me.chlstWC.Items.AddRange(New Object() {"Unconfirmed", "Called and Cancelled", "Reset", "Not Hit", "Not Issued"})
-        Me.chlstWC.Location = New System.Drawing.Point(11, 25)
-        Me.chlstWC.Name = "chlstWC"
-        Me.chlstWC.Size = New System.Drawing.Size(617, 154)
-        Me.chlstWC.TabIndex = 17
         '
         'txtRecordCount
         '
@@ -340,40 +123,6 @@ Partial Class frmWCList
         Me.epForm.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.epForm.ContainerControl = Me
         '
-        'chGroupBy
-        '
-        Me.chGroupBy.AutoSize = True
-        Me.chGroupBy.Location = New System.Drawing.Point(23, 18)
-        Me.chGroupBy.Name = "chGroupBy"
-        Me.chGroupBy.Size = New System.Drawing.Size(137, 17)
-        Me.chGroupBy.TabIndex = 41
-        Me.chGroupBy.Text = "Group By Top Sort Item"
-        Me.chGroupBy.UseVisualStyleBackColor = True
-        '
-        'btnUnCheckOrderBy
-        '
-        Me.btnUnCheckOrderBy.AutoSize = True
-        Me.btnUnCheckOrderBy.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnUnCheckOrderBy.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUnCheckOrderBy.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.btnUnCheckOrderBy.Location = New System.Drawing.Point(337, 216)
-        Me.btnUnCheckOrderBy.Name = "btnUnCheckOrderBy"
-        Me.btnUnCheckOrderBy.Size = New System.Drawing.Size(83, 16)
-        Me.btnUnCheckOrderBy.TabIndex = 40
-        Me.btnUnCheckOrderBy.Text = "Uncheck All"
-        '
-        'btnCheckOrderBy
-        '
-        Me.btnCheckOrderBy.AutoSize = True
-        Me.btnCheckOrderBy.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCheckOrderBy.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCheckOrderBy.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.btnCheckOrderBy.Location = New System.Drawing.Point(246, 216)
-        Me.btnCheckOrderBy.Name = "btnCheckOrderBy"
-        Me.btnCheckOrderBy.Size = New System.Drawing.Size(67, 16)
-        Me.btnCheckOrderBy.TabIndex = 39
-        Me.btnCheckOrderBy.Text = "Check All"
-        '
         'epGeo
         '
         Me.epGeo.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
@@ -384,71 +133,6 @@ Partial Class frmWCList
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageList1.Images.SetKeyName(0, "danger.ico")
-        '
-        'btnCheckProducts
-        '
-        Me.btnCheckProducts.AutoSize = True
-        Me.btnCheckProducts.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCheckProducts.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCheckProducts.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.btnCheckProducts.Location = New System.Drawing.Point(232, 204)
-        Me.btnCheckProducts.Name = "btnCheckProducts"
-        Me.btnCheckProducts.Size = New System.Drawing.Size(67, 16)
-        Me.btnCheckProducts.TabIndex = 8
-        Me.btnCheckProducts.Text = "Check All"
-        '
-        'tabSort
-        '
-        Me.tabSort.Controls.Add(Me.chGroupBy)
-        Me.tabSort.Controls.Add(Me.btnUnCheckOrderBy)
-        Me.tabSort.Controls.Add(Me.btnCheckOrderBy)
-        Me.tabSort.Controls.Add(Me.btnDown)
-        Me.tabSort.Controls.Add(Me.btnUp)
-        Me.tabSort.Controls.Add(Me.chlstOrderBy)
-        Me.tabSort.Location = New System.Drawing.Point(4, 23)
-        Me.tabSort.Name = "tabSort"
-        Me.tabSort.Size = New System.Drawing.Size(666, 287)
-        Me.tabSort.TabIndex = 6
-        Me.tabSort.Text = "Sort By/Group By"
-        Me.tabSort.UseVisualStyleBackColor = True
-        '
-        'btnDown
-        '
-        Me.btnDown.Image = CType(resources.GetObject("btnDown.Image"), System.Drawing.Image)
-        Me.btnDown.Location = New System.Drawing.Point(23, 100)
-        Me.btnDown.Name = "btnDown"
-        Me.btnDown.Size = New System.Drawing.Size(26, 38)
-        Me.btnDown.TabIndex = 3
-        Me.btnDown.UseVisualStyleBackColor = True
-        '
-        'btnUp
-        '
-        Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
-        Me.btnUp.Location = New System.Drawing.Point(23, 56)
-        Me.btnUp.Name = "btnUp"
-        Me.btnUp.Size = New System.Drawing.Size(26, 38)
-        Me.btnUp.TabIndex = 2
-        Me.btnUp.UseVisualStyleBackColor = True
-        '
-        'chlstOrderBy
-        '
-        Me.chlstOrderBy.ColumnWidth = 200
-        Me.chlstOrderBy.FormattingEnabled = True
-        Me.chlstOrderBy.Items.AddRange(New Object() {"City, State", "Zip Code", "Generated On", "Appointment Date", "Appointment Time", "Primary Product", "Marketer", "Marketing Result"})
-        Me.chlstOrderBy.Location = New System.Drawing.Point(55, 56)
-        Me.chlstOrderBy.MultiColumn = True
-        Me.chlstOrderBy.Name = "chlstOrderBy"
-        Me.chlstOrderBy.Size = New System.Drawing.Size(578, 139)
-        Me.chlstOrderBy.TabIndex = 1
-        '
-        'chlstProducts
-        '
-        Me.chlstProducts.FormattingEnabled = True
-        Me.chlstProducts.Location = New System.Drawing.Point(18, 22)
-        Me.chlstProducts.MultiColumn = True
-        Me.chlstProducts.Name = "chlstProducts"
-        Me.chlstProducts.Size = New System.Drawing.Size(607, 154)
-        Me.chlstProducts.TabIndex = 7
         '
         'btnCancel
         '
@@ -481,22 +165,31 @@ Partial Class frmWCList
         Me.btnClear.Text = "Clear Criteria"
         Me.btnClear.UseVisualStyleBackColor = True
         '
-        'tbCriteria
+        'btnRecordCount
         '
-        Me.tbCriteria.Controls.Add(Me.tabDate)
-        Me.tbCriteria.Controls.Add(Me.tabMarketers)
-        Me.tbCriteria.Controls.Add(Me.tabProducts)
-        Me.tbCriteria.Controls.Add(Me.tabGeo)
-        Me.tbCriteria.Controls.Add(Me.tabWC)
-        Me.tbCriteria.Controls.Add(Me.tabSort)
-        Me.tbCriteria.ImageList = Me.ImageList1
-        Me.tbCriteria.Location = New System.Drawing.Point(13, 12)
-        Me.tbCriteria.Multiline = True
-        Me.tbCriteria.Name = "tbCriteria"
-        Me.tbCriteria.SelectedIndex = 0
-        Me.tbCriteria.ShowToolTips = True
-        Me.tbCriteria.Size = New System.Drawing.Size(674, 314)
-        Me.tbCriteria.TabIndex = 54
+        Me.btnRecordCount.Location = New System.Drawing.Point(13, 342)
+        Me.btnRecordCount.Name = "btnRecordCount"
+        Me.btnRecordCount.Size = New System.Drawing.Size(113, 23)
+        Me.btnRecordCount.TabIndex = 59
+        Me.btnRecordCount.Text = "Record Count"
+        Me.btnRecordCount.UseVisualStyleBackColor = True
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.tabDate)
+        Me.TabControl1.Controls.Add(Me.tabMarketers)
+        Me.TabControl1.Controls.Add(Me.tabProducts)
+        Me.TabControl1.Controls.Add(Me.tabGeo)
+        Me.TabControl1.Controls.Add(Me.tabWC)
+        Me.TabControl1.Controls.Add(Me.tabSort)
+        Me.TabControl1.ImageList = Me.ImageList1
+        Me.TabControl1.Location = New System.Drawing.Point(9, 12)
+        Me.TabControl1.Multiline = True
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.ShowToolTips = True
+        Me.TabControl1.Size = New System.Drawing.Size(674, 314)
+        Me.TabControl1.TabIndex = 60
         '
         'tabDate
         '
@@ -782,13 +475,42 @@ Partial Class frmWCList
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Products"
         '
+        'btnUncheckProducts
+        '
+        Me.btnUncheckProducts.AutoSize = True
+        Me.btnUncheckProducts.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnUncheckProducts.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUncheckProducts.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.btnUncheckProducts.Location = New System.Drawing.Point(323, 204)
+        Me.btnUncheckProducts.Name = "btnUncheckProducts"
+        Me.btnUncheckProducts.Size = New System.Drawing.Size(83, 16)
+        Me.btnUncheckProducts.TabIndex = 9
+        Me.btnUncheckProducts.Text = "Uncheck All"
+        '
+        'btnCheckProducts
+        '
+        Me.btnCheckProducts.AutoSize = True
+        Me.btnCheckProducts.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCheckProducts.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCheckProducts.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.btnCheckProducts.Location = New System.Drawing.Point(232, 204)
+        Me.btnCheckProducts.Name = "btnCheckProducts"
+        Me.btnCheckProducts.Size = New System.Drawing.Size(67, 16)
+        Me.btnCheckProducts.TabIndex = 8
+        Me.btnCheckProducts.Text = "Check All"
+        '
+        'chlstProducts
+        '
+        Me.chlstProducts.FormattingEnabled = True
+        Me.chlstProducts.Location = New System.Drawing.Point(18, 22)
+        Me.chlstProducts.MultiColumn = True
+        Me.chlstProducts.Name = "chlstProducts"
+        Me.chlstProducts.Size = New System.Drawing.Size(607, 154)
+        Me.chlstProducts.TabIndex = 7
+        '
         'tabGeo
         '
-        Me.tabGeo.Controls.Add(Me.lblUniques)
-        Me.tabGeo.Controls.Add(Me.Label8)
-        Me.tabGeo.Controls.Add(Me.Label7)
-        Me.tabGeo.Controls.Add(Me.pbSearch)
-        Me.tabGeo.Controls.Add(Me.grpGeo)
+        Me.tabGeo.Controls.Add(Me.GroupBox3)
         Me.tabGeo.Location = New System.Drawing.Point(4, 23)
         Me.tabGeo.Name = "tabGeo"
         Me.tabGeo.Size = New System.Drawing.Size(666, 287)
@@ -796,75 +518,303 @@ Partial Class frmWCList
         Me.tabGeo.Text = "Geography"
         Me.tabGeo.UseVisualStyleBackColor = True
         '
-        'btnRecordCount
+        'GroupBox3
         '
-        Me.btnRecordCount.Location = New System.Drawing.Point(13, 342)
-        Me.btnRecordCount.Name = "btnRecordCount"
-        Me.btnRecordCount.Size = New System.Drawing.Size(113, 23)
-        Me.btnRecordCount.TabIndex = 59
-        Me.btnRecordCount.Text = "Record Count"
-        Me.btnRecordCount.UseVisualStyleBackColor = True
+        Me.GroupBox3.Controls.Add(Me.cboStateSelection)
+        Me.GroupBox3.Controls.Add(Me.lblStateSelect)
+        Me.GroupBox3.Controls.Add(Me.btnShow)
+        Me.GroupBox3.Controls.Add(Me.btnUncheckZip)
+        Me.GroupBox3.Controls.Add(Me.btnCheckZip)
+        Me.GroupBox3.Controls.Add(Me.chlstZipCity)
+        Me.GroupBox3.Controls.Add(Me.Label11)
+        Me.GroupBox3.Controls.Add(Me.numMiles)
+        Me.GroupBox3.Controls.Add(Me.Label10)
+        Me.GroupBox3.Controls.Add(Me.txtZipCity)
+        Me.GroupBox3.Controls.Add(Me.Label9)
+        Me.GroupBox3.Controls.Add(Me.rdoCity)
+        Me.GroupBox3.Controls.Add(Me.rdoZip)
+        Me.GroupBox3.Location = New System.Drawing.Point(14, 11)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(638, 237)
+        Me.GroupBox3.TabIndex = 39
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Geography"
         '
-        'pbSearch
+        'cboStateSelection
         '
-        Me.pbSearch.Location = New System.Drawing.Point(72, 254)
-        Me.pbSearch.Name = "pbSearch"
-        Me.pbSearch.Size = New System.Drawing.Size(306, 23)
-        Me.pbSearch.TabIndex = 40
+        Me.cboStateSelection.FormattingEnabled = True
+        Me.cboStateSelection.Location = New System.Drawing.Point(266, 99)
+        Me.cboStateSelection.Name = "cboStateSelection"
+        Me.cboStateSelection.Size = New System.Drawing.Size(62, 21)
+        Me.cboStateSelection.TabIndex = 12
         '
-        'Label7
+        'lblStateSelect
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(15, 260)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(51, 13)
-        Me.Label7.TabIndex = 41
-        Me.Label7.Text = "Progress:"
+        Me.lblStateSelect.AutoSize = True
+        Me.lblStateSelect.Location = New System.Drawing.Point(15, 102)
+        Me.lblStateSelect.Name = "lblStateSelect"
+        Me.lblStateSelect.Size = New System.Drawing.Size(110, 13)
+        Me.lblStateSelect.TabIndex = 11
+        Me.lblStateSelect.Text = "Select Starting State :"
         '
-        'Label8
+        'btnShow
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(426, 260)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(150, 13)
-        Me.Label8.TabIndex = 42
-        Me.Label8.Text = "Unique Cities/Zips To Search:"
+        Me.btnShow.Location = New System.Drawing.Point(492, 200)
+        Me.btnShow.Name = "btnShow"
+        Me.btnShow.Size = New System.Drawing.Size(140, 24)
+        Me.btnShow.TabIndex = 10
+        Me.btnShow.Text = "Show Zip Codes"
+        Me.btnShow.UseVisualStyleBackColor = True
         '
-        'lblUniques
+        'btnUncheckZip
         '
-        Me.lblUniques.AutoSize = True
-        Me.lblUniques.Location = New System.Drawing.Point(613, 260)
-        Me.lblUniques.Name = "lblUniques"
-        Me.lblUniques.Size = New System.Drawing.Size(10, 13)
-        Me.lblUniques.TabIndex = 43
-        Me.lblUniques.Text = " "
+        Me.btnUncheckZip.AutoSize = True
+        Me.btnUncheckZip.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnUncheckZip.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUncheckZip.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.btnUncheckZip.Location = New System.Drawing.Point(521, 164)
+        Me.btnUncheckZip.Name = "btnUncheckZip"
+        Me.btnUncheckZip.Size = New System.Drawing.Size(83, 16)
+        Me.btnUncheckZip.TabIndex = 9
+        Me.btnUncheckZip.Text = "Uncheck All"
+        '
+        'btnCheckZip
+        '
+        Me.btnCheckZip.AutoSize = True
+        Me.btnCheckZip.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCheckZip.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCheckZip.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.btnCheckZip.Location = New System.Drawing.Point(430, 164)
+        Me.btnCheckZip.Name = "btnCheckZip"
+        Me.btnCheckZip.Size = New System.Drawing.Size(67, 16)
+        Me.btnCheckZip.TabIndex = 8
+        Me.btnCheckZip.Text = "Check All"
+        '
+        'chlstZipCity
+        '
+        Me.chlstZipCity.FormattingEnabled = True
+        Me.chlstZipCity.Location = New System.Drawing.Point(412, 22)
+        Me.chlstZipCity.Name = "chlstZipCity"
+        Me.chlstZipCity.Size = New System.Drawing.Size(213, 124)
+        Me.chlstZipCity.TabIndex = 7
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(227, 136)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(128, 13)
+        Me.Label11.TabIndex = 6
+        Me.Label11.Text = "Miles of Starting Zip Code"
+        '
+        'numMiles
+        '
+        Me.numMiles.Location = New System.Drawing.Point(179, 134)
+        Me.numMiles.Name = "numMiles"
+        Me.numMiles.Size = New System.Drawing.Size(42, 20)
+        Me.numMiles.TabIndex = 5
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(15, 136)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(115, 13)
+        Me.Label10.TabIndex = 4
+        Me.Label10.Text = "Show Zip Codes within"
+        '
+        'txtZipCity
+        '
+        Me.txtZipCity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtZipCity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtZipCity.Location = New System.Drawing.Point(191, 67)
+        Me.txtZipCity.Name = "txtZipCity"
+        Me.txtZipCity.Size = New System.Drawing.Size(137, 20)
+        Me.txtZipCity.TabIndex = 3
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(15, 70)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(120, 13)
+        Me.Label9.TabIndex = 2
+        Me.Label9.Text = "Enter Starting Zip Code:"
+        '
+        'rdoCity
+        '
+        Me.rdoCity.AutoSize = True
+        Me.rdoCity.Location = New System.Drawing.Point(235, 35)
+        Me.rdoCity.Name = "rdoCity"
+        Me.rdoCity.Size = New System.Drawing.Size(129, 17)
+        Me.rdoCity.TabIndex = 1
+        Me.rdoCity.Text = "Search by City Radius"
+        Me.rdoCity.UseVisualStyleBackColor = True
+        '
+        'rdoZip
+        '
+        Me.rdoZip.AutoSize = True
+        Me.rdoZip.Checked = True
+        Me.rdoZip.Location = New System.Drawing.Point(18, 35)
+        Me.rdoZip.Name = "rdoZip"
+        Me.rdoZip.Size = New System.Drawing.Size(155, 17)
+        Me.rdoZip.TabIndex = 0
+        Me.rdoZip.TabStop = True
+        Me.rdoZip.Text = "Search by Zip Code Radius"
+        Me.rdoZip.UseVisualStyleBackColor = True
+        '
+        'tabWC
+        '
+        Me.tabWC.Controls.Add(Me.GroupBox2)
+        Me.tabWC.Location = New System.Drawing.Point(4, 23)
+        Me.tabWC.Name = "tabWC"
+        Me.tabWC.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabWC.Size = New System.Drawing.Size(666, 287)
+        Me.tabWC.TabIndex = 1
+        Me.tabWC.Text = "Marketing Results"
+        Me.tabWC.UseVisualStyleBackColor = True
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.btnUncheckWC)
+        Me.GroupBox2.Controls.Add(Me.btnCheckWC)
+        Me.GroupBox2.Controls.Add(Me.chlstWC)
+        Me.GroupBox2.Location = New System.Drawing.Point(14, 11)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(638, 237)
+        Me.GroupBox2.TabIndex = 35
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Last Known Marketing Result"
+        '
+        'btnUncheckWC
+        '
+        Me.btnUncheckWC.AutoSize = True
+        Me.btnUncheckWC.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnUncheckWC.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUncheckWC.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.btnUncheckWC.Location = New System.Drawing.Point(323, 205)
+        Me.btnUncheckWC.Name = "btnUncheckWC"
+        Me.btnUncheckWC.Size = New System.Drawing.Size(83, 16)
+        Me.btnUncheckWC.TabIndex = 27
+        Me.btnUncheckWC.Text = "Uncheck All"
+        '
+        'btnCheckWC
+        '
+        Me.btnCheckWC.AutoSize = True
+        Me.btnCheckWC.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCheckWC.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCheckWC.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.btnCheckWC.Location = New System.Drawing.Point(232, 205)
+        Me.btnCheckWC.Name = "btnCheckWC"
+        Me.btnCheckWC.Size = New System.Drawing.Size(67, 16)
+        Me.btnCheckWC.TabIndex = 26
+        Me.btnCheckWC.Text = "Check All"
+        '
+        'chlstWC
+        '
+        Me.chlstWC.FormattingEnabled = True
+        Me.chlstWC.Items.AddRange(New Object() {"Unconfirmed", "Called and Cancelled", "Reset", "Not Hit", "Not Issued"})
+        Me.chlstWC.Location = New System.Drawing.Point(11, 25)
+        Me.chlstWC.Name = "chlstWC"
+        Me.chlstWC.Size = New System.Drawing.Size(617, 154)
+        Me.chlstWC.TabIndex = 17
+        '
+        'tabSort
+        '
+        Me.tabSort.Controls.Add(Me.chGroupBy)
+        Me.tabSort.Controls.Add(Me.btnUnCheckOrderBy)
+        Me.tabSort.Controls.Add(Me.btnCheckOrderBy)
+        Me.tabSort.Controls.Add(Me.btnDown)
+        Me.tabSort.Controls.Add(Me.btnUp)
+        Me.tabSort.Controls.Add(Me.chlstOrderBy)
+        Me.tabSort.Location = New System.Drawing.Point(4, 23)
+        Me.tabSort.Name = "tabSort"
+        Me.tabSort.Size = New System.Drawing.Size(666, 287)
+        Me.tabSort.TabIndex = 6
+        Me.tabSort.Text = "Sort By/Group By"
+        Me.tabSort.UseVisualStyleBackColor = True
+        '
+        'chGroupBy
+        '
+        Me.chGroupBy.AutoSize = True
+        Me.chGroupBy.Location = New System.Drawing.Point(23, 18)
+        Me.chGroupBy.Name = "chGroupBy"
+        Me.chGroupBy.Size = New System.Drawing.Size(137, 17)
+        Me.chGroupBy.TabIndex = 41
+        Me.chGroupBy.Text = "Group By Top Sort Item"
+        Me.chGroupBy.UseVisualStyleBackColor = True
+        '
+        'btnUnCheckOrderBy
+        '
+        Me.btnUnCheckOrderBy.AutoSize = True
+        Me.btnUnCheckOrderBy.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnUnCheckOrderBy.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUnCheckOrderBy.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.btnUnCheckOrderBy.Location = New System.Drawing.Point(337, 216)
+        Me.btnUnCheckOrderBy.Name = "btnUnCheckOrderBy"
+        Me.btnUnCheckOrderBy.Size = New System.Drawing.Size(83, 16)
+        Me.btnUnCheckOrderBy.TabIndex = 40
+        Me.btnUnCheckOrderBy.Text = "Uncheck All"
+        '
+        'btnCheckOrderBy
+        '
+        Me.btnCheckOrderBy.AutoSize = True
+        Me.btnCheckOrderBy.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCheckOrderBy.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCheckOrderBy.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.btnCheckOrderBy.Location = New System.Drawing.Point(246, 216)
+        Me.btnCheckOrderBy.Name = "btnCheckOrderBy"
+        Me.btnCheckOrderBy.Size = New System.Drawing.Size(67, 16)
+        Me.btnCheckOrderBy.TabIndex = 39
+        Me.btnCheckOrderBy.Text = "Check All"
+        '
+        'btnDown
+        '
+        Me.btnDown.Image = CType(resources.GetObject("btnDown.Image"), System.Drawing.Image)
+        Me.btnDown.Location = New System.Drawing.Point(23, 100)
+        Me.btnDown.Name = "btnDown"
+        Me.btnDown.Size = New System.Drawing.Size(26, 38)
+        Me.btnDown.TabIndex = 3
+        Me.btnDown.UseVisualStyleBackColor = True
+        '
+        'btnUp
+        '
+        Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
+        Me.btnUp.Location = New System.Drawing.Point(23, 56)
+        Me.btnUp.Name = "btnUp"
+        Me.btnUp.Size = New System.Drawing.Size(26, 38)
+        Me.btnUp.TabIndex = 2
+        Me.btnUp.UseVisualStyleBackColor = True
+        '
+        'chlstOrderBy
+        '
+        Me.chlstOrderBy.ColumnWidth = 200
+        Me.chlstOrderBy.FormattingEnabled = True
+        Me.chlstOrderBy.Items.AddRange(New Object() {"City, State", "Zip Code", "Generated On", "Appointment Date", "Appointment Time", "Primary Product", "Marketer", "Marketing Result"})
+        Me.chlstOrderBy.Location = New System.Drawing.Point(55, 56)
+        Me.chlstOrderBy.MultiColumn = True
+        Me.chlstOrderBy.Name = "chlstOrderBy"
+        Me.chlstOrderBy.Size = New System.Drawing.Size(578, 139)
+        Me.chlstOrderBy.TabIndex = 1
         '
         'frmWCList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(700, 377)
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.txtRecordCount)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.btnClear)
-        Me.Controls.Add(Me.tbCriteria)
         Me.Controls.Add(Me.btnRecordCount)
         Me.Name = "frmWCList"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Create Warm Calling List"
-        Me.grpGeo.ResumeLayout(False)
-        Me.grpGeo.PerformLayout()
-        CType(Me.numMiles, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabWC.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         CType(Me.epForm, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.epGeo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabSort.ResumeLayout(False)
-        Me.tabSort.PerformLayout()
-        Me.tbCriteria.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
         Me.tabDate.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -875,31 +825,18 @@ Partial Class frmWCList
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.tabGeo.ResumeLayout(False)
-        Me.tabGeo.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        CType(Me.numMiles, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabWC.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.tabSort.ResumeLayout(False)
+        Me.tabSort.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents grpGeo As System.Windows.Forms.GroupBox
-    Friend WithEvents cboStateSelection As System.Windows.Forms.ComboBox
-    Friend WithEvents lblStateSelect As System.Windows.Forms.Label
-    Friend WithEvents btnShow As System.Windows.Forms.Button
-    Friend WithEvents btnUncheckZip As System.Windows.Forms.Label
-    Friend WithEvents btnCheckZip As System.Windows.Forms.Label
-    Friend WithEvents chlstZipCity As System.Windows.Forms.CheckedListBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents numMiles As System.Windows.Forms.NumericUpDown
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txtZipCity As System.Windows.Forms.TextBox
-    Friend WithEvents lblCityZip As System.Windows.Forms.Label
-    Friend WithEvents rdoCity As System.Windows.Forms.RadioButton
-    Friend WithEvents rdoZip As System.Windows.Forms.RadioButton
-    Friend WithEvents btnUncheckProducts As System.Windows.Forms.Label
-    Friend WithEvents tabWC As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnUncheckWC As System.Windows.Forms.Label
-    Friend WithEvents btnCheckWC As System.Windows.Forms.Label
-    Friend WithEvents chlstWC As System.Windows.Forms.CheckedListBox
     Friend WithEvents txtRecordCount As System.Windows.Forms.TextBox
     Friend WithEvents BackgroundWorkerCity As System.ComponentModel.BackgroundWorker
     Friend WithEvents BackgroundWorkerZip As System.ComponentModel.BackgroundWorker
@@ -907,7 +844,10 @@ Partial Class frmWCList
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnGenerate As System.Windows.Forms.Button
     Friend WithEvents btnClear As System.Windows.Forms.Button
-    Friend WithEvents tbCriteria As System.Windows.Forms.TabControl
+    Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
+    Friend WithEvents btnRecordCount As System.Windows.Forms.Button
+    Friend WithEvents epGeo As System.Windows.Forms.ErrorProvider
+    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents tabDate As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents txtGenerated As System.Windows.Forms.TextBox
@@ -935,9 +875,29 @@ Partial Class frmWCList
     Friend WithEvents chlstMarketers As System.Windows.Forms.CheckedListBox
     Friend WithEvents tabProducts As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnUncheckProducts As System.Windows.Forms.Label
     Friend WithEvents btnCheckProducts As System.Windows.Forms.Label
     Friend WithEvents chlstProducts As System.Windows.Forms.CheckedListBox
     Friend WithEvents tabGeo As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents cboStateSelection As System.Windows.Forms.ComboBox
+    Friend WithEvents lblStateSelect As System.Windows.Forms.Label
+    Friend WithEvents btnShow As System.Windows.Forms.Button
+    Friend WithEvents btnUncheckZip As System.Windows.Forms.Label
+    Friend WithEvents btnCheckZip As System.Windows.Forms.Label
+    Friend WithEvents chlstZipCity As System.Windows.Forms.CheckedListBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents numMiles As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txtZipCity As System.Windows.Forms.TextBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents rdoCity As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoZip As System.Windows.Forms.RadioButton
+    Friend WithEvents tabWC As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnUncheckWC As System.Windows.Forms.Label
+    Friend WithEvents btnCheckWC As System.Windows.Forms.Label
+    Friend WithEvents chlstWC As System.Windows.Forms.CheckedListBox
     Friend WithEvents tabSort As System.Windows.Forms.TabPage
     Friend WithEvents chGroupBy As System.Windows.Forms.CheckBox
     Friend WithEvents btnUnCheckOrderBy As System.Windows.Forms.Label
@@ -945,11 +905,4 @@ Partial Class frmWCList
     Friend WithEvents btnDown As System.Windows.Forms.Button
     Friend WithEvents btnUp As System.Windows.Forms.Button
     Friend WithEvents chlstOrderBy As System.Windows.Forms.CheckedListBox
-    Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
-    Friend WithEvents btnRecordCount As System.Windows.Forms.Button
-    Friend WithEvents epGeo As System.Windows.Forms.ErrorProvider
-    Friend WithEvents lblUniques As System.Windows.Forms.Label
-    Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents pbSearch As System.Windows.Forms.ProgressBar
 End Class
