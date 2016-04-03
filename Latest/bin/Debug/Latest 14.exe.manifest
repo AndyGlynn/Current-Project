@@ -54,7 +54,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>O1S1+Qq4/zShPMZW/bipq0mkeMg=</dsig:DigestValue>
+        <dsig:DigestValue>YZ8IG3Df24EM55qHP0Fhno4pRXc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -66,7 +66,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>NK3auw6tOKwPemdtMDYNkB63+2o=</dsig:DigestValue>
+        <dsig:DigestValue>KGDS80UEd+hwQjsol/+D45lnYdQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -78,7 +78,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>/sDczqeWfQFIkZVqc9/2zjcHUBM=</dsig:DigestValue>
+        <dsig:DigestValue>6cwvZBVx8kcltmthZYFt4Tt1+7w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -90,7 +90,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Gp+241TlefdAgz1C3sLenNoO+X0=</dsig:DigestValue>
+        <dsig:DigestValue>ryh3GoCqRwOKHr9ZMdQfVC8QlT4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -102,19 +102,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>E9Ed49sMXm9eQqc+YhylKQQET4Q=</dsig:DigestValue>
+        <dsig:DigestValue>oRP2MfhXBov5MsQ7PE1xCKPZd0A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="4241408">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="4229120">
       <assemblyIdentity name="Latest 14" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>LMx6GDlvhcSs4XNYqK63rsEXxwU=</dsig:DigestValue>
+        <dsig:DigestValue>tLBASko1oh9phvkv4Te0ofmqDtI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
