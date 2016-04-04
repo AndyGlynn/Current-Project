@@ -916,6 +916,7 @@ Public Class frmRList
             '' 
             Dim cl_XP As New createListPrintOperations
             ' generate for GROUPED RC List
+            cl_XP.CreateWireFrameHTML_Recovery(Slct, True, arSort, qrySTR_Headers)
             cl_XP = Nothing
         Else
             Me.chGroupBy.CheckState = CheckState.Unchecked
@@ -924,7 +925,7 @@ Public Class frmRList
             '' 
             Dim clP As New createListPrintOperations
             ' Generate for NON GROUPED RC LIST
-
+            clP.CreateWireFrameHTML_Recovery(Slct)
             clP = Nothing
         End If
 
