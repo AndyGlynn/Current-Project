@@ -2412,6 +2412,7 @@ Public Class frmWCList
             arSort.Add(Me.chlstOrderBy.CheckedItems(i))
         Next
         If Me.chGroupBy.CheckState = CheckState.Checked Then
+
             Dim qrySTR_Headers As String = ConvertGroup(Me.chlstOrderBy.CheckedItems.Item(0), Slct, arSort) '' private function to present selections in UNIFIED SQL StateMent
             '' now we have headings and result set in a unified format
             '' also have query to pull unique heading [data] out of SQL

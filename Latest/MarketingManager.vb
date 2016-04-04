@@ -167,8 +167,10 @@ Public Class MarketingManager
     End Sub
 
     Private Sub RecoveryListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecoveryListToolStripMenuItem.Click
+        Me.Cursor = Cursors.WaitCursor
         frmRList.MdiParent = Main
         frmRList.Show()
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub GenerateWarmCallingListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateWarmCallingListToolStripMenuItem.Click
