@@ -3202,8 +3202,42 @@ Public Class frmWCList
 
 
         InitQuery = InitQuery.Replace("Order By", " ")
-        Dim SUB_QUERY_STR As String = (retSTR & " FROM (" & InitQuery & ") AS SUBQUERY")
+
+        Dim tailEnd As String = ""
+        Select Case GroupVerbage
+            Case Is = "City, State"
+                tailEnd = "Order By City asc"
+                Exit Select
+            Case Is = "Zip Code"
+                tailEnd = "Order By Zip desc"
+                Exit Select
+            Case Is = "Generated On"
+                tailEnd = "Order By LeadGeneratedOn asc"
+                Exit Select
+            Case Is = "Appointment Date"
+                tailEnd = "Order By ApptDate asc"
+                Exit Select
+            Case Is = "Appointment Time"
+                tailEnd = "Order By ApptTime asc"
+                Exit Select
+            Case Is = "Primary Product"
+                tailEnd = "Order By Product1 asc"
+                Exit Select
+            Case Is = "Marketer"
+                tailEnd = "Order By Marketer asc"
+                Exit Select
+            Case Is = "Marketing Result"
+                tailEnd = "Order By MarketingResults asc"
+                Exit Select
+            Case Else
+                tailEnd = ";"
+                Exit Select
+        End Select
+
+        Dim SUB_QUERY_STR As String = (retSTR & " FROM (" & InitQuery & ") AS SUBQUERY " & tailEnd)
+
         Return SUB_QUERY_STR
+
     End Function
 
 #End Region

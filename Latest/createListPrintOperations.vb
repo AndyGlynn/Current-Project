@@ -377,29 +377,16 @@ Public Class createListPrintOperations
                             Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                             '' type the phones only phone 2 & three if present
                             Dim arPhoneType(1)
-                            arPhoneType = Get_Phone_Type(obj.ID)
-                            Dim phone1Type As String = arPhoneType(0)
-                            Dim phone2Type As String = arPhoneType(1)
 
-                            If Len(phone1Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(0) = " - " & phone1Type
-                                    End If
-                                End If
-                            End If
+                            Dim PhoneString As String = ""
 
-                            If Len(phone2Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(1) = " - " & phone2Type
-                                    End If
-                                End If
-                            End If
+                            PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                           
 
-                            Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                            Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                            Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+
+
+                            Dim AddyString = (obj.StAddress & "<br />" & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                             rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                             rowData += "<td>" & nameStr & "</td>"
@@ -410,7 +397,7 @@ Public Class createListPrintOperations
                             rowData += "<td>" & obj.ApptDate & "</td>"
                             'rowData += "<td></td>"
                             rowData += "<td>" & apptTime & "</td>"
-                            rowData += "<td>" & obj.Result & "</td></tr><!-- END ROW Group Data-->"
+                            rowData += "<td>" & DetermineSalesAndMarketingResults(obj.Result, obj.MarketingResults) & "</td></tr><!-- END ROW Group Data-->"
                             '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                             doc += (rowData & vbCrLf)
                             rowData = ""
@@ -460,30 +447,11 @@ Public Class createListPrintOperations
                             Dim recID As String = obj.ID
                             Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                             '' type the phones only phone 2 & three if present
-                            Dim arPhoneType(1)
-                            arPhoneType = Get_Phone_Type(obj.ID)
-                            Dim phone1Type As String = arPhoneType(0)
-                            Dim phone2Type As String = arPhoneType(1)
 
-                            If Len(phone1Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(0) = " - " & phone1Type
-                                    End If
-                                End If
-                            End If
 
-                            If Len(phone2Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(1) = " - " & phone2Type
-                                    End If
-                                End If
-                            End If
-
-                            Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                            Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                            Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br />" & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                             rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                             rowData += "<td>" & nameStr & "</td>"
@@ -494,7 +462,7 @@ Public Class createListPrintOperations
                             rowData += "<td>" & obj.ApptDate & "</td>"
                             'rowData += "<td></td>"
                             rowData += "<td>" & apptTime & "</td>"
-                            rowData += "<td>" & obj.Result & "</td></tr><!-- END ROW Group Data-->"
+                            rowData += "<td>" & DetermineSalesAndMarketingResults(obj.Result, obj.MarketingResults) & "</td></tr><!-- END ROW Group Data-->"
                             '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                             doc += (rowData & vbCrLf)
                             rowData = ""
@@ -555,30 +523,11 @@ Public Class createListPrintOperations
                             Dim recID As String = obj.ID
                             Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                             '' type the phones only phone 2 & three if present
-                            Dim arPhoneType(1)
-                            arPhoneType = Get_Phone_Type(obj.ID)
-                            Dim phone1Type As String = arPhoneType(0)
-                            Dim phone2Type As String = arPhoneType(1)
 
-                            If Len(phone1Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(0) = " - " & phone1Type
-                                    End If
-                                End If
-                            End If
 
-                            If Len(phone2Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(1) = " - " & phone2Type
-                                    End If
-                                End If
-                            End If
-
-                            Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                            Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                            Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br />" & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                             rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                             rowData += "<td>" & nameStr & "</td>"
@@ -589,7 +538,7 @@ Public Class createListPrintOperations
                             rowData += "<td>" & obj.ApptDate & "</td>"
                             'rowData += "<td></td>"
                             rowData += "<td>" & apptTime & "</td>"
-                            rowData += "<td>" & obj.Result & "</td></tr><!-- END ROW Group Data-->"
+                            rowData += "<td>" & DetermineSalesAndMarketingResults(obj.Result, obj.MarketingResults) & "</td></tr><!-- END ROW Group Data-->"
                             '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                             doc += (rowData & vbCrLf)
                             rowData = ""
@@ -639,30 +588,10 @@ Public Class createListPrintOperations
                             Dim recID As String = obj.ID
                             Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                             '' type the phones only phone 2 & three if present
-                            Dim arPhoneType(1)
-                            arPhoneType = Get_Phone_Type(obj.ID)
-                            Dim phone1Type As String = arPhoneType(0)
-                            Dim phone2Type As String = arPhoneType(1)
 
-                            If Len(phone1Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(0) = " - " & phone1Type
-                                    End If
-                                End If
-                            End If
-
-                            If Len(phone2Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(1) = " - " & phone2Type
-                                    End If
-                                End If
-                            End If
-
-                            Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                            Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                            Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br />" & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                             rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                             rowData += "<td>" & nameStr & "</td>"
@@ -673,7 +602,7 @@ Public Class createListPrintOperations
                             rowData += "<td>" & obj.ApptDate & "</td>"
                             'rowData += "<td></td>"
                             rowData += "<td>" & apptTime & "</td>"
-                            rowData += "<td>" & obj.Result & "</td></tr><!-- END ROW Group Data-->"
+                            rowData += "<td>" & DetermineSalesAndMarketingResults(obj.Result, obj.MarketingResults) & "</td></tr><!-- END ROW Group Data-->"
                             '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                             doc += (rowData & vbCrLf)
                             rowData = ""
@@ -728,30 +657,10 @@ Public Class createListPrintOperations
                             Dim recID As String = obj.ID
                             Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                             '' type the phones only phone 2 & three if present
-                            Dim arPhoneType(1)
-                            arPhoneType = Get_Phone_Type(obj.ID)
-                            Dim phone1Type As String = arPhoneType(0)
-                            Dim phone2Type As String = arPhoneType(1)
 
-                            If Len(phone1Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(0) = " - " & phone1Type
-                                    End If
-                                End If
-                            End If
-
-                            If Len(phone2Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(1) = " - " & phone2Type
-                                    End If
-                                End If
-                            End If
-
-                            Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                            Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                            Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br />" & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                             rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                             rowData += "<td>" & nameStr & "</td>"
@@ -762,7 +671,7 @@ Public Class createListPrintOperations
                             rowData += "<td>" & obj.ApptDate & "</td>"
                             'rowData += "<td></td>"
                             rowData += "<td>" & apptTime & "</td>"
-                            rowData += "<td>" & obj.Result & "</td></tr><!-- END ROW Group Data-->"
+                            rowData += "<td>" & DetermineSalesAndMarketingResults(obj.Result, obj.MarketingResults) & "</td></tr><!-- END ROW Group Data-->"
                             '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                             doc += (rowData & vbCrLf)
                             rowData = ""
@@ -815,30 +724,10 @@ Public Class createListPrintOperations
                             Dim recID As String = obj.ID
                             Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                             '' type the phones only phone 2 & three if present
-                            Dim arPhoneType(1)
-                            arPhoneType = Get_Phone_Type(obj.ID)
-                            Dim phone1Type As String = arPhoneType(0)
-                            Dim phone2Type As String = arPhoneType(1)
 
-                            If Len(phone1Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(0) = " - " & phone1Type
-                                    End If
-                                End If
-                            End If
-
-                            If Len(phone2Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(1) = " - " & phone2Type
-                                    End If
-                                End If
-                            End If
-
-                            Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                            Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                            Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br />" & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                             rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                             rowData += "<td>" & nameStr & "</td>"
@@ -849,7 +738,7 @@ Public Class createListPrintOperations
                             rowData += "<td>" & obj.ApptDate & "</td>"
                             'rowData += "<td></td>"
                             rowData += "<td>" & apptTime & "</td>"
-                            rowData += "<td>" & obj.Result & "</td></tr><!-- END ROW Group Data-->"
+                            rowData += "<td>" & DetermineSalesAndMarketingResults(obj.Result, obj.MarketingResults) & "</td></tr><!-- END ROW Group Data-->"
                             '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                             doc += (rowData & vbCrLf)
                             rowData = ""
@@ -901,30 +790,11 @@ Public Class createListPrintOperations
                             Dim recID As String = obj.ID
                             Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                             '' type the phones only phone 2 & three if present
-                            Dim arPhoneType(1)
-                            arPhoneType = Get_Phone_Type(obj.ID)
-                            Dim phone1Type As String = arPhoneType(0)
-                            Dim phone2Type As String = arPhoneType(1)
 
-                            If Len(phone1Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(0) = " - " & phone1Type
-                                    End If
-                                End If
-                            End If
 
-                            If Len(phone2Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(1) = " - " & phone2Type
-                                    End If
-                                End If
-                            End If
-
-                            Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                            Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                            Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br />" & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                             rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                             rowData += "<td>" & nameStr & "</td>"
@@ -935,7 +805,7 @@ Public Class createListPrintOperations
                             rowData += "<td>" & obj.ApptDate & "</td>"
                             'rowData += "<td></td>"
                             rowData += "<td>" & apptTime & "</td>"
-                            rowData += "<td>" & obj.Result & "</td></tr><!-- END ROW Group Data-->"
+                            rowData += "<td>" & DetermineSalesAndMarketingResults(obj.Result, obj.MarketingResults) & "</td></tr><!-- END ROW Group Data-->"
                             '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                             doc += (rowData & vbCrLf)
                             rowData = ""
@@ -988,30 +858,11 @@ Public Class createListPrintOperations
                             Dim recID As String = obj.ID
                             Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                             '' type the phones only phone 2 & three if present
-                            Dim arPhoneType(1)
-                            arPhoneType = Get_Phone_Type(obj.ID)
-                            Dim phone1Type As String = arPhoneType(0)
-                            Dim phone2Type As String = arPhoneType(1)
 
-                            If Len(phone1Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(0) = " - " & phone1Type
-                                    End If
-                                End If
-                            End If
 
-                            If Len(phone2Type) > 1 = True Then
-                                If phone1Type <> "" Then
-                                    If phone1Type <> " " Then
-                                        arPhoneType(1) = " - " & phone2Type
-                                    End If
-                                End If
-                            End If
-
-                            Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                            Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                            Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br />" & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                             rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                             rowData += "<td>" & nameStr & "</td>"
@@ -1022,7 +873,7 @@ Public Class createListPrintOperations
                             rowData += "<td>" & obj.ApptDate & "</td>"
                             'rowData += "<td></td>"
                             rowData += "<td>" & apptTime & "</td>"
-                            rowData += "<td>" & obj.Result & "</td></tr><!-- END ROW Group Data-->"
+                            rowData += "<td>" & DetermineSalesAndMarketingResults(obj.Result, obj.MarketingResults) & "</td></tr><!-- END ROW Group Data-->"
                             '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                             doc += (rowData & vbCrLf)
                             rowData = ""
@@ -1169,30 +1020,11 @@ Public Class createListPrintOperations
                 Dim recID As String = z.ID
                 Dim prodString = (z.Prod1 & "<br />" & z.Prod2 & "<br />" & z.Prod3)
                 '' type the phones only phone 2 & three if present
-                Dim arPhoneType(1)
-                arPhoneType = Get_Phone_Type(z.ID)
-                Dim phone1Type As String = arPhoneType(0)
-                Dim phone2Type As String = arPhoneType(1)
+                 
 
-                If Len(phone1Type) > 1 = True Then
-                    If phone1Type <> "" Then
-                        If phone1Type <> " " Then
-                            arPhoneType(0) = " - " & phone1Type
-                        End If
-                    End If
-                End If
-
-                If Len(phone2Type) > 1 = True Then
-                    If phone1Type <> "" Then
-                        If phone1Type <> " " Then
-                            arPhoneType(1) = " - " & phone2Type
-                        End If
-                    End If
-                End If
-
-                Dim PhoneString = (z.Phone1 & "<br />" & z.Phone2 & " " & arPhoneType(0) & "<br />" & z.Phone3 & " " & arPhoneType(1) & "<br />")
-                Dim AddyString = (z.StAddress & " " & z.City & ", " & z.State & " " & z.Zip)
-                Dim nameStr As String = (z.FName & " " & z.LName & "<br />" & z.FName2 & " " & z.LName2)
+                Dim PhoneString = Determine_Phone_String(z.Phone1, z.Phone2, z.Phone3, z.ID)
+                Dim AddyString = (z.StAddress & "<br /> " & z.City & ", " & z.State & " " & z.Zip)
+                Dim nameStr As String = Determine_Name_String(z.FName, z.LName, z.FName2, z.LName2)
 
                 rowData = "<!--BEGIN ROW Data--><tr><td></td><td>" & z.ID & "</td>"
                 rowData += "<td>" & nameStr & "</td>"
@@ -1203,7 +1035,7 @@ Public Class createListPrintOperations
                 rowData += "<td>" & z.ApptDate & "</td>"
                 'rowData += "<td></td>"
                 rowData += "<td>" & apptTime & "</td>"
-                rowData += "<td>" & z.Result & "</td></tr><!-- END ROW Data-->"
+                rowData += "<td>" & DetermineSalesAndMarketingResults(z.Result, z.MarketingResults) & "</td></tr><!-- END ROW Data-->"
                 '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                 doc += (rowData & vbCrLf)
                 rowData = ""
@@ -1480,30 +1312,11 @@ Public Class createListPrintOperations
                 Dim recID As String = z.ID
                 Dim prodString = (z.Prod1 & "<br />" & z.Prod2 & "<br />" & z.Prod3)
                 '' type the phones only phone 2 & three if present
-                Dim arPhoneType(1)
-                arPhoneType = Get_Phone_Type(z.ID)
-                Dim phone1Type As String = arPhoneType(0)
-                Dim phone2Type As String = arPhoneType(1)
+                
 
-                If Len(phone1Type) > 1 = True Then
-                    If phone1Type <> "" Then
-                        If phone1Type <> " " Then
-                            arPhoneType(0) = " - " & phone1Type
-                        End If
-                    End If
-                End If
-
-                If Len(phone2Type) > 1 = True Then
-                    If phone1Type <> "" Then
-                        If phone1Type <> " " Then
-                            arPhoneType(1) = " - " & phone2Type
-                        End If
-                    End If
-                End If
-
-                Dim PhoneString = (z.Phone1 & "<br />" & z.Phone2 & " " & arPhoneType(0) & "<br />" & z.Phone3 & " " & arPhoneType(1) & "<br />")
-                Dim AddyString = (z.StAddress & " " & z.City & ", " & z.State & " " & z.Zip)
-                Dim nameStr As String = (z.FName & " " & z.LName & "<br />" & z.FName2 & " " & z.LName2)
+                Dim PhoneString = Determine_Phone_String(z.Phone1, z.Phone2, z.Phone3, z.ID)
+                Dim AddyString = (z.StAddress & "<br /> " & z.City & ", " & z.State & " " & z.Zip)
+                Dim nameStr As String = Determine_Name_String(z.FName, z.LName, z.FName2, z.LName2)
 
                 rowData = "<!--BEGIN ROW Data--><tr><td></td><td>" & z.ID & "</td>"
                 rowData += "<td>" & nameStr & "</td>"
@@ -1515,7 +1328,7 @@ Public Class createListPrintOperations
                 'rowData += "<td></td>"
                 rowData += "<td>" & apptTime & "</td>"
                 rowData += "<td>" & z.Result & "</td>"
-                rowData += "<td>" & FormatCurrency(z.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Data-->"
+                rowData += "<td>" & FormatCurrency(z.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Data-->"
                 '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                 doc += (rowData & vbCrLf)
                 rowData = ""
@@ -1662,30 +1475,11 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        Dim arPhoneType(1)
-                        arPhoneType = Get_Phone_Type(obj.ID)
-                        Dim phone1Type As String = arPhoneType(0)
-                        Dim phone2Type As String = arPhoneType(1)
+                        
 
-                        If Len(phone1Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(0) = " - " & phone1Type
-                                End If
-                            End If
-                        End If
-
-                        If Len(phone2Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(1) = " - " & phone2Type
-                                End If
-                            End If
-                        End If
-
-                        Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                        Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                         rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                         rowData += "<td>" & nameStr & "</td>"
@@ -1697,7 +1491,7 @@ Public Class createListPrintOperations
                         'rowData += "<td></td>"
                         rowData += "<td>" & apptTime & "</td>"
                         rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
                         '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                         doc += (rowData & vbCrLf)
                         rowData = ""
@@ -1747,30 +1541,11 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        Dim arPhoneType(1)
-                        arPhoneType = Get_Phone_Type(obj.ID)
-                        Dim phone1Type As String = arPhoneType(0)
-                        Dim phone2Type As String = arPhoneType(1)
+                        
 
-                        If Len(phone1Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(0) = " - " & phone1Type
-                                End If
-                            End If
-                        End If
-
-                        If Len(phone2Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(1) = " - " & phone2Type
-                                End If
-                            End If
-                        End If
-
-                        Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                        Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                         rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                         rowData += "<td>" & nameStr & "</td>"
@@ -1782,7 +1557,7 @@ Public Class createListPrintOperations
                         'rowData += "<td></td>"
                         rowData += "<td>" & apptTime & "</td>"
                         rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
                         '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                         doc += (rowData & vbCrLf)
                         rowData = ""
@@ -1843,30 +1618,11 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        Dim arPhoneType(1)
-                        arPhoneType = Get_Phone_Type(obj.ID)
-                        Dim phone1Type As String = arPhoneType(0)
-                        Dim phone2Type As String = arPhoneType(1)
+                         
 
-                        If Len(phone1Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(0) = " - " & phone1Type
-                                End If
-                            End If
-                        End If
-
-                        If Len(phone2Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(1) = " - " & phone2Type
-                                End If
-                            End If
-                        End If
-
-                        Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                        Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                         rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                         rowData += "<td>" & nameStr & "</td>"
@@ -1878,7 +1634,7 @@ Public Class createListPrintOperations
                         'rowData += "<td></td>"
                         rowData += "<td>" & apptTime & "</td>"
                         rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
                         '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                         doc += (rowData & vbCrLf)
                         rowData = ""
@@ -1928,30 +1684,11 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        Dim arPhoneType(1)
-                        arPhoneType = Get_Phone_Type(obj.ID)
-                        Dim phone1Type As String = arPhoneType(0)
-                        Dim phone2Type As String = arPhoneType(1)
+                        
 
-                        If Len(phone1Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(0) = " - " & phone1Type
-                                End If
-                            End If
-                        End If
-
-                        If Len(phone2Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(1) = " - " & phone2Type
-                                End If
-                            End If
-                        End If
-
-                        Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                        Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                         rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                         rowData += "<td>" & nameStr & "</td>"
@@ -1963,7 +1700,7 @@ Public Class createListPrintOperations
                         'rowData += "<td></td>"
                         rowData += "<td>" & apptTime & "</td>"
                         rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
                         '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                         doc += (rowData & vbCrLf)
                         rowData = ""
@@ -2018,30 +1755,11 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        Dim arPhoneType(1)
-                        arPhoneType = Get_Phone_Type(obj.ID)
-                        Dim phone1Type As String = arPhoneType(0)
-                        Dim phone2Type As String = arPhoneType(1)
+                        
 
-                        If Len(phone1Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(0) = " - " & phone1Type
-                                End If
-                            End If
-                        End If
-
-                        If Len(phone2Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(1) = " - " & phone2Type
-                                End If
-                            End If
-                        End If
-
-                        Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                        Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                         rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                         rowData += "<td>" & nameStr & "</td>"
@@ -2053,7 +1771,7 @@ Public Class createListPrintOperations
                         'rowData += "<td></td>"
                         rowData += "<td>" & apptTime & "</td>"
                         rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
                         '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                         doc += (rowData & vbCrLf)
                         rowData = ""
@@ -2106,31 +1824,11 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        Dim arPhoneType(1)
-                        arPhoneType = Get_Phone_Type(obj.ID)
-                        Dim phone1Type As String = arPhoneType(0)
-                        Dim phone2Type As String = arPhoneType(1)
+                        
 
-                        If Len(phone1Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(0) = " - " & phone1Type
-                                End If
-                            End If
-                        End If
-
-                        If Len(phone2Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(1) = " - " & phone2Type
-                                End If
-                            End If
-                        End If
-
-                        Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                        Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
-
+                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
                         rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                         rowData += "<td>" & nameStr & "</td>"
                         rowData += "<td>" & AddyString & "</td>"
@@ -2141,7 +1839,7 @@ Public Class createListPrintOperations
                         'rowData += "<td></td>"
                         rowData += "<td>" & apptTime & "</td>"
                         rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
                         '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                         doc += (rowData & vbCrLf)
                         rowData = ""
@@ -2193,30 +1891,10 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        Dim arPhoneType(1)
-                        arPhoneType = Get_Phone_Type(obj.ID)
-                        Dim phone1Type As String = arPhoneType(0)
-                        Dim phone2Type As String = arPhoneType(1)
-
-                        If Len(phone1Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(0) = " - " & phone1Type
-                                End If
-                            End If
-                        End If
-
-                        If Len(phone2Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(1) = " - " & phone2Type
-                                End If
-                            End If
-                        End If
-
-                        Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                        Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                         
+                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                         rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                         rowData += "<td>" & nameStr & "</td>"
@@ -2228,7 +1906,7 @@ Public Class createListPrintOperations
                         'rowData += "<td></td>"
                         rowData += "<td>" & apptTime & "</td>"
                         rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
                         '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                         doc += (rowData & vbCrLf)
                         rowData = ""
@@ -2281,30 +1959,11 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        Dim arPhoneType(1)
-                        arPhoneType = Get_Phone_Type(obj.ID)
-                        Dim phone1Type As String = arPhoneType(0)
-                        Dim phone2Type As String = arPhoneType(1)
+                        
 
-                        If Len(phone1Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(0) = " - " & phone1Type
-                                End If
-                            End If
-                        End If
-
-                        If Len(phone2Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(1) = " - " & phone2Type
-                                End If
-                            End If
-                        End If
-
-                        Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                        Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                         rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                         rowData += "<td>" & nameStr & "</td>"
@@ -2316,7 +1975,7 @@ Public Class createListPrintOperations
                         'rowData += "<td></td>"
                         rowData += "<td>" & apptTime & "</td>"
                         rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
                         '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                         doc += (rowData & vbCrLf)
                         rowData = ""
@@ -2352,7 +2011,7 @@ Public Class createListPrintOperations
                     arObjss = d.Value
                     Dim cnt_Local As Integer = arObjss.Count
                     Dim Item0 As LeadToPrintRecovery = arObjss(0)
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & FormatCurrency(d.Key, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
+                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & FormatCurrency(d.Key, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
                     Item0 = Nothing
                     doc += hdrSTR
 
@@ -2368,30 +2027,10 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        Dim arPhoneType(1)
-                        arPhoneType = Get_Phone_Type(obj.ID)
-                        Dim phone1Type As String = arPhoneType(0)
-                        Dim phone2Type As String = arPhoneType(1)
-
-                        If Len(phone1Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(0) = " - " & phone1Type
-                                End If
-                            End If
-                        End If
-
-                        If Len(phone2Type) > 1 = True Then
-                            If phone1Type <> "" Then
-                                If phone1Type <> " " Then
-                                    arPhoneType(1) = " - " & phone2Type
-                                End If
-                            End If
-                        End If
-
-                        Dim PhoneString = (obj.Phone1 & "<br />" & obj.Phone2 & " " & arPhoneType(0) & "<br />" & obj.Phone3 & " " & arPhoneType(1) & "<br />")
-                        Dim AddyString = (obj.StAddress & " " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = (obj.FName & " " & obj.LName & "<br />" & obj.FName2 & " " & obj.LName2)
+                        
+                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
                         rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
                         rowData += "<td>" & nameStr & "</td>"
@@ -2403,7 +2042,7 @@ Public Class createListPrintOperations
                         'rowData += "<td></td>"
                         rowData += "<td>" & apptTime & "</td>"
                         rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 2, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
                         '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
                         doc += (rowData & vbCrLf)
                         rowData = ""
@@ -2459,28 +2098,50 @@ Public Class createListPrintOperations
 
 #Region "Private Util Funcs - For all Methods"
 
-    Private Function Get_Phone_Type(ByVal RecID As String)
-        Dim arPhone(1) '' generic two dimension array for type of phones if exists
+    Private Function Get_Phone_Type1(ByVal RecID As String)
+        Dim retVal As String = ""
         Try
             Dim cnx As New SqlConnection(sql_cnx)
             cnx.Open()
-            Dim cmdGET As New SqlCommand("select AltPhone1,AltPhone2,Phone1Type,Phone2Type from Enterlead WHERE ID = '" & RecID & "';", cnx)
+            Dim cmdGET As New SqlCommand("select Phone1Type from Enterlead WHERE ID = '" & RecID & "';", cnx)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
             While r1.Read
-                arPhone(0) = r1.Item("Phone1Type")
-                arPhone(1) = r1.Item("Phone2Type")
+                retVal = r1.Item("Phone1Type")
             End While
             r1.Close()
             cnx.Close()
             cnx = Nothing
 
-            Return arPhone
+            Return retVal
 
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Func", " Get_Phone_Type(recID) ", "0", ex.Message.ToString)
             y = Nothing
-            Return arPhone
+            Return retVal
+        End Try
+    End Function
+    Private Function Get_Phone_Type2(ByVal RecID As String)
+        Dim retVal As String = ""
+        Try
+            Dim cnx As New SqlConnection(sql_cnx)
+            cnx.Open()
+            Dim cmdGET As New SqlCommand("select Phone2Type from Enterlead WHERE ID = '" & RecID & "';", cnx)
+            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+            While r1.Read
+                retVal = r1.Item("Phone2Type")
+            End While
+            r1.Close()
+            cnx.Close()
+            cnx = Nothing
+
+            Return retVal
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Func", " Get_Phone_Type(recID) ", "0", ex.Message.ToString)
+            y = Nothing
+            Return retVal
         End Try
     End Function
 
@@ -2538,6 +2199,211 @@ Public Class createListPrintOperations
             retVal = "0:00 AM/PM"
             Return retVal
         End Try
+
+    End Function
+
+    '' function to determine "S - " or "M - " or "S/M - " or " " 
+    Private Function DetermineSalesAndMarketingResults(ByVal SalesResult As String, ByVal MarketingResult As String)
+       Dim retVal As String = " "
+        Dim PrependSales As String = "S - "
+        Dim PrependMarketing As String = "M - "
+
+        Dim sz_S As Integer = SalesResult.Length
+        Dim sz_M As Integer = MarketingResult.Length
+
+
+        If MarketingResult = SalesResult Then
+            retVal = MarketingResult
+            Return retVal
+            Exit Function
+        End If
+
+        If SalesResult = MarketingResult Then
+            retVal = SalesResult
+            Return retVal
+            Exit Function
+        End If
+
+        '' sales result present.
+        If sz_S >= 1 And SalesResult <> " " Then
+            '' sales result but no marketing result
+            If sz_M <= 0 Then
+                Dim prepend As String = (PrependSales & SalesResult)
+                retVal = prepend
+                Return retVal
+                Exit Function
+            ElseIf sz_M >= 1 And MarketingResult <> " " Then '' sales result and marketing result
+                Dim prepend As String = (PrependSales & SalesResult & "<br />")
+                Dim prepend2 As String = (PrependMarketing & MarketingResult)
+                retVal = (prepend & prepend2)
+                Return retVal
+                Exit Function
+            ElseIf sz_M >= 1 And MarketingResult = " " Then
+                Dim prepend As String = (PrependSales & SalesResult)
+                retVal = prepend
+                Return retVal
+                Exit Function
+            End If
+        End If
+
+        '' marketing result present
+        If sz_M >= 1 And MarketingResult <> " " Then
+            '' marketing result but no sales result
+            If sz_S <= 0 Then
+                Dim prepend As String = (PrependMarketing & MarketingResult)
+                retVal = prepend
+                Return retVal
+                Exit Function
+            ElseIf sz_S >= 1 And SalesResult <> " " Then '' marketing result and sales result
+                Dim prepend As String = (PrependMarketing & MarketingResult & "<br />")
+                Dim prepend2 As String = (PrependSales & SalesResult)
+                retVal = (prepend & prepend2)
+                Return retVal
+                Exit Function
+            ElseIf sz_S >= 1 And SalesResult = " " Then
+                Dim prepend As String = (PrependMarketing & MarketingResult)
+                retVal = prepend
+                Return retVal
+                Exit Function
+            End If
+        End If
+
+        Return retVal '' default return of "_"
+
+    End Function
+
+    '' function to determine "H - " or "A1 - " or "A2 - " or "H - " & "A2 - " or "H - " & "A1 - " or Just "H - "
+    Private Function Determine_Phone_String(ByVal H_Phone As String, ByVal A1_Phone As String, ByVal A2_Phone As String, ByVal ID As String)
+        Dim retVal As String = ""
+
+        Dim sz_H As Integer = H_Phone.Length
+        Dim sz_A1 As Integer = A1_Phone.Length
+        Dim sz_A2 As Integer = A2_Phone.Length
+
+        If sz_H > 1 And H_Phone <> " " Then 'Home phone present
+            Dim prePendH As String = ("H-" & H_Phone)
+            retVal += (prePendH)
+            If sz_A1 > 1 And A1_Phone <> " " Then '' is alt 1 present?
+                Dim prePendA1 As String = ("A1-" & A1_Phone)
+                Dim type As String = Get_Phone_Type1(ID)
+                If type = "" Or type = " " Then
+                    Dim appendA1 As String = (prePendA1)
+                    retVal += ("<br />" & appendA1)
+                ElseIf type = "Work" Or type = "Cell" Then
+                    Dim appendA1 As String = (prePendA1 & "-" & type)
+                    retVal += ("<br />" & appendA1)
+                Else
+                    Dim appendA1 As String = (prePendA1 & "-" & type.ToString)
+                    retVal += ("<br />" & appendA1)
+                End If
+            End If
+            If sz_A2 > 1 And A2_Phone <> " " Then
+                Dim prePendA2 As String = ("A2-" & A2_Phone)
+                Dim type As String = Get_Phone_Type2(ID)
+                If type = "" Or type = " " Then
+                    Dim appendA2 As String = (prePendA2)
+                    retVal += ("<br />" & appendA2)
+                ElseIf type = "Work" Or type = "Cell" Then
+                    Dim appendA2 As String = (prePendA2 & "-" & type)
+                    retVal += ("<br />" & appendA2)
+                Else
+                    Dim appendA2 As String = (prePendA2 & "-" & type.ToString)
+                    retVal += ("<br />" & appendA2)
+                End If
+            End If
+        ElseIf sz_H <= 0 And sz_A1 >= 1 And A1_Phone <> " " Then
+            Dim prePendA1 As String = ("A1-" & A1_Phone)
+            Dim type As String = Get_Phone_Type1(ID)
+            If type = "" Or type = " " Then
+                Dim appendA1 As String = (prePendA1)
+                retVal += ("<br />" & appendA1)
+            ElseIf type = "Work" Or type = "Cell" Then
+                Dim appendA1 As String = (prePendA1 & "-" & type)
+                retVal += ("<br />" & appendA1)
+            Else
+                Dim appendA1 As String = (prePendA1 & "-" & type.ToString)
+                retVal += ("<br />" & appendA1)
+            End If
+            If sz_A2 > 1 And A2_Phone <> " " Then
+                Dim prePendA2 As String = ("A2-" & A2_Phone)
+                Dim type_ As String = Get_Phone_Type2(ID)
+                If type = "" Or type = " " Then
+                    Dim appendA2 As String = (prePendA2)
+                    retVal += ("<br />" & appendA2)
+                ElseIf type = "Work" Or type = "Cell" Then
+                    Dim appendA2 As String = (prePendA2 & "-" & type)
+                    retVal += ("<br />" & appendA2)
+                Else
+                    Dim appendA2 As String = (prePendA2 & "-" & type.ToString)
+                    retVal += ("<br />" & appendA2)
+                End If
+            End If
+        ElseIf sz_H <= 0 And sz_A1 <= 0 And sz_A2 >= 1 Then
+            Dim prePendA2 As String = ("A2-" & A2_Phone)
+            Dim type As String = Get_Phone_Type2(ID)
+            If type = "" Or type = " " Then
+                Dim appendA2 As String = (prePendA2)
+                retVal += ("<br />" & appendA2)
+            ElseIf type = "Work" Or type = "Cell" Then
+                Dim appendA2 As String = (prePendA2 & "-" & type)
+                retVal += ("<br />" & appendA2)
+            Else
+                Dim appendA2 As String = (prePendA2 & "-" & type.ToString)
+                retVal += ("<br />" & appendA2)
+            End If
+        End If
+
+        Return retVal
+
+    End Function
+
+    '' function for Customer name determination "Smith, Mr and Mrs." , "John X" vbcrlf "Nancy Y" 
+    Private Function Determine_Name_String(ByVal FName1 As String, ByVal LName1 As String, ByVal FName2 As String, ByVal LName2 As String)
+
+        Dim retVal As String = ""
+
+        Dim c1_FN As Integer = FName1.Length
+        Dim c1_LN As Integer = LName1.Length
+
+        Dim c2_FN As Integer = FName2.Length
+        Dim c2_LN As Integer = LName2.Length
+
+
+
+        If c1_FN > 1 And FName1 <> " " Then '' contact1 present?
+            If c2_LN > 1 And LName2 <> " " Then
+                If c1_LN = c2_LN Then   '' same last name?
+                    Dim con_STR As String = (LName1 & ", " & FName1 & " and " & FName2)
+                    retVal = con_STR
+                    Return retVal
+                    Exit Function
+                ElseIf c1_LN <> c2_LN Then '' not same last name? 
+                    Dim con_STR As String = (FName1 & " " & LName1 & "<br />" & FName2 & " " & LName2)
+                    retVal = con_STR
+                    Return retVal
+                    Exit Function
+                End If
+            ElseIf c2_FN > 1 Or FName2 <> "" Or FName2 <> " " Then '' no secondary contact info?
+                Dim con_STR As String = (FName1 & " " & LName1)
+                retVal = con_STR
+                Return retVal
+                Exit Function
+            ElseIf c2_FN > 1 Or FName2 = " " Then '' Blank secondary contact info?
+                Dim con_STR As String = (FName1 & " " & LName1)
+                retVal = con_STR
+                Return retVal
+                Exit Function
+            End If
+        ElseIf c1_FN < 1 Or FName1 = "" Or FName1 = " " Then '' blank contact1 info?
+            If c2_FN > 1 And FName2 <> " " Then '' but contact2 present?
+                Dim con_STR As String = (FName2 & " " & LName2)
+                retVal = con_STR
+                Return retVal
+                Exit Function
+            End If
+        End If
+
+        Return retVal
 
     End Function
 

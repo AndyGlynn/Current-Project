@@ -107,14 +107,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="4280832">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="4279296">
       <assemblyIdentity name="Latest 14" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>/5adtswaXFeG/MCZOf/fKb05+fI=</dsig:DigestValue>
+        <dsig:DigestValue>Supxyxb/2/2BCCBgKyH0fcF9S0A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
