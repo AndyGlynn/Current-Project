@@ -2405,6 +2405,9 @@ Public Class frmWCList
         '' 'Marketer' Field was/is left off for some reason, concat back in.
 
         Slct = Slct.ToString.Replace(" ApptTime, MarketingResults", " ApptTime, MarketingResults, Marketer, Result,IsPreviousCustomer,IsRecovery ") '' needed for ORDER BY clause
+        Slct = Slct.ToString.Replace("Enterlead.Product3, LeadGeneratedOn,", "Enterlead.Product3, Cast(LeadGeneratedOn as DATE) as 'LeadGeneratedOn',")
+        Slct = Slct.ToString.Replace("Order By LeadGeneratedOn desc", "Order By Cast(LeadGeneratedOn as DATE) desc")
+
         Dim arSort As New ArrayList
         Dim cntSRT As Integer = Me.chlstOrderBy.CheckedItems.Count - 1
         Dim i As Integer = 0
@@ -3109,10 +3112,10 @@ Public Class frmWCList
                     InitQuery = InitQuery.ToString.Replace("Zip desc", " ")
                     Exit Select
                 Case Is = "Generated On"
-                    InitQuery = InitQuery.ToString.Replace("LeadGeneratedOn asc,", " ")
-                    InitQuery = InitQuery.ToString.Replace("LeadGeneratedOn desc,", " ")
-                    InitQuery = InitQuery.ToString.Replace("LeadGeneratedOn asc", " ")
-                    InitQuery = InitQuery.ToString.Replace("LeadGeneratedOn desc", " ")
+                    InitQuery = InitQuery.ToString.Replace("Cast(LeadGeneratedOn as DATE) asc,", " ")
+                    InitQuery = InitQuery.ToString.Replace("Cast(LeadGeneratedOn as DATE) desc,", " ")
+                    InitQuery = InitQuery.ToString.Replace("Cast(LeadGeneratedOn as DATE) asc", " ")
+                    InitQuery = InitQuery.ToString.Replace("Cast(LeadGeneratedOn as DATE) desc", " ")
                     Exit Select
                 Case Is = "Appointment Date"
                     InitQuery = InitQuery.ToString.Replace("ApptDate asc,", " ")
@@ -3164,7 +3167,7 @@ Public Class frmWCList
                 InitQuery = InitQuery.ToString.Replace("Order By Zip desc", " ")
                 Exit Select
             Case Is = "Generated On"
-                retSTR = "SELECT DISTINCT(LeadGeneratedOn) "
+                retSTR = "SELECT DISTINCT(Cast(LeadGeneratedOn as Date)) as 'LeadGeneratedOn' " '' code calls for ordinal name not index num // just named column. 4-6-2016
                 InitQuery = InitQuery.ToString.Replace("Order By LeadGeneratedOn asc", " ")
                 InitQuery = InitQuery.ToString.Replace("Order By LeadGeneratedOn desc", " ")
                 Exit Select
@@ -3212,7 +3215,7 @@ Public Class frmWCList
                 tailEnd = "Order By Zip desc"
                 Exit Select
             Case Is = "Generated On"
-                tailEnd = "Order By LeadGeneratedOn asc"
+                tailEnd = "Order By Cast(LeadGeneratedOn as date) asc"
                 Exit Select
             Case Is = "Appointment Date"
                 tailEnd = "Order By ApptDate asc"

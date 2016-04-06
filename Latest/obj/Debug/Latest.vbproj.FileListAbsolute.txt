@@ -539,3 +539,4 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.exe
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.xml
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.pdb
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.vbprojResolveAssemblyReference.cache
