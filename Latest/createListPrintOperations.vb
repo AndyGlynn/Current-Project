@@ -1483,6 +1483,7 @@ Public Class createListPrintOperations
 
         Dim arFilteredRows As New ArrayList
 
+        Dim srtGroups As New SortedList
         Dim hashGroups As New Hashtable
         'For Each xx As LeadToPrint In arListOfLeadsToDisplay
 
@@ -1698,16 +1699,32 @@ Public Class createListPrintOperations
                 doc += "</table></body></html>" '' put the end cap on it. . . 
                 Exit Select '' end lead generated on catch
             Case Is = "ApptDate"
+                Dim arHeadingsAsDate As New ArrayList
                 For Each y As String In target_headings
                     '' sort leads by 'heading'
-                    Dim arObjs As New List(Of LeadToPrintRecovery)
-                    For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
-                        If xyz.ApptDate = y Then
+                    arHeadingsAsDate.Add(CType(y, Date)) '' first convert
+                Next
+
+                arHeadingsAsDate.Sort() '' second sort
+
+                '' sort list works here but doesn't take years into consideration 
+                '' on the date. 
+                '' so still showing out of whack logically by calendar date.
+                '' iE: 1/2/2016 comes before 1/21/2014
+                '' second attempt , convert -> sort -> add
+                '' third attempt, don't add as 'ToShortDateString in array, just add as [Type] and let default
+                '' sort kick in. . . 
+
+
+                For Each zz As Date In arHeadingsAsDate
+                    Dim arObjs As New List(Of LeadToPrint)
+                    For Each xyz As LeadToPrint In arListOfLeadsToDisplay
+                        If xyz.ApptDate = zz.ToShortDateString Then '' third equate
                             arObjs.Add(xyz)
                         End If
                     Next
                     Try
-                        hashGroups.Add(y, arObjs)
+                        srtGroups.Add(zz, arObjs) '' add as default [type]
                     Catch ex As Exception
 
                     End Try
@@ -1716,7 +1733,7 @@ Public Class createListPrintOperations
 
                 '' now break sorted list apart and render according per 'group'
 
-                For Each d As DictionaryEntry In hashGroups
+                For Each d As DictionaryEntry In srtGroups
                     Dim arObjss As New List(Of LeadToPrintRecovery)
                     arObjss = d.Value
                     Dim cnt_Local As Integer = arObjss.Count
@@ -1737,7 +1754,7 @@ Public Class createListPrintOperations
                         Dim recID As String = obj.ID
                         Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
                         '' type the phones only phone 2 & three if present
-                        
+
 
                         Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
                         Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
