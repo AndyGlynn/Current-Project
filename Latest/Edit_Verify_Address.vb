@@ -413,6 +413,7 @@ Public Class Edit_Verify_Address
             End If
             Return Valid
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim err As New ErrorLogFlatFile
             err.WriteLog("VerifyAddress", "ByVal StAddress As String, ByVal City As String, ByVal State As String, ByVal Zip As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Mappoint", "LookForValidAddress")
 
@@ -454,6 +455,7 @@ Public Class Edit_Verify_Address
             End Select
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("VerifyAddress", "ByVal City As String, ByVal State As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Mappoint", "CheckCity")
             Dim y As New ErrorLogging_V2
@@ -564,6 +566,7 @@ Public Class Edit_Verify_Address
             '    Dim err As New ErrorLogFlatFile
             '    err.WriteLog("VerifyAddress", "ByVal StAddress As String, ByVal City As String, ByVal State As String, ByVal Zip As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Mappoint", "Filter1")
             Dim y As New ErrorLogging_V2
+            Main.Cursor = Cursors.Default
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Edit_Verify_Address", "Edit_Verify_Address", "Sub", "Filter(StAddress,city,state,zip)", "0", ex.Message.ToString)
             y = Nothing
 

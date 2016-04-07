@@ -190,6 +190,7 @@ Public Class VerifyAddressBulk
                     Exit Select
             End Select
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim err As String = ex.Message
             Dim stAddress As String = obj.StreetAddress
             Dim City As String = obj.City
@@ -279,6 +280,7 @@ Public Class VerifyAddressBulk
         Catch ex As Exception
             ' Dim err As New ErrorLogFlatFile
             'err.WriteLog("VerifyAddress", "ByVal StAddress As String, ByVal City As String, ByVal State As String, ByVal Zip As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Mappoint", "LookForValidAddress")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "VerifyAddressBulk", "VerifyAddressBulk", "Function", "LookForValidAdress", "0", ex.Message.ToString)
             y = Nothing
@@ -320,6 +322,7 @@ Public Class VerifyAddressBulk
             End Select
             cnn = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             cnn.Close()
             cnn = Nothing
             'Dim err As New ErrorLogFlatFile

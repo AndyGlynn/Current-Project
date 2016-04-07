@@ -14,6 +14,8 @@ Public Class frmBackup
             '' DBASE_Backup class is legacy code circa: 2005-2008
             '' 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmBackup", "FormCode", "Sub", "btn1_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -27,6 +29,8 @@ Public Class frmBackup
             b.Get_Existing()
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmBackup", "FormCode", "Sub", "form1_load", "0", ex.Message.ToString)
             y = Nothing

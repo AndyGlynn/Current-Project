@@ -27,6 +27,9 @@ Public Class MarketingManager
             Dim y As New ScheduledActions
             y.SetUp(Me)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingManager", "FormCode", "Event", "MarketingManager_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -73,6 +76,9 @@ Public Class MarketingManager
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingManager", "FormCode", "Event", "btnMarkTaskAsDone_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -99,6 +105,9 @@ Public Class MarketingManager
             Dim x As New ScheduledActions
             x.SetUp(Me)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingManager", "FormCode", "Event", "btnEditScheduledTask_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -121,6 +130,9 @@ Public Class MarketingManager
                 End If
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingManager", "FormCode", "Event", "btnRemoveThisCompletedTask_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -135,6 +147,9 @@ Public Class MarketingManager
             Me.pnlScheduledTasks.Controls.Clear()
             x.SetUp(Me)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingManager", "FormCode", "Event", "btnRemoveAllScheduledTask_Click", "0", ex.Message.ToString)
             y = Nothing

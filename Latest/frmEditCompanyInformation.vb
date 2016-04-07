@@ -12,6 +12,8 @@ Public Class frmEditCompanyInformation
             stAddress = Trim(str(1).ToString) & " " & Trim(str(2).ToString)
             stAddress = stNum & " " & Trim(str(1).ToString) & " " & Trim(str(2).ToString)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             MsgBox("There is a problem with your address format. Please try again. IE: '1234 There st.", MsgBoxStyle.Critical, "Error With Address")
             Exit Sub
         End Try
@@ -67,6 +69,8 @@ Public Class frmEditCompanyInformation
             Me.txtFaxNumber.Text = cmpy_info.ContactFaxNumber
             Me.txtLogoDirectory.Text = cmpy_info.Logo_Directory
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEditCompanyInformation", "FormCode", "Sub", "frmEditCompanyInformation_Load", "0", ex.Message.ToString)
             y = Nothing

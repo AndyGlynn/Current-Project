@@ -18,6 +18,8 @@ Public Class systemCheckLogin
             cnt_cnx = Nothing
             Return cnt
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "systemCheckLogin", "systemCheckLogin", "Function", "CntRecs", "0", ex.Message.ToString)
             y = Nothing
@@ -52,6 +54,7 @@ Public Class systemCheckLogin
             End Try
             Return status
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "systemCheckLogin", "systemCheckLogin", "Function", "CheckSQLStatus()", "0", ex.Message.ToString)
             y = Nothing

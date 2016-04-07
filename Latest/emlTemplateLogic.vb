@@ -45,6 +45,7 @@ Public Class emlTemplateLogic
             cnx = Nothing
             Return res
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetMaxID(devorpro)", "0", ex.Message.ToString)
             y = Nothing
@@ -95,6 +96,7 @@ Public Class emlTemplateLogic
             cnx = Nothing
             Return arTemplates
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetTemplatesbyDepartment(department)", "0", ex.Message.ToString)
             y = Nothing
@@ -126,6 +128,7 @@ Public Class emlTemplateLogic
             cnx = Nothing
             Return x
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetSingleTemplate(templatename,devorpro)", "0", ex.Message.ToString)
             y = Nothing
@@ -153,6 +156,7 @@ Public Class emlTemplateLogic
             cnx.Close()
             cnx = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Sub", "InsertNewTemplate(template,devorpro)", "0", ex.Message.ToString)
             y = Nothing
@@ -177,6 +181,7 @@ Public Class emlTemplateLogic
             cnx.Close()
             cnx = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Sub", "UpdateBodyOfTemplate(devorpro,template_info)", "0", ex.Message.ToString)
             y = Nothing
@@ -201,6 +206,7 @@ Public Class emlTemplateLogic
             cnx.Close()
             cnx = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Sub", "UpdateSubjectOfTemplate(devorpro,template_info)", "0", ex.Message.ToString)
             y = Nothing
@@ -225,6 +231,7 @@ Public Class emlTemplateLogic
             cnx.Close()
             cnx = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Sub", "UpdateTemplateName(devorpro,template_info)", "0", ex.Message.ToString)
             y = Nothing
@@ -252,6 +259,7 @@ Public Class emlTemplateLogic
             cnx.Close()
             cnx = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Sub", "UpdateWholeTemplate(devorpro,template_info)", "0", ex.Message.ToString)
             y = Nothing
@@ -273,6 +281,7 @@ Public Class emlTemplateLogic
             cnx.Close()
             cnx = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Sub", "DeleteTemplate(devorpro,template_info)", "0", ex.Message.ToString)
             y = Nothing
@@ -301,6 +310,7 @@ Public Class emlTemplateLogic
             cnx = Nothing
             Return Exists
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Sub", "CheckDuplicateTemplateExists(devorpro,template_info)", "0", ex.Message.ToString)
             y = Nothing
@@ -324,6 +334,7 @@ Public Class emlTemplateLogic
             cnx = Nothing
             Return name
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetEmployeeDepartment(Fname,Lname,devorpro)", "0", ex.Message.ToString)
             y = Nothing
@@ -369,6 +380,7 @@ Public Class emlTemplateLogic
             Return scrubbedText
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "SubjectScrub(RecID,devorpro,templatename,department)", RecID, ex.Message.ToString)
             y = Nothing
@@ -448,6 +460,7 @@ Public Class emlTemplateLogic
 
             Return template_text
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Return ""
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "TestTemplateScrub(recID,templatename,depart)", RecID, ex.Message.ToString)
@@ -490,6 +503,7 @@ Public Class emlTemplateLogic
             ret_str = (y.CompanyWebSite)
             Return ret_str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetCompanyWebSite()", "0", ex.Message.ToString)
             y = Nothing
@@ -521,6 +535,7 @@ Public Class emlTemplateLogic
             ret_str = (y.ContactFaxNumber)
             Return ret_str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetCompanyfax()", "0", ex.Message.ToString)
             y = Nothing
@@ -552,6 +567,7 @@ Public Class emlTemplateLogic
             ret_str = (y.ContactPhoneNumber)
             Return ret_str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetCompanyPhone()", "0", ex.Message.ToString)
             y = Nothing
@@ -579,6 +595,7 @@ Public Class emlTemplateLogic
             ret_str = (y.StreetName & vbCrLf & y.AddressLine2 & vbCrLf & y.City & ", " & y.State & " " & y.Zip)
             Return ret_str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetCompanyAddressMulti()", "0", ex.Message.ToString)
             y = Nothing
@@ -606,6 +623,7 @@ Public Class emlTemplateLogic
             ret_str = (y.StreetName & " " & y.AddressLine2 & " " & y.City & ", " & y.State & " " & y.Zip)
             Return ret_str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetCompanyAddressSingle()", "0", ex.Message.ToString)
             y = Nothing
@@ -625,6 +643,7 @@ Public Class emlTemplateLogic
             cnx = Nothing
             Return ret_str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetCompanyName()", "0", ex.Message.ToString)
             y = Nothing
@@ -649,6 +668,7 @@ Public Class emlTemplateLogic
 
             Return ret_str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "CorrectSalesReps(objlead)", "0", ex.Message.ToString)
             y = Nothing
@@ -672,6 +692,7 @@ Public Class emlTemplateLogic
             Dim returnString As String = hour & ":00 " & amPM
             Return returnString
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "CorrectApptTime(objlead)", "0", ex.Message.ToString)
             y = Nothing
@@ -717,6 +738,7 @@ Public Class emlTemplateLogic
 
             Return ret_str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "CorrectApptDate(objleaD)", "0", ex.Message.ToString)
             y = Nothing
@@ -743,6 +765,7 @@ Public Class emlTemplateLogic
             End If
             Return return_string
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "DetermineCustomerName(objlead)", "0", ex.Message.ToString)
             y = Nothing
@@ -756,6 +779,7 @@ Public Class emlTemplateLogic
             return_string = objLead.City & ", " & objLead.State
             Return return_string
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "CityStateCorrection(objlead)", "0", ex.Message.ToString)
             y = Nothing
@@ -790,6 +814,7 @@ Public Class emlTemplateLogic
             End If
             Return return_str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "DetermineProductString(objlead)", "0", ex.Message.ToString)
             y = Nothing
@@ -823,6 +848,7 @@ Public Class emlTemplateLogic
             cnx = Nothing
             Return arTemplates
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "emlTemplateLogic", "emlTemplateLogic", "Function", "GetTemplates(devorpro)", "0", ex.Message.ToString)
             y = Nothing

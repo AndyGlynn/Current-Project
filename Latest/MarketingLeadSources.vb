@@ -16,6 +16,8 @@ Public Class MarketerLeadSources
             Dim g As New PopulateMarketingManager
             g.PopulateMarketingMAN()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode", "Event", "MarketerLeadSources_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -79,6 +81,9 @@ Public Class MarketerLeadSources
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode", "Event", "cboPRILS_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -131,6 +136,9 @@ Public Class MarketerLeadSources
                 r1.Close()
                 cnn.Close()
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
+
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode-Private Class", "Sub", "PopulatePrimary", "0", ex.Message.ToString)
                 y = Nothing
@@ -156,6 +164,8 @@ Public Class MarketerLeadSources
                 r1.Close()
                 cnn.Close()
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
+
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode-Private Class", "Sub", "PopulateSecondary(primary)", "0", ex.Message.ToString)
                 y = Nothing
@@ -182,6 +192,8 @@ Public Class MarketerLeadSources
                 r1.Close()
                 cnn.Close()
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
+
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode-Private Class", "Sub", "PopulateMarketingMAN()", "0", ex.Message.ToString)
                 y = Nothing
@@ -206,6 +218,8 @@ Public Class MarketerLeadSources
                 g.PopulatePrimary()
                 MarketerLeadSources.cboPRILS.SelectedItem = PLS
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
+
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode-Private Class", "Sub", "InsertPLS(pls)", "0", ex.Message.ToString)
                 y = Nothing
@@ -232,6 +246,8 @@ Public Class MarketerLeadSources
                 g.PopulateMarketingMAN()
                 MarketerLeadSources.cboMM.SelectedItem = FName & " " & LName
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
+
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode-Private Class", "Sub", "InsertManager(Fname,LName)", "0", ex.Message.ToString)
                 y = Nothing
@@ -267,6 +283,8 @@ Public Class MarketerLeadSources
                 g.PopulateSecondary(PLS)
                 MarketerLeadSources.cboSLS.SelectedItem = SLS
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
+
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode-Private Class", "Sub", "InsertSLS(pls,sls)", "0", ex.Message.ToString)
                 y = Nothing
@@ -328,6 +346,9 @@ Public Class MarketerLeadSources
                     Exit Select
             End Select
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode", "Sub", "cboMM_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -365,6 +386,9 @@ Public Class MarketerLeadSources
                     Exit Select
             End Select
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode", "Sub", "cboSLS_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -412,6 +436,8 @@ Public Class MarketerLeadSources
             End Select
             Me.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode", "Sub", "btnNext_click", "0", ex.Message.ToString)
             y = Nothing
@@ -429,6 +455,9 @@ Public Class MarketerLeadSources
             y = x.CapitalizeText(Me.txtFName.Text)
             Me.txtFName.Text = y
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode", "Sub", "txtFName_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -443,6 +472,9 @@ Public Class MarketerLeadSources
             y = x.CapitalizeText(Me.txtLname.Text)
             Me.txtLname.Text = y
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingLeadSources", "FormCode", "Sub", "txtLname_LostFocus", "0", ex.Message.ToString)
             y = Nothing

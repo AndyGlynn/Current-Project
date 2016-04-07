@@ -398,6 +398,8 @@ Public Class Sales_Performance_Report
                 r1.Close()
                 cnn.Close()
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 MsgBox("Lost Network Connection! Sales Performance Report" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
 
                 cnn.Close()
@@ -427,6 +429,7 @@ Public Class Sales_Performance_Report
 
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales_Performance_Report", "Sales_Performance_Report", "Constructor", "New()", "0", ex.Message.ToString)
             y = Nothing

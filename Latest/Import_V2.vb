@@ -41,6 +41,7 @@ Public Class Import_V2
                 End Try
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "IMPORT_PICTURES_LOGIC", "IMPORT_PICTURES_LOGIC", "Sub", "ImportThePictures(fileObj)", "0", ex.Message.ToString)
             y = Nothing

@@ -369,13 +369,14 @@ Public Class Main
 
     Private Sub tsbschedule_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbschedule.Click
         Try
-            Dim x As Form
-            x = ScheduleAction
-            x.ShowInTaskbar = False
-            x.ShowDialog()
-
-            x.Focus()
-            x.TopMost = True
+            'Dim x As Form
+            'x = ScheduleAction
+            'x.ShowInTaskbar = False
+            'x.ShowDialog()
+            ScheduleAction.MdiParent = Me
+            ScheduleAction.ShowInTaskbar = False
+            ScheduleAction.TopMost = True
+            ScheduleAction.Show()
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbschedule_Click", "0", ex.Message.ToString)
@@ -581,10 +582,9 @@ Public Class Main
 
     Private Sub WarmCallingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WarmCallingToolStripMenuItem.Click
         Try
-            Dim x As Form
-            x = WCaller
-            x.MdiParent = Me
-            x.Show()
+            Me.Cursor = Cursors.WaitCursor
+            WCaller.MdiParent = Me
+            WCaller.Show()
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "WarmCallingToolStripMenuItem_Click", "0", ex.Message.ToString)
@@ -707,9 +707,11 @@ Public Class Main
 
     Private Sub ConfirmingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConfirmingToolStripMenuItem.Click
         Try
+            Me.Cursor = Cursors.WaitCursor
             Confirming.MdiParent = Me
             Confirming.Show()
             Confirming.BringToFront()
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "ConfirmingToolStripMenuItem_Click", "0", ex.Message.ToString)

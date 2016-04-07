@@ -39,6 +39,7 @@ Public Class createAShortCut
             '' call to error log from here on fail
             '' 
             Dim y As New ErrorLogging_V2
+            Main.Cursor = Cursors.Default
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createAShortCut", "createAShortCut", "Sub", "Constructor(ShortCutName,SourceDestination)", "0", ex.Message.ToString)
             y.ToString()
         End Try

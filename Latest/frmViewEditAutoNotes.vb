@@ -20,6 +20,8 @@ Public Class frmViewEditAutoNotes
                 Me.chklstAutoNotes.Items.Add(x.ArAutoNotes(d), False)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmViewEditAuotNotes", "FormCode", "Event", "form1_load", "0", ex.Message.ToString)
             y = Nothing
@@ -49,6 +51,8 @@ Public Class frmViewEditAutoNotes
                 Me.chklstAutoNotes.Items.Add(y.ArAutoNotes(d), False)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmViewEditAuotNotes", "FormCode", "Event", "Button2_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -73,6 +77,8 @@ Public Class frmViewEditAutoNotes
                 Next
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmViewEditAuotNotes", "FormCode", "Event", "Button1_click", "0", ex.Message.ToString)
             y = Nothing

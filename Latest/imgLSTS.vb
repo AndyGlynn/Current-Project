@@ -133,6 +133,7 @@ Public Class imgLSTS
         Catch ex As Exception
             '' catch and write to error log here 
             ''
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "imgLSTS", "imgLSTS", "Constructor", "New(DirectoryName)", "0", ex.Message.ToString)
             y = Nothing

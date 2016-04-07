@@ -28,6 +28,7 @@ Public Class ROLODEX_LOGIC
                 r1.Close()
                 cnn.Close()
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ROLODEX_LOGIC.GetEmployeeByDepartment", "ByVal department as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetEMPLOYEES")
                 Dim y As New ErrorLogging_V2
@@ -64,6 +65,7 @@ Public Class ROLODEX_LOGIC
                 Dim g As New GetEmployeeByDepartment
                 g.GetEMPLOYEES(z)
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ROLODEX_LOGIC.EditEmployee", "ByVal RecID As String, ByVal NewFname As String, ByVal NewLName As String, ByVal PrimaryPhone As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "EditEmployees")
                 Dim y As New ErrorLogging_V2
@@ -93,6 +95,7 @@ Public Class ROLODEX_LOGIC
                 cnn.Close()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ROLODEX_LOGIC.GetRecIDForEmployee", "ByVal EmpFname As String, ByVal EmpLName As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetRecID")
                 Dim y As New ErrorLogging_V2
@@ -116,6 +119,7 @@ Public Class ROLODEX_LOGIC
                 Dim g As New GetEmployeeByDepartment
                 g.GetEMPLOYEES(Employee_Contacts.cboDepartment.Text)
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 cnn.Close()
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ROLODEX_LOGIC.DeleteEmployee", "ByVal RecID As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "DelEmployee")
@@ -171,6 +175,7 @@ Public Class ROLODEX_LOGIC
                 End Select
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ROLODEX_LOGIC.InsetEmployee", "ByVal FName As String, ByVal LName As String, ByVal Department As String, ByVal PrimaryPhone As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewEmployee")
                 Dim y As New ErrorLogging_V2

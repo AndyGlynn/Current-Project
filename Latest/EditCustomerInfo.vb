@@ -67,6 +67,8 @@ Public Class EditCustomerInfo
                 Me.btnMap.Enabled = True
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "EditCustomerInfo_Load", ID, ex.Message.ToString)
             y = Nothing
@@ -116,6 +118,8 @@ Public Class EditCustomerInfo
             Dim New_Word As String = str & str2
             Me.cboAlt2Type.Text = New_Word
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtAlt2Type_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -131,6 +135,8 @@ Public Class EditCustomerInfo
             Dim New_Word As String = str & str2
             Me.cboalt1type.Text = New_Word
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtAlt1Type_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -176,6 +182,8 @@ Public Class EditCustomerInfo
             End If
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "cboc1WorkHours_SelectedValueChanged()", "0", ex.Message.ToString)
             y = Nothing
@@ -217,6 +225,8 @@ Public Class EditCustomerInfo
                 End Select
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "cboProduct1_SelectedValueChanged()", "0", ex.Message.ToString)
             y = Nothing
@@ -260,6 +270,8 @@ Public Class EditCustomerInfo
                 End Select
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "cboProduct2_SelectedValueChanged()", "0", ex.Message.ToString)
             y = Nothing
@@ -302,6 +314,8 @@ Public Class EditCustomerInfo
                 End Select
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "cboProduct3_SelectedValueChanged()", "0", ex.Message.ToString)
             y = Nothing
@@ -325,6 +339,8 @@ Public Class EditCustomerInfo
             Me.ResetForm()
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "btnUpdate_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -449,6 +465,8 @@ Public Class EditCustomerInfo
                     End If
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Sub", "Chk_Errors(tab)", "0", ex.Message.ToString)
             y = Nothing
@@ -477,6 +495,8 @@ Public Class EditCustomerInfo
                 Me.IsManage = True
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Sub", "isManager()", "0", ex.Message.ToString)
             y = Nothing
@@ -496,6 +516,8 @@ Public Class EditCustomerInfo
                 Me.txtContact2.Text = Me.txtContact2.Text & " " & c.Get_Last(Me.txtContact1.Text)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtContact2_lostfocus", "0", ex.Message.ToString)
             y = Nothing
@@ -539,6 +561,8 @@ Public Class EditCustomerInfo
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "cboPriLead_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -580,6 +604,8 @@ Public Class EditCustomerInfo
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "cboSecLead_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -633,6 +659,8 @@ Public Class EditCustomerInfo
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "cboMarketer_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -673,6 +701,8 @@ Public Class EditCustomerInfo
             d.Get_New_Appt(ID)
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "btnSetAppt2_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -684,6 +714,8 @@ Public Class EditCustomerInfo
         Try
             Dim c As New Edit_Verify_Address(Me.txtAddress.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text, 1)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "btnMap_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -700,6 +732,8 @@ Public Class EditCustomerInfo
                 d.Update_MPVerified_False(ID)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtAddress_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -733,6 +767,8 @@ Public Class EditCustomerInfo
                 d.Update_MPVerified_False(ID)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtCity_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -749,6 +785,8 @@ Public Class EditCustomerInfo
                 d.Update_MPVerified_False(ID)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtState_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -765,6 +803,8 @@ Public Class EditCustomerInfo
                 d.Update_MPVerified_False(ID)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtZip_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -804,6 +844,8 @@ Public Class EditCustomerInfo
                 End Select
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "cboC2WorkHours_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing

@@ -33,6 +33,8 @@ Public Class ConfirmingSingleRecord
             Dim c As New CustomerHistory
             c.SetUp(Me, ID, Me.TScboCustomerHistory)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "calledandcancelled_Click()", "0", ex.Message.ToString)
             y = Nothing
@@ -181,6 +183,8 @@ Public Class ConfirmingSingleRecord
             cnn.Close()
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             cnn.Close()
             'Me.PullCustomerINFO(ID)
             'MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
@@ -201,6 +205,8 @@ Public Class ConfirmingSingleRecord
         Kill.ShowInTaskbar = False
         Kill.ShowDialog()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "ConfirmingSingleRecord_Load", ID, ex.Message.ToString)
             y = Nothing
@@ -227,6 +233,8 @@ Public Class ConfirmingSingleRecord
             Dim c As New CustomerHistory
             c.SetUp(Me, ID, Me.TScboCustomerHistory)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnSetAppt_Click", ID, ex.Message.ToString)
             y = Nothing
@@ -244,6 +252,8 @@ Public Class ConfirmingSingleRecord
             d.SetUp(Me, ID, Me.TScboCustomerHistory)
             Me.Manage_Buttons()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnDoNotCall_Click", ID, ex.Message.ToString)
             y = Nothing
@@ -261,6 +271,8 @@ Public Class ConfirmingSingleRecord
             d.SetUp(Me, ID, Me.TScboCustomerHistory)
             Me.Manage_Buttons()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnDoNotCallOrMail_Click", ID, ex.Message.ToString)
             y = Nothing
@@ -276,6 +288,8 @@ Public Class ConfirmingSingleRecord
             d.SetUp(Me, ID, Me.TScboCustomerHistory)
             Me.Manage_Buttons()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnDoNotMail_Click", ID, ex.Message.ToString)
             y = Nothing
@@ -294,6 +308,8 @@ Public Class ConfirmingSingleRecord
             Dim c As New CustomerHistory
             c.SetUp(Me, ID, Me.TScboCustomerHistory)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "TScboCustomerHistory_SelectedIndexChanged", ID, ex.Message.ToString)
             y = Nothing
@@ -314,6 +330,8 @@ Public Class ConfirmingSingleRecord
             cmdUP.ExecuteNonQuery()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "rtbSpecialInstructions", ID, ex.Message.ToString)
             y = Nothing
@@ -365,6 +383,8 @@ Public Class ConfirmingSingleRecord
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Sub", "Manage_Buttons()", "0", ex.Message.ToString)
             y = Nothing
@@ -399,6 +419,8 @@ Public Class ConfirmingSingleRecord
             c.SetUp(Me, ID, Me.TScboCustomerHistory)
             Me.Manage_Buttons()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnKill_Click", ID, ex.Message.ToString)
             y = Nothing
@@ -438,6 +460,8 @@ Public Class ConfirmingSingleRecord
             Confirming.dpConfirming.Value = dt
             MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "ConfirmingToolStripMenuItem_Click", ID, ex.Message.ToString)
             y = Nothing
@@ -472,6 +496,8 @@ Public Class ConfirmingSingleRecord
             Sales.tbMain.SelectedIndex = 1
             MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "SalesToolStripMenuItem_Click", ID, ex.Message.ToString)
             y = Nothing
@@ -514,6 +540,8 @@ Public Class ConfirmingSingleRecord
             MsgBox("This whole form needs to be built. Demonstration purposes only.", MsgBoxStyle.Information, "Whole Form")
             'MsgBox("The date picker value has been changed in order to show you this lead.", MsgBoxStyle.Information, "Date Changed.")
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "MarketingToolStripMenuItem_Click", ID, ex.Message.ToString)
             y = Nothing

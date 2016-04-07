@@ -34,14 +34,16 @@ Public Class WCaller
     Public IfExists As Boolean = False
     Public ID As String
     Private Sub WCaller_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
-        Me.Dispose()
+        '' Me.Dispose()
+        Me.Cursor = Cursors.Default
+        Main.Cursor = Cursors.Default
     End Sub
 
     Private Sub WCaller_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-            Me.Cursor = Cursors.WaitCursor
             Dim c As New WarmCalling.LoadProcedure()
             Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2

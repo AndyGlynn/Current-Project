@@ -387,6 +387,7 @@ Public Class CustomerHistory
             panel.ResumeLayout(False)
             panel.PerformLayout()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CustomerHistory", "CustomerHistory", "Sub", "SetUp(frm,ID,tscboCustomerHistory)", ID, ex.Message.ToString)
             y = Nothing
@@ -426,6 +427,7 @@ Public Class CustomerHistory
 
             Return size
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CustomerHistory", "CustomerHistory", "Sub", "MeasureString(text,font)", "0", ex.Message.ToString)
             y = Nothing

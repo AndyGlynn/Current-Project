@@ -220,6 +220,7 @@ Public Class ProductDetail
                 End If
             End Select
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ProductDetail", "FormCode", "Sub", "Setup()", "0", ex.Message.ToString)
             y = Nothing
@@ -270,6 +271,7 @@ Public Class ProductDetail
             R1.Close()
             Cnn.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ProductDetail", "FormCode", "Sub", "AddNew(sender)", "0", ex.Message.ToString)
             y = Nothing
@@ -315,6 +317,7 @@ Public Class ProductDetail
             R1.Close()
             Cnn.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ProductDetail", "FormCode", "Sub", "GetItems(sender)", "0", ex.Message.ToString)
             y = Nothing

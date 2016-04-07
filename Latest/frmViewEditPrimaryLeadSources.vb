@@ -9,6 +9,8 @@ Public Class frmViewEditPrimaryLeadSources
                 Me.chkPrimaryLeadSources.Items.Add(y.ArPLS(d).ToString)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmViewEditPrimaryLeadSources", "FormCode", "Event", "frmViewEditPrimaryLeadSources_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -40,6 +42,8 @@ Public Class frmViewEditPrimaryLeadSources
                 Next
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim yy As New ErrorLogging_V2
             yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmViewEditPrimaryLeadSources", "FormCode", "Event", "Button2_Click", "0", ex.Message.ToString)
             yy = Nothing

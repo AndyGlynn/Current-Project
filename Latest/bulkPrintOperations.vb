@@ -66,6 +66,7 @@ Public Class bulkPrintOperations
             cnx_ld = Nothing
             Return ListOfLeadNumbers
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkPrintOperations", "bulkPrintOperations", "Function", "GetLeadNumbers()", "0", ex.Message.ToString)
             y = Nothing
@@ -85,6 +86,7 @@ Public Class bulkPrintOperations
                 ls_col.Add(lvItem)
             Next
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Sub", "PopluateListViewWithLeadNumbers()", "0", ex.Message.ToString)
             y = Nothing
@@ -117,6 +119,7 @@ Public Class bulkPrintOperations
             cnx_ex = Nothing
             Return exclusion_
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "GetExclusions()", "0", ex.Message.ToString)
             y = Nothing
@@ -140,6 +143,7 @@ Public Class bulkPrintOperations
             GenerateBoiler(msg_body, LeadNum)
             frmPrint.wbPrint.Navigate(Server_directory_print & LeadNum.ToString & ".htm")
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "DoTheWork(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -152,6 +156,7 @@ Public Class bulkPrintOperations
             GenerateBoiler_Exclusions(msg_body, LeadNum, Exclusions)
             frmPrint.wbPrint.Navigate(Server_directory_print & LeadNum.ToString & ".htm")
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "DoThWork(leadnum,exclusions)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -203,6 +208,7 @@ Public Class bulkPrintOperations
             cnx_MSG = Nothing
             Return msg_
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "GenerateMSG_BODY(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -223,6 +229,7 @@ Public Class bulkPrintOperations
             cmdMRes = Nothing
             Return res
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "GetLastKnowMarketingResults(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -322,6 +329,7 @@ Public Class bulkPrintOperations
             fs.Close()
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Sub", "GenerateBoiler_Exclusions(ByVal MSG_BODY As MessageBody, ByVal LeadNum As String, ByVal Exclusions As Exclusions)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -388,6 +396,7 @@ Public Class bulkPrintOperations
             fs.Flush()
             fs.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Sub", "GenerateBoiler(ByVal MSG_BODY As MessageBody, ByVal LeadNum As String)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -403,6 +412,7 @@ Public Class bulkPrintOperations
             Dim timeConstructed As String = secondary(0) & ":" & secondary(1) & " " & peices(2)
             Return timeConstructed
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "SplitTime(appttime)", "0", ex.Message.ToString)
             y = Nothing
@@ -458,6 +468,7 @@ Public Class bulkPrintOperations
 
             Return strMSG
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "GenerateBoiler_BULK_MSG_BODY(leadnums)", "0", ex.Message.ToString)
             y = Nothing
@@ -543,6 +554,7 @@ Public Class bulkPrintOperations
 
             Return strMSG
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "GenerateBoiler_BULK_MSG_BODY_EXCLUSIONS(leadnums)", "0", ex.Message.ToString)
             y = Nothing
@@ -567,6 +579,7 @@ Public Class bulkPrintOperations
             fs.Close()
             frmPrint.wbPrint.Navigate(Server_directory_print & "BULK_PRINT.htm")
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Sub", "GenerateBULK_PRINT(strmsg)", "0", ex.Message.ToString)
             y = Nothing
@@ -594,6 +607,7 @@ Public Class bulkPrintOperations
             End If
             Return can_get_email
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "CanRepGetEmail(repfname,replname)", "0", ex.Message.ToString)
             y = Nothing
@@ -617,6 +631,7 @@ Public Class bulkPrintOperations
             End If
             Return can_get_email
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "CanRepGetEmail(EmployeeID) {Overloaded}", "0", ex.Message.ToString)
             y = Nothing

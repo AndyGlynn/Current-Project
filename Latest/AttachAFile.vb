@@ -22,6 +22,8 @@ Public Class AttachAFile
             Me.lblPhoneInfo.Text = a.Contact1Name & vbCrLf & a.StAddress & vbCrLf & a.HousePhone & vbCrLf & a.AltPhone1 & "     " & a.AltPhone1Type & vbCrLf & a.AltPhone2 & "     " & a.AltPhone2Type
             Me.Text = Me.Text & " for Record ID: " & Me.txtLeadNumber.Text
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AttachAFile", "FormCode", "Event", "AttachAFile_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -40,6 +42,8 @@ Public Class AttachAFile
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AttachAFile", "FormCode", "Event", "txtLeadNumber_KeyPress", "0", ex.Message.ToString)
             y = Nothing
@@ -76,6 +80,8 @@ Public Class AttachAFile
             End If
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AttachAFile", "FormCode", "Event", "txtLeadNumber_TextChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -111,6 +117,8 @@ Public Class AttachAFile
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AttachAFile", "FormCode", "Sub", "ValidateLeadNumber(leadNumber)", LeadNumber, ex.Message.ToString)
             y = Nothing
@@ -210,6 +218,8 @@ Public Class AttachAFile
             Me.Close()
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AttachAFile", "FormCode", "Event", "btnNext_Click", "0", ex.Message.ToString)
             y = Nothing

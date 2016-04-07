@@ -11,6 +11,8 @@ Public Class ImportPictures
             z.GetProducts()
             Me.txtLeadNum.Text = STATIC_VARIABLES.CurrentID.ToString
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportPictures", "FormCode", "Event", "ImportPictures_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -32,6 +34,8 @@ Public Class ImportPictures
             z.PullACRO(x.ToString)
             ProdAcro = z.ProductAcronym
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportPictures", "FormCode", "Event", "cboProductSel_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -223,6 +227,8 @@ Public Class ImportPictures
             y = Nothing
             Me.Cursor = Cursors.WaitCursor
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportPictures", "FormCode", "Event", "btnOK_click", "0", ex.Message.ToString)

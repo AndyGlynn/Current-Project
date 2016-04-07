@@ -90,6 +90,8 @@ Public Class frmRolodex
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmRolodex", "FormCode", "sub", "PopulateDefaultList(department)", "0", ex.Message.ToString)
             y = Nothing
@@ -158,6 +160,8 @@ Public Class frmRolodex
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmRolodex", "FormCode", "sub", "Button3_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -212,6 +216,8 @@ Public Class frmRolodex
             'Dim dn As New DialTelephoneNumber(area_code & number)
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             MsgBox("Error Placing Call: " & Area_Code & Number & "." & vbCrLf & ex.Message.ToString, MsgBoxStyle.Critical, "Error Placing Call")
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmRolodex", "FormCode", "Sub", "Button4_Click", "0", ex.Message.ToString)

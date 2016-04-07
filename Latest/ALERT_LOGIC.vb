@@ -173,6 +173,7 @@ Public Class ALERT_LOGIC
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm.ToString, "SQL", "GetRecordInformation")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC", "Sub", "GetRecordInformation(username)", "0", ex.Message.ToString)
             y = Nothing
@@ -211,6 +212,7 @@ Public Class ALERT_LOGIC
         Catch ex As Exception
             cnn.Close()
             Return CountOfAlerts
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CountAlerts")
             Dim y As New ErrorLogging_V2
@@ -265,6 +267,7 @@ Public Class ALERT_LOGIC
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "'New'")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC", "Constructor", "New(UserName)", "0", ex.Message.ToString)
             y = Nothing
@@ -355,6 +358,7 @@ Public Class ALERT_LOGIC
             Catch ex As Exception
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ALERT_LOGIC.CreateForePanel", "ByVal ID As String, ByVal LeadNumber As String, ByVal AlertTime As String, ByVal ExecDate As String, ByVal Notes As String, ByVal AssignedBy As String, ByVal Completed As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "'New'")
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC.CreateForePanel", "Constructor", "New(ByVal ID As String, ByVal LeadNumber As String, ByVal AlertTime As String, ByVal ExecDate As String, ByVal Notes As String, ByVal AssignedBy As String, ByVal Completed As Boolean)", "0", ex.Message.ToString)
                 y = Nothing
@@ -384,6 +388,7 @@ Public Class ALERT_LOGIC
                     PastDueAlerts.SelectedID.Add(Me.ForePanel.Tag.ToString)
                 End If
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC.CreateForePanel", "Event", "forepanel_Click", "0", ex.Message.ToString)
                 y = Nothing
@@ -401,6 +406,7 @@ Public Class ALERT_LOGIC
                 CommonNFO.ShowInTaskbar = False
                 CommonNFO.ShowDialog()
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "ALERT_LOGIC", "ALERT_LOGIC.CreateForePanel", "Event", "lnkID_Click", "0", ex.Message.ToString)
                 y = Nothing

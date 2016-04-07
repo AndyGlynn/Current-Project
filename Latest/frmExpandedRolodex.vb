@@ -21,6 +21,8 @@
             Next
             Me.cboDepartment.SelectedIndex = 0
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmExpandedRolodex", "FormCode", "Event", "Form1_Load()", "0", ex.Message.ToString)
             y = Nothing
@@ -44,6 +46,8 @@
                 RolodexEdit.ShowDialog()
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmExpandedRolodex", "FormCode", "Event", "btnEdit_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -81,6 +85,8 @@
             Next
             Me.cboDepartment.SelectedIndex = 0
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmExpandedRolodex", "FormCode", "Event", "ReFreshForm()", "0", ex.Message.ToString)
             y = Nothing
@@ -102,6 +108,8 @@
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmExpandedRolodex", "FormCode", "Event", "btnDelete_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -139,6 +147,8 @@
                 Me.ListView1.Items.Add(lv)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmExpandedRolodex", "FormCode", "Event", "cboDepartment_SelectedIndexChange", "0", ex.Message.ToString)
             y = Nothing
@@ -161,6 +171,8 @@
                 frmSMS.ShowDialog()
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmExpandedRolodex", "FormCode", "Event", "btnDial_click", "0", ex.Message.ToString)
             y = Nothing
@@ -185,6 +197,8 @@
             prntChoice.arDepartments = arGroups
             prntChoice.ShowDialog()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmExpandedRolodex", "FormCode", "Event", "btnPrint_Click", "0", ex.Message.ToString)
             y = Nothing

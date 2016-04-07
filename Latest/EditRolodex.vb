@@ -21,6 +21,8 @@ Public Class EditRolodex
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditRolodex", "FormCode", "Event", "Edit_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -113,6 +115,8 @@ Public Class EditRolodex
             Me.Close()
             frmRolodex.PopulateDefaultList(frmRolodex.cboDepartment.Text)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "btnAction_click", "0", ex.Message.ToString)
             y = Nothing

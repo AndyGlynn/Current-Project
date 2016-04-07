@@ -264,6 +264,8 @@ Public Class frmRList
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmCreateList", "FormCode", "sub", "btnShow_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -343,6 +345,8 @@ Public Class frmRList
             Next
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "tabDate_Leave", "FormCode", "sub", "tabDate_Leave", "0", ex.Message.ToString)
             y = Nothing
@@ -370,6 +374,8 @@ Public Class frmRList
                 Me.chlstProducts.SetItemChecked(x, True)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "tabDate_Leave", "FormCode", "sub", "tabDate_Leave", "0", ex.Message.ToString)
             y = Nothing
@@ -471,6 +477,8 @@ Public Class frmRList
 
 
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "txtZipCity_Leave", "FormCode", "sub", "tabDate_Leave", "0", ex.Message.ToString)
                 y = Nothing
@@ -499,6 +507,8 @@ Public Class frmRList
 
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "tabDate_Leave", "FormCode", "sub", "tabDate_Leave", "0", ex.Message.ToString)
             y = Nothing
@@ -526,6 +536,8 @@ Public Class frmRList
 
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "rdoCity_CheckedChanged", "FormCode", "sub", "tabDate_Leave", "0", ex.Message.ToString)
             y = Nothing
@@ -1208,7 +1220,8 @@ Public Class frmRList
             cnn.Close()
 
         Catch ex As Exception
-
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
         End Try
     End Sub
 

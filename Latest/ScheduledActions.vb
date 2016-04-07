@@ -301,6 +301,8 @@ Public Class ScheduledActions
             R1.Close()
             cnn.Close()
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "SetUp()", "0", ex.Message.ToString)
@@ -345,6 +347,8 @@ Public Class ScheduledActions
 
             End Select
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "Link()", "0", ex.Message.ToString)
             y = Nothing
@@ -496,6 +500,8 @@ Public Class ScheduledActions
                 'Administration.ScheduledTasks.ShowDropDown()
             End If
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "PanelControl", "0", ex.Message.ToString)
             y = Nothing
@@ -536,6 +542,8 @@ Public Class ScheduledActions
             R1.Close()
             cnn.Close()
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "Completed(Id)", ID, ex.Message.ToString)
@@ -556,6 +564,8 @@ Public Class ScheduledActions
             R1.Close()
             cnn.Close()
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "UndoCompleted(id)", ID, ex.Message.ToString)
@@ -576,6 +586,8 @@ Public Class ScheduledActions
             R1.Close()
 
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "HideTask(id)", ID, ex.Message.ToString)
@@ -596,6 +608,8 @@ Public Class ScheduledActions
             R1.Close()
             cnn.Close()
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "HideAll(form)", "0", ex.Message.ToString)
@@ -615,6 +629,8 @@ Public Class ScheduledActions
             R1.Close()
             cnn.Close()
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "ShowAll(form)", "0", ex.Message.ToString)
@@ -636,6 +652,8 @@ Public Class ScheduledActions
             R1.Close()
             cnn.Close()
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim yy As New ErrorLogging_V2
             yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "Preferences(y,form)", "0", ex.Message.ToString)

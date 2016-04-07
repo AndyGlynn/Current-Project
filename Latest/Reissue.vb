@@ -99,6 +99,7 @@ Public Class Reissue
                     Me.rtfAutoNote.Text = (Me.rtfAutoNote.Text & ", " & x)
             End Select
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Reissue", "FormCode", "Sub", "cboautonotes", "0", ex.Message.ToString)
             y = Nothing
@@ -157,6 +158,7 @@ Public Class Reissue
             cnn.Close()
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             MsgBox(ex.ToString)
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Reissue", "FormCode", "Sub", "Reissue_Load", "0", ex.Message.ToString)
@@ -182,6 +184,7 @@ Public Class Reissue
                 Me.cboSpokeWith.Items.Add(s(0) & " & " & s2(0))
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Reissue", "FormCode", "Sub", "Reissue_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -327,6 +330,7 @@ Public Class Reissue
             Me.Dispose()
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Reissue", "FormCode", "Sub", "Button2_Click", "0", ex.Message.ToString)
             y = Nothing

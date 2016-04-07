@@ -239,6 +239,7 @@ Public Class AF_And_JP_Logic
             ar_directories = New List(Of DirObject)
             ar_directories = Get_Folders_In_Directory(target_path)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic", "Class", "Constructor", "New {1}", "0", ex.Message.ToString)
             y = Nothing
@@ -251,6 +252,7 @@ Public Class AF_And_JP_Logic
             ar_directories = New List(Of DirObject)
             ar_directories = Get_Folders_In_Directory(Directory)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Constructor", "New {2} Overloaded", "0", ex.Message.ToString)
             y = Nothing
@@ -341,6 +343,7 @@ Public Class AF_And_JP_Logic
                 System.IO.Directory.CreateDirectory(TargetPath)
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic", "AF_And_JP_Logic", "Function", "Get_Files_In_Directory()", "0", ex.Message.ToString)
             y = Nothing
@@ -375,6 +378,7 @@ Public Class AF_And_JP_Logic
                 System.IO.Directory.CreateDirectory(TargetPath)
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "Get_Folders_In_Directory(directory)", "0", ex.Message.ToString)
             y = Nothing
@@ -408,6 +412,7 @@ Public Class AF_And_JP_Logic
             'Dim y As New ErrorLogging_V2
             'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetJumbos(path)", "0", ex.Message.ToString)
             'y = Nothing
+            Main.Cursor = Cursors.Default
         End Try
 
     End Function
@@ -436,6 +441,7 @@ Public Class AF_And_JP_Logic
             'Dim y As New ErrorLogging_V2
             'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetLarges(path)", "0", ex.Message.ToString)
             'y = Nothing
+            Main.Cursor = Cursors.Default
         End Try
 
     End Function
@@ -464,6 +470,7 @@ Public Class AF_And_JP_Logic
             'Dim y As New ErrorLogging_V2
             'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetSmalls(Path)", "0", ex.Message.ToString)
             'y = Nothing
+            Main.Cursor = Cursors.Default
         End Try
 
     End Function
@@ -492,6 +499,7 @@ Public Class AF_And_JP_Logic
             'Dim y As New ErrorLogging_V2
             'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "GetMediums(path)", "0", ex.Message.ToString)
             'y = Nothing
+            Main.Cursor = Cursors.Default
         End Try
 
     End Function
@@ -577,6 +585,7 @@ Public Class AF_And_JP_Logic
 
             Return y
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AF_And_JP_Logic Class", "AF_And_JP_Logic", "Function", "Extract_Thumbs(FillFullName,File)", "0", ex.Message.ToString)
             y = Nothing

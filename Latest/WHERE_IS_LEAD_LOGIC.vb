@@ -109,6 +109,7 @@ Public Class WHERE_IS_LEAD_LOGIC
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim err As New ErrorLogFlatFile
             err.WriteLog("WHERE_IS_LEAD_LOGIC", "ByVal ID as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "FindLead")

@@ -26,6 +26,8 @@ Public Class SCHEDULE_ACTION_LOGIC
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("SCHEDULE_ACTION_LOGIC.GetActionList", "ByVal Department as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetActionList")
             Dim y As New ErrorLogging_V2
@@ -51,6 +53,8 @@ Public Class SCHEDULE_ACTION_LOGIC
             'ScheduleAction.CboScheduledAction.SelectedItem = Action
         Catch ex As Exception
             cnn.Close()
+
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("SCHEDULE_ACTION_LOGIC.GetActionList", "ByVal Department as string, ByVal Action As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewAction")
             Dim y As New ErrorLogging_V2
@@ -139,6 +143,8 @@ Public Class SCHEDULE_ACTION_LOGIC
                 End Select
             Catch ex As Exception
                 cnn.Close()
+
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("SCHEDULE_ACTION_LOGIC.InsertSA", "ByVal LeadNum As String, ByVal Department As String, ByVal AssignedTo As String, ByVal ExecDate As Date, ByVal Notes As String, ByVal AttachedFiles As Boolean, ByVal scheduledAction As String, ByVal Hash As String, ByVal Completed As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewSchedAction")
                 Dim y As New ErrorLogging_V2
@@ -182,6 +188,8 @@ Public Class SCHEDULE_ACTION_LOGIC
                 r2.Close()
                 cnn.Close()
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SCHEDULEDACTION_LOGIC", "SCHEDULEDACTION_LOGIC", "Sub", "InsertNewSchedAction(id)", id, ex.Message.ToString)
                 y = Nothing
@@ -200,6 +208,8 @@ Public Class SCHEDULE_ACTION_LOGIC
                 r2.Close()
                 cnn.Close()
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SCHEDULEDACTION_LOGIC", "SCHEDULEDACTION_LOGIC", "Sub", "Update_AF_Path(hash,said)", "0", ex.Message.ToString)
                 y = Nothing
@@ -240,6 +250,8 @@ Public Class SCHEDULE_ACTION_LOGIC
                 End If
                 x.SetUp(STATIC_VARIABLES.ActiveChild, STATIC_VARIABLES.CurrentID, tscbo)
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SCHEDULEDACTION_LOGIC", "SCHEDULEDACTION_LOGIC", "Sub", "Refresh_CustomerHistory()", "0", ex.Message.ToString)
                 y = Nothing

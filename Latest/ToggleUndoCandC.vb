@@ -29,6 +29,7 @@ Public Class ToggleUndoCandC
 
             Return res '' the id of the record to delete 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ToggleUndoCandC", "ToggleUndoCandC", "Function", "Get_ID_OF_CandC", "0", ex.Message.ToString)
             y = Nothing
@@ -47,6 +48,7 @@ Public Class ToggleUndoCandC
             m_resCNX = Nothing
             Log_CandC_Undone(LeadNum, Date.Now.ToString)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ToggleUndoCandC", "ToggleUndoCandC", "Function", "Delete_CandC", "0", ex.Message.ToString)
             y = Nothing
@@ -73,6 +75,7 @@ Public Class ToggleUndoCandC
 
             m_resCNX = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ToggleUndoCandC", "ToggleUndoCandC", "Function", "Log_CandC_Undone(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing

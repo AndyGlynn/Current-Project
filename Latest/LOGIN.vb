@@ -18,7 +18,7 @@ Public Class LOGIN
 
     Private Sub LOGIN_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
-        Me.Dispose()
+        ' Me.Dispose()
         ' Main.tmrmanagealerts.Start()
         'PastDueAlerts.Show()
      
@@ -43,8 +43,9 @@ Public Class LOGIN
 
             Me.txtPWD.Text = ""
             Me.Text = STATIC_VARIABLES.ProgramName.ToString & " : Login"
+            Me.Cursor = Cursors.WaitCursor
             Dim a As New AUTO_COMPLETE_LOGINS
-
+            Me.Cursor = Cursors.Default
             'Dim doc As New XmlDocument
             'doc.Load(strPath)
             'Dim r1 As XmlNodeReader
@@ -82,6 +83,7 @@ Public Class LOGIN
             'Me.btnOK_Click(Nothing, Nothing)
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "LOGIN", "FormCode", "Event", "Load", "0", ex.Message.ToString)
             y = Nothing
@@ -93,6 +95,7 @@ Public Class LOGIN
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
 
         Try
+            Me.Cursor = Cursors.WaitCursor
             Dim x As New MAPPOINT_LOGIC
             x.KillProcess() '' make sure all mappoint instances are not runnning and closed out / free resources 
             Dim c As New USER_LOGICv2
@@ -124,7 +127,7 @@ Public Class LOGIN
                     'c.LogOut("99", scrX, scrY, scrW, scrH, "Main", "No Query", My.Computer.Name.ToString, "admin")
                     c.LogOutOfSystem(STATIC_VARIABLES.CurrentLoggedInEmployee.UserFirstName, STATIC_VARIABLES.CurrentLoggedInEmployee.UserLastName, scrX, scrY, scrW, scrH, frmX)
                 End Try
-                Me.Cursor = Cursors.WaitCursor
+
                 Application.Exit()
                 Me.Cursor = Cursors.Default
             Catch ex As Exception
@@ -141,6 +144,7 @@ Public Class LOGIN
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         Try
+            Me.Cursor = Cursors.WaitCursor
             If Me.txtPWD.Text.ToString.Length < 2 Then
                 MsgBox("You cannot have a blank password.", MsgBoxStyle.Exclamation, "Password Needed")
                 Me.txtPWD.Select()
@@ -266,12 +270,14 @@ Public Class LOGIN
             End If
             STATIC_VARIABLES.CurrentLoggedInEmployee = usr_obj
             sql = Nothing
+            Me.Cursor = Cursors.Default
             Me.Close()
 
             'End If
             'MsgBox(STATIC_VARIABLES.CurrentUser)
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "LOGIN", "FormCode", "Event", "btnOK_CLick", "0", ex.Message.ToString)
             y = Nothing

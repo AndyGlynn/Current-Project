@@ -35,6 +35,7 @@ Public Class Alert_Logic_Tick
         Catch ex As Exception
             cnn.Close()
             Return CountOfAlertsTick
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CountAlertsTick")
             Dim y As New ErrorLogging_V2
@@ -57,6 +58,7 @@ Public Class Alert_Logic_Tick
             y.ID = ID
             y.Show()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Alert_Logic_Tick", "Alert_Logic_Tick", "Sub", "Completed", ID, ex.Message.ToString)
             y = Nothing
@@ -84,6 +86,7 @@ Public Class Alert_Logic_Tick
 
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ALERT_LOGIC", "UserName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CountAlertsTick")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Alert_Logic_Tick", "Alert_Logic_Tick", "Function", "Get_ID(UserName)", "0", ex.Message.ToString)
             y = Nothing

@@ -11,6 +11,7 @@ Public Class AddManager
             Me.txtLname.Text = ""
             Me.cboDept.SelectedItem = Nothing
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddManager", "FormCode", "Event", "AddManager_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -25,6 +26,7 @@ Public Class AddManager
                 e.Handled = Not Char.IsLetter(e.KeyChar)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddManager", "FormCode", "Event", "txtFName_KeyPress", "0", ex.Message.ToString)
             y = Nothing
@@ -38,6 +40,7 @@ Public Class AddManager
                 Me.txtFName.Text = Me.CapitalizeText(Me.txtFName.Text)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddManager", "FormCode", "Event", "txtFName_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -52,6 +55,7 @@ Public Class AddManager
             TextToCap = Text & Mid(TextToCap, 2, TextToCap.Length)
             Return TextToCap
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Return TextToCap
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddManager", "FormCode", "Function", "CapitalizeText", "0", ex.Message.ToString)
@@ -66,6 +70,7 @@ Public Class AddManager
                 e.Handled = Not Char.IsLetter(e.KeyChar)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddManager", "FormCode", "Event", "txtLName_KeyPress", "0", ex.Message.ToString)
             y = Nothing
@@ -79,6 +84,7 @@ Public Class AddManager
                 Me.txtLname.Text = Me.CapitalizeText(Me.txtLname.Text)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddManager", "FormCode", "Event", "txtLName_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -127,6 +133,7 @@ Public Class AddManager
             SetUpUser1.cboManager.SelectedItem = Me.txtFName.Text & " " & Me.txtLname.Text
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddManager", "FormCode", "Event", "btnNext_Click", "0", ex.Message.ToString)
             y = Nothing

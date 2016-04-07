@@ -20,6 +20,9 @@
                     Me.ListView1.Items.Add(lvItem)
                 Next
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
+
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ErrorLogForm", "FormCode", "Sub", "Form1_Load", "0", ex.Message.ToString)
                 y = Nothing
@@ -43,6 +46,8 @@
                 End If
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
 
         End Try
     End Sub
@@ -54,6 +59,8 @@
             fileList = logger.GetFiles
             RefreshListViewFiles()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
 
         End Try
     End Sub
@@ -70,6 +77,8 @@
                 Me.ListView1.Items.Add(lvItem)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
 
         End Try
     End Sub
@@ -87,6 +96,8 @@
                 End If
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
 
         End Try
     End Sub

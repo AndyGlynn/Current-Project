@@ -61,6 +61,7 @@ Public Class RescheduleAppt
             Me.Close()
             Me.Dispose()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "RescheduleAppt", "FormCode", "Sub", "btnSave_Click", "0", ex.Message.ToString)
             y = Nothing

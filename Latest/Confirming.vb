@@ -70,7 +70,7 @@ Public Class Confirming
   
     Private Sub Confirming_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         STATIC_VARIABLES.CurrentID = ""
-        Me.Dispose()
+
         Main.Refresh()
     End Sub
 
@@ -318,7 +318,10 @@ Public Class Confirming
             lvConfirming_SelectedIndexChanged(Nothing, Nothing)
             Me.RefreshData.Interval = 5000
             Me.RefreshData.Start()
+            Me.Cursor = Cursors.Default
+
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Confirming", "Confirming", "Event", "Confirming_Load()", "0", ex.Message.ToString)
             y = Nothing

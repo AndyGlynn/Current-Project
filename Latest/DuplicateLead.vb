@@ -30,6 +30,8 @@ Public Class DuplicateLead
             Me.lstDupes.Items.Clear()
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "DuplicateLead", "FormCode", "Event", "btnNew_Click()", "0", ex.Message.ToString)
             y = Nothing
@@ -37,11 +39,5 @@ Public Class DuplicateLead
 
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-
-    End Sub
-
-    Private Sub DuplicateLead_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
+  
 End Class

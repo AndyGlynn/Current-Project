@@ -60,6 +60,7 @@ Public Class AlertNotify
                        AudioPlayMode.Background)
             Main.Refresh()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Sub", "AlertNotify_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -83,6 +84,7 @@ Public Class AlertNotify
             Me.Close()
             Me.Dispose()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Sub", "Label5_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -119,6 +121,7 @@ Public Class AlertNotify
             Me.Dispose()
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "btnRemind_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -407,6 +410,7 @@ Public Class AlertNotify
             'remove customer in listview on lost index changed and restart refresh timer 
             Me.Label5_Click(Nothing, Nothing)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "LinkID_Clicked", "0", ex.Message.ToString)
             y = Nothing
@@ -480,6 +484,7 @@ Public Class AlertNotify
             End If
             cnt2 += 1
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "Timer1_Tick", "0", ex.Message.ToString)
             y = Nothing

@@ -41,6 +41,7 @@ Public Class Locked_for_Editing
             cmdUP.ExecuteNonQuery()
             cnn.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Locked_For_Editing", "Locked_For_Editing", "Sub", "Lock", "0", ex.Message.ToString)
             y = Nothing
@@ -55,6 +56,7 @@ Public Class Locked_for_Editing
             cmdUP.ExecuteNonQuery()
             cnn.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Locked_For_Editing", "Locked_For_Editing", "Sub", "Remove_Lock", id, ex.Message.ToString)
             y = Nothing

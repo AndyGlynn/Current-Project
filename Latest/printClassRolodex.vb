@@ -32,6 +32,7 @@ Public Class printClassRolodex
             pprev.ClientSize = New System.Drawing.Size(700, 700)
             pprev.ShowDialog()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "printClassRolodex", "printClassRolodex", "Constructor", "New(listtoprint)", "0", ex.Message.ToString)
             y = Nothing
@@ -57,6 +58,7 @@ Public Class printClassRolodex
 
             e.HasMorePages = False
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "printClassRolodex", "printClassRolodex", "Event", "PD_PrintPage()", "0", ex.Message.ToString)
             y = Nothing

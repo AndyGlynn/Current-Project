@@ -966,6 +966,8 @@ Public Class createListPrintOperations
             frmWCList.Cursor = Cursors.Default
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Sub", "CreateWireFrameHTML_WarmCalling(ByVal QueryString As String, ByVal Grouped As Boolean, ByVal GroupHeading As ArrayList)", "0", ex.Message.ToString)
             y = Nothing
@@ -995,6 +997,8 @@ Public Class createListPrintOperations
             cnx = Nothing
             Return hsh
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Func", " GrabUniqueHeadings(ByVal HeadingData_QRY As String)", "0", ex.Message.ToString)
             y = Nothing
@@ -1166,6 +1170,9 @@ Public Class createListPrintOperations
             System.Diagnostics.Process.Start(Production_Directory & guid.ToString & ext)
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Sub", "CreateWireFrameHTML(QueryString)", "0", ex.Message.ToString)
             y = Nothing
@@ -1221,6 +1228,9 @@ Public Class createListPrintOperations
             cnx = Nothing
             Return arResults
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Function", "GrabRowsForHTML(Query_String)", "0", ex.Message.ToString)
             y = Nothing
@@ -1294,6 +1304,9 @@ Public Class createListPrintOperations
             cnx = Nothing
             Return arResults
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Function", "GrabRowsForHTML(Query_String)", "0", ex.Message.ToString)
             y = Nothing
@@ -1396,6 +1409,8 @@ Public Class createListPrintOperations
             System.Diagnostics.Process.Start(Production_Directory & guid.ToString & ext)
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Sub", "CreateWireFrameHTML(QueryString)", "0", ex.Message.ToString)
             y = Nothing
@@ -1404,727 +1419,727 @@ Public Class createListPrintOperations
     End Sub
 
     Public Sub CreateWireFrameHTML_Recovery(ByVal QueryString As String, ByVal Grouped As Boolean, ByVal GroupHeadings As ArrayList, ByVal HeadingData_QRY As String)
-        'Try
+        Try
 
-        frmWCList.Cursor = Cursors.WaitCursor
-
-
-        arListOfLeadsToDisplayRecovery = GrabRowsForHTML_Recovery(QueryString)
-        Dim recCNT As Integer = 0
-        recCNT = arListOfLeadsToDisplayRecovery.Count
-        Dim arHeadingData As New Hashtable
-        arHeadingData = GrabUniqueHeadings(HeadingData_QRY)
-        Dim g As DictionaryEntry
-        Dim target_column As String = ""
-        Dim target_headings As New ArrayList
-
-        For Each g In arHeadingData '' should only be one entry here.
-            target_column = g.Key
-            target_headings = g.Value
-        Next
-        Dim guid As Guid = guid.NewGuid
-        Dim dateTime As String = Date.Now
-        Dim ext As String = ".htm"
-
-        Dim doc As String = "" '' var for ENTIRE html doc after built and to write to disk once complete
+            frmRList.Cursor = Cursors.WaitCursor
 
 
-        Dim title As String = "<title>Create List For Recovery -" & Date.Today.ToShortDateString & "</title>"
+            arListOfLeadsToDisplayRecovery = GrabRowsForHTML_Recovery(QueryString)
+            Dim recCNT As Integer = 0
+            recCNT = arListOfLeadsToDisplayRecovery.Count
+            Dim arHeadingData As New Hashtable
+            arHeadingData = GrabUniqueHeadings(HeadingData_QRY)
+            Dim g As DictionaryEntry
+            Dim target_column As String = ""
+            Dim target_headings As New ArrayList
 
-        Dim style As String = "<style type='text/css'>" & vbCrLf
-        style += "span.data {font-family:""Verdana"",sans-serif;font-size:1.3em;color:black;}" & vbCrLf
-        style += ".elem1 {font-family:""Verdana"",sans-serif;color:blue;font-size:1.3em;}" & vbCrLf
-        style += ".tbl {font-family:""Verdana"",sans-serif;color:black;border-collapse:collapse;margin:5px;box-shadow:2px 2px 2px grey;}" & vbCrLf
-        style += "tr {padding:3px;border-bottom-width:1px;border-bottom-color:black;border-style:solid;border-top-width:0px;border-right-width:0px;border-left-width:0px;}" & vbCrLf
-        style += "tr:nth-child(odd) {background-color:white;}" & vbCrLf
-        style += "tr:nth-child(even) {background-color:hsl(0,0%,90%);}" & vbCrLf
-        style += "th {font-family:""Verdana"",sans-serif;font-size:1.1em;color:black;padding:3px;text-align:center;background-color:hsl(0,0%,80%);}" & vbCrLf
-        style += "th.lg {font-family:""Verdana"",sans-serif;font-size:1.2em;font-weight:bold;color:black;padding:3px;text-align:center;background-color:white;text-align:left;}"
-        style += "td {font-family:""Verdana"",sans-serif;font-size:0.8em;padding:7px;text-align:center;}" & vbCrLf
-        style += "tr.sale {font-family:""Verdana"",sans-serif;font-weight:normal;font-size:1em;background-color:hsl(120,100%,75%);}" & vbCrLf
-        style += "@media print { span.data {display:none;} tr:nth-child(even){background-color:white;}tr:nth-child(odd){background-color:white;}" & vbCrLf
-        style += "tr.sale{background-color:white;font-size:0.8em;}th{font-size:0.7em;}td{font-size:0.5em;}.tbl{box-shadow:0px 0px 0px white;} @page{size:landscape;}}" & vbCrLf
-        style += "</style>"
+            For Each g In arHeadingData '' should only be one entry here.
+                target_column = g.Key
+                target_headings = g.Value
+            Next
+            Dim guid As Guid = guid.NewGuid
+            Dim dateTime As String = Date.Now
+            Dim ext As String = ".htm"
 
-
-        Dim jScript As String = "<script type='text/javascript'></script>"
-
+            Dim doc As String = "" '' var for ENTIRE html doc after built and to write to disk once complete
 
 
-        doc += "<!DOCTYPE html>" & vbCrLf
-        doc += "<head>" & vbCrLf
-        doc += "<meta charset=""UTF-8"">" & vbCrLf
-        doc += "" & title & "" & vbCrLf
-        doc += "" & style & "" & vbCrLf
-        doc += "" & jScript & "" & vbCrLf
-        doc += " " & vbCrLf
-        doc += " " & vbCrLf
-        doc += "<!-- AUTO GENERATED CODE FOR: " & Date.Now.ToString & " -->" & vbCrLf
-        doc += "<!-- Header Query: " & vbCrLf
-        doc += "" & HeadingData_QRY.ToString & " -->" & vbCrLf
-        doc += " " & vbCrLf
-        doc += " " & vbCrLf
-        doc += "<!-- Query ACTUAL: " & vbCrLf
-        doc += "" & QueryString.ToString & " -->"
-        doc += " " & vbCrLf
-        doc += " " & vbCrLf
-        doc += "</head>" & vbCrLf
-        doc += "<body>" & vbCrLf
-        doc += "<span id='elem1' class='elem1'> Recovery List - " & recCNT.ToString & " Item(s)  [ " & target_column & " ] Grouping Applied </span>" & vbCrLf
-        doc += "<br /><br />" & vbCrLf
-        doc += "<table id='tbDat' class='tbl'>" & vbCrLf
-        doc += "<tr><th></th><th>ID</th><th>Name(s)</th><th>Address</th><th width=""215"" >Phone(s)</th><th>Product(s)</th><th>Gen. On</th><th>Appt. Date</th><th>Appt. Time</th><th>Result</th><th>Q. / S.</th></tr>" & vbCrLf
-        '' 
-        '' Appt Date. Header Dropped.
-        '' 
+            Dim title As String = "<title>Create List For Recovery -" & Date.Today.ToShortDateString & "</title>"
 
-        '' for each 'Heading' determine if the lead.field is = to heading , if it is=> put row 'under heading'
-        '' if it isnt => do nothing with it
-
-        Dim arFilteredRows As New ArrayList
-
-        Dim srtGroups As New SortedList
-        Dim hashGroups As New Hashtable
-        'For Each xx As LeadToPrint In arListOfLeadsToDisplay
+            Dim style As String = "<style type='text/css'>" & vbCrLf
+            style += "span.data {font-family:""Verdana"",sans-serif;font-size:1.3em;color:black;}" & vbCrLf
+            style += ".elem1 {font-family:""Verdana"",sans-serif;color:blue;font-size:1.3em;}" & vbCrLf
+            style += ".tbl {font-family:""Verdana"",sans-serif;color:black;border-collapse:collapse;margin:5px;box-shadow:2px 2px 2px grey;}" & vbCrLf
+            style += "tr {padding:3px;border-bottom-width:1px;border-bottom-color:black;border-style:solid;border-top-width:0px;border-right-width:0px;border-left-width:0px;}" & vbCrLf
+            style += "tr:nth-child(odd) {background-color:white;}" & vbCrLf
+            style += "tr:nth-child(even) {background-color:hsl(0,0%,90%);}" & vbCrLf
+            style += "th {font-family:""Verdana"",sans-serif;font-size:1.1em;color:black;padding:3px;text-align:center;background-color:hsl(0,0%,80%);}" & vbCrLf
+            style += "th.lg {font-family:""Verdana"",sans-serif;font-size:1.2em;font-weight:bold;color:black;padding:3px;text-align:center;background-color:white;text-align:left;}"
+            style += "td {font-family:""Verdana"",sans-serif;font-size:0.8em;padding:7px;text-align:center;}" & vbCrLf
+            style += "tr.sale {font-family:""Verdana"",sans-serif;font-weight:normal;font-size:1em;background-color:hsl(120,100%,75%);}" & vbCrLf
+            style += "@media print { span.data {display:none;} tr:nth-child(even){background-color:white;}tr:nth-child(odd){background-color:white;}" & vbCrLf
+            style += "tr.sale{background-color:white;font-size:0.8em;}th{font-size:0.7em;}td{font-size:0.5em;}.tbl{box-shadow:0px 0px 0px white;} @page{size:landscape;}}" & vbCrLf
+            style += "</style>"
 
 
-        Select Case target_column
-            Case Is = "City"
-                For Each y As String In target_headings
-                    '' sort leads by 'heading'
-                    Dim arObjs As New List(Of LeadToPrintRecovery)
-                    For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
-                        If xyz.City = y Then
-                            arObjs.Add(xyz)
-                        End If
-                    Next
-                    Try
-                        hashGroups.Add(y, arObjs)
-                    Catch ex As Exception
-
-                    End Try
-                Next
+            Dim jScript As String = "<script type='text/javascript'></script>"
 
 
-                '' now break sorted list apart and render according per 'group'
 
-                For Each d As DictionaryEntry In hashGroups
-                    Dim arObjss As New List(Of LeadToPrintRecovery)
-                    arObjss = d.Value
-                    Dim cnt_Local As Integer = arObjss.Count
-                    Dim Item0 As LeadToPrintRecovery = arObjss(0)
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & ", " & Item0.State & " - [" & cnt_Local & " Items]  </em></td></tr><!-- END ROW Group Heading -->"
-                    Item0 = Nothing
-                    doc += hdrSTR
+            doc += "<!DOCTYPE html>" & vbCrLf
+            doc += "<head>" & vbCrLf
+            doc += "<meta charset=""UTF-8"">" & vbCrLf
+            doc += "" & title & "" & vbCrLf
+            doc += "" & style & "" & vbCrLf
+            doc += "" & jScript & "" & vbCrLf
+            doc += " " & vbCrLf
+            doc += " " & vbCrLf
+            doc += "<!-- AUTO GENERATED CODE FOR: " & Date.Now.ToString & " -->" & vbCrLf
+            doc += "<!-- Header Query: " & vbCrLf
+            doc += "" & HeadingData_QRY.ToString & " -->" & vbCrLf
+            doc += " " & vbCrLf
+            doc += " " & vbCrLf
+            doc += "<!-- Query ACTUAL: " & vbCrLf
+            doc += "" & QueryString.ToString & " -->"
+            doc += " " & vbCrLf
+            doc += " " & vbCrLf
+            doc += "</head>" & vbCrLf
+            doc += "<body>" & vbCrLf
+            doc += "<span id='elem1' class='elem1'> Recovery List - " & recCNT.ToString & " Item(s)  [ " & target_column & " ] Grouping Applied </span>" & vbCrLf
+            doc += "<br /><br />" & vbCrLf
+            doc += "<table id='tbDat' class='tbl'>" & vbCrLf
+            doc += "<tr><th></th><th>ID</th><th>Name(s)</th><th>Address</th><th width=""215"" >Phone(s)</th><th>Product(s)</th><th>Gen. On</th><th>Appt. Date</th><th>Appt. Time</th><th>Result</th><th>Q. / S.</th></tr>" & vbCrLf
+            '' 
+            '' Appt Date. Header Dropped.
+            '' 
 
-                    For Each obj As LeadToPrintRecovery In arObjss
+            '' for each 'Heading' determine if the lead.field is = to heading , if it is=> put row 'under heading'
+            '' if it isnt => do nothing with it
 
-                        Dim rowData As String = ""
+            Dim arFilteredRows As New ArrayList
 
-                        Dim timeSplit() = Split(obj.ApptTime, " ", 2)
-                        Dim apptTime As String = splitTime(timeSplit(1).ToString)
-                        Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
-
-                        Dim leadGen As String = LeadGenSplit(0)
-                        Dim recID As String = obj.ID
-                        Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
-                        '' type the phones only phone 2 & three if present
-                        
-
-                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
-                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
-
-                        rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
-                        rowData += "<td>" & nameStr & "</td>"
-                        rowData += "<td>" & AddyString & "</td>"
-                        rowData += "<td>" & PhoneString & "</td>"
-                        rowData += "<td>" & prodString & "</td>"
-                        rowData += "<td>" & leadGen & "</td>"
-                        rowData += "<td>" & obj.ApptDate & "</td>"
-                        'rowData += "<td></td>"
-                        rowData += "<td>" & apptTime & "</td>"
-                        rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
-                        '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
-                        doc += (rowData & vbCrLf)
-                        rowData = ""
-                    Next '' end each obj in arobjs
-
-                Next '' end each dictionary entry 
-
-                doc += "</table></body></html>" '' put the end cap on it. . . 
-                Exit Select '' end city state catch
-            Case Is = "Zip"
-                For Each y As String In target_headings
-                    '' sort leads by 'heading'
-                    Dim arObjs As New List(Of LeadToPrintRecovery)
-                    For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
-                        If xyz.Zip = y Then
-                            arObjs.Add(xyz)
-                        End If
-                    Next
-                    Try
-                        hashGroups.Add(y, arObjs)
-                    Catch ex As Exception
-
-                    End Try
-                Next
+            Dim srtGroups As New SortedList
+            Dim hashGroups As New Hashtable
+            'For Each xx As LeadToPrint In arListOfLeadsToDisplay
 
 
-                '' now break sorted list apart and render according per 'group'
+            Select Case target_column
+                Case Is = "City"
+                    For Each y As String In target_headings
+                        '' sort leads by 'heading'
+                        Dim arObjs As New List(Of LeadToPrintRecovery)
+                        For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
+                            If xyz.City = y Then
+                                arObjs.Add(xyz)
+                            End If
+                        Next
+                        Try
+                            hashGroups.Add(y, arObjs)
+                        Catch ex As Exception
 
-                For Each d As DictionaryEntry In hashGroups
-                    Dim arObjss As New List(Of LeadToPrintRecovery)
-                    arObjss = d.Value
-                    Dim cnt_Local As Integer = arObjss.Count
-                    Dim Item0 As LeadToPrintRecovery = arObjss(0)
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & "  [" & Item0.State & "] - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
-                    Item0 = Nothing
-                    doc += hdrSTR
-
-                    For Each obj As LeadToPrintRecovery In arObjss
-
-                        Dim rowData As String = ""
-
-                        Dim timeSplit() = Split(obj.ApptTime, " ", 2)
-                        Dim apptTime As String = splitTime(timeSplit(1).ToString)
-                        Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
-
-                        Dim leadGen As String = LeadGenSplit(0)
-                        Dim recID As String = obj.ID
-                        Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
-                        '' type the phones only phone 2 & three if present
-                        
-
-                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
-                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
-
-                        rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
-                        rowData += "<td>" & nameStr & "</td>"
-                        rowData += "<td>" & AddyString & "</td>"
-                        rowData += "<td>" & PhoneString & "</td>"
-                        rowData += "<td>" & prodString & "</td>"
-                        rowData += "<td>" & leadGen & "</td>"
-                        rowData += "<td>" & obj.ApptDate & "</td>"
-                        'rowData += "<td></td>"
-                        rowData += "<td>" & apptTime & "</td>"
-                        rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
-                        '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
-                        doc += (rowData & vbCrLf)
-                        rowData = ""
-                    Next '' end each obj in arobjs
-
-                Next '' end each dictionary entry 
-
-                doc += "</table></body></html>" '' put the end cap on it. . . 
-                Exit Select '' end zip code catch
-            Case Is = "Result"
-                For Each y As String In target_headings
-                    '' sort leads by 'heading'
-                    Dim arObjs As New List(Of LeadToPrintRecovery)
-
-                    For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
-                        If xyz.Result = y Then
-                            arObjs.Add(xyz)
-                        End If
+                        End Try
                     Next
 
-                    Try
-                        hashGroups.Add(y, arObjs)
-                    Catch ex As Exception
 
-                    End Try
-                Next
+                    '' now break sorted list apart and render according per 'group'
 
+                    For Each d As DictionaryEntry In hashGroups
+                        Dim arObjss As New List(Of LeadToPrintRecovery)
+                        arObjss = d.Value
+                        Dim cnt_Local As Integer = arObjss.Count
+                        Dim Item0 As LeadToPrintRecovery = arObjss(0)
+                        Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & ", " & Item0.State & " - [" & cnt_Local & " Items]  </em></td></tr><!-- END ROW Group Heading -->"
+                        Item0 = Nothing
+                        doc += hdrSTR
 
-                '' now break sorted list apart and render according per 'group'
+                        For Each obj As LeadToPrintRecovery In arObjss
 
-                For Each d As DictionaryEntry In hashGroups
-                    Dim arObjss As New List(Of LeadToPrintRecovery)
-                    arObjss = d.Value
-                    Dim cnt_Local As Integer = arObjss.Count
-                    Dim Item0 As LeadToPrintRecovery = arObjss(0)
+                            Dim rowData As String = ""
 
-                    '' for this grouping, split off time: 
-                    '' comes out like: [ Gen. On: 11/29/2014 5:13:14 PM - [1 Items] ]
-                    '' 
-                    Dim split3() = Split(d.Key, " ", 2)
+                            Dim timeSplit() = Split(obj.ApptTime, " ", 2)
+                            Dim apptTime As String = splitTime(timeSplit(1).ToString)
+                            Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
 
-
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & " - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
-                    Item0 = Nothing
-                    doc += hdrSTR
-
-                    For Each obj As LeadToPrintRecovery In arObjss
-
-                        Dim rowData As String = ""
-
-                        Dim timeSplit() = Split(obj.ApptTime, " ", 2)
-                        Dim apptTime As String = splitTime(timeSplit(1).ToString)
-                        Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
-
-                        Dim leadGen As String = LeadGenSplit(0)
-                        Dim split2() = Split(leadGen(0), " ")
-                        Dim leadGen2 As String = split2(0)
-                        Dim recID As String = obj.ID
-                        Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
-                        '' type the phones only phone 2 & three if present
-                         
-
-                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
-                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
-
-                        rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
-                        rowData += "<td>" & nameStr & "</td>"
-                        rowData += "<td>" & AddyString & "</td>"
-                        rowData += "<td>" & PhoneString & "</td>"
-                        rowData += "<td>" & prodString & "</td>"
-                        rowData += "<td>" & leadGen & "</td>"
-                        rowData += "<td>" & obj.ApptDate & "</td>"
-                        'rowData += "<td></td>"
-                        rowData += "<td>" & apptTime & "</td>"
-                        rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
-                        '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
-                        doc += (rowData & vbCrLf)
-                        rowData = ""
-                    Next '' end each obj in arobjs
-
-                Next '' end each dictionary entry 
-
-                doc += "</table></body></html>" '' put the end cap on it. . . 
-                Exit Select '' end lead generated on catch
-            Case Is = "ApptDate"
-                Dim arHeadingsAsDate As New ArrayList
-                For Each y As String In target_headings
-                    '' sort leads by 'heading'
-                    arHeadingsAsDate.Add(CType(y, Date)) '' first convert
-                Next
-
-                arHeadingsAsDate.Sort() '' second sort
-
-                '' sort list works here but doesn't take years into consideration 
-                '' on the date. 
-                '' so still showing out of whack logically by calendar date.
-                '' iE: 1/2/2016 comes before 1/21/2014
-                '' second attempt , convert -> sort -> add
-                '' third attempt, don't add as 'ToShortDateString in array, just add as [Type] and let default
-                '' sort kick in. . . 
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = obj.ID
+                            Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
+                            '' type the phones only phone 2 & three if present
 
 
-                For Each zz As Date In arHeadingsAsDate
-                    Dim arObjs As New List(Of LeadToPrint)
-                    For Each xyz As LeadToPrint In arListOfLeadsToDisplay
-                        If xyz.ApptDate = zz.ToShortDateString Then '' third equate
-                            arObjs.Add(xyz)
-                        End If
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
+
+                            rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
+                            rowData += "<td>" & nameStr & "</td>"
+                            rowData += "<td>" & AddyString & "</td>"
+                            rowData += "<td>" & PhoneString & "</td>"
+                            rowData += "<td>" & prodString & "</td>"
+                            rowData += "<td>" & leadGen & "</td>"
+                            rowData += "<td>" & obj.ApptDate & "</td>"
+                            'rowData += "<td></td>"
+                            rowData += "<td>" & apptTime & "</td>"
+                            rowData += "<td>" & obj.Result & "</td>"
+                            rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                            '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
+                            doc += (rowData & vbCrLf)
+                            rowData = ""
+                        Next '' end each obj in arobjs
+
+                    Next '' end each dictionary entry 
+
+                    doc += "</table></body></html>" '' put the end cap on it. . . 
+                    Exit Select '' end city state catch
+                Case Is = "Zip"
+                    For Each y As String In target_headings
+                        '' sort leads by 'heading'
+                        Dim arObjs As New List(Of LeadToPrintRecovery)
+                        For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
+                            If xyz.Zip = y Then
+                                arObjs.Add(xyz)
+                            End If
+                        Next
+                        Try
+                            hashGroups.Add(y, arObjs)
+                        Catch ex As Exception
+
+                        End Try
                     Next
-                    Try
-                        srtGroups.Add(zz, arObjs) '' add as default [type]
-                    Catch ex As Exception
-
-                    End Try
-                Next
 
 
-                '' now break sorted list apart and render according per 'group'
+                    '' now break sorted list apart and render according per 'group'
 
-                For Each d As DictionaryEntry In srtGroups
-                    Dim arObjss As New List(Of LeadToPrintRecovery)
-                    arObjss = d.Value
-                    Dim cnt_Local As Integer = arObjss.Count
-                    Dim Item0 As LeadToPrintRecovery = arObjss(0)
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em> " & d.Key & "  - [" & cnt_Local & " Items]  </em></td></tr><!-- END ROW Group Heading -->"
-                    Item0 = Nothing
-                    doc += hdrSTR
+                    For Each d As DictionaryEntry In hashGroups
+                        Dim arObjss As New List(Of LeadToPrintRecovery)
+                        arObjss = d.Value
+                        Dim cnt_Local As Integer = arObjss.Count
+                        Dim Item0 As LeadToPrintRecovery = arObjss(0)
+                        Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & "  [" & Item0.State & "] - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
+                        Item0 = Nothing
+                        doc += hdrSTR
 
-                    For Each obj As LeadToPrintRecovery In arObjss
+                        For Each obj As LeadToPrintRecovery In arObjss
 
-                        Dim rowData As String = ""
+                            Dim rowData As String = ""
 
-                        Dim timeSplit() = Split(obj.ApptTime, " ", 2)
-                        Dim apptTime As String = splitTime(timeSplit(1).ToString)
-                        Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
+                            Dim timeSplit() = Split(obj.ApptTime, " ", 2)
+                            Dim apptTime As String = splitTime(timeSplit(1).ToString)
+                            Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
 
-                        Dim leadGen As String = LeadGenSplit(0)
-                        Dim recID As String = obj.ID
-                        Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
-                        '' type the phones only phone 2 & three if present
-
-
-                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
-                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
-
-                        rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
-                        rowData += "<td>" & nameStr & "</td>"
-                        rowData += "<td>" & AddyString & "</td>"
-                        rowData += "<td>" & PhoneString & "</td>"
-                        rowData += "<td>" & prodString & "</td>"
-                        rowData += "<td>" & leadGen & "</td>"
-                        rowData += "<td>" & obj.ApptDate & "</td>"
-                        'rowData += "<td></td>"
-                        rowData += "<td>" & apptTime & "</td>"
-                        rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
-                        '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
-                        doc += (rowData & vbCrLf)
-                        rowData = ""
-                    Next '' end each obj in arobjs
-
-                Next '' end each dictionary entry 
-
-                doc += "</table></body></html>" '' put the end cap on it. . . 
-                Exit Select '' end appt date catch
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = obj.ID
+                            Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
+                            '' type the phones only phone 2 & three if present
 
 
-            Case Is = "ApptTime"
-                For Each y As String In target_headings
-                    '' sort leads by 'heading'
-                    Dim arObjs As New List(Of LeadToPrintRecovery)
-                    For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
-                        If xyz.ApptTime = y Then
-                            arObjs.Add(xyz)
-                        End If
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
+
+                            rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
+                            rowData += "<td>" & nameStr & "</td>"
+                            rowData += "<td>" & AddyString & "</td>"
+                            rowData += "<td>" & PhoneString & "</td>"
+                            rowData += "<td>" & prodString & "</td>"
+                            rowData += "<td>" & leadGen & "</td>"
+                            rowData += "<td>" & obj.ApptDate & "</td>"
+                            'rowData += "<td></td>"
+                            rowData += "<td>" & apptTime & "</td>"
+                            rowData += "<td>" & obj.Result & "</td>"
+                            rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                            '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
+                            doc += (rowData & vbCrLf)
+                            rowData = ""
+                        Next '' end each obj in arobjs
+
+                    Next '' end each dictionary entry 
+
+                    doc += "</table></body></html>" '' put the end cap on it. . . 
+                    Exit Select '' end zip code catch
+                Case Is = "Result"
+                    For Each y As String In target_headings
+                        '' sort leads by 'heading'
+                        Dim arObjs As New List(Of LeadToPrintRecovery)
+
+                        For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
+                            If xyz.Result = y Then
+                                arObjs.Add(xyz)
+                            End If
+                        Next
+
+                        Try
+                            hashGroups.Add(y, arObjs)
+                        Catch ex As Exception
+
+                        End Try
                     Next
-                    Try
-                        hashGroups.Add(y, arObjs)
-                    Catch ex As Exception
-
-                    End Try
-                Next
 
 
-                '' now break sorted list apart and render according per 'group'
+                    '' now break sorted list apart and render according per 'group'
 
-                For Each d As DictionaryEntry In hashGroups
-                    Dim arObjss As New List(Of LeadToPrintRecovery)
-                    arObjss = d.Value
-                    Dim cnt_Local As Integer = arObjss.Count
-                    Dim Item0 As LeadToPrintRecovery = arObjss(0)
-                    Dim split2() = Split(Item0.ApptTime, " ", 2)
-                    Dim spTIME As String = ""
-                    spTIME = splitTime(split2(1))
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em> " & spTIME & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
-                    Item0 = Nothing
-                    doc += hdrSTR
+                    For Each d As DictionaryEntry In hashGroups
+                        Dim arObjss As New List(Of LeadToPrintRecovery)
+                        arObjss = d.Value
+                        Dim cnt_Local As Integer = arObjss.Count
+                        Dim Item0 As LeadToPrintRecovery = arObjss(0)
 
-                    For Each obj As LeadToPrintRecovery In arObjss
-
-                        Dim rowData As String = ""
-
-                        Dim timeSplit() = Split(obj.ApptTime, " ", 2)
-                        Dim apptTime As String = splitTime(timeSplit(1).ToString)
-                        Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
-
-                        Dim leadGen As String = LeadGenSplit(0)
-                        Dim recID As String = obj.ID
-                        Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
-                        '' type the phones only phone 2 & three if present
-                        
-
-                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
-                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
-
-                        rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
-                        rowData += "<td>" & nameStr & "</td>"
-                        rowData += "<td>" & AddyString & "</td>"
-                        rowData += "<td>" & PhoneString & "</td>"
-                        rowData += "<td>" & prodString & "</td>"
-                        rowData += "<td>" & leadGen & "</td>"
-                        rowData += "<td>" & obj.ApptDate & "</td>"
-                        'rowData += "<td></td>"
-                        rowData += "<td>" & apptTime & "</td>"
-                        rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
-                        '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
-                        doc += (rowData & vbCrLf)
-                        rowData = ""
-                    Next '' end each obj in arobjs
-
-                Next '' end each dictionary entry 
-
-                doc += "</table></body></html>" '' put the end cap on it. . . 
-                Exit Select '' end appt time catch
+                        '' for this grouping, split off time: 
+                        '' comes out like: [ Gen. On: 11/29/2014 5:13:14 PM - [1 Items] ]
+                        '' 
+                        Dim split3() = Split(d.Key, " ", 2)
 
 
+                        Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & " - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
+                        Item0 = Nothing
+                        doc += hdrSTR
 
-            Case Is = "Product1"
-                For Each y As String In target_headings
-                    '' sort leads by 'heading'
-                    Dim arObjs As New List(Of LeadToPrintRecovery)
-                    For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
-                        If xyz.Prod1 = y Then
-                            arObjs.Add(xyz)
-                        End If
+                        For Each obj As LeadToPrintRecovery In arObjss
+
+                            Dim rowData As String = ""
+
+                            Dim timeSplit() = Split(obj.ApptTime, " ", 2)
+                            Dim apptTime As String = splitTime(timeSplit(1).ToString)
+                            Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim split2() = Split(leadGen(0), " ")
+                            Dim leadGen2 As String = split2(0)
+                            Dim recID As String = obj.ID
+                            Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
+                            '' type the phones only phone 2 & three if present
+
+
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
+
+                            rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
+                            rowData += "<td>" & nameStr & "</td>"
+                            rowData += "<td>" & AddyString & "</td>"
+                            rowData += "<td>" & PhoneString & "</td>"
+                            rowData += "<td>" & prodString & "</td>"
+                            rowData += "<td>" & leadGen & "</td>"
+                            rowData += "<td>" & obj.ApptDate & "</td>"
+                            'rowData += "<td></td>"
+                            rowData += "<td>" & apptTime & "</td>"
+                            rowData += "<td>" & obj.Result & "</td>"
+                            rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                            '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
+                            doc += (rowData & vbCrLf)
+                            rowData = ""
+                        Next '' end each obj in arobjs
+
+                    Next '' end each dictionary entry 
+
+                    doc += "</table></body></html>" '' put the end cap on it. . . 
+                    Exit Select '' end lead generated on catch
+                Case Is = "ApptDate"
+                    Dim arHeadingsAsDate As New ArrayList
+                    For Each y As String In target_headings
+                        '' sort leads by 'heading'
+                        arHeadingsAsDate.Add(CType(y, Date)) '' first convert
                     Next
-                    Try
-                        hashGroups.Add(y, arObjs)
-                    Catch ex As Exception
 
-                    End Try
-                Next
+                    arHeadingsAsDate.Sort() '' second sort
 
-
-                '' now break sorted list apart and render according per 'group'
-
-                For Each d As DictionaryEntry In hashGroups
-                    Dim arObjss As New List(Of LeadToPrintRecovery)
-                    arObjss = d.Value
-                    Dim cnt_Local As Integer = arObjss.Count
-                    Dim Item0 As LeadToPrintRecovery = arObjss(0)
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
-                    Item0 = Nothing
-                    doc += hdrSTR
-
-                    For Each obj As LeadToPrintRecovery In arObjss
-
-                        Dim rowData As String = ""
-
-                        Dim timeSplit() = Split(obj.ApptTime, " ", 2)
-                        Dim apptTime As String = splitTime(timeSplit(1).ToString)
-                        Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
-
-                        Dim leadGen As String = LeadGenSplit(0)
-                        Dim recID As String = obj.ID
-                        Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
-                        '' type the phones only phone 2 & three if present
-                        
-
-                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
-                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
-                        rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
-                        rowData += "<td>" & nameStr & "</td>"
-                        rowData += "<td>" & AddyString & "</td>"
-                        rowData += "<td>" & PhoneString & "</td>"
-                        rowData += "<td>" & prodString & "</td>"
-                        rowData += "<td>" & leadGen & "</td>"
-                        rowData += "<td>" & obj.ApptDate & "</td>"
-                        'rowData += "<td></td>"
-                        rowData += "<td>" & apptTime & "</td>"
-                        rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
-                        '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
-                        doc += (rowData & vbCrLf)
-                        rowData = ""
-                    Next '' end each obj in arobjs
-
-                Next '' end each dictionary entry 
-
-                doc += "</table></body></html>" '' put the end cap on it. . . 
-                Exit Select '' end product1 catch
+                    '' sort list works here but doesn't take years into consideration 
+                    '' on the date. 
+                    '' so still showing out of whack logically by calendar date.
+                    '' iE: 1/2/2016 comes before 1/21/2014
+                    '' second attempt , convert -> sort -> add
+                    '' third attempt, don't add as 'ToShortDateString in array, just add as [Type] and let default
+                    '' sort kick in. . . 
 
 
-            Case Is = "Rep1"
-                For Each y As String In target_headings
-                    '' sort leads by 'heading'
-                    Dim arObjs As New List(Of LeadToPrintRecovery)
-                    For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
-                        If xyz.Rep1 = y Then
-                            arObjs.Add(xyz)
-                        End If
+                    For Each zz As Date In arHeadingsAsDate
+                        Dim arObjs As New List(Of LeadToPrint)
+                        For Each xyz As LeadToPrint In arListOfLeadsToDisplay
+                            If xyz.ApptDate = zz.ToShortDateString Then '' third equate
+                                arObjs.Add(xyz)
+                            End If
+                        Next
+                        Try
+                            srtGroups.Add(zz, arObjs) '' add as default [type]
+                        Catch ex As Exception
+
+                        End Try
                     Next
-                    Try
-                        hashGroups.Add(y, arObjs)
-                    Catch ex As Exception
-
-                    End Try
-                Next
 
 
-                '' now break sorted list apart and render according per 'group'
+                    '' now break sorted list apart and render according per 'group'
 
-                For Each d As DictionaryEntry In hashGroups
-                    Dim arObjss As New List(Of LeadToPrintRecovery)
-                    arObjss = d.Value
-                    Dim cnt_Local As Integer = arObjss.Count
-                    Dim Item0 As LeadToPrintRecovery = arObjss(0)
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
-                    Item0 = Nothing
-                    doc += hdrSTR
+                    For Each d As DictionaryEntry In srtGroups
+                        Dim arObjss As New List(Of LeadToPrintRecovery)
+                        arObjss = d.Value
+                        Dim cnt_Local As Integer = arObjss.Count
+                        Dim Item0 As LeadToPrintRecovery = arObjss(0)
+                        Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em> " & d.Key & "  - [" & cnt_Local & " Items]  </em></td></tr><!-- END ROW Group Heading -->"
+                        Item0 = Nothing
+                        doc += hdrSTR
 
-                    For Each obj As LeadToPrintRecovery In arObjss
+                        For Each obj As LeadToPrintRecovery In arObjss
 
-                        Dim rowData As String = ""
+                            Dim rowData As String = ""
 
-                        Dim timeSplit() = Split(obj.ApptTime, " ", 2)
-                        Dim apptTime As String = splitTime(timeSplit(1).ToString)
-                        Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
+                            Dim timeSplit() = Split(obj.ApptTime, " ", 2)
+                            Dim apptTime As String = splitTime(timeSplit(1).ToString)
+                            Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
 
-                        Dim leadGen As String = LeadGenSplit(0)
-                        Dim recID As String = obj.ID
-                        Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
-                        '' type the phones only phone 2 & three if present
-                         
-                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
-                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
-
-                        rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
-                        rowData += "<td>" & nameStr & "</td>"
-                        rowData += "<td>" & AddyString & "</td>"
-                        rowData += "<td>" & PhoneString & "</td>"
-                        rowData += "<td>" & prodString & "</td>"
-                        rowData += "<td>" & leadGen & "</td>"
-                        rowData += "<td>" & obj.ApptDate & "</td>"
-                        'rowData += "<td></td>"
-                        rowData += "<td>" & apptTime & "</td>"
-                        rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
-                        '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
-                        doc += (rowData & vbCrLf)
-                        rowData = ""
-                    Next '' end each obj in arobjs
-
-                Next '' end each dictionary entry 
-
-                doc += "</table></body></html>" '' put the end cap on it. . . 
-                Exit Select '' end marketer catch
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = obj.ID
+                            Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
+                            '' type the phones only phone 2 & three if present
 
 
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
 
-            Case Is = "MarketingResults"
-                For Each y As String In target_headings
-                    '' sort leads by 'heading'
-                    Dim arObjs As New List(Of LeadToPrintRecovery)
-                    For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
-                        If xyz.MarketingResults = y Then
-                            arObjs.Add(xyz)
-                        End If
+                            rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
+                            rowData += "<td>" & nameStr & "</td>"
+                            rowData += "<td>" & AddyString & "</td>"
+                            rowData += "<td>" & PhoneString & "</td>"
+                            rowData += "<td>" & prodString & "</td>"
+                            rowData += "<td>" & leadGen & "</td>"
+                            rowData += "<td>" & obj.ApptDate & "</td>"
+                            'rowData += "<td></td>"
+                            rowData += "<td>" & apptTime & "</td>"
+                            rowData += "<td>" & obj.Result & "</td>"
+                            rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                            '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
+                            doc += (rowData & vbCrLf)
+                            rowData = ""
+                        Next '' end each obj in arobjs
+
+                    Next '' end each dictionary entry 
+
+                    doc += "</table></body></html>" '' put the end cap on it. . . 
+                    Exit Select '' end appt date catch
+
+
+                Case Is = "ApptTime"
+                    For Each y As String In target_headings
+                        '' sort leads by 'heading'
+                        Dim arObjs As New List(Of LeadToPrintRecovery)
+                        For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
+                            If xyz.ApptTime = y Then
+                                arObjs.Add(xyz)
+                            End If
+                        Next
+                        Try
+                            hashGroups.Add(y, arObjs)
+                        Catch ex As Exception
+
+                        End Try
                     Next
-                    Try
-                        hashGroups.Add(y, arObjs)
-                    Catch ex As Exception
-
-                    End Try
-                Next
 
 
-                '' now break sorted list apart and render according per 'group'
+                    '' now break sorted list apart and render according per 'group'
 
-                For Each d As DictionaryEntry In hashGroups
-                    Dim arObjss As New List(Of LeadToPrintRecovery)
-                    arObjss = d.Value
-                    Dim cnt_Local As Integer = arObjss.Count
-                    Dim Item0 As LeadToPrintRecovery = arObjss(0)
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
-                    Item0 = Nothing
-                    doc += hdrSTR
+                    For Each d As DictionaryEntry In hashGroups
+                        Dim arObjss As New List(Of LeadToPrintRecovery)
+                        arObjss = d.Value
+                        Dim cnt_Local As Integer = arObjss.Count
+                        Dim Item0 As LeadToPrintRecovery = arObjss(0)
+                        Dim split2() = Split(Item0.ApptTime, " ", 2)
+                        Dim spTIME As String = ""
+                        spTIME = splitTime(split2(1))
+                        Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em> " & spTIME & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
+                        Item0 = Nothing
+                        doc += hdrSTR
 
-                    For Each obj As LeadToPrintRecovery In arObjss
+                        For Each obj As LeadToPrintRecovery In arObjss
 
-                        Dim rowData As String = ""
+                            Dim rowData As String = ""
 
-                        Dim timeSplit() = Split(obj.ApptTime, " ", 2)
-                        Dim apptTime As String = splitTime(timeSplit(1).ToString)
-                        Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
+                            Dim timeSplit() = Split(obj.ApptTime, " ", 2)
+                            Dim apptTime As String = splitTime(timeSplit(1).ToString)
+                            Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
 
-                        Dim leadGen As String = LeadGenSplit(0)
-                        Dim recID As String = obj.ID
-                        Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
-                        '' type the phones only phone 2 & three if present
-                        
-
-                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
-                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
-
-                        rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
-                        rowData += "<td>" & nameStr & "</td>"
-                        rowData += "<td>" & AddyString & "</td>"
-                        rowData += "<td>" & PhoneString & "</td>"
-                        rowData += "<td>" & prodString & "</td>"
-                        rowData += "<td>" & leadGen & "</td>"
-                        rowData += "<td>" & obj.ApptDate & "</td>"
-                        'rowData += "<td></td>"
-                        rowData += "<td>" & apptTime & "</td>"
-                        rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
-                        '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
-                        doc += (rowData & vbCrLf)
-                        rowData = ""
-                    Next '' end each obj in arobjs
-
-                Next '' end each dictionary entry 
-
-                doc += "</table></body></html>" '' put the end cap on it. . . 
-                Exit Select '' end marketing results catch
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = obj.ID
+                            Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
+                            '' type the phones only phone 2 & three if present
 
 
-            Case Is = "QuotedSold"
-                For Each y As String In target_headings
-                    '' sort leads by 'heading'
-                    Dim arObjs As New List(Of LeadToPrintRecovery)
-                    For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
-                        If xyz.QuotedSold = y Then
-                            arObjs.Add(xyz)
-                        End If
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
+
+                            rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
+                            rowData += "<td>" & nameStr & "</td>"
+                            rowData += "<td>" & AddyString & "</td>"
+                            rowData += "<td>" & PhoneString & "</td>"
+                            rowData += "<td>" & prodString & "</td>"
+                            rowData += "<td>" & leadGen & "</td>"
+                            rowData += "<td>" & obj.ApptDate & "</td>"
+                            'rowData += "<td></td>"
+                            rowData += "<td>" & apptTime & "</td>"
+                            rowData += "<td>" & obj.Result & "</td>"
+                            rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                            '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
+                            doc += (rowData & vbCrLf)
+                            rowData = ""
+                        Next '' end each obj in arobjs
+
+                    Next '' end each dictionary entry 
+
+                    doc += "</table></body></html>" '' put the end cap on it. . . 
+                    Exit Select '' end appt time catch
+
+
+
+                Case Is = "Product1"
+                    For Each y As String In target_headings
+                        '' sort leads by 'heading'
+                        Dim arObjs As New List(Of LeadToPrintRecovery)
+                        For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
+                            If xyz.Prod1 = y Then
+                                arObjs.Add(xyz)
+                            End If
+                        Next
+                        Try
+                            hashGroups.Add(y, arObjs)
+                        Catch ex As Exception
+
+                        End Try
                     Next
-                    Try
-                        hashGroups.Add(y, arObjs)
-                    Catch ex As Exception
-
-                    End Try
-                Next
 
 
-                '' now break sorted list apart and render according per 'group'
+                    '' now break sorted list apart and render according per 'group'
 
-                For Each d As DictionaryEntry In hashGroups
-                    Dim arObjss As New List(Of LeadToPrintRecovery)
-                    arObjss = d.Value
-                    Dim cnt_Local As Integer = arObjss.Count
-                    Dim Item0 As LeadToPrintRecovery = arObjss(0)
-                    Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & FormatCurrency(d.Key, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
-                    Item0 = Nothing
-                    doc += hdrSTR
+                    For Each d As DictionaryEntry In hashGroups
+                        Dim arObjss As New List(Of LeadToPrintRecovery)
+                        arObjss = d.Value
+                        Dim cnt_Local As Integer = arObjss.Count
+                        Dim Item0 As LeadToPrintRecovery = arObjss(0)
+                        Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
+                        Item0 = Nothing
+                        doc += hdrSTR
 
-                    For Each obj As LeadToPrintRecovery In arObjss
+                        For Each obj As LeadToPrintRecovery In arObjss
 
-                        Dim rowData As String = ""
+                            Dim rowData As String = ""
 
-                        Dim timeSplit() = Split(obj.ApptTime, " ", 2)
-                        Dim apptTime As String = splitTime(timeSplit(1).ToString)
-                        Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
+                            Dim timeSplit() = Split(obj.ApptTime, " ", 2)
+                            Dim apptTime As String = splitTime(timeSplit(1).ToString)
+                            Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
 
-                        Dim leadGen As String = LeadGenSplit(0)
-                        Dim recID As String = obj.ID
-                        Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
-                        '' type the phones only phone 2 & three if present
-                        
-                        Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
-                        Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
-                        Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
-
-                        rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
-                        rowData += "<td>" & nameStr & "</td>"
-                        rowData += "<td>" & AddyString & "</td>"
-                        rowData += "<td>" & PhoneString & "</td>"
-                        rowData += "<td>" & prodString & "</td>"
-                        rowData += "<td>" & leadGen & "</td>"
-                        rowData += "<td>" & obj.ApptDate & "</td>"
-                        'rowData += "<td></td>"
-                        rowData += "<td>" & apptTime & "</td>"
-                        rowData += "<td>" & obj.Result & "</td>"
-                        rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
-                        '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
-                        doc += (rowData & vbCrLf)
-                        rowData = ""
-                    Next '' end each obj in arobjs
-
-                Next '' end each dictionary entry 
-
-                doc += "</table></body></html>" '' put the end cap on it. . . 
-                Exit Select '' end marketing results catch
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = obj.ID
+                            Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
+                            '' type the phones only phone 2 & three if present
 
 
-        End Select
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
+                            rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
+                            rowData += "<td>" & nameStr & "</td>"
+                            rowData += "<td>" & AddyString & "</td>"
+                            rowData += "<td>" & PhoneString & "</td>"
+                            rowData += "<td>" & prodString & "</td>"
+                            rowData += "<td>" & leadGen & "</td>"
+                            rowData += "<td>" & obj.ApptDate & "</td>"
+                            'rowData += "<td></td>"
+                            rowData += "<td>" & apptTime & "</td>"
+                            rowData += "<td>" & obj.Result & "</td>"
+                            rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                            '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
+                            doc += (rowData & vbCrLf)
+                            rowData = ""
+                        Next '' end each obj in arobjs
+
+                    Next '' end each dictionary entry 
+
+                    doc += "</table></body></html>" '' put the end cap on it. . . 
+                    Exit Select '' end product1 catch
+
+
+                Case Is = "Rep1"
+                    For Each y As String In target_headings
+                        '' sort leads by 'heading'
+                        Dim arObjs As New List(Of LeadToPrintRecovery)
+                        For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
+                            If xyz.Rep1 = y Then
+                                arObjs.Add(xyz)
+                            End If
+                        Next
+                        Try
+                            hashGroups.Add(y, arObjs)
+                        Catch ex As Exception
+
+                        End Try
+                    Next
+
+
+                    '' now break sorted list apart and render according per 'group'
+
+                    For Each d As DictionaryEntry In hashGroups
+                        Dim arObjss As New List(Of LeadToPrintRecovery)
+                        arObjss = d.Value
+                        Dim cnt_Local As Integer = arObjss.Count
+                        Dim Item0 As LeadToPrintRecovery = arObjss(0)
+                        Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
+                        Item0 = Nothing
+                        doc += hdrSTR
+
+                        For Each obj As LeadToPrintRecovery In arObjss
+
+                            Dim rowData As String = ""
+
+                            Dim timeSplit() = Split(obj.ApptTime, " ", 2)
+                            Dim apptTime As String = splitTime(timeSplit(1).ToString)
+                            Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = obj.ID
+                            Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
+                            '' type the phones only phone 2 & three if present
+
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
+
+                            rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
+                            rowData += "<td>" & nameStr & "</td>"
+                            rowData += "<td>" & AddyString & "</td>"
+                            rowData += "<td>" & PhoneString & "</td>"
+                            rowData += "<td>" & prodString & "</td>"
+                            rowData += "<td>" & leadGen & "</td>"
+                            rowData += "<td>" & obj.ApptDate & "</td>"
+                            'rowData += "<td></td>"
+                            rowData += "<td>" & apptTime & "</td>"
+                            rowData += "<td>" & obj.Result & "</td>"
+                            rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                            '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
+                            doc += (rowData & vbCrLf)
+                            rowData = ""
+                        Next '' end each obj in arobjs
+
+                    Next '' end each dictionary entry 
+
+                    doc += "</table></body></html>" '' put the end cap on it. . . 
+                    Exit Select '' end marketer catch
+
+
+
+                Case Is = "MarketingResults"
+                    For Each y As String In target_headings
+                        '' sort leads by 'heading'
+                        Dim arObjs As New List(Of LeadToPrintRecovery)
+                        For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
+                            If xyz.MarketingResults = y Then
+                                arObjs.Add(xyz)
+                            End If
+                        Next
+                        Try
+                            hashGroups.Add(y, arObjs)
+                        Catch ex As Exception
+
+                        End Try
+                    Next
+
+
+                    '' now break sorted list apart and render according per 'group'
+
+                    For Each d As DictionaryEntry In hashGroups
+                        Dim arObjss As New List(Of LeadToPrintRecovery)
+                        arObjss = d.Value
+                        Dim cnt_Local As Integer = arObjss.Count
+                        Dim Item0 As LeadToPrintRecovery = arObjss(0)
+                        Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & d.Key & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
+                        Item0 = Nothing
+                        doc += hdrSTR
+
+                        For Each obj As LeadToPrintRecovery In arObjss
+
+                            Dim rowData As String = ""
+
+                            Dim timeSplit() = Split(obj.ApptTime, " ", 2)
+                            Dim apptTime As String = splitTime(timeSplit(1).ToString)
+                            Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = obj.ID
+                            Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
+                            '' type the phones only phone 2 & three if present
+
+
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
+
+                            rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
+                            rowData += "<td>" & nameStr & "</td>"
+                            rowData += "<td>" & AddyString & "</td>"
+                            rowData += "<td>" & PhoneString & "</td>"
+                            rowData += "<td>" & prodString & "</td>"
+                            rowData += "<td>" & leadGen & "</td>"
+                            rowData += "<td>" & obj.ApptDate & "</td>"
+                            'rowData += "<td></td>"
+                            rowData += "<td>" & apptTime & "</td>"
+                            rowData += "<td>" & obj.Result & "</td>"
+                            rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                            '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
+                            doc += (rowData & vbCrLf)
+                            rowData = ""
+                        Next '' end each obj in arobjs
+
+                    Next '' end each dictionary entry 
+
+                    doc += "</table></body></html>" '' put the end cap on it. . . 
+                    Exit Select '' end marketing results catch
+
+
+                Case Is = "QuotedSold"
+                    For Each y As String In target_headings
+                        '' sort leads by 'heading'
+                        Dim arObjs As New List(Of LeadToPrintRecovery)
+                        For Each xyz As LeadToPrintRecovery In arListOfLeadsToDisplayRecovery
+                            If xyz.QuotedSold = y Then
+                                arObjs.Add(xyz)
+                            End If
+                        Next
+                        Try
+                            hashGroups.Add(y, arObjs)
+                        Catch ex As Exception
+
+                        End Try
+                    Next
+
+
+                    '' now break sorted list apart and render according per 'group'
+
+                    For Each d As DictionaryEntry In hashGroups
+                        Dim arObjss As New List(Of LeadToPrintRecovery)
+                        arObjss = d.Value
+                        Dim cnt_Local As Integer = arObjss.Count
+                        Dim Item0 As LeadToPrintRecovery = arObjss(0)
+                        Dim hdrSTR As String = "<!-- BEGIN ROW Group Heading --><tr><td colspan=""11"" style='font-family:""Verdana"",sans-serif;font-size:0.8em;font-weight:bold;text-align:left;'><em>" & FormatCurrency(d.Key, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "  - [" & cnt_Local & " Items] </em></td></tr><!-- END ROW Group Heading -->"
+                        Item0 = Nothing
+                        doc += hdrSTR
+
+                        For Each obj As LeadToPrintRecovery In arObjss
+
+                            Dim rowData As String = ""
+
+                            Dim timeSplit() = Split(obj.ApptTime, " ", 2)
+                            Dim apptTime As String = splitTime(timeSplit(1).ToString)
+                            Dim LeadGenSplit() = Split(obj.LeadGeneratedOn, " ", 2)
+
+                            Dim leadGen As String = LeadGenSplit(0)
+                            Dim recID As String = obj.ID
+                            Dim prodString = (obj.Prod1 & "<br />" & obj.Prod2 & "<br />" & obj.Prod3)
+                            '' type the phones only phone 2 & three if present
+
+                            Dim PhoneString = Determine_Phone_String(obj.Phone1, obj.Phone2, obj.Phone3, obj.ID)
+                            Dim AddyString = (obj.StAddress & "<br /> " & obj.City & ", " & obj.State & " " & obj.Zip)
+                            Dim nameStr As String = Determine_Name_String(obj.FName, obj.LName, obj.FName2, obj.LName2)
+
+                            rowData = "<!--BEGIN ROW Group Data--><tr><td></td><td>" & obj.ID & "</td>"
+                            rowData += "<td>" & nameStr & "</td>"
+                            rowData += "<td>" & AddyString & "</td>"
+                            rowData += "<td>" & PhoneString & "</td>"
+                            rowData += "<td>" & prodString & "</td>"
+                            rowData += "<td>" & leadGen & "</td>"
+                            rowData += "<td>" & obj.ApptDate & "</td>"
+                            'rowData += "<td></td>"
+                            rowData += "<td>" & apptTime & "</td>"
+                            rowData += "<td>" & obj.Result & "</td>"
+                            rowData += "<td>" & FormatCurrency(obj.QuotedSold, 0, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault, Microsoft.VisualBasic.TriState.UseDefault) & "</td></tr><!-- END ROW Group Data-->"
+                            '' now, does this lead have any Previous sales or what not? => dropping this per AG "No mash up lists"
+                            doc += (rowData & vbCrLf)
+                            rowData = ""
+                        Next '' end each obj in arobjs
+
+                    Next '' end each dictionary entry 
+
+                    doc += "</table></body></html>" '' put the end cap on it. . . 
+                    Exit Select '' end marketing results catch
+
+
+            End Select
 
 
 
@@ -2133,30 +2148,32 @@ Public Class createListPrintOperations
 
 
 
-        '' doc += "</table></body></html>" & vbCrLf ' shouldn't need double cap, dont' know why I put this here.....AC
+            '' doc += "</table></body></html>" & vbCrLf ' shouldn't need double cap, dont' know why I put this here.....AC
 
 
-        '' 4-3-2016 Changes: AC
-        '' var "doc" constructed first, then doc passed as entire arg to streamwriter(doc), then written to disk. 
-        '' much faster => doc should actually be a "stringbuilder" instead of string var  
-        '' stringbuilder optimized for string concatenation.
-        '' src: http://www.dotnetperls.com/stringbuilder-vbnet
-        '' this runs fast enough, so I am going to leave for now. . . .
+            '' 4-3-2016 Changes: AC
+            '' var "doc" constructed first, then doc passed as entire arg to streamwriter(doc), then written to disk. 
+            '' much faster => doc should actually be a "stringbuilder" instead of string var  
+            '' stringbuilder optimized for string concatenation.
+            '' src: http://www.dotnetperls.com/stringbuilder-vbnet
+            '' this runs fast enough, so I am going to leave for now. . . .
 
 
-        Dim stWriter As New StreamWriter(Production_Directory & guid.ToString & ext)
-        stWriter.Write(doc)
-        stWriter.Flush()
-        stWriter.Close()
+            Dim stWriter As New StreamWriter(Production_Directory & guid.ToString & ext)
+            stWriter.Write(doc)
+            stWriter.Flush()
+            stWriter.Close()
 
-        System.Diagnostics.Process.Start(Production_Directory & guid.ToString & ext)
-        frmWCList.Cursor = Cursors.Default
+            System.Diagnostics.Process.Start(Production_Directory & guid.ToString & ext)
+            frmRList.Cursor = Cursors.Default
 
-        'Catch ex As Exception
-        '    Dim y As New ErrorLogging_V2
-        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Sub", "CreateWireFrameHTML_WarmCalling(ByVal QueryString As String, ByVal Grouped As Boolean, ByVal GroupHeading As ArrayList)", "0", ex.Message.ToString)
-        '    y = Nothing
-        'End Try
+        Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Sub", "CreateWireFrameHTML_WarmCalling(ByVal QueryString As String, ByVal Grouped As Boolean, ByVal GroupHeading As ArrayList)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
         'frmWCList.Cursor = Cursors.Default
 
@@ -2185,6 +2202,9 @@ Public Class createListPrintOperations
             Return retVal
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Func", " Get_Phone_Type(recID) ", "0", ex.Message.ToString)
             y = Nothing
@@ -2208,6 +2228,9 @@ Public Class createListPrintOperations
             Return retVal
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Func", " Get_Phone_Type(recID) ", "0", ex.Message.ToString)
             y = Nothing
@@ -2246,6 +2269,9 @@ Public Class createListPrintOperations
 
             Return arResults
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Function", "GrabSalesInfo(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -2266,6 +2292,9 @@ Public Class createListPrintOperations
             retVal = (arPC2(0) & ":" & arPC2(1) & " " & arPC(1))
             Return retVal
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
             retVal = "0:00 AM/PM"
             Return retVal
         End Try
@@ -2274,86 +2303,124 @@ Public Class createListPrintOperations
 
     '' function to determine "S - " or "M - " or "S/M - " or " " 
     Private Function DetermineSalesAndMarketingResults(ByVal SalesResult As String, ByVal MarketingResult As String)
-       Dim retVal As String = " "
-        Dim PrependSales As String = "S - "
-        Dim PrependMarketing As String = "M - "
+        Try
+            Dim retVal As String = " "
+            Dim PrependSales As String = "S - "
+            Dim PrependMarketing As String = "M - "
 
-        Dim sz_S As Integer = SalesResult.Length
-        Dim sz_M As Integer = MarketingResult.Length
+            Dim sz_S As Integer = SalesResult.Length
+            Dim sz_M As Integer = MarketingResult.Length
 
 
-        If MarketingResult = SalesResult Then
-            retVal = MarketingResult
-            Return retVal
-            Exit Function
-        End If
-
-        If SalesResult = MarketingResult Then
-            retVal = SalesResult
-            Return retVal
-            Exit Function
-        End If
-
-        '' sales result present.
-        If sz_S >= 1 And SalesResult <> " " Then
-            '' sales result but no marketing result
-            If sz_M <= 0 Then
-                Dim prepend As String = (PrependSales & SalesResult)
-                retVal = prepend
-                Return retVal
-                Exit Function
-            ElseIf sz_M >= 1 And MarketingResult <> " " Then '' sales result and marketing result
-                Dim prepend As String = (PrependSales & SalesResult & "<br />")
-                Dim prepend2 As String = (PrependMarketing & MarketingResult)
-                retVal = (prepend & prepend2)
-                Return retVal
-                Exit Function
-            ElseIf sz_M >= 1 And MarketingResult = " " Then
-                Dim prepend As String = (PrependSales & SalesResult)
-                retVal = prepend
+            If MarketingResult = SalesResult Then
+                retVal = MarketingResult
                 Return retVal
                 Exit Function
             End If
-        End If
 
-        '' marketing result present
-        If sz_M >= 1 And MarketingResult <> " " Then
-            '' marketing result but no sales result
-            If sz_S <= 0 Then
-                Dim prepend As String = (PrependMarketing & MarketingResult)
-                retVal = prepend
-                Return retVal
-                Exit Function
-            ElseIf sz_S >= 1 And SalesResult <> " " Then '' marketing result and sales result
-                Dim prepend As String = (PrependMarketing & MarketingResult & "<br />")
-                Dim prepend2 As String = (PrependSales & SalesResult)
-                retVal = (prepend & prepend2)
-                Return retVal
-                Exit Function
-            ElseIf sz_S >= 1 And SalesResult = " " Then
-                Dim prepend As String = (PrependMarketing & MarketingResult)
-                retVal = prepend
+            If SalesResult = MarketingResult Then
+                retVal = SalesResult
                 Return retVal
                 Exit Function
             End If
-        End If
 
-        Return retVal '' default return of "_"
+            '' sales result present.
+            If sz_S >= 1 And SalesResult <> " " Then
+                '' sales result but no marketing result
+                If sz_M <= 0 Then
+                    Dim prepend As String = (PrependSales & SalesResult)
+                    retVal = prepend
+                    Return retVal
+                    Exit Function
+                ElseIf sz_M >= 1 And MarketingResult <> " " Then '' sales result and marketing result
+                    Dim prepend As String = (PrependSales & SalesResult & "<br />")
+                    Dim prepend2 As String = (PrependMarketing & MarketingResult)
+                    retVal = (prepend & prepend2)
+                    Return retVal
+                    Exit Function
+                ElseIf sz_M >= 1 And MarketingResult = " " Then
+                    Dim prepend As String = (PrependSales & SalesResult)
+                    retVal = prepend
+                    Return retVal
+                    Exit Function
+                End If
+            End If
+
+            '' marketing result present
+            If sz_M >= 1 And MarketingResult <> " " Then
+                '' marketing result but no sales result
+                If sz_S <= 0 Then
+                    Dim prepend As String = (PrependMarketing & MarketingResult)
+                    retVal = prepend
+                    Return retVal
+                    Exit Function
+                ElseIf sz_S >= 1 And SalesResult <> " " Then '' marketing result and sales result
+                    Dim prepend As String = (PrependMarketing & MarketingResult & "<br />")
+                    Dim prepend2 As String = (PrependSales & SalesResult)
+                    retVal = (prepend & prepend2)
+                    Return retVal
+                    Exit Function
+                ElseIf sz_S >= 1 And SalesResult = " " Then
+                    Dim prepend As String = (PrependMarketing & MarketingResult)
+                    retVal = prepend
+                    Return retVal
+                    Exit Function
+                End If
+            End If
+            Return retVal '' default return of "_"
+        Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Class", "createListPrintOperations.vb", "Func", "DetermineSalesAndMarketingResults()", "0", ex.Message.ToString)
+            y = Nothing
+
+        End Try
 
     End Function
 
     '' function to determine "H - " or "A1 - " or "A2 - " or "H - " & "A2 - " or "H - " & "A1 - " or Just "H - "
     Private Function Determine_Phone_String(ByVal H_Phone As String, ByVal A1_Phone As String, ByVal A2_Phone As String, ByVal ID As String)
-        Dim retVal As String = ""
+        Try
+            Dim retVal As String = ""
 
-        Dim sz_H As Integer = H_Phone.Length
-        Dim sz_A1 As Integer = A1_Phone.Length
-        Dim sz_A2 As Integer = A2_Phone.Length
+            Dim sz_H As Integer = H_Phone.Length
+            Dim sz_A1 As Integer = A1_Phone.Length
+            Dim sz_A2 As Integer = A2_Phone.Length
 
-        If sz_H > 1 And H_Phone <> " " Then 'Home phone present
-            Dim prePendH As String = ("H-" & H_Phone)
-            retVal += (prePendH)
-            If sz_A1 > 1 And A1_Phone <> " " Then '' is alt 1 present?
+            If sz_H > 1 And H_Phone <> " " Then 'Home phone present
+                Dim prePendH As String = ("H-" & H_Phone)
+                retVal += (prePendH)
+                If sz_A1 > 1 And A1_Phone <> " " Then '' is alt 1 present?
+                    Dim prePendA1 As String = ("A1-" & A1_Phone)
+                    Dim type As String = Get_Phone_Type1(ID)
+                    If type = "" Or type = " " Then
+                        Dim appendA1 As String = (prePendA1)
+                        retVal += ("<br />" & appendA1)
+                    ElseIf type = "Work" Or type = "Cell" Then
+                        Dim appendA1 As String = (prePendA1 & "-" & type)
+                        retVal += ("<br />" & appendA1)
+                    Else
+                        Dim appendA1 As String = (prePendA1 & "-" & type.ToString)
+                        retVal += ("<br />" & appendA1)
+                    End If
+                End If
+                If sz_A2 > 1 And A2_Phone <> " " Then
+                    Dim prePendA2 As String = ("A2-" & A2_Phone)
+                    Dim type As String = Get_Phone_Type2(ID)
+                    If type = "" Or type = " " Then
+                        Dim appendA2 As String = (prePendA2)
+                        retVal += ("<br />" & appendA2)
+                    ElseIf type = "Work" Or type = "Cell" Then
+                        Dim appendA2 As String = (prePendA2 & "-" & type)
+                        retVal += ("<br />" & appendA2)
+                    Else
+                        Dim appendA2 As String = (prePendA2 & "-" & type.ToString)
+                        retVal += ("<br />" & appendA2)
+                    End If
+                End If
+            ElseIf sz_H <= 0 And sz_A1 >= 1 And A1_Phone <> " " Then
                 Dim prePendA1 As String = ("A1-" & A1_Phone)
                 Dim type As String = Get_Phone_Type1(ID)
                 If type = "" Or type = " " Then
@@ -2366,8 +2433,21 @@ Public Class createListPrintOperations
                     Dim appendA1 As String = (prePendA1 & "-" & type.ToString)
                     retVal += ("<br />" & appendA1)
                 End If
-            End If
-            If sz_A2 > 1 And A2_Phone <> " " Then
+                If sz_A2 > 1 And A2_Phone <> " " Then
+                    Dim prePendA2 As String = ("A2-" & A2_Phone)
+                    Dim type_ As String = Get_Phone_Type2(ID)
+                    If type = "" Or type = " " Then
+                        Dim appendA2 As String = (prePendA2)
+                        retVal += ("<br />" & appendA2)
+                    ElseIf type = "Work" Or type = "Cell" Then
+                        Dim appendA2 As String = (prePendA2 & "-" & type)
+                        retVal += ("<br />" & appendA2)
+                    Else
+                        Dim appendA2 As String = (prePendA2 & "-" & type.ToString)
+                        retVal += ("<br />" & appendA2)
+                    End If
+                End If
+            ElseIf sz_H <= 0 And sz_A1 <= 0 And sz_A2 >= 1 Then
                 Dim prePendA2 As String = ("A2-" & A2_Phone)
                 Dim type As String = Get_Phone_Type2(ID)
                 If type = "" Or type = " " Then
@@ -2381,99 +2461,74 @@ Public Class createListPrintOperations
                     retVal += ("<br />" & appendA2)
                 End If
             End If
-        ElseIf sz_H <= 0 And sz_A1 >= 1 And A1_Phone <> " " Then
-            Dim prePendA1 As String = ("A1-" & A1_Phone)
-            Dim type As String = Get_Phone_Type1(ID)
-            If type = "" Or type = " " Then
-                Dim appendA1 As String = (prePendA1)
-                retVal += ("<br />" & appendA1)
-            ElseIf type = "Work" Or type = "Cell" Then
-                Dim appendA1 As String = (prePendA1 & "-" & type)
-                retVal += ("<br />" & appendA1)
-            Else
-                Dim appendA1 As String = (prePendA1 & "-" & type.ToString)
-                retVal += ("<br />" & appendA1)
-            End If
-            If sz_A2 > 1 And A2_Phone <> " " Then
-                Dim prePendA2 As String = ("A2-" & A2_Phone)
-                Dim type_ As String = Get_Phone_Type2(ID)
-                If type = "" Or type = " " Then
-                    Dim appendA2 As String = (prePendA2)
-                    retVal += ("<br />" & appendA2)
-                ElseIf type = "Work" Or type = "Cell" Then
-                    Dim appendA2 As String = (prePendA2 & "-" & type)
-                    retVal += ("<br />" & appendA2)
-                Else
-                    Dim appendA2 As String = (prePendA2 & "-" & type.ToString)
-                    retVal += ("<br />" & appendA2)
-                End If
-            End If
-        ElseIf sz_H <= 0 And sz_A1 <= 0 And sz_A2 >= 1 Then
-            Dim prePendA2 As String = ("A2-" & A2_Phone)
-            Dim type As String = Get_Phone_Type2(ID)
-            If type = "" Or type = " " Then
-                Dim appendA2 As String = (prePendA2)
-                retVal += ("<br />" & appendA2)
-            ElseIf type = "Work" Or type = "Cell" Then
-                Dim appendA2 As String = (prePendA2 & "-" & type)
-                retVal += ("<br />" & appendA2)
-            Else
-                Dim appendA2 As String = (prePendA2 & "-" & type.ToString)
-                retVal += ("<br />" & appendA2)
-            End If
-        End If
 
-        Return retVal
+            Return retVal
+        Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Class", "createListPrintOperations.vb", "Func", "Determine_Phone_String()", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Function
 
     '' function for Customer name determination "Smith, Mr and Mrs." , "John X" vbcrlf "Nancy Y" 
     Private Function Determine_Name_String(ByVal FName1 As String, ByVal LName1 As String, ByVal FName2 As String, ByVal LName2 As String)
+        Try
+            Dim retVal As String = ""
 
-        Dim retVal As String = ""
+            Dim c1_FN As Integer = FName1.Length
+            Dim c1_LN As Integer = LName1.Length
 
-        Dim c1_FN As Integer = FName1.Length
-        Dim c1_LN As Integer = LName1.Length
-
-        Dim c2_FN As Integer = FName2.Length
-        Dim c2_LN As Integer = LName2.Length
+            Dim c2_FN As Integer = FName2.Length
+            Dim c2_LN As Integer = LName2.Length
 
 
 
-        If c1_FN > 1 And FName1 <> " " Then '' contact1 present?
-            If c2_LN > 1 And LName2 <> " " Then
-                If c1_LN = c2_LN Then   '' same last name?
-                    Dim con_STR As String = (LName1 & ", " & FName1 & " and " & FName2)
+            If c1_FN > 1 And FName1 <> " " Then '' contact1 present?
+                If c2_LN > 1 And LName2 <> " " Then
+                    If c1_LN = c2_LN Then   '' same last name?
+                        Dim con_STR As String = (LName1 & ", " & FName1 & " and " & FName2)
+                        retVal = con_STR
+                        Return retVal
+                        Exit Function
+                    ElseIf c1_LN <> c2_LN Then '' not same last name? 
+                        Dim con_STR As String = (FName1 & " " & LName1 & "<br />" & FName2 & " " & LName2)
+                        retVal = con_STR
+                        Return retVal
+                        Exit Function
+                    End If
+                ElseIf c2_FN > 1 Or FName2 <> "" Or FName2 <> " " Then '' no secondary contact info?
+                    Dim con_STR As String = (FName1 & " " & LName1)
                     retVal = con_STR
                     Return retVal
                     Exit Function
-                ElseIf c1_LN <> c2_LN Then '' not same last name? 
-                    Dim con_STR As String = (FName1 & " " & LName1 & "<br />" & FName2 & " " & LName2)
+                ElseIf c2_FN > 1 Or FName2 = " " Then '' Blank secondary contact info?
+                    Dim con_STR As String = (FName1 & " " & LName1)
                     retVal = con_STR
                     Return retVal
                     Exit Function
                 End If
-            ElseIf c2_FN > 1 Or FName2 <> "" Or FName2 <> " " Then '' no secondary contact info?
-                Dim con_STR As String = (FName1 & " " & LName1)
-                retVal = con_STR
-                Return retVal
-                Exit Function
-            ElseIf c2_FN > 1 Or FName2 = " " Then '' Blank secondary contact info?
-                Dim con_STR As String = (FName1 & " " & LName1)
-                retVal = con_STR
-                Return retVal
-                Exit Function
+            ElseIf c1_FN < 1 Or FName1 = "" Or FName1 = " " Then '' blank contact1 info?
+                If c2_FN > 1 And FName2 <> " " Then '' but contact2 present?
+                    Dim con_STR As String = (FName2 & " " & LName2)
+                    retVal = con_STR
+                    Return retVal
+                    Exit Function
+                End If
             End If
-        ElseIf c1_FN < 1 Or FName1 = "" Or FName1 = " " Then '' blank contact1 info?
-            If c2_FN > 1 And FName2 <> " " Then '' but contact2 present?
-                Dim con_STR As String = (FName2 & " " & LName2)
-                retVal = con_STR
-                Return retVal
-                Exit Function
-            End If
-        End If
 
-        Return retVal
+            Return retVal
+        Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Class", "createListPrintOperations.vb", "Func", "DetermineSalesAndMarketingResults()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Function
 
@@ -2483,6 +2538,12 @@ Public Class createListPrintOperations
 
 
 #Region " Unknown Function - TestList()"
+
+    '' i think this is for the "Admin Form - AC" 
+    '' and a test somewhere on it. I can't remember So I am leaving it. 
+    '' AC 4-7-2016
+
+
 
     Public Function TestList()
         Try
@@ -2499,6 +2560,9 @@ Public Class createListPrintOperations
             cnx = Nothing
             Return arLeadNum
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            frmWCList.Cursor = Cursors.Default
+            frmRList.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "createListPrintOperations", "createListPrintOperations", "Sub", "TestLIst()", "0", ex.Message.ToString)
             y = Nothing

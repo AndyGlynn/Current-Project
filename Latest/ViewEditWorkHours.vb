@@ -26,6 +26,7 @@ Public Class ViewEditWorkHours
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ViewEditWorkHours", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateWorkHours")
             Dim y As New ErrorLogging_V2
@@ -43,6 +44,7 @@ Public Class ViewEditWorkHours
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ViewEditWorkHours", "ByVal Hour As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "DeleteWorkHour")
             Dim y As New ErrorLogging_V2
@@ -92,7 +94,7 @@ Public Class ViewEditWorkHours
             End Select
         Catch ex As Exception
             cnn.Close()
-
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ViewEditWorkHours", "ByVal Hour As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertHour")
             Dim y As New ErrorLogging_V2

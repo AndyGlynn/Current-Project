@@ -52,6 +52,7 @@ Public Class Attach
         Catch ex As Exception
             'Dim errp As New ErrorLogFlatFile
             'errp.WriteLog("Attach", "ByVal ID As Integer, ByVal Hash As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "AttachFile")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "AttachFile(ID)", ID, ex.Message.ToString)
             y = Nothing
@@ -161,6 +162,7 @@ Public Class Attach
             cnx_MOVE.Close()
             cnx_MOVE = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "LogToSQLFileMove(ID,SourcePath,ServerDestination)", ID, ex.Message.ToString)
             y = Nothing
@@ -178,6 +180,7 @@ Public Class Attach
             Dim f_name As String = arName(cnt - 1)
             Return f_name
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "StripOffFileName(ItemText)", "0", ex.Message.ToString)
             y = Nothing
@@ -196,6 +199,7 @@ Public Class Attach
             cmd_DUP = Nothing
             Return retCNT
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Function", "CountDuplicates(ID,SourcePath,ServerPath)", ID, ex.Message.ToString)
             y = Nothing
@@ -212,6 +216,7 @@ Public Class Attach
                 Exist = False
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "DoesDirectoryExist(path)", "0", ex.Message.ToString)
             y = Nothing
@@ -224,6 +229,7 @@ Public Class Attach
             Dim path As String = (RootLocation & "\" & ID & "\")
             System.IO.Directory.CreateDirectory(path)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "CreateDirectory(ID,RootLocation)", ID, ex.Message.ToString)
             y = Nothing
@@ -267,6 +273,7 @@ Public Class Attach
         Catch ex As Exception
             '' call to error log from here on fail
             '' 
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "Attach", "Attach", "Sub", "CreateAShortCut", "0", ex.Message.ToString)
             y = Nothing
@@ -349,6 +356,7 @@ Public Class Attach
             System.Diagnostics.Process.Start(loc.ToString)
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("Attach", "UserName as string, byval HASH as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "OpenFile")
             Dim y As New ErrorLogging_V2

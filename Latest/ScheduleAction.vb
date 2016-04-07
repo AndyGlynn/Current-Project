@@ -16,7 +16,9 @@ Public Class ScheduleAction
     Public SAID As String
 
     Private Sub ScheduleAction_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        Me.Dispose()
+        '' me.dispose \\ was 
+
+
     End Sub
     '' notes:
     '' font enumeration fontsytle.bolditalic = 3 in system enumeration

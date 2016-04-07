@@ -45,6 +45,7 @@ Public Class Pull_Unique_States_And_Zips
             cnxG.Close()
             Return arUniques
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim b As New ErrorLogging_V2
             b.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Pull_Unique_States_And_Zip.vb", "Pull_Unique_States_And_Zip.vb", "Utility Class", "Get_Uniques()", "0", ex.Message.ToString)
             b = Nothing

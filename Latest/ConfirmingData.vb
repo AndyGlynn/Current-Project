@@ -293,6 +293,8 @@ Public Class ConfirmingData
                 End If
 
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
+
                 MsgBox("Lost Network Connection! Populate List" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
 
 
@@ -322,6 +324,7 @@ Public Class ConfirmingData
                 End If
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingData", "ConfirmingData", "Sub", "Populate(tab,pls,sls,poporrefresh)", "0", ex.Message.ToString)
             y = Nothing
@@ -364,6 +367,7 @@ Public Class ConfirmingData
             cnn.Close()
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingData", "ConfirmingData", "Sub", "GetPrimaryLeadSource()", "0", ex.Message.ToString)
             y = Nothing
@@ -404,6 +408,7 @@ Public Class ConfirmingData
             End Select
             cnn.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingData", "ConfirmingData", "Sub", "GetSLS(pls)", "0", ex.Message.ToString)
             y = Nothing
@@ -580,6 +585,7 @@ Public Class ConfirmingData
             'Cnn.Close()
             'Me.PullCustomerINFO(ID)
             'MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingData", "ConfirmingData", "Sub", "PullCustomerInfo(ID)", ID, ex.Message.ToString)
             y = Nothing
@@ -636,6 +642,7 @@ Public Class ConfirmingData
                 Exit Sub
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingData", "ConfirmingData", "Sub", "Confirm(ID,cmd,spokewith,usr)", ID, ex.Message.ToString)
             y = Nothing
@@ -679,6 +686,7 @@ Public Class ConfirmingData
             Cnn.Close()
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingData", "ConfirmingData", "Sub", "PopReps()", "0", ex.Message.ToString)
             y = Nothing
@@ -751,6 +759,7 @@ Public Class ConfirmingData
             Dim c As New CustomerHistory
             c.SetUp(Confirming, ID, Confirming.TScboCustomerHistory)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingData", "ConfirmingData", "Sub", "ChangeRep(ID,rep1,rep2,origrep1,origrep2)", ID, ex.Message.ToString)
             y = Nothing

@@ -1331,6 +1331,7 @@ Public Class ImportData
             Form6.lblTable.Text = "Successfully Imported " & iteration.ToString
             Form6.btnImport.Text = "Close"
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData", "ImportData", "Constructor", "New(...)", "0", ex.Message.ToString)
             y = Nothing
@@ -1470,6 +1471,7 @@ Public Class ImportData
             'b.Dump_To_ProxyTable(v, DevOrPro)
             'Dim err As String = ex.Message
             'MsgBox("Error: " & vbCrLf & err, MsgBoxStyle.Critical, "DEBUG INFO - ImportData.VerifyAddress ")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData", "ImportData", "Sub", "VerifyAddress(obj,devOrPro)", "0", ex.Message.ToString)
             y = Nothing
@@ -1488,6 +1490,7 @@ Public Class ImportData
         Catch ex As Exception
             'Dim err As String = ex.Message
             'MsgBox("ERROR: " & vbCrLf & err, MsgBoxStyle.Critical, "DEBUG INFO - ImportData.Update_Table_Verified_Address(recID)")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData", "ImportData", "Sub", "VerifyAddress(RecID)", "0", ex.Message.ToString)
             y = Nothing
@@ -1513,6 +1516,7 @@ Public Class ImportData
             cnxVerify = Nothing
             Return y
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData", "ImportData", "Function", "Get_Address_To_Verify(leadNum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -1530,6 +1534,7 @@ Public Class ImportData
             cnxVerify = Nothing
             Return res
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData", "ImportData", "Function", "GetMaxID()", "0", ex.Message.ToString)
             y = Nothing

@@ -31,6 +31,8 @@
             Me.lblAppliedTemplate.Text = TemplateName.ToString
             Me.lblSubject.Text = z.SubjectScrub(LeadToShow.RecID, False, TemplateName, depart_)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEmailPreview", "FormCode", "Event", "frmEmailPreview_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -59,6 +61,8 @@
             Next
             Me.Name = "Email Preview"
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEmailPreview", "FormCode", "Event", "ResetForm()", "0", ex.Message.ToString)
             y = Nothing
@@ -81,6 +85,8 @@
             Me.lblAppliedTemplate.Text = cbo_txt
             Me.lblSubject.Text = z.SubjectScrub(LeadToShow.RecID, False, cbo_txt, Me.Department)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEmailPreview", "FormCode", "Event", "cboTemplates_SelectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -115,6 +121,8 @@
             Me.ResetForm()
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEmailPreview", "FormCode", "Event", "btnSendEmail_click", "0", ex.Message.ToString)
             y = Nothing

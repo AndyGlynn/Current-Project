@@ -20,6 +20,7 @@ Public Class AddSalesRep
             Me.cboSM.SelectedItem = Nothing
             Me.PopulateSalesManager()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddSalesRep", "FormCode", "Event", "AddSalesRep_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -82,6 +83,7 @@ Public Class AddSalesRep
                 combo.Items.Add(Trim(CapitalizeText(Me.txtFName.Text)) & " " & Trim(CapitalizeText(Me.txtLname.Text)))
                 combo.SelectedItem = Trim(CapitalizeText(Me.txtFName.Text)) & " " & Trim(CapitalizeText(Me.txtLname.Text))
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
                 cnn.Close()
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddSalesRep", "FormCode", "Event", "btnSave_Click", "0", ex.Message.ToString)
@@ -89,6 +91,7 @@ Public Class AddSalesRep
             End Try
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddSalesRep", "FormCode", "Event", "btnSave_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -103,6 +106,7 @@ Public Class AddSalesRep
             TextToCap = Text & Mid(TextToCap, 2, TextToCap.Length)
             Return TextToCap
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Return TextToCap
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddSalesRep", "FormCode", "Function", "CapitalizeText(texttocap)", "0", ex.Message.ToString)
@@ -126,6 +130,7 @@ Public Class AddSalesRep
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddSalesRep", "FormCode", "Sub", "PopulateSalesManager", "0", ex.Message.ToString)
             y = Nothing
@@ -137,6 +142,7 @@ Public Class AddSalesRep
         Try
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddSalesRep", "FormCode", "Event", "bntCancel_click", "0", ex.Message.ToString)
             y = Nothing
@@ -164,7 +170,9 @@ Public Class AddSalesRep
                     cnn.Close()
                     PopulateSalesManager()
                     Me.cboSM.SelectedItem = CapitalizeText(first) & " " & CapitalizeText(last)
+                    Me.Cursor = Cursors.Default
                 Catch ex As Exception
+                    Me.Cursor = Cursors.Default
                     Dim y As New ErrorLogging_V2
                     y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddSalesRep", "FormCode", "Event", "cboSM_SelectedValueChanged", "0", ex.Message.ToString)
                     y = Nothing
@@ -176,6 +184,7 @@ Public Class AddSalesRep
                 Exit Sub
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddSalesRep", "FormCode", "Event", "cboSM_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing

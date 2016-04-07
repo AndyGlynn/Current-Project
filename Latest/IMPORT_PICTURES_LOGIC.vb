@@ -33,6 +33,7 @@ Public Class IMPORT_PICTURES_LOGIC
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("IMPORT_PICTURE_LOGIC", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetProducts")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "IMPORT_PICTURES_LOGIC", "IMPORT_PICTURES_LOGIC", "Sub", "GetProducts()", "0", ex.Message.ToString)
             y = Nothing
@@ -57,6 +58,7 @@ Public Class IMPORT_PICTURES_LOGIC
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("IMPORT_PICTURE_LOGIC", "ByVal Product as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PullACRO")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "IMPORT_PICTURES_LOGIC", "IMPORT_PICTURES_LOGIC", "Sub", "PullAcro(product)", "0", ex.Message.ToString)
             y = Nothing

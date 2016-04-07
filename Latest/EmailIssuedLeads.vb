@@ -167,6 +167,8 @@ Public Class EmailIssuedLeads
             cnx_ex = Nothing
             Return exclusion_
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "GetExclusions()", "0", ex.Message.ToString)
             y = Nothing
@@ -203,6 +205,7 @@ Public Class EmailIssuedLeads
             End If
             Return can_get_email
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "CanRepGetEmail(repfname,replname)", "0", ex.Message.ToString)
             y = Nothing
@@ -226,6 +229,7 @@ Public Class EmailIssuedLeads
             End If
             Return can_get_email
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "CanRepGetEmail(employeeid)", "0", ex.Message.ToString)
             y = Nothing
@@ -246,6 +250,7 @@ Public Class EmailIssuedLeads
             rep_cnx = Nothing
             Return emailAddress
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "GetRepEmailAddress(repfname,replname)", "0", ex.Message.ToString)
             y = Nothing
@@ -263,6 +268,7 @@ Public Class EmailIssuedLeads
             rep_cnx = Nothing
             Return emailAddress
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "GetRepEmailAddress(EmployeeID)", "0", ex.Message.ToString)
             y = Nothing
@@ -472,6 +478,7 @@ Public Class EmailIssuedLeads
             Return strLead
             'Return msgBody
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "ConstructMessageWithExclusions(ByVal RepFName As String, ByVal RepLName As String, ByVal LeadNum As String, ByVal _Exclusions As Exclusions, ByVal RepEmail As String)", "0", ex.Message.ToString)
             y = Nothing
@@ -656,6 +663,7 @@ Public Class EmailIssuedLeads
                 'MsgBox(arMesssages(ggg),MsgBoxStyle.Information ,"DEBUG INFO: WITH EXCLUSIONS")
             Next
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Sub", "BulkMailWithExclusions", "0", ex.Message.ToString)
             y = Nothing
@@ -844,6 +852,7 @@ Public Class EmailIssuedLeads
                 'MsgBox(arMesssages(ggg),MsgBoxStyle.Information ,"DEBUG INFO: WITH EXCLUSIONS")
             Next
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Sub", "BulkMailWithoutExclusions", "0", ex.Message.ToString)
             y = Nothing
@@ -1012,6 +1021,7 @@ Public Class EmailIssuedLeads
             Return strLead
             'Return msgBody
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "ConstructMessageWithoutExclusions", "0", ex.Message.ToString)
             y = Nothing
@@ -1045,6 +1055,7 @@ Public Class EmailIssuedLeads
             MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "EMAIL_SINGLE_MarkupEmail_With_Exclusions", "0", ex.Message.ToString)
             y = Nothing
@@ -1075,6 +1086,7 @@ Public Class EmailIssuedLeads
             smptSERV.Send(eml_msg)
             MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "BulkMailWithExclusions(repemail,msg)", "0", ex.Message.ToString)
             y = Nothing
@@ -1104,6 +1116,7 @@ Public Class EmailIssuedLeads
             smptSERV.Send(eml_msg)
             MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "BulkMailWithoutExclusions(repmail,msg)", "0", ex.Message.ToString)
             y = Nothing
@@ -1136,6 +1149,7 @@ Public Class EmailIssuedLeads
 
             MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "Email_Single_MarkupEmail_WITHOUT_Exclusions(refname,replname,leadnum,repemail,msg,subject)", "0", ex.Message.ToString)
             y = Nothing
@@ -1168,6 +1182,7 @@ Public Class EmailIssuedLeads
 
             MsgBox("Email Sent to: " & vbCrLf & Recipient.ToString & " .", MsgBoxStyle.Information, "Mail Was Sent.")
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Sub", "Send_BLAST_MAIL(from,recipient,msg,subject)", "0", ex.Message.ToString)
             y = Nothing
@@ -1200,6 +1215,7 @@ Public Class EmailIssuedLeads
 
             MsgBox("Mail Sent to: " & _To.ToString & " .", MsgBoxStyle.Information, "Mail Was Sent.")
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Sub", "Send_BLAST_MAIL_confirming(from,to,msg,subject,fromSMTP,fromSMTPPort,FromPWD,fromUSR,Fromdisplayname)", "0", ex.Message.ToString)
             y = Nothing
@@ -1226,6 +1242,7 @@ Public Class EmailIssuedLeads
             lm_cnx = Nothing
             Return m_result
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Sub", "GetLastMarketingResult(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -1248,6 +1265,7 @@ Public Class EmailIssuedLeads
             End If
             Return CandC
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Sub", "GetEnterLeadMarketingrResult(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -1283,6 +1301,7 @@ Public Class EmailIssuedLeads
             Return mm
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "GetmarketingManager()", "0", ex.Message.ToString)
             y = Nothing
@@ -1326,6 +1345,7 @@ Public Class EmailIssuedLeads
             mm_cnx = Nothing
             Return ArrayOfListOBJs
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "Generate_MarketingManager_List(ApptDate)", "0", ex.Message.ToString)
             y = Nothing
@@ -1384,6 +1404,7 @@ Public Class EmailIssuedLeads
             End With
             smptSERV.Send(eml_msg)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Sub", "MailTheListToTheManager(listoflead,fname,lname,apptdate)", "0", ex.Message.ToString)
             y = Nothing
@@ -1422,6 +1443,7 @@ Public Class EmailIssuedLeads
             End If
             Return ShouldMail
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "IsCalledAndCancelled(leadnum,apptdate)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -1439,6 +1461,7 @@ Public Class EmailIssuedLeads
             cnxID.Close()
             Return res
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailIssueLeads", "EmailIssueLeads", "Function", "Get_record_Email(recID)", recID, ex.Message.ToString)
             y = Nothing

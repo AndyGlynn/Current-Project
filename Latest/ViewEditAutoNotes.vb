@@ -22,6 +22,7 @@ Public Class ViewEditAutoNotes
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ViewEditAutoNotes", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Client", "PopulateList")
@@ -73,6 +74,7 @@ Public Class ViewEditAutoNotes
             End Select
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ViewEditAutoNotes", "ByVal Response As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Client", "InsertAutoNote")
             Dim y As New ErrorLogging_V2
@@ -91,6 +93,7 @@ Public Class ViewEditAutoNotes
             'Me.PopuluateList()
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("DeleteNote", "ByVal Response as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "DeleteNote")
             Dim y As New ErrorLogging_V2

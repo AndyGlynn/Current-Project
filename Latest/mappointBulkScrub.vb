@@ -97,6 +97,7 @@ Public Class mappointBulkScrub
                     Exit Select
             End Select
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim stAddress As String = obj.StreetAddress
             Dim City As String = obj.City
             Dim zip As String = obj.Zip

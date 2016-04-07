@@ -158,6 +158,7 @@ Public Class USER_LOGICv2
             Next
             Return arIPV4s
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Function", "GET_arIPV4s_FROM_LOCAL_MACHINE", "0", ex.Message.ToString)
             y = Nothing
@@ -190,6 +191,7 @@ Public Class USER_LOGICv2
             End If
             Return Exists
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Function", "Check_User_exists(fname,lname)", "0", ex.Message.ToString)
             y = Nothing
@@ -237,6 +239,7 @@ Public Class USER_LOGICv2
             End If
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Function", "Check_Password(pwd,ufname,ulname)", "0", ex.Message.ToString)
             y = Nothing
@@ -327,6 +330,7 @@ Public Class USER_LOGICv2
             End Using
             Return usr
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             '' write to error log here.
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Function", "Get_User_Obj", "0", ex.Message.ToString)
@@ -430,6 +434,7 @@ Public Class USER_LOGICv2
             cnx_.Close()
             cnx_ = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Sub", "LogOutOfSystem(fname,lname,scrx,scry...)", "0", ex.Message.ToString)
             y = Nothing
@@ -453,6 +458,7 @@ Public Class USER_LOGICv2
             '' not using anymore.
             '' end edit
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Sub", "Logout(...)", "0", ex.Message.ToString)
             y = Nothing
@@ -485,6 +491,7 @@ Public Class USER_LOGICv2
             usr_cnx = Nothing
             Return z
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "User_logic_V2", "User_logic_V2", "Sub", "Get_Last_form_and_sizes(fname,lname,pwd)", "0", ex.Message.ToString)
             y = Nothing

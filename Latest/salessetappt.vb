@@ -61,6 +61,8 @@ Public Class salessetappt
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "salessetappt", "FormCode", "Sub", "salessetappt_load", "0", ex.Message.ToString)
             y = Nothing
@@ -150,6 +152,8 @@ Public Class salessetappt
                 Me.Label1.Visible = False
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "salessetappt", "FormCode", "Sub", "salessetappt_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -344,6 +348,8 @@ Public Class salessetappt
 
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "salessetappt", "FormCode", "Sub", "btnSave_Click", "0", ex.Message.ToString)
             y = Nothing

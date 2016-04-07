@@ -398,6 +398,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "RemoveLinkLabel")
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "RemoveLinkLabel", "0", ex.Message.ToString)
             y = Nothing
@@ -435,6 +437,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm.ToString, "Front_End", "RemoveTextBox")
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "RemoveTextBox()", "0", ex.Message.ToString)
             y = Nothing
@@ -450,6 +454,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
 
             Return name
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Function", "Get_First(name)", "0", ex.Message.ToString)
             y = Nothing
@@ -468,6 +474,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
 
             Return name
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Function", "Get_Last(name)", "0", ex.Message.ToString)
             y = Nothing
@@ -481,6 +489,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             End If
             Return sel_item
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Function", "EmptyCbo(sel_item)", "0", ex.Message.ToString)
             y = Nothing
@@ -524,6 +534,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
 
             Me.UpdateRecord(EditCustomerInfo.ID)
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "New_Properties()", "0", ex.Message.ToString)
             y = Nothing
@@ -584,6 +596,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "ByVal ID as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "FeedProperties")
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Function", "Feed_Properties(ID)", ID, ex.Message.ToString)
             y = Nothing
@@ -724,6 +738,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "PopulateForm")
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "PopulateForm()", "0", ex.Message.ToString)
             y = Nothing
@@ -755,6 +771,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             Return Trim(Me.CorrectedAppointmentTime)
         Catch ex As Exception
             Return Trim(Me.CorrectedAppointmentTime)
+            Main.Cursor = Cursors.Default
+
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "ByVal AppTime as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CorrectedApptTime")
             Dim y As New ErrorLogging_V2
@@ -786,6 +804,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
         Catch ex As Exception
             Return Trim(Me.CorrectedAppointmentDate)
             Return Me.CorrectedAppointmentDate
+            Main.Cursor = Cursors.Default
+
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "ByVal ApptDate as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CorrectedApptDate")
             Dim y As New ErrorLogging_V2
@@ -967,6 +987,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             MsgBox("Problem update record: " & ID.ToString & ". Please try again.", MsgBoxStyle.Exclamation, "ERROR UPDATING")
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "ByVal ID As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "UpdateRecord")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "UpdateRecord(id)", ID, ex.Message.ToString)
             y = Nothing
@@ -1011,6 +1032,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_CUSTOMER_INFORMATION.GetMarketers", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetMarketers")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "GetMarketers()", "0", ex.Message.ToString)
             y = Nothing
@@ -1052,6 +1074,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_CUSTOMER_INFORMATION.GetPrimaryLeadSource", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetPrimaryLeadSource")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "GetPrimaryLeadSource()", "0", ex.Message.ToString)
             y = Nothing
@@ -1093,6 +1116,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
+
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_CUSTOMER_INFORMATION.GetSecondaryLeadSource", "ByVal PrimaryLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetSLS")
             Dim y As New ErrorLogging_V2
@@ -1127,6 +1152,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_CUSTOMER_INFORMATION.GetMarketerLeadSources", "ByVal FName As String, ByVal LName As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetMarketerLeadSources")
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Function", "GetMarketerLeadSources(FName,LName)", "0", ex.Message.ToString)
             y = Nothing
@@ -1150,6 +1177,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_CUSTOMER_INFORMATION.GetCities", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetCities")
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "GetCities()", "0", ex.Message.ToString)
             y = Nothing
@@ -1183,6 +1212,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_CUSTOMER_INFORMATION.GetWorkHours", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetWorkHours")
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "GetWorkHours()", "0", ex.Message.ToString)
             y = Nothing
@@ -1218,6 +1249,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_CUSTOMER_INFORMATION.GetProducts", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetProducts")
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "GetProducts()", "0", ex.Message.ToString)
             y = Nothing
@@ -1272,6 +1305,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_CUSTOMER_INFORMATION.AddNewProduct", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "AddNewProduct")
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "AddNewProduct(Product,ProdAcro,cbo)", "0", ex.Message.ToString)
             y = Nothing
@@ -1288,6 +1323,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertMarketer", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "InsertMarketer")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "InsertMarketer(frm)", "0", ex.Message.ToString)
             y = Nothing
@@ -1329,6 +1365,8 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertMarketer", "ByVal MFname As String, ByVal MLName As String, ByVal PLS As String, ByVal SLS As String, ByVal MarketingMan As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "WriteMarketerToTable")
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "WriteMarketerToTable(MFname,MLname,PLS,SLS,MarketingMan)", "0", ex.Message.ToString)
             y = Nothing
@@ -1343,6 +1381,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             TextToCap = Text & Mid(TextToCap, 2, TextToCap.Length)
             Return TextToCap
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Return TextToCap
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertMarketer", "ByVal TextToCap as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CapitalizeText")
@@ -1381,6 +1420,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             End Select
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertPLS", "ByVal PLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewPLS")
             Dim y As New ErrorLogging_V2
@@ -1425,6 +1465,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             End Select
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertSLS", "ByVal PLS As String, ByVal SLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertSLS")
             Dim y As New ErrorLogging_V2
@@ -1471,6 +1512,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             End Select
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertSLS", "ByVal PLS As String, ByVal SLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertSLS")
             Dim y As New ErrorLogging_V2
@@ -1515,6 +1557,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             End Select
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.IsCityInTable", "ByVal City As String, ByVal State As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CheckCity")
             Dim y As New ErrorLogging_V2
@@ -1538,6 +1581,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
         Catch ex As Exception
             'MsgBox(ex.ToString)
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "AutoFillState(City)", "0", ex.Message.ToString)
             y = Nothing
@@ -1560,6 +1604,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             End Select
             Return NumberToCheck
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Function", "DoLiteralsExist(NumberToCheck)", "0", ex.Message.ToString)
             y = Nothing
@@ -1588,6 +1633,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
 
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "ByVal ID as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "FeedProperties")
             Dim y As New ErrorLogging_V2
@@ -1615,6 +1661,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
 
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "ByVal ID as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "FeedProperties")
             Dim y As New ErrorLogging_V2
@@ -1631,6 +1678,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "ByVal ID as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "FeedProperties")
             Dim y As New ErrorLogging_V2
@@ -1647,6 +1695,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("EDIT_CUSTOMER_INFORMATION", "ByVal ID as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "FeedProperties")
             Dim y As New ErrorLogging_V2
@@ -1690,6 +1739,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
                 cnx = Nothing
                 Return a
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Function", "What_Was_PreviousPLS(recid)", RecID, ex.Message.ToString)
                 y = Nothing
@@ -1713,6 +1763,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
                 cnx.Close()
                 cnx = Nothing
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "UpdateLog(oldpls,newpls,recid,triggerdate)", RecID, ex.Message.ToString)
                 y = Nothing
@@ -1736,6 +1787,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
                 cnx.Close()
                 cnx = Nothing
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EDIT_CUSTOMER_INFORMATION", "EDIT_CUSTOMER_INFORMATION", "Sub", "UpdateLog(oldpls,newsls,recid,triggerdate)", RecID, ex.Message.ToString)
                 y = Nothing

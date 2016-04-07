@@ -29,6 +29,8 @@ Public Class AUTO_COMPLETE_LOGINS
                 LOGIN.txtUserName.AutoCompleteCustomSource.Add(ArUSERS.Item(i).ToString)
             Next
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("AUTO_COMPLETE_LOGINS", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "'New'")

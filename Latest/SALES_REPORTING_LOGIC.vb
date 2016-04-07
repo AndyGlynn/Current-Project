@@ -55,6 +55,7 @@ Public Class SALES_REPORTING_LOGIC
             Me.Run(ApptDate)
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal ApptDate as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "GetSQL_TO_XML_Information_NoResults")
@@ -77,6 +78,7 @@ Public Class SALES_REPORTING_LOGIC
             Me.Run_DailyPerf(ApptDate)
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal ApptDate as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "GetSQL_TO_XML_Information_DailyPerf")
@@ -110,6 +112,7 @@ Public Class SALES_REPORTING_LOGIC
             fs.Flush()
             fs.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal ApptDate as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "GetXML_TO_TEXT_FILE_NoResults")
@@ -125,6 +128,7 @@ Public Class SALES_REPORTING_LOGIC
 
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             cnn.Close()
         End Try
 
@@ -155,6 +159,7 @@ Public Class SALES_REPORTING_LOGIC
             fs.Flush()
             fs.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             cnn.Close()
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal ApptDate as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "GetXML_TO_TEXT_FILE_DailyPerf")
@@ -170,6 +175,7 @@ Public Class SALES_REPORTING_LOGIC
 
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             cnn.Close()
         End Try
 
@@ -182,6 +188,7 @@ Public Class SALES_REPORTING_LOGIC
             dataset.ReadXml(FileName)
             Return dataset.Tables(0)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Return dataset.Tables(0)
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal FileName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "Generate_DATASET")
@@ -198,6 +205,7 @@ Public Class SALES_REPORTING_LOGIC
             m_streams.Add(stream)
             Return stream
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Return stream
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal Name As String, ByVal FileNameExtension As String, ByVal encoding As Encoding, ByVal MimeType As String, ByVal WillSeek As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CreateStream")
@@ -253,6 +261,7 @@ Public Class SALES_REPORTING_LOGIC
 
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal Sender As Object, ByVal ev As PrintPageEventArgs", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "PrintPage")
         End Try
@@ -347,6 +356,7 @@ Public Class SALES_REPORTING_LOGIC
             End Select
             Main.Cursor = Cursors.Default
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "Print")
 
@@ -392,6 +402,7 @@ Public Class SALES_REPORTING_LOGIC
             ' Next
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal ApptDate As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "Run")
 
@@ -426,6 +437,7 @@ Public Class SALES_REPORTING_LOGIC
             m_CurrentPageIndex = 0
             print()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim errp As New ErrorLogFlatFile
             errp.WriteLog("SALES_REPORTING_LOGIC", "ByVal ApptDate As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "Run_DailyPerf")
 
@@ -747,6 +759,7 @@ Public Class SALES_REPORTING_LOGIC
                 Main.Cursor = Cursors.Default
                 'MsgBox("Report1.rdl Generated.")
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim errp As New ErrorLogFlatFile
                 errp.WriteLog("SALES_REPORTING_LOGIC.GENERATE_RDL", "ByVal ApptDate As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "GenerateRDL")
             End Try

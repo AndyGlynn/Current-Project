@@ -19,6 +19,8 @@ Public Class AssignAlert
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AssignAlert", "FormCode", "Event", "txtLeadNumber_KeyPress", "0", ex.Message.ToString)
             y = Nothing
@@ -72,6 +74,8 @@ Public Class AssignAlert
                 End If
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "txtLeadNumber", "0", ex.Message.ToString)
             y = Nothing
@@ -107,6 +111,8 @@ Public Class AssignAlert
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "ValidateLeadNumber(leadNumber)", LeadNumber.ToString, ex.Message.ToString)
             y = Nothing
@@ -137,6 +143,8 @@ Public Class AssignAlert
                 End If
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Sub", "GetAutoCompleteSource()", "0", ex.Message.ToString)
             y = Nothing
@@ -172,6 +180,8 @@ Public Class AssignAlert
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "AssignAlert_Load()", "0", ex.Message.ToString)
             y = Nothing
@@ -193,6 +203,8 @@ Public Class AssignAlert
 
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "Button2_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -276,6 +288,8 @@ Public Class AssignAlert
             Me.Close()
             Me.Dispose()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "Button1_click", "0", ex.Message.ToString)
             y = Nothing
@@ -351,6 +365,8 @@ Public Class AssignAlert
                     Me.rtfNotes.Text = (Me.rtfNotes.Text & ", " & x)
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "cboAutoNotes_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -363,6 +379,8 @@ Public Class AssignAlert
             Me.cboAutonotes.Focus()
             Me.cboAutonotes.DroppedDown = True
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "lblAutoNotes_Click", "0", ex.Message.ToString)
             y = Nothing

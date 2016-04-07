@@ -106,6 +106,8 @@ Public Class Contact_Info
                     '        Me.Close()
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ConfirmingSingleRecord", "FormCode", "Event", "btnAction_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -113,7 +115,5 @@ Public Class Contact_Info
 
     End Sub
 
-    Private Sub cboDepart_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDepart.SelectedIndexChanged
-
-    End Sub
+    
 End Class

@@ -64,6 +64,8 @@ Public Class SetAppt_V2
 
             Me.Text = "Set Appointment For - " & Me.ID.ToString
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SendNotesSM", "FormCode", "Event", "SetAppt_V2", "0", ex.Message.ToString)
             y = Nothing
@@ -136,6 +138,8 @@ Public Class SetAppt_V2
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SendNotesSM", "FormCode", "Event", "cboAutoNotes_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -397,6 +401,8 @@ Public Class SetAppt_V2
             End Select
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SendNotesSM", "FormCode", "Event", "btnSave_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -435,6 +441,8 @@ Public Class SetAppt_V2
                 cnx.Close()
                 cnx = Nothing
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Return res
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SendNotesSM", "FormCode-PrivateClass", "Function", "GetAuotNotes", "0", ex.Message.ToString)
@@ -506,6 +514,8 @@ Public Class SetAppt_V2
                 End If
                 Return arNames
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SendNotesSM", "FormCode-PrivateClass", "Function", "Get_Customer_Names(recID)", recID, ex.Message.ToString)
                 y = Nothing
@@ -538,6 +548,8 @@ Public Class SetAppt_V2
 
                 Return x
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SendNotesSM", "FormCode-PrivateClass", "Function", "Get_Appointment_Date_And_Time(RecID)", RecID, ex.Message.ToString)
                 y = Nothing
@@ -561,6 +573,8 @@ Public Class SetAppt_V2
                 cnx = Nothing
                 Return a
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SendNotesSM", "FormCode-PrivateClass", "Function", "Get_ExtendedAutoNote_info(recid)", RecID, ex.Message.ToString)
                 y = Nothing
@@ -590,6 +604,8 @@ Public Class SetAppt_V2
                     cnx = Nothing
                 End If
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SetAppt_V2", "FormCode-PrivateClass", "Function", "InsertNewAuotNote.InsertNote(note)", "0", ex.Message.ToString)
                 y = Nothing
@@ -607,6 +623,8 @@ Public Class SetAppt_V2
                 cnx = Nothing
                 Return cnt
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SetAppt_V2", "FormCode-PrivateClass", "Function", "Check_For_Duplicate(note)", "0", ex.Message.ToString)
                 y = Nothing
@@ -653,6 +671,8 @@ Public Class SetAppt_V2
                 cnx = Nothing
                 Return cnt
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SetAppt_V2", "FormCode-PrivateClass", "Function", "Check_IF_exists_Already(recID)", RecID, ex.Message.ToString)
                 y = Nothing
@@ -669,6 +689,8 @@ Public Class SetAppt_V2
                 cnx.Close()
                 cnx = Nothing
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SetAppt_V2", "FormCode-PrivateClass", "Function", "Insert_New_ExtendedINfo(recid,autonote,extendednote,delayedinstall,datelogged,userlogged)", RecID, ex.Message.ToString)
                 y = Nothing
@@ -719,6 +741,8 @@ Public Class SetAppt_V2
                 cnx.Close()
                 cnx = Nothing
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SetAppt_V2", "FormCode-PrivateClass", "Function", "Update_ExtendedInfoLog", RecID, ex.Message.ToString)
                 y = Nothing

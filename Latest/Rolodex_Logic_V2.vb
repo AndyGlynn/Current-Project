@@ -43,6 +43,7 @@ Public Class Rolodex_Logic_V2
             cnx = Nothing
             Return arDepartments
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "GetDepartments()", "0", ex.Message.ToString)
             y = Nothing
@@ -80,6 +81,7 @@ Public Class Rolodex_Logic_V2
             cnx = Nothing
             Return listOfEmployess
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "Get_All_Employees", "0", ex.Message.ToString)
             y = Nothing
@@ -116,6 +118,7 @@ Public Class Rolodex_Logic_V2
             cnx = Nothing
             Return a
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "GetEmpObject", "0", ex.Message.ToString)
             y = Nothing
@@ -138,6 +141,7 @@ Public Class Rolodex_Logic_V2
             End If
             Return DoesDuplicateExist
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "Check_Duplicates(employee)", "0", ex.Message.ToString)
             y = Nothing
@@ -159,6 +163,7 @@ Public Class Rolodex_Logic_V2
             End If
             Return DoesDuplicateExist
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "CheckDuplicates(EmployeeID)", "0", ex.Message.ToString)
             y = Nothing
@@ -180,6 +185,7 @@ Public Class Rolodex_Logic_V2
             End If
             Return DoesDuplicateExist
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "Check_Duplicates(fname,lname)", "0", ex.Message.ToString)
             y = Nothing
@@ -196,6 +202,7 @@ Public Class Rolodex_Logic_V2
             cnx.Close()
             cnx = Nothing
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "Update_Information", "0", ex.Message.ToString)
             y = Nothing
@@ -219,6 +226,7 @@ Public Class Rolodex_Logic_V2
                 Exit Sub
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "DeleteEmployee", "0", ex.Message.ToString)
             y = Nothing
@@ -274,6 +282,7 @@ Public Class Rolodex_Logic_V2
                 RolodexEdit.Close()
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Sub", "AddEmployee()", "0", ex.Message.ToString)
             y = Nothing
@@ -311,6 +320,7 @@ Public Class Rolodex_Logic_V2
             cnx = Nothing
             Return listOfEmployess
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "Get_Employee_By_Department", "0", ex.Message.ToString)
             y = Nothing
@@ -328,6 +338,7 @@ Public Class Rolodex_Logic_V2
             Next
             Return arEmps
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "Generate_obj_List()", "0", ex.Message.ToString)
             y = Nothing
@@ -344,6 +355,7 @@ Public Class Rolodex_Logic_V2
             Next
             Return arEmps
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "GenerateEmp_obj_list()", "0", ex.Message.ToString)
             y = Nothing
@@ -369,6 +381,7 @@ Public Class Rolodex_Logic_V2
             cnx.Close()
             Return str
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Rolodex_Logic_V2", "Rolodex_Logic_V2", "Function", "Lookup_Lead_Number_for_text_Location()", LeadNumber, ex.Message.ToString)
             y = Nothing

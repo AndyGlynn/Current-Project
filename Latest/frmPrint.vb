@@ -79,6 +79,8 @@
                 Next
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmPrint", "FormCode", "Event", "lsLeadIds_SelectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -147,6 +149,8 @@
                 'MsgBox("Record IDs From Multi-Select : " & vbCrLf & str, MsgBoxStyle.Information, "DEBUG INFO")
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmPrint", "FormCode", "Event", "Button1_click", "0", ex.Message.ToString)
             y = Nothing

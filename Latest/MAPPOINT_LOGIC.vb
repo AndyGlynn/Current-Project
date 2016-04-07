@@ -132,6 +132,8 @@ Public Class MAPPOINT_LOGIC
             oApp = Nothing
 
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             oMap.Saved = True
             oMap = Nothing
             oApp = Nothing
@@ -293,6 +295,7 @@ Public Class MAPPOINT_LOGIC
             oApp = Nothing
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             oMap.Saved = True
             oMap = Nothing
             oApp = Nothing

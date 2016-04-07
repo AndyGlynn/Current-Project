@@ -65,6 +65,7 @@ Public Class ImportData_V2
                     '' do nothing 
                 End If
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2", "ImportData_V2.FileOperations", "Sub", "WriteErrorTog(fail_error,dispaly,production)", "0", ex.Message.ToString)
                 y = Nothing
@@ -82,6 +83,7 @@ Public Class ImportData_V2
                 Return arFile
 
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2", "ImportData_V2.FileOperations", "Sub", "Get_Files(Directory,SearchPattern)", "0", ex.Message.ToString)
                 y = Nothing
@@ -102,6 +104,7 @@ Public Class ImportData_V2
                 stream_reader.Close()
                 Return arLines
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2", "ImportData_V2.FileOperations", "Function", "Preview_Read_File(filepath)", "0", ex.Message.ToString)
                 y = Nothing
@@ -180,6 +183,7 @@ Public Class ImportData_V2
 
                 Return strFileName
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2", "ImportData_V2.FileOperations", "Function", "CreateBatchReport(starttime,stoptime,table-names)", "0", ex.Message.ToString)
                 y = Nothing
@@ -228,6 +232,7 @@ Public Class ImportData_V2
                 Return strFileName
 
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2", "ImportData_V2.FileOperations", "Function", "CreateSingleReport(Start,stop,table,numrows)", "0", ex.Message.ToString)
                 y = Nothing
@@ -277,6 +282,7 @@ Public Class ImportData_V2
                 cnx.Close()
                 cnx = Nothing
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2.sqlOperations", "sqlOperations", "Sub", "Update_Table", "0", ex.Message.ToString)
                 y = Nothing
@@ -294,6 +300,7 @@ Public Class ImportData_V2
                 cnx.Close()
                 cnx = Nothing
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2.sqlOperations", "sqlOperations", "Sub", "CreateTestTable()", "0", ex.Message.ToString)
                 y = Nothing
@@ -493,6 +500,7 @@ Public Class ImportData_V2
 
                 End If
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2.sqlOperations", "sqlOperations", "Sub", "Create_Table(name)", "0", ex.Message.ToString)
                 y = Nothing
@@ -535,6 +543,7 @@ Public Class ImportData_V2
                 cnx = Nothing
                 Return arRecords
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2.sqlOperations", "sqlOperations", "Function", "Get_Addresses_tblProspect(devOrPro)", "0", ex.Message.ToString)
                 y = Nothing
@@ -556,6 +565,7 @@ Public Class ImportData_V2
                 cnx.Close()
                 Return arTables
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2.sqlOperations", "sqlOperations", "Function", "GetTables()", "0", ex.Message.ToString)
                 y = Nothing
@@ -686,6 +696,7 @@ Public Class ImportData_V2
                 cnx = Nothing
                 Return cnt
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ImportData_V2.sqlOperations", "sqlOperations", "Function", "CountRecords(tablename,devorpro)", "0", ex.Message.ToString)
                 y = Nothing

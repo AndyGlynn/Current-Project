@@ -9,6 +9,7 @@ Imports System.Collections
 
 Imports System.Windows.Forms '' for context menus MAYBE
 
+#Region "Notes 2-9-2016"
 '' notes 2-9-2016
 '' This class was deprecated completely per Andy's request.
 '' Moved over to a "Static Control" style on the Front End Form Code.
@@ -17,7 +18,7 @@ Imports System.Windows.Forms '' for context menus MAYBE
 '' 
 '' CLASS NOT USED ANYMORE - Point of Reference Only -  NOT GOING TO WRAP IN ERROR HANDLERS - AC
 '' 
-
+#End Region
 
 Public Class jbPicsAttachedFiles
     Private _InitDirExists As Boolean

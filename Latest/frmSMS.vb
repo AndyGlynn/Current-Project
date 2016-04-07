@@ -146,6 +146,8 @@ Public Class frmSMS
 
             'smtp.Send(eml)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmSMS", "FormCode", "Sub", "SendMSG(args)", "0", ex.Message.ToString)
             y = Nothing
@@ -175,6 +177,8 @@ Public Class frmSMS
             Me.ResetForm()
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmSMS", "FormCode", "Event", "btnSend_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -194,7 +198,10 @@ Public Class frmSMS
                 Me.txtLocation.Text = "No Location Found/Lead Number Provided."
             End If
             v = Nothing
+
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmSMS", "FormCode", "Event", "txtLeadNumberLookup_TextChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -239,6 +246,8 @@ Public Class frmSMS
                 cnx.Close()
                 Return retCoObj
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmSMS", "FormCode-Private Class", "Function", "GetCompanyInfo()", "0", ex.Message.ToString)
                 y = Nothing

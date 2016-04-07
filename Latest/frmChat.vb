@@ -35,6 +35,8 @@ Public Class frmChat
                 End If
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmChat", "FormCode", "sub", "GetUsers()", "0", ex.Message.ToString)
             y = Nothing
@@ -57,6 +59,8 @@ Public Class frmChat
             cnn.Close()
             Return ONLINE
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmChat", "FormCode", "sub", "GetUsers()", "0", ex.Message.ToString)
             y = Nothing
@@ -97,6 +101,8 @@ Public Class frmChat
                 Me.txtMSG.Text = ""
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmChat", "FormCode", "Sub", "btnSend_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -112,6 +118,8 @@ Public Class frmChat
             ns.Flush()
             'ns.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmChat", "FormCode", "sub", "Send(t as string)", "0", ex.Message.ToString)
             y = Nothing
@@ -140,6 +148,8 @@ Public Class frmChat
                 PENDING_REQUEST_INFO.MSG = ""
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmChat", "FormCode", "sub", "tmrChat_Tick", "0", ex.Message.ToString)
             y = Nothing

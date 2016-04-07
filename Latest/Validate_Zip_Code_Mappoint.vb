@@ -32,10 +32,11 @@ Public Class Validate_Zip_Code_Mappoint
             oApp = Nothing
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim a As New ErrorLogging_V2
             a.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmWCList.vb", "Validate_Zip_Code_Mappoint", "Class", "IzZipValid()", "0", ex.Message.ToString)
             a = Nothing
-            isvalid = False
+            isValid = False
             Return isValid
         End Try
     End Function

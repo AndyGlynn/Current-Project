@@ -114,6 +114,7 @@ Public Class Print_Sales_Perf_Report
             '    Exit Sub
             'End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Print_Sales_Perf_Report", "Print_Sales_Perf_Report", "Constructor", "New(..)", "0", ex.Message.ToString)
             y = Nothing
@@ -168,6 +169,7 @@ Public Class Print_Sales_Perf_Report
             Return arLinesOfData
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim err As String = ex.Message
             MsgBox("Error: Performance Report.", MsgBoxStyle.Critical, "DEBUG INFO - Error On Perf Report")
             Dim y As New ErrorLogging_V2
@@ -2207,6 +2209,7 @@ Public Class Print_Sales_Perf_Report
                 System.Diagnostics.Process.Start("IExplore.exe", complete_File_Path)
 
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim err As String = ex.Message
                 MsgBox("An error has occurred generating the Performance Report." & vbCrLf & "Please check the error logs for more information.", MsgBoxStyle.Exclamation, "DEBUG INFO - Error Write_HTML_Doc()")
                 Dim y As New ErrorLogging_V2
@@ -2216,6 +2219,7 @@ Public Class Print_Sales_Perf_Report
             End Try
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Print_Sales_Perf_Report", "Print_Sales_Perf_Report", "Sub", "Write_HTML_DOC(...)", "0", ex.Message.ToString)
             y = Nothing

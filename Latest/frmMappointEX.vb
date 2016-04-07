@@ -24,12 +24,18 @@
     Private charType As MapPoint.GeoDataMapType
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        Me.axTarget.ActiveMap.Saved = True
+        Try
+            Me.axTarget.ActiveMap.Saved = True
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Me.Cursor = Cursors.WaitCursor
+            ' Me.MdiParent = Main
             ActiveTabPage = "Single Result Plot"
             List_Of_MRes = New List(Of String)
             List_Of_SRes = New List(Of String)

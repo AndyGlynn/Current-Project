@@ -141,6 +141,7 @@ Public Class CompanyInformation
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("CompanyInformation", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetInformation")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "CompanyInformation", "CompanyInformation", "Sub", "GetInformation()", "0", ex.Message.ToString)
             y = Nothing
@@ -179,6 +180,7 @@ Public Class CompanyInformation
             cnn.Close()
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("CompanyInformation", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "UpdateCompanyInformation")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "CompanyInformation", "CompanyInformation", "Sub", "UpdateCompanyInformation()", "0", ex.Message.ToString)
             y = Nothing

@@ -37,6 +37,7 @@ Public Class GetIcons
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("GetIcons", "ByVal FileName as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "GetIcons")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "GetIcons", "GetIcons", "Constructor", "New(FileName)", "0", ex.Message.ToString)
             y = Nothing

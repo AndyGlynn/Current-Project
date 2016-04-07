@@ -137,6 +137,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx = Nothing
             Return arRes
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "GetUniqueZipStates()", "0", ex.Message.ToString)
             y = Nothing
@@ -162,6 +163,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx = Nothing
             Return arRes
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "GetUniqueCityStates()", "0", ex.Message.ToString)
             y = Nothing
@@ -188,6 +190,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx_get = Nothing
             Return arCityZip
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "GetUniqueCityAndZips()", "0", ex.Message.ToString)
             y = Nothing
@@ -237,6 +240,7 @@ Public Class MAPPOINT_LOGIC_V2
             oApp = Nothing
             Return arCityFoundName
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Search_Radius_City(ByVal ListOfCityAndZips As List(Of CityState), ByVal Search_Radius As Double, ByVal StartCity As String, ByVal StartState As String)", "0", ex.Message.ToString)
             y = Nothing
@@ -300,6 +304,7 @@ Public Class MAPPOINT_LOGIC_V2
             oApp = Nothing
             Return arZipFoundName
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Search_Radius_ZipCode(ByVal ListOfCityAndZips As List(Of CityState), ByVal Search_Radius As Double, ByVal StartCity As String, ByVal StartState As String)", "0", ex.Message.ToString)
             y = Nothing
@@ -317,6 +322,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx_st = Nothing
             Return res
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_STATE_ForCity(City)", "0", ex.Message.ToString)
             y = Nothing
@@ -333,6 +339,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx_st = Nothing
             Return res
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_STATE_ForZip(zip)", "0", ex.Message.ToString)
             y = Nothing
@@ -356,6 +363,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx_st = Nothing
             Return res
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_Unique_States()", "0", ex.Message.ToString)
             y = Nothing
@@ -397,6 +405,7 @@ Public Class MAPPOINT_LOGIC_V2
             oMap.Saved = True
             oApp.Visible = True
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Map_Single_Address(staddress,city,state,zip)", "0", ex.Message.ToString)
             y = Nothing
@@ -446,6 +455,7 @@ Public Class MAPPOINT_LOGIC_V2
             oApp.Visible = True
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "PointToPointDirections(begin vars,end vars)", "0", ex.Message.ToString)
             y = Nothing
@@ -472,6 +482,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx_res = Nothing
             Return arResults
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_Unique_Sales_Results()", "0", ex.Message.ToString)
             y = Nothing
@@ -504,6 +515,7 @@ Public Class MAPPOINT_LOGIC_V2
             Return arLeadsToPlot
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_Leads_By_Result_Sales(startdate,enddate)", "0", ex.Message.ToString)
             y = Nothing
@@ -534,6 +546,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx = Nothing
             Return arLeadsToPlot
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_Leads_By_Result_DemoNoSale(startdate,enddate)", "0", ex.Message.ToString)
             y = Nothing
@@ -563,6 +576,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx = Nothing
             Return arLeadsToPlot
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_Leads_By_Result_NotHit(startdate,enddate)", "0", ex.Message.ToString)
             y = Nothing
@@ -592,6 +606,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx = Nothing
             Return arLeadsToPlot
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_Leads_By_Result_RecissionCancel(startdate,enddate)", "0", ex.Message.ToString)
             y = Nothing
@@ -621,6 +636,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx = Nothing
             Return arLeadsToPlot
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_Leads_By_Result_Reset(startdate,enddate)", "0", ex.Message.ToString)
             y = Nothing
@@ -650,6 +666,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx = Nothing
             Return arLeadsToPlot
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "Get_Leads_By_Result_NoDemo(startdate,enddate)", "0", ex.Message.ToString)
             y = Nothing
@@ -690,6 +707,7 @@ Public Class MAPPOINT_LOGIC_V2
             oMap.Saved = True
             oApp.Visible = True
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "PlotNoDemo(listNoDemos)", "0", ex.Message.ToString)
             y = Nothing
@@ -730,6 +748,7 @@ Public Class MAPPOINT_LOGIC_V2
             oMap.Saved = True
             oApp.Visible = True
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "PlotNoDemo(listResets)", "0", ex.Message.ToString)
             y = Nothing
@@ -770,6 +789,7 @@ Public Class MAPPOINT_LOGIC_V2
             oMap.Saved = True
             oApp.Visible = True
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "PlotNoDemo(listrecissioncancel)", "0", ex.Message.ToString)
             y = Nothing
@@ -810,6 +830,7 @@ Public Class MAPPOINT_LOGIC_V2
             oMap.Saved = True
             oApp.Visible = True
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "PlotNoDemo(listnothit)", "0", ex.Message.ToString)
             y = Nothing
@@ -850,6 +871,7 @@ Public Class MAPPOINT_LOGIC_V2
             oMap.Saved = True
             oApp.Visible = True
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "PlotNoDemo(listdemonosale)", "0", ex.Message.ToString)
             y = Nothing
@@ -890,6 +912,7 @@ Public Class MAPPOINT_LOGIC_V2
             oMap.Saved = True
             oApp.Visible = True
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "PlotNoDemo(listofsales)", "0", ex.Message.ToString)
             y = Nothing
@@ -917,6 +940,7 @@ Public Class MAPPOINT_LOGIC_V2
             cnx = Nothing
             Return x
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "LookUpLeadNumberAddress(Leadnumber)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -962,6 +986,7 @@ Public Class MAPPOINT_LOGIC_V2
 
             Return DD_Obj
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC_V2", "MAPPOINT_LOGIC_V2", "Function", "GetDistanceBetweenCities(start:=city,state|end:=city,state)", LeadNum, ex.Message.ToString)
             y = Nothing

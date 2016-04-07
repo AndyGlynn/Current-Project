@@ -723,11 +723,13 @@ Public Class WarmCalling
             r.Close()
             Cnn.Close()
             WCaller.txtRecordsMatching.Text = CStr(cnt)
-        Catch ex As Exception
-            MsgBox(ex.ToString)
+            Catch ex As Exception
+                Main.Cursor = Cursors.Default
+                MsgBox(ex.ToString)
         End Try
         Me.Populate()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WarmCalling", "FormCode", "Sub", "WarmCalling.GroupBy()", "0", ex.Message.ToString)
             y = Nothing
@@ -1482,6 +1484,7 @@ Public Class WarmCalling
                 MsgBox(ex.ToString)
             End Try
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WarmCalling", "FormCode", "Sub", "Populate()", "0", ex.Message.ToString)
             y = Nothing
@@ -1650,6 +1653,7 @@ Public Class WarmCalling
                 cnn.Close()
             End Try
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WarmCalling", "FormCode", "Sub", "ManagerCriteria()", "0", ex.Message.ToString)
             y = Nothing
@@ -1694,6 +1698,7 @@ Public Class WarmCalling
             cnn.Close()
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WarmCalling", "FormCode", "Sub", "GetPrimaryLeadSource()", "0", ex.Message.ToString)
             y = Nothing
@@ -1736,6 +1741,7 @@ Public Class WarmCalling
             End Select
             cnn.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WarmCalling", "FormCode", "Sub", "GETSLS()", "0", ex.Message.ToString)
             y = Nothing
@@ -1896,6 +1902,7 @@ Public Class WarmCalling
             Catch ex As Exception
                 'Cnn.Close()
                 'Me.PullCustomerINFO(ID)
+                Main.Cursor = Cursors.Default
                 MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
             End Try
             Dim c As New CustomerHistory
@@ -1903,6 +1910,7 @@ Public Class WarmCalling
                 c.SetUp(WCaller, ID, WCaller.TScboCustomerHistory)
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WarmCalling", "FormCode", "Sub", "PullCustomerINfo()", "0", ex.Message.ToString)
             y = Nothing
@@ -1929,6 +1937,7 @@ Public Class WarmCalling
             End Select
             Return Appt_Set
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim err As String = ex.Message
             Appt_Set = False
             Return Appt_Set
@@ -2062,6 +2071,7 @@ Public Class WarmCalling
                     r1.Close()
                     cnn.Close()
                 Catch ex As Exception
+                    Main.Cursor = Cursors.Default
                     Dim y As New ErrorLogging_V2
                     y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WarmCalling", "FormCode", "Constructor", "New(...)", "0", ex.Message.ToString)
                     y = Nothing
@@ -2096,6 +2106,7 @@ Public Class WarmCalling
                     cnn.Close()
                     WCaller.lvMyAppts.Groups.Add("grpMemorized", "My Memorized Appointments")
                 Catch ex As Exception
+                    Main.Cursor = Cursors.Default
                     Dim y As New ErrorLogging_V2
                     y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WarmCalling", "FormCode", "Constructor", "Groups()", "0", ex.Message.ToString)
                     y = Nothing
@@ -2256,6 +2267,7 @@ Public Class WarmCalling
                 End If
 
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WarmCalling", "FormCode", "Constructor", "New(...)", "0", ex.Message.ToString)
                 y = Nothing

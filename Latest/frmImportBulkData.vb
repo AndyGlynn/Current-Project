@@ -178,6 +178,8 @@
                         imp_data = Nothing
 
                     Catch ex As Exception
+                        Me.Cursor = Cursors.Default
+                        Main.Cursor = Cursors.Default
                         Dim msg As String = ex.Message
                         MsgBox(msg, MsgBoxStyle.Critical, "DEBUG INFO - OLD IMPORT DATA CLASS")
                     End Try
@@ -205,6 +207,8 @@
                             System.Diagnostics.Process.Start(whereIsReport)
                         End If
                     Catch ex As Exception
+                        Me.Cursor = Cursors.Default
+                        Main.Cursor = Cursors.Default
                         Dim yy As New ErrorLogging_V2
                         yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmImportBulkData", "FormCode", "Event", "txtDirectory_TextChanged", "0", ex.Message.ToString)
                         yy = Nothing
@@ -358,6 +362,8 @@
                             Application.DoEvents()
 
                         Catch ex As Exception
+                            Me.Cursor = Cursors.Default
+                            Main.Cursor = Cursors.Default
                             Dim err As String = ex.Message
                             status = "FAIL" & "-" & err
                             Me.lblMessage.Text = status
@@ -456,7 +462,8 @@
 
 
                     Catch ex As Exception
-
+                        Me.Cursor = Cursors.Default
+                        Main.Cursor = Cursors.Default
 
                         Dim err As String = ex.Message
 
@@ -482,6 +489,8 @@
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim msg As String = ex.Message
             Me.lblMessage.Text = "FAIL - " & msg.ToString
             Dim y As New ImportData_V2.FileOperations
@@ -718,6 +727,8 @@
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim msg As String = ex.Message
             Me.lblMessage.Text = "FAIL - " & msg.ToString
             Dim y As New ImportData_V2.FileOperations
@@ -764,6 +775,8 @@
             Dim y As New ImportData
             y = Nothing
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim yy As New ErrorLogging_V2
             yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmImportBulkData", "FormCode", "Event", "button1_click", "0", ex.Message.ToString)
             yy = Nothing

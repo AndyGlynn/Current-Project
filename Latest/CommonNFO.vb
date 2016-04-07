@@ -17,6 +17,8 @@ Public Class CommonNFO
             Me.lblPhone2Type.Text = ""
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CommonNFO", "CommonNFO", "Event", "Button1_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -28,6 +30,8 @@ Public Class CommonNFO
         Try
             GetINFO(RecordID)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CommonNFO", "CommonNFO", "Event", "CommonNFO_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -56,6 +60,8 @@ Public Class CommonNFO
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CommonNFO", "CommonNFO", "Sub", "GetINFO(id)", ID, ex.Message.ToString)
             y = Nothing

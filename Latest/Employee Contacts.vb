@@ -39,6 +39,8 @@ Public Class Employee_Contacts
             Dim c As New ROLODEX_LOGIC.GetEmployeeByDepartment
             c.GetEMPLOYEES(Me.cboDepartment.Text)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmployeeContacts", "FormCode", "Sub", "Employee_Contacts_Load", RecID, ex.Message.ToString)
             y = Nothing
@@ -66,6 +68,8 @@ Public Class Employee_Contacts
             '    Me.lstEmployees.Items.Add(lvEMP)
             'Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmployeeContacts", "FormCode", "Sub", "cboDepartment_SelectedValueChanged", RecID, ex.Message.ToString)
             y = Nothing
@@ -101,6 +105,8 @@ Public Class Employee_Contacts
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmployeeContacts", "FormCode", "Sub", "pctDelete_Click1", RecID, ex.Message.ToString)
             y = Nothing
@@ -136,6 +142,8 @@ Public Class Employee_Contacts
             Contact_Info.btnAction.Text = "EDIT"
             Contact_Info.Show()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmployeeContacts", "FormCode", "Sub", "pctEdit_click", RecID, ex.Message.ToString)
             y = Nothing
@@ -160,6 +168,8 @@ Public Class Employee_Contacts
             Me.RecID = g.RecID
             '' on mouse down get RecID - Write Class for it.
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmployeeContacts", "FormCode", "Sub", "lstEmployees_MouseDown", RecID, ex.Message.ToString)
             y = Nothing

@@ -47,6 +47,9 @@ Public Class ErrorLogging_V2
             Next
             Return f_list
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
+
             MsgBox("There was an error retrieving the error log files on the server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "Error Getting Logs")
             Return 0
         End Try
@@ -68,6 +71,8 @@ Public Class ErrorLogging_V2
                 wrtr.Close()
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+
             MsgBox("There was an error writing to the error log files on the server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "Error Writing Logs")
             Exit Sub
         End Try
@@ -83,6 +88,8 @@ Public Class ErrorLogging_V2
             rd = Nothing
             Return txt
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+
             MsgBox("There was an error reading the error log from the server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "Error Reading Log")
             Return 0
         End Try
@@ -102,6 +109,8 @@ Public Class ErrorLogging_V2
             End If
             Return Refresh
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+
             MsgBox("There was an error deleting the error log on the server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "Error Deleting Logs")
             Return 0
         End Try

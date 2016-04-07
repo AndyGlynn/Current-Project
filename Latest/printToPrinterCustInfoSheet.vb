@@ -78,6 +78,7 @@ Public Class printToPrinterCustInfoSheet
             cnx = Nothing
             Return x
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "printToPrinterContactList", "printToPrinterContactList", "Function", "GetCustInfo(recid)", RecID, ex.Message.ToString)
             y = Nothing
@@ -172,6 +173,7 @@ Public Class printToPrinterCustInfoSheet
             'e.Graphics.DrawRectangle(Pens.Blue, rectEMVal)
             e.Graphics.DrawString(CurrentLead.EmailAddress, nfo_font, Brushes.Black, rectEMVal)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "printToPrinterContactList", "printToPrinterContactList", "Sub", "PD_PrintPage", "0", ex.Message.ToString)
             y = Nothing

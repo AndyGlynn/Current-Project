@@ -41,6 +41,9 @@ Public Class MemorizeNotes
                 Sales.PopulateMemorized()
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MemorizeNotes", "FormCode", "Event", "btnSave_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -72,6 +75,9 @@ Public Class MemorizeNotes
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MemorizeNotes", "FormCode", "Sub", "Populate_Groups", "0", ex.Message.ToString)
             y = Nothing
@@ -118,6 +124,9 @@ Public Class MemorizeNotes
             cnn.Close()
             Me.cboGroup.SelectedItem = i
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MemorizeNotes", "FormCode", "Sub", "Add_Group()", "0", ex.Message.ToString)
             y = Nothing

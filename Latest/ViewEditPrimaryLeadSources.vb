@@ -27,6 +27,7 @@ Public Class ViewEditPrimaryLeadSources
             cnn.Close()
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ViewEditPrimaryLeadSources", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateList")
             Dim y As New ErrorLogging_V2
@@ -72,7 +73,7 @@ Public Class ViewEditPrimaryLeadSources
             End Select
         Catch ex As Exception
             cnn.Close()
-            cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ViewEditPrimaryLeadSources", "ByVal PLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "PopulateList")
             Dim y As New ErrorLogging_V2

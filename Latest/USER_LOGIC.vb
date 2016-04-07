@@ -30,6 +30,7 @@ Public Class USER_LOGIC
                 End If
             Next
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Function", "GetIPV4Address()", "0", ex.Message.ToString)
             y = Nothing
@@ -408,6 +409,7 @@ Public Class USER_LOGIC
 
                 End Select
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 cnn.Close()
                 Dim err As New ErrorLogFlatFile
                 Dim y As New ErrorLogging_V2
@@ -416,6 +418,7 @@ Public Class USER_LOGIC
                 MsgBox("Error Logging into system. Please check logs at \\server\company\ISS\Logs for more information.", MsgBoxStyle.Exclamation, "Error Logging into system.")
             End Try
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "Login_To_System()", "0", ex.Message.ToString)
             y = Nothing
@@ -432,6 +435,7 @@ Public Class USER_LOGIC
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("USER_LOGIC", "ByVal t as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Network", "Send")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "Send(t as string)", "0", ex.Message.ToString)
             y = Nothing
@@ -576,6 +580,7 @@ Public Class USER_LOGIC
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("USER_LOGIC", "ByVal Bytes() As Byte, ByVal offset As Integer, ByVal count As Integer", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Network", "BuildString")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "BuildString()", "0", ex.Message.ToString)
             y = Nothing
@@ -613,11 +618,13 @@ Public Class USER_LOGIC
                 STATIC_VARIABLES.NET_CLIENT = mobjClient
 
             Catch e As Exception
+                Main.Cursor = Cursors.Default
                 MarkAsDisconnected("DoRead")
             End Try
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("USER_LOGIC", "ByVal ar As IAsyncResult", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Network", "DoRead")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "DoRead(ar as IAsyncResult)", "0", ex.Message.ToString)
             y = Nothing
@@ -664,6 +671,7 @@ Public Class USER_LOGIC
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "Logout_of_System()", "0", ex.Message.ToString)
             y = Nothing
+            Main.Cursor = Cursors.Default
         End Try
     End Sub
     Public Sub CheckPermissions()
@@ -731,6 +739,7 @@ Public Class USER_LOGIC
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "USER_LOGIC", "USER_LOGIC", "Sub", "CheckPermissions()", "0", ex.Message.ToString)
             y = Nothing
+            Main.Cursor = Cursors.Default
         End Try
 
     End Sub

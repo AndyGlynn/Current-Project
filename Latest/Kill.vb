@@ -44,6 +44,8 @@ Public Class Kill
             R1.Close()
             cnn.close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Kill", "FormCode", "Event", "Kill_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -119,6 +121,8 @@ Public Class Kill
                 Me.Dispose()
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Kill", "FormCode", "Event", "btnSave_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -190,6 +194,8 @@ Public Class Kill
 
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Kill", "FormCode", "Event", "cboautonote_selectedValueChanged", "0", ex.Message.ToString)
             y = Nothing

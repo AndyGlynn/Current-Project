@@ -28,6 +28,7 @@ Public Class XFerOBJ
             ns.Write(SendByte, 0, SendByte.Length)
             cli.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             MsgBox(ex.Message.ToString)
             Dim err As New ErrorLogFlatFile
             err.WriteLog("XFerOBJ", "ByVal msg As String, ByVal tm As String, ByVal tip As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "XFER", "'New'")

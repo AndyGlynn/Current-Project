@@ -72,6 +72,8 @@ Public Class CandCNotes
 
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CandCNotes", "CandCNotes", "Event", "cboautonotes_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -260,6 +262,8 @@ Public Class CandCNotes
             ''revisit for other forms 
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CandCNotes", "CandCNotes", "Event", "btnSave_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -272,6 +276,8 @@ Public Class CandCNotes
             Me.Close()
             Me.Dispose()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CandCNotes", "CandCNotes", "Event", "btnCancel", "0", ex.Message.ToString)
             y = Nothing
@@ -284,6 +290,8 @@ Public Class CandCNotes
             Me.cboautonotes.Focus()
             Me.cboautonotes.DroppedDown = True
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CandCNotes", "CandCNotes", "Event", "lblautonotes_click", "0", ex.Message.ToString)
             y = Nothing
@@ -314,6 +322,8 @@ Public Class CandCNotes
                 Me.txtTime.Visible = True
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CandCNotes", "CandCNotes", "Event", "cbCallBack_CheckedChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -344,6 +354,8 @@ Public Class CandCNotes
                 Me.txtTime.Visible = True
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CandCNotes", "CandCNotes", "Event", "cbNoReschedule_CheckedChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -452,6 +464,8 @@ Public Class CandCNotes
             'Me.btnsave.Focus()
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CandCNotes", "CandCNotes", "Event", "candcnotes_load", "0", ex.Message.ToString)
             y = Nothing
@@ -470,6 +484,8 @@ Public Class CandCNotes
                 Me.lblSpokeWith.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CandCNotes", "CandCNotes", "Event", "cboSpokeWith_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing

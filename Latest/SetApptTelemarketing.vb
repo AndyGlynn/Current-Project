@@ -47,11 +47,15 @@ Public Class SetApptTelemarketing
                 cnn.Close()
                 Exit Sub
             Else
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 c1.Close()
                 cnn.Close()
             End If
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             c1.Close()
             cnn.Close()
         End Try
@@ -123,6 +127,8 @@ Public Class SetApptTelemarketing
 
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             r1.Close()
             cnn.Close()
 
@@ -160,6 +166,8 @@ Public Class SetApptTelemarketing
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SetApptTelemarketing", "SetApptTelemarketing", "Sub", "DayOfWeek(ByVal dt As Date)", "0", ex.Message.ToString)
             y = Nothing
@@ -232,6 +240,8 @@ Public Class SetApptTelemarketing
                 Me.GetMarketerLeadSources(fname, lname)
 
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboMarketer_SelectedValueChanged(ENTER_LEAD.PopPLSandSLS)", "0", ex.Message.ToString)
                 y = Nothing
@@ -275,7 +285,9 @@ Public Class SetApptTelemarketing
             MarketerLeadSources.cboMM.Text = ""
             MarketerLeadSources.Close()
         Catch ex As Exception
-            Cnn.Close()
+            cnn.Close()
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertMarketer", "ByVal MFname As String, ByVal MLName As String, ByVal PLS As String, ByVal SLS As String, ByVal MarketingMan As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "WriteMarketerToTable")
             Dim y As New ErrorLogging_V2
@@ -356,7 +368,9 @@ Public Class SetApptTelemarketing
                     Me.cboPriLead.SelectedItem = PLS
             End Select
         Catch ex As Exception
-            Cnn.Close()
+            cnn.Close()
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertPLS", "ByVal PLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewPLS")
             Dim y As New ErrorLogging_V2
@@ -374,6 +388,8 @@ Public Class SetApptTelemarketing
             Return TextToCap
         Catch ex As Exception
             Return TextToCap
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertMarketer", "ByVal TextToCap as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CapitalizeText")
             Dim y As New ErrorLogging_V2
@@ -421,7 +437,9 @@ Public Class SetApptTelemarketing
                     Exit Select
             End Select
         Catch ex As Exception
-            Cnn.Close()
+            cnn.Close()
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.InsertSLS", "ByVal PLS As String, ByVal SLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertSLS")
             Dim y As New ErrorLogging_V2
@@ -536,7 +554,9 @@ Public Class SetApptTelemarketing
                     Exit Sub
             End Select
         Catch ex As Exception
-            Cnn.Close()
+            cnn.Close()
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.AddNewProduct", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "AddNewProduct")
             Dim y As New ErrorLogging_V2
@@ -621,7 +641,9 @@ Public Class SetApptTelemarketing
             r1.Close()
             Cnn.Close()
         Catch ex As Exception
-            Cnn.Close()
+            cnn.Close()
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD.PopulatePLSandSLSByMarketer", "ByVal FName As String, ByVal LName As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetMarketerLeadSources")
             Dim y As New ErrorLogging_V2
@@ -766,6 +788,8 @@ Public Class SetApptTelemarketing
 
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SendNotesSM", "FormCode", "Event", "btnSaveClose_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -904,6 +928,8 @@ Public Class SetApptTelemarketing
 
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SendNotesSM", "FormCode", "Event", "btnSaveClose_Click", "0", ex.Message.ToString)
             y = Nothing

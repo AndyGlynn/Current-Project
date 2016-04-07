@@ -16,6 +16,9 @@ Public Class PastDueAlerts
                 Dim g As New ALERT_LOGIC(STATIC_VARIABLES.CurrentUser)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "PastDueAlerts", "FormCode", "Event", "Form1_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -47,6 +50,9 @@ Public Class PastDueAlerts
                 End If
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "PastDueAlerts", "FormCode", "Event", "Button2_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -65,6 +71,9 @@ Public Class PastDueAlerts
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "PastDueAlerts", "FormCode", "Sub", "ToggleComplete(recordID)", RecordID, ex.Message.ToString)
             y = Nothing

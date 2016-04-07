@@ -116,6 +116,8 @@ Public Class SalesListManager
                 ''progressbar class
             End If
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesListManager", "SalesListManager", "Sub", "Count()", "0", ex.Message.ToString)
             y = Nothing
@@ -372,6 +374,8 @@ Public Class SalesListManager
             Sales.LastD1 = Date1
             Sales.LastD2 = Date2
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesListManager", "SalesListManager", "Constructor", "New()", "0", ex.Message.ToString)
             y = Nothing
@@ -475,6 +479,8 @@ Public Class SalesListManager
             r.Close()
             cnn.Close()
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesListManager", "SalesListManager", "Sub", "GroupBy()", "0", ex.Message.ToString)
             y = Nothing

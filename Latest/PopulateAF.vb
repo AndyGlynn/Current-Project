@@ -27,6 +27,8 @@ Public Class PopulateAF
             Me.AssignImageKeys(f)
             a.Populate_Sub_Directories(f)
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "PopulateAF", "PopulateAF", "Constructor", "New(frm)", "0", ex.Message.ToString)
             y = Nothing
@@ -47,6 +49,7 @@ Public Class PopulateAF
             Next
             f.lvAttachedFiles.Refresh()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "PopulateAF", "PopulateAF", "Sub", "AssignImageKeys(frm)", "0", ex.Message.ToString)
             y = Nothing

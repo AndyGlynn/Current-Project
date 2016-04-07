@@ -116,6 +116,7 @@ Public Class printingOperations
 
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "printingOperations", "printingOperations", "Sub", "Create_STD_WEB_PAGE_FOR_PRINT(...)", "0", ex.Message.ToString)
             y = Nothing

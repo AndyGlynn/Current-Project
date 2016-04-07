@@ -24,6 +24,8 @@ Public Class SetUpUser
             r.Close()
             cnx.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SetUpUser", "FormCode", "Event", "SetUpUser_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -76,6 +78,8 @@ Public Class SetUpUser
                 cnx1.Close()
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SetUpUser", "FormCode", "Event", "btnDeleteUser_Click", "0", ex.Message.ToString)
             y = Nothing

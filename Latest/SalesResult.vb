@@ -872,6 +872,8 @@ Public Class SDResult
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesResult", "FormCode", "Sub", "SalesResults_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -1095,6 +1097,8 @@ Public Class SDResult
                     End Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesResult", "FormCode", "Sub", "Sequence()", "0", ex.Message.ToString)
             y = Nothing
@@ -1177,6 +1181,8 @@ Public Class SDResult
             Me.StepCount = Me.StepCount + 1
             Me.Sequence()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesResult", "FormCode", "Sub", "btnNext_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -1403,6 +1409,8 @@ Public Class SDResult
                 End If
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesResult", "FormCode", "Sub", "cboSalesResults_selectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -1997,6 +2005,8 @@ Public Class SDResult
             Me.txt1Par.Text = y(0)
             Me.txt2Par.Text = y(1)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesResult", "FormCode", "Sub", "lvPrevious_selectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -2085,6 +2095,8 @@ Public Class SDResult
             End If
             Me.cboautonotes.Text = Nothing
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesResult", "FormCode", "Sub", "cboautonotes", "0", ex.Message.ToString)
             y = Nothing
@@ -2248,6 +2260,8 @@ Public Class SDResult
                 Sales.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesResult", "FormCode", "Sub", "DeleteThisProductToolStripMenuItem_click", "0", ex.Message.ToString)
             y = Nothing
@@ -2640,6 +2654,8 @@ Public Class SDResult
                 Dim z As New Sales_Performance_Report
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesResult", "FormCode", "Sub", "btnSave_Click", "0", ex.Message.ToString)
             y = Nothing

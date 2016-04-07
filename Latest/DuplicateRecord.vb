@@ -132,6 +132,8 @@ Public Class DuplicateRecord
             Me.Close()
             Me.Dispose()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "DuplicateRecord", "FormCode", "Sub", "btnUpdate_Click()", "0", ex.Message.ToString)
             y = Nothing
@@ -158,6 +160,8 @@ Public Class DuplicateRecord
             End Select
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "DuplicateRecord", "FormCode", "Sub", "btnNewRecord_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -179,6 +183,8 @@ Public Class DuplicateRecord
             cnn.Close()
             Return retValue
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "DuplicateRecord", "FormCode", "Function", "SingleVerify(LeadNumber)", LeadNumber, ex.Message.ToString)
             y = Nothing

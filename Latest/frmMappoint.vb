@@ -20,6 +20,8 @@ Public Class frmMappoint
                 Me.cboPointBState.Items.Add(b)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "frmMappoint_Load()", "0", ex.Message.ToString)
             y = Nothing
@@ -34,6 +36,8 @@ Public Class frmMappoint
             y.Map_Single_Address(Me.txtStreetAddress.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text)
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "Button1_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -48,6 +52,8 @@ Public Class frmMappoint
             y.PointToPointDirections(Me.txtBeginAddress.Text, Me.txtBeginCity.Text, Me.txtBeginState.Text, Me.txtBeginZip.Text, Me.txtEndAddress.Text, Me.txtEndCity.Text, Me.txtEndState.Text, Me.txtEndZip.Text)
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "Button2_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -70,6 +76,8 @@ Public Class frmMappoint
                 Me.cboSalesResults.Items.Add(arResults(a).ToString)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "PopulateCboSalesResults()", "0", ex.Message.ToString)
             y = Nothing
@@ -121,6 +129,8 @@ Public Class frmMappoint
             End Select
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "Button3_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -149,6 +159,8 @@ Public Class frmMappoint
                 Me.txtState.Text = ""
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "txtLeadNumLookup_TextChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -175,6 +187,8 @@ Public Class frmMappoint
                 Me.txtBeginState.Text = ""
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "txtBeginLookup_TextChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -202,6 +216,8 @@ Public Class frmMappoint
             End If
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "txtDestinationLookup_TextChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -267,6 +283,8 @@ Public Class frmMappoint
             Me.dtpBeginDate.Text = d.retDateFrom
             Me.dtpEndDate.Text = d.retDateTo
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "cboCustomRange_selectedIndexchanged", "0", ex.Message.ToString)
             y = Nothing
@@ -284,6 +302,8 @@ Public Class frmMappoint
             y = Nothing
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "btnCalc_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -299,6 +319,8 @@ Public Class frmMappoint
             y.Map_Single_Address(Me.txtStreetAddress.Text, Me.txtCity.Text, Me.txtState.Text, Me.txtZip.Text)
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmMappoint", "FormCode", "Event", "btnMapSingle_click", "0", ex.Message.ToString)
             y = Nothing

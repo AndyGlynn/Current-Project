@@ -21,6 +21,8 @@ Public Class EmailTemplate
                 Me.lblSubject.Visible = False
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "txtSubject_lostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -41,6 +43,8 @@ Public Class EmailTemplate
                 Me.lblEmailBody.Visible = False
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "txtEmailBody_lostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -140,6 +144,8 @@ Public Class EmailTemplate
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "btnSave_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -167,6 +173,8 @@ Public Class EmailTemplate
                 Me.cboTemplateName.Items.Add(a.TemplateName)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "ResetForm()", "0", ex.Message.ToString)
             y = Nothing
@@ -207,6 +215,8 @@ Public Class EmailTemplate
                 Exit Sub
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EmailTemplate", "FormCode", "Sub", "cboTemplateName_SelectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing

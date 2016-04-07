@@ -19,6 +19,7 @@ Public Class AddressEnterLead
             Me.Label1.Text = STATIC_VARIABLES.ProgramName & Me.Label1.Text
             EnterLead.ExSub = False
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddressEnterLead", "FormCode", "Event", "AddressEnterLead_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -31,6 +32,7 @@ Public Class AddressEnterLead
         Try
             SelectedAddress = Me.lvAddresses.GetItemAt(e.X, e.Y)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddressEnterLead", "FormCode", "Event", "lvAddresses_MouseDown", "0", ex.Message.ToString)
             y = Nothing
@@ -49,6 +51,7 @@ Public Class AddressEnterLead
                 Me.btnUpdate.Enabled = False
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddressEnterLead", "FormCode", "Event", "lvAddresses_SelectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -71,6 +74,7 @@ Public Class AddressEnterLead
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddressEnterLead", "FormCode", "Event", "btnBack_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -99,6 +103,7 @@ Public Class AddressEnterLead
             ''Go back to enterlead @ finish executing Save & New or Save & Close
             '' Write lead to table with @mapped = to False 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddressEnterLead", "FormCode", "Event", "btnDoNotUpdate_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -138,6 +143,7 @@ Public Class AddressEnterLead
 
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "AddressEnterLead", "FormCode", "Event", "btnUpdate_Click", "0", ex.Message.ToString)
             y = Nothing

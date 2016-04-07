@@ -707,6 +707,8 @@ Public Class Sales
 
             '' add more datepickers and textboxes as needed for additional tabs
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "ButtonConfig(idx)", "0", ex.Message.ToString)
             y = Nothing
@@ -816,6 +818,8 @@ Public Class Sales
 
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "ToolbarConfig(idx)", "0", ex.Message.ToString)
             y = Nothing
@@ -897,6 +901,8 @@ Public Class Sales
 
             Me.Label38.Text = (Me.Label38.Text & " -[ Records: " & cntNoResults & " ]")
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PopulateNoResults()", "0", ex.Message.ToString)
             y = Nothing
@@ -948,6 +954,8 @@ Public Class Sales
                 cnx = Nothing
             Catch ex As Exception
                 cnx.Close()
+
+                Main.Cursor = Cursors.Default
                 cnx = Nothing
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode-Private Class", "Function", "Get_No_Results()", "0", ex.Message.ToString)
@@ -1002,6 +1010,8 @@ Public Class Sales
 
                 Next
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 Dim ctrl
                 For Each ctrl In Me.pnlAFPics.Controls
                     If TypeOf (ctrl) Is ListView Then
@@ -1132,6 +1142,8 @@ Public Class Sales
             'Cnn.Close()
             'Me.PullCustomerINFO(ID)
             'MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim err As String = ex.Message
             MsgBox("Error: " & vbCrLf & err, MsgBoxStyle.Critical, "DEBUG INFO - ERROR PULLInfo()")
             Dim y As New ErrorLogging_V2
@@ -1175,6 +1187,8 @@ Public Class Sales
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Me.cboRep1.Text = ""
             Me.ToolStripComboBox1.Text = ""
             Dim y As New ErrorLogging_V2
@@ -1194,6 +1208,8 @@ Public Class Sales
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Me.cboRep2.Text = ""
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo-rep1 & rep2 logic", "0", ex.Message.ToString)
@@ -1335,6 +1351,8 @@ Public Class Sales
 
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "DisplayColumn()", "0", ex.Message.ToString)
             y = Nothing
@@ -1369,6 +1387,8 @@ Public Class Sales
             r.Close()
             cnn1.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "LoadReps()", "0", ex.Message.ToString)
             y = Nothing
@@ -1393,6 +1413,8 @@ Public Class Sales
             cnn.Close()
             Me.cboFilterGroups.Items.Add("No Group Assigned")
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "LoadGroups()", "0", ex.Message.ToString)
             y = Nothing
@@ -1422,6 +1444,8 @@ Public Class Sales
             r1.Close()
             cnn1.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "MemorizedGroupBy()", "0", ex.Message.ToString)
             y = Nothing
@@ -1622,6 +1646,8 @@ Public Class Sales
                 Me.PullInfo("")
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PopulateMemorized()", "0", ex.Message.ToString)
             y = Nothing
@@ -1728,6 +1754,8 @@ Public Class Sales
             r.Close()
             cnn1.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "RefreshSelectedItem()", ID, ex.Message.ToString)
             y = Nothing
@@ -1826,6 +1854,8 @@ Public Class Sales
 
             'MsgBox(Me.tsSalesDepartment.Width.ToString & " - " & Me.txt2CustomerList.Location.X.ToString)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "Sales_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -1954,6 +1984,8 @@ Public Class Sales
                 Next
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tbMain_SelectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -1995,6 +2027,8 @@ Public Class Sales
             Dim x As New ScheduledActions
             x.SetUp(Me)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnMarkTaskAsDone_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -2023,6 +2057,8 @@ Public Class Sales
                 Me.cboSalesList_SelectedIndexChanged(Nothing, Nothing)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnSAPreferences_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -2038,6 +2074,8 @@ Public Class Sales
             Me.pnlScheduledTasks.Controls.Clear()
             x.SetUp(Me)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnShowAllCompletedTasks_click1", "0", ex.Message.ToString)
             y = Nothing
@@ -2053,6 +2091,8 @@ Public Class Sales
             Me.pnlScheduledTasks.Controls.Clear()
             x.SetUp(Me)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnRemoveAllScheduledTasks_Click1", "0", ex.Message.ToString)
             y = Nothing
@@ -2088,6 +2128,8 @@ Public Class Sales
             Dim x As New ScheduledActions
             x.SetUp(Me)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnRemoveThisCompletedTask_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -2193,6 +2235,8 @@ Public Class Sales
             'arItemCache = c.LV_Sales_Items
             'Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "dtp2CustomerList_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -2233,6 +2277,8 @@ Public Class Sales
             'arItemCache = c.LV_Sales_Items
             'Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "dtp1CustomerList_lostfocus", "0", ex.Message.ToString)
             y = Nothing
@@ -2284,6 +2330,8 @@ Public Class Sales
             'arItemCache = c.LV_Sales_Items
             'Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboDateRangeCustomerList_selectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -2325,6 +2373,8 @@ Public Class Sales
             'arItemCache = c.LV_Sales_Items
             'Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboGroupSales_SelectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -2400,6 +2450,8 @@ Public Class Sales
             'arItemCache = c.LV_Sales_Items
             'Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboSalesList_SelectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -2422,6 +2474,8 @@ Public Class Sales
                 Exit Sub
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim err As String = ex.Message
             MsgBox("Error:" & err, MsgBoxStyle.Exclamation, "LVSales_MouseClick()")
             Dim y As New ErrorLogging_V2
@@ -2437,6 +2491,8 @@ Public Class Sales
                 current_Item = e.Item
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim err As String = ex.Message
             MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "LvSales_RetrievewVirtualItem()")
             Dim y As New ErrorLogging_V2
@@ -2456,6 +2512,8 @@ Public Class Sales
 
             firstItem = e.StartIndex
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim err As String = ex.Message
             MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "CachVirtualItems")
             Dim y As New ErrorLogging_V2
@@ -2470,6 +2528,8 @@ Public Class Sales
         Try
             current_Item = arItemCache(e.Index)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim err As String = ex.Message
             MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "SearchForVirtualItem()")
             Dim y As New ErrorLogging_V2
@@ -2490,7 +2550,10 @@ Public Class Sales
 
 
             End If
+
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tscbocustomerhistory_selectedindexchanged", "0", ex.Message.ToString)
             y = Nothing
@@ -2539,6 +2602,8 @@ Public Class Sales
             bgGetImages_DoWork(Me, Nothing)
             'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tsbtnAFPics_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -2560,6 +2625,8 @@ Public Class Sales
                 bgCustomerHistory_DoWork(Nothing, Nothing)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tsbtnShowCH_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -2639,6 +2706,8 @@ Public Class Sales
                     '        Me.tslblAFPic.Text = "Attached Files..."
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tscboAFPicsFilter_SelectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -2707,6 +2776,8 @@ Public Class Sales
                 Me.TT.Show(notes, Me.lvMemorized, p, 30000)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvMemorized_DoubleClick", "0", ex.Message.ToString)
             y = Nothing
@@ -2796,6 +2867,8 @@ Public Class Sales
             r.Close()
             cnn.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnSingleRecord_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -2814,6 +2887,8 @@ Public Class Sales
                 Me.lvSales.Items(Me.txtSingleRecordInput.Text).Selected = True
                 Me.lvSales.SelectedItems(0).EnsureVisible()
             Catch ex2 As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 Dim x = MsgBox("This Record is not available to the Sales Department." & vbCr & vbCr & "Would you like to make it available add it to ""Unfiltered Sales Dept. List""?", MsgBoxStyle.YesNo, "Cannot Access Record")
                 Me.lvSales.Focus()
                 If x = vbYes Then
@@ -2939,6 +3014,8 @@ Public Class Sales
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnMemorize_click", ID, ex.Message.ToString)
             y = Nothing
@@ -3165,6 +3242,8 @@ Public Class Sales
             Dim x As New ScheduledActions
             x.SetUp(Me)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEditScheduledTask_click", ID, ex.Message.ToString)
             y = Nothing
@@ -3241,6 +3320,8 @@ Public Class Sales
             End If
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboDateRangeSummary_SelectedIndexChanged", ID, ex.Message.ToString)
             y = Nothing
@@ -3358,6 +3439,7 @@ Public Class Sales
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "GetImages_Files_And_Folders(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -3374,6 +3456,8 @@ Public Class Sales
             ar_files = d.Files
             AddListItem_Files(ar_files, Me.lsJobPictures)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "GetTheFiles(leadNum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -3401,6 +3485,8 @@ Public Class Sales
             Me.lsJobPictures.LargeImageList = Me.ImgLst32
             Me.lsJobPictures.Invalidate()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "getthedirs(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing
@@ -3500,6 +3586,8 @@ Public Class Sales
             '' if they are blank arrays it will throw an error and spam the logs.
             '' is by design and doesn't necessarily need reporting
             '' 2-11-16 AC
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
         End Try
     End Function
 
@@ -3538,6 +3626,8 @@ Public Class Sales
             '' if they are blank arrays it will throw an error and spam the logs.
             '' is by design and doesn't necessarily need reporting
             '' 2-11-16 AC
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
         End Try
     End Function
 
@@ -3563,6 +3653,8 @@ Public Class Sales
                 System.Diagnostics.Process.Start(sel_Item_Right_Jp.Tag)
 
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "ToolStripMenuItem1_click", "0", ex.Message.ToString)
                 y = Nothing
@@ -3630,6 +3722,8 @@ Public Class Sales
                 Exit Sub
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnDelete_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -3693,6 +3787,8 @@ Public Class Sales
                 Exit Sub
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnDeleteJP_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -3924,6 +4020,8 @@ Public Class Sales
                 sel_Item_left = Nothing
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnRename_click", "0", ex.Message.ToString)
             y = Nothing
@@ -4153,6 +4251,8 @@ Public Class Sales
                 sel_Item_Left_Jp = Nothing
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnRenameJP_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -4221,6 +4321,8 @@ Public Class Sales
             Me.btnAscending.Checked = True
             Me.btnDescending.Checked = False
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnAscending_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -4234,6 +4336,8 @@ Public Class Sales
             Me.btnAscendingJP.Checked = True
             Me.btnDescJP.Checked = False
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnAscendingJP_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -4248,6 +4352,8 @@ Public Class Sales
             Me.btnAscending.Checked = False
             Me.btnDescending.Checked = True
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnDesc_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -4261,6 +4367,8 @@ Public Class Sales
             Me.btnAscendingJP.Checked = False
             Me.btnDescJP.Checked = True
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnDescending_click", "0", ex.Message.ToString)
             y = Nothing
@@ -4487,6 +4595,8 @@ Public Class Sales
                 Me.tsAttachedFilesNAV.Enabled = True
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnNewFolder_click", "0", ex.Message.ToString)
             y = Nothing
@@ -4596,6 +4706,8 @@ Public Class Sales
             '    Me.tsAttachedFilesNAV.Enabled = True
             'End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "btnNewFolderJP_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -4613,6 +4725,8 @@ Public Class Sales
             Try
                 Dim x As New Issue_Leads(True, "")
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "dtpIssueLeads_ValueChanged()", "0", ex.Message.ToString)
                 y = Nothing
@@ -4649,6 +4763,8 @@ Public Class Sales
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "pnlIssue_sizechanged", "0", ex.Message.ToString)
             y = Nothing
@@ -4837,6 +4953,8 @@ Public Class Sales
                 Next
             Catch ex As Exception
                 ' MsgBox("Fail If True")
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 Dim yy As New ErrorLogging_V2
                 yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "pnlPerformanceReport_SizeChanged", "0", ex.Message.ToString)
                 yy = Nothing
@@ -4986,6 +5104,8 @@ Public Class Sales
 
             Catch ex As Exception
                 ' MsgBox("Fail Else")
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 Dim yy As New ErrorLogging_V2
                 yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "pnlPerformanceReport_SizeChanged", "0", ex.Message.ToString)
                 yy = Nothing
@@ -5116,6 +5236,8 @@ Public Class Sales
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnCCIssue_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -5291,6 +5413,8 @@ Public Class Sales
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "Sales_SizeChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -5361,6 +5485,8 @@ Public Class Sales
             '' marketing manager list
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEmailIssuedAppts_click", "0", ex.Message.ToString)
             y = Nothing
@@ -5522,6 +5648,8 @@ Public Class Sales
                 xyz.BulkEmailWithoutExceptions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEmailAllIssue_click", "0", ex.Message.ToString)
             y = Nothing
@@ -5538,6 +5666,8 @@ Public Class Sales
             EmailSingleRecord()
 
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEmailThisIssue_click", "0", ex.Message.ToString)
             y = Nothing
@@ -5914,6 +6044,8 @@ Public Class Sales
                 End If
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tsAttachedFilesNAV_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -6068,6 +6200,8 @@ Public Class Sales
         Try
             Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
             y = Nothing
@@ -6082,6 +6216,8 @@ Public Class Sales
             Dim x As New printToPrinterContactList(arItemCache)
             x.ShowDoc()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCurrentList_click", "0", ex.Message.ToString)
             y = Nothing
@@ -6095,6 +6231,8 @@ Public Class Sales
         Try
             Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCustomerInfoSheet_click", "0", ex.Message.ToString)
             y = Nothing
@@ -6195,6 +6333,8 @@ Public Class Sales
                 frmPrint.ShowDialog()
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintNoEmailIssue_click", "0", ex.Message.ToString)
             y = Nothing
@@ -6251,6 +6391,8 @@ Public Class Sales
                 Next
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintThisIssue", "0", ex.Message.ToString)
             y = Nothing
@@ -6273,6 +6415,8 @@ Public Class Sales
             Dim a As emlTemplateLogic.TemplateInfo
             Return g
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "GetTemplates()", "0", ex.Message.ToString)
             y = Nothing
@@ -6315,7 +6459,10 @@ Public Class Sales
 
                 frmEmailTemplateChoice.ShowDialog()
             End If
+
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "btnEmailCustomer_click", "0", ex.Message.ToString)
             y = Nothing
@@ -6438,6 +6585,8 @@ Public Class Sales
                 Next
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "EmailSingleRecord()", "0", ex.Message.ToString)
             y = Nothing
@@ -7664,6 +7813,8 @@ Public Class Sales
             Me.tsAttachedFilesNAV.Enabled = False
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             sel_Item_Left_Jp = Nothing
             sel_Item_Right_Jp = Nothing
             Dim y As New ErrorLogging_V2
@@ -7699,6 +7850,8 @@ Public Class Sales
             AddListItem_Files(arFiles, Me.lsJobPictures)
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             sel_Item_Left_Jp = Nothing
             sel_Item_Right_Jp = Nothing
             Dim y As New ErrorLogging_V2
@@ -7724,6 +7877,8 @@ Public Class Sales
         Catch ex As Exception
             '' fail it here
             'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split File Ext Error")
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitApartFileExt(fullpath)", "0", ex.Message.ToString)
             y = Nothing
@@ -7742,6 +7897,8 @@ Public Class Sales
         Catch ex As Exception
             '' fail it here
             'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split Folder Name Error")
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitFolderName(fullpath)", "0", ex.Message.ToString)
             y = Nothing
@@ -8114,6 +8271,8 @@ Public Class Sales
                 Me.btnPaste.Enabled = False
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "btnPaste_click", "0", ex.Message.ToString)
             y = Nothing
@@ -8483,6 +8642,8 @@ Public Class Sales
                 Me.btnPasteJP.Enabled = False
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "btnPasteJP_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -8505,6 +8666,8 @@ Public Class Sales
         Catch ex As Exception
             '' fail it here
             'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split File Name Error")
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitApartFileName(fullpath)", "0", ex.Message.ToString)
             y = Nothing
@@ -8570,6 +8733,8 @@ Public Class Sales
                 Me.cboEmailTemplates.Items.Add(a.TemplateName)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "Get_Toolstrip_Templates()", "0", ex.Message.ToString)
             y = Nothing
@@ -8607,6 +8772,8 @@ Public Class Sales
                 frmEmailPreview.ShowDialog()
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "cboEmailTemplates_SelectedIndexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -8661,6 +8828,8 @@ Public Class Sales
             arItemCache = c.LV_Sales_Items
             bgSalesQuery_RunWorkerCompleted(Me, Nothing)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_DoWork", "0", ex.Message.ToString)
             y = Nothing
@@ -8682,6 +8851,8 @@ Public Class Sales
             End If
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_RunworkerCompleted", "0", ex.Message.ToString)
             y = Nothing
@@ -8706,6 +8877,8 @@ Public Class Sales
             Dim c As New CustomerHistory
             c.SetUp(Me, STATIC_VARIABLES.CurrentID, Me.TScboCustomerHistory)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgCustomerHistory_DoWork", "0", ex.Message.ToString)
             y = Nothing
@@ -8729,6 +8902,7 @@ Public Class Sales
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lnkPrintReport_LinkClicked", "0", ex.Message.ToString)
             y = Nothing

@@ -1177,6 +1177,7 @@ Public Class Issue_Leads
             y.Visible = True
         Catch ex As Exception
             MsgBox(ex.ToString)
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Constructor", "New(...)", "0", ex.Message.ToString)
             y = Nothing
@@ -1294,6 +1295,7 @@ Public Class Issue_Leads
 
         Catch ex As Exception
             MsgBox(ex.ToString)
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "ReLayout()", "0", ex.Message.ToString)
             y = Nothing
@@ -1346,6 +1348,7 @@ Public Class Issue_Leads
                 'MsgBox(ex.ToString) ''took message box because of known error, when the controls active scrollbar it cause a size chenge before creation done 
                 '' Doesnt matter though cuz after creation in full screen it does another Relayout anyway Cant think of a way to kick it out when this happens 
                 '' so i just commented out MSGBOX
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "ReLayout()", "0", ex.Message.ToString)
                 y = Nothing
@@ -1744,6 +1747,7 @@ Public Class Issue_Leads
                 r.Close()
                 cnn.Close()
             Catch ex As Exception
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "Cbo(sender,e)", "0", ex.Message.ToString)
                 y = Nothing
@@ -1843,6 +1847,7 @@ Public Class Issue_Leads
                 STATIC_VARIABLES.CurrentID = who.Controls.Item(2).Text
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "PanelControl()", "0", ex.Message.ToString)
             y = Nothing
@@ -1922,6 +1927,7 @@ Public Class Issue_Leads
 
             End If
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "Add_Rep(sender,e)", "0", ex.Message.ToString)
             y = Nothing
@@ -1950,6 +1956,7 @@ Public Class Issue_Leads
             r.Close()
             cnn2.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "Pop_Reps(cbo)", "0", ex.Message.ToString)
             y = Nothing
@@ -2004,6 +2011,7 @@ Public Class Issue_Leads
             m_resCNX = Nothing
             Return res.ToString
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "GetMResult(leadnum)", LeadNum, ex.Message.ToString)
             y = Nothing

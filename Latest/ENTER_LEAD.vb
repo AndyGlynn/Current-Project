@@ -23,6 +23,7 @@ Public Class ENTER_LEAD
 
             'GetDayOfWeek()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ENTER_LEAD", "ENTER_LEAD", "Sub", "LoadUp()", "0", ex.Message.ToString)
             y = Nothing
@@ -57,6 +58,7 @@ Public Class ENTER_LEAD
                     Exit Select
             End Select
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ENTER_LEAD", "ENTER_LEAD", "Sub", "GetDayOfWeek()", "0", ex.Message.ToString)
             y = Nothing
@@ -82,6 +84,7 @@ Public Class ENTER_LEAD
             End If
         Catch ex As Exception
             cnn.Close()
+            Main.Cursor = Cursors.Default
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("ENTER_LEAD", "ByVal product as string, byval Productnum as integer", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetAcronym")
             Dim y As New ErrorLogging_V2
@@ -125,6 +128,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.PopulateMarketers", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetMarketers")
                 Dim y As New ErrorLogging_V2
@@ -168,6 +172,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.PopulatePrimaryLeadSource", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetPrimaryLeadSource")
                 Dim y As New ErrorLogging_V2
@@ -213,6 +218,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.PopulateSecondaryLeadSource", "ByVal PrimaryLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetSLS")
                 Dim y As New ErrorLogging_V2
@@ -252,6 +258,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.PopulatePLSandSLSByMarketer", "ByVal FName As String, ByVal LName As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetMarketerLeadSources")
                 Dim y As New ErrorLogging_V2
@@ -278,6 +285,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetCities")
                 Dim y As New ErrorLogging_V2
@@ -314,6 +322,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.PopulateWorkHours", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetWorkHours")
                 Dim y As New ErrorLogging_V2
@@ -358,6 +367,7 @@ Public Class ENTER_LEAD
                 End Select
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.InsertSLS", "ByVal PLS As String, ByVal SLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertSLS")
                 Dim y As New ErrorLogging_V2
@@ -396,6 +406,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "GetProducts")
                 Dim y As New ErrorLogging_V2
@@ -453,6 +464,7 @@ Public Class ENTER_LEAD
                 End Select
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.AddNewProduct", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "AddNewProduct")
                 Dim y As New ErrorLogging_V2
@@ -487,6 +499,7 @@ Public Class ENTER_LEAD
             Catch ex As Exception
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.InsertMarketer", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "InsertMarketer")
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ENTER_LEAD", "ENTER_LEAD", "Sub", "InsertMarketing(frm)", "0", ex.Message.ToString)
                 y = Nothing
@@ -528,6 +541,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.InsertMarketer", "ByVal MFname As String, ByVal MLName As String, ByVal PLS As String, ByVal SLS As String, ByVal MarketingMan As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "WriteMarketerToTable")
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ENTER_LEAD", "ENTER_LEAD", "Sub", "WriteMarketerToTable(mfname,mlname,pls,sls,marketingman)", "0", ex.Message.ToString)
                 y = Nothing
@@ -545,6 +559,7 @@ Public Class ENTER_LEAD
                 Return TextToCap
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.InsertMarketer", "ByVal TextToCap as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CapitalizeText")
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ENTER_LEAD", "ENTER_LEAD", "Function", "capitalizeText(texttocap)", "0", ex.Message.ToString)
                 y = Nothing
@@ -568,6 +583,7 @@ Public Class ENTER_LEAD
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.Capitalize", "ByVal TextToCap as string", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "Front_End", "CapitalizeText")
                 Dim y As New ErrorLogging_V2
+                Main.Cursor = Cursors.Default
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ENTER_LEAD", "ENTER_LEAD", "Function", "capitalizeText(texttocap)", "0", ex.Message.ToString)
                 y = Nothing
             End Try
@@ -605,6 +621,7 @@ Public Class ENTER_LEAD
                 End Select
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.InsertPLS", "ByVal PLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertNewPLS")
                 Dim y As New ErrorLogging_V2
@@ -655,6 +672,7 @@ Public Class ENTER_LEAD
                 End Select
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.InsertSLS", "ByVal PLS As String, ByVal SLS As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertSLS")
                 Dim y As New ErrorLogging_V2
@@ -738,6 +756,7 @@ Public Class ENTER_LEAD
                 End Select
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.CheckDuplicateLead", "ByVal StAddress As String, ByVal City As String, ByVal State As String, ByVal Zip As String, ByVal CloseMethod As String, ByVal ForceMap As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "'New'")
                 Dim y As New ErrorLogging_V2
@@ -888,6 +907,7 @@ Public Class ENTER_LEAD
                 DuplicateRecord.ShowDialog()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.PopulateDuplicates", "ByVal C1FName As String, ByVal C1LName As String, ByVal C2FName As String, ByVal C2LName As String, ByVal MainPhone As String, ByVal AltPhone1 As String, ByVal AltPhone2 As String, ByVal STAddress As String, ByVal City As String, ByVal State As String, ByVal Zip As String, ByVal CloseMethod As String, ByVal ForceMap As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "SetUp")
                 Dim y As New ErrorLogging_V2
@@ -1129,6 +1149,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.InsertEnterLead", "ByVal MapPointVerified As Boolean", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "InsertLead")
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ENTER_LEAD", "ENTER_LEAD", "Sub", "InsertLead(...)", "0", ex.Message.ToString)
                 y = Nothing
@@ -1196,6 +1217,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
                 'Dim err As New ErrorLogFlatFile
                 'err.WriteLog("ENTER_LEAD.IsCityInTable", "ByVal City As String, ByVal State As String", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "SQL", "CheckCity")
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ENTER_LEAD", "ENTER_LEAD", "Sub", "CheckCity(city,state)", "0", ex.Message.ToString)
                 y = Nothing
@@ -1219,6 +1241,7 @@ Public Class ENTER_LEAD
             r1.Close()
             cnn.Close()
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ENTER_LEAD", "ENTER_LEAD", "Sub", "AutoFillState(city)", "0", ex.Message.ToString)
             y = Nothing
@@ -1366,6 +1389,7 @@ Public Class ENTER_LEAD
                 cnn.Close()
             Catch ex As Exception
                 cnn.Close()
+                Main.Cursor = Cursors.Default
                 '       Dim err As New ErrorLogFlatFile
                 '       err.WriteLog("ENTER_LEAD.UpdateEnterLead", "ByVal ID As String, ByVal Marketer As String, ByVal PLS As String, ByVal SLS As String, ByVal LeadGenOn As Date," _
                 '& "   ByVal Contact1FirstName As String, ByVal Contact1LastName As String, ByVal Contact2FirstName As String, ByVal Contact2LastName As String," _

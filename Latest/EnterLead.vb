@@ -21,6 +21,9 @@ Public Class EnterLead
             Me.dtpApptInfo.Value = Today.AddDays(1)
             Me.txtApptTime.Value = CType("01/01/1900 " & Now.Hour.ToString & ":00", Date)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "EnterLead_Load", "0", ex.Message.ToString)
             y = Nothing
@@ -63,6 +66,9 @@ Public Class EnterLead
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboPriLead_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -120,6 +126,9 @@ Public Class EnterLead
                     d.GetMarketerLeadSources(fname, lname)
 
                 Catch ex As Exception
+                    Me.Cursor = Cursors.Default
+                    Main.Cursor = Cursors.Default
+
                     Dim y As New ErrorLogging_V2
                     y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboMarketer_SelectedValueChanged(ENTER_LEAD.PopPLSandSLS)", "0", ex.Message.ToString)
                     y = Nothing
@@ -138,6 +147,9 @@ Public Class EnterLead
             tf.CheckTimeFormat(b)
             Me.txtApptTime.Text = tf.RetTime
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "txtApptTime_LostFocus", "0", ex.Message.ToString)
             y = Nothing
@@ -216,6 +228,9 @@ Public Class EnterLead
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cbosecLead_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -255,6 +270,9 @@ Public Class EnterLead
                     Exit Select
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct1_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -280,6 +298,9 @@ Public Class EnterLead
                     x.GetAcronym(Me.cboProduct2.Text, 2)
                     Exit Select
                 Catch ex As Exception
+                    Me.Cursor = Cursors.Default
+                    Main.Cursor = Cursors.Default
+
                     Dim y As New ErrorLogging_V2
                     y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct2_SelectedIndexChanged", "0", ex.Message.ToString)
                     y = Nothing
@@ -323,6 +344,9 @@ Public Class EnterLead
                 x.GetAcronym(Me.cboProduct2.Text, 2)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct2_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -349,6 +373,9 @@ Public Class EnterLead
                     x.GetAcronym(Me.cboProduct3.Text, 3)
                     Exit Select
                 Catch ex As Exception
+                    Me.Cursor = Cursors.Default
+                    Main.Cursor = Cursors.Default
+
                     Dim y As New ErrorLogging_V2
                     y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct3_SelectedINdexChanged", "0", ex.Message.ToString)
                     y = Nothing
@@ -383,6 +410,9 @@ Public Class EnterLead
                     b.AddNewProduct(pr, prA, "CBO3")
                     Exit Select
                 Catch ex As Exception
+                    Me.Cursor = Cursors.Default
+                    Main.Cursor = Cursors.Default
+
                     Dim yy As New ErrorLogging_V2
                     yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboProduct3_selectedValueChanged", "0", ex.Message.ToString)
                     yy = Nothing
@@ -451,6 +481,9 @@ Public Class EnterLead
             Me.cboSpokeWith.Items.Clear()
             Me.cboSpokeWith.Items.Add(Me.txtC1FName.Text)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "txtc1fname_lostfocus(enter_lead.capitalize)", "0", ex.Message.ToString)
             y = Nothing
@@ -479,6 +512,9 @@ Public Class EnterLead
                 'Me.cboSpokeWith.Items.Add("Both")
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "txtc2fname_lostfocus(enter_lead.capitalize)", "0", ex.Message.ToString)
             y = Nothing
@@ -671,6 +707,9 @@ Public Class EnterLead
                 DuplicateLead.CloseMethod = "SAVEANDNEW"
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "btnSaveNew_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -797,6 +836,9 @@ Public Class EnterLead
                 DuplicateLead.CloseMethod = "SAVE"
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "btnSaveClose_click", "0", ex.Message.ToString)
             y = Nothing
@@ -969,6 +1011,9 @@ Public Class EnterLead
                 Me.txtState.TabStop = False
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "txtcity_lostfocus", "0", ex.Message.ToString)
             y = Nothing
@@ -1017,6 +1062,9 @@ Public Class EnterLead
                 End Select
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EnterLead", "FormCode", "Event", "cboc1work_selectedvaluechanged", "0", ex.Message.ToString)
             y = Nothing

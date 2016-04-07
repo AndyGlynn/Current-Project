@@ -14,6 +14,8 @@ Public Class frmEditSpecialInstructions
                 Dim y As New GetSpecialInstructions(RecID)
                 Me.rtfSpecialInstructions.Text = y.SpecialInstructions
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEditSpecialInstructions", "FormCode", "Event", "frmEditSpecialInstructions_Load", "0", ex.Message.ToString)
                 y = Nothing
@@ -55,6 +57,8 @@ Public Class frmEditSpecialInstructions
                 cnx = Nothing
                 Return retSTR
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEditSpecialInstructions.GetSpecialInstructions", "FormCode-Private Class", "Function", "Get_SPI(recID)", RecID, ex.Message.ToString)
                 y = Nothing
@@ -79,6 +83,8 @@ Public Class frmEditSpecialInstructions
                 cnx.Close()
                 cnx = Nothing
             Catch ex As Exception
+
+                Main.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEditSpecialInstructions.UpdateSpecialInstructions", "FormCode-Private Class", "Function", "Update_SPI(recID)", RecID, ex.Message.ToString)
                 y = Nothing

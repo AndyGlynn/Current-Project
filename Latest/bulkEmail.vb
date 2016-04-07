@@ -52,6 +52,8 @@ Public Class bulkEmail
             Me.ListOfLeads = New List(Of convertLeadToStruct.EnterLead_Record)
             Me.ListOfLeads = Grab_Top_TwentyFiveLeadsCONVERTED(arLeads, Dev_Or_Pro)
         Catch ex As Exception
+
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Class", "Constructor(dev or pro)", "0", ex.Message.ToString)
             y = Nothing
@@ -78,6 +80,7 @@ Public Class bulkEmail
             cnx = Nothing
             Return arLeadIds
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "Grab_Top_TwentyFiveLeads(dev_or_pro)", "0", ex.Message.ToString)
             y = Nothing
@@ -93,6 +96,7 @@ Public Class bulkEmail
             Next
             Return ListOfLeads
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "Grab_Top_TwentyFiveLeadsConverted(listofrecids,devorpro)", "0", ex.Message.ToString)
             y = Nothing
@@ -110,6 +114,7 @@ Public Class bulkEmail
             x.Department = Get_User_Department(x.FName, x.LName, Dev_Or_Pro)
             Return x
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "Get_CurrentUser_AND_Department(devorpro)", "0", ex.Message.ToString)
             y = Nothing
@@ -134,6 +139,7 @@ Public Class bulkEmail
             cnx = Nothing
             Return depart_
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "Get_User_Department(FName,LName,DevOrPro)", "0", ex.Message.ToString)
             y = Nothing

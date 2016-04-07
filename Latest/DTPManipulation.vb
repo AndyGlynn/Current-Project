@@ -581,6 +581,7 @@ Public Class DTPManipulation
                     Exit Select
             End Select
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "DTP_Manipulation", "DTP_Manipulation", "Sub", "Constructor(RangeChoice)", "0", ex.Message.ToString)
             y = Nothing

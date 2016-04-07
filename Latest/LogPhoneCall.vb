@@ -94,6 +94,8 @@ Public Class LogPhoneCall
                     Me.lblautonotes.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             End Select
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "LogPhoneCall", "FormCode", "Event", "cboautonote_selectedvaluechanged", "0", ex.Message.ToString)
             y = Nothing
@@ -192,6 +194,8 @@ Public Class LogPhoneCall
 
             Me.Close()
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "LogPhoneCall", "FormCode", "Event", "btnsave_click", "0", ex.Message.ToString)
             y = Nothing
@@ -244,6 +248,8 @@ Public Class LogPhoneCall
 
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "LogPhoneCall", "FormCode", "Event", "LogPhoneCall_Load ", "0", ex.Message.ToString)
             y = Nothing

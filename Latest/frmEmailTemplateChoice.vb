@@ -19,6 +19,8 @@
                 Me.cboTemplates.Items.Add(a.TemplateName)
             Next
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEmailTemplateChoice", "FormCode", "Sub", "GetTemplates()", "0", ex.Message.ToString)
             y = Nothing
@@ -54,6 +56,8 @@
                 frmEmailPreview.ShowDialog()
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmEmailTemplateChoice", "FormCode", "Event", "btnApply_Click", "0", ex.Message.ToString)
             y = Nothing

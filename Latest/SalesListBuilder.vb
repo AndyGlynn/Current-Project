@@ -46,6 +46,8 @@ Public Class SalesListBuilder
                 cnn.Close()
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesListBuilder", "FormCode", "Sub", "cboPLS_SelectedINdexChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -163,6 +165,8 @@ Public Class SalesListBuilder
             Me.Close()
             Dim c As New SalesListManager(sender)
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesListBuilder", "FormCode", "Sub", "btnSearch_Click", "0", ex.Message.ToString)
             y = Nothing
@@ -255,6 +259,8 @@ Public Class SalesListBuilder
 
             Me.Loading = False
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesListBuilder", "FormCode", "Event", "SalesListBuilder_Load", "0", ex.Message.ToString)
             y = Nothing

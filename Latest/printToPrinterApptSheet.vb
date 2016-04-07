@@ -238,6 +238,7 @@ Public Class printToPrinterApptSheet
             e.Graphics.DrawString(CurrentLeadInfo.Marketer, nfo_font, Brushes.Black, rectMarkVal)
 
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "printToPrinterApptSheet", "printToPrinterApptSheet", "Sub", "PD_PrintPage", "0", ex.Message.ToString)
             y = Nothing
@@ -281,6 +282,7 @@ Public Class printToPrinterApptSheet
             cnx = Nothing
             Return x
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "printToPrinterApptSheet", "printToPrinterApptSheet", "Function", "Get_Lead_Info", RecID, ex.Message.ToString)
             y = Nothing

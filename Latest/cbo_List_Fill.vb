@@ -98,6 +98,7 @@ Public Class cbo_List_Fill
             cnx.Close()
         Catch ex As Exception
 
+            Main.Cursor = Cursors.Default
         End Try
 
     End Sub

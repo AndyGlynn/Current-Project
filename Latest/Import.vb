@@ -92,6 +92,7 @@ Module Import
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("Import", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "StripGarbage")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "imgLSTS", "imgLSTS", "Constructor", "StripGarbage()", "0", ex.Message.ToString)
             y = Nothing
@@ -145,6 +146,7 @@ Module Import
         Catch ex As Exception
             'Dim err As New ErrorLogFlatFile
             'err.WriteLog("Import", "None", ex.Message.ToString, "Client", STATIC_VARIABLES.CurrentUser & ", " & STATIC_VARIABLES.CurrentForm, "File_IO", "StripOffLastDigit")
+            Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "imgLSTS", "imgLSTS", "Constructor", "StripOffLastDigit()", "0", ex.Message.ToString)
             y = Nothing
