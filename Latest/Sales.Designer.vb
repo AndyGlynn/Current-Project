@@ -1459,7 +1459,7 @@ Partial Class Sales
         Me.gbContactInfo.ForeColor = System.Drawing.Color.Gray
         Me.gbContactInfo.Location = New System.Drawing.Point(5, 3)
         Me.gbContactInfo.Name = "gbContactInfo"
-        Me.gbContactInfo.Size = New System.Drawing.Size(819, 198)
+        Me.gbContactInfo.Size = New System.Drawing.Size(734, 198)
         Me.gbContactInfo.TabIndex = 191
         Me.gbContactInfo.TabStop = False
         Me.gbContactInfo.Text = "Contact Info:"
@@ -1471,7 +1471,7 @@ Partial Class Sales
         Me.txtHousePhone.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtHousePhone.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHousePhone.ForeColor = System.Drawing.Color.Black
-        Me.txtHousePhone.Location = New System.Drawing.Point(611, 33)
+        Me.txtHousePhone.Location = New System.Drawing.Point(526, 33)
         Me.txtHousePhone.Name = "txtHousePhone"
         Me.txtHousePhone.ReadOnly = True
         Me.txtHousePhone.Size = New System.Drawing.Size(116, 16)
@@ -1485,7 +1485,7 @@ Partial Class Sales
         Me.txtaltphone2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone2.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone2.Location = New System.Drawing.Point(611, 96)
+        Me.txtaltphone2.Location = New System.Drawing.Point(526, 96)
         Me.txtaltphone2.Name = "txtaltphone2"
         Me.txtaltphone2.ReadOnly = True
         Me.txtaltphone2.Size = New System.Drawing.Size(116, 16)
@@ -1498,7 +1498,7 @@ Partial Class Sales
         Me.txtaltphone1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone1.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone1.Location = New System.Drawing.Point(611, 64)
+        Me.txtaltphone1.Location = New System.Drawing.Point(526, 64)
         Me.txtaltphone1.Name = "txtaltphone1"
         Me.txtaltphone1.ReadOnly = True
         Me.txtaltphone1.Size = New System.Drawing.Size(116, 16)
@@ -1510,7 +1510,7 @@ Partial Class Sales
         Me.lnkEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkEmail.AutoSize = True
         Me.lnkEmail.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lnkEmail.Location = New System.Drawing.Point(558, 144)
+        Me.lnkEmail.Location = New System.Drawing.Point(473, 144)
         Me.lnkEmail.Name = "lnkEmail"
         Me.lnkEmail.Size = New System.Drawing.Size(144, 16)
         Me.lnkEmail.TabIndex = 136
@@ -1524,7 +1524,7 @@ Partial Class Sales
         Me.lblEmail.BackColor = System.Drawing.Color.Transparent
         Me.lblEmail.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmail.ForeColor = System.Drawing.Color.Gray
-        Me.lblEmail.Location = New System.Drawing.Point(507, 144)
+        Me.lblEmail.Location = New System.Drawing.Point(422, 144)
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.Size = New System.Drawing.Size(45, 16)
         Me.lblEmail.TabIndex = 135
@@ -1550,7 +1550,7 @@ Partial Class Sales
         Me.txtAlt1Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt1Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt1Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt1Type.Location = New System.Drawing.Point(743, 64)
+        Me.txtAlt1Type.Location = New System.Drawing.Point(658, 64)
         Me.txtAlt1Type.Name = "txtAlt1Type"
         Me.txtAlt1Type.ReadOnly = True
         Me.txtAlt1Type.Size = New System.Drawing.Size(57, 16)
@@ -1564,7 +1564,7 @@ Partial Class Sales
         Me.txtAlt2Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt2Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt2Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt2Type.Location = New System.Drawing.Point(743, 96)
+        Me.txtAlt2Type.Location = New System.Drawing.Point(658, 96)
         Me.txtAlt2Type.Name = "txtAlt2Type"
         Me.txtAlt2Type.ReadOnly = True
         Me.txtAlt2Type.Size = New System.Drawing.Size(57, 16)
@@ -1578,7 +1578,7 @@ Partial Class Sales
         Me.lblAltPhone2.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone2.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone2.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone2.Location = New System.Drawing.Point(507, 96)
+        Me.lblAltPhone2.Location = New System.Drawing.Point(422, 96)
         Me.lblAltPhone2.Name = "lblAltPhone2"
         Me.lblAltPhone2.Size = New System.Drawing.Size(84, 16)
         Me.lblAltPhone2.TabIndex = 83
@@ -1591,7 +1591,7 @@ Partial Class Sales
         Me.lblAltPhone1.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone1.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone1.Location = New System.Drawing.Point(507, 64)
+        Me.lblAltPhone1.Location = New System.Drawing.Point(422, 64)
         Me.lblAltPhone1.Name = "lblAltPhone1"
         Me.lblAltPhone1.Size = New System.Drawing.Size(88, 16)
         Me.lblAltPhone1.TabIndex = 81
@@ -1614,7 +1614,7 @@ Partial Class Sales
         Me.lblHousePhone.BackColor = System.Drawing.Color.Transparent
         Me.lblHousePhone.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHousePhone.ForeColor = System.Drawing.Color.Gray
-        Me.lblHousePhone.Location = New System.Drawing.Point(507, 33)
+        Me.lblHousePhone.Location = New System.Drawing.Point(422, 33)
         Me.lblHousePhone.Name = "lblHousePhone"
         Me.lblHousePhone.Size = New System.Drawing.Size(97, 16)
         Me.lblHousePhone.TabIndex = 78
@@ -1737,9 +1737,9 @@ Partial Class Sales
         Me.gbHomeInfo.Controls.Add(Me.txtYrBuilt)
         Me.gbHomeInfo.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbHomeInfo.ForeColor = System.Drawing.Color.Gray
-        Me.gbHomeInfo.Location = New System.Drawing.Point(830, 3)
+        Me.gbHomeInfo.Location = New System.Drawing.Point(745, 3)
         Me.gbHomeInfo.Name = "gbHomeInfo"
-        Me.gbHomeInfo.Size = New System.Drawing.Size(78, 198)
+        Me.gbHomeInfo.Size = New System.Drawing.Size(109, 198)
         Me.gbHomeInfo.TabIndex = 183
         Me.gbHomeInfo.TabStop = False
         Me.gbHomeInfo.Text = "Home Info:"
@@ -1830,7 +1830,7 @@ Partial Class Sales
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
         Me.gbSpecialInstructions.Location = New System.Drawing.Point(445, 207)
         Me.gbSpecialInstructions.Name = "gbSpecialInstructions"
-        Me.gbSpecialInstructions.Size = New System.Drawing.Size(463, 144)
+        Me.gbSpecialInstructions.Size = New System.Drawing.Size(409, 144)
         Me.gbSpecialInstructions.TabIndex = 188
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions:"
@@ -1852,7 +1852,7 @@ Partial Class Sales
         Me.rtbSpecialInstructions.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(6, 22)
         Me.rtbSpecialInstructions.Name = "rtbSpecialInstructions"
-        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(382, 116)
+        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(328, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
         Me.rtbSpecialInstructions.Text = "The customer only wants a rough frame in the basement and they are interested in " & _
     "upper grids in the windows"
@@ -2103,7 +2103,7 @@ Partial Class Sales
         Me.tsCustomerLog.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsCustomerLog.Name = "tsCustomerLog"
         Me.tsCustomerLog.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsCustomerLog.Size = New System.Drawing.Size(964, 33)
+        Me.tsCustomerLog.Size = New System.Drawing.Size(850, 33)
         Me.tsCustomerLog.TabIndex = 189
         Me.tsCustomerLog.Text = "ToolStrip1"
         Me.tsCustomerLog.Visible = False
@@ -2175,7 +2175,7 @@ Partial Class Sales
         Me.pnlCustomerHistory.AutoScroll = True
         Me.pnlCustomerHistory.Location = New System.Drawing.Point(4, 390)
         Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(909, 172)
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(855, 172)
         Me.pnlCustomerHistory.TabIndex = 200
         '
         'tsAFPics
@@ -2190,7 +2190,7 @@ Partial Class Sales
         Me.tsAFPics.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsAFPics.Name = "tsAFPics"
         Me.tsAFPics.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsAFPics.Size = New System.Drawing.Size(966, 33)
+        Me.tsAFPics.Size = New System.Drawing.Size(850, 33)
         Me.tsAFPics.TabIndex = 201
         Me.tsAFPics.Text = "ToolStrip1"
         '
@@ -2259,7 +2259,7 @@ Partial Class Sales
         Me.pnlAFPics.Controls.Add(Me.lsJobPictures)
         Me.pnlAFPics.Location = New System.Drawing.Point(4, 390)
         Me.pnlAFPics.Name = "pnlAFPics"
-        Me.pnlAFPics.Size = New System.Drawing.Size(963, 172)
+        Me.pnlAFPics.Size = New System.Drawing.Size(855, 172)
         Me.pnlAFPics.TabIndex = 201
         Me.pnlAFPics.Visible = False
         '

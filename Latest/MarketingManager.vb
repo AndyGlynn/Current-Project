@@ -179,4 +179,8 @@ Public Class MarketingManager
         frmWCList.Show()
         Me.Cursor = Cursors.Default
     End Sub
+
+    Private Sub ToolStripSplitButton2_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripSplitButton2.ButtonClick
+        SetApptTelemarketing.Show()
+    End Sub
 End Class

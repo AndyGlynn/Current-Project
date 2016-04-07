@@ -137,6 +137,7 @@
     <Compile Include="CandCNotes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="cbo_List_Fill.vb" />
     <Compile Include="companyInfoSQL.vb" />
     <Compile Include="convertLeadToStruct.vb" />
     <Compile Include="createAShortCut.vb" />
@@ -609,6 +610,12 @@
       <DependentUpon>SecondSource.vb</DependentUpon>
     </Compile>
     <Compile Include="SecondSource.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetApptTelemarketing.Designer.vb">
+      <DependentUpon>SetApptTelemarketing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SetApptTelemarketing.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SetAppt_V2.Designer.vb">
@@ -1094,6 +1101,9 @@
     <EmbeddedResource Include="SecondSource.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SecondSource.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetApptTelemarketing.resx">
+      <DependentUpon>SetApptTelemarketing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetAppt_V2.resx">
       <DependentUpon>SetAppt_V2.vb</DependentUpon>

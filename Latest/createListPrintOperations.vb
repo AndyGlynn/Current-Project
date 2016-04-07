@@ -1032,7 +1032,7 @@ Public Class createListPrintOperations
             'style += "th.lg {font-family:""Verdana"",sans-serif;font-size:1.2em;font-weight:bold;color:black;padding:3px;text-align:center;background-color:white;text-align:left;}td {font-family:"Verdana",sans-serif;font-size:0.8em;padding:7px;text-align:center;}"
             style += "td {font-family:""Verdana"",sans-serif;font-size:0.8em;padding:7px;text-align:center;}" & vbCrLf
             style += "tr.sale {font-family:""Verdana"",sans-serif;font-weight:normal;font-size:1em;background-color:hsl(120,100%,75%);}" & vbCrLf
-            style += "@media print { span.data {display:none;} tr:nth-child(even){background-color:white;}tr:nth-child(odd){background-color:white;}" & vbCrLf
+            style += "@media print { span.data {display:none;} tr:nth-child(even){background-color:white;}tr:nth-child(odd){background-color:white;tr:nth-child(15n-7){ tr {page-break-before:allways;}} " & vbCrLf '' should be every 15th row, break AFTER row element... again, SHOULD be.
             style += "tr.sale{background-color:white;font-size:0.8em;}th{font-size:0.7em;}td{font-size:0.5em;}.tbl{box-shadow:0px 0px 0px white;} @page{size:landscape;}}" & vbCrLf
             style += "</style>"
 

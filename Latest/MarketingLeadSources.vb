@@ -105,6 +105,8 @@ Public Class MarketerLeadSources
                 EnterLead.cboMarketer.SelectedItem = ""
             Case "EditCustomerInfo"
                 EditCustomerInfo.cboMarketer.SelectedItem = ""
+            Case "SetApptTelemarketing"
+                SetApptTelemarketing.cboMarketer.SelectedItem = Nothing
         End Select
     End Sub
 #Region "Private Classes"
@@ -370,7 +372,7 @@ Public Class MarketerLeadSources
 
     End Sub
 
-    
+
     Private Sub btnNext_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNext.Click
         Try
             Me.ErrorProvider1.Clear()
@@ -405,6 +407,8 @@ Public Class MarketerLeadSources
                 Case "EditCustomerInfo"
                     Dim d As New EDIT_CUSTOMER_INFORMATION
                     d.WriteMarketerToTable(Me.txtFName.Text, Me.txtLname.Text, Me.cboPRILS.Text, Me.cboSLS.Text, Me.cboMM.Text)
+                Case "SetApptTelemarketing"
+                    SetApptTelemarketing.WriteMarketerToTable(Me.txtFName.Text, Me.txtLname.Text, Me.cboPRILS.Text, Me.cboSLS.Text, Me.cboMM.Text)
             End Select
             Me.Close()
         Catch ex As Exception
@@ -416,7 +420,7 @@ Public Class MarketerLeadSources
 
     End Sub
 
-    
+
 
     Private Sub txtFName_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtFName.LostFocus
         Try
