@@ -115,6 +115,11 @@ Public Class SalesListManager
             If r.Item(0) >= 500 Then
                 ''progressbar class
             End If
+
+            r.Close()
+            cnn.Close()
+            cnn = Nothing
+
         Catch ex As Exception
 
             Main.Cursor = Cursors.Default
@@ -374,6 +379,9 @@ Public Class SalesListManager
             End If
             Sales.LastD1 = Date1
             Sales.LastD2 = Date2
+
+            Sales.Cursor = Cursors.Default
+
         Catch ex As Exception
 
             Main.Cursor = Cursors.Default

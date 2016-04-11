@@ -1233,7 +1233,8 @@ Public Class Sales
             End If
 
         End If
-
+        Me.Cursor = Cursors.Default
+        Main.Cursor = Cursors.Default
     End Sub
     Private Sub DisplayColumn(ByVal Column As String, ByVal LV As ListView)
         Try
@@ -8924,7 +8925,7 @@ Public Class Sales
                         Me.Cursor = Cursors.WaitCursor
                         PullInfo(y.Text)
                         STATIC_VARIABLES.CurrentID = y.Text
-                        Me.Cursor = Cursors.Default
+
                     End If
                 Next
             Else
