@@ -141,7 +141,7 @@ Public Class SalesListManager
             End If
             Sales.lvSales.Items.Clear()
 
-            'Dim lvCol As New ListView.ListViewItemCollection(Sales.lvSales)
+            Dim lvCol As New ListView.ListViewItemCollection(Sales.lvSales)
 
             Dim PLS As String = Sales.PLS
             Dim SLS As String = Sales.SLS
@@ -332,9 +332,10 @@ Public Class SalesListManager
                     End If
                 End If
                 lv.SubItems.Add(r.Item(20))
-                'Sales.lvSales.Items.Add(lv)
-                'lvCol.Add(lv)
-                arItems.Add(lv)
+                ' Sales.lvSales.Items.Add(lv)
+                lvCol.Add(lv)
+
+                ' arItems.Add(lv)
 
                 If lv.Text = Sales.ID Then
                     lv.Selected = True
@@ -345,13 +346,13 @@ Public Class SalesListManager
             End While
             Itemcnt = arItems.Count
             Me.lvSalesCnt = Itemcnt
-            Me._arLVSalesItems = arItems
+            'Me._arLVSalesItems = arItems
             r.Close()
             cnn.Close()
             'Itemcnt = arItems.Count
-            Sales.lvSales.VirtualMode = True
-            'Sales.lvSales.View = View.Details
-            Sales.lvSales.VirtualListSize = Itemcnt
+            'Sales.lvSales.VirtualMode = True
+            Sales.lvSales.View = View.Details
+            'Sales.lvSales.VirtualListSize = Itemcnt
             Main.tsProgress.Minimum = 0
             If Itemcnt <= 0 Then
                 Main.tsProgress.Maximum = 1
@@ -365,9 +366,9 @@ Public Class SalesListManager
             Next
             'Sales.arItemCache = arItems
             Sales.lblCntFiltered.Text = cntRecs.ToString
-            'If Sales.lvSales.SelectedItems.Count = 0 And Sales.lvSales.Items.Count <> 0 Then
-            '    Sales.lvSales.TopItem.Selected = True
-            'End If
+            If Sales.lvSales.SelectedItems.Count = 0 And Sales.lvSales.Items.Count <> 0 Then
+                Sales.lvSales.TopItem.Selected = True
+            End If
             If Sales.lvSales.Items.Count = 0 Then
                 Sales.PullInfo("")
             End If
@@ -474,7 +475,7 @@ Public Class SalesListManager
             cnn.Open()
             r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
             While r.Read
-                'Sales.lvSales.Groups.Add(r.Item(0), r.Item(0))
+                Sales.lvSales.Groups.Add(r.Item(0), r.Item(0))
             End While
             r.Close()
             cnn.Close()

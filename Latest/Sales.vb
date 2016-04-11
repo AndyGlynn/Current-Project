@@ -2483,60 +2483,60 @@ Public Class Sales
             y = Nothing
         End Try
     End Sub
-    Private Sub lvSales_RetrieveVirtualItem(sender As Object, e As RetrieveVirtualItemEventArgs) Handles lvSales.RetrieveVirtualItem
+    'Private Sub lvSales_RetrieveVirtualItem(sender As Object, e As RetrieveVirtualItemEventArgs) Handles lvSales.RetrieveVirtualItem
 
-        Try
-            If Not (arItemCache Is Nothing) AndAlso e.ItemIndex >= firstItem AndAlso e.ItemIndex < firstItem + arItemCache.Count Then
-                e.Item = arItemCache((e.ItemIndex - firstItem))
-                current_Item = e.Item
-            End If
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim err As String = ex.Message
-            MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "LvSales_RetrievewVirtualItem()")
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvSales_RetrieveVirtualItem", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-
-    End Sub
-    Private Sub lvsales_CacheVirtualItems(ByVal sender As Object, ByVal e As CacheVirtualItemsEventArgs) Handles lvSales.CacheVirtualItems
-        Try
-
-            If Not (arItemCache Is Nothing) AndAlso e.StartIndex >= firstItem AndAlso e.EndIndex <= firstItem + arItemCache.Count Then
-                Return
-            End If
+    '    Try
+    '        If Not (arItemCache Is Nothing) AndAlso e.ItemIndex >= firstItem AndAlso e.ItemIndex < firstItem + arItemCache.Count Then
+    '            e.Item = arItemCache((e.ItemIndex - firstItem))
+    '            current_Item = e.Item
+    '        End If
+    '    Catch ex As Exception
+    '        Me.Cursor = Cursors.Default
+    '        Main.Cursor = Cursors.Default
+    '        Dim err As String = ex.Message
+    '        MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "LvSales_RetrievewVirtualItem()")
+    '        Dim y As New ErrorLogging_V2
+    '        y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvSales_RetrieveVirtualItem", "0", ex.Message.ToString)
+    '        y = Nothing
+    '    End Try
 
 
-            firstItem = e.StartIndex
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim err As String = ex.Message
-            MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "CachVirtualItems")
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvsales_cachevirtaulitems", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+    'End Sub
+    'Private Sub lvsales_CacheVirtualItems(ByVal sender As Object, ByVal e As CacheVirtualItemsEventArgs) Handles lvSales.CacheVirtualItems
+    '    Try
+
+    '        If Not (arItemCache Is Nothing) AndAlso e.StartIndex >= firstItem AndAlso e.EndIndex <= firstItem + arItemCache.Count Then
+    '            Return
+    '        End If
+
+
+    '        firstItem = e.StartIndex
+    '    Catch ex As Exception
+    '        Me.Cursor = Cursors.Default
+    '        Main.Cursor = Cursors.Default
+    '        Dim err As String = ex.Message
+    '        MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "CachVirtualItems")
+    '        Dim y As New ErrorLogging_V2
+    '        y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvsales_cachevirtaulitems", "0", ex.Message.ToString)
+    '        y = Nothing
+    '    End Try
 
 
 
-    End Sub
-    Private Sub lvsales_SearchForVirtualItem(ByVal sender As Object, ByVal e As SearchForVirtualItemEventArgs) Handles lvSales.SearchForVirtualItem
-        Try
-            current_Item = arItemCache(e.Index)
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim err As String = ex.Message
-            MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "SearchForVirtualItem()")
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvsales_searchforvirtualitem", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-    End Sub
+    'End Sub
+    'Private Sub lvsales_SearchForVirtualItem(ByVal sender As Object, ByVal e As SearchForVirtualItemEventArgs) Handles lvSales.SearchForVirtualItem
+    '    Try
+    '        current_Item = arItemCache(e.Index)
+    '    Catch ex As Exception
+    '        Me.Cursor = Cursors.Default
+    '        Main.Cursor = Cursors.Default
+    '        Dim err As String = ex.Message
+    '        MsgBox("Error: " & err, MsgBoxStyle.Exclamation, "SearchForVirtualItem()")
+    '        Dim y As New ErrorLogging_V2
+    '        y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvsales_searchforvirtualitem", "0", ex.Message.ToString)
+    '        y = Nothing
+    '    End Try
+    'End Sub
 
 #End Region
 
@@ -8824,8 +8824,8 @@ Public Class Sales
         Try
             Me.Cursor = Cursors.WaitCursor
             Dim c As New SalesListManager(sender)
-            arItemCache = New ArrayList
-            arItemCache = c.LV_Sales_Items
+            'arItemCache = New ArrayList
+            'arItemCache = c.LV_Sales_Items
             bgSalesQuery_RunWorkerCompleted(Me, Nothing)
         Catch ex As Exception
             Me.Cursor = Cursors.Default
@@ -8840,15 +8840,15 @@ Public Class Sales
 
     Private Sub bgSalesQuery_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles bgSalesQuery.RunWorkerCompleted
         Try
-            If arItemCache.Count > 1 Then
-                Dim a As ListViewItem = arItemCache(0)
-                STATIC_VARIABLES.CurrentID = a.Text
-                Me.Text = "Sales Department Record ID: " & a.Text
-                PullInfo(a.Text)
-                AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-                Me.lvSales.EnsureVisible(0)
-                RaiseEvent PopCustHistory()
-            End If
+            ' If arItemCache.Count > 1 Then
+            Dim a As ListViewItem = Me.lvSales.Items.Item(0)
+            STATIC_VARIABLES.CurrentID = a.Text
+            Me.Text = "Sales Department Record ID: " & a.Text
+            PullInfo(a.Text)
+            AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+            Me.lvSales.EnsureVisible(0)
+            RaiseEvent PopCustHistory()
+            'End If
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
@@ -8907,5 +8907,36 @@ Public Class Sales
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lnkPrintReport_LinkClicked", "0", ex.Message.ToString)
             y = Nothing
         End Try
+    End Sub
+
+    Private Sub lvSales_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvSales.SelectedIndexChanged
+        '' 
+        '' re-added 4/10/2016 AC
+        '' per request to do away with bg thread
+        '' and virtual list control -> Grouping NEEDED
+        '' 
+
+        Try
+            If Me.LoadComplete = True Then
+                Dim y As ListViewItem
+                For Each y In Me.lvSales.Items
+                    If y.Selected = True Then
+                        Me.Cursor = Cursors.WaitCursor
+                        PullInfo(y.Text)
+                        STATIC_VARIABLES.CurrentID = y.Text
+                        Me.Cursor = Cursors.Default
+                    End If
+                Next
+            Else
+                '' do nothing 
+            End If
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "Form Code", "Event", "lv_SalesSelectedIndexChanged()", STATIC_VARIABLES.CurrentID, ex.Message.ToString)
+        End Try
+
     End Sub
 End Class
