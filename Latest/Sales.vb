@@ -5,6 +5,7 @@ Imports System
 Imports System.Threading
 
 Public Class Sales
+
 #Region "Variables & Dynamic Buttons"
 #Region "Criteria Variables"
     Public Rep As String = ""
@@ -22,6 +23,13 @@ Public Class Sales
     Public R7 As String = "Recission Cancel"
     Public R8 As String = "No Results"
     Public panelsize As Integer
+#End Region
+
+#Region "DTP Variables"
+    Dim dtpsum2orig As String
+    Dim dtpsum1orig As String
+    Dim Focusdtp1 As Boolean = False
+    Dim focusdtp2 As Boolean = False
 #End Region
 
 #Region "Edits For lsAttachedFiles and lsJobPictures 11-15-2015"
@@ -2172,9 +2180,11 @@ Public Class Sales
     End Sub
 
 #End Region
+
 #Region "Customer List Page Events"
 
 #End Region
+
 #Region "Customer List Page Toolbar Buttons"
     Private Sub btnSalesResult2_ButtonClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalesResult2.ButtonClick
         If Me.ID = "" Then
@@ -2819,13 +2829,9 @@ Public Class Sales
 
 #End Region
 
-
-
-
     Private Sub txtSingleRecordInput_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSingleRecordInput.GotFocus
         Me.txtSingleRecordInput.Text = ""
     End Sub
-
 
     Private Sub txtSingleRecordInput_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSingleRecordInput.KeyPress
         Dim x = e.KeyChar.ToString
@@ -2925,7 +2931,6 @@ Public Class Sales
         Me.btnBuildList.HideDropDown()
     End Sub
 
-
     Private Sub btnSaveRep_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSaveRep.Click
         Try
             Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
@@ -3024,14 +3029,10 @@ Public Class Sales
 
     End Sub
 
-
-
     Private Sub lblFilterGroups_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblFilterGroups.Click
         Me.cboFilterGroups.Focus()
         Me.cboFilterGroups.DroppedDown = True
     End Sub
-
-
 
     Private Sub cboFilterGroups_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboFilterGroups.SelectedIndexChanged
 
@@ -3051,8 +3052,6 @@ Public Class Sales
         End If
         Me.PopulateMemorized()
     End Sub
-
-
 
     Private Sub cboGroupByMemorized_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboGroupByMemorized.SelectedIndexChanged
         If Me.cboGroupByMemorized.Text <> "" Then
@@ -3122,11 +3121,6 @@ Public Class Sales
         Me.cboDisplayColumn.DroppedDown = True
     End Sub
 
-
-
-
-
-
     Private Sub cboDisplayMemorized_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDisplayMemorized.SelectedIndexChanged
         If Me.cboDisplayMemorized.Text <> "" Then
             Me.lbldisplaymemorized.Text = Me.cboDisplayMemorized.Text
@@ -3190,11 +3184,6 @@ Public Class Sales
         Me.cboRep2.Text = Me.ToolStripComboBox2.Text
     End Sub
 
-
-
-
-
-
     Private Sub btnEditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustomer.Click
         If Me.TabControl2.SelectedIndex = 0 Then
             'If Me.lvSales.SelectedItems.Count <> 0 Then
@@ -3213,8 +3202,6 @@ Public Class Sales
             EditCustomerInfo.Show()
         End If
     End Sub
-
-
 
     Private Sub MarkTaskAsDoneToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MarkTaskAsDoneToolStripMenuItem.Click
         Me.btnMarkTaskAsDone_Click(Nothing, Nothing)
@@ -3255,9 +3242,6 @@ Public Class Sales
     Private Sub HideThisCompletedTaskToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles HideThisCompletedTaskToolStripMenuItem.Click
         Me.btnRemoveThisCompletedTask_Click(Nothing, Nothing)
     End Sub
-
-
-
 
     Private Sub pnlScheduledTasks_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlScheduledTasks.MouseDown
         Me.HideThisCompletedTaskToolStripMenuItem.Visible = False
@@ -3330,10 +3314,6 @@ Public Class Sales
 
 
     End Sub
-    Dim dtpsum2orig As String
-    Dim dtpsum1orig As String
-    Dim Focusdtp1 As Boolean = False
-    Dim focusdtp2 As Boolean = False
 
     Private Sub dtpSummary_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpSummary.GotFocus
         If LoadComplete = False Then
@@ -3345,7 +3325,6 @@ Public Class Sales
 
 
     End Sub
-
 
     Private Sub dtpSummary2_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpSummary2.GotFocus
         If LoadComplete = False Then
@@ -4491,7 +4470,6 @@ Public Class Sales
     End Sub
 #End Region
 
-
 #Region "Context Menu New Folder - LS and JP"
     Private Sub btnNewFolder_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolder.Click
         Try
@@ -4736,7 +4714,6 @@ Public Class Sales
 
     End Sub
 
-
     Private Sub pnlIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlIssue.Click
         For i As Integer = 1 To Me.pnlIssue.Controls.Count
             Dim all As Panel = Me.pnlIssue.Controls(i - 1)
@@ -4772,8 +4749,6 @@ Public Class Sales
         End Try
 
     End Sub
-
-
 
     Private Sub pnlPerformanceReport_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlPerformanceReport.SizeChanged
 
@@ -5121,7 +5096,6 @@ Public Class Sales
 
     End Sub
 
-
     Private Sub btnExclude_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExclude.Click
         If Me.btnExclude.Text.Contains("Off") Then
             Me.btnExclude.Text = "Turn On Exclusions"
@@ -5131,6 +5105,7 @@ Public Class Sales
             Me.btnExclude.Image = Me.ilToolbarButtons.Images(13)
         End If
     End Sub
+
     Private Sub Refocus_IssueLeads()
         Dim c As Integer = Me.pnlIssue.Controls.Count
         Dim i As Integer
@@ -5141,8 +5116,6 @@ Public Class Sales
             End If
         Next
     End Sub
-
-
 
     Private Sub btnEditCustIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustIssue.Click
         Refocus_IssueLeads()
@@ -5250,9 +5223,6 @@ Public Class Sales
         btnPrintThisIssue_Click(sender, e)
     End Sub
 
-
-
-
     Private Sub EmailThisLeadToAssignedRepsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EmailThisLeadToAssignedRepsToolStripMenuItem.Click
         btnEmailThisIssue_Click(sender, e)
     End Sub
@@ -5260,12 +5230,6 @@ Public Class Sales
     Private Sub btnExcludeManage_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExcludeManage.Click
         exclusions.ShowDialog()
     End Sub
-
-
-
-
-
-
 
     Private Sub Sales_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
         'Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
@@ -5426,9 +5390,6 @@ Public Class Sales
     Private Sub tpSummary_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tpSummary.SizeChanged
         Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
     End Sub
-
-
-
 
     Private Sub btnSetAppt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetAppt.Click
         '' 1-10-2015 Testing Purposes
@@ -5678,8 +5639,6 @@ Public Class Sales
     End Sub
 
 #End Region
-
-
 
     Private Sub tsAttachedFilesNAV_Click(sender As Object, e As EventArgs) Handles tsAttachedFilesNAV.Click
         Try
@@ -6134,7 +6093,6 @@ Public Class Sales
         'MsgBox("btnPrintIssue")
     End Sub
 
-
 #Region "Printing Options"
 
     Private Sub btnPrintIssuedAppts_Click(sender As Object, e As EventArgs) Handles btnPrintIssuedAppts.Click
@@ -6403,8 +6361,6 @@ Public Class Sales
 
 #End Region
 
-
-
 #Region "Email Templating Stuff"
     Public Function GetTemplates()
         Try
@@ -6634,13 +6590,9 @@ Public Class Sales
 
     End Sub
 
-
-
     Private Sub bgGetImages_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgGetImages.DoWork
         GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
     End Sub
-
-
 
 #Region "List View - {Views} Job Pictures"
     Private Sub cmJPExtraLarge_Click(sender As Object, e As EventArgs) Handles cmJPExtraLarge.Click
@@ -7865,8 +7817,6 @@ Public Class Sales
 
 #End Region
 
-
-
     Private Function SplitApartFileExt(ByVal FullPath As String)
         Try
             Dim BeginAr() = FullPath.ToString.Split("\")
@@ -7906,7 +7856,6 @@ Public Class Sales
         End Try
 
     End Function
-
 
 #Region "Context Menu Paste - LS and JP"
 
@@ -8655,7 +8604,6 @@ Public Class Sales
 
 #End Region
 
-
     Public Function SplitApartFileName(ByVal FullPath As String)
         Try
             Dim BeginAr() = FullPath.ToString.Split("\")
@@ -8694,12 +8642,6 @@ Public Class Sales
             Return ret
         End Function
     End Class
-
-
-
-
-
-
 
 #Region "12-14-15 Edits for Email Templating Wizard"
 
@@ -8799,12 +8741,6 @@ Public Class Sales
 
 #End Region
 
-
-
-
-
-
-
     Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
         Dim lnk As LinkLabel = sender
         frmLinkSendEmail.MdiParent = Main
@@ -8813,7 +8749,6 @@ Public Class Sales
         frmLinkSendEmail.Show()
         frmLinkSendEmail.BringToFront()
     End Sub
-
 
     Private Sub btnUpdateSPI_Click(sender As Object, e As EventArgs) Handles btnUpdateSPI.Click
         frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
@@ -8838,7 +8773,6 @@ Public Class Sales
 
     End Sub
 
-
     Private Sub bgSalesQuery_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles bgSalesQuery.RunWorkerCompleted
         Try
             ' If arItemCache.Count > 1 Then
@@ -8860,9 +8794,6 @@ Public Class Sales
         End Try
 
     End Sub
-
-
-
 
     Private Sub PopulateCustomerHistory()
         If CType(Me.lblCntFiltered.Text, Integer) > 0 Then
@@ -8887,9 +8818,6 @@ Public Class Sales
 
     End Sub
 
-  
-    
-    
     Private Sub btnPrintDPerformanceReport_Click(sender As Object, e As EventArgs) Handles btnPrintDPerformanceReport.Click
         Try
             Dim d As New DTPManipulation(Me.cboDateRangeSummary.Text)
@@ -8940,4 +8868,5 @@ Public Class Sales
         End Try
 
     End Sub
+
 End Class
