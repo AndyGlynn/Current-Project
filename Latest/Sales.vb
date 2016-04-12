@@ -5,6 +5,7 @@ Imports System
 Imports System.Threading
 
 Public Class Sales
+
 #Region "Variables & Dynamic Buttons"
 #Region "Criteria Variables"
     Public Rep As String = ""
@@ -22,6 +23,13 @@ Public Class Sales
     Public R7 As String = "Recission Cancel"
     Public R8 As String = "No Results"
     Public panelsize As Integer
+#End Region
+
+#Region "DTP Variables"
+    Dim dtpsum2orig As String
+    Dim dtpsum1orig As String
+    Dim Focusdtp1 As Boolean = False
+    Dim focusdtp2 As Boolean = False
 #End Region
 
 #Region "Edits For lsAttachedFiles and lsJobPictures 11-15-2015"
@@ -2172,9 +2180,11 @@ Public Class Sales
     End Sub
 
 #End Region
+
 #Region "Customer List Page Events"
 
 #End Region
+
 #Region "Customer List Page Toolbar Buttons"
     Private Sub btnSalesResult2_ButtonClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalesResult2.ButtonClick
         If Me.ID = "" Then
@@ -2819,13 +2829,11 @@ Public Class Sales
 
 #End Region
 
-
-
+#Region " ' Normal ' Events - Clicks,Lost Focus...."
 
     Private Sub txtSingleRecordInput_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSingleRecordInput.GotFocus
         Me.txtSingleRecordInput.Text = ""
     End Sub
-
 
     Private Sub txtSingleRecordInput_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSingleRecordInput.KeyPress
         Dim x = e.KeyChar.ToString
@@ -2925,7 +2933,6 @@ Public Class Sales
         Me.btnBuildList.HideDropDown()
     End Sub
 
-
     Private Sub btnSaveRep_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSaveRep.Click
         Try
             Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
@@ -2938,40 +2945,40 @@ Public Class Sales
             r2.Read()
             '' Loads Names of Latest Rep from sales rep pull list and will also add 
             '' the name to rep combos if they are not part of the current rep list 
-        
 
-        Try
-            Me.cboRep1.Text = R2.Item(0)
-            If Me.cboRep1.Text = "" And R2.Item(0) <> "" Then
-                Me.cboRep1.Items.Add(R2.Item(0))
-                Me.cboRep2.Items.Add(R2.Item(0))
-                Me.cboRep1.Text = R2.Item(0)
 
+            Try
+                Me.cboRep1.Text = r2.Item(0)
+                If Me.cboRep1.Text = "" And r2.Item(0) <> "" Then
+                    Me.cboRep1.Items.Add(r2.Item(0))
+                    Me.cboRep2.Items.Add(r2.Item(0))
+                    Me.cboRep1.Text = r2.Item(0)
+
+                End If
+            Catch ex As Exception
+                Me.cboRep1.Text = Nothing
+
+            End Try
+            Try
+                Me.cboRep2.Text = r2.Item(1)
+                If Me.cboRep2.Text = "" And r2.Item(1) <> "" Then
+                    Me.cboRep2.Items.Add(r2.Item(1))
+                    Me.cboRep1.Items.Add(r2.Item(1))
+                    Me.cboRep2.Text = r2.Item(1)
+
+                End If
+            Catch ex As Exception
+                Me.cboRep2.Text = Nothing
+
+            End Try
+
+            r2.Close()
+            cnn2.Close()
+            If Me.TabControl2.SelectedIndex = 1 Then
+                Me.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
+            Else
+                'Me.lvSales_SelectedIndexChanged(Nothing, Nothing)
             End If
-        Catch ex As Exception
-            Me.cboRep1.Text = Nothing
-
-        End Try
-        Try
-            Me.cboRep2.Text = R2.Item(1)
-            If Me.cboRep2.Text = "" And R2.Item(1) <> "" Then
-                Me.cboRep2.Items.Add(R2.Item(1))
-                Me.cboRep1.Items.Add(R2.Item(1))
-                Me.cboRep2.Text = R2.Item(1)
-
-            End If
-        Catch ex As Exception
-            Me.cboRep2.Text = Nothing
-
-        End Try
-
-        R2.Close()
-        cnn2.Close()
-        If Me.TabControl2.SelectedIndex = 1 Then
-            Me.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
-        Else
-            'Me.lvSales_SelectedIndexChanged(Nothing, Nothing)
-        End If
 
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -3024,14 +3031,10 @@ Public Class Sales
 
     End Sub
 
-
-
     Private Sub lblFilterGroups_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblFilterGroups.Click
         Me.cboFilterGroups.Focus()
         Me.cboFilterGroups.DroppedDown = True
     End Sub
-
-
 
     Private Sub cboFilterGroups_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboFilterGroups.SelectedIndexChanged
 
@@ -3051,8 +3054,6 @@ Public Class Sales
         End If
         Me.PopulateMemorized()
     End Sub
-
-
 
     Private Sub cboGroupByMemorized_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboGroupByMemorized.SelectedIndexChanged
         If Me.cboGroupByMemorized.Text <> "" Then
@@ -3122,11 +3123,6 @@ Public Class Sales
         Me.cboDisplayColumn.DroppedDown = True
     End Sub
 
-
-
-
-
-
     Private Sub cboDisplayMemorized_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDisplayMemorized.SelectedIndexChanged
         If Me.cboDisplayMemorized.Text <> "" Then
             Me.lbldisplaymemorized.Text = Me.cboDisplayMemorized.Text
@@ -3190,11 +3186,6 @@ Public Class Sales
         Me.cboRep2.Text = Me.ToolStripComboBox2.Text
     End Sub
 
-
-
-
-
-
     Private Sub btnEditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustomer.Click
         If Me.TabControl2.SelectedIndex = 0 Then
             'If Me.lvSales.SelectedItems.Count <> 0 Then
@@ -3213,8 +3204,6 @@ Public Class Sales
             EditCustomerInfo.Show()
         End If
     End Sub
-
-
 
     Private Sub MarkTaskAsDoneToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MarkTaskAsDoneToolStripMenuItem.Click
         Me.btnMarkTaskAsDone_Click(Nothing, Nothing)
@@ -3255,9 +3244,6 @@ Public Class Sales
     Private Sub HideThisCompletedTaskToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles HideThisCompletedTaskToolStripMenuItem.Click
         Me.btnRemoveThisCompletedTask_Click(Nothing, Nothing)
     End Sub
-
-
-
 
     Private Sub pnlScheduledTasks_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlScheduledTasks.MouseDown
         Me.HideThisCompletedTaskToolStripMenuItem.Visible = False
@@ -3330,10 +3316,6 @@ Public Class Sales
 
 
     End Sub
-    Dim dtpsum2orig As String
-    Dim dtpsum1orig As String
-    Dim Focusdtp1 As Boolean = False
-    Dim focusdtp2 As Boolean = False
 
     Private Sub dtpSummary_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpSummary.GotFocus
         If LoadComplete = False Then
@@ -3346,7 +3328,6 @@ Public Class Sales
 
     End Sub
 
-
     Private Sub dtpSummary2_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpSummary2.GotFocus
         If LoadComplete = False Then
             Exit Sub
@@ -3355,6 +3336,1010 @@ Public Class Sales
         dtpsum2orig = Me.dtpSummary2.Value.ToString
 
     End Sub
+
+    Private Sub EditCustomerToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EditCustomerToolStripMenuItem.Click
+        Me.btnEditCustomer_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub dtpIssueLeads_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpIssueLeads.ValueChanged
+        If Me.LoadComplete = True Then
+            Try
+                Dim x As New Issue_Leads(True, "")
+            Catch ex As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "dtpIssueLeads_ValueChanged()", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+        End If
+
+    End Sub
+
+    Private Sub pnlIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlIssue.Click
+        For i As Integer = 1 To Me.pnlIssue.Controls.Count
+            Dim all As Panel = Me.pnlIssue.Controls(i - 1)
+
+            all.BorderStyle = BorderStyle.None
+
+        Next
+    End Sub
+
+    Private Sub pnlScheduledTasks_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlScheduledTasks.Paint
+
+    End Sub
+
+    Private Sub pnlIssue_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlIssue.SizeChanged
+        Try
+            If LoadComplete = True Then
+                If Me.panelsize < Me.pnlIssue.Width Then
+                    Dim x As New Issue_Leads(False, "grow")
+                Else
+                    Dim x As New Issue_Leads(False, "shrink")
+                End If
+
+
+                Me.panelsize = Me.pnlIssue.Width
+
+            End If
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "pnlIssue_sizechanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub pnlPerformanceReport_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlPerformanceReport.SizeChanged
+
+        Dim buffer As Integer = 25
+        Dim x As Double = Me.tpSummary.Width - (94 + buffer)
+        x = x / 8
+        Dim h As Integer = 5
+        Dim fs As Single = 9.75
+        Dim j As Integer = 0
+        Dim pix As Double = 0
+        Dim y As Double = (x / 2) - 61
+        'MsgBox(y.ToString)
+        If y > 5 And y < 15 Then
+            fs = 10.75
+            h = 17
+            j = 20
+            pix = 0.5
+        ElseIf y >= 15 Then
+            fs = 11.75
+            h = 29
+            j = 20
+            pix = 1
+        Else
+            pix = 0
+        End If
+        Dim fstyle As FontStyle
+
+
+        If y < 0 Then
+            Me.lblRep.Size = New Size(71, 20)
+            Me.lblIssued.Size = New Size(122, 20)
+            Me.lblResets.Size = New Size(122, 20)
+            Me.lblDNS.Size = New Size(122, 20)
+            Me.lblND.Size = New Size(122, 20)
+            Me.lblRC.Size = New Size(122, 20)
+            Me.lblsales.Size = New Size(122, 20)
+            Me.lblNH.Size = New Size(122, 20)
+            Me.lblSold.Size = New Size(122, 20)
+
+
+
+
+            Me.lblIssued.Location = New System.Drawing.Point(74, Me.lblRep.Location.Y)
+            Me.lblDNS.Location = New System.Drawing.Point(173, Me.lblRep.Location.Y)
+            Me.lblNH.Location = New System.Drawing.Point(286, Me.lblRep.Location.Y)
+            Me.lblResets.Location = New System.Drawing.Point(399, Me.lblRep.Location.Y)
+            Me.lblND.Location = New System.Drawing.Point(512, Me.lblRep.Location.Y)
+            Me.lblsales.Location = New System.Drawing.Point(625, Me.lblRep.Location.Y)
+            Me.lblRC.Location = New System.Drawing.Point(738, Me.lblRep.Location.Y)
+            Me.lblSold.Location = New System.Drawing.Point(851, Me.lblRep.Location.Y)
+            Me.lblIssued.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblNH.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblResets.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblND.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblsales.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblRC.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblSold.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblRep.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            'If Me.pnlPerformanceReport.Controls.Count <= 1 Then
+            '    Exit Sub
+            'End If
+
+
+
+            Try
+
+
+                For q As Integer = 0 To Me.pnlPerformanceReport.Controls.Count - 1
+
+                    Dim z
+                    If Me.pnlPerformanceReport.Controls.Item(q).Text.Contains("No Data to Report") Then
+                        Me.pnlPerformanceReport.Controls.Item(q).Location = New System.Drawing.Point((Me.pnlPerformanceReport.Width / 2) - 308, (Me.pnlPerformanceReport.Height / 2) - 12)
+
+                    End If
+
+
+
+                    If Me.pnlPerformanceReport.Controls.Item(q).Name.Contains("pnl") Then
+
+                        z = Me.pnlPerformanceReport.Controls.Item(q)
+                        If z.name = "pnl1" Then
+                            h = h + 4
+                            fstyle = FontStyle.Bold
+                        Else
+                            fstyle = FontStyle.Regular
+                        End If
+                        If z.name = "pnl2" Then
+                            h = h - 4
+                        End If
+
+                        Dim lblissue As Label = z.Controls.Item(1)
+                        Dim name As Label = z.Controls.Item(0)
+                        name.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        name.Location = New System.Drawing.Point(name.Location.X, 8)
+
+                        lblissue.Location = New System.Drawing.Point((Me.lblIssued.Location.X + 61) - (22 + h), 0)
+                        lblissue.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblissue.Size = New Size(44 + h, 32)
+
+                        Dim lblDNS As Label = z.Controls.Item(8)
+                        lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblDNS.Location = New System.Drawing.Point((Me.lblDNS.Location.X + 61) - (42 + h), 0) '192
+                        lblDNS.Size = New Size(32 + h, 32)
+
+                        Dim lblDNSper As Label = z.Controls.Item(9)
+                        lblDNSper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblDNSper.Location = New System.Drawing.Point(lblDNS.Location.X + (32 + h), 0) '224
+                        lblDNSper.Size = New Size(42 + h, 32)
+
+                        Dim lblNH As Label = z.Controls.Item(4)
+                        lblNH.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNH.Size = New Size(32 + h, 32)
+                        lblNH.Location = New System.Drawing.Point((Me.lblNH.Location.X + 61) - (42 + h), 0) '305
+
+                        Dim lblNHper As Label = z.Controls.Item(5)
+                        lblNHper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNHper.Size = New Size(46 + h, 32)
+                        lblNHper.Location = New System.Drawing.Point(lblNH.Location.X + (32 + h), 0) '337
+
+                        Dim lblResets As Label = z.Controls.Item(2)
+                        lblResets.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblResets.Size = New Size(32 + h, 32)
+                        lblResets.Location = New System.Drawing.Point((Me.lblResets.Location.X + 61) - (42 + h), 0) '418
+
+                        Dim lblResetsper As Label = z.Controls.Item(3)
+                        lblResetsper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblResetsper.Size = New Size(46 + h, 32)
+                        lblResetsper.Location = New System.Drawing.Point(lblResets.Location.X + (32 + h), 0) '450
+
+                        Dim lblND As Label = z.Controls.Item(6)
+                        lblND.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblND.Size = New Size(32 + h, 32)
+                        lblND.Location = New System.Drawing.Point((Me.lblND.Location.X + 61) - (42 + h), 0) '534
+
+                        Dim lblNDper As Label = z.Controls.Item(7)
+                        lblNDper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNDper.Size = New Size(46 + h, 32)
+                        lblNDper.Location = New System.Drawing.Point(lblND.Location.X + (32 + h), 0) '566
+
+                        Dim lblSales As Label = z.Controls.Item(12)
+                        lblSales.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblSales.Size = New Size(32 + h, 32)
+                        lblSales.Location = New System.Drawing.Point((Me.lblsales.Location.X + 61) - (42 + h), 0) '664
+
+                        Dim lblSalesper As Label = z.Controls.Item(13)
+                        lblSalesper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblSalesper.Size = New Size(46 + h, 32)
+                        lblSalesper.Location = New System.Drawing.Point(lblSales.Location.X + (32 + h), 0) '676
+
+                        Dim lblRC As Label = z.Controls.Item(10)
+                        lblRC.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblRC.Size = New Size(32 + h, 32)
+                        lblRC.Location = New System.Drawing.Point((Me.lblRC.Location.X + 61) - (42 + h), 0) '757
+
+                        Dim lblRCper As Label = z.Controls.Item(11)
+                        lblRCper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblRCper.Size = New Size(46 + h, 32)
+                        lblRCper.Location = New System.Drawing.Point(lblRC.Location.X + (32 + h), 0) '789
+
+                        Dim lblsold As Label = z.Controls.Item(14)
+                        lblsold.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblsold.Size = New Size(80 + j, 32)
+                        If y < 0 Then
+                            lblsold.Location = New System.Drawing.Point(Me.lblSold.Location.X + 20, 0) '869
+                        Else
+                            lblsold.Location = New System.Drawing.Point(870, 0) '869 
+                        End If
+
+
+
+                    End If
+
+
+
+
+
+                Next
+            Catch ex As Exception
+                ' MsgBox("Fail If True")
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
+                Dim yy As New ErrorLogging_V2
+                yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "pnlPerformanceReport_SizeChanged", "0", ex.Message.ToString)
+                yy = Nothing
+            End Try
+
+        Else
+
+            Dim count As Integer = 0
+            Me.lblRep.Size = New Size(x, 20)
+            Me.lblIssued.Size = New Size(x, 20)
+            Me.lblResets.Size = New Size(x, 20)
+            Me.lblDNS.Size = New Size(x, 20)
+            Me.lblND.Size = New Size(x, 20)
+            Me.lblRC.Size = New Size(x + 20, 20)
+            Me.lblsales.Size = New Size(x, 20)
+            Me.lblNH.Size = New Size(x, 20)
+            Me.lblSold.Size = New Size(x, 20)
+
+            Me.lblIssued.Location = New System.Drawing.Point(x - y, Me.lblRep.Location.Y)
+            Me.lblDNS.Location = New System.Drawing.Point((x * 2) - y, Me.lblRep.Location.Y)
+            Me.lblDNS.Size = New Size(Me.lblIssued.Width + j, Me.lblIssued.Height)
+            Me.lblNH.Location = New System.Drawing.Point((x * 3) - y, Me.lblRep.Location.Y)
+            Me.lblResets.Location = New System.Drawing.Point((x * 4) - y, Me.lblRep.Location.Y)
+            Me.lblND.Location = New System.Drawing.Point((x * 5) - y, Me.lblRep.Location.Y)
+            Me.lblsales.Location = New System.Drawing.Point((x * 6) - y, Me.lblRep.Location.Y)
+            Me.lblRC.Location = New System.Drawing.Point((x * 7) - y, Me.lblRep.Location.Y)
+            Me.lblSold.Location = New System.Drawing.Point((x * 8) - y, Me.lblRep.Location.Y)
+            Me.lblIssued.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblNH.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblResets.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblND.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblsales.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblRC.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblSold.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblRep.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            'If Me.pnlPerformanceReport.Controls.Count <= 1 Then
+            '    Exit Sub
+            'End If
+
+
+            Try
+
+
+                For q As Integer = 0 To Me.pnlPerformanceReport.Controls.Count - 1
+                    Dim z
+                    If Me.pnlPerformanceReport.Controls.Item(q).Text.Contains("No Data to Report") Then
+                        Me.pnlPerformanceReport.Controls.Item(q).Location = New System.Drawing.Point((Me.pnlPerformanceReport.Width / 2) - 308, (Me.pnlPerformanceReport.Height / 2) - 12)
+
+                    End If
+
+
+                    If Me.pnlPerformanceReport.Controls.Item(q).Name.Contains("pnl") Then
+                        z = Me.pnlPerformanceReport.Controls.Item(q)
+                        If z.name = "pnl1" Then
+                            fstyle = FontStyle.Bold
+                        Else
+                            fstyle = FontStyle.Regular
+                        End If
+
+                        Dim name As Label = z.Controls.Item(0)
+
+                        name.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        If name.Location.Y >= 8 Then
+                            name.Location = New System.Drawing.Point(name.Location.X, name.Location.Y - pix)
+                        End If
+
+
+                        Dim lblissue As Label = z.Controls.Item(1)
+                        lblissue.Location = New System.Drawing.Point((Me.lblIssued.Location.X + (Me.lblIssued.Width / 2)) - (22 + h), 0)
+                        lblissue.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblissue.Size = New Size(44 + h, 32)
+
+
+                        Dim lblDNS As Label = z.Controls.Item(8)
+                        lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblDNS.Location = New System.Drawing.Point((Me.lblDNS.Location.X + (Me.lblDNS.Width / 2)) - (42 + h), 0) '192
+                        lblDNS.Size = New Size(32 + h, 32)
+
+                        Dim lblDNSper As Label = z.Controls.Item(9)
+                        lblDNSper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblDNSper.Location = New System.Drawing.Point(lblDNS.Location.X + (32 + h), 0) '224
+                        lblDNSper.Size = New Size(42 + h, 32)
+
+                        Dim lblNH As Label = z.Controls.Item(4)
+                        lblNH.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNH.Size = New Size(32 + h, 32)
+                        lblNH.Location = New System.Drawing.Point((Me.lblNH.Location.X + (Me.lblNH.Width / 2)) - (42 + h), 0) '305
+
+                        Dim lblNHper As Label = z.Controls.Item(5)
+                        lblNHper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNHper.Size = New Size(46 + h, 32)
+                        lblNHper.Location = New System.Drawing.Point(lblNH.Location.X + (32 + h), 0) '337
+
+                        Dim lblResets As Label = z.Controls.Item(2)
+                        lblResets.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblResets.Size = New Size(32 + h, 32)
+                        lblResets.Location = New System.Drawing.Point((Me.lblResets.Location.X + (Me.lblResets.Width / 2)) - (42 + h), 0) '418
+
+                        Dim lblResetsper As Label = z.Controls.Item(3)
+                        lblResetsper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblResetsper.Size = New Size(46 + h, 32)
+                        lblResetsper.Location = New System.Drawing.Point(lblResets.Location.X + (32 + h), 0) '450
+
+                        Dim lblND As Label = z.Controls.Item(6)
+                        lblND.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblND.Size = New Size(32 + h, 32)
+                        lblND.Location = New System.Drawing.Point((Me.lblND.Location.X + (Me.lblND.Width / 2)) - (42 + h), 0) '534
+
+                        Dim lblNDper As Label = z.Controls.Item(7)
+                        lblNDper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNDper.Size = New Size(46 + h, 32)
+                        lblNDper.Location = New System.Drawing.Point(lblND.Location.X + (32 + h), 0) '566
+
+                        Dim lblSales As Label = z.Controls.Item(12)
+                        lblSales.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblSales.Size = New Size(32 + h, 32)
+                        lblSales.Location = New System.Drawing.Point((Me.lblsales.Location.X + (Me.lblsales.Width / 2)) - (42 + h), 0) '664
+
+                        Dim lblSalesper As Label = z.Controls.Item(13)
+                        lblSalesper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblSalesper.Size = New Size(46 + h, 32)
+                        lblSalesper.Location = New System.Drawing.Point(lblSales.Location.X + (32 + h), 0) '676
+
+                        Dim lblRC As Label = z.Controls.Item(10)
+                        lblRC.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblRC.Size = New Size(32 + h, 32)
+                        lblRC.Location = New System.Drawing.Point((Me.lblRC.Location.X + (Me.lblRC.Width / 2)) - (42 + h), 0) '757
+
+                        Dim lblRCper As Label = z.Controls.Item(11)
+                        lblRCper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblRCper.Size = New Size(46 + h, 32)
+                        lblRCper.Location = New System.Drawing.Point(lblRC.Location.X + (32 + h), 0) '789
+
+                        Dim lblsold As Label = z.Controls.Item(14)
+                        lblsold.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblsold.Size = New Size(80 + j, 32)
+                        If j > 0 Then
+                            lblsold.Location = New System.Drawing.Point(Me.pnlPerformanceReport.Width - (lblsold.Width + 10), 0) '869
+                        Else
+                            lblsold.Location = New System.Drawing.Point(Me.pnlPerformanceReport.Width - (lblsold.Width + 10), 0) '869 
+                        End If
+
+
+                    End If
+                Next
+
+            Catch ex As Exception
+                ' MsgBox("Fail Else")
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
+                Dim yy As New ErrorLogging_V2
+                yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "pnlPerformanceReport_SizeChanged", "0", ex.Message.ToString)
+                yy = Nothing
+            End Try
+        End If
+
+
+
+
+
+
+
+    End Sub
+
+    Private Sub btnExclude_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExclude.Click
+        If Me.btnExclude.Text.Contains("Off") Then
+            Me.btnExclude.Text = "Turn On Exclusions"
+            Me.btnExclude.Image = Me.ilToolbarButtons.Images(12)
+        Else
+            Me.btnExclude.Text = "Turn Off Exclusions"
+            Me.btnExclude.Image = Me.ilToolbarButtons.Images(13)
+        End If
+    End Sub
+
+    Private Sub btnEditCustIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustIssue.Click
+        Refocus_IssueLeads()
+
+        EditCustomerInfo.Show()
+    End Sub
+
+    Private Sub btnCCIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCCIssue.Click
+        '' edits for 'toggle button' 
+        '' 8-26-2015
+        ''
+
+        '' basically a split switch 
+        '' if the button text is 'this' do this
+        '' elseif the button text is 'that' do that
+        '' 
+        Try
+            Dim myBtn As ToolStripButton = sender
+            Dim buttonText As String = myBtn.Text
+            Dim cnt As Integer = 0
+            If buttonText = "Undo Called and Cancelled" Then
+
+                '' get the lead number
+                Dim leadNum As String = ""
+                Dim y As Panel
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.FixedSingle Then
+                        cnt += 1
+                        Dim t As Control
+                        For Each t In y.Controls
+                            If TypeOf t Is LinkLabel Then
+                                leadNum = t.Text
+
+                            End If
+                        Next
+                    End If
+                Next
+
+                If cnt <= 0 Then
+                    MsgBox("You must select a record to ' Undo Called and Cancelled ' . ", MsgBoxStyle.Critical, "Select a record")
+                    Exit Sub
+                ElseIf cnt >= 1 Then
+                    ' MsgBox("LeadNumber : " & leadNum, MsgBoxStyle.Information, "DEBUG INFO")
+                    Dim b As New ToggleUndoCandC
+                    Dim rec_ID As String = b.Get_ID_OF_CandC(leadNum)
+                    b.Delete_CandC(rec_ID, leadNum, Date.Now.ToString)
+                    Dim c = New Issue_Leads(True, "")
+                End If
+
+
+
+            ElseIf buttonText = "Log Appt. as Called and Cancelled" Then
+
+                Dim lead As String = ""
+                For t As Integer = 0 To Me.pnlIssue.Controls.Count - 1
+                    If Me.pnlIssue.Controls.Item(t).Name.Contains("pnl") Then
+                        Dim z As Panel = Me.pnlIssue.Controls.Item(t)
+                        If z.BorderStyle = BorderStyle.FixedSingle Then
+                            lead = z.Controls.Item(2).Text
+                        End If
+                    End If
+                Next
+                If lead = "" Then
+                    MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
+                    Exit Sub
+                End If
+                'Me.cboSalesList.SelectedItem = "Issue Leads List"
+                'For x As Integer = 0 To Me.lvSales.Items.Count - 1
+                '    If Me.lvSales.Items(x).Text = lead Then
+                '        Me.lvSales.Items(x).Selected = True
+                '        If Me.lvSales.Items(x).Selected = True Then
+                '            Me.PullInfo(lead)
+                '        End If
+                '    End If
+                'Next
+                Me.PullInfo(lead)
+
+                Dim s = Split(Me.txtContact1.Text, " ")
+                Dim c1 = s(0)
+                Dim s2 = Split(Me.txtContact2.Text, " ")
+                Dim c2 = s2(0)
+                CandCNotes.ID = lead
+                CandCNotes.Contact1 = c1
+                CandCNotes.Contact2 = c2
+                CandCNotes.OrigApptDate = Me.txtApptDate.Text
+                CandCNotes.OrigApptTime = Me.txtApptTime.Text
+                CandCNotes.frm = Me
+
+
+                CandCNotes.ShowInTaskbar = False
+                CandCNotes.ShowDialog()
+
+            End If
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnCCIssue_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub PrintThisLeadToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PrintThisLeadToolStripMenuItem.Click
+        btnPrintThisIssue_Click(sender, e)
+    End Sub
+
+    Private Sub EmailThisLeadToAssignedRepsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EmailThisLeadToAssignedRepsToolStripMenuItem.Click
+        btnEmailThisIssue_Click(sender, e)
+    End Sub
+
+    Private Sub btnExcludeManage_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExcludeManage.Click
+        exclusions.ShowDialog()
+    End Sub
+
+    Private Sub tpSummary_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tpSummary.SizeChanged
+        Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
+    End Sub
+
+    Private Sub btnSetAppt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetAppt.Click
+        '' 1-10-2015 Testing Purposes
+        '' 
+        'If Me.ID = "" Then
+        '    MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
+        '    Exit Sub
+        'End If
+        'SetAppt.ID = Me.ID
+        'SetAppt.MdiParent = Main
+        'SetAppt.frm = Me
+
+        'SetAppt.OrigApptDate = Me.txtApptDate.Text
+        'SetAppt.OrigApptTime = Me.txtApptTime.Text
+        'Dim s = Split(Me.txtContact1.Text, " ")
+        'Dim s2 = Split(Me.txtContact2.Text, " ")
+        'SetAppt.Contact1 = s(0)
+        'SetAppt.Contact2 = s2(0)
+        'If STATIC_VARIABLES.salesworkaround = True Then
+        '    STATIC_VARIABLES.salesworkaround = False
+
+        '    Me.btnSetAppt_Click(sender, e)
+        '    SetAppt.Show()
+        'Else
+        '    Me.btnSetAppt_Click(sender, e)
+        '    SetAppt.Show()
+        'End If
+
+        SetAppt_V2.MdiParent = Main
+        SetAppt_V2.ID = Me.ID
+        SetAppt_V2.CallingForm = "Sales"
+        SetAppt_V2.Show()
+
+    End Sub
+
+    Private Sub tsAttachedFilesNAV_Click(sender As Object, e As EventArgs) Handles tsAttachedFilesNAV.Click
+        Try
+            Dim x As Control
+            For Each x In Me.pnlAFPics.Controls
+                If TypeOf (x) Is ListView Then
+                    If x.Name = "lsAttachedFiles" Then
+                        '' 11-17-2015 AC
+                        '' now do logic to check whether or not to lock up one level button
+                        Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
+                        ''
+                        '' get current directory
+                        Dim cur_dir As String = x.Tag
+                        '' get 'up one directory
+                        Dim pieces() = Split(cur_dir, "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                        Dim cnt As Integer = -1 '' zero based index
+                        Dim up_one As String = ""
+                        Dim arItems As New ArrayList
+                        For Each pc As String In pieces
+                            cnt += 1
+                        Next
+                        If pieces(cnt) = "" Then '' if the last item is blank -> "\" then move the index back another one to compensate
+                            cnt = (cnt - 1)
+                        End If
+                        Dim iter As Integer = 0
+                        For iter = 0 To (cnt - 1)
+                            If pieces(iter) = "" Then
+                                up_one += "\"
+                            ElseIf pieces(iter) <> "" Then
+                                up_one += (pieces(iter) & "\")
+                            End If
+                        Next
+                        '' move to the up one
+                        x.Tag = up_one
+                        '' process images and whatnot
+                        Dim a As ListView = x
+                        'bgGetImages_DoWork(Me, Nothing)
+                        If sel_Item_left IsNot Nothing Then
+                            Select Case sel_Item_left.SubItems(3).Text
+                                Case Is = "File"
+                                    Dim af As New AF_And_JP_Logic(x.Tag)
+
+                                    Me.lsAttachedFiles.Items.Clear()
+                                    For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                        Dim lvItem As New ListViewItem
+                                        '' Name | Date Mod | Size | Type
+                                        lvItem.Text = xy.FileName
+                                        lvItem.Tag = xy.FullPath
+                                        lvItem.SubItems.Add(xy.DateModified)
+                                        Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                        Dim sz_str As String = sz.ToString & " KB"
+                                        lvItem.SubItems.Add(sz_str)
+                                        lvItem.SubItems.Add("File")
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                        If xy.smThumb IsNot Nothing Then
+                                            Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                        ElseIf xy.smThumb Is Nothing Then
+                                            Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                        End If
+
+                                        If xy.mdThumb IsNot Nothing Then
+                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                        ElseIf xy.mdThumb Is Nothing Then
+                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        If xy.lgThumb IsNot Nothing Then
+                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                        ElseIf xy.lgThumb Is Nothing Then
+                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        If xy.jbThumb IsNot Nothing Then
+                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                        ElseIf xy.jbThumb Is Nothing Then
+                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                        End If
+
+                                        If xy.Tile IsNot Nothing Then
+                                            Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                        ElseIf xy.Tile Is Nothing Then
+                                            Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        lvItem.ImageKey = xy.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
+
+                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                        Dim lvItem As New ListViewItem
+                                        lvItem.Text = y.FileName
+                                        lvItem.Tag = y.FullPath
+                                        lvItem.SubItems.Add(y.DateModified)
+                                        lvItem.SubItems.Add("")
+                                        lvItem.SubItems.Add("Folder")
+                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                        lvItem.ImageKey = y.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
+                                    Exit Select
+                                Case Is = "Folder"
+                                    '' 
+                                    '' have lsAF nav to this directory and repop.
+                                    '' 
+
+                                    Dim af As New AF_And_JP_Logic(x.Tag)
+
+                                    Me.lsAttachedFiles.Items.Clear()
+                                    For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                        Dim lvItem As New ListViewItem
+                                        '' Name | Date Mod | Size | Type
+                                        lvItem.Text = xy.FileName
+                                        lvItem.Tag = xy.FullPath
+                                        lvItem.SubItems.Add(xy.DateModified)
+                                        Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                        Dim sz_str As String = sz.ToString & " KB"
+                                        lvItem.SubItems.Add(sz_str)
+                                        lvItem.SubItems.Add("File")
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                        If xy.smThumb IsNot Nothing Then
+                                            Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                        ElseIf xy.smThumb Is Nothing Then
+                                            Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                        End If
+
+                                        If xy.mdThumb IsNot Nothing Then
+                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                        ElseIf xy.mdThumb Is Nothing Then
+                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        If xy.lgThumb IsNot Nothing Then
+                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                        ElseIf xy.lgThumb Is Nothing Then
+                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        If xy.jbThumb IsNot Nothing Then
+                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                        ElseIf xy.jbThumb Is Nothing Then
+                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                        End If
+
+                                        If xy.Tile IsNot Nothing Then
+                                            Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                        ElseIf xy.Tile Is Nothing Then
+                                            Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                        End If
+
+                                        lvItem.ImageKey = xy.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
+
+                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                        Dim lvItem As New ListViewItem
+                                        lvItem.Text = y.FileName
+                                        lvItem.Tag = y.FullPath
+                                        lvItem.SubItems.Add(y.DateModified)
+                                        lvItem.SubItems.Add("")
+                                        lvItem.SubItems.Add("Folder")
+                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                        lvItem.ImageKey = y.FileName
+                                        Me.lsAttachedFiles.Items.Add(lvItem)
+                                    Next
+
+                                    'sel_Item_left = Nothing
+                                    'sel_Item_right = Nothing
+                                    ''
+                                    '' 1 clear out list view
+                                    '' 2 set the directory of the listview
+                                    '' 3 check to see if the button should be locked
+                                    '' 4 clear out/append image lists for new folder/file icon associations
+                                    '' 5 loop through and repopulate the listview with the 'new' items.
+                                    '' 5 reset sel_item_left & sel_item_right vars
+                                    '' 
+
+
+                                    Exit Select
+                                Case Else
+                                    '' just fail it
+                                    Exit Select
+                            End Select
+                        ElseIf sel_Item_left Is Nothing Then
+                            '' 
+                            '' where is the cur dir pointing?
+                            '' if its at root
+                            ''     keep at root to repop
+                            '' if its not at root
+                            ''     move it up one to repop
+                            '' 
+                            If cur_dir = (af_dir & STATIC_VARIABLES.CurrentID) Then
+                                Dim af As New AF_And_JP_Logic(x.Tag)
+
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = xy.FileName
+                                    lvItem.Tag = xy.FullPath
+                                    lvItem.SubItems.Add(xy.DateModified)
+                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                    If xy.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                    ElseIf xy.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                    End If
+
+                                    If xy.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                    ElseIf xy.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                    End If
+
+                                    If xy.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                    ElseIf xy.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = xy.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+                            ElseIf cur_dir <> (af_dir & STATIC_VARIABLES.CurrentID) Then
+                                Dim af As New AF_And_JP_Logic(up_one)
+
+                                Me.lsAttachedFiles.Items.Clear()
+                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
+                                    Dim lvItem As New ListViewItem
+                                    '' Name | Date Mod | Size | Type
+                                    lvItem.Text = xy.FileName
+                                    lvItem.Tag = xy.FullPath
+                                    lvItem.SubItems.Add(xy.DateModified)
+                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
+                                    Dim sz_str As String = sz.ToString & " KB"
+                                    lvItem.SubItems.Add(sz_str)
+                                    lvItem.SubItems.Add("File")
+                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
+                                    If xy.smThumb IsNot Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
+                                    ElseIf xy.smThumb Is Nothing Then
+                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
+                                    End If
+
+                                    If xy.mdThumb IsNot Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.mdThumb Is Nothing Then
+                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.lgThumb IsNot Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
+                                    ElseIf xy.lgThumb Is Nothing Then
+                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    If xy.jbThumb IsNot Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
+                                    ElseIf xy.jbThumb Is Nothing Then
+                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
+                                    End If
+
+                                    If xy.Tile IsNot Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
+                                    ElseIf xy.Tile Is Nothing Then
+                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
+                                    End If
+
+                                    lvItem.ImageKey = xy.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+
+                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
+                                    Dim lvItem As New ListViewItem
+                                    lvItem.Text = y.FileName
+                                    lvItem.Tag = y.FullPath
+                                    lvItem.SubItems.Add(y.DateModified)
+                                    lvItem.SubItems.Add("")
+                                    lvItem.SubItems.Add("Folder")
+                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
+                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
+                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
+                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
+                                    lvItem.ImageKey = y.FileName
+                                    Me.lsAttachedFiles.Items.Add(lvItem)
+                                Next
+                            End If
+
+
+
+                        End If
+
+                        '' now check to enable/disable nav button
+                        '' 
+                        If Len(x.Tag) <= 0 Then
+                            If x.Tag = rootDir_Lead Then
+                                Me.tsAttachedFilesNAV.Enabled = False
+                            ElseIf x.Tag <> rootDir_Lead Then
+                                Me.tsAttachedFilesNAV.Enabled = True
+                            End If
+                        ElseIf Len(x.Tag) >= 1 Then
+                            If x.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
+                                If x.Tag = rootDir_Lead Then
+                                    Me.tsAttachedFilesNAV.Enabled = False
+                                ElseIf x.Tag <> rootDir_Lead Then
+                                    Me.tsAttachedFilesNAV.Enabled = True
+                                End If
+                            ElseIf x.Tag <> (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
+                                If x.Tag = rootDir_Lead Then
+                                    Me.tsAttachedFilesNAV.Enabled = False
+                                ElseIf x.Tag <> rootDir_Lead Then
+                                    Me.tsAttachedFilesNAV.Enabled = True
+                                End If
+                            End If
+
+                        End If
+
+                    End If
+                ElseIf x.Name = "lsJobPictures" Then
+                    Dim a As ListView = x
+                    bgGetImages_DoWork(Me, Nothing)
+
+                End If
+            Next
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tsAttachedFilesNAV_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
+        Dim lnk As LinkLabel = sender
+        frmLinkSendEmail.MdiParent = Main
+        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
+        frmLinkSendEmail.Cust_Email = lnk.Text
+        frmLinkSendEmail.Show()
+        frmLinkSendEmail.BringToFront()
+    End Sub
+
+    Private Sub btnUpdateSPI_Click(sender As Object, e As EventArgs) Handles btnUpdateSPI.Click
+        frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
+        frmEditSpecialInstructions.CallingForm = "Sales"
+        frmEditSpecialInstructions.Show()
+    End Sub
+
+    Private Sub btnPrintDPerformanceReport_Click(sender As Object, e As EventArgs) Handles btnPrintDPerformanceReport.Click
+        Try
+            Dim d As New DTPManipulation(Me.cboDateRangeSummary.Text)
+            Me.dtpSummary2.Value = d.retDateFrom
+            Me.dtpSummary.Value = d.retDateTo
+            ' Dim r As New Sales_Performance_Report
+            Dim accuracy As String = Me.lblAccuracy.Text
+            Me.Cursor = Cursors.WaitCursor
+            Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
+            x = Nothing
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lnkPrintReport_LinkClicked", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+    End Sub
+
+    Private Sub lvSales_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvSales.SelectedIndexChanged
+        '' 
+        '' re-added 4/10/2016 AC
+        '' per request to do away with bg thread
+        '' and virtual list control -> Grouping NEEDED
+        '' 
+
+        Try
+            If Me.LoadComplete = True Then
+                Dim y As ListViewItem
+                For Each y In Me.lvSales.Items
+                    If y.Selected = True Then
+                        Me.Cursor = Cursors.WaitCursor
+                        PullInfo(y.Text)
+                        STATIC_VARIABLES.CurrentID = y.Text
+
+                    End If
+                Next
+            Else
+                '' do nothing 
+            End If
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "Form Code", "Event", "lv_SalesSelectedIndexChanged()", STATIC_VARIABLES.CurrentID, ex.Message.ToString)
+        End Try
+
+    End Sub
+
+#End Region
 
 #Region "List View Context Menus - NOTES"
 
@@ -4491,7 +5476,6 @@ Public Class Sales
     End Sub
 #End Region
 
-
 #Region "Context Menu New Folder - LS and JP"
     Private Sub btnNewFolder_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFolder.Click
         Try
@@ -4717,752 +5701,302 @@ Public Class Sales
     End Sub
 #End Region
 
-    Private Sub EditCustomerToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EditCustomerToolStripMenuItem.Click
-        Me.btnEditCustomer_Click(Nothing, Nothing)
+#Region "Printing Options"
+
+    Private Sub btnPrintIssuedAppts_Click(sender As Object, e As EventArgs) Handles btnPrintIssuedAppts.Click
+        'MsgBox("btnPrintIssuedAppts")
     End Sub
 
-    Private Sub dtpIssueLeads_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpIssueLeads.ValueChanged
-        If Me.LoadComplete = True Then
-            Try
-                Dim x As New Issue_Leads(True, "")
-            Catch ex As Exception
-                Me.Cursor = Cursors.Default
-                Main.Cursor = Cursors.Default
-                Dim y As New ErrorLogging_V2
-                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "dtpIssueLeads_ValueChanged()", "0", ex.Message.ToString)
-                y = Nothing
-            End Try
+    Private Sub btnPrintAllIssue_Click(sender As Object, e As EventArgs) Handles btnPrintAllIssue.Click
+        '' MsgBox("btnPrintAllIssue")
+        If Me.btnExclude.Text.Contains("On") Then
+            frmPrint.Exclusions = False
+            Dim y As Panel
+            Dim arLeadNums As New ArrayList
+            For Each y In pnlIssue.Controls
+                Dim yy As Control
+                For Each yy In y.Controls
+                    If TypeOf yy Is LinkLabel Then
+                        ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                        Dim lead_id As String = yy.Text
+                        arLeadNums.Add(lead_id)
+                    End If
+                Next
+            Next
+
+            frmPrint.ClearListView()
+
+            Dim i As Integer = 0
+            For i = 0 To arLeadNums.Count - 1
+                Dim lv As New ListViewItem
+                lv.Text = arLeadNums(i)
+                frmPrint.lsLeadIds.Items.Add(lv)
+            Next
+            frmPrint.ShowDialog()
+        ElseIf Me.btnExclude.Text.Contains("Off") Then
+            frmPrint.Exclusions = True
+            Dim y As Panel
+            Dim arLeadNums As New ArrayList
+            For Each y In pnlIssue.Controls
+                Dim yy As Control
+                For Each yy In y.Controls
+                    If TypeOf yy Is LinkLabel Then
+                        ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                        Dim lead_id As String = yy.Text
+                        arLeadNums.Add(lead_id)
+                    End If
+                Next
+            Next
+
+            frmPrint.ClearListView()
+
+            Dim i As Integer = 0
+            For i = 0 To arLeadNums.Count - 1
+                Dim lv As New ListViewItem
+                lv.Text = arLeadNums(i)
+                frmPrint.lsLeadIds.Items.Add(lv)
+            Next
+            frmPrint.ShowDialog()
         End If
 
-    End Sub
-
-
-    Private Sub pnlIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlIssue.Click
-        For i As Integer = 1 To Me.pnlIssue.Controls.Count
-            Dim all As Panel = Me.pnlIssue.Controls(i - 1)
-
-            all.BorderStyle = BorderStyle.None
-
-        Next
-    End Sub
-
-    Private Sub pnlScheduledTasks_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlScheduledTasks.Paint
 
     End Sub
 
-    Private Sub pnlIssue_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlIssue.SizeChanged
+    Private Sub btnPrintApptSheet_Click(sender As Object, e As EventArgs) Handles btnPrintApptSheet.Click
+        'MsgBox("btnPrintApptSheet")
         Try
-            If LoadComplete = True Then
-                If Me.panelsize < Me.pnlIssue.Width Then
-                    Dim x As New Issue_Leads(False, "grow")
-                Else
-                    Dim x As New Issue_Leads(False, "shrink")
-                End If
-
-
-                Me.panelsize = Me.pnlIssue.Width
-
-            End If
+            Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "pnlIssue_sizechanged", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
     End Sub
 
-
-
-    Private Sub pnlPerformanceReport_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlPerformanceReport.SizeChanged
-
-        Dim buffer As Integer = 25
-        Dim x As Double = Me.tpSummary.Width - (94 + buffer)
-        x = x / 8
-        Dim h As Integer = 5
-        Dim fs As Single = 9.75
-        Dim j As Integer = 0
-        Dim pix As Double = 0
-        Dim y As Double = (x / 2) - 61
-        'MsgBox(y.ToString)
-        If y > 5 And y < 15 Then
-            fs = 10.75
-            h = 17
-            j = 20
-            pix = 0.5
-        ElseIf y >= 15 Then
-            fs = 11.75
-            h = 29
-            j = 20
-            pix = 1
-        Else
-            pix = 0
-        End If
-        Dim fstyle As FontStyle
-
-
-        If y < 0 Then
-            Me.lblRep.Size = New Size(71, 20)
-            Me.lblIssued.Size = New Size(122, 20)
-            Me.lblResets.Size = New Size(122, 20)
-            Me.lblDNS.Size = New Size(122, 20)
-            Me.lblND.Size = New Size(122, 20)
-            Me.lblRC.Size = New Size(122, 20)
-            Me.lblsales.Size = New Size(122, 20)
-            Me.lblNH.Size = New Size(122, 20)
-            Me.lblSold.Size = New Size(122, 20)
-
-
-
-
-            Me.lblIssued.Location = New System.Drawing.Point(74, Me.lblRep.Location.Y)
-            Me.lblDNS.Location = New System.Drawing.Point(173, Me.lblRep.Location.Y)
-            Me.lblNH.Location = New System.Drawing.Point(286, Me.lblRep.Location.Y)
-            Me.lblResets.Location = New System.Drawing.Point(399, Me.lblRep.Location.Y)
-            Me.lblND.Location = New System.Drawing.Point(512, Me.lblRep.Location.Y)
-            Me.lblsales.Location = New System.Drawing.Point(625, Me.lblRep.Location.Y)
-            Me.lblRC.Location = New System.Drawing.Point(738, Me.lblRep.Location.Y)
-            Me.lblSold.Location = New System.Drawing.Point(851, Me.lblRep.Location.Y)
-            Me.lblIssued.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblNH.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblResets.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblND.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblsales.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblRC.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblSold.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblRep.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            'If Me.pnlPerformanceReport.Controls.Count <= 1 Then
-            '    Exit Sub
-            'End If
-
-
-
-            Try
-
-
-                For q As Integer = 0 To Me.pnlPerformanceReport.Controls.Count - 1
-
-                    Dim z
-                    If Me.pnlPerformanceReport.Controls.Item(q).Text.Contains("No Data to Report") Then
-                        Me.pnlPerformanceReport.Controls.Item(q).Location = New System.Drawing.Point((Me.pnlPerformanceReport.Width / 2) - 308, (Me.pnlPerformanceReport.Height / 2) - 12)
-
-                    End If
-
-
-
-                    If Me.pnlPerformanceReport.Controls.Item(q).Name.Contains("pnl") Then
-
-                        z = Me.pnlPerformanceReport.Controls.Item(q)
-                        If z.name = "pnl1" Then
-                            h = h + 4
-                            fstyle = FontStyle.Bold
-                        Else
-                            fstyle = FontStyle.Regular
-                        End If
-                        If z.name = "pnl2" Then
-                            h = h - 4
-                        End If
-
-                        Dim lblissue As Label = z.Controls.Item(1)
-                        Dim name As Label = z.Controls.Item(0)
-                        name.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        name.Location = New System.Drawing.Point(name.Location.X, 8)
-
-                        lblissue.Location = New System.Drawing.Point((Me.lblIssued.Location.X + 61) - (22 + h), 0)
-                        lblissue.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblissue.Size = New Size(44 + h, 32)
-
-                        Dim lblDNS As Label = z.Controls.Item(8)
-                        lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblDNS.Location = New System.Drawing.Point((Me.lblDNS.Location.X + 61) - (42 + h), 0) '192
-                        lblDNS.Size = New Size(32 + h, 32)
-
-                        Dim lblDNSper As Label = z.Controls.Item(9)
-                        lblDNSper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblDNSper.Location = New System.Drawing.Point(lblDNS.Location.X + (32 + h), 0) '224
-                        lblDNSper.Size = New Size(42 + h, 32)
-
-                        Dim lblNH As Label = z.Controls.Item(4)
-                        lblNH.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblNH.Size = New Size(32 + h, 32)
-                        lblNH.Location = New System.Drawing.Point((Me.lblNH.Location.X + 61) - (42 + h), 0) '305
-
-                        Dim lblNHper As Label = z.Controls.Item(5)
-                        lblNHper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblNHper.Size = New Size(46 + h, 32)
-                        lblNHper.Location = New System.Drawing.Point(lblNH.Location.X + (32 + h), 0) '337
-
-                        Dim lblResets As Label = z.Controls.Item(2)
-                        lblResets.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblResets.Size = New Size(32 + h, 32)
-                        lblResets.Location = New System.Drawing.Point((Me.lblResets.Location.X + 61) - (42 + h), 0) '418
-
-                        Dim lblResetsper As Label = z.Controls.Item(3)
-                        lblResetsper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblResetsper.Size = New Size(46 + h, 32)
-                        lblResetsper.Location = New System.Drawing.Point(lblResets.Location.X + (32 + h), 0) '450
-
-                        Dim lblND As Label = z.Controls.Item(6)
-                        lblND.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblND.Size = New Size(32 + h, 32)
-                        lblND.Location = New System.Drawing.Point((Me.lblND.Location.X + 61) - (42 + h), 0) '534
-
-                        Dim lblNDper As Label = z.Controls.Item(7)
-                        lblNDper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblNDper.Size = New Size(46 + h, 32)
-                        lblNDper.Location = New System.Drawing.Point(lblND.Location.X + (32 + h), 0) '566
-
-                        Dim lblSales As Label = z.Controls.Item(12)
-                        lblSales.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblSales.Size = New Size(32 + h, 32)
-                        lblSales.Location = New System.Drawing.Point((Me.lblsales.Location.X + 61) - (42 + h), 0) '664
-
-                        Dim lblSalesper As Label = z.Controls.Item(13)
-                        lblSalesper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblSalesper.Size = New Size(46 + h, 32)
-                        lblSalesper.Location = New System.Drawing.Point(lblSales.Location.X + (32 + h), 0) '676
-
-                        Dim lblRC As Label = z.Controls.Item(10)
-                        lblRC.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblRC.Size = New Size(32 + h, 32)
-                        lblRC.Location = New System.Drawing.Point((Me.lblRC.Location.X + 61) - (42 + h), 0) '757
-
-                        Dim lblRCper As Label = z.Controls.Item(11)
-                        lblRCper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblRCper.Size = New Size(46 + h, 32)
-                        lblRCper.Location = New System.Drawing.Point(lblRC.Location.X + (32 + h), 0) '789
-
-                        Dim lblsold As Label = z.Controls.Item(14)
-                        lblsold.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblsold.Size = New Size(80 + j, 32)
-                        If y < 0 Then
-                            lblsold.Location = New System.Drawing.Point(Me.lblSold.Location.X + 20, 0) '869
-                        Else
-                            lblsold.Location = New System.Drawing.Point(870, 0) '869 
-                        End If
-
-
-
-                    End If
-
-
-
-
-
-                Next
-            Catch ex As Exception
-                ' MsgBox("Fail If True")
-                Me.Cursor = Cursors.Default
-                Main.Cursor = Cursors.Default
-                Dim yy As New ErrorLogging_V2
-                yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "pnlPerformanceReport_SizeChanged", "0", ex.Message.ToString)
-                yy = Nothing
-            End Try
-
-        Else
-
-            Dim count As Integer = 0
-            Me.lblRep.Size = New Size(x, 20)
-            Me.lblIssued.Size = New Size(x, 20)
-            Me.lblResets.Size = New Size(x, 20)
-            Me.lblDNS.Size = New Size(x, 20)
-            Me.lblND.Size = New Size(x, 20)
-            Me.lblRC.Size = New Size(x + 20, 20)
-            Me.lblsales.Size = New Size(x, 20)
-            Me.lblNH.Size = New Size(x, 20)
-            Me.lblSold.Size = New Size(x, 20)
-
-            Me.lblIssued.Location = New System.Drawing.Point(x - y, Me.lblRep.Location.Y)
-            Me.lblDNS.Location = New System.Drawing.Point((x * 2) - y, Me.lblRep.Location.Y)
-            Me.lblDNS.Size = New Size(Me.lblIssued.Width + j, Me.lblIssued.Height)
-            Me.lblNH.Location = New System.Drawing.Point((x * 3) - y, Me.lblRep.Location.Y)
-            Me.lblResets.Location = New System.Drawing.Point((x * 4) - y, Me.lblRep.Location.Y)
-            Me.lblND.Location = New System.Drawing.Point((x * 5) - y, Me.lblRep.Location.Y)
-            Me.lblsales.Location = New System.Drawing.Point((x * 6) - y, Me.lblRep.Location.Y)
-            Me.lblRC.Location = New System.Drawing.Point((x * 7) - y, Me.lblRep.Location.Y)
-            Me.lblSold.Location = New System.Drawing.Point((x * 8) - y, Me.lblRep.Location.Y)
-            Me.lblIssued.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblNH.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblResets.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblND.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblsales.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblRC.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblSold.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblRep.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            'If Me.pnlPerformanceReport.Controls.Count <= 1 Then
-            '    Exit Sub
-            'End If
-
-
-            Try
-
-
-                For q As Integer = 0 To Me.pnlPerformanceReport.Controls.Count - 1
-                    Dim z
-                    If Me.pnlPerformanceReport.Controls.Item(q).Text.Contains("No Data to Report") Then
-                        Me.pnlPerformanceReport.Controls.Item(q).Location = New System.Drawing.Point((Me.pnlPerformanceReport.Width / 2) - 308, (Me.pnlPerformanceReport.Height / 2) - 12)
-
-                    End If
-
-
-                    If Me.pnlPerformanceReport.Controls.Item(q).Name.Contains("pnl") Then
-                        z = Me.pnlPerformanceReport.Controls.Item(q)
-                        If z.name = "pnl1" Then
-                            fstyle = FontStyle.Bold
-                        Else
-                            fstyle = FontStyle.Regular
-                        End If
-
-                        Dim name As Label = z.Controls.Item(0)
-
-                        name.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        If name.Location.Y >= 8 Then
-                            name.Location = New System.Drawing.Point(name.Location.X, name.Location.Y - pix)
-                        End If
-
-
-                        Dim lblissue As Label = z.Controls.Item(1)
-                        lblissue.Location = New System.Drawing.Point((Me.lblIssued.Location.X + (Me.lblIssued.Width / 2)) - (22 + h), 0)
-                        lblissue.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblissue.Size = New Size(44 + h, 32)
-
-
-                        Dim lblDNS As Label = z.Controls.Item(8)
-                        lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblDNS.Location = New System.Drawing.Point((Me.lblDNS.Location.X + (Me.lblDNS.Width / 2)) - (42 + h), 0) '192
-                        lblDNS.Size = New Size(32 + h, 32)
-
-                        Dim lblDNSper As Label = z.Controls.Item(9)
-                        lblDNSper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblDNSper.Location = New System.Drawing.Point(lblDNS.Location.X + (32 + h), 0) '224
-                        lblDNSper.Size = New Size(42 + h, 32)
-
-                        Dim lblNH As Label = z.Controls.Item(4)
-                        lblNH.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblNH.Size = New Size(32 + h, 32)
-                        lblNH.Location = New System.Drawing.Point((Me.lblNH.Location.X + (Me.lblNH.Width / 2)) - (42 + h), 0) '305
-
-                        Dim lblNHper As Label = z.Controls.Item(5)
-                        lblNHper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblNHper.Size = New Size(46 + h, 32)
-                        lblNHper.Location = New System.Drawing.Point(lblNH.Location.X + (32 + h), 0) '337
-
-                        Dim lblResets As Label = z.Controls.Item(2)
-                        lblResets.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblResets.Size = New Size(32 + h, 32)
-                        lblResets.Location = New System.Drawing.Point((Me.lblResets.Location.X + (Me.lblResets.Width / 2)) - (42 + h), 0) '418
-
-                        Dim lblResetsper As Label = z.Controls.Item(3)
-                        lblResetsper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblResetsper.Size = New Size(46 + h, 32)
-                        lblResetsper.Location = New System.Drawing.Point(lblResets.Location.X + (32 + h), 0) '450
-
-                        Dim lblND As Label = z.Controls.Item(6)
-                        lblND.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblND.Size = New Size(32 + h, 32)
-                        lblND.Location = New System.Drawing.Point((Me.lblND.Location.X + (Me.lblND.Width / 2)) - (42 + h), 0) '534
-
-                        Dim lblNDper As Label = z.Controls.Item(7)
-                        lblNDper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblNDper.Size = New Size(46 + h, 32)
-                        lblNDper.Location = New System.Drawing.Point(lblND.Location.X + (32 + h), 0) '566
-
-                        Dim lblSales As Label = z.Controls.Item(12)
-                        lblSales.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblSales.Size = New Size(32 + h, 32)
-                        lblSales.Location = New System.Drawing.Point((Me.lblsales.Location.X + (Me.lblsales.Width / 2)) - (42 + h), 0) '664
-
-                        Dim lblSalesper As Label = z.Controls.Item(13)
-                        lblSalesper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblSalesper.Size = New Size(46 + h, 32)
-                        lblSalesper.Location = New System.Drawing.Point(lblSales.Location.X + (32 + h), 0) '676
-
-                        Dim lblRC As Label = z.Controls.Item(10)
-                        lblRC.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblRC.Size = New Size(32 + h, 32)
-                        lblRC.Location = New System.Drawing.Point((Me.lblRC.Location.X + (Me.lblRC.Width / 2)) - (42 + h), 0) '757
-
-                        Dim lblRCper As Label = z.Controls.Item(11)
-                        lblRCper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblRCper.Size = New Size(46 + h, 32)
-                        lblRCper.Location = New System.Drawing.Point(lblRC.Location.X + (32 + h), 0) '789
-
-                        Dim lblsold As Label = z.Controls.Item(14)
-                        lblsold.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                        lblsold.Size = New Size(80 + j, 32)
-                        If j > 0 Then
-                            lblsold.Location = New System.Drawing.Point(Me.pnlPerformanceReport.Width - (lblsold.Width + 10), 0) '869
-                        Else
-                            lblsold.Location = New System.Drawing.Point(Me.pnlPerformanceReport.Width - (lblsold.Width + 10), 0) '869 
-                        End If
-
-
-                    End If
-                Next
-
-            Catch ex As Exception
-                ' MsgBox("Fail Else")
-                Me.Cursor = Cursors.Default
-                Main.Cursor = Cursors.Default
-                Dim yy As New ErrorLogging_V2
-                yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "pnlPerformanceReport_SizeChanged", "0", ex.Message.ToString)
-                yy = Nothing
-            End Try
-        End If
-
-
-
-
-
-
-
-    End Sub
-
-
-    Private Sub btnExclude_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExclude.Click
-        If Me.btnExclude.Text.Contains("Off") Then
-            Me.btnExclude.Text = "Turn On Exclusions"
-            Me.btnExclude.Image = Me.ilToolbarButtons.Images(12)
-        Else
-            Me.btnExclude.Text = "Turn Off Exclusions"
-            Me.btnExclude.Image = Me.ilToolbarButtons.Images(13)
-        End If
-    End Sub
-    Private Sub Refocus_IssueLeads()
-        Dim c As Integer = Me.pnlIssue.Controls.Count
-        Dim i As Integer
-        For i = 1 To c
-            Dim all As Panel = Me.pnlIssue.Controls(i - 1)
-            If all.BorderStyle = BorderStyle.FixedSingle Then
-                STATIC_VARIABLES.CurrentID = all.Controls.Item(2).Text
-            End If
-        Next
-    End Sub
-
-
-
-    Private Sub btnEditCustIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustIssue.Click
-        Refocus_IssueLeads()
-
-        EditCustomerInfo.Show()
-    End Sub
-
-    Private Sub btnCCIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCCIssue.Click
-        '' edits for 'toggle button' 
-        '' 8-26-2015
-        ''
-
-        '' basically a split switch 
-        '' if the button text is 'this' do this
-        '' elseif the button text is 'that' do that
-        '' 
+    Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click
+        'MsgBox("btnPrintCurrentList")
         Try
-            Dim myBtn As ToolStripButton = sender
-            Dim buttonText As String = myBtn.Text
-            Dim cnt As Integer = 0
-            If buttonText = "Undo Called and Cancelled" Then
+            Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
+            Dim x As New printToPrinterContactList(arItemCache)
+            x.ShowDoc()
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCurrentList_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
-                '' get the lead number
-                Dim leadNum As String = ""
+    End Sub
+
+    Private Sub btnPrintCustomerList_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerList.Click
+        'MsgBox("btnPrintCustomerList")
+    End Sub
+
+    Private Sub btnPrintCustomerInfoSheet_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerInfoSheet.Click
+        Try
+            Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCustomerInfoSheet_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub btnPrintNoEmailIssue_Click(sender As Object, e As EventArgs) Handles btnPrintNoEmailIssue.Click
+        Try
+            ''MsgBox("btnPrintNoEmailIssue")
+            If Me.btnExclude.Text.Contains("On") Then
+                frmPrint.Exclusions = False
+                Dim y As Panel
+                Dim arRepNames As New ArrayList
+                Dim arLeadNums As New ArrayList
+                Dim _leadNum As String = ""
+                For Each y In pnlIssue.Controls
+                    Dim ctrl As Control
+                    For Each ctrl In y.Controls
+
+                        If TypeOf ctrl Is LinkLabel Then
+                            _leadNum = ctrl.Text
+                        End If
+                        If TypeOf ctrl Is ComboBox Then
+                            If ctrl.Text <> "" Then
+                                Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                Dim fname As String = strName(0)
+                                Dim lname As String = strName(1)
+                                Dim g As New bulkPrintOperations
+                                Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+                                If canGetMail = False Then
+                                    arRepNames.Add(fname & " " & lname)
+                                    arLeadNums.Add(_leadNum)
+                                End If
+                            End If
+                        End If
+                    Next
+                Next
+
+                Dim gg As Integer = 0
+                ''Dim strMSG As String = ""
+                frmPrint.ClearListView()
+
+                For gg = 0 To arRepNames.Count - 1
+                    '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
+                    Dim lv As New ListViewItem
+                    lv.Text = arLeadNums(gg)
+                    frmPrint.lsLeadIds.Items.Add(lv)
+                Next
+
+                frmPrint.ShowDialog()
+
+
+            ElseIf btnExclude.Text.Contains("Off") Then
+                '' MsgBox("exclusions on")
+                frmPrint.Exclusions = True
+                Dim b As New bulkPrintOperations
+                Dim ex_set As bulkPrintOperations.Exclusions
+                ex_set = b.GetExclusions()
+                Dim y As Panel
+                Dim arRepNames As New ArrayList
+                Dim arLeadNums As New ArrayList
+                Dim _leadNum As String = ""
+                For Each y In pnlIssue.Controls
+                    Dim ctrl As Control
+                    For Each ctrl In y.Controls
+
+                        If TypeOf ctrl Is LinkLabel Then
+                            _leadNum = ctrl.Text
+                        End If
+                        If TypeOf ctrl Is ComboBox Then
+                            If ctrl.Text <> "" Then
+                                Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                Dim fname As String = strName(0)
+                                Dim lname As String = strName(1)
+                                Dim g As New bulkPrintOperations
+                                Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+                                If canGetMail = False Then
+                                    arRepNames.Add(fname & " " & lname)
+                                    arLeadNums.Add(_leadNum)
+                                End If
+                            End If
+                        End If
+                    Next
+                Next
+                Dim gg As Integer = 0
+                ''Dim strMSG As String = ""
+                frmPrint.ClearListView()
+
+                For gg = 0 To arRepNames.Count - 1
+                    '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
+                    Dim lv As New ListViewItem
+                    lv.Text = arLeadNums(gg)
+                    frmPrint.lsLeadIds.Items.Add(lv)
+                Next
+
+
+                frmPrint.ShowDialog()
+            End If
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintNoEmailIssue_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+
+    End Sub
+
+    Private Sub btnPrintThisIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnPrintThisIssue.Click
+        ''
+        '' print selected lead 
+        '' 
+        ''MsgBox("btnPrintThisIssue")
+        ''
+        Try
+            If btnExclude.Text.Contains("On") Then
+                frmPrint.Exclusions = False
                 Dim y As Panel
                 For Each y In pnlIssue.Controls
                     If y.BorderStyle = BorderStyle.FixedSingle Then
-                        cnt += 1
-                        Dim t As Control
-                        For Each t In y.Controls
-                            If TypeOf t Is LinkLabel Then
-                                leadNum = t.Text
+                        Dim yy As Control
+                        For Each yy In y.Controls
+                            If TypeOf yy Is LinkLabel Then
+                                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                                Dim lead_id As String = yy.Text
+                                Dim lv As New ListViewItem
+                                lv.Text = lead_id
+                                frmPrint.ClearListView()
+                                frmPrint.lsLeadIds.Items.Add(lv)
+                                frmPrint.ShowDialog()
 
                             End If
                         Next
                     End If
                 Next
-
-                If cnt <= 0 Then
-                    MsgBox("You must select a record to ' Undo Called and Cancelled ' . ", MsgBoxStyle.Critical, "Select a record")
-                    Exit Sub
-                ElseIf cnt >= 1 Then
-                    ' MsgBox("LeadNumber : " & leadNum, MsgBoxStyle.Information, "DEBUG INFO")
-                    Dim b As New ToggleUndoCandC
-                    Dim rec_ID As String = b.Get_ID_OF_CandC(leadNum)
-                    b.Delete_CandC(rec_ID, leadNum, Date.Now.ToString)
-                    Dim c = New Issue_Leads(True, "")
-                End If
-
-
-
-            ElseIf buttonText = "Log Appt. as Called and Cancelled" Then
-
-                Dim lead As String = ""
-                For t As Integer = 0 To Me.pnlIssue.Controls.Count - 1
-                    If Me.pnlIssue.Controls.Item(t).Name.Contains("pnl") Then
-                        Dim z As Panel = Me.pnlIssue.Controls.Item(t)
-                        If z.BorderStyle = BorderStyle.FixedSingle Then
-                            lead = z.Controls.Item(2).Text
-                        End If
+            ElseIf btnExclude.Text.Contains("Off") Then
+                frmPrint.Exclusions = True
+                Dim y As Panel
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.FixedSingle Then
+                        Dim yy As Control
+                        For Each yy In y.Controls
+                            If TypeOf yy Is LinkLabel Then
+                                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                                Dim lead_id As String = yy.Text
+                                Dim lv As New ListViewItem
+                                lv.Text = lead_id
+                                frmPrint.ClearListView()
+                                frmPrint.lsLeadIds.Items.Add(lv)
+                                frmPrint.ShowDialog()
+                            End If
+                        Next
                     End If
                 Next
-                If lead = "" Then
-                    MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-                    Exit Sub
-                End If
-                'Me.cboSalesList.SelectedItem = "Issue Leads List"
-                'For x As Integer = 0 To Me.lvSales.Items.Count - 1
-                '    If Me.lvSales.Items(x).Text = lead Then
-                '        Me.lvSales.Items(x).Selected = True
-                '        If Me.lvSales.Items(x).Selected = True Then
-                '            Me.PullInfo(lead)
-                '        End If
-                '    End If
-                'Next
-                Me.PullInfo(lead)
-
-                Dim s = Split(Me.txtContact1.Text, " ")
-                Dim c1 = s(0)
-                Dim s2 = Split(Me.txtContact2.Text, " ")
-                Dim c2 = s2(0)
-                CandCNotes.ID = lead
-                CandCNotes.Contact1 = c1
-                CandCNotes.Contact2 = c2
-                CandCNotes.OrigApptDate = Me.txtApptDate.Text
-                CandCNotes.OrigApptTime = Me.txtApptTime.Text
-                CandCNotes.frm = Me
-
-
-                CandCNotes.ShowInTaskbar = False
-                CandCNotes.ShowDialog()
-
             End If
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnCCIssue_Click", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintThisIssue", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
     End Sub
 
-    Private Sub PrintThisLeadToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PrintThisLeadToolStripMenuItem.Click
-        btnPrintThisIssue_Click(sender, e)
+    Private Sub btnPrintIssue_Click(sender As Object, e As EventArgs) Handles btnPrintIssue.Click
+        'MsgBox("btnPrintIssue")
     End Sub
 
+#End Region
 
-
-
-    Private Sub EmailThisLeadToAssignedRepsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EmailThisLeadToAssignedRepsToolStripMenuItem.Click
-        btnEmailThisIssue_Click(sender, e)
-    End Sub
-
-    Private Sub btnExcludeManage_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExcludeManage.Click
-        exclusions.ShowDialog()
-    End Sub
-
-
-
-
-
-
-
-    Private Sub Sales_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
-        'Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
+#Region "Email Templating Stuff"
+    Public Function GetTemplates()
         Try
-            If Me.lvSales.SelectedItems.Count <> 0 Then
-                'Dim c As New CustomerHistory
-                'c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
-                bgCustomerHistory_DoWork(Nothing, Nothing)
-            End If
-            Dim x As New ScheduledActions
-            ' x.SetUp("Sales")
-            'Me.SplitContainer1.SplitterDistance = 2500
-            Me.SplitContainer1.SplitterDistance = 218
-            Me.SplitContainer1.SplitterWidth = 1
-            Me.btnExpandSalesList.Text = Chr(187)
-            Me.btnExpandMemorize.Text = Chr(187)
-
-
-            '' EDIT: 
-            '' 9-13-2015 
-            '' work around for resize of control
-            '' on size changed event
-            '' 
-
-            ''EDIT:
-            '' 9-16-2015
-            '' Need to redraw respective container on size changed
-            '' If job pictures is active filter, only redraw job pictures
-            '' If Attached Files is active filter......
-            '' 
-
-            Dim active_filter_text As String = Me.tscboAFPicsFilter.Text
-            Select Case active_filter_text
-                Case "All"
-                    Try
-                        Dim a As Control
-                        Dim p_width As Integer = Me.pnlAFPics.Width
-                        Dim p_height As Integer = Me.pnlAFPics.Height
-                        'x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
-                        'x.Location = New Point((p_width / 2) + 5, 0)
-                        For Each a In Me.pnlAFPics.Controls
-
-                            If TypeOf (a) Is ListView Then
-                                If a.Name.ToString = "lsAttachedFiles" Then
-                                    Dim pLocX As Integer = a.Location.X
-                                    Dim pLocY As Integer = a.Location.Y
-                                    a.Width = (p_width / 2) - 20
-                                    a.Height = p_height - 10
-                                    a.Location = New Point(5, 5)
-
-                                ElseIf a.Name.ToString = "lsJobPictures" Then
-                                    '' for list view lsJP the offset of X has to be counted in as well
-                                    '' 
-                                    Dim pLocX As Integer = (p_width / 2)
-                                    Dim pLocY As Integer = a.Location.Y
-                                    a.Width = (p_width / 2) - 20
-                                    a.Height = p_height - 10
-                                    a.Location = New Point(pLocX + 5, 5)
-                                End If
-                            End If
-                        Next
-                    Catch ex As Exception
-                        '' just trap it
-
-                    End Try
-                    Exit Select
-                Case "Job Pictures"
-                    Try
-                        Dim a As Control
-                        Dim p_width As Integer = Me.pnlAFPics.Width
-                        Dim p_height As Integer = Me.pnlAFPics.Height
-
-                        For Each a In Me.pnlAFPics.Controls
-
-                            If TypeOf (a) Is ListView Then
-
-                                If a.Name.ToString = "lsJobPictures" Then
-                                    Dim pLocX As Integer = (p_width)
-                                    Dim pLocY As Integer = a.Location.Y
-                                    a.Width = (p_width - 20)
-                                    a.Height = (p_height - 10)
-                                    a.Location = New Point(5, 5)
-                                End If
-                            End If
-                        Next
-                    Catch ex As Exception
-
-                    End Try
-                    Exit Select
-                Case "Attached Files"
-                    Try
-                        Dim a As Control
-                        Dim p_width As Integer = Me.pnlAFPics.Width
-                        Dim p_height As Integer = Me.pnlAFPics.Height
-
-                        For Each a In Me.pnlAFPics.Controls
-
-                            If TypeOf (a) Is ListView Then
-
-                                If a.Name.ToString = "lsAttachedFiles" Then
-                                    Dim pLocX As Integer = a.Location.X
-                                    Dim pLocY As Integer = a.Location.Y
-                                    a.Width = (p_width) - 20
-                                    a.Height = p_height - 10
-                                    a.Location = New Point(5, 5)
-
-                                End If
-                            End If
-                        Next
-                    Catch ex As Exception
-
-                    End Try
-                    Exit Select
-                Case Else
-                    Try
-                        Dim a As Control
-                        Dim p_width As Integer = Me.pnlAFPics.Width
-                        Dim p_height As Integer = Me.pnlAFPics.Height
-                        'x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
-                        'x.Location = New Point((p_width / 2) + 5, 0)
-                        For Each a In Me.pnlAFPics.Controls
-
-                            If TypeOf (a) Is ListView Then
-                                If a.Name.ToString = "lsAttachedFiles" Then
-                                    Dim pLocX As Integer = a.Location.X
-                                    Dim pLocY As Integer = a.Location.Y
-                                    a.Width = (p_width / 2) - 20
-                                    a.Height = p_height - 10
-                                    a.Location = New Point(5, 5)
-
-                                ElseIf a.Name.ToString = "lsJobPictures" Then
-                                    '' for list view lsJP the offset of X has to be counted in as well
-                                    '' 
-                                    Dim pLocX As Integer = (p_width / 2)
-                                    Dim pLocY As Integer = a.Location.Y
-                                    a.Width = (p_width / 2) - 20
-                                    a.Height = p_height - 10
-                                    a.Location = New Point(pLocX, 5)
-                                End If
-                            End If
-                        Next
-                    Catch ex As Exception
-                        '' just trap it
-
-                    End Try
-                    Exit Select
-            End Select
+            Dim y As New emlTemplateLogic
+            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
+            Dim g As List(Of emlTemplateLogic.TemplateInfo)
+            g = y.GetTemplatesByDepartment(False, depart_)
+            Dim a As emlTemplateLogic.TemplateInfo
+            Return g
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "Sales_SizeChanged", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "GetTemplates()", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
-    End Sub
+    End Function
+#End Region
 
-    Private Sub tpSummary_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tpSummary.SizeChanged
-        Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
-    End Sub
-
-
-
-
-    Private Sub btnSetAppt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetAppt.Click
-        '' 1-10-2015 Testing Purposes
-        '' 
-        'If Me.ID = "" Then
-        '    MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-        '    Exit Sub
-        'End If
-        'SetAppt.ID = Me.ID
-        'SetAppt.MdiParent = Main
-        'SetAppt.frm = Me
-
-        'SetAppt.OrigApptDate = Me.txtApptDate.Text
-        'SetAppt.OrigApptTime = Me.txtApptTime.Text
-        'Dim s = Split(Me.txtContact1.Text, " ")
-        'Dim s2 = Split(Me.txtContact2.Text, " ")
-        'SetAppt.Contact1 = s(0)
-        'SetAppt.Contact2 = s2(0)
-        'If STATIC_VARIABLES.salesworkaround = True Then
-        '    STATIC_VARIABLES.salesworkaround = False
-
-        '    Me.btnSetAppt_Click(sender, e)
-        '    SetAppt.Show()
-        'Else
-        '    Me.btnSetAppt_Click(sender, e)
-        '    SetAppt.Show()
-        'End If
-
-        SetAppt_V2.MdiParent = Main
-        SetAppt_V2.ID = Me.ID
-        SetAppt_V2.CallingForm = "Sales"
-        SetAppt_V2.Show()
-
-    End Sub
+#Region "Emailing Stuff"
 
 #Region " ' Email ' buttons tracked down from tool strip sales department . . .  "
     ''
@@ -5659,774 +6193,9 @@ Public Class Sales
 
     End Sub
 
-    Private Sub btnEmailThisIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEmailThisIssue.Click
 
-        '' individual selected lead to be emailed 
-        '' 
-        Try
-            EmailSingleRecord()
-
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEmailThisIssue_click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-
-    End Sub
 
 #End Region
-
-
-
-    Private Sub tsAttachedFilesNAV_Click(sender As Object, e As EventArgs) Handles tsAttachedFilesNAV.Click
-        Try
-            Dim x As Control
-            For Each x In Me.pnlAFPics.Controls
-                If TypeOf (x) Is ListView Then
-                    If x.Name = "lsAttachedFiles" Then
-                        '' 11-17-2015 AC
-                        '' now do logic to check whether or not to lock up one level button
-                        Dim rootDir_Lead As String = (af_dir & STATIC_VARIABLES.CurrentID & "\")
-                        ''
-                        '' get current directory
-                        Dim cur_dir As String = x.Tag
-                        '' get 'up one directory
-                        Dim pieces() = Split(cur_dir, "\", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                        Dim cnt As Integer = -1 '' zero based index
-                        Dim up_one As String = ""
-                        Dim arItems As New ArrayList
-                        For Each pc As String In pieces
-                            cnt += 1
-                        Next
-                        If pieces(cnt) = "" Then '' if the last item is blank -> "\" then move the index back another one to compensate
-                            cnt = (cnt - 1)
-                        End If
-                        Dim iter As Integer = 0
-                        For iter = 0 To (cnt - 1)
-                            If pieces(iter) = "" Then
-                                up_one += "\"
-                            ElseIf pieces(iter) <> "" Then
-                                up_one += (pieces(iter) & "\")
-                            End If
-                        Next
-                        '' move to the up one
-                        x.Tag = up_one
-                        '' process images and whatnot
-                        Dim a As ListView = x
-                        'bgGetImages_DoWork(Me, Nothing)
-                        If sel_Item_left IsNot Nothing Then
-                            Select Case sel_Item_left.SubItems(3).Text
-                                Case Is = "File"
-                                    Dim af As New AF_And_JP_Logic(x.Tag)
-
-                                    Me.lsAttachedFiles.Items.Clear()
-                                    For Each xy As AF_And_JP_Logic.FileObject In af.Files
-                                        Dim lvItem As New ListViewItem
-                                        '' Name | Date Mod | Size | Type
-                                        lvItem.Text = xy.FileName
-                                        lvItem.Tag = xy.FullPath
-                                        lvItem.SubItems.Add(xy.DateModified)
-                                        Dim sz = Math.Round(xy.FileSize / 1024, 0)
-                                        Dim sz_str As String = sz.ToString & " KB"
-                                        lvItem.SubItems.Add(sz_str)
-                                        lvItem.SubItems.Add("File")
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                        If xy.smThumb IsNot Nothing Then
-                                            Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
-                                        ElseIf xy.smThumb Is Nothing Then
-                                            Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
-                                        End If
-
-                                        If xy.mdThumb IsNot Nothing Then
-                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
-                                        ElseIf xy.mdThumb Is Nothing Then
-                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
-                                        End If
-
-                                        If xy.lgThumb IsNot Nothing Then
-                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
-                                        ElseIf xy.lgThumb Is Nothing Then
-                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                        End If
-
-                                        If xy.jbThumb IsNot Nothing Then
-                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
-                                        ElseIf xy.jbThumb Is Nothing Then
-                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
-                                        End If
-
-                                        If xy.Tile IsNot Nothing Then
-                                            Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
-                                        ElseIf xy.Tile Is Nothing Then
-                                            Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                        End If
-
-                                        lvItem.ImageKey = xy.FileName
-                                        Me.lsAttachedFiles.Items.Add(lvItem)
-                                    Next
-
-                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                        Dim lvItem As New ListViewItem
-                                        lvItem.Text = y.FileName
-                                        lvItem.Tag = y.FullPath
-                                        lvItem.SubItems.Add(y.DateModified)
-                                        lvItem.SubItems.Add("")
-                                        lvItem.SubItems.Add("Folder")
-                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                        lvItem.ImageKey = y.FileName
-                                        Me.lsAttachedFiles.Items.Add(lvItem)
-                                    Next
-                                    Exit Select
-                                Case Is = "Folder"
-                                    '' 
-                                    '' have lsAF nav to this directory and repop.
-                                    '' 
-
-                                    Dim af As New AF_And_JP_Logic(x.Tag)
-
-                                    Me.lsAttachedFiles.Items.Clear()
-                                    For Each xy As AF_And_JP_Logic.FileObject In af.Files
-                                        Dim lvItem As New ListViewItem
-                                        '' Name | Date Mod | Size | Type
-                                        lvItem.Text = xy.FileName
-                                        lvItem.Tag = xy.FullPath
-                                        lvItem.SubItems.Add(xy.DateModified)
-                                        Dim sz = Math.Round(xy.FileSize / 1024, 0)
-                                        Dim sz_str As String = sz.ToString & " KB"
-                                        lvItem.SubItems.Add(sz_str)
-                                        lvItem.SubItems.Add("File")
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                        If xy.smThumb IsNot Nothing Then
-                                            Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
-                                        ElseIf xy.smThumb Is Nothing Then
-                                            Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
-                                        End If
-
-                                        If xy.mdThumb IsNot Nothing Then
-                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
-                                        ElseIf xy.mdThumb Is Nothing Then
-                                            Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
-                                        End If
-
-                                        If xy.lgThumb IsNot Nothing Then
-                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
-                                        ElseIf xy.lgThumb Is Nothing Then
-                                            Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                        End If
-
-                                        If xy.jbThumb IsNot Nothing Then
-                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
-                                        ElseIf xy.jbThumb Is Nothing Then
-                                            Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
-                                        End If
-
-                                        If xy.Tile IsNot Nothing Then
-                                            Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
-                                        ElseIf xy.Tile Is Nothing Then
-                                            Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                        End If
-
-                                        lvItem.ImageKey = xy.FileName
-                                        Me.lsAttachedFiles.Items.Add(lvItem)
-                                    Next
-
-                                    For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                        Dim lvItem As New ListViewItem
-                                        lvItem.Text = y.FileName
-                                        lvItem.Tag = y.FullPath
-                                        lvItem.SubItems.Add(y.DateModified)
-                                        lvItem.SubItems.Add("")
-                                        lvItem.SubItems.Add("Folder")
-                                        Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                        Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                        Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                        Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                        Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                        lvItem.ImageKey = y.FileName
-                                        Me.lsAttachedFiles.Items.Add(lvItem)
-                                    Next
-
-                                    'sel_Item_left = Nothing
-                                    'sel_Item_right = Nothing
-                                    ''
-                                    '' 1 clear out list view
-                                    '' 2 set the directory of the listview
-                                    '' 3 check to see if the button should be locked
-                                    '' 4 clear out/append image lists for new folder/file icon associations
-                                    '' 5 loop through and repopulate the listview with the 'new' items.
-                                    '' 5 reset sel_item_left & sel_item_right vars
-                                    '' 
-
-
-                                    Exit Select
-                                Case Else
-                                    '' just fail it
-                                    Exit Select
-                            End Select
-                        ElseIf sel_Item_left Is Nothing Then
-                            '' 
-                            '' where is the cur dir pointing?
-                            '' if its at root
-                            ''     keep at root to repop
-                            '' if its not at root
-                            ''     move it up one to repop
-                            '' 
-                            If cur_dir = (af_dir & STATIC_VARIABLES.CurrentID) Then
-                                Dim af As New AF_And_JP_Logic(x.Tag)
-
-                                Me.lsAttachedFiles.Items.Clear()
-                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
-                                    Dim lvItem As New ListViewItem
-                                    '' Name | Date Mod | Size | Type
-                                    lvItem.Text = xy.FileName
-                                    lvItem.Tag = xy.FullPath
-                                    lvItem.SubItems.Add(xy.DateModified)
-                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
-                                    Dim sz_str As String = sz.ToString & " KB"
-                                    lvItem.SubItems.Add(sz_str)
-                                    lvItem.SubItems.Add("File")
-                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                    If xy.smThumb IsNot Nothing Then
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
-                                    ElseIf xy.smThumb Is Nothing Then
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
-                                    End If
-
-                                    If xy.mdThumb IsNot Nothing Then
-                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
-                                    ElseIf xy.mdThumb Is Nothing Then
-                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    If xy.lgThumb IsNot Nothing Then
-                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
-                                    ElseIf xy.lgThumb Is Nothing Then
-                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    If xy.jbThumb IsNot Nothing Then
-                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
-                                    ElseIf xy.jbThumb Is Nothing Then
-                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
-                                    End If
-
-                                    If xy.Tile IsNot Nothing Then
-                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
-                                    ElseIf xy.Tile Is Nothing Then
-                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    lvItem.ImageKey = xy.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-
-                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                    Dim lvItem As New ListViewItem
-                                    lvItem.Text = y.FileName
-                                    lvItem.Tag = y.FullPath
-                                    lvItem.SubItems.Add(y.DateModified)
-                                    lvItem.SubItems.Add("")
-                                    lvItem.SubItems.Add("Folder")
-                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                    lvItem.ImageKey = y.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-                            ElseIf cur_dir <> (af_dir & STATIC_VARIABLES.CurrentID) Then
-                                Dim af As New AF_And_JP_Logic(up_one)
-
-                                Me.lsAttachedFiles.Items.Clear()
-                                For Each xy As AF_And_JP_Logic.FileObject In af.Files
-                                    Dim lvItem As New ListViewItem
-                                    '' Name | Date Mod | Size | Type
-                                    lvItem.Text = xy.FileName
-                                    lvItem.Tag = xy.FullPath
-                                    lvItem.SubItems.Add(xy.DateModified)
-                                    Dim sz = Math.Round(xy.FileSize / 1024, 0)
-                                    Dim sz_str As String = sz.ToString & " KB"
-                                    lvItem.SubItems.Add(sz_str)
-                                    lvItem.SubItems.Add("File")
-                                    Me.imgLst16.Images.Add(xy.FileName, xy.smIcon)
-                                    If xy.smThumb IsNot Nothing Then
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.smThumb)
-                                    ElseIf xy.smThumb Is Nothing Then
-                                        Me.imgLst16.Images.Add(xy.FileName, xy.mdIcon)
-                                    End If
-
-                                    If xy.mdThumb IsNot Nothing Then
-                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgThumb)
-                                    ElseIf xy.mdThumb Is Nothing Then
-                                        Me.ImgLst32.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    If xy.lgThumb IsNot Nothing Then
-                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgThumb)
-                                    ElseIf xy.lgThumb Is Nothing Then
-                                        Me.ImgLst48.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    If xy.jbThumb IsNot Nothing Then
-                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbThumb)
-                                    ElseIf xy.jbThumb Is Nothing Then
-                                        Me.ImgLst256.Images.Add(xy.FileName, xy.jbIcon)
-                                    End If
-
-                                    If xy.Tile IsNot Nothing Then
-                                        Me.ImgLst128.Images.Add(xy.FileName, xy.Tile)
-                                    ElseIf xy.Tile Is Nothing Then
-                                        Me.ImgLst128.Images.Add(xy.FileName, xy.lgIcon)
-                                    End If
-
-                                    lvItem.ImageKey = xy.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-
-                                For Each y As AF_And_JP_Logic.DirObject In af.Directories
-                                    Dim lvItem As New ListViewItem
-                                    lvItem.Text = y.FileName
-                                    lvItem.Tag = y.FullPath
-                                    lvItem.SubItems.Add(y.DateModified)
-                                    lvItem.SubItems.Add("")
-                                    lvItem.SubItems.Add("Folder")
-                                    Me.imgLst16.Images.Add(y.FileName, y.smIcon)
-                                    Me.ImgLst32.Images.Add(y.FileName, y.mdIcon)
-                                    Me.ImgLst48.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst128.Images.Add(y.FileName, y.lgIcon)
-                                    Me.ImgLst256.Images.Add(y.FileName, y.jbIcon)
-                                    lvItem.ImageKey = y.FileName
-                                    Me.lsAttachedFiles.Items.Add(lvItem)
-                                Next
-                            End If
-
-
-
-                        End If
-
-                        '' now check to enable/disable nav button
-                        '' 
-                        If Len(x.Tag) <= 0 Then
-                            If x.Tag = rootDir_Lead Then
-                                Me.tsAttachedFilesNAV.Enabled = False
-                            ElseIf x.Tag <> rootDir_Lead Then
-                                Me.tsAttachedFilesNAV.Enabled = True
-                            End If
-                        ElseIf Len(x.Tag) >= 1 Then
-                            If x.Tag = (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
-                                If x.Tag = rootDir_Lead Then
-                                    Me.tsAttachedFilesNAV.Enabled = False
-                                ElseIf x.Tag <> rootDir_Lead Then
-                                    Me.tsAttachedFilesNAV.Enabled = True
-                                End If
-                            ElseIf x.Tag <> (af_dir & STATIC_VARIABLES.CurrentID & "\") Then
-                                If x.Tag = rootDir_Lead Then
-                                    Me.tsAttachedFilesNAV.Enabled = False
-                                ElseIf x.Tag <> rootDir_Lead Then
-                                    Me.tsAttachedFilesNAV.Enabled = True
-                                End If
-                            End If
-
-                        End If
-
-                    End If
-                ElseIf x.Name = "lsJobPictures" Then
-                    Dim a As ListView = x
-                    bgGetImages_DoWork(Me, Nothing)
-
-                End If
-            Next
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "tsAttachedFilesNAV_Click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
-
-    Private Sub GetRidOfOldAndPutNew()
-        '' notes: 2-10-2016
-        '' not used.
-        '' left as a point of reference.
-        '' not wrapping with error handlers.
-        '' 
-        Dim x As Integer = 0
-        Dim y As Integer = 0
-        Dim height As Integer = 0
-        Dim width As Integer = 0
-        Dim name As String = ""
-        Dim tg As String = ""
-
-        Dim x2 As Integer = 0
-        Dim y2 As Integer = 0
-        Dim height2 As Integer = 0
-        Dim width2 As Integer = 0
-        Dim name2 As String = ""
-        Dim tg2 As String = ""
-
-
-        For Each Ctrl As Windows.Forms.Control In Me.pnlAFPics.Controls
-            If TypeOf Ctrl Is ListView Then
-                '' ' lsAF ' and ' lsJP ' 
-                If Ctrl.Name = "lsAF" Then
-                    x = Ctrl.Location.X
-                    y = Ctrl.Location.Y
-                    height = Ctrl.Height
-                    width = Ctrl.Width
-                    name = "lsAF"
-                    tg = Ctrl.Tag
-                End If
-                If Ctrl.Name = "lsJP" Then
-                    x2 = Ctrl.Location.X
-                    y2 = Ctrl.Location.Y
-                    height2 = Ctrl.Height
-                    width2 = Ctrl.Width
-                    name2 = "lsJP"
-                    tg2 = Ctrl.Tag
-                End If
-            End If
-        Next
-
-        Dim ls As ListView = pnlAFPics.Controls("lsAF")
-        pnlAFPics.Controls.Remove(ls)
-        Dim dir1 As String = (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString
-        Dim dir2 As String = (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString
-        Dim ls2 As ListView = pnlAFPics.Controls("lsJP")
-        pnlAFPics.Controls.Remove(ls2)
-
-
-        Dim widthOfParent As Integer = pnlAFPics.Width
-        Dim widthOfControl As Integer = (widthOfParent / 2) - 20
-        Dim heightOfParent As Integer = pnlAFPics.Height
-        Dim heightOfControl As Integer = (heightOfParent - 30)
-        Dim InitPoint As System.Drawing.Point = New System.Drawing.Point((0 + 10), (0 + 10))
-        Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(((widthOfParent / 2) + 10), (0 + 10))
-
-
-        '' EDIT 11-15-2015
-        '' Going back to a static control design with
-        '' multi-threads. AC
-        'Dim rc As ReusableListViewControl = New ReusableListViewControl
-        'rc.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint, "lsAF", heightOfControl, widthOfControl)
-        'Dim rc2 As ReusableListViewControl = New ReusableListViewControl
-        'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
-        ''END EDIT 
-
-        'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
-        'th1.Start()
-        'th1.Join()
-        bgGetImages_DoWork(Me, Nothing)
-        'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
-
-    End Sub
-
-    Private Sub btnPrintIssue_Click(sender As Object, e As EventArgs) Handles btnPrintIssue.Click
-        'MsgBox("btnPrintIssue")
-    End Sub
-
-
-#Region "Printing Options"
-
-    Private Sub btnPrintIssuedAppts_Click(sender As Object, e As EventArgs) Handles btnPrintIssuedAppts.Click
-        'MsgBox("btnPrintIssuedAppts")
-    End Sub
-
-    Private Sub btnPrintAllIssue_Click(sender As Object, e As EventArgs) Handles btnPrintAllIssue.Click
-        '' MsgBox("btnPrintAllIssue")
-        If Me.btnExclude.Text.Contains("On") Then
-            frmPrint.Exclusions = False
-            Dim y As Panel
-            Dim arLeadNums As New ArrayList
-            For Each y In pnlIssue.Controls
-                Dim yy As Control
-                For Each yy In y.Controls
-                    If TypeOf yy Is LinkLabel Then
-                        ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
-                        Dim lead_id As String = yy.Text
-                        arLeadNums.Add(lead_id)
-                    End If
-                Next
-            Next
-
-            frmPrint.ClearListView()
-
-            Dim i As Integer = 0
-            For i = 0 To arLeadNums.Count - 1
-                Dim lv As New ListViewItem
-                lv.Text = arLeadNums(i)
-                frmPrint.lsLeadIds.Items.Add(lv)
-            Next
-            frmPrint.ShowDialog()
-        ElseIf Me.btnExclude.Text.Contains("Off") Then
-            frmPrint.Exclusions = True
-            Dim y As Panel
-            Dim arLeadNums As New ArrayList
-            For Each y In pnlIssue.Controls
-                Dim yy As Control
-                For Each yy In y.Controls
-                    If TypeOf yy Is LinkLabel Then
-                        ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
-                        Dim lead_id As String = yy.Text
-                        arLeadNums.Add(lead_id)
-                    End If
-                Next
-            Next
-
-            frmPrint.ClearListView()
-
-            Dim i As Integer = 0
-            For i = 0 To arLeadNums.Count - 1
-                Dim lv As New ListViewItem
-                lv.Text = arLeadNums(i)
-                frmPrint.lsLeadIds.Items.Add(lv)
-            Next
-            frmPrint.ShowDialog()
-        End If
-
-
-    End Sub
-
-    Private Sub btnPrintApptSheet_Click(sender As Object, e As EventArgs) Handles btnPrintApptSheet.Click
-        'MsgBox("btnPrintApptSheet")
-        Try
-            Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
-
-    Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click
-        'MsgBox("btnPrintCurrentList")
-        Try
-            Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
-            Dim x As New printToPrinterContactList(arItemCache)
-            x.ShowDoc()
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCurrentList_click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
-    Private Sub btnPrintCustomerList_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerList.Click
-        'MsgBox("btnPrintCustomerList")
-    End Sub
-    Private Sub btnPrintCustomerInfoSheet_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerInfoSheet.Click
-        Try
-            Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCustomerInfoSheet_click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
-
-    Private Sub btnPrintNoEmailIssue_Click(sender As Object, e As EventArgs) Handles btnPrintNoEmailIssue.Click
-        Try
-            ''MsgBox("btnPrintNoEmailIssue")
-            If Me.btnExclude.Text.Contains("On") Then
-                frmPrint.Exclusions = False
-                Dim y As Panel
-                Dim arRepNames As New ArrayList
-                Dim arLeadNums As New ArrayList
-                Dim _leadNum As String = ""
-                For Each y In pnlIssue.Controls
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
-
-                        If TypeOf ctrl Is LinkLabel Then
-                            _leadNum = ctrl.Text
-                        End If
-                        If TypeOf ctrl Is ComboBox Then
-                            If ctrl.Text <> "" Then
-                                Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                                Dim fname As String = strName(0)
-                                Dim lname As String = strName(1)
-                                Dim g As New bulkPrintOperations
-                                Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
-                                If canGetMail = False Then
-                                    arRepNames.Add(fname & " " & lname)
-                                    arLeadNums.Add(_leadNum)
-                                End If
-                            End If
-                        End If
-                    Next
-                Next
-
-                Dim gg As Integer = 0
-                ''Dim strMSG As String = ""
-                frmPrint.ClearListView()
-
-                For gg = 0 To arRepNames.Count - 1
-                    '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
-                    Dim lv As New ListViewItem
-                    lv.Text = arLeadNums(gg)
-                    frmPrint.lsLeadIds.Items.Add(lv)
-                Next
-
-                frmPrint.ShowDialog()
-
-
-            ElseIf btnExclude.Text.Contains("Off") Then
-                '' MsgBox("exclusions on")
-                frmPrint.Exclusions = True
-                Dim b As New bulkPrintOperations
-                Dim ex_set As bulkPrintOperations.Exclusions
-                ex_set = b.GetExclusions()
-                Dim y As Panel
-                Dim arRepNames As New ArrayList
-                Dim arLeadNums As New ArrayList
-                Dim _leadNum As String = ""
-                For Each y In pnlIssue.Controls
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
-
-                        If TypeOf ctrl Is LinkLabel Then
-                            _leadNum = ctrl.Text
-                        End If
-                        If TypeOf ctrl Is ComboBox Then
-                            If ctrl.Text <> "" Then
-                                Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                                Dim fname As String = strName(0)
-                                Dim lname As String = strName(1)
-                                Dim g As New bulkPrintOperations
-                                Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
-                                If canGetMail = False Then
-                                    arRepNames.Add(fname & " " & lname)
-                                    arLeadNums.Add(_leadNum)
-                                End If
-                            End If
-                        End If
-                    Next
-                Next
-                Dim gg As Integer = 0
-                ''Dim strMSG As String = ""
-                frmPrint.ClearListView()
-
-                For gg = 0 To arRepNames.Count - 1
-                    '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
-                    Dim lv As New ListViewItem
-                    lv.Text = arLeadNums(gg)
-                    frmPrint.lsLeadIds.Items.Add(lv)
-                Next
-
-
-                frmPrint.ShowDialog()
-            End If
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintNoEmailIssue_click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-
-    End Sub
-
-    Private Sub btnPrintThisIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnPrintThisIssue.Click
-        ''
-        '' print selected lead 
-        '' 
-        ''MsgBox("btnPrintThisIssue")
-        ''
-        Try
-            If btnExclude.Text.Contains("On") Then
-                frmPrint.Exclusions = False
-                Dim y As Panel
-                For Each y In pnlIssue.Controls
-                    If y.BorderStyle = BorderStyle.FixedSingle Then
-                        Dim yy As Control
-                        For Each yy In y.Controls
-                            If TypeOf yy Is LinkLabel Then
-                                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
-                                Dim lead_id As String = yy.Text
-                                Dim lv As New ListViewItem
-                                lv.Text = lead_id
-                                frmPrint.ClearListView()
-                                frmPrint.lsLeadIds.Items.Add(lv)
-                                frmPrint.ShowDialog()
-
-                            End If
-                        Next
-                    End If
-                Next
-            ElseIf btnExclude.Text.Contains("Off") Then
-                frmPrint.Exclusions = True
-                Dim y As Panel
-                For Each y In pnlIssue.Controls
-                    If y.BorderStyle = BorderStyle.FixedSingle Then
-                        Dim yy As Control
-                        For Each yy In y.Controls
-                            If TypeOf yy Is LinkLabel Then
-                                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
-                                Dim lead_id As String = yy.Text
-                                Dim lv As New ListViewItem
-                                lv.Text = lead_id
-                                frmPrint.ClearListView()
-                                frmPrint.lsLeadIds.Items.Add(lv)
-                                frmPrint.ShowDialog()
-                            End If
-                        Next
-                    End If
-                Next
-            End If
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintThisIssue", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
-
-#End Region
-
-
-
-#Region "Email Templating Stuff"
-    Public Function GetTemplates()
-        Try
-            Dim y As New emlTemplateLogic
-            Dim name() = Split(STATIC_VARIABLES.CurrentUser, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-            Dim depart_ As String = y.GetEmployeeDepartment(name(0), name(1), False)
-            Dim g As List(Of emlTemplateLogic.TemplateInfo)
-            g = y.GetTemplatesByDepartment(False, depart_)
-            Dim a As emlTemplateLogic.TemplateInfo
-            Return g
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "GetTemplates()", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Function
-#End Region
-
-#Region "Emailing Stuff"
 
     Private Sub btnEMailCustomer_Click(sender As Object, e As EventArgs) Handles btnEMailCustomer.Click
 
@@ -6471,132 +6240,28 @@ Public Class Sales
 
     End Sub
 
+    Private Sub btnEmailThisIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEmailThisIssue.Click
 
-    Private Sub EmailSingleRecord()
+        '' individual selected lead to be emailed 
+        '' 
         Try
-            Dim z As New EmailIssuedLeads
-            Dim emlBody As String = ""
-            If Me.btnExclude.Text.Contains("Off") Then
-                Dim y As Panel
-                Dim leadNum As String = "0"
-                For Each y In pnlIssue.Controls
-                    If y.BorderStyle = BorderStyle.FixedSingle Then
-                        '' this is the selected record now determine rep and can they get email and so on. . . . . 
-                        Dim ctrl As Control
-                        For Each ctrl In y.Controls
-                            If TypeOf ctrl Is LinkLabel Then
-                                'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
-                                leadNum = ctrl.Text
-                                '' check last m result here to make sure it can be done. 
-                                '' 
-                                ''--8-25-2015 Per Andy Edit
-                                '' needs to filter down to ALL print options, all Email options
-                                '' 
+            EmailSingleRecord()
 
-
-
-                            ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
-                                Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                                Dim fname As String = strRep(0)
-                                Dim lname As String = strRep(1)
-
-                                Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
-                                If canGetEmail = False Then
-                                    MsgBox("This sales rep cannot recieve emails.", MsgBoxStyle.Critical, "Can't Recieve Email")
-                                    Exit Sub
-                                End If
-                                Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
-                                Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
-                                STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
-                                'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
-                                If canGetEmail = True Then
-                                    '' check here to make sure not called an cancelled
-                                    '' 8-26-2014
-
-                                    If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
-                                        MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
-                                        Exit Sub
-                                    End If
-
-                                    emlBody = z.ConstructMessageWithExclusions(fname, lname, leadNum, exclusionSet, emailAddy)
-                                    'MsgBox(emlBody)
-                                    '' uncomment here to actually send
-                                    z.EMAIL_SINGLE_MarkupEmail_WITH_EXCLUSIONS(fname, lname, leadNum, exclusionSet, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
-                                ElseIf canGetEmail = False Then
-                                    '' do nothing for now. 
-                                    ''
-                                End If
-
-                            End If '' end type of control 
-
-                        Next
-                    End If
-                Next
-            ElseIf Me.btnExclude.Text.Contains("On") Then
-                Dim y As Panel
-                Dim leadNum As String = "0"
-                For Each y In pnlIssue.Controls
-                    If y.BorderStyle = BorderStyle.FixedSingle Then
-                        '' this is the selected record now determine rep and can they get email and so on. . . . . 
-                        Dim ctrl As Control
-                        For Each ctrl In y.Controls
-                            If TypeOf ctrl Is LinkLabel Then
-                                'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
-                                leadNum = ctrl.Text
-
-                            ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
-                                Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                                Dim fname As String = strRep(0)
-                                Dim lname As String = strRep(1)
-                                Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
-                                If canGetEmail = False Then
-                                    MsgBox("This Sales Rep cannot recieve Email.", MsgBoxStyle.Critical, "Can't Recieve Email")
-                                    Exit Sub
-                                End If
-                                Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
-                                Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
-                                STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
-                                'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
-                                If canGetEmail = True Then
-                                    '' check here to make sure not called an cancelled
-                                    '' 8-26-2014
-
-                                    If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
-                                        MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
-                                        Exit Sub
-                                    End If
-
-
-
-                                    emlBody = z.ConstructMessageWithoutExclusions(fname, lname, leadNum, emailAddy)
-                                    'MsgBox(emlBody)
-                                    '' uncomment here to actually send
-                                    z.EMAIL_SINGLE_MarkupEmail_WITHOUT_EXCLUSIONS(fname, lname, leadNum, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
-                                ElseIf canGetEmail = False Then
-                                    '' do nothing for now. 
-                                End If
-                            End If
-
-                            'End If
-
-
-
-                        Next
-                    End If
-                Next
-            End If
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "EmailSingleRecord()", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEmailThisIssue_click", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
 
     End Sub
 
+
 #End Region
+
+#Region "DTP Val Change And Lost Focus"
 
     Private Sub dtpSummary2_LostFocus(sender As Object, e As EventArgs) Handles dtpSummary2.LostFocus
         focusdtp2 = False
@@ -6634,13 +6299,68 @@ Public Class Sales
 
     End Sub
 
+#End Region
 
+#Region "Background Workers"
 
     Private Sub bgGetImages_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgGetImages.DoWork
         GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
     End Sub
 
+    Private Sub bgCustomerHistory_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgCustomerHistory.DoWork
+        Try
+            Dim c As New CustomerHistory
+            c.SetUp(Me, STATIC_VARIABLES.CurrentID, Me.TScboCustomerHistory)
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgCustomerHistory_DoWork", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
+    End Sub
+
+    Private Sub bgSalesQuery_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgSalesQuery.DoWork
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim c As New SalesListManager(sender)
+            'arItemCache = New ArrayList
+            'arItemCache = c.LV_Sales_Items
+            bgSalesQuery_RunWorkerCompleted(Me, Nothing)
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_DoWork", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub bgSalesQuery_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles bgSalesQuery.RunWorkerCompleted
+        Try
+            ' If arItemCache.Count > 1 Then
+            Dim a As ListViewItem = Me.lvSales.Items.Item(0)
+            STATIC_VARIABLES.CurrentID = a.Text
+            Me.Text = "Sales Department Record ID: " & a.Text
+            PullInfo(a.Text)
+            AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+            Me.lvSales.EnsureVisible(0)
+            RaiseEvent PopCustHistory()
+            'End If
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_RunworkerCompleted", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Sub
+
+#End Region
 
 #Region "List View - {Views} Job Pictures"
     Private Sub cmJPExtraLarge_Click(sender As Object, e As EventArgs) Handles cmJPExtraLarge.Click
@@ -7865,49 +7585,6 @@ Public Class Sales
 
 #End Region
 
-
-
-    Private Function SplitApartFileExt(ByVal FullPath As String)
-        Try
-            Dim BeginAr() = FullPath.ToString.Split("\")
-            Dim FileNameAndExt = BeginAr(BeginAr.Length - 1) '' last index of items minus one. 
-            Dim LastTwo = FileNameAndExt.ToString.Split(".")
-            Dim FileExt As String
-            FileExt = LastTwo(1) '' file name is going to be position 1
-            Return FileExt
-        Catch ex As Exception
-            '' fail it here
-            'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split File Ext Error")
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitApartFileExt(fullpath)", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Function
-
-    Public Function SplitFolderName(ByVal FullPath As String)
-        Try
-            Dim BeginAr = FullPath.ToString.Split("\")
-            Dim FileNameAndExt = BeginAr(BeginAr.Count - 1) '' last index of items minus one. 
-            Dim LastTwo = FileNameAndExt.ToString.Split(".")
-            Dim FolderName
-            FolderName = LastTwo(0) '' file name is going to be position 0 
-            Return FolderName
-        Catch ex As Exception
-            '' fail it here
-            'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split Folder Name Error")
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitFolderName(fullpath)", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Function
-
-
 #Region "Context Menu Paste - LS and JP"
 
     Private Sub btnPaste_Click(sender As Object, e As EventArgs) Handles btnPaste.Click
@@ -8655,6 +8332,47 @@ Public Class Sales
 
 #End Region
 
+#Region "Private Utility Functions"
+
+    Public Function SplitFolderName(ByVal FullPath As String)
+        Try
+            Dim BeginAr = FullPath.ToString.Split("\")
+            Dim FileNameAndExt = BeginAr(BeginAr.Count - 1) '' last index of items minus one. 
+            Dim LastTwo = FileNameAndExt.ToString.Split(".")
+            Dim FolderName
+            FolderName = LastTwo(0) '' file name is going to be position 0 
+            Return FolderName
+        Catch ex As Exception
+            '' fail it here
+            'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split Folder Name Error")
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitFolderName(fullpath)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Function
+
+    Private Function SplitApartFileExt(ByVal FullPath As String)
+        Try
+            Dim BeginAr() = FullPath.ToString.Split("\")
+            Dim FileNameAndExt = BeginAr(BeginAr.Length - 1) '' last index of items minus one. 
+            Dim LastTwo = FileNameAndExt.ToString.Split(".")
+            Dim FileExt As String
+            FileExt = LastTwo(1) '' file name is going to be position 1
+            Return FileExt
+        Catch ex As Exception
+            '' fail it here
+            'MsgBox(ex.InnerException.ToString, MsgBoxStyle.Critical, "Split File Ext Error")
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Function", "SplitApartFileExt(fullpath)", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Function
 
     Public Function SplitApartFileName(ByVal FullPath As String)
         Try
@@ -8674,6 +8392,392 @@ Public Class Sales
             y = Nothing
         End Try
     End Function
+
+#End Region
+
+#Region "Private Utility Subs"
+
+    Private Sub EmailSingleRecord()
+        Try
+            Dim z As New EmailIssuedLeads
+            Dim emlBody As String = ""
+            If Me.btnExclude.Text.Contains("Off") Then
+                Dim y As Panel
+                Dim leadNum As String = "0"
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.FixedSingle Then
+                        '' this is the selected record now determine rep and can they get email and so on. . . . . 
+                        Dim ctrl As Control
+                        For Each ctrl In y.Controls
+                            If TypeOf ctrl Is LinkLabel Then
+                                'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
+                                leadNum = ctrl.Text
+                                '' check last m result here to make sure it can be done. 
+                                '' 
+                                ''--8-25-2015 Per Andy Edit
+                                '' needs to filter down to ALL print options, all Email options
+                                '' 
+
+
+
+                            ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
+                                Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                Dim fname As String = strRep(0)
+                                Dim lname As String = strRep(1)
+
+                                Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
+                                If canGetEmail = False Then
+                                    MsgBox("This sales rep cannot recieve emails.", MsgBoxStyle.Critical, "Can't Recieve Email")
+                                    Exit Sub
+                                End If
+                                Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
+                                Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
+                                STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
+                                'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
+                                If canGetEmail = True Then
+                                    '' check here to make sure not called an cancelled
+                                    '' 8-26-2014
+
+                                    If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
+                                        MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
+                                        Exit Sub
+                                    End If
+
+                                    emlBody = z.ConstructMessageWithExclusions(fname, lname, leadNum, exclusionSet, emailAddy)
+                                    'MsgBox(emlBody)
+                                    '' uncomment here to actually send
+                                    z.EMAIL_SINGLE_MarkupEmail_WITH_EXCLUSIONS(fname, lname, leadNum, exclusionSet, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
+                                ElseIf canGetEmail = False Then
+                                    '' do nothing for now. 
+                                    ''
+                                End If
+
+                            End If '' end type of control 
+
+                        Next
+                    End If
+                Next
+            ElseIf Me.btnExclude.Text.Contains("On") Then
+                Dim y As Panel
+                Dim leadNum As String = "0"
+                For Each y In pnlIssue.Controls
+                    If y.BorderStyle = BorderStyle.FixedSingle Then
+                        '' this is the selected record now determine rep and can they get email and so on. . . . . 
+                        Dim ctrl As Control
+                        For Each ctrl In y.Controls
+                            If TypeOf ctrl Is LinkLabel Then
+                                'If InStr(ctrl.Name, "lnk", Microsoft.VisualBasic.CompareMethod.Text) = True Then
+                                leadNum = ctrl.Text
+
+                            ElseIf TypeOf ctrl Is ComboBox And ctrl.Text <> "" Then
+                                Dim strRep() = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                                Dim fname As String = strRep(0)
+                                Dim lname As String = strRep(1)
+                                Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
+                                If canGetEmail = False Then
+                                    MsgBox("This Sales Rep cannot recieve Email.", MsgBoxStyle.Critical, "Can't Recieve Email")
+                                    Exit Sub
+                                End If
+                                Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
+                                Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
+                                STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
+                                'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
+                                If canGetEmail = True Then
+                                    '' check here to make sure not called an cancelled
+                                    '' 8-26-2014
+
+                                    If z.IsCalledAndCancelled(leadNum, Me.dtpIssueLeads.Value.ToShortDateString) = False Then
+                                        MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Critical, "Lead Called and Cancelled")
+                                        Exit Sub
+                                    End If
+
+
+
+                                    emlBody = z.ConstructMessageWithoutExclusions(fname, lname, leadNum, emailAddy)
+                                    'MsgBox(emlBody)
+                                    '' uncomment here to actually send
+                                    z.EMAIL_SINGLE_MarkupEmail_WITHOUT_EXCLUSIONS(fname, lname, leadNum, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
+                                ElseIf canGetEmail = False Then
+                                    '' do nothing for now. 
+                                End If
+                            End If
+
+                            'End If
+
+
+
+                        Next
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "EmailSingleRecord()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+
+    End Sub
+
+    Private Sub GetRidOfOldAndPutNew()
+        '' notes: 2-10-2016
+        '' not used.
+        '' left as a point of reference.
+        '' not wrapping with error handlers.
+        '' 
+        Dim x As Integer = 0
+        Dim y As Integer = 0
+        Dim height As Integer = 0
+        Dim width As Integer = 0
+        Dim name As String = ""
+        Dim tg As String = ""
+
+        Dim x2 As Integer = 0
+        Dim y2 As Integer = 0
+        Dim height2 As Integer = 0
+        Dim width2 As Integer = 0
+        Dim name2 As String = ""
+        Dim tg2 As String = ""
+
+
+        For Each Ctrl As Windows.Forms.Control In Me.pnlAFPics.Controls
+            If TypeOf Ctrl Is ListView Then
+                '' ' lsAF ' and ' lsJP ' 
+                If Ctrl.Name = "lsAF" Then
+                    x = Ctrl.Location.X
+                    y = Ctrl.Location.Y
+                    height = Ctrl.Height
+                    width = Ctrl.Width
+                    name = "lsAF"
+                    tg = Ctrl.Tag
+                End If
+                If Ctrl.Name = "lsJP" Then
+                    x2 = Ctrl.Location.X
+                    y2 = Ctrl.Location.Y
+                    height2 = Ctrl.Height
+                    width2 = Ctrl.Width
+                    name2 = "lsJP"
+                    tg2 = Ctrl.Tag
+                End If
+            End If
+        Next
+
+        Dim ls As ListView = pnlAFPics.Controls("lsAF")
+        pnlAFPics.Controls.Remove(ls)
+        Dim dir1 As String = (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString
+        Dim dir2 As String = (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString
+        Dim ls2 As ListView = pnlAFPics.Controls("lsJP")
+        pnlAFPics.Controls.Remove(ls2)
+
+
+        Dim widthOfParent As Integer = pnlAFPics.Width
+        Dim widthOfControl As Integer = (widthOfParent / 2) - 20
+        Dim heightOfParent As Integer = pnlAFPics.Height
+        Dim heightOfControl As Integer = (heightOfParent - 30)
+        Dim InitPoint As System.Drawing.Point = New System.Drawing.Point((0 + 10), (0 + 10))
+        Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(((widthOfParent / 2) + 10), (0 + 10))
+
+
+        '' EDIT 11-15-2015
+        '' Going back to a static control design with
+        '' multi-threads. AC
+        'Dim rc As ReusableListViewControl = New ReusableListViewControl
+        'rc.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint, "lsAF", heightOfControl, widthOfControl)
+        'Dim rc2 As ReusableListViewControl = New ReusableListViewControl
+        'rc2.GenerateListControl(pnlAFPics, (STATIC_VARIABLES.JobPicturesFileDirectory & STATIC_VARIABLES.CurrentID).ToString, InitPoint2, "lsJP", heightOfControl, widthOfControl)
+        ''END EDIT 
+
+        'Dim th1 As New Thread(AddressOf GetImages_Files_And_Folders)
+        'th1.Start()
+        'th1.Join()
+        bgGetImages_DoWork(Me, Nothing)
+        'GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
+
+    End Sub
+
+    Private Sub Sales_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
+        'Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
+        Try
+            If Me.lvSales.SelectedItems.Count <> 0 Then
+                'Dim c As New CustomerHistory
+                'c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                bgCustomerHistory_DoWork(Nothing, Nothing)
+            End If
+            Dim x As New ScheduledActions
+            ' x.SetUp("Sales")
+            'Me.SplitContainer1.SplitterDistance = 2500
+            Me.SplitContainer1.SplitterDistance = 218
+            Me.SplitContainer1.SplitterWidth = 1
+            Me.btnExpandSalesList.Text = Chr(187)
+            Me.btnExpandMemorize.Text = Chr(187)
+
+
+            '' EDIT: 
+            '' 9-13-2015 
+            '' work around for resize of control
+            '' on size changed event
+            '' 
+
+            ''EDIT:
+            '' 9-16-2015
+            '' Need to redraw respective container on size changed
+            '' If job pictures is active filter, only redraw job pictures
+            '' If Attached Files is active filter......
+            '' 
+
+            Dim active_filter_text As String = Me.tscboAFPicsFilter.Text
+            Select Case active_filter_text
+                Case "All"
+                    Try
+                        Dim a As Control
+                        Dim p_width As Integer = Me.pnlAFPics.Width
+                        Dim p_height As Integer = Me.pnlAFPics.Height
+                        'x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
+                        'x.Location = New Point((p_width / 2) + 5, 0)
+                        For Each a In Me.pnlAFPics.Controls
+
+                            If TypeOf (a) Is ListView Then
+                                If a.Name.ToString = "lsAttachedFiles" Then
+                                    Dim pLocX As Integer = a.Location.X
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width / 2) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(5, 5)
+
+                                ElseIf a.Name.ToString = "lsJobPictures" Then
+                                    '' for list view lsJP the offset of X has to be counted in as well
+                                    '' 
+                                    Dim pLocX As Integer = (p_width / 2)
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width / 2) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(pLocX + 5, 5)
+                                End If
+                            End If
+                        Next
+                    Catch ex As Exception
+                        '' just trap it
+
+                    End Try
+                    Exit Select
+                Case "Job Pictures"
+                    Try
+                        Dim a As Control
+                        Dim p_width As Integer = Me.pnlAFPics.Width
+                        Dim p_height As Integer = Me.pnlAFPics.Height
+
+                        For Each a In Me.pnlAFPics.Controls
+
+                            If TypeOf (a) Is ListView Then
+
+                                If a.Name.ToString = "lsJobPictures" Then
+                                    Dim pLocX As Integer = (p_width)
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width - 20)
+                                    a.Height = (p_height - 10)
+                                    a.Location = New Point(5, 5)
+                                End If
+                            End If
+                        Next
+                    Catch ex As Exception
+
+                    End Try
+                    Exit Select
+                Case "Attached Files"
+                    Try
+                        Dim a As Control
+                        Dim p_width As Integer = Me.pnlAFPics.Width
+                        Dim p_height As Integer = Me.pnlAFPics.Height
+
+                        For Each a In Me.pnlAFPics.Controls
+
+                            If TypeOf (a) Is ListView Then
+
+                                If a.Name.ToString = "lsAttachedFiles" Then
+                                    Dim pLocX As Integer = a.Location.X
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(5, 5)
+
+                                End If
+                            End If
+                        Next
+                    Catch ex As Exception
+
+                    End Try
+                    Exit Select
+                Case Else
+                    Try
+                        Dim a As Control
+                        Dim p_width As Integer = Me.pnlAFPics.Width
+                        Dim p_height As Integer = Me.pnlAFPics.Height
+                        'x.Size = New System.Drawing.Point((p_width / 2) - 20, (p_height - 10))
+                        'x.Location = New Point((p_width / 2) + 5, 0)
+                        For Each a In Me.pnlAFPics.Controls
+
+                            If TypeOf (a) Is ListView Then
+                                If a.Name.ToString = "lsAttachedFiles" Then
+                                    Dim pLocX As Integer = a.Location.X
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width / 2) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(5, 5)
+
+                                ElseIf a.Name.ToString = "lsJobPictures" Then
+                                    '' for list view lsJP the offset of X has to be counted in as well
+                                    '' 
+                                    Dim pLocX As Integer = (p_width / 2)
+                                    Dim pLocY As Integer = a.Location.Y
+                                    a.Width = (p_width / 2) - 20
+                                    a.Height = p_height - 10
+                                    a.Location = New Point(pLocX, 5)
+                                End If
+                            End If
+                        Next
+                    Catch ex As Exception
+                        '' just trap it
+
+                    End Try
+                    Exit Select
+            End Select
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "Sales_SizeChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub PopulateCustomerHistory()
+        If CType(Me.lblCntFiltered.Text, Integer) > 0 Then
+            bgCustomerHistory_DoWork(Nothing, Nothing)
+        Else
+            PullInfo("")
+            Me.pnlCustomerHistory.Controls.Clear()
+        End If
+    End Sub
+
+    Private Sub Refocus_IssueLeads()
+        Dim c As Integer = Me.pnlIssue.Controls.Count
+        Dim i As Integer
+        For i = 1 To c
+            Dim all As Panel = Me.pnlIssue.Controls(i - 1)
+            If all.BorderStyle = BorderStyle.FixedSingle Then
+                STATIC_VARIABLES.CurrentID = all.Controls.Item(2).Text
+            End If
+        Next
+    End Sub
+
+#End Region
+
+#Region "Private Classes"
+
+#Region "List View Sorting"
 
     Private Class ListSortAscending
         Implements IComparer
@@ -8695,11 +8799,9 @@ Public Class Sales
         End Function
     End Class
 
+#End Region
 
-
-
-
-
+#End Region
 
 #Region "12-14-15 Edits for Email Templating Wizard"
 
@@ -8799,145 +8901,5 @@ Public Class Sales
 
 #End Region
 
-
-
-
-
-
-
-    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
-        Dim lnk As LinkLabel = sender
-        frmLinkSendEmail.MdiParent = Main
-        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
-        frmLinkSendEmail.Cust_Email = lnk.Text
-        frmLinkSendEmail.Show()
-        frmLinkSendEmail.BringToFront()
-    End Sub
-
-
-    Private Sub btnUpdateSPI_Click(sender As Object, e As EventArgs) Handles btnUpdateSPI.Click
-        frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
-        frmEditSpecialInstructions.CallingForm = "Sales"
-        frmEditSpecialInstructions.Show()
-    End Sub
-
-    Private Sub bgSalesQuery_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgSalesQuery.DoWork
-        Try
-            Me.Cursor = Cursors.WaitCursor
-            Dim c As New SalesListManager(sender)
-            'arItemCache = New ArrayList
-            'arItemCache = c.LV_Sales_Items
-            bgSalesQuery_RunWorkerCompleted(Me, Nothing)
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_DoWork", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
-
-
-    Private Sub bgSalesQuery_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles bgSalesQuery.RunWorkerCompleted
-        Try
-            ' If arItemCache.Count > 1 Then
-            Dim a As ListViewItem = Me.lvSales.Items.Item(0)
-            STATIC_VARIABLES.CurrentID = a.Text
-            Me.Text = "Sales Department Record ID: " & a.Text
-            PullInfo(a.Text)
-            AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-            Me.lvSales.EnsureVisible(0)
-            RaiseEvent PopCustHistory()
-            'End If
-            Me.Cursor = Cursors.Default
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_RunworkerCompleted", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
-
-
-
-
-    Private Sub PopulateCustomerHistory()
-        If CType(Me.lblCntFiltered.Text, Integer) > 0 Then
-            bgCustomerHistory_DoWork(Nothing, Nothing)
-        Else
-            PullInfo("")
-            Me.pnlCustomerHistory.Controls.Clear()
-        End If
-    End Sub
-
-    Private Sub bgCustomerHistory_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgCustomerHistory.DoWork
-        Try
-            Dim c As New CustomerHistory
-            c.SetUp(Me, STATIC_VARIABLES.CurrentID, Me.TScboCustomerHistory)
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgCustomerHistory_DoWork", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
-
-  
     
-    
-    Private Sub btnPrintDPerformanceReport_Click(sender As Object, e As EventArgs) Handles btnPrintDPerformanceReport.Click
-        Try
-            Dim d As New DTPManipulation(Me.cboDateRangeSummary.Text)
-            Me.dtpSummary2.Value = d.retDateFrom
-            Me.dtpSummary.Value = d.retDateTo
-            ' Dim r As New Sales_Performance_Report
-            Dim accuracy As String = Me.lblAccuracy.Text
-            Me.Cursor = Cursors.WaitCursor
-            Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
-            x = Nothing
-            Me.Cursor = Cursors.Default
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lnkPrintReport_LinkClicked", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-    End Sub
-
-    Private Sub lvSales_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvSales.SelectedIndexChanged
-        '' 
-        '' re-added 4/10/2016 AC
-        '' per request to do away with bg thread
-        '' and virtual list control -> Grouping NEEDED
-        '' 
-
-        Try
-            If Me.LoadComplete = True Then
-                Dim y As ListViewItem
-                For Each y In Me.lvSales.Items
-                    If y.Selected = True Then
-                        Me.Cursor = Cursors.WaitCursor
-                        PullInfo(y.Text)
-                        STATIC_VARIABLES.CurrentID = y.Text
-
-                    End If
-                Next
-            Else
-                '' do nothing 
-            End If
-
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "Form Code", "Event", "lv_SalesSelectedIndexChanged()", STATIC_VARIABLES.CurrentID, ex.Message.ToString)
-        End Try
-
-    End Sub
 End Class
