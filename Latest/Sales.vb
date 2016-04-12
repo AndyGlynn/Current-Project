@@ -2484,6 +2484,7 @@ Public Class Sales
         Try
             If current_Item IsNot Nothing Then
                 PullInfo(current_Item.Text)
+                STATIC_VARIABLES.CurrentID = current_Item.Text
             Else
                 Exit Sub
             End If
@@ -4748,9 +4749,9 @@ Public Class Sales
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "pnlIssue_sizechanged", "0", ex.Message.ToString)
-            y = Nothing
+            ' Dim y As New ErrorLogging_V2
+            'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "pnlIssue_sizechanged", "0", ex.Message.ToString)
+            'y = Nothing
         End Try
 
     End Sub
