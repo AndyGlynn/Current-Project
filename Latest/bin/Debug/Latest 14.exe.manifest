@@ -67,7 +67,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>lWGIBt9AJprwn1YKe4qxty03CdI=</dsig:DigestValue>
+        <dsig:DigestValue>eFBeJtqFd8e5t6qOi3vkisbmQCI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -79,43 +79,43 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>CCIo2vPdQqMYIeH1BUavBfS1KqI=</dsig:DigestValue>
+        <dsig:DigestValue>dNfMkkKnm7kSyurLjaRqr4AvLcw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Core.dll" size="430592">
-      <assemblyIdentity name="Interop.Microsoft.Office.Core" version="2.5.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Core.dll" size="437248">
+      <assemblyIdentity name="Interop.Microsoft.Office.Core" version="2.7.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Iinmv1gnaG/0fiqWcBGDV8fjniQ=</dsig:DigestValue>
+        <dsig:DigestValue>NJv7bU39j7bbgfNHCUzLsRpfKZ4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Interop.Outlook.dll" size="911872">
-      <assemblyIdentity name="Interop.Microsoft.Office.Interop.Outlook" version="9.3.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Interop.Outlook.dll" size="965632">
+      <assemblyIdentity name="Interop.Microsoft.Office.Interop.Outlook" version="9.5.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>mtBye/YXFEKue6SFxcDoYCh1uIc=</dsig:DigestValue>
+        <dsig:DigestValue>WhvC7vNV8WQv3snV/vWghqJNRHA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="4417408">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="4416384">
       <assemblyIdentity name="Latest 14" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>t5YNuq4FGdeegc5+lKY4EDw+3LY=</dsig:DigestValue>
+        <dsig:DigestValue>9ZT++7TqfN5bqKQiSVrT4nRdQvE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -1961,7 +1961,9 @@ Public Class Sales
                     STATIC_VARIABLES.CurrentID = Me.ID
                     ToolbarConfig(4)
 
+                    Me.Cursor = Cursors.WaitCursor
                     Dim d As New Issue_Leads(True, "")
+                    Me.Cursor = Cursors.Default
 
                     Exit Select
                 Case 3
@@ -4703,7 +4705,9 @@ Public Class Sales
     Private Sub dtpIssueLeads_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpIssueLeads.ValueChanged
         If Me.LoadComplete = True Then
             Try
+                Me.Cursor = Cursors.WaitCursor
                 Dim x As New Issue_Leads(True, "")
+                Me.Cursor = Cursors.Default
             Catch ex As Exception
                 Me.Cursor = Cursors.Default
                 Main.Cursor = Cursors.Default
@@ -8763,7 +8767,23 @@ Public Class Sales
             Dim c As New SalesListManager(sender)
             'arItemCache = New ArrayList
             'arItemCache = c.LV_Sales_Items
-            bgSalesQuery_RunWorkerCompleted(Me, Nothing)
+            'bgSalesQuery_RunWorkerCompleted(Me, Nothing)
+
+            If Me.lvSales.Items.Count > 0 Then
+                Dim a As ListViewItem = Me.lvSales.Items.Item(0)
+                STATIC_VARIABLES.CurrentID = a.Text
+                Me.Text = "Sales Department Record ID: " & a.Text
+                PullInfo(a.Text)
+                AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                Me.lvSales.EnsureVisible(0)
+                RaiseEvent PopCustHistory()
+                'End If
+                Me.Cursor = Cursors.Default
+            Else
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
+            End If
+            
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -8777,15 +8797,21 @@ Public Class Sales
     Private Sub bgSalesQuery_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles bgSalesQuery.RunWorkerCompleted
         Try
             ' If arItemCache.Count > 1 Then
-            Dim a As ListViewItem = Me.lvSales.Items.Item(0)
-            STATIC_VARIABLES.CurrentID = a.Text
-            Me.Text = "Sales Department Record ID: " & a.Text
-            PullInfo(a.Text)
-            AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-            Me.lvSales.EnsureVisible(0)
-            RaiseEvent PopCustHistory()
-            'End If
-            Me.Cursor = Cursors.Default
+
+            If Me.lvSales.Items.Count > 0 Then
+                Dim a As ListViewItem = Me.lvSales.Items.Item(0)
+                STATIC_VARIABLES.CurrentID = a.Text
+                Me.Text = "Sales Department Record ID: " & a.Text
+                PullInfo(a.Text)
+                AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                Me.lvSales.EnsureVisible(0)
+                RaiseEvent PopCustHistory()
+                'End If
+                Me.Cursor = Cursors.Default
+            Else
+
+            End If
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
