@@ -687,6 +687,7 @@ Partial Class Confirming
         '
         'btnEditSPI
         '
+        Me.btnEditSPI.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnEditSPI.Location = New System.Drawing.Point(251, 115)
         Me.btnEditSPI.Name = "btnEditSPI"
         Me.btnEditSPI.Size = New System.Drawing.Size(53, 23)

@@ -13,6 +13,7 @@ Public Class SDResult
     Public Editmodetext As String
     Public SeqNum As Integer = 0
     Public StepCount As Integer = 1
+    Public Frm As Form
 #End Region
 #Region "Get Data Variables"
     '' Data Needed for new result 
@@ -2031,22 +2032,22 @@ Public Class SDResult
 
     End Sub
 
-    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.cboautonotes.Focus()
         Me.cboautonotes.DroppedDown = True
 
     End Sub
 
-    Private Sub cboautonotes_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboautonotes.GotFocus
+    Private Sub cboautonotes_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.Label1.Visible = False
     End Sub
 
-    Private Sub cboautonotes_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboautonotes.LostFocus
+    Private Sub cboautonotes_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.Label1.Visible = True
     End Sub
 
 
-    Private Sub cboautonotes_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboautonotes.SelectedValueChanged
+    Private Sub cboautonotes_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
             If Me.cboautonotes.Text = Nothing Or Me.cboautonotes.Text = "________________________________________________________________" Then
                 Exit Sub
@@ -2272,395 +2273,375 @@ Public Class SDResult
 
 
     Private Sub btnSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        Try
-            Dim RD As String = Me.dtpRecDate.Value.ToShortDateString
-            RD = RD & " 12:00:00 AM"
-            RD = CDate(RD)
-            Dim cash As Boolean
-            Dim finance As Boolean
-            If Me.rdoCash.Checked = True And Me.rdoFinance.Checked = False Then
-                cash = True
-                finance = False
-            ElseIf Me.rdoCash.Checked = False And Me.rdoFinance.Checked = True Then
-                cash = False
-                finance = True
-            ElseIf Me.rdoCash.Checked = False And Me.rdoFinance.Checked = False Then
-                cash = False
-                finance = False
-            End If
-            If Me.txt1Quoted.Text = "" Then
-                Me.txt1Quoted.Text = "0"
-            End If
-            If Me.txt2Quoted.Text = "" Then
-                Me.txt2Quoted.Text = "00"
-            End If
-            If Me.txt1Par.Text = "" Then
-                Me.txt1Par.Text = "0"
-            End If
-            If Me.txt2Par.Text = "" Then
-                Me.txt2Par.Text = "00"
-            End If
-            If Me.txt1ContractAmt.Text = "" Then
-                Me.txt1ContractAmt.Text = "0"
-            End If
-            If Me.txt2ContractAmt.Text = "" Then
-                Me.txt2ContractAmt.Text = "00"
-            End If
-            Me.txt2Quoted.Text = Microsoft.VisualBasic.Left(Me.txt2Quoted.Text, 2)
-            Me.txt2Par.Text = Microsoft.VisualBasic.Left(Me.txt2Par.Text, 2)
-            Me.txt2ContractAmt.Text = Microsoft.VisualBasic.Left(Me.txt2Par.Text, 2)
-            If Me.cboSalesResults.Text = "Sale" Then
-                If Me.lstManage.Items.Count = 3 Then
-                    Me.Product1 = Me.lstManage.Items(0)
-                    Me.Product2 = Me.lstManage.Items(1)
-                    Me.Product3 = Me.lstManage.Items(2)
-                ElseIf Me.lstManage.Items.Count = 2 Then
-                    Me.Product1 = Me.lstManage.Items(0)
-                    Me.Product2 = Me.lstManage.Items(1)
-                    Me.Product3 = ""
-                ElseIf Me.lstManage.Items.Count = 1 Then
-                    Me.Product1 = Me.lstManage.Items(0)
-                    Me.Product2 = ""
-                    Me.Product3 = ""
-                Else
-                    Me.Product1 = ""
-                    Me.Product2 = ""
-                    Me.Product3 = ""
-                End If
-            End If
-
-            If Me.chkRecoverable.Checked = True Then
-                Me.Recoverable = True
+       Dim RD As String = Me.dtpRecDate.Value.ToShortDateString
+        RD = RD & " 12:00:00 AM"
+        RD = CDate(RD)
+        Dim Delay As String = Me.dtpDelay.Value.ToShortDateString
+        Delay = Delay & " 12:00:00 AM"
+        Delay = CDate(Delay)
+        Dim cash As Boolean
+        Dim finance As Boolean
+        If Me.rdoCash.Checked = True And Me.rdoFinance.Checked = False Then
+            cash = True
+            finance = False
+        ElseIf Me.rdoCash.Checked = False And Me.rdoFinance.Checked = True Then
+            cash = False
+            finance = True
+        ElseIf Me.rdoCash.Checked = False And Me.rdoFinance.Checked = False Then
+            cash = False
+            finance = False
+        End If
+        If Me.txt1Quoted.Text = "" Then
+            Me.txt1Quoted.Text = "0"
+        End If
+        If Me.txt2Quoted.Text = "" Then
+            Me.txt2Quoted.Text = "00"
+        End If
+        If Me.txt1Par.Text = "" Then
+            Me.txt1Par.Text = "0"
+        End If
+        If Me.txt2Par.Text = "" Then
+            Me.txt2Par.Text = "00"
+        End If
+        If Me.txt1ContractAmt.Text = "" Then
+            Me.txt1ContractAmt.Text = "0"
+        End If
+        If Me.txt2ContractAmt.Text = "" Then
+            Me.txt2ContractAmt.Text = "00"
+        End If
+        Me.txt2Quoted.Text = Microsoft.VisualBasic.Left(Me.txt2Quoted.Text, 2)
+        Me.txt2Par.Text = Microsoft.VisualBasic.Left(Me.txt2Par.Text, 2)
+        Me.txt2ContractAmt.Text = Microsoft.VisualBasic.Left(Me.txt2Par.Text, 2)
+        If Me.cboSalesResults.Text = "Sale" Then
+            If Me.lstManage.Items.Count = 3 Then
+                Me.Product1 = Me.lstManage.Items(0)
+                Me.Product2 = Me.lstManage.Items(1)
+                Me.Product3 = Me.lstManage.Items(2)
+            ElseIf Me.lstManage.Items.Count = 2 Then
+                Me.Product1 = Me.lstManage.Items(0)
+                Me.Product2 = Me.lstManage.Items(1)
+                Me.Product3 = ""
+            ElseIf Me.lstManage.Items.Count = 1 Then
+                Me.Product1 = Me.lstManage.Items(0)
+                Me.Product2 = ""
+                Me.Product3 = ""
             Else
-                Me.Recoverable = False
+                Me.Product1 = ""
+                Me.Product2 = ""
+                Me.Product3 = ""
             End If
+        End If
 
-            Dim Reps As String
-            If Me.cboRep1.Text <> "" And Me.cboRep2.Text = "" Or Me.cboRep2.Text = " " Then
-                Reps = Me.cboRep1.Text
-            Else
-                Reps = Me.cboRep1.Text & " and " & Me.cboRep2.Text
-            End If
+        If Me.chkRecoverable.Checked = True Then
+            Me.Recoverable = True
+        Else
+            Me.Recoverable = False
+        End If
 
-            Dim dep2 As String
-            Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdGet2 As SqlCommand
-            Dim r2 As SqlDataReader
-            cmdGet2 = New SqlCommand("Select isrecovery from Enterlead where id = " & Me.ID, cnn2)
-            cmdGet2.CommandType = CommandType.Text
-            cnn2.Open()
-            r2 = cmdGet2.ExecuteReader(CommandBehavior.CloseConnection)
-            r2.Read()
-            If r2.Item(0) = True Then
-                dep2 = "Recovery"
-            Else
+        Dim Reps As String
+        If Me.cboRep1.Text <> "" And Me.cboRep2.Text = "" Or Me.cboRep2.Text = " " Then
+            Reps = Me.cboRep1.Text
+        Else
+            Reps = Me.cboRep1.Text & " and " & Me.cboRep2.Text
+        End If
+
+        Dim dep2 As String
+        Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+        Dim cmdGet2 As SqlCommand
+        Dim r2 As SqlDataReader
+        cmdGet2 = New SqlCommand("Select isrecovery from Enterlead where id = " & Me.ID, cnn2)
+        cmdGet2.CommandType = CommandType.Text
+        cnn2.Open()
+        r2 = cmdGet2.ExecuteReader(CommandBehavior.CloseConnection)
+        r2.Read()
+        If r2.Item(0) = True Then
+            dep2 = "Recovery"
+        Else
+            dep2 = "Marketing"
+        End If
+        If Me.EditMode = True Then
+            If Me.lvPrevious.Items(0).SubItems(7).Text = True And Me.cboSalesResults.Text <> "Demo/No Sale" Then
+                dep2 = "Marketing"
+            ElseIf Me.lvPrevious.Items(0).SubItems(7).Text = True And Me.cboSalesResults.Text <> "Recission Cancel" Then
                 dep2 = "Marketing"
             End If
-            If Me.EditMode = True Then
-                If Me.lvPrevious.Items(0).SubItems(7).Text = True And Me.cboSalesResults.Text <> "Demo/No Sale" Then
-                    dep2 = "Marketing"
-                ElseIf Me.lvPrevious.Items(0).SubItems(7).Text = True And Me.cboSalesResults.Text <> "Recission Cancel" Then
-                    dep2 = "Marketing"
-                End If
+        End If
+        r2.Close()
+        cnn2.Close()
+        Dim description As String
+        If Me.cboSalesResults.Text = "Not Issued" Then
+            description = "Appt. was not issued. Logged by " & STATIC_VARIABLES.CurrentUser & " (Forwarded back to the " & dep2 & " Department to be rescheduled)"
+        ElseIf Me.cboSalesResults.Text = "Lost Result" Then
+            If Me.cboRep1.Text = "" Then
+                description = "Appt. Logged as ""Lost Result"" by " & STATIC_VARIABLES.CurrentUser & ", and has been forwarded back to the " & dep2 & " Department"
+            Else
+                description = "Appt. issued to " & Reps & ", and has been logged as ""Lost Result"" by " & STATIC_VARIABLES.CurrentUser & ". Record has been forwarded back to the " & dep2 & " Department"
             End If
-            r2.Close()
-            cnn2.Close()
-            Dim description As String
-            If Me.cboSalesResults.Text = "Not Issued" Then
-                description = "Appt. was not issued. Logged by " & STATIC_VARIABLES.CurrentUser & " (Forwarded back to the " & dep2 & " Department to be rescheduled)"
-            ElseIf Me.cboSalesResults.Text = "Lost Result" Then
-                If Me.cboRep1.Text = "" Then
-                    description = "Appt. Logged as ""Lost Result"" by " & STATIC_VARIABLES.CurrentUser & ", and has been forwarded back to the " & dep2 & " Department"
-                Else
-                    description = "Appt. issued to " & Reps & ", and has been logged as ""Lost Result"" by " & STATIC_VARIABLES.CurrentUser & ". Record has been forwarded back to the " & dep2 & " Department"
-                End If
-            ElseIf Me.cboSalesResults.Text = "Recission Cancel" Then
-                Dim cnn1 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-                Dim cmdGet1 As SqlCommand
-                Dim r1 As SqlDataReader
-                cmdGet1 = New SqlCommand("Select Contact1FirstName, Contact2FirstName from Enterlead where id = " & Me.ID, cnn1)
-                cmdGet1.CommandType = CommandType.Text
-                cnn1.Open()
-                r1 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
-                r1.Read()
-                Dim Customer As String
-                Dim hashave As String
-                Dim theirhisher As String
-                If r1.Item(1) = "" Then
-                    Customer = r1.Item(0)
-                    hashave = "has"
-                    theirhisher = "his/her"
-                Else
-                    Customer = r1.Item(0) & " and " & r1.Item(1)
-                    hashave = "have"
-                    theirhisher = "their"
-                End If
-                r1.Close()
-                cnn1.Close()
+        ElseIf Me.cboSalesResults.Text = "Recission Cancel" Then
+            Dim cnn1 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet1 As SqlCommand
+            Dim r1 As SqlDataReader
+            cmdGet1 = New SqlCommand("Select Contact1FirstName, Contact2FirstName from Enterlead where id = " & Me.ID, cnn1)
+            cmdGet1.CommandType = CommandType.Text
+            cnn1.Open()
+            r1 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
+            r1.Read()
+            Dim Customer As String
+            Dim hashave As String
+            Dim theirhisher As String
+            If r1.Item(1) = "" Then
+                Customer = r1.Item(0)
+                hashave = "has"
+                theirhisher = "his/her"
+            Else
+                Customer = r1.Item(0) & " and " & r1.Item(1)
+                hashave = "have"
+                theirhisher = "their"
+            End If
+            r1.Close()
+            cnn1.Close()
 
-                cmdGet1 = New SqlCommand("Select Financing,Installation from tblwherecanleadgo where leadnumber = " & Me.ID, cnn1)
-                cnn1.Open()
-                r1 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
-                r1.Read()
-                Dim dep As String
-                If r1.Item(0) = True And r1.Item(1) = True Then
-                    dep = "(Removed from Installation and Finance Departments)"
-                ElseIf r1.Item(0) = True And r1.Item(1) = False Then
-                    dep = "(Removed from Finance Department)"
-                ElseIf r1.Item(1) = True And r1.Item(0) = False Then
-                    dep = "(Removed from Installation Department)"
-                Else
-                    dep = ""
-                End If
-                r1.Close()
-                cnn1.Close()
+            cmdGet1 = New SqlCommand("Select Financing,Installation from tblwherecanleadgo where leadnumber = " & Me.ID, cnn1)
+            cnn1.Open()
+            r1 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
+            r1.Read()
+            Dim dep As String
+            If r1.Item(0) = True And r1.Item(1) = True Then
+                dep = "(Removed from Installation and Finance Departments)"
+            ElseIf r1.Item(0) = True And r1.Item(1) = False Then
+                dep = "(Removed from Finance Department)"
+            ElseIf r1.Item(1) = True And r1.Item(0) = False Then
+                dep = "(Removed from Installation Department)"
+            Else
+                dep = ""
+            End If
+            r1.Close()
+            cnn1.Close()
 
-                If Me.Recoverable = False Then
-                    description = Customer & " " & hashave & " decided to cancel " & theirhisher & " contract within the ""Right to Rescind"" date. Recission Cancel logged by " & STATIC_VARIABLES.CurrentUser & "." & dep
+            If Me.Recoverable = False Then
+                description = Customer & " " & hashave & " decided to cancel " & theirhisher & " contract within the ""Right to Rescind"" date. Recission Cancel logged by " & STATIC_VARIABLES.CurrentUser & "." & dep
+            Else
+                description = Customer & " " & hashave & " decided to cancel " & theirhisher & " contract within the ""Right to Rescind"" date. Recission Cancel logged by " & STATIC_VARIABLES.CurrentUser & ", and forwarded to the Recovery Department." & dep
+            End If
+        ElseIf Me.cboSalesResults.Text = "Bank Rejected" Then
+            description = "Due to credit issues, this contract has been rejected by the Finance Department. Rejection logged by " & STATIC_VARIABLES.CurrentUser
+        ElseIf Me.cboSalesResults.Text = "Bank Approved" Then
+            description = "Contract has been approved by the Finance Department. Approval logged by " & STATIC_VARIABLES.CurrentUser
+        ElseIf Me.cboSalesResults.Text = "Demo/No Sale" Then
+            description = "Appt. Issued to " & Reps & ", which resulted in a Demo/No Sale. Price Quoted was $" & Me.txt1Quoted.Text & "." & Me.txt2Quoted.Text & " and Par Price was $" & Me.txt1Par.Text & "." & Me.txt2Par.Text & ". Logged by " & STATIC_VARIABLES.CurrentUser
+            If Recoverable = True Then
+                description = description & " (Forwarded to the Recovery Department)"
+            End If
+        ElseIf Me.cboSalesResults.Text = "Sale" Then
+            Dim Products As String = Me.P1
+            If Me.P2 <> "" Then
+                If Me.P2 <> "" And Me.P3 = "" Then
+                    Products = Products & " and " & Me.P2
                 Else
-                    description = Customer & " " & hashave & " decided to cancel " & theirhisher & " contract within the ""Right to Rescind"" date. Recission Cancel logged by " & STATIC_VARIABLES.CurrentUser & ", and forwarded to the Recovery Department." & dep
-                End If
-            ElseIf Me.cboSalesResults.Text = "Bank Rejected" Then
-                description = "Due to credit issues, this contract has been rejected by the Finance Department. Rejection logged by " & STATIC_VARIABLES.CurrentUser
-            ElseIf Me.cboSalesResults.Text = "Bank Approved" Then
-                description = "Contract has been approved by the Finance Department. Approval logged by " & STATIC_VARIABLES.CurrentUser
-            ElseIf Me.cboSalesResults.Text = "Demo/No Sale" Then
-                description = "Appt. Issued to " & Reps & ", which resulted in a Demo/No Sale. Price Quoted was $" & Me.txt1Quoted.Text & "." & Me.txt2Quoted.Text & " and Par Price was $" & Me.txt1Par.Text & "." & Me.txt2Par.Text & ". Logged by " & STATIC_VARIABLES.CurrentUser
-                If Recoverable = True Then
-                    description = description & " (Forwarded to the Recovery Department)"
-                End If
-            ElseIf Me.cboSalesResults.Text = "Sale" Then
-                Dim Products As String = Me.P1
-                If Me.P2 <> "" Then
-                    If Me.P2 <> "" And Me.P3 = "" Then
-                        Products = Products & " and " & Me.P2
+                    Products = Products & ", " & Me.P2
+                    If Me.P4 = "" Then
+                        Products = Products & ", and " & Me.P3
                     Else
-                        Products = Products & ", " & Me.P2
-                        If Me.P4 = "" Then
-                            Products = Products & ", and " & Me.P3
+                        Products = Products & ", " & Me.P3
+                        If Me.P5 = "" Then
+                            Products = Products & ", and " & Me.P4
                         Else
-                            Products = Products & ", " & Me.P3
-                            If Me.P5 = "" Then
-                                Products = Products & ", and " & Me.P4
-                            Else
-                                Products = Products & ", " & Me.P4 & ", and " & Me.P5
-                            End If
+                            Products = Products & ", " & Me.P4 & ", and " & Me.P5
                         End If
                     End If
                 End If
+            End If
 
-                If Me.rdoFinance.Checked = True Then
-                    description = "Appt. Issued to " & Reps & ", which resulted in a Sale in the amount of $" & Me.txt1ContractAmt.Text & "." & Me.txt2ContractAmt.Text & ". Products Sold- " & Products & ". (Forwarded to Finance Department for approval)"
-                Else
-                    description = "Appt. Issued to " & Reps & ", which resulted in a Sale in the amount of $" & Me.txt1ContractAmt.Text & "." & Me.txt2ContractAmt.Text & ". Products Sold- " & Products & ". (Forwarded to Installation Department)"
-                End If
-
-
-            ElseIf Me.cboSalesResults.Text = "No Demo" Then
-                description = "Appt. Issued to " & Reps & ", which resulted in a No Demo. Logged by " & STATIC_VARIABLES.CurrentUser
-            ElseIf Me.cboSalesResults.Text = "Reset" Or Me.cboSalesResults.Text = "Not Hit" Then
-                description = "Appt. issued to " & Reps & ", which resulted in a " & Me.cboSalesResults.Text & ". Logged by " & STATIC_VARIABLES.CurrentUser & " (Forwarded back to the " & dep2 & " Department to be rescheduled)"
+            If Me.rdoFinance.Checked = True Then
+                description = "Appt. Issued to " & Reps & ", which resulted in a Sale in the amount of $" & Me.txt1ContractAmt.Text & "." & Me.txt2ContractAmt.Text & ". Products Sold- " & Products & ". (Forwarded to Finance Department for approval)"
+            Else
+                description = "Appt. Issued to " & Reps & ", which resulted in a Sale in the amount of $" & Me.txt1ContractAmt.Text & "." & Me.txt2ContractAmt.Text & ". Products Sold- " & Products & ". (Forwarded to Installation Department)"
             End If
 
 
+        ElseIf Me.cboSalesResults.Text = "No Demo" Then
+            description = "Appt. Issued to " & Reps & ", which resulted in a No Demo. Logged by " & STATIC_VARIABLES.CurrentUser
+        ElseIf Me.cboSalesResults.Text = "Reset" Or Me.cboSalesResults.Text = "Not Hit" Then
+            description = "Appt. issued to " & Reps & ", which resulted in a " & Me.cboSalesResults.Text & ". Logged by " & STATIC_VARIABLES.CurrentUser & " (Forwarded back to the " & dep2 & " Department to be rescheduled)"
+        End If
 
-            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim param1 As SqlParameter = New SqlParameter("@NR", Me.NR)
-            Dim param2 As SqlParameter = New SqlParameter("@Editmode", Me.EditMode)
-            Dim param3 As SqlParameter = New SqlParameter("@Result", Me.cboSalesResults.Text)
-            Dim param4 As SqlParameter = New SqlParameter("@rep1", Me.cboRep1.Text)
-            Dim param5 As SqlParameter = New SqlParameter("@Rep2", Me.cboRep2.Text)
-            Dim param6 As SqlParameter = New SqlParameter("@RDate", RD)
-            Dim param7 As SqlParameter = New SqlParameter("@ContractAmt", Me.txt1ContractAmt.Text & "." & Me.txt2ContractAmt.Text)
-            Dim param8 As SqlParameter = New SqlParameter("@cash", cash)
-            Dim param9 As SqlParameter = New SqlParameter("@finance", finance)
-            Dim param10 As SqlParameter = New SqlParameter("@contractnotes", Me.txtContractNotes.Text)
-            Dim param11 As SqlParameter = New SqlParameter("@Product1", Me.Product1)
-            Dim param12 As SqlParameter = New SqlParameter("@Product2", Me.Product2)
-            Dim param13 As SqlParameter = New SqlParameter("@Product3", Me.Product3)
-            Dim param14 As SqlParameter = New SqlParameter("@Sold1", Me.P1)
-            Dim param15 As SqlParameter = New SqlParameter("@Sold2", Me.P2)
-            Dim param16 As SqlParameter = New SqlParameter("@Sold3", Me.P3)
-            Dim param17 As SqlParameter = New SqlParameter("@Sold4", Me.P4)
-            Dim param18 As SqlParameter = New SqlParameter("@Sold5", Me.P5)
-            Dim param19 As SqlParameter = New SqlParameter("@Split1", Me.Split1)
-            Dim param20 As SqlParameter = New SqlParameter("@Split2", Me.Split2)
-            Dim param21 As SqlParameter = New SqlParameter("@Split3", Me.Split3)
-            Dim param22 As SqlParameter = New SqlParameter("@Split4", Me.Split4)
-            Dim param23 As SqlParameter = New SqlParameter("@Split5", Me.Split5)
-            Dim param24 As SqlParameter = New SqlParameter("@Manufacturer1", Me.PM1)
-            Dim param25 As SqlParameter = New SqlParameter("@Manufacturer2", Me.PM2)
-            Dim param26 As SqlParameter = New SqlParameter("@Manufacturer3", Me.PM3)
-            Dim param27 As SqlParameter = New SqlParameter("@Manufacturer4", Me.PM4)
-            Dim param28 As SqlParameter = New SqlParameter("@Manufacturer5", Me.PM5)
-            Dim param29 As SqlParameter = New SqlParameter("@Model1", Me.PModel1)
-            Dim param30 As SqlParameter = New SqlParameter("@Model2", Me.PModel2)
-            Dim param31 As SqlParameter = New SqlParameter("@Model3", Me.PModel3)
-            Dim param32 As SqlParameter = New SqlParameter("@Model4", Me.PModel4)
-            Dim param33 As SqlParameter = New SqlParameter("@Model5", Me.PModel5)
-            Dim param34 As SqlParameter = New SqlParameter("@Style1", Me.PStyle1)
-            Dim param35 As SqlParameter = New SqlParameter("@Style2", Me.PStyle2)
-            Dim param36 As SqlParameter = New SqlParameter("@Style3", Me.PStyle3)
-            Dim param37 As SqlParameter = New SqlParameter("@Style4", Me.PStyle4)
-            Dim param38 As SqlParameter = New SqlParameter("@Style5", Me.PStyle5)
-            Dim param39 As SqlParameter = New SqlParameter("@Color1", Me.PColor1)
-            Dim param40 As SqlParameter = New SqlParameter("@Color2", Me.PColor2)
-            Dim param41 As SqlParameter = New SqlParameter("@Color3", Me.PColor3)
-            Dim param42 As SqlParameter = New SqlParameter("@Color4", Me.PColor4)
-            Dim param43 As SqlParameter = New SqlParameter("@Color5", Me.PColor5)
-            Dim param44 As SqlParameter = New SqlParameter("@Qty1", Me.Qty1)
-            Dim param45 As SqlParameter = New SqlParameter("@Qty2", Me.Qty2)
-            Dim param46 As SqlParameter = New SqlParameter("@Qty3", Me.Qty3)
-            Dim param47 As SqlParameter = New SqlParameter("@Qty4", Me.Qty4)
-            Dim param48 As SqlParameter = New SqlParameter("@Qty5", Me.Qty5)
-            Dim param49 As SqlParameter = New SqlParameter("@Unit1", Me.Unit1)
-            Dim param50 As SqlParameter = New SqlParameter("@Unit2", Me.Unit2)
-            Dim param51 As SqlParameter = New SqlParameter("@Unit3", Me.Unit3)
-            Dim param52 As SqlParameter = New SqlParameter("@Unit4", Me.Unit4)
-            Dim param53 As SqlParameter = New SqlParameter("@Unit5", Me.Unit5)
-            Dim param54 As SqlParameter = New SqlParameter("@Notes", Me.rtfNote.Text)
-            Dim param55 As SqlParameter = New SqlParameter("@Quoted", Me.txt1Quoted.Text & "." & Me.txt2Quoted.Text)
-            Dim param56 As SqlParameter = New SqlParameter("@Par", Me.txt1Par.Text & "." & Me.txt2Par.Text)
-            Dim param57 As SqlParameter = New SqlParameter("@Recoverable", Me.Recoverable)
-            Dim param58 As SqlParameter = New SqlParameter("@LeadHistoryId", Me.LHID)
-            Dim param59 As SqlParameter = New SqlParameter("@ID", Me.ID)
-            Dim param60 As SqlParameter = New SqlParameter("@description", description)
-            Dim param61 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
 
-            '' Notes: 2-14-2016 AC
-            '' This stored procedure expects '@Delay' param
-            '' which is not being supplied causing 
-            '' the update/save to fail for 'moving lead to being recoverable'.
-            '' The unknown of it is 'how long to delay for' so i know what to set the params default as
-            '' IE: @Delay = TimeSpan(date.today + 1 day || 1 week || 1 month )
-            '' @Delay = choice
-            '' cmdGet.Parameters.add(@Delay) 
-            ''
-            Dim timeVar As Date = Date.Today.AddDays(7)
-            Dim stopPoint As String = timeVar.ToString
-            Dim paramADD As SqlParameter = New SqlParameter("@Delay", timeVar)
-            ''
 
-            Dim cmdGet As SqlCommand
-            cmdGet = New SqlCommand("dbo.SalesResult", cnn)
-            cmdGet.Parameters.Add(param1)
-            cmdGet.Parameters.Add(param2)
-            cmdGet.Parameters.Add(param3)
-            cmdGet.Parameters.Add(param4)
-            cmdGet.Parameters.Add(param5)
-            cmdGet.Parameters.Add(param6)
-            cmdGet.Parameters.Add(param7)
-            cmdGet.Parameters.Add(param8)
-            cmdGet.Parameters.Add(param9)
-            cmdGet.Parameters.Add(param10)
-            cmdGet.Parameters.Add(param11)
-            cmdGet.Parameters.Add(param12)
-            cmdGet.Parameters.Add(param13)
-            cmdGet.Parameters.Add(param14)
-            cmdGet.Parameters.Add(param15)
-            cmdGet.Parameters.Add(param16)
-            cmdGet.Parameters.Add(param17)
-            cmdGet.Parameters.Add(param18)
-            cmdGet.Parameters.Add(param19)
-            cmdGet.Parameters.Add(param20)
-            cmdGet.Parameters.Add(param21)
-            cmdGet.Parameters.Add(param22)
-            cmdGet.Parameters.Add(param23)
-            cmdGet.Parameters.Add(param24)
-            cmdGet.Parameters.Add(param25)
-            cmdGet.Parameters.Add(param26)
-            cmdGet.Parameters.Add(param27)
-            cmdGet.Parameters.Add(param28)
-            cmdGet.Parameters.Add(param29)
-            cmdGet.Parameters.Add(param30)
-            cmdGet.Parameters.Add(param31)
-            cmdGet.Parameters.Add(param32)
-            cmdGet.Parameters.Add(param33)
-            cmdGet.Parameters.Add(param34)
-            cmdGet.Parameters.Add(param35)
-            cmdGet.Parameters.Add(param36)
-            cmdGet.Parameters.Add(param37)
-            cmdGet.Parameters.Add(param38)
-            cmdGet.Parameters.Add(param39)
-            cmdGet.Parameters.Add(param40)
-            cmdGet.Parameters.Add(param41)
-            cmdGet.Parameters.Add(param42)
-            cmdGet.Parameters.Add(param43)
-            cmdGet.Parameters.Add(param44)
-            cmdGet.Parameters.Add(param45)
-            cmdGet.Parameters.Add(param46)
-            cmdGet.Parameters.Add(param47)
-            cmdGet.Parameters.Add(param48)
-            cmdGet.Parameters.Add(param49)
-            cmdGet.Parameters.Add(param50)
-            cmdGet.Parameters.Add(param51)
-            cmdGet.Parameters.Add(param52)
-            cmdGet.Parameters.Add(param53)
-            cmdGet.Parameters.Add(param54)
-            cmdGet.Parameters.Add(param55)
-            cmdGet.Parameters.Add(param56)
-            cmdGet.Parameters.Add(param57)
-            cmdGet.Parameters.Add(param58)
-            cmdGet.Parameters.Add(param59)
-            cmdGet.Parameters.Add(param60)
-            cmdGet.Parameters.Add(param61)
+        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+        Dim param1 As SqlParameter = New SqlParameter("@NR", Me.NR)
+        Dim param2 As SqlParameter = New SqlParameter("@Editmode", Me.EditMode)
+        Dim param3 As SqlParameter = New SqlParameter("@Result", Me.cboSalesResults.Text)
+        Dim param4 As SqlParameter = New SqlParameter("@rep1", Me.cboRep1.Text)
+        Dim param5 As SqlParameter = New SqlParameter("@Rep2", Me.cboRep2.Text)
+        Dim param6 As SqlParameter = New SqlParameter("@RDate", RD)
+        Dim param7 As SqlParameter = New SqlParameter("@ContractAmt", Me.txt1ContractAmt.Text & "." & Me.txt2ContractAmt.Text)
+        Dim param8 As SqlParameter = New SqlParameter("@cash", cash)
+        Dim param9 As SqlParameter = New SqlParameter("@finance", finance)
+        Dim param10 As SqlParameter = New SqlParameter("@contractnotes", Me.txtContractNotes.Text)
+        Dim param11 As SqlParameter = New SqlParameter("@Product1", Me.Product1)
+        Dim param12 As SqlParameter = New SqlParameter("@Product2", Me.Product2)
+        Dim param13 As SqlParameter = New SqlParameter("@Product3", Me.Product3)
+        Dim param14 As SqlParameter = New SqlParameter("@Sold1", Me.P1)
+        Dim param15 As SqlParameter = New SqlParameter("@Sold2", Me.P2)
+        Dim param16 As SqlParameter = New SqlParameter("@Sold3", Me.P3)
+        Dim param17 As SqlParameter = New SqlParameter("@Sold4", Me.P4)
+        Dim param18 As SqlParameter = New SqlParameter("@Sold5", Me.P5)
+        Dim param19 As SqlParameter = New SqlParameter("@Split1", Me.Split1)
+        Dim param20 As SqlParameter = New SqlParameter("@Split2", Me.Split2)
+        Dim param21 As SqlParameter = New SqlParameter("@Split3", Me.Split3)
+        Dim param22 As SqlParameter = New SqlParameter("@Split4", Me.Split4)
+        Dim param23 As SqlParameter = New SqlParameter("@Split5", Me.Split5)
+        Dim param24 As SqlParameter = New SqlParameter("@Manufacturer1", Me.PM1)
+        Dim param25 As SqlParameter = New SqlParameter("@Manufacturer2", Me.PM2)
+        Dim param26 As SqlParameter = New SqlParameter("@Manufacturer3", Me.PM3)
+        Dim param27 As SqlParameter = New SqlParameter("@Manufacturer4", Me.PM4)
+        Dim param28 As SqlParameter = New SqlParameter("@Manufacturer5", Me.PM5)
+        Dim param29 As SqlParameter = New SqlParameter("@Model1", Me.PModel1)
+        Dim param30 As SqlParameter = New SqlParameter("@Model2", Me.PModel2)
+        Dim param31 As SqlParameter = New SqlParameter("@Model3", Me.PModel3)
+        Dim param32 As SqlParameter = New SqlParameter("@Model4", Me.PModel4)
+        Dim param33 As SqlParameter = New SqlParameter("@Model5", Me.PModel5)
+        Dim param34 As SqlParameter = New SqlParameter("@Style1", Me.PStyle1)
+        Dim param35 As SqlParameter = New SqlParameter("@Style2", Me.PStyle2)
+        Dim param36 As SqlParameter = New SqlParameter("@Style3", Me.PStyle3)
+        Dim param37 As SqlParameter = New SqlParameter("@Style4", Me.PStyle4)
+        Dim param38 As SqlParameter = New SqlParameter("@Style5", Me.PStyle5)
+        Dim param39 As SqlParameter = New SqlParameter("@Color1", Me.PColor1)
+        Dim param40 As SqlParameter = New SqlParameter("@Color2", Me.PColor2)
+        Dim param41 As SqlParameter = New SqlParameter("@Color3", Me.PColor3)
+        Dim param42 As SqlParameter = New SqlParameter("@Color4", Me.PColor4)
+        Dim param43 As SqlParameter = New SqlParameter("@Color5", Me.PColor5)
+        Dim param44 As SqlParameter = New SqlParameter("@Qty1", Me.Qty1)
+        Dim param45 As SqlParameter = New SqlParameter("@Qty2", Me.Qty2)
+        Dim param46 As SqlParameter = New SqlParameter("@Qty3", Me.Qty3)
+        Dim param47 As SqlParameter = New SqlParameter("@Qty4", Me.Qty4)
+        Dim param48 As SqlParameter = New SqlParameter("@Qty5", Me.Qty5)
+        Dim param49 As SqlParameter = New SqlParameter("@Unit1", Me.Unit1)
+        Dim param50 As SqlParameter = New SqlParameter("@Unit2", Me.Unit2)
+        Dim param51 As SqlParameter = New SqlParameter("@Unit3", Me.Unit3)
+        Dim param52 As SqlParameter = New SqlParameter("@Unit4", Me.Unit4)
+        Dim param53 As SqlParameter = New SqlParameter("@Unit5", Me.Unit5)
+        Dim param54 As SqlParameter = New SqlParameter("@Notes", Me.rtfNote.Text)
+        Dim param55 As SqlParameter = New SqlParameter("@Quoted", Me.txt1Quoted.Text & "." & Me.txt2Quoted.Text)
+        Dim param56 As SqlParameter = New SqlParameter("@Par", Me.txt1Par.Text & "." & Me.txt2Par.Text)
+        Dim param57 As SqlParameter = New SqlParameter("@Recoverable", Me.Recoverable)
+        Dim param58 As SqlParameter = New SqlParameter("@LeadHistoryId", Me.LHID)
+        Dim param59 As SqlParameter = New SqlParameter("@ID", Me.ID)
+        Dim param60 As SqlParameter = New SqlParameter("@description", description)
+        Dim param61 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
+        Dim param62 As SqlParameter = New SqlParameter("@Delay", Delay)
+        Dim cmdGet As SqlCommand
+        cmdGet = New SqlCommand("dbo.SalesResult", cnn)
+        cmdGet.Parameters.Add(param1)
+        cmdGet.Parameters.Add(param2)
+        cmdGet.Parameters.Add(param3)
+        cmdGet.Parameters.Add(param4)
+        cmdGet.Parameters.Add(param5)
+        cmdGet.Parameters.Add(param6)
+        cmdGet.Parameters.Add(param7)
+        cmdGet.Parameters.Add(param8)
+        cmdGet.Parameters.Add(param9)
+        cmdGet.Parameters.Add(param10)
+        cmdGet.Parameters.Add(param11)
+        cmdGet.Parameters.Add(param12)
+        cmdGet.Parameters.Add(param13)
+        cmdGet.Parameters.Add(param14)
+        cmdGet.Parameters.Add(param15)
+        cmdGet.Parameters.Add(param16)
+        cmdGet.Parameters.Add(param17)
+        cmdGet.Parameters.Add(param18)
+        cmdGet.Parameters.Add(param19)
+        cmdGet.Parameters.Add(param20)
+        cmdGet.Parameters.Add(param21)
+        cmdGet.Parameters.Add(param22)
+        cmdGet.Parameters.Add(param23)
+        cmdGet.Parameters.Add(param24)
+        cmdGet.Parameters.Add(param25)
+        cmdGet.Parameters.Add(param26)
+        cmdGet.Parameters.Add(param27)
+        cmdGet.Parameters.Add(param28)
+        cmdGet.Parameters.Add(param29)
+        cmdGet.Parameters.Add(param30)
+        cmdGet.Parameters.Add(param31)
+        cmdGet.Parameters.Add(param32)
+        cmdGet.Parameters.Add(param33)
+        cmdGet.Parameters.Add(param34)
+        cmdGet.Parameters.Add(param35)
+        cmdGet.Parameters.Add(param36)
+        cmdGet.Parameters.Add(param37)
+        cmdGet.Parameters.Add(param38)
+        cmdGet.Parameters.Add(param39)
+        cmdGet.Parameters.Add(param40)
+        cmdGet.Parameters.Add(param41)
+        cmdGet.Parameters.Add(param42)
+        cmdGet.Parameters.Add(param43)
+        cmdGet.Parameters.Add(param44)
+        cmdGet.Parameters.Add(param45)
+        cmdGet.Parameters.Add(param46)
+        cmdGet.Parameters.Add(param47)
+        cmdGet.Parameters.Add(param48)
+        cmdGet.Parameters.Add(param49)
+        cmdGet.Parameters.Add(param50)
+        cmdGet.Parameters.Add(param51)
+        cmdGet.Parameters.Add(param52)
+        cmdGet.Parameters.Add(param53)
+        cmdGet.Parameters.Add(param54)
+        cmdGet.Parameters.Add(param55)
+        cmdGet.Parameters.Add(param56)
+        cmdGet.Parameters.Add(param57)
+        cmdGet.Parameters.Add(param58)
+        cmdGet.Parameters.Add(param59)
+        cmdGet.Parameters.Add(param60)
+        cmdGet.Parameters.Add(param61)
+        cmdGet.Parameters.Add(param62)
+        cmdGet.CommandType = CommandType.StoredProcedure
+        Dim r As SqlDataReader
+        cnn.Open()
+        r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+        r.Read()
+        r.Close()
+        cnn.Close()
+        Me.Close()
+        Try
+            If Frm.Name = "Sales" Then
 
-            '' Added: 2-14-2015 AC
-            cmdGet.Parameters.Add(paramADD)
-            '' FROM THE LOG AFTER EXECUTING:
-            '' 
-            '2/14/2016 2:23:07 PM,PC-101,192.168.0.8,SalesResult,FormCode,Sub,btnSave_Click,0,Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
-            'Cannot insert the value NULL into column 'QuotedSold', table 'iss.dbo.LeadHistory'; column does not allow nulls. INSERT fails.
-            'The statement has been terminated.
-            'The statement has been terminated.
-            ''
-            ''problem in the stored procedure. 
 
-            cmdGet.CommandType = CommandType.StoredProcedure
-            Dim r As SqlDataReader
-            cnn.Open()
-            r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-            r.Read()
-            r.Close()
-            cnn.Close()
-            Me.Close()
-            Sales.ForceRefresh = True
-            If Sales.tbMain.SelectedIndex = 1 Then
-                If Sales.cboSalesList.Text <> "Unfiltered Sales Dept. List" Or (Sales.cboGroupSales.Text = "Sales Result" Or Sales.cboGroupSales.Text = "Marketing Result" Or Sales.cboGroupSales.Text = "Sales Rep") Then
-                    Dim c As New SalesListManager(sender)
-                Else
-                    If Sales.TabControl2.TabIndex = 0 And Sales.lvSales.SelectedItems.Count <> 0 Then
-                        'Sales.lvSales_SelectedIndexChanged(Nothing, Nothing)
-                    ElseIf Sales.TabControl2.TabIndex = 1 And Sales.lvMemorized.SelectedItems.Count <> 0 Then
-                        Sales.PopulateMemorized()
+                Sales.ForceRefresh = True
+                If Sales.tbMain.SelectedIndex = 1 Then
+                    If Sales.cboSalesList.Text <> "Unfiltered Sales Dept. List" Or (Sales.cboGroupSales.Text = "Sales Result" Or Sales.cboGroupSales.Text = "Marketing Result" Or Sales.cboGroupSales.Text = "Sales Rep") Then
+                        Dim c As New SalesListManager(sender)
+                    Else
+                        If Sales.TabControl2.TabIndex = 0 And Sales.lvSales.SelectedItems.Count <> 0 Then
+                            Sales.lvSales_SelectedIndexChanged(Nothing, Nothing)
+                        ElseIf Sales.TabControl2.TabIndex = 1 And Sales.lvMemorized.SelectedItems.Count <> 0 Then
+                            Sales.PopulateMemorized()
+                        End If
                     End If
-                End If
-            Else
-                If Sales.lvnoresults.SelectedItems(0).Index = 0 And Sales.lvnoresults.Items.Count >= 2 Then
-                    Sales.lvnoresults.SelectedItems(0).Remove()
-                    Sales.lvnoresults.Items(0).Selected = True
-                ElseIf Sales.lvnoresults.SelectedItems(0).Index = Sales.lvnoresults.Items.Count - 1 And Sales.lvnoresults.Items.Count >= 2 Then
-                    Dim x As Integer = Sales.lvnoresults.SelectedItems(0).Index
-                    Sales.lvnoresults.SelectedItems(0).Remove()
-                    Sales.lvnoresults.Items(x - 1).Selected = True
-
-                ElseIf Sales.lvnoresults.SelectedItems(0).Index <> 0 And Sales.lvnoresults.Items.Count >= 2 Then
-                    Dim x As Integer = Sales.lvnoresults.SelectedItems(0).Index
-                    Sales.lvnoresults.SelectedItems(0).Remove()
-                    Sales.lvnoresults.Items(x).Selected = True
                 Else
-                    Sales.lvnoresults.SelectedItems(0).Remove()
+                    If Sales.lvnoresults.SelectedItems(0).Index = 0 And Sales.lvnoresults.Items.Count >= 2 Then
+                        Sales.lvnoresults.SelectedItems(0).Remove()
+                        Sales.lvnoresults.Items(0).Selected = True
+                    ElseIf Sales.lvnoresults.SelectedItems(0).Index = Sales.lvnoresults.Items.Count - 1 And Sales.lvnoresults.Items.Count >= 2 Then
+                        Dim x As Integer = Sales.lvnoresults.SelectedItems(0).Index
+                        Sales.lvnoresults.SelectedItems(0).Remove()
+                        Sales.lvnoresults.Items(x - 1).Selected = True
+
+                    ElseIf Sales.lvnoresults.SelectedItems(0).Index <> 0 And Sales.lvnoresults.Items.Count >= 2 Then
+                        Dim x As Integer = Sales.lvnoresults.SelectedItems(0).Index
+                        Sales.lvnoresults.SelectedItems(0).Remove()
+                        Sales.lvnoresults.Items(x).Selected = True
+                    Else
+                        Sales.lvnoresults.SelectedItems(0).Remove()
+                    End If
+                    Dim z As New Sales_Performance_Report
                 End If
-                Dim z As New Sales_Performance_Report
+            ElseIf Frm.Name = "ConfirmingSingleRecord" Then
+                Dim c As New CustomerHistory
+                c.SetUp(ConfirmingSingleRecord, ConfirmingSingleRecord.ID, ConfirmingSingleRecord.TScboCustomerHistory)
             End If
         Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesResult", "FormCode", "Sub", "btnSave_Click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
 
+        End Try
     End Sub
 
     Private Sub cboRep1_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboRep1.SelectedValueChanged
@@ -2684,5 +2665,18 @@ Public Class SDResult
 
     Private Sub SDResult_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged
 
+    End Sub
+
+    Private Sub chkDelay_CheckedChanged(sender As Object, e As EventArgs) Handles chkDelay.CheckedChanged
+        If Me.chkDelay.CheckState = CheckState.Checked Then
+            Me.dtpDelay.Enabled = True
+        Else
+            Me.dtpDelay.Enabled = False
+        End If
+    End Sub
+
+    Private Sub Label1_Click_1(sender As Object, e As EventArgs) Handles Label1.Click
+        Me.cboautonotes.Focus()
+        Me.cboautonotes.DroppedDown = True
     End Sub
 End Class

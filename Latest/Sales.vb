@@ -1852,9 +1852,10 @@ Public Class Sales
             Me.cboDateRangeSummary.Text = "Last Week"
             Dim r As New Sales_Performance_Report()
 
-
+            Me.cboDateRangeCustomerList.Text = "Last Month"
             Me.LoadComplete = True
             Me.cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
+            Me.cboDateRangeCustomerList_SelectedIndexChanged(Nothing, Nothing)
             If Me.WindowState <> FormWindowState.Normal Then
 
             End If
@@ -8838,7 +8839,7 @@ Public Class Sales
         End Try
     End Sub
 
-    Private Sub lvSales_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvSales.SelectedIndexChanged
+    Public Sub lvSales_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvSales.SelectedIndexChanged
         '' 
         '' re-added 4/10/2016 AC
         '' per request to do away with bg thread
