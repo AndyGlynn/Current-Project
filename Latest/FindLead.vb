@@ -17,7 +17,7 @@ Public Class FindLead
     Public PREVIOUS_ID As String = ""
     Public i As ListViewItem
     Public x As String = ""
-  
+    Public focused As Form = STATIC_VARIABLES.ActiveChild
     'Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
     '    Me.lstSearchResults.Items.Clear()
     '    Search(WhatIsChecked())
@@ -341,294 +341,186 @@ Public Class FindLead
 
     Private Sub lstSearchResults_MouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstSearchResults.MouseClick
 
+               Dim foundinform As String = ""
         Dim selitem As ListViewItem
         selitem = Me.lstSearchResults.GetItemAt(e.X, e.Y)
         If selitem Is Nothing Then
             Exit Sub
         End If
-
+        STATIC_VARIABLES.CurrentID = selitem.Text
         Dim found As Integer = 0
         Dim open As Integer = 0
-        Dim focused As Form
+        Dim frmName As String
         If STATIC_VARIABLES.ActiveChild IsNot Nothing Then
-            focused = STATIC_VARIABLES.ActiveChild
+            Focused = STATIC_VARIABLES.ActiveChild
         End If
         For Each frm As Form In Main.MdiChildren
-
             Select Case frm.Name
                 Case "Confirming", "Sales", "Administration", "ColdCalling", "WCaller", "Finance", "MarketingManager", _
                         "Recovery", "PreviousCustomer", "SecondSource", "Installation"
                     open += 1
                     Select Case frm.Name
                         Case Is = "Confirming"
-                            'Dim lv As New ListViewItem
+
                             Dim tab As String = Confirming.Tab
-                            'If tab = "Confirm" Then
-                            Dim foundConfirming As Integer = 0
-                            For Each Me.i In Confirming.lvConfirming.Items
-                                If Me.i.Text = selitem.Text Then
-
-                                    Me.i.Selected = True
-                                    found += 1
-                                    foundConfirming += 1
-                                    If Confirming.TabControl1.SelectedIndex <> 0 Then
-                                        Confirming.TabControl1.SelectedIndex = 0
-                                    End If
-
-                                    'Confirming.Focus()
-                                    'Me.Close()
-
-                                    'Exit Sub
+                            If tab = "Confirm" Then
+                                If Confirming.lvConfirming.Items.Count > 0 Then
+                                    For Each Me.i In Confirming.lvConfirming.Items
+                                        If Me.i.Text = selitem.Text Then
+                                            Me.i.Selected = True
+                                            Me.i.EnsureVisible()
+                                            found += 1
+                                            frmName = "Confirming"
+                                            If foundinform <> "" Then
+                                                foundinform = foundinform & " " & frmName
+                                            Else
+                                                foundinform = frmName
+                                            End If
+                                        End If
+                                    Next
                                 End If
-                            Next
-                            '''''''''''''''   'End If''
-                            If Confirming.lvConfirming.SelectedItems.Count <> 0 Then
-                                If Confirming.lvConfirming.SelectedItems(0).Text <> selitem.Text Then
+                            Else
+                                If Confirming.lvSales.Items.Count > 0 Then
                                     For Each Me.i In Confirming.lvSales.Items
                                         If Me.i.Text = selitem.Text Then
                                             Me.i.Selected = True
+                                            Me.i.EnsureVisible()
                                             found += 1
-                                            foundConfirming += 1
-                                            If Confirming.TabControl1.SelectedIndex <> 1 Then
-                                                Confirming.TabControl1.SelectedIndex = 1
+                                            frmName = "Confirming"
+                                            If foundinform <> "" Then
+                                                foundinform = foundinform & " " & frmName
+                                            Else
+                                                foundinform = frmName
                                             End If
-
-                                            'Confirming.Focus()
-                                            'Me.Close()
-
-                                            'Exit Sub
                                         End If
                                     Next
                                 End If
                             End If
-
-                            If foundConfirming = 0 Then
-                                Try
-                                    Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-                                    Dim cmdGET As SqlCommand = New SqlCommand("dbo.AlertConfirm", cnn)
-
-                                    Dim param1 As SqlParameter = New SqlParameter("@ID", selitem.Text)
-                                    cmdGET.Parameters.Add(param1)
-                                    cmdGET.CommandType = CommandType.StoredProcedure
-                                    cnn.Open()
-                                    Dim r1 As SqlDataReader
-
-                                    r1 = cmdGET.ExecuteReader
-                                    While r1.Read
-                                        'MsgBox(r1.Item(0))
-                                        Dim was As Date = Confirming.dpConfirming.Value
-
-
-
-
-
-                                        Confirming.dpConfirming.Value = r1.Item(0)
-                                        'Exit Sub '' remove 
-                                        'MsgBox(Confirming.lvConfirming.Items.Count)
-                                        For Each Me.i In Confirming.lvConfirming.Items
-                                            'MsgBox(Confirming.lvConfirming.SelectedItems(0).Text)
-                                            If Me.i.Text = selitem.Text Then
-
-                                                Me.i.Selected = True
-
-                                                'Dim c As New ConfirmingData
-                                                'c.PullCustomerINFO(Confirming.Tab, Me.i.Text)
-
-                                                found += 1
-                                                foundConfirming += 1
-                                                If Confirming.TabControl1.SelectedIndex <> 0 Then
-                                                    Confirming.TabControl1.SelectedIndex = 0
-                                                End If
-
-                                                Confirming.Focus()
-                                                'Me.Label5_Click(Nothing, Nothing)
-                                                Main.forcettconfirm = True
-
-
-
-                                                'Exit Sub
-                                            End If
-
-                                        Next
-                                        If Confirming.lvConfirming.SelectedItems.Count = 0 Then
-                                            Confirming.dpConfirming.Value = was
-                                        End If
-                                        was = Confirming.dpSales.Value
-
-                                        If found = 0 Then
-
-                                            Confirming.dpSales.Value = r1.Item(0)
-                                            For Each Me.i In Confirming.lvSales.Items
-                                                If Me.i.Text = selitem.Text Then
-                                                    Me.i.Selected = True
-                                                    found += 1
-                                                    foundConfirming += 1
-                                                    If Confirming.TabControl1.SelectedIndex <> 1 Then
-                                                        Confirming.TabControl1.SelectedIndex = 1
-                                                    End If
-
-                                                    Confirming.Focus()
-                                                    Main.forcettsales = True
-                                                    Confirming.Create_Tooltip(Confirming.dpSales, "search results")
-                                                    'Me.Label5_Click(Nothing, Nothing)
-
-
-
-                                                    'Exit Sub
-                                                End If
-                                            Next
-                                            If foundConfirming = 0 Then
-                                                Confirming.dpSales.Value = was
-                                            End If
-                                        End If
-                                    End While
-                                    r1.Close()
-                                    cnn.Close()
-                                Catch ex As Exception
-                                    Dim y As New ErrorLogging_V2
-                                    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Exclusions", "FormCode", "Sub", "lstSearchResults_MouseClick", "0", ex.Message.ToString)
-                                    y = Nothing
-                                End Try
-
-                            End If
-
-
                             '' run query to see if it is open to form (this case being confirming) if confirming form = true get date, 
                             ''switch date picker then rerun for each and get lead , add tool tip explaining date has been changed to find the lead 
                             '' change below message box to say lead not available for confirming form 
 
                         Case Is = "Sales"
-                            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-                            Dim cmdGET As SqlCommand = New SqlCommand("dbo.FindSales", cnn)
-
-                            Dim param1 As SqlParameter = New SqlParameter("@ID", selitem.Text)
-                            cmdGET.Parameters.Add(param1)
-                            cmdGET.CommandType = CommandType.StoredProcedure
-                            cnn.Open()
-                            Dim r1 As SqlDataReader
-
-                            r1 = cmdGET.ExecuteReader
-                            Try
-                                While r1.Read
-                                    If r1.Item(0) = True Then
-                                        If Sales.tbMain.SelectedIndex <> 1 Then
-                                            Sales.tbMain.SelectedIndex = 1
+                            If Sales.TabControl2.SelectedIndex = 0 Then
+                                If Sales.lvSales.Items.Count > 0 Then
+                                    For Each i In Sales.lvSales.Items
+                                        If Me.i.Text = selitem.Text Then
+                                            Me.i.Selected = True
+                                            Me.i.EnsureVisible()
+                                            found += 1
+                                            frmName = "Sales"
+                                            If foundinform <> "" Then
+                                                foundinform = foundinform & " " & frmName
+                                            Else
+                                                foundinform = frmName
+                                            End If
                                         End If
-                                        Dim dt As String = r1.Item(1)
-                                        Dim s = Split(dt, " ")
-                                        dt = s(0)
-
-
-
-
-                                        If DateDiff(DateInterval.Day, CType(dt, Date), Sales.dtp1CustomerList.Value) <= 0 And DateDiff(DateInterval.Day, CType(dt, Date), Sales.dtp2CustomerList.Value) >= 0 Then
-                                            If Sales.cboSalesList.SelectedText <> "Unfiltered Sales Dept. List" Then
-                                                Sales.cboSalesList.SelectedText = "Unfiltered Sales Dept. List"
-                                                For Each Me.i In Sales.lvSales.Items
-                                                    If Me.i.Text = selitem.Text Then
-                                                        Me.i.Selected = True
-                                                        found += 1
-                                                    End If
-                                                Next
+                                    Next
+                                End If
+                            Else
+                                If Sales.lvMemorized.Items.Count > 0 Then
+                                    For Each i In Sales.lvMemorized.Items
+                                        If Me.i.Text = selitem.Text Then
+                                            Me.i.Selected = True
+                                            Me.i.EnsureVisible()
+                                            found += 1
+                                            frmName = "Sales"
+                                            If foundinform <> "" Then
+                                                foundinform = foundinform & " " & frmName
+                                            Else
+                                                foundinform = frmName
                                             End If
-                                        Else
-                                            If CType(dt, Date) = Today Then
-                                                Sales.cboDateRangeCustomerList.SelectedItem = "Today"
-                                            End If
-                                            If DateDiff(DateInterval.Day, CType(dt, Date), Sales.dtp1CustomerList.Value) > 0 Then
-                                                Sales.dtp1CustomerList.Value = dt
-                                                Sales.cboDateRangeCustomerList.SelectedItem = "Custom"
-                                            End If
-                                            If DateDiff(DateInterval.Day, CType(dt, Date), Sales.dtp2CustomerList.Value) < 0 Then
-                                                Sales.dtp2CustomerList.Value = dt
-                                                Sales.cboDateRangeCustomerList.SelectedItem = "Custom"
-                                            End If
-                                            If Sales.cboSalesList.SelectedItem <> "Unfiltered Sales Dept. List" Then
-                                                Sales.cboSalesList.SelectedItem = "Unfiltered Sales Dept. List"
-                                            End If
-                                            For Each Me.i In Sales.lvSales.Items
-                                                If Me.i.Text = selitem.Text Then
-                                                    Me.i.Selected = True
-                                                    found += 1
-                                                End If
-                                            Next
                                         End If
-                                        If Sales.tbMain.SelectedIndex <> 1 Then
-                                            Sales.tbMain.SelectedIndex = 1
-                                        End If
-                                    Else
-                                        Dim dt As String = r1.Item(2)
-                                        Dim s = Split(dt, " ")
-                                        dt = s(0)
-                                        If r1.Item(1) = True Then
-                                            If Sales.cboSalesList.SelectedItem <> "Unconfirmed Appts. For Today" Then
-                                                Sales.cboSalesList.SelectedItem = "Unconfirmed Appts. For Today"
-                                            End If
-
-                                            'MsgBox(DateDiff(DateInterval.Day, CType(dt, Date), Sales.dtp1CustomerList.Value).ToString)
-                                            If DateDiff(DateInterval.Day, CType(dt, Date), Sales.dtp1CustomerList.Value) > 0 Then
-                                                Sales.dtp1CustomerList.Value = dt
-                                                Sales.cboDateRangeCustomerList.SelectedItem = "Custom"
-                                            End If
-                                            If DateDiff(DateInterval.Day, CType(dt, Date), Sales.dtp2CustomerList.Value) < 0 Then
-                                                Sales.dtp2CustomerList.Value = dt
-                                                Sales.cboDateRangeCustomerList.SelectedItem = "Custom"
-                                            End If
-                                            For Each Me.i In Sales.lvSales.Items
-                                                If Me.i.Text = selitem.Text Then
-                                                    Me.i.Selected = True
-                                                    found += 1
-                                                End If
-                                            Next
-                                        End If
-                                        If Sales.tbMain.SelectedIndex <> 1 Then
-                                            Sales.tbMain.SelectedIndex = 1
-                                        End If
-                                    End If
-                                End While
-                            Catch ex As Exception
-                                Dim y As New ErrorLogging_V2
-                                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "FindLead", "FormCode", "Sub", "lstSearchResults_MouseClick", "0", ex.Message.ToString)
-                                y = Nothing
-                            End Try
-
-
+                                    Next
+                                End If
+                            End If
                         Case Is = "Installation"
-
-
+                            frmName = "Installation"
+                            open += 1
+                            If foundinform <> "" Then
+                                foundinform = foundinform & " " & frmName
+                            Else
+                                foundinform = frmName
+                            End If
                         Case Is = "Administration"
-
-
+                            frmName = "Administration"
+                            open += 1
+                            If foundinform <> "" Then
+                                foundinform = foundinform & " " & frmName
+                            Else
+                                foundinform = frmName
+                            End If
                         Case Is = "WCaller"
-
+                            frmName = "WCaller"
+                            open += 1
+                            If foundinform <> "" Then
+                                foundinform = foundinform & " " & frmName
+                            Else
+                                foundinform = frmName
+                            End If
                         Case Is = "MarketingManager"
-
+                            frmName = "MarketingManager"
+                            open += 1
+                            If foundinform <> "" Then
+                                foundinform = foundinform & " " & frmName
+                            Else
+                                foundinform = frmName
+                            End If
                         Case Is = "Recovery"
-
+                            frmName = "Recovery"
+                            open += 1
+                            If foundinform <> "" Then
+                                foundinform = foundinform & " " & frmName
+                            Else
+                                foundinform = frmName
+                            End If
                         Case Is = "PreviousCustomer"
-
+                            frmName = "PreviousCustomer"
+                            open += 1
+                            If foundinform <> "" Then
+                                foundinform = foundinform & " " & frmName
+                            Else
+                                foundinform = frmName
+                            End If
                         Case Is = "Financing"
-
+                            frmName = "Financing"
+                            open += 1
+                            If foundinform <> "" Then
+                                foundinform = foundinform & " " & frmName
+                            Else
+                                foundinform = frmName
+                            End If
                         Case Is = "ColdCalling"
-
+                            frmName = "ColdCalling"
+                            open += 1
+                            If foundinform <> "" Then
+                                foundinform = foundinform & " " & frmName
+                            Else
+                                foundinform = frmName
+                            End If
                         Case Is = "SecondSource"
-
-
-
+                            frmName = "SecondSource"
+                            open += 1
+                            If foundinform <> "" Then
+                                foundinform = foundinform & " " & frmName
+                            Else
+                                foundinform = frmName
+                            End If
                     End Select
-
             End Select
 
-
-
-
-
-
-
         Next
-        If focused IsNot Nothing Then
-            focused.Focus()
+        If Focused IsNot Nothing And foundinform.Contains(Focused.Name) Then
+            Focused.Activate()
+        ElseIf foundinform.Contains(" ") = False And foundinform <> "" Then
+            For Each frm As Form In Main.MdiChildren
+                If frm.Name = foundinform Then
+                    frm.Activate()
+                    Exit For
+                End If
+            Next
         End If
+
 
         If found = 0 And open <> 0 Then
             ConfirmingSingleRecord.ID = selitem.Text
@@ -648,17 +540,8 @@ Public Class FindLead
 
 
         Me.BackgroundWorker1.Dispose()
-        'Me.Close()
+        Me.Close()
         Me.Dispose()
-
-
-
-
-
-
-
-
-        'MsgBox(selitem.Text & " for dummy forms to be designed.", MsgBoxStyle.Information)
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked

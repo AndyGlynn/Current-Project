@@ -191,14 +191,6 @@ Partial Class Sales
         Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton()
         Me.btnCalledandCancelled = New System.Windows.Forms.ToolStripMenuItem()
         Me.tslblCustomerHistory = New System.Windows.Forms.ToolStripLabel()
-        Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
-        Me.tsAFPics = New System.Windows.Forms.ToolStrip()
-        Me.tscboAFPicsFilter = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbtnShowCH = New System.Windows.Forms.ToolStripButton()
-        Me.tsAttachedFilesNAV = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tslblAFPic = New System.Windows.Forms.ToolStripLabel()
         Me.pnlAFPics = New System.Windows.Forms.Panel()
         Me.lsAttachedFiles = New System.Windows.Forms.ListView()
         Me.cmAF = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -258,6 +250,14 @@ Partial Class Sales
         Me.btnPasteJP = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator19 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnNewFolderJP = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsAFPics = New System.Windows.Forms.ToolStrip()
+        Me.tscboAFPicsFilter = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.tsbtnShowCH = New System.Windows.Forms.ToolStripButton()
+        Me.tsAttachedFilesNAV = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tslblAFPic = New System.Windows.Forms.ToolStripLabel()
+        Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
         Me.tpIssueLeads = New System.Windows.Forms.TabPage()
         Me.pnlIssue = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -307,10 +307,10 @@ Partial Class Sales
         Me.gbProductInfo.SuspendLayout()
         Me.gbApptInfo.SuspendLayout()
         Me.tsCustomerLog.SuspendLayout()
-        Me.tsAFPics.SuspendLayout()
         Me.pnlAFPics.SuspendLayout()
         Me.cmAF.SuspendLayout()
         Me.cmJP.SuspendLayout()
+        Me.tsAFPics.SuspendLayout()
         Me.tpIssueLeads.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.cmIssue.SuspendLayout()
@@ -853,9 +853,9 @@ Partial Class Sales
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbProductInfo)
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbApptInfo)
         Me.SplitContainer1.Panel2.Controls.Add(Me.tsCustomerLog)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.pnlCustomerHistory)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.tsAFPics)
         Me.SplitContainer1.Panel2.Controls.Add(Me.pnlAFPics)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.tsAFPics)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.pnlCustomerHistory)
         Me.SplitContainer1.Size = New System.Drawing.Size(1075, 562)
         Me.SplitContainer1.SplitterDistance = 215
         Me.SplitContainer1.SplitterWidth = 1
@@ -1459,7 +1459,7 @@ Partial Class Sales
         Me.gbContactInfo.ForeColor = System.Drawing.Color.Gray
         Me.gbContactInfo.Location = New System.Drawing.Point(5, 3)
         Me.gbContactInfo.Name = "gbContactInfo"
-        Me.gbContactInfo.Size = New System.Drawing.Size(743, 198)
+        Me.gbContactInfo.Size = New System.Drawing.Size(710, 198)
         Me.gbContactInfo.TabIndex = 191
         Me.gbContactInfo.TabStop = False
         Me.gbContactInfo.Text = "Contact Info:"
@@ -1471,12 +1471,11 @@ Partial Class Sales
         Me.txtHousePhone.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtHousePhone.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHousePhone.ForeColor = System.Drawing.Color.Black
-        Me.txtHousePhone.Location = New System.Drawing.Point(535, 33)
+        Me.txtHousePhone.Location = New System.Drawing.Point(502, 33)
         Me.txtHousePhone.Name = "txtHousePhone"
         Me.txtHousePhone.ReadOnly = True
         Me.txtHousePhone.Size = New System.Drawing.Size(116, 16)
         Me.txtHousePhone.TabIndex = 141
-        Me.txtHousePhone.Text = "(419) 472-4000"
         '
         'txtaltphone2
         '
@@ -1485,7 +1484,7 @@ Partial Class Sales
         Me.txtaltphone2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone2.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone2.Location = New System.Drawing.Point(535, 96)
+        Me.txtaltphone2.Location = New System.Drawing.Point(502, 96)
         Me.txtaltphone2.Name = "txtaltphone2"
         Me.txtaltphone2.ReadOnly = True
         Me.txtaltphone2.Size = New System.Drawing.Size(116, 16)
@@ -1498,24 +1497,21 @@ Partial Class Sales
         Me.txtaltphone1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone1.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone1.Location = New System.Drawing.Point(535, 64)
+        Me.txtaltphone1.Location = New System.Drawing.Point(502, 64)
         Me.txtaltphone1.Name = "txtaltphone1"
         Me.txtaltphone1.ReadOnly = True
         Me.txtaltphone1.Size = New System.Drawing.Size(116, 16)
         Me.txtaltphone1.TabIndex = 139
-        Me.txtaltphone1.Text = "(419) 467-4926"
         '
         'lnkEmail
         '
         Me.lnkEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkEmail.AutoSize = True
         Me.lnkEmail.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lnkEmail.Location = New System.Drawing.Point(482, 144)
+        Me.lnkEmail.Location = New System.Drawing.Point(449, 144)
         Me.lnkEmail.Name = "lnkEmail"
-        Me.lnkEmail.Size = New System.Drawing.Size(144, 16)
+        Me.lnkEmail.Size = New System.Drawing.Size(0, 16)
         Me.lnkEmail.TabIndex = 136
-        Me.lnkEmail.TabStop = True
-        Me.lnkEmail.Text = "SuzzieN@yahoo.com"
         '
         'lblEmail
         '
@@ -1524,7 +1520,7 @@ Partial Class Sales
         Me.lblEmail.BackColor = System.Drawing.Color.Transparent
         Me.lblEmail.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmail.ForeColor = System.Drawing.Color.Gray
-        Me.lblEmail.Location = New System.Drawing.Point(431, 144)
+        Me.lblEmail.Location = New System.Drawing.Point(398, 144)
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.Size = New System.Drawing.Size(45, 16)
         Me.lblEmail.TabIndex = 135
@@ -1550,12 +1546,11 @@ Partial Class Sales
         Me.txtAlt1Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt1Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt1Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt1Type.Location = New System.Drawing.Point(667, 64)
+        Me.txtAlt1Type.Location = New System.Drawing.Point(634, 64)
         Me.txtAlt1Type.Name = "txtAlt1Type"
         Me.txtAlt1Type.ReadOnly = True
         Me.txtAlt1Type.Size = New System.Drawing.Size(57, 16)
         Me.txtAlt1Type.TabIndex = 126
-        Me.txtAlt1Type.Text = "Cell"
         '
         'txtAlt2Type
         '
@@ -1564,12 +1559,11 @@ Partial Class Sales
         Me.txtAlt2Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt2Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt2Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt2Type.Location = New System.Drawing.Point(667, 96)
+        Me.txtAlt2Type.Location = New System.Drawing.Point(634, 96)
         Me.txtAlt2Type.Name = "txtAlt2Type"
         Me.txtAlt2Type.ReadOnly = True
         Me.txtAlt2Type.Size = New System.Drawing.Size(57, 16)
         Me.txtAlt2Type.TabIndex = 125
-        Me.txtAlt2Type.Text = "Work"
         '
         'lblAltPhone2
         '
@@ -1578,7 +1572,7 @@ Partial Class Sales
         Me.lblAltPhone2.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone2.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone2.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone2.Location = New System.Drawing.Point(431, 96)
+        Me.lblAltPhone2.Location = New System.Drawing.Point(398, 96)
         Me.lblAltPhone2.Name = "lblAltPhone2"
         Me.lblAltPhone2.Size = New System.Drawing.Size(84, 16)
         Me.lblAltPhone2.TabIndex = 83
@@ -1591,7 +1585,7 @@ Partial Class Sales
         Me.lblAltPhone1.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone1.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone1.Location = New System.Drawing.Point(431, 64)
+        Me.lblAltPhone1.Location = New System.Drawing.Point(398, 64)
         Me.lblAltPhone1.Name = "lblAltPhone1"
         Me.lblAltPhone1.Size = New System.Drawing.Size(88, 16)
         Me.lblAltPhone1.TabIndex = 81
@@ -1614,7 +1608,7 @@ Partial Class Sales
         Me.lblHousePhone.BackColor = System.Drawing.Color.Transparent
         Me.lblHousePhone.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHousePhone.ForeColor = System.Drawing.Color.Gray
-        Me.lblHousePhone.Location = New System.Drawing.Point(431, 33)
+        Me.lblHousePhone.Location = New System.Drawing.Point(398, 33)
         Me.lblHousePhone.Name = "lblHousePhone"
         Me.lblHousePhone.Size = New System.Drawing.Size(97, 16)
         Me.lblHousePhone.TabIndex = 78
@@ -1644,7 +1638,6 @@ Partial Class Sales
         Me.txtAddress.ReadOnly = True
         Me.txtAddress.Size = New System.Drawing.Size(185, 33)
         Me.txtAddress.TabIndex = 124
-        Me.txtAddress.Text = "12345 Main St." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Toledo, OH 43613"
         '
         'lblAddress
         '
@@ -1669,7 +1662,6 @@ Partial Class Sales
         Me.txtContact2.ReadOnly = True
         Me.txtContact2.Size = New System.Drawing.Size(185, 16)
         Me.txtContact2.TabIndex = 76
-        Me.txtContact2.Text = "Suzzana NameWaytolong"
         '
         'txtContact1
         '
@@ -1682,7 +1674,6 @@ Partial Class Sales
         Me.txtContact1.ReadOnly = True
         Me.txtContact1.Size = New System.Drawing.Size(185, 16)
         Me.txtContact1.TabIndex = 74
-        Me.txtContact1.Text = "Alexander Namewaytolong"
         '
         'lblContact2
         '
@@ -1737,9 +1728,9 @@ Partial Class Sales
         Me.gbHomeInfo.Controls.Add(Me.txtYrBuilt)
         Me.gbHomeInfo.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbHomeInfo.ForeColor = System.Drawing.Color.Gray
-        Me.gbHomeInfo.Location = New System.Drawing.Point(754, 3)
+        Me.gbHomeInfo.Location = New System.Drawing.Point(721, 3)
         Me.gbHomeInfo.Name = "gbHomeInfo"
-        Me.gbHomeInfo.Size = New System.Drawing.Size(109, 198)
+        Me.gbHomeInfo.Size = New System.Drawing.Size(133, 198)
         Me.gbHomeInfo.TabIndex = 183
         Me.gbHomeInfo.TabStop = False
         Me.gbHomeInfo.Text = "Home Info:"
@@ -1750,12 +1741,11 @@ Partial Class Sales
         Me.txtHomeValue.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtHomeValue.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHomeValue.ForeColor = System.Drawing.Color.Black
-        Me.txtHomeValue.Location = New System.Drawing.Point(4, 152)
+        Me.txtHomeValue.Location = New System.Drawing.Point(23, 152)
         Me.txtHomeValue.Name = "txtHomeValue"
         Me.txtHomeValue.ReadOnly = True
         Me.txtHomeValue.Size = New System.Drawing.Size(91, 16)
         Me.txtHomeValue.TabIndex = 35
-        Me.txtHomeValue.Text = "25"
         Me.txtHomeValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtYrsOwned
@@ -1764,12 +1754,11 @@ Partial Class Sales
         Me.txtYrsOwned.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtYrsOwned.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYrsOwned.ForeColor = System.Drawing.Color.Black
-        Me.txtYrsOwned.Location = New System.Drawing.Point(2, 102)
+        Me.txtYrsOwned.Location = New System.Drawing.Point(21, 102)
         Me.txtYrsOwned.Name = "txtYrsOwned"
         Me.txtYrsOwned.ReadOnly = True
         Me.txtYrsOwned.Size = New System.Drawing.Size(91, 16)
         Me.txtYrsOwned.TabIndex = 34
-        Me.txtYrsOwned.Text = "25"
         Me.txtYrsOwned.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblYrBuilt
@@ -1777,7 +1766,7 @@ Partial Class Sales
         Me.lblYrBuilt.AutoSize = True
         Me.lblYrBuilt.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblYrBuilt.ForeColor = System.Drawing.Color.Gray
-        Me.lblYrBuilt.Location = New System.Drawing.Point(1, 33)
+        Me.lblYrBuilt.Location = New System.Drawing.Point(14, 33)
         Me.lblYrBuilt.Name = "lblYrBuilt"
         Me.lblYrBuilt.Size = New System.Drawing.Size(97, 16)
         Me.lblYrBuilt.TabIndex = 28
@@ -1788,7 +1777,7 @@ Partial Class Sales
         Me.lblYrsOwned.AutoSize = True
         Me.lblYrsOwned.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblYrsOwned.ForeColor = System.Drawing.Color.Gray
-        Me.lblYrsOwned.Location = New System.Drawing.Point(6, 83)
+        Me.lblYrsOwned.Location = New System.Drawing.Point(19, 83)
         Me.lblYrsOwned.Name = "lblYrsOwned"
         Me.lblYrsOwned.Size = New System.Drawing.Size(99, 16)
         Me.lblYrsOwned.TabIndex = 2
@@ -1799,7 +1788,7 @@ Partial Class Sales
         Me.lblHomeValue.AutoSize = True
         Me.lblHomeValue.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHomeValue.ForeColor = System.Drawing.Color.Gray
-        Me.lblHomeValue.Location = New System.Drawing.Point(13, 133)
+        Me.lblHomeValue.Location = New System.Drawing.Point(26, 133)
         Me.lblHomeValue.Name = "lblHomeValue"
         Me.lblHomeValue.Size = New System.Drawing.Size(89, 16)
         Me.lblHomeValue.TabIndex = 32
@@ -1811,12 +1800,11 @@ Partial Class Sales
         Me.txtYrBuilt.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtYrBuilt.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYrBuilt.ForeColor = System.Drawing.Color.Black
-        Me.txtYrBuilt.Location = New System.Drawing.Point(0, 52)
+        Me.txtYrBuilt.Location = New System.Drawing.Point(19, 52)
         Me.txtYrBuilt.Name = "txtYrBuilt"
         Me.txtYrBuilt.ReadOnly = True
         Me.txtYrBuilt.Size = New System.Drawing.Size(91, 16)
         Me.txtYrBuilt.TabIndex = 29
-        Me.txtYrBuilt.Text = "1960"
         Me.txtYrBuilt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'gbSpecialInstructions
@@ -1830,13 +1818,14 @@ Partial Class Sales
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
         Me.gbSpecialInstructions.Location = New System.Drawing.Point(445, 207)
         Me.gbSpecialInstructions.Name = "gbSpecialInstructions"
-        Me.gbSpecialInstructions.Size = New System.Drawing.Size(418, 144)
+        Me.gbSpecialInstructions.Size = New System.Drawing.Size(409, 144)
         Me.gbSpecialInstructions.TabIndex = 188
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions:"
         '
         'btnUpdateSPI
         '
+        Me.btnUpdateSPI.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnUpdateSPI.Location = New System.Drawing.Point(336, 116)
         Me.btnUpdateSPI.Name = "btnUpdateSPI"
         Me.btnUpdateSPI.Size = New System.Drawing.Size(54, 22)
@@ -1848,14 +1837,15 @@ Partial Class Sales
         '
         Me.rtbSpecialInstructions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rtbSpecialInstructions.BackColor = System.Drawing.SystemColors.Window
         Me.rtbSpecialInstructions.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.rtbSpecialInstructions.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(6, 22)
         Me.rtbSpecialInstructions.Name = "rtbSpecialInstructions"
-        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(337, 116)
+        Me.rtbSpecialInstructions.ReadOnly = True
+        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(384, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
-        Me.rtbSpecialInstructions.Text = "The customer only wants a rough frame in the basement and they are interested in " & _
-    "upper grids in the windows"
+        Me.rtbSpecialInstructions.Text = ""
         '
         'gbProductInfo
         '
@@ -1902,7 +1892,6 @@ Partial Class Sales
         Me.txtProducts.ReadOnly = True
         Me.txtProducts.Size = New System.Drawing.Size(138, 48)
         Me.txtProducts.TabIndex = 32
-        Me.txtProducts.Text = "Roofing" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Basement Finish" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Windows"
         '
         'Label5
         '
@@ -1948,7 +1937,6 @@ Partial Class Sales
         Me.txtColor.ReadOnly = True
         Me.txtColor.Size = New System.Drawing.Size(138, 16)
         Me.txtColor.TabIndex = 30
-        Me.txtColor.Text = "Onyx Black"
         '
         'Label6
         '
@@ -1994,7 +1982,6 @@ Partial Class Sales
         Me.txtQty.ReadOnly = True
         Me.txtQty.Size = New System.Drawing.Size(138, 16)
         Me.txtQty.TabIndex = 28
-        Me.txtQty.Text = "16"
         '
         'lblProducts
         '
@@ -2034,7 +2021,6 @@ Partial Class Sales
         Me.txtApptDate.Name = "txtApptDate"
         Me.txtApptDate.Size = New System.Drawing.Size(114, 16)
         Me.txtApptDate.TabIndex = 21
-        Me.txtApptDate.Text = "12/24/2007"
         '
         'txtApptTime
         '
@@ -2045,7 +2031,6 @@ Partial Class Sales
         Me.txtApptTime.Name = "txtApptTime"
         Me.txtApptTime.Size = New System.Drawing.Size(114, 16)
         Me.txtApptTime.TabIndex = 20
-        Me.txtApptTime.Text = "11:00 AM"
         '
         'Label22
         '
@@ -2089,7 +2074,6 @@ Partial Class Sales
         Me.txtApptDay.Name = "txtApptDay"
         Me.txtApptDay.Size = New System.Drawing.Size(114, 16)
         Me.txtApptDay.TabIndex = 16
-        Me.txtApptDay.Text = "Wednesday"
         '
         'tsCustomerLog
         '
@@ -2103,7 +2087,7 @@ Partial Class Sales
         Me.tsCustomerLog.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsCustomerLog.Name = "tsCustomerLog"
         Me.tsCustomerLog.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsCustomerLog.Size = New System.Drawing.Size(859, 33)
+        Me.tsCustomerLog.Size = New System.Drawing.Size(858, 33)
         Me.tsCustomerLog.TabIndex = 189
         Me.tsCustomerLog.Text = "ToolStrip1"
         Me.tsCustomerLog.Visible = False
@@ -2167,88 +2151,6 @@ Partial Class Sales
         Me.tslblCustomerHistory.Size = New System.Drawing.Size(150, 30)
         Me.tslblCustomerHistory.Text = "Customer History"
         '
-        'pnlCustomerHistory
-        '
-        Me.pnlCustomerHistory.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlCustomerHistory.AutoScroll = True
-        Me.pnlCustomerHistory.Location = New System.Drawing.Point(4, 390)
-        Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(864, 172)
-        Me.pnlCustomerHistory.TabIndex = 200
-        '
-        'tsAFPics
-        '
-        Me.tsAFPics.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tsAFPics.AutoSize = False
-        Me.tsAFPics.Dock = System.Windows.Forms.DockStyle.None
-        Me.tsAFPics.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.tsAFPics.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscboAFPicsFilter, Me.ToolStripLabel1, Me.tsbtnShowCH, Me.tsAttachedFilesNAV, Me.ToolStripSeparator2, Me.tslblAFPic})
-        Me.tsAFPics.Location = New System.Drawing.Point(4, 354)
-        Me.tsAFPics.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
-        Me.tsAFPics.Name = "tsAFPics"
-        Me.tsAFPics.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsAFPics.Size = New System.Drawing.Size(859, 33)
-        Me.tsAFPics.TabIndex = 201
-        Me.tsAFPics.Text = "ToolStrip1"
-        '
-        'tscboAFPicsFilter
-        '
-        Me.tscboAFPicsFilter.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.tscboAFPicsFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.tscboAFPicsFilter.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.tscboAFPicsFilter.Items.AddRange(New Object() {"All", "Attached Files", "Job Pictures"})
-        Me.tscboAFPicsFilter.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
-        Me.tscboAFPicsFilter.Name = "tscboAFPicsFilter"
-        Me.tscboAFPicsFilter.Size = New System.Drawing.Size(160, 33)
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripLabel1.Margin = New System.Windows.Forms.Padding(10, 1, 0, 2)
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(43, 30)
-        Me.ToolStripLabel1.Text = "Show"
-        '
-        'tsbtnShowCH
-        '
-        Me.tsbtnShowCH.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbtnShowCH.Image = CType(resources.GetObject("tsbtnShowCH.Image"), System.Drawing.Image)
-        Me.tsbtnShowCH.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsbtnShowCH.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnShowCH.Name = "tsbtnShowCH"
-        Me.tsbtnShowCH.Size = New System.Drawing.Size(36, 30)
-        Me.tsbtnShowCH.Text = "ShowAFPics"
-        Me.tsbtnShowCH.ToolTipText = "Go Back to Customer History"
-        '
-        'tsAttachedFilesNAV
-        '
-        Me.tsAttachedFilesNAV.AutoSize = False
-        Me.tsAttachedFilesNAV.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsAttachedFilesNAV.Enabled = False
-        Me.tsAttachedFilesNAV.Image = CType(resources.GetObject("tsAttachedFilesNAV.Image"), System.Drawing.Image)
-        Me.tsAttachedFilesNAV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsAttachedFilesNAV.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsAttachedFilesNAV.Name = "tsAttachedFilesNAV"
-        Me.tsAttachedFilesNAV.Size = New System.Drawing.Size(36, 30)
-        Me.tsAttachedFilesNAV.Text = "Up One Level"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 33)
-        '
-        'tslblAFPic
-        '
-        Me.tslblAFPic.Font = New System.Drawing.Font("Tahoma", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tslblAFPic.Margin = New System.Windows.Forms.Padding(5, 1, 0, 2)
-        Me.tslblAFPic.Name = "tslblAFPic"
-        Me.tslblAFPic.Size = New System.Drawing.Size(279, 30)
-        Me.tslblAFPic.Text = "Attached Files and Job Pictures..."
-        '
         'pnlAFPics
         '
         Me.pnlAFPics.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -2259,7 +2161,7 @@ Partial Class Sales
         Me.pnlAFPics.Controls.Add(Me.lsJobPictures)
         Me.pnlAFPics.Location = New System.Drawing.Point(4, 390)
         Me.pnlAFPics.Name = "pnlAFPics"
-        Me.pnlAFPics.Size = New System.Drawing.Size(864, 172)
+        Me.pnlAFPics.Size = New System.Drawing.Size(858, 172)
         Me.pnlAFPics.TabIndex = 201
         Me.pnlAFPics.Visible = False
         '
@@ -2271,7 +2173,7 @@ Partial Class Sales
         Me.lsAttachedFiles.LabelEdit = True
         Me.lsAttachedFiles.Location = New System.Drawing.Point(8, 8)
         Me.lsAttachedFiles.Name = "lsAttachedFiles"
-        Me.lsAttachedFiles.Size = New System.Drawing.Size(400, 159)
+        Me.lsAttachedFiles.Size = New System.Drawing.Size(415, 159)
         Me.lsAttachedFiles.TabIndex = 0
         Me.lsAttachedFiles.UseCompatibleStateImageBehavior = False
         '
@@ -2447,9 +2349,9 @@ Partial Class Sales
         Me.lsJobPictures.BackColor = System.Drawing.SystemColors.Window
         Me.lsJobPictures.ContextMenuStrip = Me.cmJP
         Me.lsJobPictures.LabelEdit = True
-        Me.lsJobPictures.Location = New System.Drawing.Point(433, 8)
+        Me.lsJobPictures.Location = New System.Drawing.Point(435, 8)
         Me.lsJobPictures.Name = "lsJobPictures"
-        Me.lsJobPictures.Size = New System.Drawing.Size(396, 159)
+        Me.lsJobPictures.Size = New System.Drawing.Size(411, 159)
         Me.lsJobPictures.TabIndex = 1
         Me.lsJobPictures.UseCompatibleStateImageBehavior = False
         '
@@ -2618,6 +2520,88 @@ Partial Class Sales
         Me.btnNewFolderJP.Name = "btnNewFolderJP"
         Me.btnNewFolderJP.Size = New System.Drawing.Size(160, 22)
         Me.btnNewFolderJP.Text = "New Folder"
+        '
+        'tsAFPics
+        '
+        Me.tsAFPics.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tsAFPics.AutoSize = False
+        Me.tsAFPics.Dock = System.Windows.Forms.DockStyle.None
+        Me.tsAFPics.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.tsAFPics.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscboAFPicsFilter, Me.ToolStripLabel1, Me.tsbtnShowCH, Me.tsAttachedFilesNAV, Me.ToolStripSeparator2, Me.tslblAFPic})
+        Me.tsAFPics.Location = New System.Drawing.Point(4, 354)
+        Me.tsAFPics.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
+        Me.tsAFPics.Name = "tsAFPics"
+        Me.tsAFPics.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.tsAFPics.Size = New System.Drawing.Size(858, 33)
+        Me.tsAFPics.TabIndex = 201
+        Me.tsAFPics.Text = "ToolStrip1"
+        '
+        'tscboAFPicsFilter
+        '
+        Me.tscboAFPicsFilter.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.tscboAFPicsFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tscboAFPicsFilter.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.tscboAFPicsFilter.Items.AddRange(New Object() {"All", "Attached Files", "Job Pictures"})
+        Me.tscboAFPicsFilter.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
+        Me.tscboAFPicsFilter.Name = "tscboAFPicsFilter"
+        Me.tscboAFPicsFilter.Size = New System.Drawing.Size(160, 33)
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripLabel1.Margin = New System.Windows.Forms.Padding(10, 1, 0, 2)
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(43, 30)
+        Me.ToolStripLabel1.Text = "Show"
+        '
+        'tsbtnShowCH
+        '
+        Me.tsbtnShowCH.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnShowCH.Image = CType(resources.GetObject("tsbtnShowCH.Image"), System.Drawing.Image)
+        Me.tsbtnShowCH.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tsbtnShowCH.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnShowCH.Name = "tsbtnShowCH"
+        Me.tsbtnShowCH.Size = New System.Drawing.Size(36, 30)
+        Me.tsbtnShowCH.Text = "ShowAFPics"
+        Me.tsbtnShowCH.ToolTipText = "Go Back to Customer History"
+        '
+        'tsAttachedFilesNAV
+        '
+        Me.tsAttachedFilesNAV.AutoSize = False
+        Me.tsAttachedFilesNAV.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsAttachedFilesNAV.Enabled = False
+        Me.tsAttachedFilesNAV.Image = CType(resources.GetObject("tsAttachedFilesNAV.Image"), System.Drawing.Image)
+        Me.tsAttachedFilesNAV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tsAttachedFilesNAV.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsAttachedFilesNAV.Name = "tsAttachedFilesNAV"
+        Me.tsAttachedFilesNAV.Size = New System.Drawing.Size(36, 30)
+        Me.tsAttachedFilesNAV.Text = "Up One Level"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 33)
+        '
+        'tslblAFPic
+        '
+        Me.tslblAFPic.Font = New System.Drawing.Font("Tahoma", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tslblAFPic.Margin = New System.Windows.Forms.Padding(5, 1, 0, 2)
+        Me.tslblAFPic.Name = "tslblAFPic"
+        Me.tslblAFPic.Size = New System.Drawing.Size(279, 30)
+        Me.tslblAFPic.Text = "Attached Files and Job Pictures..."
+        '
+        'pnlCustomerHistory
+        '
+        Me.pnlCustomerHistory.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlCustomerHistory.AutoScroll = True
+        Me.pnlCustomerHistory.Location = New System.Drawing.Point(4, 390)
+        Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(861, 172)
+        Me.pnlCustomerHistory.TabIndex = 200
         '
         'tpIssueLeads
         '
@@ -2861,11 +2845,11 @@ Partial Class Sales
         Me.gbApptInfo.PerformLayout()
         Me.tsCustomerLog.ResumeLayout(False)
         Me.tsCustomerLog.PerformLayout()
-        Me.tsAFPics.ResumeLayout(False)
-        Me.tsAFPics.PerformLayout()
         Me.pnlAFPics.ResumeLayout(False)
         Me.cmAF.ResumeLayout(False)
         Me.cmJP.ResumeLayout(False)
+        Me.tsAFPics.ResumeLayout(False)
+        Me.tsAFPics.PerformLayout()
         Me.tpIssueLeads.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

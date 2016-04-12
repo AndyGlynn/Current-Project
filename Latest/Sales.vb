@@ -1852,9 +1852,10 @@ Public Class Sales
             Me.cboDateRangeSummary.Text = "Last Week"
             Dim r As New Sales_Performance_Report()
 
-
+            Me.cboDateRangeCustomerList.Text = "Last Month"
             Me.LoadComplete = True
             Me.cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
+            Me.cboDateRangeCustomerList_SelectedIndexChanged(Nothing, Nothing)
             If Me.WindowState <> FormWindowState.Normal Then
 
             End If
@@ -1892,7 +1893,7 @@ Public Class Sales
 
 
 
-  
+
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tbMain.SelectedIndexChanged
         Try
             Dim x As Integer = 0
@@ -2425,7 +2426,7 @@ Public Class Sales
             bgSalesQuery_DoWork(Nothing, Nothing)
             If current_Item IsNot Nothing Then
                 PullInfo(current_Item.Text)
-                 RaiseEvent PopCustHistory()
+                RaiseEvent PopCustHistory()
             End If
             'Me.Cursor = Cursors.WaitCursor
             'Dim c As New SalesListManager(sender)
@@ -2943,40 +2944,40 @@ Public Class Sales
             r2.Read()
             '' Loads Names of Latest Rep from sales rep pull list and will also add 
             '' the name to rep combos if they are not part of the current rep list 
-        
 
-        Try
-            Me.cboRep1.Text = R2.Item(0)
-            If Me.cboRep1.Text = "" And R2.Item(0) <> "" Then
-                Me.cboRep1.Items.Add(R2.Item(0))
-                Me.cboRep2.Items.Add(R2.Item(0))
+
+            Try
                 Me.cboRep1.Text = R2.Item(0)
+                If Me.cboRep1.Text = "" And R2.Item(0) <> "" Then
+                    Me.cboRep1.Items.Add(R2.Item(0))
+                    Me.cboRep2.Items.Add(R2.Item(0))
+                    Me.cboRep1.Text = R2.Item(0)
 
-            End If
-        Catch ex As Exception
-            Me.cboRep1.Text = Nothing
+                End If
+            Catch ex As Exception
+                Me.cboRep1.Text = Nothing
 
-        End Try
-        Try
-            Me.cboRep2.Text = R2.Item(1)
-            If Me.cboRep2.Text = "" And R2.Item(1) <> "" Then
-                Me.cboRep2.Items.Add(R2.Item(1))
-                Me.cboRep1.Items.Add(R2.Item(1))
+            End Try
+            Try
                 Me.cboRep2.Text = R2.Item(1)
+                If Me.cboRep2.Text = "" And R2.Item(1) <> "" Then
+                    Me.cboRep2.Items.Add(R2.Item(1))
+                    Me.cboRep1.Items.Add(R2.Item(1))
+                    Me.cboRep2.Text = R2.Item(1)
 
+                End If
+            Catch ex As Exception
+                Me.cboRep2.Text = Nothing
+
+            End Try
+
+            R2.Close()
+            cnn2.Close()
+            If Me.TabControl2.SelectedIndex = 1 Then
+                Me.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
+            Else
+                'Me.lvSales_SelectedIndexChanged(Nothing, Nothing)
             End If
-        Catch ex As Exception
-            Me.cboRep2.Text = Nothing
-
-        End Try
-
-        R2.Close()
-        cnn2.Close()
-        If Me.TabControl2.SelectedIndex = 1 Then
-            Me.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
-        Else
-            'Me.lvSales_SelectedIndexChanged(Nothing, Nothing)
-        End If
 
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -8838,7 +8839,7 @@ Public Class Sales
         End Try
     End Sub
 
-    Private Sub lvSales_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvSales.SelectedIndexChanged
+    Public Sub lvSales_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvSales.SelectedIndexChanged
         '' 
         '' re-added 4/10/2016 AC
         '' per request to do away with bg thread

@@ -22,93 +22,95 @@ Partial Class SDResult
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SDResult))
-        Me.Label141 = New System.Windows.Forms.Label
-        Me.Label140 = New System.Windows.Forms.Label
-        Me.cboSalesResults = New System.Windows.Forms.ComboBox
-        Me.cboRep2 = New System.Windows.Forms.ComboBox
-        Me.Label139 = New System.Windows.Forms.Label
-        Me.cboRep1 = New System.Windows.Forms.ComboBox
+        Me.Label141 = New System.Windows.Forms.Label()
+        Me.Label140 = New System.Windows.Forms.Label()
+        Me.cboSalesResults = New System.Windows.Forms.ComboBox()
+        Me.cboRep2 = New System.Windows.Forms.ComboBox()
+        Me.Label139 = New System.Windows.Forms.Label()
+        Me.cboRep1 = New System.Windows.Forms.ComboBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DeleteThisProductToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnNext = New System.Windows.Forms.Button
-        Me.lvPrevious = New System.Windows.Forms.ListView
-        Me.ColumnHeader4 = New System.Windows.Forms.ColumnHeader(3)
-        Me.ColumnHeader1 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader2 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader3 = New System.Windows.Forms.ColumnHeader
+        Me.DeleteThisProductToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnNext = New System.Windows.Forms.Button()
+        Me.lvPrevious = New System.Windows.Forms.ListView()
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
-        Me.pnlFirst = New System.Windows.Forms.Panel
-        Me.pnlLast = New System.Windows.Forms.Panel
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.cboautonotes = New System.Windows.Forms.ComboBox
-        Me.lblsalesnotes = New System.Windows.Forms.Label
-        Me.rtfNote = New System.Windows.Forms.RichTextBox
-        Me.pnlDemo = New System.Windows.Forms.Panel
-        Me.txt1Par = New System.Windows.Forms.TextBox
-        Me.txt2Par = New System.Windows.Forms.TextBox
-        Me.txt1Quoted = New System.Windows.Forms.TextBox
-        Me.txt2Quoted = New System.Windows.Forms.TextBox
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.chkRecoverable = New System.Windows.Forms.CheckBox
-        Me.Label137 = New System.Windows.Forms.Label
-        Me.Label138 = New System.Windows.Forms.Label
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.pnlSale1 = New System.Windows.Forms.Panel
-        Me.txt1ContractAmt = New System.Windows.Forms.TextBox
-        Me.txt2ContractAmt = New System.Windows.Forms.TextBox
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.grpPaymentOptions = New System.Windows.Forms.GroupBox
-        Me.rdoCash = New System.Windows.Forms.RadioButton
-        Me.rdoFinance = New System.Windows.Forms.RadioButton
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.dtpRecDate = New System.Windows.Forms.DateTimePicker
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.pnlSale2 = New System.Windows.Forms.Panel
-        Me.lblContractNotes = New System.Windows.Forms.Label
-        Me.txtContractNotes = New System.Windows.Forms.RichTextBox
-        Me.pnlSale4 = New System.Windows.Forms.Panel
-        Me.btnDeleteProduct = New System.Windows.Forms.Button
-        Me.cboProducts = New System.Windows.Forms.ComboBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.btnMovetoFuture = New System.Windows.Forms.Button
-        Me.lstSold = New System.Windows.Forms.ListBox
-        Me.btnMovetoSold = New System.Windows.Forms.Button
-        Me.lstManage = New System.Windows.Forms.ListBox
-        Me.Label15 = New System.Windows.Forms.Label
-        Me.pnlSale5 = New System.Windows.Forms.Panel
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel
-        Me.txtP1 = New System.Windows.Forms.TextBox
-        Me.txtP1Amnt = New System.Windows.Forms.TextBox
-        Me.lnkP1 = New System.Windows.Forms.LinkLabel
-        Me.txtP2 = New System.Windows.Forms.TextBox
-        Me.txtP2Amnt = New System.Windows.Forms.TextBox
-        Me.lnkP2 = New System.Windows.Forms.LinkLabel
-        Me.txtP3 = New System.Windows.Forms.TextBox
-        Me.txtP3Amnt = New System.Windows.Forms.TextBox
-        Me.lnkP3 = New System.Windows.Forms.LinkLabel
-        Me.txtP4 = New System.Windows.Forms.TextBox
-        Me.txtP4Amnt = New System.Windows.Forms.TextBox
-        Me.lnkP4 = New System.Windows.Forms.LinkLabel
-        Me.txtP5 = New System.Windows.Forms.TextBox
-        Me.txtP5Amnt = New System.Windows.Forms.TextBox
-        Me.lnkP5 = New System.Windows.Forms.LinkLabel
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.btnBack = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.btnEdit = New System.Windows.Forms.Button
+        Me.pnlFirst = New System.Windows.Forms.Panel()
+        Me.pnlLast = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cboautonotes = New System.Windows.Forms.ComboBox()
+        Me.lblsalesnotes = New System.Windows.Forms.Label()
+        Me.rtfNote = New System.Windows.Forms.RichTextBox()
+        Me.pnlDemo = New System.Windows.Forms.Panel()
+        Me.txt1Par = New System.Windows.Forms.TextBox()
+        Me.txt2Par = New System.Windows.Forms.TextBox()
+        Me.txt1Quoted = New System.Windows.Forms.TextBox()
+        Me.txt2Quoted = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.chkRecoverable = New System.Windows.Forms.CheckBox()
+        Me.Label137 = New System.Windows.Forms.Label()
+        Me.Label138 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.pnlSale1 = New System.Windows.Forms.Panel()
+        Me.txt1ContractAmt = New System.Windows.Forms.TextBox()
+        Me.txt2ContractAmt = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.grpPaymentOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoCash = New System.Windows.Forms.RadioButton()
+        Me.rdoFinance = New System.Windows.Forms.RadioButton()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dtpRecDate = New System.Windows.Forms.DateTimePicker()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.pnlSale2 = New System.Windows.Forms.Panel()
+        Me.dtpDelay = New System.Windows.Forms.DateTimePicker()
+        Me.chkDelay = New System.Windows.Forms.CheckBox()
+        Me.lblContractNotes = New System.Windows.Forms.Label()
+        Me.txtContractNotes = New System.Windows.Forms.RichTextBox()
+        Me.pnlSale4 = New System.Windows.Forms.Panel()
+        Me.btnDeleteProduct = New System.Windows.Forms.Button()
+        Me.cboProducts = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnMovetoFuture = New System.Windows.Forms.Button()
+        Me.lstSold = New System.Windows.Forms.ListBox()
+        Me.btnMovetoSold = New System.Windows.Forms.Button()
+        Me.lstManage = New System.Windows.Forms.ListBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.pnlSale5 = New System.Windows.Forms.Panel()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.txtP1 = New System.Windows.Forms.TextBox()
+        Me.txtP1Amnt = New System.Windows.Forms.TextBox()
+        Me.lnkP1 = New System.Windows.Forms.LinkLabel()
+        Me.txtP2 = New System.Windows.Forms.TextBox()
+        Me.txtP2Amnt = New System.Windows.Forms.TextBox()
+        Me.lnkP2 = New System.Windows.Forms.LinkLabel()
+        Me.txtP3 = New System.Windows.Forms.TextBox()
+        Me.txtP3Amnt = New System.Windows.Forms.TextBox()
+        Me.lnkP3 = New System.Windows.Forms.LinkLabel()
+        Me.txtP4 = New System.Windows.Forms.TextBox()
+        Me.txtP4Amnt = New System.Windows.Forms.TextBox()
+        Me.lnkP4 = New System.Windows.Forms.LinkLabel()
+        Me.txtP5 = New System.Windows.Forms.TextBox()
+        Me.txtP5Amnt = New System.Windows.Forms.TextBox()
+        Me.lnkP5 = New System.Windows.Forms.LinkLabel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnEdit = New System.Windows.Forms.Button()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.lnkCalc = New System.Windows.Forms.LinkLabel
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.pctRecoveryPC = New System.Windows.Forms.PictureBox
-        Me.lblRecoveryPC = New System.Windows.Forms.Label
+        Me.lnkCalc = New System.Windows.Forms.LinkLabel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.pctRecoveryPC = New System.Windows.Forms.PictureBox()
+        Me.lblRecoveryPC = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.pnlFirst.SuspendLayout()
         Me.pnlLast.SuspendLayout()
@@ -126,22 +128,22 @@ Partial Class SDResult
         'Label141
         '
         Me.Label141.AutoSize = True
-        Me.Label141.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label141.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label141.ForeColor = System.Drawing.Color.Black
         Me.Label141.Location = New System.Drawing.Point(8, 22)
         Me.Label141.Name = "Label141"
-        Me.Label141.Size = New System.Drawing.Size(72, 13)
+        Me.Label141.Size = New System.Drawing.Size(76, 13)
         Me.Label141.TabIndex = 459
         Me.Label141.Text = "Sales Rep1:"
         '
         'Label140
         '
         Me.Label140.AutoSize = True
-        Me.Label140.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label140.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label140.ForeColor = System.Drawing.Color.Black
         Me.Label140.Location = New System.Drawing.Point(8, 49)
         Me.Label140.Name = "Label140"
-        Me.Label140.Size = New System.Drawing.Size(72, 13)
+        Me.Label140.Size = New System.Drawing.Size(76, 13)
         Me.Label140.TabIndex = 460
         Me.Label140.Text = "Sales Rep2:"
         '
@@ -152,7 +154,7 @@ Partial Class SDResult
         Me.cboSalesResults.BackColor = System.Drawing.SystemColors.Window
         Me.cboSalesResults.DropDownHeight = 140
         Me.cboSalesResults.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboSalesResults.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboSalesResults.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboSalesResults.FormattingEnabled = True
         Me.ErrorProvider1.SetIconPadding(Me.cboSalesResults, 5)
         Me.cboSalesResults.IntegralHeight = False
@@ -168,7 +170,7 @@ Partial Class SDResult
         Me.cboRep2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboRep2.BackColor = System.Drawing.SystemColors.Window
         Me.cboRep2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboRep2.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboRep2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboRep2.FormattingEnabled = True
         Me.cboRep2.Location = New System.Drawing.Point(110, 46)
         Me.cboRep2.Name = "cboRep2"
@@ -179,11 +181,11 @@ Partial Class SDResult
         '
         Me.Label139.AutoSize = True
         Me.Label139.BackColor = System.Drawing.Color.Transparent
-        Me.Label139.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label139.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label139.ForeColor = System.Drawing.Color.Black
         Me.Label139.Location = New System.Drawing.Point(8, 76)
         Me.Label139.Name = "Label139"
-        Me.Label139.Size = New System.Drawing.Size(46, 13)
+        Me.Label139.Size = New System.Drawing.Size(47, 13)
         Me.Label139.TabIndex = 461
         Me.Label139.Text = "Result:"
         '
@@ -194,7 +196,7 @@ Partial Class SDResult
         Me.cboRep1.BackColor = System.Drawing.SystemColors.Window
         Me.cboRep1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.cboRep1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboRep1.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboRep1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboRep1.FormattingEnabled = True
         Me.cboRep1.Location = New System.Drawing.Point(110, 19)
         Me.cboRep1.Name = "cboRep1"
@@ -216,7 +218,7 @@ Partial Class SDResult
         '
         'btnNext
         '
-        Me.btnNext.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNext.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNext.ForeColor = System.Drawing.Color.Black
         Me.btnNext.Image = CType(resources.GetObject("btnNext.Image"), System.Drawing.Image)
         Me.btnNext.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -232,7 +234,7 @@ Partial Class SDResult
         '
         Me.lvPrevious.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
         Me.lvPrevious.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.lvPrevious.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvPrevious.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvPrevious.FullRowSelect = True
         Me.lvPrevious.HideSelection = False
         Me.lvPrevious.Location = New System.Drawing.Point(12, 219)
@@ -304,27 +306,27 @@ Partial Class SDResult
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.White
-        Me.Label1.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label1.Cursor = System.Windows.Forms.Cursors.Default
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Gray
-        Me.Label1.Location = New System.Drawing.Point(19, 14)
+        Me.Label1.Location = New System.Drawing.Point(8, 14)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(110, 13)
-        Me.Label1.TabIndex = 505
+        Me.Label1.Size = New System.Drawing.Size(336, 21)
+        Me.Label1.TabIndex = 509
         Me.Label1.Text = "select auto note here"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'cboautonotes
         '
         Me.cboautonotes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboautonotes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cboautonotes.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboautonotes.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboautonotes.FormattingEnabled = True
-        Me.cboautonotes.Location = New System.Drawing.Point(8, 11)
+        Me.cboautonotes.Location = New System.Drawing.Point(8, 14)
         Me.cboautonotes.Name = "cboautonotes"
         Me.cboautonotes.Size = New System.Drawing.Size(357, 21)
-        Me.cboautonotes.TabIndex = 1
+        Me.cboautonotes.TabIndex = 508
         '
         'lblsalesnotes
         '
@@ -342,7 +344,7 @@ Partial Class SDResult
         'rtfNote
         '
         Me.rtfNote.BackColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.rtfNote.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rtfNote.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtfNote.Location = New System.Drawing.Point(8, 43)
         Me.rtfNote.Name = "rtfNote"
         Me.rtfNote.Size = New System.Drawing.Size(357, 79)
@@ -370,7 +372,7 @@ Partial Class SDResult
         '
         'txt1Par
         '
-        Me.txt1Par.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt1Par.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt1Par.Location = New System.Drawing.Point(121, 46)
         Me.txt1Par.MaxLength = 7
         Me.txt1Par.Name = "txt1Par"
@@ -380,7 +382,7 @@ Partial Class SDResult
         '
         'txt2Par
         '
-        Me.txt2Par.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt2Par.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt2Par.Location = New System.Drawing.Point(197, 46)
         Me.txt2Par.MaxLength = 2
         Me.txt2Par.Name = "txt2Par"
@@ -392,7 +394,7 @@ Partial Class SDResult
         '
         'txt1Quoted
         '
-        Me.txt1Quoted.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt1Quoted.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt1Quoted.Location = New System.Drawing.Point(121, 19)
         Me.txt1Quoted.MaxLength = 7
         Me.txt1Quoted.Name = "txt1Quoted"
@@ -402,7 +404,7 @@ Partial Class SDResult
         '
         'txt2Quoted
         '
-        Me.txt2Quoted.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt2Quoted.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt2Quoted.Location = New System.Drawing.Point(197, 19)
         Me.txt2Quoted.MaxLength = 2
         Me.txt2Quoted.Name = "txt2Quoted"
@@ -415,18 +417,18 @@ Partial Class SDResult
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Black
         Me.Label10.Location = New System.Drawing.Point(185, 22)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(12, 16)
+        Me.Label10.Size = New System.Drawing.Size(13, 16)
         Me.Label10.TabIndex = 462
         Me.Label10.Text = "."
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.Black
         Me.Label9.Location = New System.Drawing.Point(108, 22)
         Me.Label9.Name = "Label9"
@@ -438,11 +440,11 @@ Partial Class SDResult
         '
         Me.chkRecoverable.AutoSize = True
         Me.chkRecoverable.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkRecoverable.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkRecoverable.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkRecoverable.ForeColor = System.Drawing.Color.Black
         Me.chkRecoverable.Location = New System.Drawing.Point(16, 91)
         Me.chkRecoverable.Name = "chkRecoverable"
-        Me.chkRecoverable.Size = New System.Drawing.Size(214, 17)
+        Me.chkRecoverable.Size = New System.Drawing.Size(218, 17)
         Me.chkRecoverable.TabIndex = 3
         Me.chkRecoverable.Text = "Send this record to be Recovered"
         Me.chkRecoverable.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -451,22 +453,22 @@ Partial Class SDResult
         'Label137
         '
         Me.Label137.AutoSize = True
-        Me.Label137.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label137.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label137.ForeColor = System.Drawing.Color.Black
         Me.Label137.Location = New System.Drawing.Point(8, 22)
         Me.Label137.Name = "Label137"
-        Me.Label137.Size = New System.Drawing.Size(51, 13)
+        Me.Label137.Size = New System.Drawing.Size(53, 13)
         Me.Label137.TabIndex = 457
         Me.Label137.Text = "Quoted:"
         '
         'Label138
         '
         Me.Label138.AutoSize = True
-        Me.Label138.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label138.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label138.ForeColor = System.Drawing.Color.Black
         Me.Label138.Location = New System.Drawing.Point(8, 49)
         Me.Label138.Name = "Label138"
-        Me.Label138.Size = New System.Drawing.Size(60, 13)
+        Me.Label138.Size = New System.Drawing.Size(63, 13)
         Me.Label138.TabIndex = 456
         Me.Label138.Text = "Par Price:"
         '
@@ -484,7 +486,7 @@ Partial Class SDResult
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.Black
         Me.Label11.Location = New System.Drawing.Point(108, 47)
         Me.Label11.Name = "Label11"
@@ -511,7 +513,7 @@ Partial Class SDResult
         '
         'txt1ContractAmt
         '
-        Me.txt1ContractAmt.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt1ContractAmt.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ErrorProvider1.SetIconPadding(Me.txt1ContractAmt, 25)
         Me.txt1ContractAmt.Location = New System.Drawing.Point(144, 58)
         Me.txt1ContractAmt.MaxLength = 9
@@ -522,7 +524,7 @@ Partial Class SDResult
         '
         'txt2ContractAmt
         '
-        Me.txt2ContractAmt.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt2ContractAmt.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt2ContractAmt.Location = New System.Drawing.Point(218, 58)
         Me.txt2ContractAmt.MaxLength = 2
         Me.txt2ContractAmt.Name = "txt2ContractAmt"
@@ -535,18 +537,18 @@ Partial Class SDResult
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.Color.Black
         Me.Label13.Location = New System.Drawing.Point(209, 61)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(12, 16)
+        Me.Label13.Size = New System.Drawing.Size(13, 16)
         Me.Label13.TabIndex = 466
         Me.Label13.Text = "."
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.Black
         Me.Label14.Location = New System.Drawing.Point(130, 61)
         Me.Label14.Name = "Label14"
@@ -557,10 +559,10 @@ Partial Class SDResult
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(8, 100)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(105, 13)
+        Me.Label8.Size = New System.Drawing.Size(107, 13)
         Me.Label8.TabIndex = 462
         Me.Label8.Text = "Payment Method:"
         '
@@ -578,11 +580,11 @@ Partial Class SDResult
         'rdoCash
         '
         Me.rdoCash.AutoSize = True
-        Me.rdoCash.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdoCash.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rdoCash.ForeColor = System.Drawing.Color.Black
         Me.rdoCash.Location = New System.Drawing.Point(14, 12)
         Me.rdoCash.Name = "rdoCash"
-        Me.rdoCash.Size = New System.Drawing.Size(52, 17)
+        Me.rdoCash.Size = New System.Drawing.Size(54, 17)
         Me.rdoCash.TabIndex = 3
         Me.rdoCash.TabStop = True
         Me.rdoCash.Text = "Cash"
@@ -591,7 +593,7 @@ Partial Class SDResult
         'rdoFinance
         '
         Me.rdoFinance.AutoSize = True
-        Me.rdoFinance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdoFinance.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rdoFinance.ForeColor = System.Drawing.Color.Black
         Me.rdoFinance.Location = New System.Drawing.Point(83, 12)
         Me.rdoFinance.Name = "rdoFinance"
@@ -604,16 +606,16 @@ Partial Class SDResult
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(8, 22)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(167, 13)
+        Me.Label2.Size = New System.Drawing.Size(169, 13)
         Me.Label2.TabIndex = 28
         Me.Label2.Text = "Recission period expires on:"
         '
         'dtpRecDate
         '
-        Me.dtpRecDate.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpRecDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpRecDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpRecDate.Location = New System.Drawing.Point(182, 18)
         Me.dtpRecDate.Name = "dtpRecDate"
@@ -623,22 +625,44 @@ Partial Class SDResult
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(8, 61)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(105, 13)
+        Me.Label3.Size = New System.Drawing.Size(109, 13)
         Me.Label3.TabIndex = 26
         Me.Label3.Text = "Contract Amount:"
         '
         'pnlSale2
         '
         Me.pnlSale2.BackColor = System.Drawing.Color.White
+        Me.pnlSale2.Controls.Add(Me.dtpDelay)
+        Me.pnlSale2.Controls.Add(Me.chkDelay)
         Me.pnlSale2.Controls.Add(Me.lblContractNotes)
         Me.pnlSale2.Controls.Add(Me.txtContractNotes)
         Me.pnlSale2.Location = New System.Drawing.Point(12, 12)
         Me.pnlSale2.Name = "pnlSale2"
         Me.pnlSale2.Size = New System.Drawing.Size(368, 125)
         Me.pnlSale2.TabIndex = 523
+        '
+        'dtpDelay
+        '
+        Me.dtpDelay.Enabled = False
+        Me.dtpDelay.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDelay.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDelay.Location = New System.Drawing.Point(164, 7)
+        Me.dtpDelay.Name = "dtpDelay"
+        Me.dtpDelay.Size = New System.Drawing.Size(130, 21)
+        Me.dtpDelay.TabIndex = 513
+        '
+        'chkDelay
+        '
+        Me.chkDelay.AutoSize = True
+        Me.chkDelay.Location = New System.Drawing.Point(28, 10)
+        Me.chkDelay.Name = "chkDelay"
+        Me.chkDelay.Size = New System.Drawing.Size(130, 17)
+        Me.chkDelay.TabIndex = 512
+        Me.chkDelay.Text = "Delay Installation Until"
+        Me.chkDelay.UseVisualStyleBackColor = True
         '
         'lblContractNotes
         '
@@ -647,7 +671,7 @@ Partial Class SDResult
         Me.lblContractNotes.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.lblContractNotes.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblContractNotes.ForeColor = System.Drawing.Color.Gray
-        Me.lblContractNotes.Location = New System.Drawing.Point(94, 56)
+        Me.lblContractNotes.Location = New System.Drawing.Point(94, 75)
         Me.lblContractNotes.Name = "lblContractNotes"
         Me.lblContractNotes.Size = New System.Drawing.Size(169, 13)
         Me.lblContractNotes.TabIndex = 505
@@ -656,10 +680,10 @@ Partial Class SDResult
         'txtContractNotes
         '
         Me.txtContractNotes.BackColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.txtContractNotes.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtContractNotes.Location = New System.Drawing.Point(8, 11)
+        Me.txtContractNotes.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtContractNotes.Location = New System.Drawing.Point(8, 34)
         Me.txtContractNotes.Name = "txtContractNotes"
-        Me.txtContractNotes.Size = New System.Drawing.Size(357, 111)
+        Me.txtContractNotes.Size = New System.Drawing.Size(357, 88)
         Me.txtContractNotes.TabIndex = 1
         Me.txtContractNotes.Text = ""
         '
@@ -695,7 +719,7 @@ Partial Class SDResult
         'cboProducts
         '
         Me.cboProducts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboProducts.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboProducts.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboProducts.FormattingEnabled = True
         Me.cboProducts.Location = New System.Drawing.Point(149, 8)
         Me.cboProducts.Name = "cboProducts"
@@ -705,20 +729,20 @@ Partial Class SDResult
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(244, 32)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(86, 13)
+        Me.Label4.Size = New System.Drawing.Size(85, 13)
         Me.Label4.TabIndex = 535
         Me.Label4.Text = "Sold Products"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(35, 32)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(90, 13)
+        Me.Label5.Size = New System.Drawing.Size(92, 13)
         Me.Label5.TabIndex = 533
         Me.Label5.Text = "Future Interest"
         '
@@ -736,6 +760,7 @@ Partial Class SDResult
         '
         'lstSold
         '
+        Me.lstSold.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstSold.FormattingEnabled = True
         Me.lstSold.Location = New System.Drawing.Point(210, 48)
         Me.lstSold.Name = "lstSold"
@@ -755,6 +780,7 @@ Partial Class SDResult
         '
         'lstManage
         '
+        Me.lstManage.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstManage.FormattingEnabled = True
         Me.lstManage.Items.AddRange(New Object() {"Roof", "Siding", "Windows", "Deck", "Porch"})
         Me.lstManage.Location = New System.Drawing.Point(3, 48)
@@ -765,10 +791,10 @@ Partial Class SDResult
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(17, 11)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(127, 13)
+        Me.Label15.Size = New System.Drawing.Size(129, 13)
         Me.Label15.TabIndex = 530
         Me.Label15.Text = "Add More Product(s):"
         '
@@ -807,7 +833,7 @@ Partial Class SDResult
         '
         Me.txtP1.BackColor = System.Drawing.Color.White
         Me.txtP1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP1.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP1.Location = New System.Drawing.Point(3, 3)
         Me.txtP1.Name = "txtP1"
         Me.txtP1.ReadOnly = True
@@ -819,7 +845,7 @@ Partial Class SDResult
         'txtP1Amnt
         '
         Me.txtP1Amnt.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP1Amnt.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP1Amnt.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP1Amnt.Location = New System.Drawing.Point(156, 3)
         Me.txtP1Amnt.Name = "txtP1Amnt"
         Me.txtP1Amnt.Size = New System.Drawing.Size(80, 14)
@@ -842,7 +868,7 @@ Partial Class SDResult
         '
         Me.txtP2.BackColor = System.Drawing.Color.White
         Me.txtP2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP2.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP2.Location = New System.Drawing.Point(3, 23)
         Me.txtP2.Name = "txtP2"
         Me.txtP2.ReadOnly = True
@@ -854,7 +880,7 @@ Partial Class SDResult
         'txtP2Amnt
         '
         Me.txtP2Amnt.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP2Amnt.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP2Amnt.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP2Amnt.Location = New System.Drawing.Point(156, 23)
         Me.txtP2Amnt.Name = "txtP2Amnt"
         Me.txtP2Amnt.Size = New System.Drawing.Size(80, 14)
@@ -877,7 +903,7 @@ Partial Class SDResult
         '
         Me.txtP3.BackColor = System.Drawing.Color.White
         Me.txtP3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP3.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP3.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP3.Location = New System.Drawing.Point(3, 43)
         Me.txtP3.Name = "txtP3"
         Me.txtP3.ReadOnly = True
@@ -889,7 +915,7 @@ Partial Class SDResult
         'txtP3Amnt
         '
         Me.txtP3Amnt.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP3Amnt.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP3Amnt.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP3Amnt.Location = New System.Drawing.Point(156, 43)
         Me.txtP3Amnt.Name = "txtP3Amnt"
         Me.txtP3Amnt.Size = New System.Drawing.Size(80, 14)
@@ -912,7 +938,7 @@ Partial Class SDResult
         '
         Me.txtP4.BackColor = System.Drawing.Color.White
         Me.txtP4.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP4.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP4.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP4.Location = New System.Drawing.Point(3, 63)
         Me.txtP4.Name = "txtP4"
         Me.txtP4.ReadOnly = True
@@ -924,7 +950,7 @@ Partial Class SDResult
         'txtP4Amnt
         '
         Me.txtP4Amnt.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP4Amnt.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP4Amnt.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP4Amnt.Location = New System.Drawing.Point(156, 63)
         Me.txtP4Amnt.Name = "txtP4Amnt"
         Me.txtP4Amnt.Size = New System.Drawing.Size(80, 14)
@@ -947,7 +973,7 @@ Partial Class SDResult
         '
         Me.txtP5.BackColor = System.Drawing.Color.White
         Me.txtP5.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP5.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP5.Location = New System.Drawing.Point(3, 83)
         Me.txtP5.Name = "txtP5"
         Me.txtP5.ReadOnly = True
@@ -959,7 +985,7 @@ Partial Class SDResult
         'txtP5Amnt
         '
         Me.txtP5Amnt.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtP5Amnt.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtP5Amnt.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtP5Amnt.Location = New System.Drawing.Point(156, 83)
         Me.txtP5Amnt.Name = "txtP5Amnt"
         Me.txtP5Amnt.Size = New System.Drawing.Size(80, 14)
@@ -993,7 +1019,7 @@ Partial Class SDResult
         'btnBack
         '
         Me.btnBack.Enabled = False
-        Me.btnBack.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBack.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBack.ForeColor = System.Drawing.Color.Black
         Me.btnBack.Image = CType(resources.GetObject("btnBack.Image"), System.Drawing.Image)
         Me.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1007,7 +1033,7 @@ Partial Class SDResult
         '
         'btnCancel
         '
-        Me.btnCancel.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.Black
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancel.Location = New System.Drawing.Point(191, 152)
@@ -1019,7 +1045,7 @@ Partial Class SDResult
         '
         'btnSave
         '
-        Me.btnSave.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.Black
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSave.Location = New System.Drawing.Point(321, 152)
@@ -1032,7 +1058,7 @@ Partial Class SDResult
         '
         'btnEdit
         '
-        Me.btnEdit.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.Color.Black
         Me.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnEdit.ImageIndex = 0
@@ -1053,11 +1079,11 @@ Partial Class SDResult
         'lnkCalc
         '
         Me.lnkCalc.AutoSize = True
-        Me.lnkCalc.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lnkCalc.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lnkCalc.Location = New System.Drawing.Point(29, 162)
         Me.lnkCalc.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
         Me.lnkCalc.Name = "lnkCalc"
-        Me.lnkCalc.Size = New System.Drawing.Size(107, 13)
+        Me.lnkCalc.Size = New System.Drawing.Size(109, 13)
         Me.lnkCalc.TabIndex = 14
         Me.lnkCalc.TabStop = True
         Me.lnkCalc.Text = "Launch Calculator"
@@ -1104,17 +1130,17 @@ Partial Class SDResult
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.lvPrevious)
         Me.Controls.Add(Me.lnkCalc)
-        Me.Controls.Add(Me.btnEdit)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.btnNext)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.btnBack)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.pnlLast)
         Me.Controls.Add(Me.pnlFirst)
         Me.Controls.Add(Me.pnlSale5)
         Me.Controls.Add(Me.pnlSale4)
         Me.Controls.Add(Me.pnlSale1)
-        Me.Controls.Add(Me.btnNext)
-        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.pnlSale2)
         Me.Controls.Add(Me.pnlDemo)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
@@ -1161,8 +1187,6 @@ Partial Class SDResult
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Friend WithEvents pnlFirst As System.Windows.Forms.Panel
     Friend WithEvents pnlLast As System.Windows.Forms.Panel
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents cboautonotes As System.Windows.Forms.ComboBox
     Friend WithEvents lblsalesnotes As System.Windows.Forms.Label
     Friend WithEvents rtfNote As System.Windows.Forms.RichTextBox
     Friend WithEvents pnlDemo As System.Windows.Forms.Panel
@@ -1233,4 +1257,8 @@ Partial Class SDResult
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents lblRecoveryPC As System.Windows.Forms.Label
     Friend WithEvents pctRecoveryPC As System.Windows.Forms.PictureBox
+    Friend WithEvents dtpDelay As System.Windows.Forms.DateTimePicker
+    Friend WithEvents chkDelay As System.Windows.Forms.CheckBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents cboautonotes As System.Windows.Forms.ComboBox
 End Class
