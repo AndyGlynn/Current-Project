@@ -705,6 +705,7 @@
     <Compile Include="systemCheckLogin.vb" />
     <Compile Include="TimeFormat.vb" />
     <Compile Include="ToggleUndoCandC.vb" />
+    <Compile Include="tstClass.vb" />
     <Compile Include="USER_LOGIC.vb" />
     <Compile Include="USER_LOGICv2.vb" />
     <Compile Include="Validate_Zip_Code_Mappoint.vb" />
