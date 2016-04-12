@@ -27,6 +27,14 @@ Latest14
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:Latest.My.Resources.Resources.arrow_right">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Latest.My.Resources.Resources.arrow_right_big">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:Latest.My.Resources.Resources.attach_files">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -63,6 +71,18 @@ Latest14
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:Latest.My.Resources.Resources.set148_copy">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Latest.My.Resources.Resources.set2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Latest.My.Resources.Resources.setappt24">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:Latest.My.Resources.Resources.SpecialInstructions24">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -71,7 +91,15 @@ Latest14
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:Latest.My.Resources.Resources.transfer61">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:Latest.My.Resources.Resources.user">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Latest.My.Resources.Resources.wordicon_200">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>

@@ -57,9 +57,28 @@ Public Class AddSalesRep
                 End If
             End If
 
+           
+            Try
+                Dim cmdCheck As SqlCommand = New SqlCommand("Select Count (Id) from SalesRepPull Where FName = '" & Trim(CapitalizeText(Me.txtFName.Text)) & "' and LName = '" & Trim(CapitalizeText(Me.txtLname.Text)) & "'", cnn)
+                cmdCheck.CommandType = CommandType.Text
+                cnn.Open()
+                Dim chk As SqlDataReader
+                chk = cmdCheck.ExecuteReader
+                chk.Read()
+                If chk.Item(0) > 0 Then
+                    Me.errorcount += 1
+                    MsgBox(Trim(CapitalizeText(Me.txtFName.Text)) & " " & Trim(CapitalizeText(Me.txtLname.Text)) & " already exists!", MsgBoxStyle.Exclamation, "Cannot Add Duplicate Names")
+                End If
+                chk.Close()
+                cnn.Close()
+
+            Catch ex As Exception
+
+            End Try
             If Me.errorcount >= 1 Then
                 Exit Sub
             End If
+
             Try
                 Dim cmdINS As SqlCommand = New SqlCommand("dbo.InsertSalesRep", cnn)
                 cmdINS.CommandType = CommandType.StoredProcedure
@@ -190,5 +209,11 @@ Public Class AddSalesRep
             y = Nothing
         End Try
 
+    End Sub
+
+    Private Sub txtEmail_LostFocus(sender As Object, e As EventArgs) Handles txtEmail.LostFocus
+        If Me.txtEmail.Text <> "" Then
+            Me.chkEmail.Checked = True
+        End If
     End Sub
 End Class

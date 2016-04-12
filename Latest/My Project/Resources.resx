@@ -124,8 +124,11 @@
   <data name="Add12x12" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add12x12.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="transfer6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\transfer6.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="set148 copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\set148 copy.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow-right-big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-right-big.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Call&amp;Cancel48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Call&amp;Cancel48.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,20 +136,35 @@
   <data name="cash2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cash2.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="arrow-right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-right.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="attach files" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\attach files.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Add16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add16.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="transfer6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\transfer6.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="print 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\print 32.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wordicon_200" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wordicon_200.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="notesnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\notesnew.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="0176" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\0176.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="transfer61" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\transfer61.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="calledcancelled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\calledcancelled.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,7 +178,10 @@
   <data name="inetcpl_4480" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\inetcpl_4480.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="set2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\set2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="setappt24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\setappt24.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

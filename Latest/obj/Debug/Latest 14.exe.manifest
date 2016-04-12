@@ -55,7 +55,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Rs0ennfRLRmVQIGiQOqVRaj/m7A=</dsig:DigestValue>
+        <dsig:DigestValue>vnbIMDf/rv8hIbiNYfehkey4oZI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -67,7 +67,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>rAMVpWesKnaaCxCKj04i6/vYo4Q=</dsig:DigestValue>
+        <dsig:DigestValue>lWGIBt9AJprwn1YKe4qxty03CdI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -79,43 +79,43 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>u1F4TJQI1i3Zp5rfAjzfKJ2cRYs=</dsig:DigestValue>
+        <dsig:DigestValue>CCIo2vPdQqMYIeH1BUavBfS1KqI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Core.dll" size="437248">
-      <assemblyIdentity name="Interop.Microsoft.Office.Core" version="2.7.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Core.dll" size="430592">
+      <assemblyIdentity name="Interop.Microsoft.Office.Core" version="2.5.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>F4TmMDZY7hxuyDhGQ12xNMeQrY8=</dsig:DigestValue>
+        <dsig:DigestValue>Iinmv1gnaG/0fiqWcBGDV8fjniQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Interop.Outlook.dll" size="965632">
-      <assemblyIdentity name="Interop.Microsoft.Office.Interop.Outlook" version="9.5.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Interop.Outlook.dll" size="911872">
+      <assemblyIdentity name="Interop.Microsoft.Office.Interop.Outlook" version="9.3.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Nqp9YCW47kI7kE84t7hvlSLWjh4=</dsig:DigestValue>
+        <dsig:DigestValue>mtBye/YXFEKue6SFxcDoYCh1uIc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="4361088">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Latest 14.exe" size="4417408">
       <assemblyIdentity name="Latest 14" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>5mOZwofMJkaICHV5Rq9/GI4SFbA=</dsig:DigestValue>
+        <dsig:DigestValue>t5YNuq4FGdeegc5+lKY4EDw+3LY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
