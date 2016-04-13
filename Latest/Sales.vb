@@ -1893,7 +1893,7 @@ Public Class Sales
 
 
 
-  
+
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tbMain.SelectedIndexChanged
         Try
             Dim x As Integer = 0
@@ -1961,7 +1961,9 @@ Public Class Sales
                     STATIC_VARIABLES.CurrentID = Me.ID
                     ToolbarConfig(4)
 
+                    Me.Cursor = Cursors.WaitCursor
                     Dim d As New Issue_Leads(True, "")
+                    Me.Cursor = Cursors.Default
 
                     Exit Select
                 Case 3
@@ -2426,7 +2428,7 @@ Public Class Sales
             bgSalesQuery_DoWork(Nothing, Nothing)
             If current_Item IsNot Nothing Then
                 PullInfo(current_Item.Text)
-                 RaiseEvent PopCustHistory()
+                RaiseEvent PopCustHistory()
             End If
             'Me.Cursor = Cursors.WaitCursor
             'Dim c As New SalesListManager(sender)
@@ -2482,6 +2484,7 @@ Public Class Sales
         Try
             If current_Item IsNot Nothing Then
                 PullInfo(current_Item.Text)
+                STATIC_VARIABLES.CurrentID = current_Item.Text
             Else
                 Exit Sub
             End If
@@ -2944,40 +2947,40 @@ Public Class Sales
             r2.Read()
             '' Loads Names of Latest Rep from sales rep pull list and will also add 
             '' the name to rep combos if they are not part of the current rep list 
-        
 
-        Try
-            Me.cboRep1.Text = R2.Item(0)
-            If Me.cboRep1.Text = "" And R2.Item(0) <> "" Then
-                Me.cboRep1.Items.Add(R2.Item(0))
-                Me.cboRep2.Items.Add(R2.Item(0))
+
+            Try
                 Me.cboRep1.Text = R2.Item(0)
+                If Me.cboRep1.Text = "" And R2.Item(0) <> "" Then
+                    Me.cboRep1.Items.Add(R2.Item(0))
+                    Me.cboRep2.Items.Add(R2.Item(0))
+                    Me.cboRep1.Text = R2.Item(0)
 
-            End If
-        Catch ex As Exception
-            Me.cboRep1.Text = Nothing
+                End If
+            Catch ex As Exception
+                Me.cboRep1.Text = Nothing
 
-        End Try
-        Try
-            Me.cboRep2.Text = R2.Item(1)
-            If Me.cboRep2.Text = "" And R2.Item(1) <> "" Then
-                Me.cboRep2.Items.Add(R2.Item(1))
-                Me.cboRep1.Items.Add(R2.Item(1))
+            End Try
+            Try
                 Me.cboRep2.Text = R2.Item(1)
+                If Me.cboRep2.Text = "" And R2.Item(1) <> "" Then
+                    Me.cboRep2.Items.Add(R2.Item(1))
+                    Me.cboRep1.Items.Add(R2.Item(1))
+                    Me.cboRep2.Text = R2.Item(1)
 
+                End If
+            Catch ex As Exception
+                Me.cboRep2.Text = Nothing
+
+            End Try
+
+            R2.Close()
+            cnn2.Close()
+            If Me.TabControl2.SelectedIndex = 1 Then
+                Me.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
+            Else
+                'Me.lvSales_SelectedIndexChanged(Nothing, Nothing)
             End If
-        Catch ex As Exception
-            Me.cboRep2.Text = Nothing
-
-        End Try
-
-        R2.Close()
-        cnn2.Close()
-        If Me.TabControl2.SelectedIndex = 1 Then
-            Me.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
-        Else
-            'Me.lvSales_SelectedIndexChanged(Nothing, Nothing)
-        End If
 
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -4703,7 +4706,9 @@ Public Class Sales
     Private Sub dtpIssueLeads_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpIssueLeads.ValueChanged
         If Me.LoadComplete = True Then
             Try
+                Me.Cursor = Cursors.WaitCursor
                 Dim x As New Issue_Leads(True, "")
+                Me.Cursor = Cursors.Default
             Catch ex As Exception
                 Me.Cursor = Cursors.Default
                 Main.Cursor = Cursors.Default
@@ -4744,9 +4749,9 @@ Public Class Sales
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "pnlIssue_sizechanged", "0", ex.Message.ToString)
-            y = Nothing
+            ' Dim y As New ErrorLogging_V2
+            'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "pnlIssue_sizechanged", "0", ex.Message.ToString)
+            'y = Nothing
         End Try
 
     End Sub
@@ -8763,7 +8768,23 @@ Public Class Sales
             Dim c As New SalesListManager(sender)
             'arItemCache = New ArrayList
             'arItemCache = c.LV_Sales_Items
-            bgSalesQuery_RunWorkerCompleted(Me, Nothing)
+            'bgSalesQuery_RunWorkerCompleted(Me, Nothing)
+
+            If Me.lvSales.Items.Count > 0 Then
+                Dim a As ListViewItem = Me.lvSales.Items.Item(0)
+                STATIC_VARIABLES.CurrentID = a.Text
+                Me.Text = "Sales Department Record ID: " & a.Text
+                PullInfo(a.Text)
+                AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                Me.lvSales.EnsureVisible(0)
+                RaiseEvent PopCustHistory()
+                'End If
+                Me.Cursor = Cursors.Default
+            Else
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
+            End If
+            
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -8777,15 +8798,21 @@ Public Class Sales
     Private Sub bgSalesQuery_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles bgSalesQuery.RunWorkerCompleted
         Try
             ' If arItemCache.Count > 1 Then
-            Dim a As ListViewItem = Me.lvSales.Items.Item(0)
-            STATIC_VARIABLES.CurrentID = a.Text
-            Me.Text = "Sales Department Record ID: " & a.Text
-            PullInfo(a.Text)
-            AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-            Me.lvSales.EnsureVisible(0)
-            RaiseEvent PopCustHistory()
-            'End If
-            Me.Cursor = Cursors.Default
+
+            If Me.lvSales.Items.Count > 0 Then
+                Dim a As ListViewItem = Me.lvSales.Items.Item(0)
+                STATIC_VARIABLES.CurrentID = a.Text
+                Me.Text = "Sales Department Record ID: " & a.Text
+                PullInfo(a.Text)
+                AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                Me.lvSales.EnsureVisible(0)
+                RaiseEvent PopCustHistory()
+                'End If
+                Me.Cursor = Cursors.Default
+            Else
+
+            End If
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default

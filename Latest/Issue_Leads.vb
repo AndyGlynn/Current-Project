@@ -25,7 +25,7 @@ Public Class Issue_Leads
 
  
     Public Sub New(ByVal setup As Boolean, ByVal growshrink As String)
-
+        Sales.Cursor = Cursors.WaitCursor
         Dim leadCnt As Integer = 0
         If setup = False Then
             Me.panelsize = growshrink
@@ -33,6 +33,8 @@ Public Class Issue_Leads
             Exit Sub
         End If
 
+        ''**DEBUG TESTING**
+        '' 4-12-2016 AC
         Try
             y.Visible = False
             y.Controls.Clear()
@@ -1175,9 +1177,11 @@ Public Class Issue_Leads
 
 
             y.Visible = True
+            Sales.Cursor = Cursors.Default
         Catch ex As Exception
-            MsgBox(ex.ToString)
+            'MsgBox(ex.ToString)
             Main.Cursor = Cursors.Default
+            Sales.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Constructor", "New(...)", "0", ex.Message.ToString)
             y = Nothing
@@ -1196,6 +1200,7 @@ Public Class Issue_Leads
             Try
                 fs = Sales.pnlIssue.Controls.Item(0).Controls.Item(1).Font.Size
             Catch ex As Exception
+                Sales.Cursor = Cursors.Default
                 Dim y As New ErrorLogging_V2
                 y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "ReLayout()", "0", ex.Message.ToString)
                 y = Nothing
@@ -1215,87 +1220,95 @@ Public Class Issue_Leads
 
                 Dim y As Panel = Sales.pnlIssue.Controls.Item(q)
                 If y.Name.Contains("pnl") Then
-                    Dim lblname As Label = y.Controls.Item(1)
-                    Dim lbladdress As Label = y.Controls.Item(3)
-                    Dim lblproduct As Label = y.Controls.Item(4)
-                    Dim strsize As New System.Drawing.SizeF()
-                    Dim strsize2 As New System.Drawing.SizeF()
-                    Dim pctSI = y.Controls.Item(5)
-                    Dim x As Integer = (lblname.Parent.Size.Width - (390)) * 0.44
+                    If y.Controls.Count > 1 Then
+                        Dim lblname As Label = y.Controls.Item(1)
 
-                    lblname.Size = New System.Drawing.Size(x, y.Height)
-                    x = lblname.Width + 134
-                    lbladdress.Location = New System.Drawing.Point(x, 0)
-                    x = (y.Size.Width - (390)) * 0.3
-                    lbladdress.Size = New System.Drawing.Size(x, y.Height)
-                    strsize = Me.MeasureString(lbladdress.Text, New System.Drawing.Font("Verdana", fs!, System.Drawing.FontStyle.Regular, _
-                                                          System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
-                    strsize2 = Me.MeasureString(lbladdress.Tag, New System.Drawing.Font("Verdana", fs!, System.Drawing.FontStyle.Regular, _
-                                                          System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
-                    Dim tag = lbladdress.Tag
-                    Dim txt = lbladdress.Text
-                    Dim longest As String
-                    If strsize.Width > strsize2.Width Then
-                        longest = "txt"
-                    Else
-                        longest = "tag"
-                    End If
-                    If longest = "txt" Then
-                        If strsize.Width >= lbladdress.Width Then
-                            lbladdress.Text = tag
-                            lbladdress.Tag = txt
-                        Else
-                            lbladdress.Text = txt
-                            lbladdress.Tag = tag
-                        End If
-                    Else  ''longest = tag 
-                        If strsize2.Width >= lbladdress.Width Then
-                            lbladdress.Text = txt
-                            lbladdress.Tag = tag
-                        Else
-                            lbladdress.Text = tag
-                            lbladdress.Tag = txt
-                        End If
-                    End If
-                    x = lblname.Width + 134 + lbladdress.Width + 6
-                    lblproduct.Location = New System.Drawing.Point(x, 0)
-                    x = (y.Size.Width - ((lbladdress.Location.X + lbladdress.Width) + (y.Width - pctSI.Location.X + 16)))
-                    lblproduct.Size = New System.Drawing.Size(x, y.Height)
-                    strsize = Me.MeasureString(lblproduct.Text, New System.Drawing.Font("Verdana", fs!, System.Drawing.FontStyle.Regular, _
+                        Dim lbladdress As Label = y.Controls.Item(3)
+                        Dim lblproduct As Label = y.Controls.Item(4)
+                        Dim strsize As New System.Drawing.SizeF()
+                        Dim strsize2 As New System.Drawing.SizeF()
+                        Dim pctSI = y.Controls.Item(5)
+                        Dim x As Integer = (lblname.Parent.Size.Width - (390)) * 0.44
+
+                        lblname.Size = New System.Drawing.Size(x, y.Height)
+                        x = lblname.Width + 134
+                        lbladdress.Location = New System.Drawing.Point(x, 0)
+                        x = (y.Size.Width - (390)) * 0.3
+                        lbladdress.Size = New System.Drawing.Size(x, y.Height)
+                        strsize = Me.MeasureString(lbladdress.Text, New System.Drawing.Font("Verdana", fs!, System.Drawing.FontStyle.Regular, _
                                                               System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
-                    strsize2 = Me.MeasureString(lblproduct.Tag, New System.Drawing.Font("Verdana", fs!, System.Drawing.FontStyle.Regular, _
-                                                          System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
+                        strsize2 = Me.MeasureString(lbladdress.Tag, New System.Drawing.Font("Verdana", fs!, System.Drawing.FontStyle.Regular, _
+                                                              System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
+                        Dim tag = lbladdress.Tag
+                        Dim txt = lbladdress.Text
+                        Dim longest As String
+                        If strsize.Width > strsize2.Width Then
+                            longest = "txt"
+                        Else
+                            longest = "tag"
+                        End If
+                        If longest = "txt" Then
+                            If strsize.Width >= lbladdress.Width Then
+                                lbladdress.Text = tag
+                                lbladdress.Tag = txt
+                            Else
+                                lbladdress.Text = txt
+                                lbladdress.Tag = tag
+                            End If
+                        Else  ''longest = tag 
+                            If strsize2.Width >= lbladdress.Width Then
+                                lbladdress.Text = txt
+                                lbladdress.Tag = tag
+                            Else
+                                lbladdress.Text = tag
+                                lbladdress.Tag = txt
+                            End If
+                        End If
+                        x = lblname.Width + 134 + lbladdress.Width + 6
+                        lblproduct.Location = New System.Drawing.Point(x, 0)
+                        x = (y.Size.Width - ((lbladdress.Location.X + lbladdress.Width) + (y.Width - pctSI.Location.X + 16)))
+                        lblproduct.Size = New System.Drawing.Size(x, y.Height)
+                        strsize = Me.MeasureString(lblproduct.Text, New System.Drawing.Font("Verdana", fs!, System.Drawing.FontStyle.Regular, _
+                                                                  System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
+                        strsize2 = Me.MeasureString(lblproduct.Tag, New System.Drawing.Font("Verdana", fs!, System.Drawing.FontStyle.Regular, _
+                                                              System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
 
-                    tag = lblproduct.Tag
-                    txt = lblproduct.Text
-                    If strsize.Width > strsize2.Width Then
-                        longest = "txt"
-                    Else
-                        longest = "tag"
-                    End If
-                    If longest = "txt" Then
-                        If strsize.Width >= lblproduct.Width Then
-                            lblproduct.Text = tag
-                            lblproduct.Tag = txt
+                        tag = lblproduct.Tag
+                        txt = lblproduct.Text
+                        If strsize.Width > strsize2.Width Then
+                            longest = "txt"
                         Else
-                            lblproduct.Text = txt
-                            lblproduct.Tag = tag
+                            longest = "tag"
                         End If
-                    Else  ''longest = tag 
-                        If strsize2.Width >= lblproduct.Width Then
-                            lblproduct.Text = txt
-                            lblproduct.Tag = tag
-                        Else
-                            lblproduct.Text = tag
-                            lblproduct.Tag = txt
+                        If longest = "txt" Then
+                            If strsize.Width >= lblproduct.Width Then
+                                lblproduct.Text = tag
+                                lblproduct.Tag = txt
+                            Else
+                                lblproduct.Text = txt
+                                lblproduct.Tag = tag
+                            End If
+                        Else  ''longest = tag 
+                            If strsize2.Width >= lblproduct.Width Then
+                                lblproduct.Text = txt
+                                lblproduct.Tag = tag
+                            Else
+                                lblproduct.Text = tag
+                                lblproduct.Tag = txt
+                            End If
                         End If
                     End If
+                Else
+                    '' there aren't any controls in the collection
+                    '' if this hits.
+                    '' just exit.
                 End If
             Next
 
         Catch ex As Exception
             MsgBox(ex.ToString)
             Main.Cursor = Cursors.Default
+            Sales.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "ReLayout()", "0", ex.Message.ToString)
             y = Nothing
@@ -1349,9 +1362,10 @@ Public Class Issue_Leads
                 '' Doesnt matter though cuz after creation in full screen it does another Relayout anyway Cant think of a way to kick it out when this happens 
                 '' so i just commented out MSGBOX
                 Main.Cursor = Cursors.Default
-                Dim y As New ErrorLogging_V2
-                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "ReLayout()", "0", ex.Message.ToString)
-                y = Nothing
+                Sales.Cursor = Cursors.Default
+                'Dim y As New ErrorLogging_V2
+                'y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Issue_Leads", "Issue_Leads", "Sub", "ReLayout()", "0", ex.Message.ToString)
+                'y = Nothing
             End Try
 
 
@@ -1627,6 +1641,7 @@ Public Class Issue_Leads
             fcnt = 0
             doit = 0
         End If
+        Sales.Cursor = Cursors.Default
     End Sub
     Function day(ByVal dayofweek As Integer)
         Dim d As String

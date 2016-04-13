@@ -380,6 +380,18 @@ Public Class SalesListManager
             Sales.LastD1 = Date1
             Sales.LastD2 = Date2
 
+
+            '' now get default top item for Static_Variables.ID
+            '' 
+            If Sales.lvSales.Items.Count > 0 Then
+                Dim lv As New ListViewItem
+                lv = Sales.lvSales.Items.Item(0)
+                STATIC_VARIABLES.CurrentID = lv.Name.ToString
+                lv = Nothing
+            Else
+                '' just trap it. 
+            End If
+
             Sales.Cursor = Cursors.Default
 
         Catch ex As Exception
