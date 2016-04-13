@@ -67,7 +67,7 @@ Public Class Confirming
     Public cntCandC As Integer = 0
     Public OrigRep1 As String
     Public OrigRep2 As String
-  
+
     Private Sub Confirming_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         STATIC_VARIABLES.CurrentID = ""
 
@@ -772,7 +772,7 @@ Public Class Confirming
 
     End Sub
 
-  
+
 
     Private Sub calledcancelled_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles calledcancelled.Click
         Try
@@ -1608,7 +1608,7 @@ Public Class Confirming
 
     End Sub
 
-  
+
 
 
 #Region "Emailing Functions/Subs"
@@ -1745,9 +1745,9 @@ Public Class Confirming
     End Sub
 #End Region
 
-  
-   
-   
+
+
+
     Private Sub EmailBlastSend_Click(sender As Object, e As EventArgs) Handles EmailBlastSend.Click
         frmBlastMail.MdiParent = Main
         frmBlastMail.RecID = STATIC_VARIABLES.CurrentID
