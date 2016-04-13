@@ -111,6 +111,11 @@ Public Class AddManager
             If cnt >= 1 Then
                 Exit Sub
             End If
+
+
+            ''' Query Name to look for duplicates and add to error count
+
+
             Dim SQLString As String
             If Me.cboDept.Text = "Marketing" Then
                 SQLString = "insert into MarketingManagerPull (ManFName , ManLName  ) values ('" & Me.txtFName.Text & "', '" & Me.txtLname.Text & "') "

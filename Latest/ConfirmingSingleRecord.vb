@@ -412,6 +412,7 @@ Public Class ConfirmingSingleRecord
         Me.tsSingleForm.Items.Clear()
         Select Case sender.Name
             Case Is = "btnSales"
+                ''Add Code to square up button states ie. Memorize, Undo Memorize   Confirm, Undo Confirm... so on and so forth
                 Me.tsSingleForm.Items.Add(Me.btnSalesResult)
                 Me.btnSalesResult.DropDownItems.Add(Me.btnMemorize)
                 Me.tsSingleForm.Items.Add(Me.btnCustomerTools)
