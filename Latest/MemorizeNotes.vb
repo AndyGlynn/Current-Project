@@ -36,9 +36,20 @@ Public Class MemorizeNotes
             Me.Close()
             Me.Dispose()
             If STATIC_VARIABLES.ActiveChild.Name = "WCaller" Then
-                Dim c As New WarmCalling.MyApptsTab.Populate(WCaller.cboFilter.Text)
+                Try
+                    Dim c As New WarmCalling.MyApptsTab.Populate(WCaller.cboFilter.Text)
+                Catch ex As Exception
+
+                End Try
+
+
             ElseIf STATIC_VARIABLES.ActiveChild.Name = "Sales" Then
-                Sales.PopulateMemorized()
+                Try
+                    Sales.PopulateMemorized()
+                Catch ex As Exception
+
+                End Try
+
             End If
         Catch ex As Exception
             Me.Cursor = Cursors.Default

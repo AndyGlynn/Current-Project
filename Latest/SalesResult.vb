@@ -2637,7 +2637,7 @@ Public Class SDResult
                 End If
             ElseIf Frm.Name = "ConfirmingSingleRecord" Then
                 Dim c As New CustomerHistory
-                c.SetUp(ConfirmingSingleRecord, ConfirmingSingleRecord.ID, ConfirmingSingleRecord.TScboCustomerHistory)
+                c.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
             End If
         Catch ex As Exception
 

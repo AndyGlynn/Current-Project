@@ -171,9 +171,9 @@ Public Class MarketingManager
     End Sub
 
     Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
-        frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
-        frmEditSpecialInstructions.CallingForm = "MarketingManager"
-        frmEditSpecialInstructions.Show()
+
+        frmEditSpecialInstructions.frm = Me
+        frmEditSpecialInstructions.ShowDialog()
     End Sub
 
     Private Sub PreviewCustomerListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PreviewCustomerListToolStripMenuItem.Click

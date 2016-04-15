@@ -585,7 +585,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
                 Me.Manage = r1.Item("MarketingManager")
                 Me.PriLS = r1.Item("PrimaryLeadSource")
                 Me.SecLS = r1.Item("SecondaryLeadSource")
-             
+
 
             End While
             r1.Close()

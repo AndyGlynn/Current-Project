@@ -550,15 +550,6 @@
     <Compile Include="MemorizeNotes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="openset.Designer.vb">
-      <DependentUpon>openset.vb</DependentUpon>
-    </Compile>
-    <Compile Include="openset.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="opensetappt.vb" />
-    <Compile Include="open_kill.vb" />
-    <Compile Include="open_setappt.vb" />
     <Compile Include="Open_Windows.vb" />
     <Compile Include="PastDueAlerts.designer.vb">
       <DependentUpon>PastDueAlerts.vb</DependentUpon>
@@ -689,12 +680,6 @@
     <Compile Include="pBar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SetAppt.Designer.vb">
-      <DependentUpon>SetAppt.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SetAppt.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="SplashScreen1.Designer.vb">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
     </Compile>
@@ -705,6 +690,7 @@
     <Compile Include="systemCheckLogin.vb" />
     <Compile Include="TimeFormat.vb" />
     <Compile Include="ToggleUndoCandC.vb" />
+    <Compile Include="TScbo_List_Fill.vb" />
     <Compile Include="USER_LOGIC.vb" />
     <Compile Include="USER_LOGICv2.vb" />
     <Compile Include="Validate_Zip_Code_Mappoint.vb" />
@@ -740,18 +726,6 @@
       <DependentUpon>EmailTemplate.vb</DependentUpon>
     </Compile>
     <Compile Include="EmailTemplate.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FinancingDepartment.Designer.vb">
-      <DependentUpon>FinancingDepartment.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FinancingDepartment.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InstallationDepartment.Designer.vb">
-      <DependentUpon>InstallationDepartment.vb</DependentUpon>
-    </Compile>
-    <Compile Include="InstallationDepartment.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Kill.Designer.vb">
@@ -932,10 +906,6 @@
       <DependentUpon>Finance.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FinancingDepartment.resx">
-      <DependentUpon>FinancingDepartment.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="FindLead.resx">
       <DependentUpon>FindLead.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1090,10 +1060,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>MemorizeNotes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="openset.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>openset.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PastDueAlerts.resx">
       <DependentUpon>PastDueAlerts.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1154,10 +1120,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>SetUpUser2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InstallationDepartment.resx">
-      <DependentUpon>InstallationDepartment.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Kill.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Kill.vb</DependentUpon>
@@ -1199,10 +1161,6 @@
     <EmbeddedResource Include="SendNotesSM.resx">
       <DependentUpon>SendNotesSM.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SetAppt.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SetAppt.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SplashScreen1.resx">
       <SubType>Designer</SubType>
@@ -1354,6 +1312,20 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\arrow-right-big.ico" />
+    <Content Include="Resources\arrow-right.ico" />
+    <Content Include="Resources\FEATURES_1017.ico" />
+    <Content Include="Resources\FEATURES_1_1017.ico" />
+    <Content Include="Resources\FEATURES_2_1017.ico" />
+    <Content Include="Resources\QBWIN32_1015.ico" />
+    <Content Include="Resources\QBWIN32_1016.ico" />
+    <Content Include="Resources\QBWIN32_1017.ico" />
+    <Content Include="Resources\QBWIN32_1104.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

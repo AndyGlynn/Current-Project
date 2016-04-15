@@ -220,7 +220,7 @@ Public Class CandCNotes
                 If Confirming.Tab = "Confirm" Then
                     If Me.cbCallBack.Checked = True Or Me.cbNoReschedule.Checked = True Then
                         c.Populate(Confirming.Tab, Confirming.cboConfirmingPLS.Text, Confirming.cboConfirmingSLS.Text, Confirming.dpConfirming.Value.ToString, "Refresh")
-                        c2.SetUp(frm, Confirming.lvConfirming.SelectedItems(0).Text, Confirming.TScboCustomerHistory)
+                        c2.SetUp(Confirming.TScboCustomerHistory)
                     Else
                         c.Populate(Confirming.Tab, Confirming.cboConfirmingPLS.Text, Confirming.cboConfirmingSLS.Text, Confirming.dpConfirming.Value.ToString, "Populate")
                     End If
@@ -228,7 +228,7 @@ Public Class CandCNotes
                     If Me.cbCallBack.Checked = True Or Me.cbNoReschedule.Checked = True Then
                         c.Populate(Confirming.Tab, Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Refresh")
                         If Confirming.lvSales.SelectedItems.Count >= 1 Then
-                            c2.SetUp(frm, Confirming.lvSales.SelectedItems(0).Text, Confirming.TScboCustomerHistory)
+                            c2.SetUp(Confirming.TScboCustomerHistory)
                         End If
                     Else
                         c.Populate(Confirming.Tab, Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Populate")
@@ -236,26 +236,26 @@ Public Class CandCNotes
                 End If
             ElseIf frm.Name = "WCaller" Then
                 If WCaller.Tab = "WC" Then
-                    c2.SetUp(frm, ID, WCaller.TScboCustomerHistory)
+                    c2.SetUp(WCaller.TScboCustomerHistory)
                 Else
                     If WCaller.lvMyAppts.SelectedItems(0).Group.Name <> "grpMemorized" Then
                         Dim x As New WarmCalling.MyApptsTab.Populate(WCaller.cboFilter.Text)
                         c3.Populate()
                     Else
-                        c2.SetUp(frm, ID, WCaller.TScboCustomerHistory)
+                        c2.SetUp(WCaller.TScboCustomerHistory)
 
                     End If
 
                 End If
             ElseIf frm.Name = "ConfirmingSingleRecord" Then
-                c2.SetUp(frm, ID, ConfirmingSingleRecord.TScboCustomerHistory)
+                c2.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
 
             ElseIf frm.Name = "Sales" Then
                 If Sales.tbMain.SelectedIndex = 2 Then
                     Dim x As New Issue_Leads(True, "")
                 End If
                 If Sales.tbMain.SelectedIndex = 1 Then
-                    c2.SetUp(frm, ID, Sales.TScboCustomerHistory)
+                    c2.SetUp(Sales.TScboCustomerHistory)
                 End If
             End If
 

@@ -1907,7 +1907,7 @@ Public Class WarmCalling
             End Try
             Dim c As New CustomerHistory
             If ID <> "" Then
-                c.SetUp(WCaller, ID, WCaller.TScboCustomerHistory)
+                c.SetUp(WCaller.TScboCustomerHistory)
             End If
         Catch ex As Exception
             Main.Cursor = Cursors.Default

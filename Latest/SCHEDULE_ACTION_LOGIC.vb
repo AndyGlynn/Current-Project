@@ -248,7 +248,7 @@ Public Class SCHEDULE_ACTION_LOGIC
                 If tscbo Is Nothing Then
                     Exit Sub
                 End If
-                x.SetUp(STATIC_VARIABLES.ActiveChild, STATIC_VARIABLES.CurrentID, tscbo)
+                x.SetUp(tscbo)
             Catch ex As Exception
 
                 Main.Cursor = Cursors.Default

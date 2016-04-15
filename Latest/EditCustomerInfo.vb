@@ -14,6 +14,7 @@ Public Class EditCustomerInfo
     Dim eCnt As Integer = 0
 
 
+
     Private Sub EditCustomerInfo_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
             If ID <> "" Then
@@ -38,11 +39,11 @@ Public Class EditCustomerInfo
                 Me.Close()
                 Exit Sub
             End If
-            If WhichForm.Name = "Confirming" Then
-                Me.Label5.Text = "Appt. Info is Read Only, To Move this Appt. for this customer Use Move Appt. Button Provided"
-            Else
-                Me.Label5.Text = "Appt. Info is Read Only, To Set New Appt. for this customer Use Set Appt. Button Provided"
-            End If
+            'If WhichForm.Name = "Confirming" Then
+            '    Me.Label5.Text = "Appt. Info is Read Only, To Move this Appt. for this customer Use Move Appt. Button Provided"
+            'Else
+            '    Me.Label5.Text = "Appt. Info is Read Only, To Set New Appt. for this customer Use Set Appt. Button Provided"
+            'End If
 
             ';Me.ResetForm()
             Dim c As New Locked_for_Editing
@@ -102,50 +103,6 @@ Public Class EditCustomerInfo
         Me.WhichForm = Nothing
 
     End Sub
-
-
-
-
-
- 
-
-    Private Sub txtAlt2Type_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
-        Try
-            Dim str = Mid(Me.cboAlt2Type.Text, 1, 1)
-            Dim str2 = Mid(Me.cboAlt2Type.Text, 2, Me.cboAlt2Type.Text.ToString.Length)
-
-            str = str.ToString.ToUpper
-            Dim New_Word As String = str & str2
-            Me.cboAlt2Type.Text = New_Word
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtAlt2Type_LostFocus", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-    End Sub
-
-    Private Sub txtAlt1Type_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
-        Try
-            Dim str = Mid(Me.cboalt1type.Text, 1, 1)
-            Dim str2 = Mid(Me.cboalt1type.Text, 2, Me.cboalt1type.Text.ToString.Length)
-
-            str = str.ToString.ToUpper
-            Dim New_Word As String = str & str2
-            Me.cboalt1type.Text = New_Word
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtAlt1Type_LostFocus", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-    End Sub
-
-
-
-
     Private Sub EditCustomerInfo_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
 
         Me.WindowState = FormWindowState.Normal
@@ -670,32 +627,12 @@ Public Class EditCustomerInfo
     Dim click As Integer
     Private Sub btnSetAppt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetAppt2.Click
         Try
-            If WhichForm.Name = "Confirming" Then
-                RescheduleAppt.frm = WhichForm.Name
-                RescheduleAppt.ID = ID
-                RescheduleAppt.ShowDialog()
-                d.Get_New_Appt(ID)
-                Me.txtApptDate.Text = d.AppointmentDate
-                Me.txtApptTime.Text = d.AppointmentTime
-                Me.txtApptDay.Text = d.AppointmentDay
-                Exit Sub
-            End If
-            click += 1
 
 
 
+            SetAppt_V2.frm = Me
+            SetAppt_V2.ShowDialog()
 
-            'SetAppt.OrigApptDate = Me.txtApptDate.Text
-            'SetAppt.OrigApptTime = Me.txtApptTime.Text
-            'SetAppt.Contact1 = d.Get_First(Me.txtContact1.Text)
-            'SetAppt.Contact2 = d.Get_First(Me.txtContact2.Text)
-            'SetAppt.frm = WhichForm
-            If click = 1 Then
-                SetAppt_V2.CallingForm = "Confirming"
-                SetAppt_V2.ID = ID
-                SetAppt_V2.MdiParent = Main
-                SetAppt_V2.Show()
-            End If
 
             'SetAppt.ShowDialog() ''come back weird fuckin bug, form opens and closes first time only then works fine 
             d.Get_New_Appt(ID)
@@ -708,6 +645,15 @@ Public Class EditCustomerInfo
             y = Nothing
         End Try
 
+    End Sub
+    Private Sub btnMoveAppt_Click(sender As Object, e As EventArgs) Handles btnMoveAppt.Click
+        RescheduleAppt.frm = WhichForm
+        RescheduleAppt.ID = ID
+        RescheduleAppt.ShowDialog()
+        d.Get_New_Appt(ID)
+        Me.txtApptDate.Text = d.AppointmentDate
+        Me.txtApptTime.Text = d.AppointmentTime
+        Me.txtApptDay.Text = d.AppointmentDay
     End Sub
 
     Private Sub btnMap_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnMap.Click
@@ -851,5 +797,40 @@ Public Class EditCustomerInfo
             y = Nothing
         End Try
 
+    End Sub
+
+
+    Private Sub cboalt1type_LostFocus(sender As Object, e As EventArgs) Handles cboalt1type.LostFocus
+        Try
+            Dim str = Mid(Me.cboalt1type.Text, 1, 1)
+            Dim str2 = Mid(Me.cboalt1type.Text, 2, Me.cboalt1type.Text.ToString.Length)
+
+            str = str.ToString.ToUpper
+            Dim New_Word As String = str & str2
+            Me.cboalt1type.Text = New_Word
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtAlt1Type_LostFocus", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+    End Sub
+
+    Private Sub cboAlt2Type_LostFocus(sender As Object, e As EventArgs) Handles cboAlt2Type.LostFocus
+        Try
+            Dim str = Mid(Me.cboAlt2Type.Text, 1, 1)
+            Dim str2 = Mid(Me.cboAlt2Type.Text, 2, Me.cboAlt2Type.Text.ToString.Length)
+
+            str = str.ToString.ToUpper
+            Dim New_Word As String = str & str2
+            Me.cboAlt2Type.Text = New_Word
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "EditCustomerInfo", "FormCode", "Event", "txtAlt2Type_LostFocus", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
 End Class

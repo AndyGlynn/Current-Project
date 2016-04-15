@@ -6,8 +6,8 @@ Imports System
 Public Class Kill
     Public Contact1 As String
     Public Contact2 As String
-    Public ID As String
-    Public frm As String
+    Public ID As String = STATIC_VARIABLES.CurrentID
+    Public frm As Form
 
     Private Sub Kill_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         Me.Dispose()
@@ -20,7 +20,7 @@ Public Class Kill
             Dim s2 = Split(Contact2, " ")
             Dim c2 = s2(0)
             Me.cboSpokeWith.Items.Add(c1)
-            If Me.Contact2 <> "" Then
+            If Me.Contact2 <> " " Then
                 Me.cboSpokeWith.Items.Add(c2)
                 Me.cboSpokeWith.Items.Add(c1 & " & " & c2)
             Else
@@ -91,9 +91,9 @@ Public Class Kill
                 Me.Close()
 
                 Dim c As New ConfirmingData
-                If frm = "Confirming" Then
+                If frm.Name = "Confirming" Then
                     c.Populate(Confirming.Tab, Confirming.cboConfirmingPLS.Text, Confirming.cboConfirmingSLS.Text, Confirming.dpConfirming.Value.ToString, "Populate")
-                ElseIf frm = "WC" Then
+                ElseIf frm.Name = "WCaller" Then
                     If WCaller.Tab = "WC" Then
                         Dim i As Integer = WCaller.lvWarmCalling.Items.IndexOfKey(ID)
                         WCaller.lvWarmCalling.SelectedItems(0).Remove()
@@ -113,8 +113,9 @@ Public Class Kill
                         Dim y As New WarmCalling
                         y.Populate()
                     End If
-                ElseIf frm = "ConfirmingSingleRecord" Then
-
+                ElseIf frm.Name = "ConfirmingSingleRecord" Then
+                    Dim q As New CustomerHistory
+                    q.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
 
                 End If
                 Me.Close()

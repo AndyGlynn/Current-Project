@@ -143,6 +143,9 @@ Public Class WCaller
     End Sub
 
     Private Sub lvMyAppts_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvMyAppts.SelectedIndexChanged
+        If Me.lvMyAppts.SelectedItems.Count > 0 Then
+            STATIC_VARIABLES.CurrentID = Me.lvMyAppts.SelectedItems(0).Tag
+        End If
         Try
             If Me.Tab = "MA" Then
                 If Me.lvMyAppts.SelectedItems.Count = 0 Or Me.lvMyAppts.Items.Count = 0 Then
@@ -285,6 +288,9 @@ Public Class WCaller
     End Sub
 
     Private Sub lvWarmCalling_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvWarmCalling.SelectedIndexChanged
+        If Me.lvWarmCalling.SelectedItems.Count > 0 Then
+            STATIC_VARIABLES.CurrentID = Me.lvWarmCalling.SelectedItems(0).Text
+        End If
         Try
             If Me.Tab = "WC" Then
                 Dim c As New WarmCalling
@@ -445,7 +451,7 @@ Public Class WCaller
                 Me.btnExpandCollapse.Location = New System.Drawing.Point(w - 30, 31)
             End If
             Dim c As New CustomerHistory
-            c.SetUp(Me, Me.ID, Me.TScboCustomerHistory)
+            c.SetUp(Me.TScboCustomerHistory)
 
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -895,7 +901,7 @@ Public Class WCaller
 
         Kill.Contact1 = Me.txtContact1.Text
         Kill.Contact2 = Me.txtContact2.Text
-        Kill.frm = "WC"
+        Kill.frm = Me
         If Me.Tab = "WC" Then
             Kill.ID = Me.lvWarmCalling.SelectedItems(0).Text
         Else
@@ -961,7 +967,7 @@ Public Class WCaller
                     y.DoNot(Me.lvWarmCalling.SelectedItems(0).Text, sender.text.ToString)
                 End If
                 Dim c As New CustomerHistory
-                c.SetUp(Me, Me.lvWarmCalling.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                c.SetUp(Me.TScboCustomerHistory)
             Else
                 If Me.lvMyAppts.SelectedItems.Count = 0 Then
                     MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
@@ -971,7 +977,7 @@ Public Class WCaller
                     x.DoNot(Me.lvMyAppts.SelectedItems(0).Tag, sender.text.ToString)
                 End If
                 Dim c As New CustomerHistory
-                c.SetUp(Me, Me.lvMyAppts.SelectedItems(0).Tag, Me.TScboCustomerHistory)
+                c.SetUp(Me.TScboCustomerHistory)
             End If
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -1231,37 +1237,31 @@ Public Class WCaller
 
     Private Sub btnSetAppt_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetAppt.ButtonClick
         Try
+            Dim id As String
+            Dim frm As Form = Me
             Select Case Me.btnSetAppt.Text
                 Case Is = "Set Apointment"
-                    SetAppt.frm = Me
                     If Tab = "WC" Then
                         If Me.lvWarmCalling.SelectedItems.Count = 0 Then
                             MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
                             Exit Sub
                         End If
-                        SetAppt.ID = Me.lvWarmCalling.SelectedItems(0).Text
+                        id = Me.lvWarmCalling.SelectedItems(0).Text
                     Else
                         If Me.lvMyAppts.SelectedItems.Count = 0 Then
                             MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
                             Exit Sub
                         End If
-                        SetAppt.ID = Me.lvMyAppts.SelectedItems(0).Tag
+                        id = Me.lvMyAppts.SelectedItems(0).Tag
                     End If
                     Dim s = Split(Me.txtContact1.Text, " ")
                     Dim s2 = Split(Me.txtContact2.Text, " ")
-                    SetAppt.Contact1 = s(0)
-                    SetAppt.Contact2 = s2(0)
-                    SetAppt.OrigApptDate = Me.txtApptDate.Text
-                    SetAppt.OrigApptTime = Me.txtApptTime.Text
-                    SetAppt.ShowInTaskbar = False
-                    SetAppt.ShowDialog()
+                    SetAppt_V2.frm = frm
+                    SetAppt_V2.ShowDialog()
                     Exit Select
                 Case Is = "Move Appointment"
-                    ''
-                    '' depends on what Andy wants done here
-                    '' for now, do nothing with it and just change the text on the button
-                    '' 
-                    MsgBox("Place holder for 'Move Appointment' only. ", MsgBoxStyle.Information, "DEBUG INFO - Move Appointment from btnSetAppt - " & Me.lvMyAppts.SelectedItems(0).Tag)
+                    RescheduleAppt.frm = Me
+                    RescheduleAppt.ShowDialog()
                     Exit Select
             End Select
         Catch ex As Exception
@@ -1292,8 +1292,8 @@ Public Class WCaller
     End Sub
 
     Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
-        frmEditSpecialInstructions.RecID = ID
-        frmEditSpecialInstructions.CallingForm = "WCaller"
-        frmEditSpecialInstructions.Show()
+
+        frmEditSpecialInstructions.frm = Me
+        frmEditSpecialInstructions.ShowDialog()
     End Sub
 End Class
