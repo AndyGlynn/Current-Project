@@ -331,7 +331,7 @@ Public Class salessetappt
                 Case "Sales"
                 Case "ConfirmerSingleRecord"
                     Dim c As New CustomerHistory
-                    c.SetUp(frm, ID, ConfirmingSingleRecord.TScboCustomerHistory)
+                    c.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
                 Case "Administration"
                     ''comeback
                 Case "Finance"

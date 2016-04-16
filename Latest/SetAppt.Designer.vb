@@ -22,24 +22,25 @@ Partial Class SetAppt
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SetAppt))
-        Me.lblSpokeWith = New System.Windows.Forms.Label
-        Me.cboSpokeWith = New System.Windows.Forms.ComboBox
-        Me.lblautonotes = New System.Windows.Forms.Label
-        Me.cboautonotes = New System.Windows.Forms.ComboBox
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox
-        Me.txtTime = New System.Windows.Forms.TextBox
-        Me.txtDate = New System.Windows.Forms.TextBox
-        Me.dtpApptTime = New System.Windows.Forms.DateTimePicker
-        Me.dtpApptDate = New System.Windows.Forms.DateTimePicker
-        Me.Label22 = New System.Windows.Forms.Label
-        Me.Label23 = New System.Windows.Forms.Label
-        Me.btncancel = New System.Windows.Forms.Button
-        Me.btnsave = New System.Windows.Forms.Button
-        Me.Label1 = New System.Windows.Forms.Label
+        Me.lblSpokeWith = New System.Windows.Forms.Label()
+        Me.cboSpokeWith = New System.Windows.Forms.ComboBox()
+        Me.lblautonotes = New System.Windows.Forms.Label()
+        Me.cboautonotes = New System.Windows.Forms.ComboBox()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.txtTime = New System.Windows.Forms.TextBox()
+        Me.txtDate = New System.Windows.Forms.TextBox()
+        Me.dtpApptTime = New System.Windows.Forms.DateTimePicker()
+        Me.dtpApptDate = New System.Windows.Forms.DateTimePicker()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.btncancel = New System.Windows.Forms.Button()
+        Me.btnsave = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.chkConfirm = New System.Windows.Forms.CheckBox()
         Me.GroupBox7.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -61,6 +62,7 @@ Partial Class SetAppt
         'cboSpokeWith
         '
         Me.cboSpokeWith.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboSpokeWith.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboSpokeWith.FormattingEnabled = True
         Me.cboSpokeWith.Location = New System.Drawing.Point(14, 12)
         Me.cboSpokeWith.Name = "cboSpokeWith"
@@ -85,6 +87,7 @@ Partial Class SetAppt
         '
         Me.cboautonotes.BackColor = System.Drawing.Color.White
         Me.cboautonotes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboautonotes.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboautonotes.FormattingEnabled = True
         Me.cboautonotes.Location = New System.Drawing.Point(212, 46)
         Me.cboautonotes.Name = "cboautonotes"
@@ -93,6 +96,7 @@ Partial Class SetAppt
         '
         'RichTextBox1
         '
+        Me.RichTextBox1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RichTextBox1.Location = New System.Drawing.Point(213, 73)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.Size = New System.Drawing.Size(166, 94)
@@ -108,7 +112,7 @@ Partial Class SetAppt
         Me.GroupBox7.Controls.Add(Me.dtpApptDate)
         Me.GroupBox7.Controls.Add(Me.Label22)
         Me.GroupBox7.Controls.Add(Me.Label23)
-        Me.GroupBox7.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox7.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox7.ForeColor = System.Drawing.Color.Black
         Me.GroupBox7.Location = New System.Drawing.Point(14, 46)
         Me.GroupBox7.Name = "GroupBox7"
@@ -120,63 +124,68 @@ Partial Class SetAppt
         'txtTime
         '
         Me.txtTime.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtTime.Location = New System.Drawing.Point(75, 85)
+        Me.txtTime.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTime.Location = New System.Drawing.Point(62, 85)
         Me.txtTime.Name = "txtTime"
-        Me.txtTime.Size = New System.Drawing.Size(74, 14)
+        Me.txtTime.Size = New System.Drawing.Size(85, 14)
         Me.txtTime.TabIndex = 24
         '
         'txtDate
         '
         Me.txtDate.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtDate.Location = New System.Drawing.Point(76, 41)
+        Me.txtDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDate.Location = New System.Drawing.Point(62, 41)
         Me.txtDate.Name = "txtDate"
-        Me.txtDate.Size = New System.Drawing.Size(74, 14)
+        Me.txtDate.Size = New System.Drawing.Size(80, 14)
         Me.txtDate.TabIndex = 23
         '
         'dtpApptTime
         '
         Me.dtpApptTime.CustomFormat = "h:mm tt"
+        Me.dtpApptTime.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpApptTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpApptTime.Location = New System.Drawing.Point(73, 82)
+        Me.dtpApptTime.Location = New System.Drawing.Point(60, 82)
         Me.dtpApptTime.Name = "dtpApptTime"
         Me.dtpApptTime.ShowUpDown = True
-        Me.dtpApptTime.Size = New System.Drawing.Size(96, 21)
+        Me.dtpApptTime.Size = New System.Drawing.Size(114, 21)
         Me.dtpApptTime.TabIndex = 6
         '
         'dtpApptDate
         '
+        Me.dtpApptDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpApptDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpApptDate.Location = New System.Drawing.Point(73, 37)
+        Me.dtpApptDate.Location = New System.Drawing.Point(60, 37)
         Me.dtpApptDate.Name = "dtpApptDate"
-        Me.dtpApptDate.Size = New System.Drawing.Size(96, 21)
+        Me.dtpApptDate.Size = New System.Drawing.Size(114, 21)
         Me.dtpApptDate.TabIndex = 5
         '
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label22.ForeColor = System.Drawing.Color.Black
         Me.Label22.Location = New System.Drawing.Point(6, 85)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(38, 13)
+        Me.Label22.Size = New System.Drawing.Size(40, 13)
         Me.Label22.TabIndex = 19
         Me.Label22.Text = "Time:"
         '
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label23.ForeColor = System.Drawing.Color.Black
         Me.Label23.Location = New System.Drawing.Point(6, 41)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(37, 13)
+        Me.Label23.Size = New System.Drawing.Size(39, 13)
         Me.Label23.TabIndex = 3
         Me.Label23.Text = "Date:"
         '
         'btncancel
         '
+        Me.btncancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btncancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btncancel.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btncancel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btncancel.ForeColor = System.Drawing.Color.Black
         Me.btncancel.Location = New System.Drawing.Point(14, 186)
         Me.btncancel.Name = "btncancel"
@@ -187,7 +196,8 @@ Partial Class SetAppt
         '
         'btnsave
         '
-        Me.btnsave.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnsave.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnsave.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnsave.ForeColor = System.Drawing.Color.Black
         Me.btnsave.Location = New System.Drawing.Point(231, 186)
         Me.btnsave.Name = "btnsave"
@@ -213,6 +223,18 @@ Partial Class SetAppt
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'chkConfirm
+        '
+        Me.chkConfirm.AutoSize = True
+        Me.chkConfirm.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkConfirm.Location = New System.Drawing.Point(42, 189)
+        Me.chkConfirm.Name = "chkConfirm"
+        Me.chkConfirm.Size = New System.Drawing.Size(309, 17)
+        Me.chkConfirm.TabIndex = 165
+        Me.chkConfirm.Text = "Bypass Confirming and Confirm this Appointment"
+        Me.chkConfirm.UseVisualStyleBackColor = True
+        Me.chkConfirm.Visible = False
+        '
         'SetAppt
         '
         Me.AcceptButton = Me.btnsave
@@ -220,6 +242,7 @@ Partial Class SetAppt
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btncancel
         Me.ClientSize = New System.Drawing.Size(393, 221)
+        Me.Controls.Add(Me.chkConfirm)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btncancel)
         Me.Controls.Add(Me.btnsave)
@@ -259,4 +282,5 @@ Partial Class SetAppt
     Friend WithEvents btnsave As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
+    Friend WithEvents chkConfirm As System.Windows.Forms.CheckBox
 End Class

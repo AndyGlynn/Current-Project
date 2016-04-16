@@ -107,6 +107,7 @@ Public Class LOGIN
                         tstCNN.Close()
                     Catch ex As Exception
                         MsgBox("No connection can be made to SQL server. Settings will not be saved.", MsgBoxStyle.Exclamation, "No Network Present.")
+                        Application.Exit()
                         Exit Sub
                     End Try
                 End If

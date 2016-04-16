@@ -31,7 +31,7 @@ Partial Class Main
         Me.PreviousCustomersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecoveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfirmingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MarketingManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbMarketingManager = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsbsales = New System.Windows.Forms.ToolStripButton()
         Me.tsbinstall = New System.Windows.Forms.ToolStripButton()
         Me.tsbfinance = New System.Windows.Forms.ToolStripButton()
@@ -114,7 +114,7 @@ Partial Class Main
         '
         'tsbmarketing
         '
-        Me.tsbmarketing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColdCallingToolStripMenuItem, Me.WarmCallingToolStripMenuItem, Me.PreviousCustomersToolStripMenuItem, Me.RecoveryToolStripMenuItem, Me.ConfirmingToolStripMenuItem, Me.MarketingManagerToolStripMenuItem})
+        Me.tsbmarketing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColdCallingToolStripMenuItem, Me.WarmCallingToolStripMenuItem, Me.PreviousCustomersToolStripMenuItem, Me.RecoveryToolStripMenuItem, Me.ConfirmingToolStripMenuItem, Me.tsbMarketingManager})
         Me.tsbmarketing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tsbmarketing.Image = CType(resources.GetObject("tsbmarketing.Image"), System.Drawing.Image)
         Me.tsbmarketing.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
@@ -164,13 +164,13 @@ Partial Class Main
         Me.ConfirmingToolStripMenuItem.Size = New System.Drawing.Size(205, 38)
         Me.ConfirmingToolStripMenuItem.Text = "Confirming"
         '
-        'MarketingManagerToolStripMenuItem
+        'tsbMarketingManager
         '
-        Me.MarketingManagerToolStripMenuItem.Image = CType(resources.GetObject("MarketingManagerToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.MarketingManagerToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.MarketingManagerToolStripMenuItem.Name = "MarketingManagerToolStripMenuItem"
-        Me.MarketingManagerToolStripMenuItem.Size = New System.Drawing.Size(205, 38)
-        Me.MarketingManagerToolStripMenuItem.Text = "Marketing Manager"
+        Me.tsbMarketingManager.Image = CType(resources.GetObject("tsbMarketingManager.Image"), System.Drawing.Image)
+        Me.tsbMarketingManager.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tsbMarketingManager.Name = "tsbMarketingManager"
+        Me.tsbMarketingManager.Size = New System.Drawing.Size(205, 38)
+        Me.tsbMarketingManager.Text = "Marketing Manager"
         '
         'tsbsales
         '
@@ -294,7 +294,7 @@ Partial Class Main
         Me.tsbtransfer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsbtransfer.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtransfer.Name = "tsbtransfer"
-        Me.tsbtransfer.Size = New System.Drawing.Size(89, 49)
+        Me.tsbtransfer.Size = New System.Drawing.Size(90, 49)
         Me.tsbtransfer.Text = "Transfer Lead"
         Me.tsbtransfer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -679,7 +679,7 @@ Partial Class Main
     Friend WithEvents PreviousCustomersToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RecoveryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConfirmingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MarketingManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbMarketingManager As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsbadmin As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents tsbnew As System.Windows.Forms.ToolStripButton

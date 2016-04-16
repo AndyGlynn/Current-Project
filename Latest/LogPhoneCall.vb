@@ -180,7 +180,7 @@ Public Class LogPhoneCall
             cnn.close()
             Dim c As New CustomerHistory
 
-            c.SetUp(frm, ID, Confirming.TScboCustomerHistory)
+            c.SetUp(Confirming.TScboCustomerHistory)
 
 
             '' Add elseif' for other forms as needed

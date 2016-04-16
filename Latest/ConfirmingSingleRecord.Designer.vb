@@ -25,6 +25,7 @@ Partial Class ConfirmingSingleRecord
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConfirmingSingleRecord))
         Me.gbSpecialInstructions = New System.Windows.Forms.GroupBox()
+        Me.btnEditSPI = New System.Windows.Forms.Button()
         Me.rtbSpecialInstructions = New System.Windows.Forms.RichTextBox()
         Me.gbProductInfo = New System.Windows.Forms.GroupBox()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -63,6 +64,7 @@ Partial Class ConfirmingSingleRecord
         Me.txtAlt2Type = New System.Windows.Forms.TextBox()
         Me.lblAltPhone2 = New System.Windows.Forms.Label()
         Me.lblAltPhone1 = New System.Windows.Forms.Label()
+        Me.pctVerified = New System.Windows.Forms.PictureBox()
         Me.lblHousePhone = New System.Windows.Forms.Label()
         Me.lblWorkHours = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
@@ -73,36 +75,7 @@ Partial Class ConfirmingSingleRecord
         Me.lblContact1 = New System.Windows.Forms.Label()
         Me.ListView4 = New System.Windows.Forms.ListView()
         Me.tsSingleForm = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.lblSalesRep = New System.Windows.Forms.ToolStripLabel()
-        Me.tsCustomerLog = New System.Windows.Forms.ToolStrip()
-        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
-        Me.ilCustomerHistory = New System.Windows.Forms.ImageList(Me.components)
-        Me.ttCustomerHistoryNotes = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttconfirming = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ilToolStripIcons = New System.Windows.Forms.ImageList(Me.components)
-        Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
-        Me.TSMain = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.lblRep = New System.Windows.Forms.ToolStripLabel()
-        Me.btnNone = New System.Windows.Forms.ToolStripButton()
-        Me.btnMarketing = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.btnColdCall = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnWarmCall = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnPC = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnRecovery = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnConfirming = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnMarketManager = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnSales = New System.Windows.Forms.ToolStripButton()
-        Me.btnInstall = New System.Windows.Forms.ToolStripButton()
-        Me.btnFinance = New System.Windows.Forms.ToolStripButton()
-        Me.btnAdmin = New System.Windows.Forms.ToolStripButton()
-        Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton()
-        Me.calledcancelled = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnConfirm = New System.Windows.Forms.ToolStripSplitButton()
+        Me.btnConfirm = New System.Windows.Forms.ToolStripDropDownButton()
         Me.btnSpokeWith = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnContact1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnContact2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -113,10 +86,12 @@ Partial Class ConfirmingSingleRecord
         Me.btnSetAppt = New System.Windows.Forms.ToolStripButton()
         Me.btnEditCustomer = New System.Windows.Forms.ToolStripButton()
         Me.btnEditSales = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.EnterSalesResultAndRescheduleApptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChangeApptTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnResultResched = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnChangeTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnConfirmDispatch = New System.Windows.Forms.ToolStripButton()
         Me.btnCustomerTools = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.btnEditCust2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnCall = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnMainPhone = New System.Windows.Forms.ToolStripMenuItem()
@@ -140,34 +115,62 @@ Partial Class ConfirmingSingleRecord
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnSaveRep = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnEditCust2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnChangeStatus = New System.Windows.Forms.ToolStripDropDownButton()
         Me.btnKill = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnDoNotCall = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnDoNotMail = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnDoNotCallOrMail = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnSalesResult = New System.Windows.Forms.ToolStripSplitButton()
         Me.btnMemorize = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRemoveFromMemorized = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnPrint = New System.Windows.Forms.ToolStripDropDownButton()
         Me.btnPrintAppt = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnPrintInfo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.pctVerified = New System.Windows.Forms.PictureBox()
-        Me.btnConfirmDispatch = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.lblSalesRep = New System.Windows.Forms.ToolStripLabel()
+        Me.btnUndoConfirm = New System.Windows.Forms.ToolStripSplitButton()
+        Me.tsCustomerLog = New System.Windows.Forms.ToolStrip()
+        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton()
+        Me.calledcancelled = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
+        Me.ilCustomerHistory = New System.Windows.Forms.ImageList(Me.components)
+        Me.ttCustomerHistoryNotes = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttconfirming = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ilToolStripIcons = New System.Windows.Forms.ImageList(Me.components)
+        Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
+        Me.TSMain = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnNone = New System.Windows.Forms.ToolStripButton()
+        Me.btnMarketing = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.btnColdCall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnWarmCall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnPC = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRecovery = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnConfirming = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnMarketManager = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnSales = New System.Windows.Forms.ToolStripButton()
+        Me.btnInstall = New System.Windows.Forms.ToolStripButton()
+        Me.btnFinance = New System.Windows.Forms.ToolStripButton()
+        Me.btnAdmin = New System.Windows.Forms.ToolStripButton()
         Me.gbSpecialInstructions.SuspendLayout()
         Me.gbProductInfo.SuspendLayout()
         Me.gbApptInfo.SuspendLayout()
         Me.gbHomeInfo.SuspendLayout()
         Me.gbContactInfo.SuspendLayout()
+        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tsSingleForm.SuspendLayout()
         Me.tsCustomerLog.SuspendLayout()
         Me.TSMain.SuspendLayout()
-        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'gbSpecialInstructions
         '
         Me.gbSpecialInstructions.BackColor = System.Drawing.Color.White
+        Me.gbSpecialInstructions.Controls.Add(Me.btnEditSPI)
         Me.gbSpecialInstructions.Controls.Add(Me.rtbSpecialInstructions)
         Me.gbSpecialInstructions.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
@@ -178,18 +181,29 @@ Partial Class ConfirmingSingleRecord
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions:"
         '
+        'btnEditSPI
+        '
+        Me.btnEditSPI.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditSPI.Location = New System.Drawing.Point(256, 117)
+        Me.btnEditSPI.Name = "btnEditSPI"
+        Me.btnEditSPI.Size = New System.Drawing.Size(53, 23)
+        Me.btnEditSPI.TabIndex = 148
+        Me.btnEditSPI.Text = "Edit"
+        Me.btnEditSPI.UseVisualStyleBackColor = True
+        '
         'rtbSpecialInstructions
         '
         Me.rtbSpecialInstructions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rtbSpecialInstructions.BackColor = System.Drawing.SystemColors.Window
         Me.rtbSpecialInstructions.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.rtbSpecialInstructions.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(8, 22)
         Me.rtbSpecialInstructions.Name = "rtbSpecialInstructions"
+        Me.rtbSpecialInstructions.ReadOnly = True
         Me.rtbSpecialInstructions.Size = New System.Drawing.Size(301, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
-        Me.rtbSpecialInstructions.Text = "The customer only wants a rough frame in the basement and they are interested in " & _
-    "upper grids in the windows"
+        Me.rtbSpecialInstructions.Text = ""
         '
         'gbProductInfo
         '
@@ -236,7 +250,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtProducts.ReadOnly = True
         Me.txtProducts.Size = New System.Drawing.Size(138, 48)
         Me.txtProducts.TabIndex = 32
-        Me.txtProducts.Text = "Roofing" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Basement Finish" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Windows"
         '
         'Label5
         '
@@ -282,7 +295,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtColor.ReadOnly = True
         Me.txtColor.Size = New System.Drawing.Size(138, 16)
         Me.txtColor.TabIndex = 30
-        Me.txtColor.Text = "Onyx Black"
         '
         'Label6
         '
@@ -328,7 +340,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtQty.ReadOnly = True
         Me.txtQty.Size = New System.Drawing.Size(138, 16)
         Me.txtQty.TabIndex = 28
-        Me.txtQty.Text = "16"
         '
         'lblProducts
         '
@@ -368,7 +379,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtApptDate.Name = "txtApptDate"
         Me.txtApptDate.Size = New System.Drawing.Size(114, 16)
         Me.txtApptDate.TabIndex = 21
-        Me.txtApptDate.Text = "12/24/2007"
         '
         'txtApptTime
         '
@@ -379,7 +389,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtApptTime.Name = "txtApptTime"
         Me.txtApptTime.Size = New System.Drawing.Size(114, 16)
         Me.txtApptTime.TabIndex = 20
-        Me.txtApptTime.Text = "11:00 AM"
         '
         'Label22
         '
@@ -423,7 +432,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtApptDay.Name = "txtApptDay"
         Me.txtApptDay.Size = New System.Drawing.Size(114, 16)
         Me.txtApptDay.TabIndex = 16
-        Me.txtApptDay.Text = "Wednesday"
         '
         'gbHomeInfo
         '
@@ -454,7 +462,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtHomeValue.ReadOnly = True
         Me.txtHomeValue.Size = New System.Drawing.Size(91, 16)
         Me.txtHomeValue.TabIndex = 35
-        Me.txtHomeValue.Text = "25"
         Me.txtHomeValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtYrsOwned
@@ -468,7 +475,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtYrsOwned.ReadOnly = True
         Me.txtYrsOwned.Size = New System.Drawing.Size(91, 16)
         Me.txtYrsOwned.TabIndex = 34
-        Me.txtYrsOwned.Text = "25"
         Me.txtYrsOwned.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblYrBuilt
@@ -515,7 +521,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtYrBuilt.ReadOnly = True
         Me.txtYrBuilt.Size = New System.Drawing.Size(91, 16)
         Me.txtYrBuilt.TabIndex = 29
-        Me.txtYrBuilt.Text = "1960"
         Me.txtYrBuilt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'gbContactInfo
@@ -563,7 +568,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtHousePhone.ReadOnly = True
         Me.txtHousePhone.Size = New System.Drawing.Size(116, 16)
         Me.txtHousePhone.TabIndex = 141
-        Me.txtHousePhone.Text = "(419) 472-4000"
         '
         'txtaltphone2
         '
@@ -590,19 +594,16 @@ Partial Class ConfirmingSingleRecord
         Me.txtaltphone1.ReadOnly = True
         Me.txtaltphone1.Size = New System.Drawing.Size(116, 16)
         Me.txtaltphone1.TabIndex = 139
-        Me.txtaltphone1.Text = "(419) 467-4926"
         '
         'lnkEmail
         '
         Me.lnkEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkEmail.AutoSize = True
         Me.lnkEmail.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lnkEmail.Location = New System.Drawing.Point(409, 144)
+        Me.lnkEmail.Location = New System.Drawing.Point(357, 144)
         Me.lnkEmail.Name = "lnkEmail"
-        Me.lnkEmail.Size = New System.Drawing.Size(144, 16)
+        Me.lnkEmail.Size = New System.Drawing.Size(0, 16)
         Me.lnkEmail.TabIndex = 136
-        Me.lnkEmail.TabStop = True
-        Me.lnkEmail.Text = "SuzzieN@yahoo.com"
         '
         'lblEmail
         '
@@ -642,7 +643,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtAlt1Type.ReadOnly = True
         Me.txtAlt1Type.Size = New System.Drawing.Size(57, 16)
         Me.txtAlt1Type.TabIndex = 126
-        Me.txtAlt1Type.Text = "Cell"
         '
         'txtAlt2Type
         '
@@ -656,7 +656,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtAlt2Type.ReadOnly = True
         Me.txtAlt2Type.Size = New System.Drawing.Size(57, 16)
         Me.txtAlt2Type.TabIndex = 125
-        Me.txtAlt2Type.Text = "Work"
         '
         'lblAltPhone2
         '
@@ -683,6 +682,16 @@ Partial Class ConfirmingSingleRecord
         Me.lblAltPhone1.Size = New System.Drawing.Size(88, 16)
         Me.lblAltPhone1.TabIndex = 81
         Me.lblAltPhone1.Text = "Alt Phone 1:"
+        '
+        'pctVerified
+        '
+        Me.pctVerified.Location = New System.Drawing.Point(29, 114)
+        Me.pctVerified.Name = "pctVerified"
+        Me.pctVerified.Size = New System.Drawing.Size(24, 24)
+        Me.pctVerified.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pctVerified.TabIndex = 133
+        Me.pctVerified.TabStop = False
+        Me.pctVerified.Visible = False
         '
         'lblHousePhone
         '
@@ -721,7 +730,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtAddress.ReadOnly = True
         Me.txtAddress.Size = New System.Drawing.Size(185, 33)
         Me.txtAddress.TabIndex = 124
-        Me.txtAddress.Text = "12345 Main St." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Toledo, OH 43613"
         '
         'lblAddress
         '
@@ -746,7 +754,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtContact2.ReadOnly = True
         Me.txtContact2.Size = New System.Drawing.Size(185, 16)
         Me.txtContact2.TabIndex = 76
-        Me.txtContact2.Text = "Suzzana NameWaytolong"
         '
         'txtContact1
         '
@@ -759,7 +766,6 @@ Partial Class ConfirmingSingleRecord
         Me.txtContact1.ReadOnly = True
         Me.txtContact1.Size = New System.Drawing.Size(185, 16)
         Me.txtContact1.TabIndex = 74
-        Me.txtContact1.Text = "Alexander Namewaytolong"
         '
         'lblContact2
         '
@@ -805,278 +811,12 @@ Partial Class ConfirmingSingleRecord
         'tsSingleForm
         '
         Me.tsSingleForm.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.tsSingleForm.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnConfirm, Me.btnSetAppt, Me.btnEditCustomer, Me.btnEditSales, Me.btnConfirmDispatch, Me.btnCustomerTools, Me.btnChangeStatus, Me.btnSalesResult, Me.btnPrint, Me.ToolStripSeparator7, Me.lblSalesRep, Me.lblRep})
+        Me.tsSingleForm.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnConfirm, Me.btnSetAppt, Me.btnEditCustomer, Me.btnEditSales, Me.btnConfirmDispatch, Me.btnCustomerTools, Me.btnChangeStatus, Me.btnSalesResult, Me.btnPrint, Me.ToolStripSeparator7, Me.lblSalesRep, Me.btnUndoConfirm})
         Me.tsSingleForm.Location = New System.Drawing.Point(0, 0)
         Me.tsSingleForm.Name = "tsSingleForm"
         Me.tsSingleForm.Size = New System.Drawing.Size(879, 25)
         Me.tsSingleForm.TabIndex = 191
         Me.tsSingleForm.Text = "ToolStrip1"
-        '
-        'ToolStripSeparator7
-        '
-        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
-        '
-        'lblSalesRep
-        '
-        Me.lblSalesRep.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblSalesRep.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSalesRep.Name = "lblSalesRep"
-        Me.lblSalesRep.Size = New System.Drawing.Size(73, 15)
-        Me.lblSalesRep.Text = "Sales Rep(s):"
-        '
-        'tsCustomerLog
-        '
-        Me.tsCustomerLog.AutoSize = False
-        Me.tsCustomerLog.Dock = System.Windows.Forms.DockStyle.None
-        Me.tsCustomerLog.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.tsCustomerLog.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TScboCustomerHistory, Me.ToolStripLabel1, Me.btnLogCall, Me.ToolStripLabel2})
-        Me.tsCustomerLog.Location = New System.Drawing.Point(8, 382)
-        Me.tsCustomerLog.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
-        Me.tsCustomerLog.Name = "tsCustomerLog"
-        Me.tsCustomerLog.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsCustomerLog.Size = New System.Drawing.Size(767, 33)
-        Me.tsCustomerLog.TabIndex = 192
-        Me.tsCustomerLog.Text = "ToolStrip1"
-        '
-        'TScboCustomerHistory
-        '
-        Me.TScboCustomerHistory.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.TScboCustomerHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.TScboCustomerHistory.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.TScboCustomerHistory.Items.AddRange(New Object() {"All", "Marketing Department", "Sales Department", "Finance Department", "Installation Department"})
-        Me.TScboCustomerHistory.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
-        Me.TScboCustomerHistory.Name = "TScboCustomerHistory"
-        Me.TScboCustomerHistory.Size = New System.Drawing.Size(160, 33)
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripLabel1.Margin = New System.Windows.Forms.Padding(10, 1, 0, 2)
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(43, 30)
-        Me.ToolStripLabel1.Text = "Show"
-        '
-        'ToolStripLabel2
-        '
-        Me.ToolStripLabel2.Font = New System.Drawing.Font("Tahoma", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripLabel2.Margin = New System.Windows.Forms.Padding(40, 1, 0, 2)
-        Me.ToolStripLabel2.Name = "ToolStripLabel2"
-        Me.ToolStripLabel2.Size = New System.Drawing.Size(150, 30)
-        Me.ToolStripLabel2.Text = "Customer History"
-        '
-        'ilCustomerHistory
-        '
-        Me.ilCustomerHistory.ImageStream = CType(resources.GetObject("ilCustomerHistory.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ilCustomerHistory.TransparentColor = System.Drawing.Color.Transparent
-        Me.ilCustomerHistory.Images.SetKeyName(0, "Confirmer.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(1, "cash.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(2, "marketing manager4.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(3, "Finance Dept.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(4, "hammerused.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(5, "recovery2.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(6, "phone4.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(7, "lock.ico")
-        '
-        'ttCustomerHistoryNotes
-        '
-        Me.ttCustomerHistoryNotes.AutoPopDelay = 30000
-        Me.ttCustomerHistoryNotes.InitialDelay = 500
-        Me.ttCustomerHistoryNotes.ReshowDelay = 100
-        '
-        'ilToolStripIcons
-        '
-        Me.ilToolStripIcons.ImageStream = CType(resources.GetObject("ilToolStripIcons.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ilToolStripIcons.TransparentColor = System.Drawing.Color.Transparent
-        Me.ilToolStripIcons.Images.SetKeyName(0, "Confirmer.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(1, "tranfer7.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(2, "marketing manager4.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(3, "Cancel.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(4, "transfer6.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(5, "C&C24.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(6, "cash.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(7, "NOTES1.ICO")
-        Me.ilToolStripIcons.Images.SetKeyName(8, "tranfer.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(9, "Cancel.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(10, "phone4.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(11, "Do Not Call!!.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(12, "donotmail.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(13, "Do not call!.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(14, "notes2.ico")
-        '
-        'pnlCustomerHistory
-        '
-        Me.pnlCustomerHistory.AutoScroll = True
-        Me.pnlCustomerHistory.Location = New System.Drawing.Point(13, 418)
-        Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(762, 197)
-        Me.pnlCustomerHistory.TabIndex = 193
-        '
-        'TSMain
-        '
-        Me.TSMain.Dock = System.Windows.Forms.DockStyle.Right
-        Me.TSMain.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TSMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.TSMain.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.TSMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel3, Me.ToolStripSeparator1, Me.btnNone, Me.btnMarketing, Me.btnSales, Me.btnInstall, Me.btnFinance, Me.btnAdmin})
-        Me.TSMain.Location = New System.Drawing.Point(785, 25)
-        Me.TSMain.Name = "TSMain"
-        Me.TSMain.Size = New System.Drawing.Size(94, 609)
-        Me.TSMain.TabIndex = 195
-        Me.TSMain.Text = "ToolStrip1"
-        '
-        'ToolStripLabel3
-        '
-        Me.ToolStripLabel3.Name = "ToolStripLabel3"
-        Me.ToolStripLabel3.Size = New System.Drawing.Size(91, 14)
-        Me.ToolStripLabel3.Text = "Select Form"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(91, 6)
-        '
-        'lblRep
-        '
-        Me.lblRep.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblRep.AutoSize = False
-        Me.lblRep.Name = "lblRep"
-        Me.lblRep.Size = New System.Drawing.Size(200, 15)
-        Me.lblRep.Text = "Tony Longeway"
-        Me.lblRep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'btnNone
-        '
-        Me.btnNone.Checked = True
-        Me.btnNone.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.btnNone.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNone.Image = CType(resources.GetObject("btnNone.Image"), System.Drawing.Image)
-        Me.btnNone.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnNone.Name = "btnNone"
-        Me.btnNone.Size = New System.Drawing.Size(91, 49)
-        Me.btnNone.Text = "None"
-        Me.btnNone.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'btnMarketing
-        '
-        Me.btnMarketing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnColdCall, Me.btnWarmCall, Me.btnPC, Me.btnRecovery, Me.btnConfirming, Me.btnMarketManager})
-        Me.btnMarketing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMarketing.Image = CType(resources.GetObject("btnMarketing.Image"), System.Drawing.Image)
-        Me.btnMarketing.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnMarketing.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnMarketing.Name = "btnMarketing"
-        Me.btnMarketing.Size = New System.Drawing.Size(91, 49)
-        Me.btnMarketing.Text = "Marketing"
-        Me.btnMarketing.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'btnColdCall
-        '
-        Me.btnColdCall.Image = CType(resources.GetObject("btnColdCall.Image"), System.Drawing.Image)
-        Me.btnColdCall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnColdCall.Name = "btnColdCall"
-        Me.btnColdCall.Size = New System.Drawing.Size(205, 38)
-        Me.btnColdCall.Text = "Cold Calling"
-        '
-        'btnWarmCall
-        '
-        Me.btnWarmCall.Image = CType(resources.GetObject("btnWarmCall.Image"), System.Drawing.Image)
-        Me.btnWarmCall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnWarmCall.Name = "btnWarmCall"
-        Me.btnWarmCall.Size = New System.Drawing.Size(205, 38)
-        Me.btnWarmCall.Text = "Warm Calling"
-        '
-        'btnPC
-        '
-        Me.btnPC.Image = CType(resources.GetObject("btnPC.Image"), System.Drawing.Image)
-        Me.btnPC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnPC.Name = "btnPC"
-        Me.btnPC.Size = New System.Drawing.Size(205, 38)
-        Me.btnPC.Text = "Previous Customers"
-        '
-        'btnRecovery
-        '
-        Me.btnRecovery.Image = CType(resources.GetObject("btnRecovery.Image"), System.Drawing.Image)
-        Me.btnRecovery.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnRecovery.Name = "btnRecovery"
-        Me.btnRecovery.Size = New System.Drawing.Size(205, 38)
-        Me.btnRecovery.Text = "Recovery"
-        '
-        'btnConfirming
-        '
-        Me.btnConfirming.Image = Global.Latest.My.Resources.Resources.inetcpl_4480
-        Me.btnConfirming.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnConfirming.Name = "btnConfirming"
-        Me.btnConfirming.Size = New System.Drawing.Size(205, 38)
-        Me.btnConfirming.Text = "Confirming"
-        '
-        'btnMarketManager
-        '
-        Me.btnMarketManager.Image = CType(resources.GetObject("btnMarketManager.Image"), System.Drawing.Image)
-        Me.btnMarketManager.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnMarketManager.Name = "btnMarketManager"
-        Me.btnMarketManager.Size = New System.Drawing.Size(205, 38)
-        Me.btnMarketManager.Text = "Marketing Manager"
-        '
-        'btnSales
-        '
-        Me.btnSales.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSales.Image = CType(resources.GetObject("btnSales.Image"), System.Drawing.Image)
-        Me.btnSales.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnSales.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnSales.Name = "btnSales"
-        Me.btnSales.Size = New System.Drawing.Size(91, 49)
-        Me.btnSales.Text = "Sales"
-        Me.btnSales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'btnInstall
-        '
-        Me.btnInstall.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInstall.Image = CType(resources.GetObject("btnInstall.Image"), System.Drawing.Image)
-        Me.btnInstall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnInstall.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnInstall.Name = "btnInstall"
-        Me.btnInstall.Size = New System.Drawing.Size(91, 49)
-        Me.btnInstall.Text = "Installation"
-        Me.btnInstall.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'btnFinance
-        '
-        Me.btnFinance.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFinance.Image = CType(resources.GetObject("btnFinance.Image"), System.Drawing.Image)
-        Me.btnFinance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnFinance.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnFinance.Name = "btnFinance"
-        Me.btnFinance.Size = New System.Drawing.Size(91, 49)
-        Me.btnFinance.Text = "Financing"
-        Me.btnFinance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'btnAdmin
-        '
-        Me.btnAdmin.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdmin.Image = CType(resources.GetObject("btnAdmin.Image"), System.Drawing.Image)
-        Me.btnAdmin.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.btnAdmin.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnAdmin.Name = "btnAdmin"
-        Me.btnAdmin.Size = New System.Drawing.Size(91, 49)
-        Me.btnAdmin.Text = "Administration"
-        Me.btnAdmin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'btnLogCall
-        '
-        Me.btnLogCall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.calledcancelled})
-        Me.btnLogCall.Image = CType(resources.GetObject("btnLogCall.Image"), System.Drawing.Image)
-        Me.btnLogCall.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnLogCall.Name = "btnLogCall"
-        Me.btnLogCall.Size = New System.Drawing.Size(272, 30)
-        Me.btnLogCall.Text = "Log Phone Conversation with this Customer"
-        '
-        'calledcancelled
-        '
-        Me.calledcancelled.Image = Global.Latest.My.Resources.Resources.Call_Cancel48
-        Me.calledcancelled.Name = "calledcancelled"
-        Me.calledcancelled.Size = New System.Drawing.Size(254, 22)
-        Me.calledcancelled.Text = "Log Appt. as Called and Cancelled"
         '
         'btnConfirm
         '
@@ -1084,7 +824,7 @@ Partial Class ConfirmingSingleRecord
         Me.btnConfirm.Image = Global.Latest.My.Resources.Resources.inetcpl_4480
         Me.btnConfirm.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnConfirm.Name = "btnConfirm"
-        Me.btnConfirm.Size = New System.Drawing.Size(157, 22)
+        Me.btnConfirm.Size = New System.Drawing.Size(154, 22)
         Me.btnConfirm.Text = "Confirm Appointment"
         '
         'btnSpokeWith
@@ -1116,7 +856,7 @@ Partial Class ConfirmingSingleRecord
         '
         Me.btnOther.Name = "btnOther"
         Me.btnOther.Size = New System.Drawing.Size(122, 22)
-        Me.btnOther.Text = "Other"
+        Me.btnOther.Text = "Other..."
         '
         'ToolStripSeparator8
         '
@@ -1148,29 +888,37 @@ Partial Class ConfirmingSingleRecord
         '
         'btnEditSales
         '
-        Me.btnEditSales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnterSalesResultAndRescheduleApptToolStripMenuItem, Me.ChangeApptTimeToolStripMenuItem, Me.ToolStripSeparator9})
+        Me.btnEditSales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnResultResched, Me.btnChangeTime, Me.ToolStripSeparator9})
         Me.btnEditSales.Image = Global.Latest.My.Resources.Resources.cash2
         Me.btnEditSales.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnEditSales.Name = "btnEditSales"
         Me.btnEditSales.Size = New System.Drawing.Size(117, 22)
         Me.btnEditSales.Text = "Edit Sales Appt."
         '
-        'EnterSalesResultAndRescheduleApptToolStripMenuItem
+        'btnResultResched
         '
-        Me.EnterSalesResultAndRescheduleApptToolStripMenuItem.Name = "EnterSalesResultAndRescheduleApptToolStripMenuItem"
-        Me.EnterSalesResultAndRescheduleApptToolStripMenuItem.Size = New System.Drawing.Size(283, 22)
-        Me.EnterSalesResultAndRescheduleApptToolStripMenuItem.Text = "Enter Sales Result and Reschedule Appt."
+        Me.btnResultResched.Name = "btnResultResched"
+        Me.btnResultResched.Size = New System.Drawing.Size(283, 22)
+        Me.btnResultResched.Text = "Enter Sales Result and Reschedule Appt."
         '
-        'ChangeApptTimeToolStripMenuItem
+        'btnChangeTime
         '
-        Me.ChangeApptTimeToolStripMenuItem.Name = "ChangeApptTimeToolStripMenuItem"
-        Me.ChangeApptTimeToolStripMenuItem.Size = New System.Drawing.Size(283, 22)
-        Me.ChangeApptTimeToolStripMenuItem.Text = "Change Appt. Time"
+        Me.btnChangeTime.Name = "btnChangeTime"
+        Me.btnChangeTime.Size = New System.Drawing.Size(283, 22)
+        Me.btnChangeTime.Text = "Change Appt. Time"
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
         Me.ToolStripSeparator9.Size = New System.Drawing.Size(280, 6)
+        '
+        'btnConfirmDispatch
+        '
+        Me.btnConfirmDispatch.Image = CType(resources.GetObject("btnConfirmDispatch.Image"), System.Drawing.Image)
+        Me.btnConfirmDispatch.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnConfirmDispatch.Name = "btnConfirmDispatch"
+        Me.btnConfirmDispatch.Size = New System.Drawing.Size(198, 22)
+        Me.btnConfirmDispatch.Text = "Switch to Dispatch Sales Toolbar"
         '
         'btnCustomerTools
         '
@@ -1180,6 +928,13 @@ Partial Class ConfirmingSingleRecord
         Me.btnCustomerTools.Name = "btnCustomerTools"
         Me.btnCustomerTools.Size = New System.Drawing.Size(120, 22)
         Me.btnCustomerTools.Text = "Customer Tools"
+        '
+        'btnEditCust2
+        '
+        Me.btnEditCust2.Image = Global.Latest.My.Resources.Resources.user
+        Me.btnEditCust2.Name = "btnEditCust2"
+        Me.btnEditCust2.Size = New System.Drawing.Size(207, 22)
+        Me.btnEditCust2.Text = "Edit Customer"
         '
         'ToolStripSeparator2
         '
@@ -1325,17 +1080,11 @@ Partial Class ConfirmingSingleRecord
         '
         'btnSaveRep
         '
+        Me.btnSaveRep.Enabled = False
         Me.btnSaveRep.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveRep.Name = "btnSaveRep"
         Me.btnSaveRep.Size = New System.Drawing.Size(210, 22)
         Me.btnSaveRep.Text = "Save Changes"
-        '
-        'btnEditCust2
-        '
-        Me.btnEditCust2.Image = Global.Latest.My.Resources.Resources.user
-        Me.btnEditCust2.Name = "btnEditCust2"
-        Me.btnEditCust2.Size = New System.Drawing.Size(207, 22)
-        Me.btnEditCust2.Text = "Edit Customer"
         '
         'btnChangeStatus
         '
@@ -1352,6 +1101,11 @@ Partial Class ConfirmingSingleRecord
         Me.btnKill.Name = "btnKill"
         Me.btnKill.Size = New System.Drawing.Size(221, 22)
         Me.btnKill.Text = "Kill Appointment"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(218, 6)
         '
         'btnDoNotCall
         '
@@ -1376,7 +1130,7 @@ Partial Class ConfirmingSingleRecord
         '
         'btnSalesResult
         '
-        Me.btnSalesResult.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMemorize})
+        Me.btnSalesResult.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMemorize, Me.btnRemoveFromMemorized})
         Me.btnSalesResult.Image = Global.Latest.My.Resources.Resources.cash2
         Me.btnSalesResult.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnSalesResult.Name = "btnSalesResult"
@@ -1389,6 +1143,13 @@ Partial Class ConfirmingSingleRecord
         Me.btnMemorize.Name = "btnMemorize"
         Me.btnMemorize.Size = New System.Drawing.Size(226, 22)
         Me.btnMemorize.Text = "Memorize This Apoointment"
+        '
+        'btnRemoveFromMemorized
+        '
+        Me.btnRemoveFromMemorized.Image = Global.Latest.My.Resources.Resources.delete2
+        Me.btnRemoveFromMemorized.Name = "btnRemoveFromMemorized"
+        Me.btnRemoveFromMemorized.Size = New System.Drawing.Size(226, 22)
+        Me.btnRemoveFromMemorized.Text = "Remove From Memorized"
         '
         'btnPrint
         '
@@ -1414,29 +1175,272 @@ Partial Class ConfirmingSingleRecord
         Me.btnPrintInfo.Size = New System.Drawing.Size(252, 22)
         Me.btnPrintInfo.Text = "Print Customer Information Sheet"
         '
-        'pctVerified
+        'ToolStripSeparator7
         '
-        Me.pctVerified.Location = New System.Drawing.Point(29, 114)
-        Me.pctVerified.Name = "pctVerified"
-        Me.pctVerified.Size = New System.Drawing.Size(24, 24)
-        Me.pctVerified.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pctVerified.TabIndex = 133
-        Me.pctVerified.TabStop = False
-        Me.pctVerified.Visible = False
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
         '
-        'btnConfirmDispatch
+        'lblSalesRep
         '
-        Me.btnConfirmDispatch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnConfirmDispatch.Image = CType(resources.GetObject("btnConfirmDispatch.Image"), System.Drawing.Image)
-        Me.btnConfirmDispatch.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnConfirmDispatch.Name = "btnConfirmDispatch"
-        Me.btnConfirmDispatch.Size = New System.Drawing.Size(182, 22)
-        Me.btnConfirmDispatch.Text = "Switch to Dispatch Sales Toolbar"
+        Me.lblSalesRep.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.lblSalesRep.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSalesRep.Margin = New System.Windows.Forms.Padding(0, 1, 10, 2)
+        Me.lblSalesRep.Name = "lblSalesRep"
+        Me.lblSalesRep.Size = New System.Drawing.Size(73, 15)
+        Me.lblSalesRep.Text = "Sales Rep(s):"
         '
-        'ToolStripSeparator4
+        'btnUndoConfirm
         '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(218, 6)
+        Me.btnUndoConfirm.Image = Global.Latest.My.Resources.Resources.delete2
+        Me.btnUndoConfirm.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnUndoConfirm.Name = "btnUndoConfirm"
+        Me.btnUndoConfirm.Size = New System.Drawing.Size(189, 20)
+        Me.btnUndoConfirm.Text = "Undo Confirm Appointment"
+        '
+        'tsCustomerLog
+        '
+        Me.tsCustomerLog.AutoSize = False
+        Me.tsCustomerLog.Dock = System.Windows.Forms.DockStyle.None
+        Me.tsCustomerLog.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.tsCustomerLog.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TScboCustomerHistory, Me.ToolStripLabel1, Me.btnLogCall, Me.ToolStripLabel2})
+        Me.tsCustomerLog.Location = New System.Drawing.Point(8, 382)
+        Me.tsCustomerLog.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
+        Me.tsCustomerLog.Name = "tsCustomerLog"
+        Me.tsCustomerLog.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.tsCustomerLog.Size = New System.Drawing.Size(871, 33)
+        Me.tsCustomerLog.TabIndex = 192
+        Me.tsCustomerLog.Text = "ToolStrip1"
+        '
+        'TScboCustomerHistory
+        '
+        Me.TScboCustomerHistory.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.TScboCustomerHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.TScboCustomerHistory.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.TScboCustomerHistory.Items.AddRange(New Object() {"All", "Marketing Department", "Sales Department", "Finance Department", "Installation Department"})
+        Me.TScboCustomerHistory.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
+        Me.TScboCustomerHistory.Name = "TScboCustomerHistory"
+        Me.TScboCustomerHistory.Size = New System.Drawing.Size(160, 33)
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripLabel1.Margin = New System.Windows.Forms.Padding(10, 1, 0, 2)
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(43, 30)
+        Me.ToolStripLabel1.Text = "Show"
+        '
+        'btnLogCall
+        '
+        Me.btnLogCall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.calledcancelled})
+        Me.btnLogCall.Image = CType(resources.GetObject("btnLogCall.Image"), System.Drawing.Image)
+        Me.btnLogCall.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnLogCall.Name = "btnLogCall"
+        Me.btnLogCall.Size = New System.Drawing.Size(272, 30)
+        Me.btnLogCall.Text = "Log Phone Conversation with this Customer"
+        '
+        'calledcancelled
+        '
+        Me.calledcancelled.Image = Global.Latest.My.Resources.Resources.Call_Cancel48
+        Me.calledcancelled.Name = "calledcancelled"
+        Me.calledcancelled.Size = New System.Drawing.Size(254, 22)
+        Me.calledcancelled.Text = "Log Appt. as Called and Cancelled"
+        '
+        'ToolStripLabel2
+        '
+        Me.ToolStripLabel2.Font = New System.Drawing.Font("Tahoma", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripLabel2.Margin = New System.Windows.Forms.Padding(40, 1, 0, 2)
+        Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        Me.ToolStripLabel2.Size = New System.Drawing.Size(150, 30)
+        Me.ToolStripLabel2.Text = "Customer History"
+        '
+        'ilCustomerHistory
+        '
+        Me.ilCustomerHistory.ImageStream = CType(resources.GetObject("ilCustomerHistory.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ilCustomerHistory.TransparentColor = System.Drawing.Color.Transparent
+        Me.ilCustomerHistory.Images.SetKeyName(0, "Confirmer.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(1, "cash.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(2, "marketing manager4.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(3, "Finance Dept.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(4, "hammerused.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(5, "recovery2.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(6, "phone4.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(7, "lock.ico")
+        '
+        'ttCustomerHistoryNotes
+        '
+        Me.ttCustomerHistoryNotes.AutoPopDelay = 30000
+        Me.ttCustomerHistoryNotes.InitialDelay = 500
+        Me.ttCustomerHistoryNotes.ReshowDelay = 100
+        '
+        'ilToolStripIcons
+        '
+        Me.ilToolStripIcons.ImageStream = CType(resources.GetObject("ilToolStripIcons.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ilToolStripIcons.TransparentColor = System.Drawing.Color.Transparent
+        Me.ilToolStripIcons.Images.SetKeyName(0, "Confirmer.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(1, "tranfer7.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(2, "marketing manager4.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(3, "Cancel.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(4, "transfer6.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(5, "C&C24.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(6, "cash.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(7, "NOTES1.ICO")
+        Me.ilToolStripIcons.Images.SetKeyName(8, "tranfer.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(9, "Cancel.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(10, "phone4.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(11, "Do Not Call!!.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(12, "donotmail.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(13, "Do not call!.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(14, "notes2.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(15, "inetcpl_4480.ico")
+        '
+        'pnlCustomerHistory
+        '
+        Me.pnlCustomerHistory.AutoScroll = True
+        Me.pnlCustomerHistory.Location = New System.Drawing.Point(13, 418)
+        Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(866, 197)
+        Me.pnlCustomerHistory.TabIndex = 193
+        '
+        'TSMain
+        '
+        Me.TSMain.Dock = System.Windows.Forms.DockStyle.Right
+        Me.TSMain.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TSMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.TSMain.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.TSMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel3, Me.ToolStripSeparator1, Me.btnNone, Me.btnMarketing, Me.btnSales, Me.btnInstall, Me.btnFinance, Me.btnAdmin})
+        Me.TSMain.Location = New System.Drawing.Point(785, 25)
+        Me.TSMain.Name = "TSMain"
+        Me.TSMain.Size = New System.Drawing.Size(94, 609)
+        Me.TSMain.TabIndex = 195
+        Me.TSMain.Text = "ToolStrip1"
+        '
+        'ToolStripLabel3
+        '
+        Me.ToolStripLabel3.Name = "ToolStripLabel3"
+        Me.ToolStripLabel3.Size = New System.Drawing.Size(91, 14)
+        Me.ToolStripLabel3.Text = "Select Form"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(91, 6)
+        '
+        'btnNone
+        '
+        Me.btnNone.Checked = True
+        Me.btnNone.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.btnNone.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNone.Image = CType(resources.GetObject("btnNone.Image"), System.Drawing.Image)
+        Me.btnNone.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnNone.Name = "btnNone"
+        Me.btnNone.Size = New System.Drawing.Size(91, 49)
+        Me.btnNone.Text = "None"
+        Me.btnNone.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'btnMarketing
+        '
+        Me.btnMarketing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnColdCall, Me.btnWarmCall, Me.btnPC, Me.btnRecovery, Me.btnConfirming, Me.btnMarketManager})
+        Me.btnMarketing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMarketing.Image = CType(resources.GetObject("btnMarketing.Image"), System.Drawing.Image)
+        Me.btnMarketing.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnMarketing.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnMarketing.Name = "btnMarketing"
+        Me.btnMarketing.Size = New System.Drawing.Size(91, 49)
+        Me.btnMarketing.Text = "Marketing"
+        Me.btnMarketing.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'btnColdCall
+        '
+        Me.btnColdCall.Image = CType(resources.GetObject("btnColdCall.Image"), System.Drawing.Image)
+        Me.btnColdCall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnColdCall.Name = "btnColdCall"
+        Me.btnColdCall.Size = New System.Drawing.Size(205, 38)
+        Me.btnColdCall.Text = "Cold Calling"
+        '
+        'btnWarmCall
+        '
+        Me.btnWarmCall.Image = CType(resources.GetObject("btnWarmCall.Image"), System.Drawing.Image)
+        Me.btnWarmCall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnWarmCall.Name = "btnWarmCall"
+        Me.btnWarmCall.Size = New System.Drawing.Size(205, 38)
+        Me.btnWarmCall.Text = "Warm Calling"
+        '
+        'btnPC
+        '
+        Me.btnPC.Image = CType(resources.GetObject("btnPC.Image"), System.Drawing.Image)
+        Me.btnPC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnPC.Name = "btnPC"
+        Me.btnPC.Size = New System.Drawing.Size(205, 38)
+        Me.btnPC.Text = "Previous Customers"
+        '
+        'btnRecovery
+        '
+        Me.btnRecovery.Image = CType(resources.GetObject("btnRecovery.Image"), System.Drawing.Image)
+        Me.btnRecovery.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnRecovery.Name = "btnRecovery"
+        Me.btnRecovery.Size = New System.Drawing.Size(205, 38)
+        Me.btnRecovery.Text = "Recovery"
+        '
+        'btnConfirming
+        '
+        Me.btnConfirming.Image = Global.Latest.My.Resources.Resources.inetcpl_4480
+        Me.btnConfirming.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnConfirming.Name = "btnConfirming"
+        Me.btnConfirming.Size = New System.Drawing.Size(205, 38)
+        Me.btnConfirming.Text = "Confirming"
+        '
+        'btnMarketManager
+        '
+        Me.btnMarketManager.Image = CType(resources.GetObject("btnMarketManager.Image"), System.Drawing.Image)
+        Me.btnMarketManager.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnMarketManager.Name = "btnMarketManager"
+        Me.btnMarketManager.Size = New System.Drawing.Size(205, 38)
+        Me.btnMarketManager.Text = "Marketing Manager"
+        '
+        'btnSales
+        '
+        Me.btnSales.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSales.Image = CType(resources.GetObject("btnSales.Image"), System.Drawing.Image)
+        Me.btnSales.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnSales.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnSales.Name = "btnSales"
+        Me.btnSales.Size = New System.Drawing.Size(91, 49)
+        Me.btnSales.Text = "Sales"
+        Me.btnSales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'btnInstall
+        '
+        Me.btnInstall.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnInstall.Image = CType(resources.GetObject("btnInstall.Image"), System.Drawing.Image)
+        Me.btnInstall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnInstall.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnInstall.Name = "btnInstall"
+        Me.btnInstall.Size = New System.Drawing.Size(91, 49)
+        Me.btnInstall.Text = "Installation"
+        Me.btnInstall.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'btnFinance
+        '
+        Me.btnFinance.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFinance.Image = CType(resources.GetObject("btnFinance.Image"), System.Drawing.Image)
+        Me.btnFinance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnFinance.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnFinance.Name = "btnFinance"
+        Me.btnFinance.Size = New System.Drawing.Size(91, 49)
+        Me.btnFinance.Text = "Financing"
+        Me.btnFinance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'btnAdmin
+        '
+        Me.btnAdmin.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdmin.Image = CType(resources.GetObject("btnAdmin.Image"), System.Drawing.Image)
+        Me.btnAdmin.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnAdmin.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnAdmin.Name = "btnAdmin"
+        Me.btnAdmin.Size = New System.Drawing.Size(91, 49)
+        Me.btnAdmin.Text = "Administration"
+        Me.btnAdmin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'ConfirmingSingleRecord
         '
@@ -1444,15 +1448,15 @@ Partial Class ConfirmingSingleRecord
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(879, 634)
-        Me.Controls.Add(Me.TSMain)
         Me.Controls.Add(Me.pnlCustomerHistory)
         Me.Controls.Add(Me.tsCustomerLog)
-        Me.Controls.Add(Me.tsSingleForm)
         Me.Controls.Add(Me.gbSpecialInstructions)
         Me.Controls.Add(Me.gbProductInfo)
         Me.Controls.Add(Me.gbApptInfo)
         Me.Controls.Add(Me.gbHomeInfo)
         Me.Controls.Add(Me.gbContactInfo)
+        Me.Controls.Add(Me.TSMain)
+        Me.Controls.Add(Me.tsSingleForm)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -1461,7 +1465,7 @@ Partial Class ConfirmingSingleRecord
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Customer Information for Record ID: "
+        Me.Text = " Single Record Form for Record ID "
         Me.gbSpecialInstructions.ResumeLayout(False)
         Me.gbProductInfo.ResumeLayout(False)
         Me.gbProductInfo.PerformLayout()
@@ -1471,13 +1475,13 @@ Partial Class ConfirmingSingleRecord
         Me.gbHomeInfo.PerformLayout()
         Me.gbContactInfo.ResumeLayout(False)
         Me.gbContactInfo.PerformLayout()
+        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tsSingleForm.ResumeLayout(False)
         Me.tsSingleForm.PerformLayout()
         Me.tsCustomerLog.ResumeLayout(False)
         Me.tsCustomerLog.PerformLayout()
         Me.TSMain.ResumeLayout(False)
         Me.TSMain.PerformLayout()
-        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1585,14 +1589,6 @@ Partial Class ConfirmingSingleRecord
     Friend WithEvents btnPrintAppt As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnPrintInfo As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents btnConfirm As System.Windows.Forms.ToolStripSplitButton
-    Friend WithEvents btnSpokeWith As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btnContact1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btnContact2 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btnBoth As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btnOther As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator8 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents btnSMNotes As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnEmailCust As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnChooseTemplate As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cboTemplates As System.Windows.Forms.ToolStripComboBox
@@ -1603,13 +1599,24 @@ Partial Class ConfirmingSingleRecord
     Friend WithEvents btnAlt1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnAlt2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnEditSales As System.Windows.Forms.ToolStripDropDownButton
-    Friend WithEvents EnterSalesResultAndRescheduleApptToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ChangeApptTimeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnResultResched As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnChangeTime As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents lblSalesRep As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents lblRep As System.Windows.Forms.ToolStripLabel
     Friend WithEvents btnSetAppt2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnEditCust2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnConfirmDispatch As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnRemoveFromMemorized As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnUndoConfirm As System.Windows.Forms.ToolStripSplitButton
+    Friend WithEvents btnConfirm As System.Windows.Forms.ToolStripDropDownButton
+    Friend WithEvents btnSpokeWith As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnContact1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnContact2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnBoth As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnOther As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator8 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnSMNotes As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnEditSPI As System.Windows.Forms.Button
 End Class

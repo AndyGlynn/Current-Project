@@ -3,8 +3,10 @@ Imports System.Data.Sql
 Imports System.Data.SqlClient
 Imports System
 Public Class Reissue
-
+    Public frm As Form
     Private Sub cboSalesResults_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboSalesResults.GotFocus
+
+
         Dim x
         x = Me.cboRep1.Text.Length
         Select Case x
@@ -107,9 +109,44 @@ Public Class Reissue
 
     End Sub
     Private Sub Reissue_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        
 
-        Me.dtpapptdate.Value = Convert.ToDateTime(Confirming.txtApptDate.Text & " 12:00 AM")
-        Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & Confirming.txtApptTime.Text)
+        If frm.Name = "Confirming" Then
+            Me.dtpapptdate.Value = Convert.ToDateTime(Confirming.txtApptDate.Text & " 12:00 AM")
+            Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & Confirming.txtApptTime.Text)
+        ElseIf frm.Name = "ConfirmingSingleRecord" Then
+            Me.dtpapptdate.Value = Convert.ToDateTime(ConfirmingSingleRecord.txtApptDate.Text & " 12:00 AM")
+            Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & ConfirmingSingleRecord.txtApptTime.Text)
+            'ElseIf frm.Name = "Sales" Then
+            '    Me.dtpapptdate.Value = Convert.ToDateTime(Sales.txtApptDate.Text & " 12:00 AM")
+            '    Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & Sales.txtApptTime.Text)
+            'ElseIf frm.Name = "Administration" Then
+            '    'Me.dtpapptdate.Value = Convert.ToDateTime(Administration.txtApptDate.Text & " 12:00 AM")
+            '    'Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & Administration.txtApptTime.Text)
+            'ElseIf frm.Name = "MarketingManager" Then
+            '    Me.dtpapptdate.Value = Convert.ToDateTime(MarketingManager.txtApptDate.Text & " 12:00 AM")
+            '    Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & MarketingManager.txtApptTime.Text)
+            'ElseIf frm.Name = "WCaller" Then
+            '    Me.dtpapptdate.Value = Convert.ToDateTime(WCaller.txtApptDate.Text & " 12:00 AM")
+            '    Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & WCaller.txtApptTime.Text)
+            'ElseIf frm.Name = "Installation" Then
+            '    'Me.dtpapptdate.Value = Convert.ToDateTime(Installation.txtApptDate.Text & " 12:00 AM")
+            '    'Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & Installation.txtApptTime.Text)
+            'ElseIf frm.Name = "PreviousCustomer" Then
+            '    'Me.dtpapptdate.Value = Convert.ToDateTime(PreviousCustomer.txtApptDate.Text & " 12:00 AM")
+            '    'Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & PreviousCustomer.txtApptTime.Text)
+            'ElseIf frm.Name = "Recovery" Then
+            '    'Me.dtpapptdate.Value = Convert.ToDateTime(Recovery.txtApptDate.Text & " 12:00 AM")
+            '    'Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & Recovery.txtApptTime.Text)
+            'ElseIf frm.Name = "EditCustomerInfo" Then
+            '    Me.dtpapptdate.Value = Convert.ToDateTime(EditCustomerInfo.txtApptDate.Text & " 12:00 AM")
+            '    Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & EditCustomerInfo.txtApptTime.Text)
+            'ElseIf frm.Name = "Finance" Then
+            '    'Me.dtpapptdate.Value = Convert.ToDateTime(Finance.txtApptDate.Text & " 12:00 AM")
+            '    'Me.dtpappttime.Value = Convert.ToDateTime("1/1/1900 " & Finance.txtApptTime.Text)
+        End If
+
+      
         Me.CheckBox1.Enabled = False
         Dim dset_Reps As Data.DataSet = New Data.DataSet("Reps")
         Dim da_Reps As SqlDataAdapter = New SqlDataAdapter
@@ -164,32 +201,65 @@ Public Class Reissue
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Reissue", "FormCode", "Sub", "Reissue_Load", "0", ex.Message.ToString)
             y = Nothing
         End Try
-        Try
-            Dim rep As String = Confirming.lvSales.SelectedItems(0).SubItems(3).Text
-            Dim rep2 As String = ""
-            If rep.Contains(" & ") = True Then
-                Dim sp = Split(rep, " & ")
-                rep = sp(0)
-                rep2 = sp(1)
-            End If
-            Me.cboRep1.Text = rep
-            Me.cboRep2.Text = rep2
-            Dim s = Split(Confirming.txtContact1.Text, " ")
-            Dim s2 = Split(Confirming.txtContact2.Text, " ")
-            If Confirming.txtContact2.Text = " " Then
-                Me.cboSpokeWith.Items.Add(s(0))
-            ElseIf Confirming.txtContact2.Text <> " " Then
-                Me.cboSpokeWith.Items.Add(s(0))
-                Me.cboSpokeWith.Items.Add(s2(0))
-                Me.cboSpokeWith.Items.Add(s(0) & " & " & s2(0))
-            End If
-        Catch ex As Exception
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Reissue", "FormCode", "Sub", "Reissue_Load", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+        If frm.Name = "Confirming" Then
+            Try
+                Dim rep As String = Confirming.lvSales.SelectedItems(0).SubItems(3).Text
+                Dim rep2 As String = ""
+                If rep.Contains(" & ") = True Then
+                    Dim sp = Split(rep, " & ")
+                    rep = sp(0)
+                    rep2 = sp(1)
+                End If
+                Me.cboRep1.Text = rep
+                Me.cboRep2.Text = rep2
+                Dim s = Split(Confirming.txtContact1.Text, " ")
+                Dim s2 = Split(Confirming.txtContact2.Text, " ")
+                If Confirming.txtContact2.Text = " " Then
+                    Me.cboSpokeWith.Items.Add(s(0))
+                    Me.cboSpokeWith.SelectedItem = s(0)
+                ElseIf Confirming.txtContact2.Text <> " " Then
+                    Me.cboSpokeWith.Items.Add(s(0))
+                    Me.cboSpokeWith.Items.Add(s2(0))
+                    Me.cboSpokeWith.Items.Add(s(0) & " & " & s2(0))
+                End If
+            Catch ex As Exception
+                Main.Cursor = Cursors.Default
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Reissue", "FormCode", "Sub", "Reissue_Load", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+        Else
+            Try
+                Dim rep As String = ConfirmingSingleRecord.Rep1
+                Dim rep2 As String = ConfirmingSingleRecord.Rep2
+                Me.cboRep1.SelectedItem = rep
+                If Me.cboRep1.SelectedItem = Nothing Then
+                    Me.cboRep1.Items.Add(rep)
+                    Me.cboRep1.SelectedItem = rep
+                End If
+                Me.cboRep2.SelectedItem = rep2
+                If Me.cboRep2.SelectedItem = Nothing Then
+                    Me.cboRep2.Items.Add(rep2)
+                    Me.cboRep2.SelectedItem = rep2
+                End If
+                Dim s = Split(ConfirmingSingleRecord.txtContact1.Text, " ")
+                Dim s2 = Split(ConfirmingSingleRecord.txtContact2.Text, " ")
+                If ConfirmingSingleRecord.txtContact2.Text = " " Then
+                    Me.cboSpokeWith.Items.Add(s(0))
+                    Me.cboSpokeWith.SelectedItem = s(0)
+                ElseIf Confirming.txtContact2.Text <> " " Then
+                    Me.cboSpokeWith.Items.Add(s(0))
+                    Me.cboSpokeWith.Items.Add(s2(0))
+                    Me.cboSpokeWith.Items.Add(s(0) & " & " & s2(0))
+                End If
 
+            Catch ex As Exception
+                Main.Cursor = Cursors.Default
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Reissue", "FormCode", "Sub", "Reissue_Load", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+        End If
     End Sub
     Private Sub rtfAutoNote_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles rtfAutoNote.GotFocus
         Me.lblsalesnotes.Visible = False
@@ -249,12 +319,15 @@ Public Class Reissue
                 Exit Sub
             End If
 
-            Dim Manager As String
-            If Me.cboRep1.Text <> "" Then
+            Dim LName As String
+            Dim FName As String
+            If Me.cboRep1.SelectedItem <> Nothing Or Me.cboRep1.SelectedItem <> "" Then
                 Dim r = Split(Me.cboRep1.Text, " ")
-                Manager = Trim(r(1))
+                LName = Trim(r(1))
+                FName = Trim(r(0))
             Else
-                Manager = ""
+                LName = ""
+                FName = ""
             End If
 
 
@@ -300,13 +373,14 @@ Public Class Reissue
             Dim param2 As SqlParameter = New SqlParameter("@Date", Me.dtpapptdate.Value.ToString)
             Dim param3 As SqlParameter = New SqlParameter("@time", Me.dtpappttime.Value.ToString)
             Dim param4 As SqlParameter = New SqlParameter("@user", STATIC_VARIABLES.CurrentUser)
-            Dim param5 As SqlParameter = New SqlParameter("@ID", Confirming.lvSales.SelectedItems(0).Text)
+            Dim param5 As SqlParameter = New SqlParameter("@ID", STATIC_VARIABLES.CurrentID)
             Dim param6 As SqlParameter = New SqlParameter("@Description", Description)
             Dim param7 As SqlParameter = New SqlParameter("@note", Me.rtfAutoNote.Text)
             Dim param8 As SqlParameter = New SqlParameter("@Rep1", Me.cboRep1.Text)
             Dim param9 As SqlParameter = New SqlParameter("@Rep2", Me.cboRep2.Text)
-            Dim param10 As SqlParameter = New SqlParameter("@LastName", Manager)
+            Dim param10 As SqlParameter = New SqlParameter("@LastName", LName)
             Dim param11 As SqlParameter = New SqlParameter("@SpokeWith", Me.cboSpokeWith.Text)
+            Dim param12 As SqlParameter = New SqlParameter("@FirstName", FName)
             cmdGet.CommandType = CommandType.StoredProcedure
             cmdGet.Parameters.Add(param1)
             cmdGet.Parameters.Add(param2)
@@ -319,15 +393,29 @@ Public Class Reissue
             cmdGet.Parameters.Add(param9)
             cmdGet.Parameters.Add(param10)
             cmdGet.Parameters.Add(param11)
+            cmdGet.Parameters.Add(param12)
             cnn.Open()
             r1 = cmdGet.ExecuteReader
             r1.Read()
             r1.Close()
             cnn.Close()
-            Dim c As New ConfirmingData
-            c.Populate("Dispatch", Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Populate")
-            Me.Close()
-            Me.Dispose()
+            If frm.Name = "Confirming" Then
+                Dim c As New ConfirmingData
+                c.Populate("Dispatch", Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Populate")
+
+            Else
+                If Me.CheckBox1.Checked = True Then
+                    ConfirmingSingleRecord.txtApptTime.Text = Me.dtpappttime.Value.ToShortTimeString
+                    ConfirmingSingleRecord.txtApptDate.Text = Me.dtpapptdate.Value.ToShortDateString
+                    ConfirmingSingleRecord.txtApptDay.Text = day
+                    ConfirmingSingleRecord.MResult = Me.cboSalesResults.Text
+                    ConfirmingSingleRecord.btnConfirmDispatch_Click(ConfirmingSingleRecord.btnConfirmDispatch, Nothing)
+                End If
+                Dim h As New CustomerHistory
+                h.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
+            End If
+
+     
 
         Catch ex As Exception
             Main.Cursor = Cursors.Default
@@ -335,7 +423,8 @@ Public Class Reissue
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Reissue", "FormCode", "Sub", "Button2_Click", "0", ex.Message.ToString)
             y = Nothing
         End Try
-
+        Me.Close()
+        Me.Dispose()
     End Sub
 
     Private Sub lblautonotes_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblautonotes.Click

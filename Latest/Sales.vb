@@ -3027,7 +3027,7 @@ Public Class Sales
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnMemorize_click", ID, ex.Message.ToString)
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, Me.Name, "FormCode", "Event", "btnMemorize_click", ID, ex.Message.ToString)
             y = Nothing
         End Try
 
@@ -5424,10 +5424,9 @@ Public Class Sales
         '    SetAppt.Show()
         'End If
 
-        SetAppt_V2.MdiParent = Main
-        SetAppt_V2.ID = Me.ID
-        SetAppt_V2.CallingForm = "Sales"
-        SetAppt_V2.Show()
+
+        SetAppt_V2.frm = Me
+        SetAppt_V2.ShowDialog()
 
     End Sub
 
@@ -8738,16 +8737,11 @@ Public Class Sales
     Private Sub btnEmailThisCustomer_Click(sender As Object, e As EventArgs) Handles btnEmailThisCustomer.Click
         Dim emailAddress As String = Me.lnkEmail.Text
         If Len(emailAddress) <= 0 Then
-            MsgBox("This customer doesn't have an email address to send mail to.", MsgBoxStyle.Critical, "No Email Address For Customer")
+            MsgBox("This customer doesn't have an email address to send mail to.", MsgBoxStyle.Exclamation, "No Email Address For Customer")
             Exit Sub
         ElseIf Len(emailAddress) >= 1 Then
-            frmEmailTemplateChoice.Show()
+            'frmEmailTemplateChoice.Show()
         End If
-    End Sub
-
-#End Region
-
-    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
         Dim lnk As LinkLabel = sender
         frmLinkSendEmail.MdiParent = Main
         frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
@@ -8756,10 +8750,28 @@ Public Class Sales
         frmLinkSendEmail.BringToFront()
     End Sub
 
+#End Region
+
+    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
+
+        Dim lnk As LinkLabel = sender
+        Dim emailAddress As String = lnk.Text
+        If Len(emailAddress) <= 0 Then
+            MsgBox("This customer doesn't have an email address to send mail to.", MsgBoxStyle.Exclamation, "No Email Address For Customer")
+            Exit Sub
+        End If
+
+        frmLinkSendEmail.MdiParent = Main
+        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
+        frmLinkSendEmail.Cust_Email = lnk.Text
+        frmLinkSendEmail.Show()
+        frmLinkSendEmail.BringToFront()
+    End Sub
+
     Private Sub btnUpdateSPI_Click(sender As Object, e As EventArgs) Handles btnUpdateSPI.Click
-        frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
-        frmEditSpecialInstructions.CallingForm = "Sales"
-        frmEditSpecialInstructions.Show()
+
+        frmEditSpecialInstructions.frm = Me
+        frmEditSpecialInstructions.ShowDialog()
     End Sub
 
     Private Sub bgSalesQuery_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgSalesQuery.DoWork
@@ -8835,7 +8847,7 @@ Public Class Sales
     Private Sub bgCustomerHistory_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgCustomerHistory.DoWork
         Try
             Dim c As New CustomerHistory
-            c.SetUp(Me, STATIC_VARIABLES.CurrentID, Me.TScboCustomerHistory)
+            c.SetUp(Me.TScboCustomerHistory)
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default

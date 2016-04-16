@@ -214,6 +214,7 @@ Public Class Main
                         tstCNN.Close()
                     Catch ex As Exception
                         MsgBox("No connection can be made to SQL server. Settings will not be saved.", MsgBoxStyle.Exclamation, "No Network Present.")
+                        Application.Exit()
                         Exit Sub
                     End Try
                 End If
@@ -250,6 +251,7 @@ Public Class Main
         Try
             If My.Computer.Network.IsAvailable = False Then
                 MsgBox("There is no network connection Present.", MsgBoxStyle.Exclamation, "No Network.")
+                Application.Exit()
                 Exit Sub
             End If
             If My.Computer.Network.IsAvailable = True Then
@@ -259,6 +261,7 @@ Public Class Main
                     tstCNN.Close()
                 Catch ex As Exception
                     MsgBox("No connection can be made to SQL server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "No Network Present.")
+                    Application.Exit()
                     Exit Sub
                 End Try
             End If
@@ -1248,29 +1251,10 @@ Public Class Main
 
 
 
-    Public Sub open()
-        Try
-            SetAppt.ID = Sales.ID
-            SetAppt.frm = Sales
-            SetAppt.OrigApptDate = Sales.txtApptDate.Text
-            SetAppt.OrigApptTime = Sales.txtApptTime.Text
-            Dim s = Split(Sales.txtContact1.Text, " ")
-            Dim s2 = Split(Sales.txtContact2.Text, " ")
-            SetAppt.Contact1 = s(0)
-            SetAppt.Contact2 = s2(0)
+ 
 
 
-            SetAppt.ShowDialog()
-        Catch ex As Exception
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Sub", "open()", Sales.ID.ToString, ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
-
-
-    Private Sub MarketingManagerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MarketingManagerToolStripMenuItem.Click
+    Private Sub MarketingManagerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsbMarketingManager.Click
         Try
             MarketingManager.MdiParent = Me
             MarketingManager.Show()

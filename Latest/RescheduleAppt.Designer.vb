@@ -130,7 +130,7 @@ Partial Class RescheduleAppt
         Me.Name = "RescheduleAppt"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Change Appt. Date/Time"
+        Me.Text = "Move Appointment"
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
