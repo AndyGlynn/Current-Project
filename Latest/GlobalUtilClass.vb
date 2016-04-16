@@ -333,8 +333,8 @@ Public Class Input_Utility_Class
 
     '' get a list of zip codes from the federal government.
     '' src: http://federalgovernmentzipcodes.us/
-    Private Function Download_Federal_Zip_Code_List()
-        Dim path As String = "%systemroot%\Temp"
+    Public Function Download_Federal_Zip_Code_List()
+        Dim path As String = "\\server.greenworks.local\Company\ISS\Data Imports"
         Dim fileName As String = "free-zipcode-database.csv"
         Dim lstZP As New List(Of ZipCodeInfoFED)
 
@@ -1182,10 +1182,10 @@ Public Class Input_Utility_Class
 
     '' downloads the file if not present.
     '' 
-    Private Function dl_list()
+    Public Function dl_list()
         Try
             Dim lst As New ArrayList
-            Dim path As String = "%systemroot%\Temp"
+            Dim path As String = "\\server.greenworks.local\Company\ISS\Data Imports"
             Dim fName As String = "email_domain_list.txt"
             If My.Computer.Network.IsAvailable = True Then
                 If System.IO.File.Exists(path & "\" & fName) = False Then
@@ -1200,11 +1200,11 @@ Public Class Input_Utility_Class
                     strReader.Close()
                     strReader = Nothing
                     Return lst
-                    System.IO.File.Delete(path & "\" & fName)
+                    'System.IO.File.Delete(path & "\" & fName)
                     Exit Function
                 ElseIf System.IO.File.Exists(path & "\" & fName) = True Then
-                    System.IO.File.Delete(path & "\" & fName)
-                    My.Computer.Network.DownloadFile("https://gist.githubusercontent.com/tbrianjones/5992856/raw/87f527af7bdd21997722fa65143a9af7bee92583/free_email_provider_domains.txt", (path & "\" & fName))
+                    'System.IO.File.Delete(path & "\" & fName)
+                    ' My.Computer.Network.DownloadFile("https://gist.githubusercontent.com/tbrianjones/5992856/raw/87f527af7bdd21997722fa65143a9af7bee92583/free_email_provider_domains.txt", (path & "\" & fName))
                     '' now convert to an array => sorted list
                     '' 
                     Dim strReader As New StreamReader(path & "\" & fName)
@@ -1215,7 +1215,7 @@ Public Class Input_Utility_Class
                     strReader.Close()
                     strReader = Nothing
                     Return lst
-                    System.IO.File.Delete(path & "\" & fName)
+                    'System.IO.File.Delete(path & "\" & fName)
                     Exit Function
                 End If
             ElseIf My.Computer.Network.IsAvailable = False Then
@@ -1276,9 +1276,9 @@ Public Class Input_Utility_Class
         carrier_sms_gateways = New Hashtable
         carrier_sms_gateways = GenCarrierSMS() '' wiki entry for top 10 carriers 
         email_list = New ArrayList '' list of valid email domains to compare to. {3148 Domains as of 4-14-2016}
-        email_list = dl_list()
+        'email_list = dl_list()
         zip_code_list = New List(Of ZipCodeInfoFED)
-        zip_code_list = Download_Federal_Zip_Code_List()
+        'zip_code_list = Download_Federal_Zip_Code_List()
 
     End Sub
 

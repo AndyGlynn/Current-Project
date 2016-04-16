@@ -295,4 +295,124 @@
         End Try
 
     End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        Try
+            Dim y As New Input_Utility_Class
+            Me.Cursor = Cursors.WaitCursor
+            Dim path As String = "\\server.greenworks.local\Company\ISS\Data Imports"
+            Dim file1 As String = "free-zipcode-database.csv"
+            Dim file2 As String = "email_domain_list.txt"
+
+            If System.IO.File.Exists(path & "\" & file1) = True Then
+                Dim response As Integer = MsgBox("Zip code file downloaded." & vbCrLf & "View It?", MsgBoxStyle.YesNo, "Zip Code File")
+                If response = vbYes Then
+                    System.Diagnostics.Process.Start(path & "\" & file1)
+                    Me.Cursor = Cursors.Default
+                Else
+                    '' exit 
+                    Me.Cursor = Cursors.Default
+
+                End If
+            End If
+            If System.IO.File.Exists(path & "\" & file1) = False Then
+                Dim r As Integer = MsgBox("The local copy of zip code files is missing. Download it?", MsgBoxStyle.YesNo, "No Zip Code Info")
+                If r = vbYes Then
+                    y.Download_Federal_Zip_Code_List()
+                    System.Diagnostics.Process.Start(path & "\" & file1)
+                    Me.Cursor = Cursors.Default
+
+                Else
+                    Me.Cursor = Cursors.Default
+
+                End If
+            End If
+
+            If System.IO.File.Exists(path & "\" & file2) = True Then
+                Dim response As Integer = MsgBox("Email Domains file downloaded." & vbCrLf & "View It?", MsgBoxStyle.YesNo, "Email Domain File")
+                If response = vbYes Then
+                    System.Diagnostics.Process.Start(path & "\" & file2)
+                    Me.Cursor = Cursors.Default
+
+                Else
+                    '' exit
+                    Me.Cursor = Cursors.Default
+
+                End If
+            End If
+            If System.IO.File.Exists(path & "\" & file2) = False Then
+                Dim r As Integer = MsgBox("The local copy of email domains is missing. Download it?", MsgBoxStyle.YesNo, "No Email Domain Info")
+                If r = vbYes Then
+                    y.dl_list()
+                    System.Diagnostics.Process.Start(path & "\" & file2)
+                    Me.Cursor = Cursors.Default
+
+                Else
+                    Me.Cursor = Cursors.Default
+
+                End If
+            End If
+
+            Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "frmTesting", "Input_Utility_Class", "Class", "New()", "0", ex.Message.ToString)
+        End Try
+    End Sub
+
+    Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
+        Dim y As New Input_Utility_Class
+        Me.txtCaptText.Text = y.CapText(Me.txtCaptText.Text)
+
+    End Sub
+
+    Private Sub Button18_Click(sender As Object, e As EventArgs) Handles Button18.Click
+        Dim y As New Input_Utility_Class
+        Me.txtValidText.Text = y.IsTextValid(Me.txtValidText.Text).ToString
+
+    End Sub
+
+    Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
+        Dim y As New Input_Utility_Class
+        Me.txtStripSpecials.Text = y.StripOutSpecials(Me.txtStripSpecials.Text)
+    End Sub
+
+    Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
+        Dim y As New Input_Utility_Class
+        Dim lstDomains As New ArrayList
+        lstDomains = y.dl_list()
+        Dim x As String
+        Me.Cursor = Cursors.WaitCursor
+        Me.cboDomains.Items.Clear()
+        For Each x In lstDomains
+            Me.cboDomains.Items.Add(x)
+        Next
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
+        Dim y As New Input_Utility_Class
+        Dim lstZipInfo As New List(Of Input_Utility_Class.ZipCodeInfoFED)
+        lstZipInfo = y.Download_Federal_Zip_Code_List()
+        Dim b As Input_Utility_Class.ZipCodeInfoFED
+        Me.cboCityStateZip.Items.Clear()
+        Me.Cursor = Cursors.WaitCursor
+        For Each b In lstZipInfo
+            Me.cboCityStateZip.Items.Add(b.City & "-" & b.State & "-" & b.ZipCode)
+        Next
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
+        Dim y As New Input_Utility_Class
+        Me.txtToTwoChar.Text = y.Convert_State_ByName_To_Abbreviation(Me.txtToTwoChar.Text)
+
+    End Sub
+
+    Private Sub Button23_Click(sender As Object, e As EventArgs) Handles Button23.Click
+        Dim y As New Input_Utility_Class
+        Me.txtFromTwoChar.Text = y.Convert_State_Two_Char(Me.txtFromTwoChar.Text)
+
+    End Sub
 End Class

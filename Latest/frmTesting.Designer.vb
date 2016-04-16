@@ -22,7 +22,7 @@ Partial Class frmTesting
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tbTesting = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -66,6 +66,8 @@ Partial Class frmTesting
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.rtfPreview = New System.Windows.Forms.RichTextBox()
@@ -80,33 +82,51 @@ Partial Class frmTesting
         Me.lstSimulated = New System.Windows.Forms.ListView()
         Me.colID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Button14 = New System.Windows.Forms.Button()
-        Me.Button15 = New System.Windows.Forms.Button()
-        Me.TabControl1.SuspendLayout()
+        Me.Button16 = New System.Windows.Forms.Button()
+        Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.Button17 = New System.Windows.Forms.Button()
+        Me.txtCaptText = New System.Windows.Forms.TextBox()
+        Me.txtValidText = New System.Windows.Forms.TextBox()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.txtStripSpecials = New System.Windows.Forms.TextBox()
+        Me.Button19 = New System.Windows.Forms.Button()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.cboDomains = New System.Windows.Forms.ComboBox()
+        Me.cboCityStateZip = New System.Windows.Forms.ComboBox()
+        Me.Button21 = New System.Windows.Forms.Button()
+        Me.Button22 = New System.Windows.Forms.Button()
+        Me.Button23 = New System.Windows.Forms.Button()
+        Me.txtToTwoChar = New System.Windows.Forms.TextBox()
+        Me.txtFromTwoChar = New System.Windows.Forms.TextBox()
+        Me.tbTesting.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.TabPage6.SuspendLayout()
+        Me.TabPage7.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TabControl1
+        'tbTesting
         '
-        Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Controls.Add(Me.TabPage5)
-        Me.TabControl1.Controls.Add(Me.TabPage6)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 12)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(992, 543)
-        Me.TabControl1.TabIndex = 0
+        Me.tbTesting.Controls.Add(Me.TabPage4)
+        Me.tbTesting.Controls.Add(Me.TabPage1)
+        Me.tbTesting.Controls.Add(Me.TabPage2)
+        Me.tbTesting.Controls.Add(Me.TabPage3)
+        Me.tbTesting.Controls.Add(Me.TabPage5)
+        Me.tbTesting.Controls.Add(Me.TabPage6)
+        Me.tbTesting.Controls.Add(Me.TabPage7)
+        Me.tbTesting.Location = New System.Drawing.Point(12, 12)
+        Me.tbTesting.Name = "tbTesting"
+        Me.tbTesting.SelectedIndex = 0
+        Me.tbTesting.Size = New System.Drawing.Size(992, 543)
+        Me.tbTesting.TabIndex = 0
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.Button16)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Size = New System.Drawing.Size(984, 517)
@@ -526,6 +546,24 @@ Partial Class frmTesting
         Me.TabPage6.Text = "Bulk Template Mail"
         Me.TabPage6.UseVisualStyleBackColor = True
         '
+        'Button15
+        '
+        Me.Button15.Location = New System.Drawing.Point(351, 474)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(157, 23)
+        Me.Button15.TabIndex = 15
+        Me.Button15.Text = "Send FIRST One ONLY"
+        Me.Button15.UseVisualStyleBackColor = True
+        '
+        'Button14
+        '
+        Me.Button14.Location = New System.Drawing.Point(669, 474)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(236, 23)
+        Me.Button14.TabIndex = 14
+        Me.Button14.Text = "Send These 25 Leads [ TEST ACCOUNT ]"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
         'Button13
         '
         Me.Button13.Location = New System.Drawing.Point(191, 76)
@@ -645,37 +683,167 @@ Partial Class frmTesting
         Me.colName.Text = "Name"
         Me.colName.Width = 93
         '
-        'Button14
+        'Button16
         '
-        Me.Button14.Location = New System.Drawing.Point(669, 474)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(236, 23)
-        Me.Button14.TabIndex = 14
-        Me.Button14.Text = "Send These 25 Leads [ TEST ACCOUNT ]"
-        Me.Button14.UseVisualStyleBackColor = True
+        Me.Button16.Location = New System.Drawing.Point(12, 23)
+        Me.Button16.Name = "Button16"
+        Me.Button16.Size = New System.Drawing.Size(262, 23)
+        Me.Button16.TabIndex = 0
+        Me.Button16.Text = "Get Zip / Email Domains [ IMPORT ]"
+        Me.Button16.UseVisualStyleBackColor = True
         '
-        'Button15
+        'TabPage7
         '
-        Me.Button15.Location = New System.Drawing.Point(351, 474)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(157, 23)
-        Me.Button15.TabIndex = 15
-        Me.Button15.Text = "Send FIRST One ONLY"
-        Me.Button15.UseVisualStyleBackColor = True
+        Me.TabPage7.Controls.Add(Me.txtFromTwoChar)
+        Me.TabPage7.Controls.Add(Me.txtToTwoChar)
+        Me.TabPage7.Controls.Add(Me.Button23)
+        Me.TabPage7.Controls.Add(Me.Button22)
+        Me.TabPage7.Controls.Add(Me.cboCityStateZip)
+        Me.TabPage7.Controls.Add(Me.Button21)
+        Me.TabPage7.Controls.Add(Me.cboDomains)
+        Me.TabPage7.Controls.Add(Me.Button20)
+        Me.TabPage7.Controls.Add(Me.txtStripSpecials)
+        Me.TabPage7.Controls.Add(Me.Button19)
+        Me.TabPage7.Controls.Add(Me.txtValidText)
+        Me.TabPage7.Controls.Add(Me.Button18)
+        Me.TabPage7.Controls.Add(Me.txtCaptText)
+        Me.TabPage7.Controls.Add(Me.Button17)
+        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage7.Name = "TabPage7"
+        Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage7.Size = New System.Drawing.Size(984, 517)
+        Me.TabPage7.TabIndex = 6
+        Me.TabPage7.Text = "Formatting / Validation"
+        Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'Button17
+        '
+        Me.Button17.Location = New System.Drawing.Point(18, 19)
+        Me.Button17.Name = "Button17"
+        Me.Button17.Size = New System.Drawing.Size(152, 23)
+        Me.Button17.TabIndex = 0
+        Me.Button17.Text = "Capt Text / Format Names"
+        Me.Button17.UseVisualStyleBackColor = True
+        '
+        'txtCaptText
+        '
+        Me.txtCaptText.Location = New System.Drawing.Point(190, 22)
+        Me.txtCaptText.Name = "txtCaptText"
+        Me.txtCaptText.Size = New System.Drawing.Size(208, 20)
+        Me.txtCaptText.TabIndex = 1
+        '
+        'txtValidText
+        '
+        Me.txtValidText.Location = New System.Drawing.Point(190, 59)
+        Me.txtValidText.Name = "txtValidText"
+        Me.txtValidText.Size = New System.Drawing.Size(208, 20)
+        Me.txtValidText.TabIndex = 3
+        '
+        'Button18
+        '
+        Me.Button18.Location = New System.Drawing.Point(18, 56)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(152, 23)
+        Me.Button18.TabIndex = 2
+        Me.Button18.Text = "IsTextValid ( )"
+        Me.Button18.UseVisualStyleBackColor = True
+        '
+        'txtStripSpecials
+        '
+        Me.txtStripSpecials.Location = New System.Drawing.Point(190, 92)
+        Me.txtStripSpecials.Name = "txtStripSpecials"
+        Me.txtStripSpecials.Size = New System.Drawing.Size(208, 20)
+        Me.txtStripSpecials.TabIndex = 5
+        '
+        'Button19
+        '
+        Me.Button19.Location = New System.Drawing.Point(18, 89)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(152, 23)
+        Me.Button19.TabIndex = 4
+        Me.Button19.Text = "StripSpecials( )"
+        Me.Button19.UseVisualStyleBackColor = True
+        '
+        'Button20
+        '
+        Me.Button20.Location = New System.Drawing.Point(18, 131)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(152, 23)
+        Me.Button20.TabIndex = 6
+        Me.Button20.Text = "Get Valid Email Domains"
+        Me.Button20.UseVisualStyleBackColor = True
+        '
+        'cboDomains
+        '
+        Me.cboDomains.FormattingEnabled = True
+        Me.cboDomains.Location = New System.Drawing.Point(190, 131)
+        Me.cboDomains.Name = "cboDomains"
+        Me.cboDomains.Size = New System.Drawing.Size(208, 21)
+        Me.cboDomains.TabIndex = 7
+        '
+        'cboCityStateZip
+        '
+        Me.cboCityStateZip.FormattingEnabled = True
+        Me.cboCityStateZip.Location = New System.Drawing.Point(190, 172)
+        Me.cboCityStateZip.Name = "cboCityStateZip"
+        Me.cboCityStateZip.Size = New System.Drawing.Size(352, 21)
+        Me.cboCityStateZip.TabIndex = 9
+        '
+        'Button21
+        '
+        Me.Button21.Location = New System.Drawing.Point(18, 172)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(152, 23)
+        Me.Button21.TabIndex = 8
+        Me.Button21.Text = "Get US City State Zip"
+        Me.Button21.UseVisualStyleBackColor = True
+        '
+        'Button22
+        '
+        Me.Button22.Location = New System.Drawing.Point(18, 215)
+        Me.Button22.Name = "Button22"
+        Me.Button22.Size = New System.Drawing.Size(152, 23)
+        Me.Button22.TabIndex = 10
+        Me.Button22.Text = "Convert State => Two Char"
+        Me.Button22.UseVisualStyleBackColor = True
+        '
+        'Button23
+        '
+        Me.Button23.Location = New System.Drawing.Point(18, 254)
+        Me.Button23.Name = "Button23"
+        Me.Button23.Size = New System.Drawing.Size(152, 23)
+        Me.Button23.TabIndex = 11
+        Me.Button23.Text = "Convert State <= Two Char"
+        Me.Button23.UseVisualStyleBackColor = True
+        '
+        'txtToTwoChar
+        '
+        Me.txtToTwoChar.Location = New System.Drawing.Point(190, 217)
+        Me.txtToTwoChar.Name = "txtToTwoChar"
+        Me.txtToTwoChar.Size = New System.Drawing.Size(208, 20)
+        Me.txtToTwoChar.TabIndex = 12
+        '
+        'txtFromTwoChar
+        '
+        Me.txtFromTwoChar.Location = New System.Drawing.Point(190, 254)
+        Me.txtFromTwoChar.Name = "txtFromTwoChar"
+        Me.txtFromTwoChar.Size = New System.Drawing.Size(208, 20)
+        Me.txtFromTwoChar.TabIndex = 13
         '
         'frmTesting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1016, 567)
-        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.tbTesting)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmTesting"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Admin Testing Form"
-        Me.TabControl1.ResumeLayout(False)
+        Me.tbTesting.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
@@ -686,10 +854,12 @@ Partial Class frmTesting
         Me.TabPage5.PerformLayout()
         Me.TabPage6.ResumeLayout(False)
         Me.TabPage6.PerformLayout()
+        Me.TabPage7.ResumeLayout(False)
+        Me.TabPage7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents tbTesting As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents cboIPV4s As System.Windows.Forms.ComboBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
@@ -749,4 +919,20 @@ Partial Class frmTesting
     Friend WithEvents Button13 As System.Windows.Forms.Button
     Friend WithEvents Button14 As System.Windows.Forms.Button
     Friend WithEvents Button15 As System.Windows.Forms.Button
+    Friend WithEvents Button16 As System.Windows.Forms.Button
+    Friend WithEvents TabPage7 As System.Windows.Forms.TabPage
+    Friend WithEvents Button17 As System.Windows.Forms.Button
+    Friend WithEvents txtCaptText As System.Windows.Forms.TextBox
+    Friend WithEvents txtValidText As System.Windows.Forms.TextBox
+    Friend WithEvents Button18 As System.Windows.Forms.Button
+    Friend WithEvents txtStripSpecials As System.Windows.Forms.TextBox
+    Friend WithEvents Button19 As System.Windows.Forms.Button
+    Friend WithEvents cboDomains As System.Windows.Forms.ComboBox
+    Friend WithEvents Button20 As System.Windows.Forms.Button
+    Friend WithEvents cboCityStateZip As System.Windows.Forms.ComboBox
+    Friend WithEvents Button21 As System.Windows.Forms.Button
+    Friend WithEvents Button22 As System.Windows.Forms.Button
+    Friend WithEvents Button23 As System.Windows.Forms.Button
+    Friend WithEvents txtFromTwoChar As System.Windows.Forms.TextBox
+    Friend WithEvents txtToTwoChar As System.Windows.Forms.TextBox
 End Class
