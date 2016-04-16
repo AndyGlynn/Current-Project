@@ -326,6 +326,7 @@
     <Compile Include="generateCSVForDataMap.vb" />
     <Compile Include="generateDataSets.vb" />
     <Compile Include="generateLists.vb" />
+    <Compile Include="GlobalUtilClass.vb" />
     <Compile Include="imgLSTS.vb" />
     <Compile Include="ColdCalling.Designer.vb">
       <DependentUpon>ColdCalling.vb</DependentUpon>
