@@ -4,7 +4,6 @@ Imports System.Data.Sql
 Imports System.Data.SqlClient
 Imports System
 Public Class Confirming
-#Region "Vars"
     Friend WithEvents Confirm As New ToolStripDropDownButton '
     Friend WithEvents EditCustomer As New ToolStripButton '
     Friend WithEvents ChangeStatus As New ToolStripDropDownButton '
@@ -59,6 +58,8 @@ Public Class Confirming
     Friend WithEvents CreateNewTemplatec As New ToolStripMenuItem
     Friend WithEvents EnterLead As New ToolStripMenuItem '' TEMPORARY DEBUG REMOVE LATER
     Friend WithEvents LastID As String
+    Friend WithEvents btnSetAppt As New ToolStripMenuItem
+    Friend WithEvents btnAppt As New ToolStripMenuItem
     Public LastIDS As String
 
     Public Tab As String
@@ -68,8 +69,6 @@ Public Class Confirming
     Public cntCandC As Integer = 0
     Public OrigRep1 As String
     Public OrigRep2 As String
-
-#End Region
 
     Private Sub Confirming_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         STATIC_VARIABLES.CurrentID = ""
@@ -172,7 +171,7 @@ Public Class Confirming
 
 
             Me.SaveChanges.Text = "Save Changes"
-            Me.SaveChanges.Font = (New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
+            Me.SaveChanges.Font = (New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
             Me.SaveChanges.Enabled = False
 
             Me.Rep2.DropDownStyle = ComboBoxStyle.DropDownList
@@ -189,8 +188,16 @@ Public Class Confirming
             Me.SendNotes.Text = "Attach Notes for the" & vbCr & "Issuing Sales Manager"
             Me.SendNotes.Image = x(7)
             ' Reschedule
-            Me.Reschedule.Text = "Reschedule Appt. For Another Day and Time"
-            Me.Reschedule.Image = x(8)
+            Me.Reschedule.Text = "Move Appointment"
+            Me.Reschedule.Image = x(15)
+            '   Set Appt
+            Me.btnSetAppt.Text = "Set Appointment"
+            Me.btnSetAppt.Image = x(8)
+            '  Appt
+            Me.btnAppt.Text = "Appointment"
+            Me.btnAppt.Image = x(8)
+            Me.btnAppt.DropDownItems.Add(Me.btnSetAppt)
+            Me.btnAppt.DropDownItems.Add(Me.Reschedule)
             ' Kill
             Me.btnKill.Text = "Kill This Appointment"
             Me.btnKill.Image = x(9)
@@ -226,7 +233,7 @@ Public Class Confirming
             Me.EmailTemplateu.Text = "Choose Email Template"
             Me.CreateNewTemplateu.Text = "Create New Template"
             Me.CreateNewTemplatec.Text = "Create New Template"
-            Me.EmailBlastSend.Text = "Send Blast Mail To Sales Rep"
+            Me.EmailBlastSend.Text = "Email Lead to Sales Rep"
             '   Email Setup Unconfirmed
             Dim emu
             emu = Me.Emailu.DropDownItems
@@ -265,7 +272,7 @@ Public Class Confirming
             Me.TemplateListc.FlatStyle = FlatStyle.System
 
             'Date Label
-            Me.TBLabel.Font = (New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
+            Me.TBLabel.Font = (New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte)))
             Me.TBLabel.Margin = New Padding(0, 1, 115, 2)
             TBLabel.Alignment = ToolStripItemAlignment.Right
 
@@ -455,7 +462,7 @@ Public Class Confirming
                 Me.tsConfirming.Items.Add(Me.ChangeStatus)
                 Dim cs
                 cs = Me.ChangeStatus.DropDownItems
-                cs.Add(Me.Reschedule)
+                cs.Add(Me.btnAppt)
                 cs.add(Me.btnKill)
                 cs.add(Me.Seperator)
                 cs.add(Me.DoNotCall)
@@ -498,11 +505,13 @@ Public Class Confirming
                 Me.tsConfirming.Items.Add(Me.Confirm)
 
                 If Me.txtContact2.Text = " " Then
+                    Dim s = Split(Me.txtContact1.Text, " ")
+                    Dim c1 = s(0)
                     Me.Confirmwith.DropDownItems.Clear()
                     Me.Confirm.DropDownItems.Add(Me.Confirmwith)
                     Me.Confirm.DropDownItems.Add(Me.ConfirmSeparator)
                     Me.Confirm.DropDownItems.Add(Me.SendNotes)
-                    Me.ConfirmwithContact1.Text = Me.txtContact1.Text
+                    Me.ConfirmwithContact1.Text = c1
                     Me.Confirmwith.DropDownItems.Add(Me.ConfirmwithContact1)
                     Me.Confirmwithther.Text = "Other..."
 
@@ -534,7 +543,7 @@ Public Class Confirming
                 Me.tsConfirming.Items.Add(Me.ChangeStatus)
                 Dim cs
                 cs = Me.ChangeStatus.DropDownItems
-                cs.Add(Me.Reschedule)
+                cs.Add(Me.btnAppt)
                 cs.add(Me.btnKill)
                 cs.add(Me.Seperator)
                 cs.add(Me.DoNotCall)
@@ -731,8 +740,7 @@ Public Class Confirming
             If Me.TabControl1.SelectedIndex = 0 Then
                 If Me.lvConfirming.SelectedItems.Count <> 0 Then
                     RescheduleAppt.ID = Me.lvConfirming.SelectedItems(0).Text
-                    RescheduleAppt.frm = "Confirming"
-                    RescheduleAppt.ShowInTaskbar = False
+                    RescheduleAppt.frm = Me
                     RescheduleAppt.ShowDialog()
                 Else
                     MsgBox("You must select a record to reschedule Appt. Date!", MsgBoxStyle.Exclamation, "No Record Selected")
@@ -740,11 +748,10 @@ Public Class Confirming
             ElseIf Me.TabControl1.SelectedIndex = 1 Then
                 If Me.lvSales.SelectedItems.Count <> 0 Then
                     RescheduleAppt.ID = Me.lvSales.SelectedItems(0).Text
-                    RescheduleAppt.frm = "Confirming"
-                    RescheduleAppt.ShowInTaskbar = False
+                    RescheduleAppt.frm = Me
                     RescheduleAppt.ShowDialog()
                 Else
-                    MsgBox("You must select a record to Send Notes!", MsgBoxStyle.Exclamation, "No Record Selected")
+                    MsgBox("You must select a record to reschedule Appt. Date!", MsgBoxStyle.Exclamation, "No Record Selected")
                 End If
             End If
         Catch ex As Exception
@@ -762,6 +769,7 @@ Public Class Confirming
                 Exit Sub
             End If
             If Me.SalesResult.Text = "Enter Sales Result and Reschedule Appt." Then
+                Reissue.frm = Me
                 Reissue.ShowInTaskbar = False
                 Reissue.ShowDialog()
             Else
@@ -920,12 +928,12 @@ Public Class Confirming
             If Tab = "Confirm" Then
                 If Me.lvConfirming.SelectedItems.Count <> 0 Then
                     Dim c As New CustomerHistory
-                    c.SetUp(Me, Me.lvConfirming.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                    c.SetUp(Me.TScboCustomerHistory)
                 End If
             ElseIf Tab = "Dispatch" Then
                 If Me.lvSales.SelectedItems.Count <> 0 Then
                     Dim c As New CustomerHistory
-                    c.SetUp(Me, Me.lvSales.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                    c.SetUp(Me.TScboCustomerHistory)
                 Else
                     'Me.lvSales.Items(LastIDS).Selected = True
                 End If
@@ -959,7 +967,7 @@ Public Class Confirming
                 'End If
             ElseIf Me.txtApptDate.Text <> Me.dpConfirming.Value.ToShortDateString Then
                 c.Populate(Tab, Me.cboConfirmingPLS.Text, Me.cboConfirmingSLS.Text, Me.dpConfirming.Value.ToString, "Refresh")
-                c2.SetUp(Me, Me.lvConfirming.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                c2.SetUp(Me.TScboCustomerHistory)
             End If
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -979,7 +987,6 @@ Public Class Confirming
                 MsgBox("Appointment Date Must be for Today or Future!", MsgBoxStyle.Exclamation, "Cannot Confirm Appt.")
                 Exit Sub
             End If
-
 
             Me.Confirmwith.Select()
             Me.Confirmwith.ShowDropDown()
@@ -1015,7 +1022,7 @@ Public Class Confirming
                 'End If
             ElseIf Me.txtApptDate.Text <> Me.dpConfirming.Value.ToShortDateString Then
                 c.Populate(Tab, Me.cboConfirmingPLS.Text, Me.cboConfirmingSLS.Text, Me.dpConfirming.Value.ToString, "Refresh")
-                c2.SetUp(Me, Me.lvConfirming.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                c2.SetUp(Me.TScboCustomerHistory)
             End If
 
         Catch ex As Exception
@@ -1047,7 +1054,7 @@ Public Class Confirming
                 'End If
             ElseIf Me.txtApptDate.Text <> Me.dpConfirming.Value.ToShortDateString Then
                 c.Populate(Tab, Me.cboConfirmingPLS.Text, Me.cboConfirmingSLS.Text, Me.dpConfirming.Value.ToString, "Refresh")
-                c2.SetUp(Me, Me.lvConfirming.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                c2.SetUp(Me.TScboCustomerHistory)
             End If
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -1059,15 +1066,16 @@ Public Class Confirming
 
     Private Sub Confirmwithther_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Confirmwithther.Click
         Try
-            Dim i As String = InputBox$("Please Enter The Name of the Person" & vbCr & "You Confirmed This Appt. With.", "Enter ""Other"" Contact")
-            If i = "" Then
-                MsgBox("You must enter a Name!", MsgBoxStyle.Exclamation, "Name Required!")
-                Exit Sub
-            End If
+    
             Dim c As New ConfirmingData
             Dim c2 As New CustomerHistory
             If Me.dpConfirming.Value < Today Then
                 MsgBox("Appointment Date Must be for Today or Future!", MsgBoxStyle.Exclamation, "Cannot Confirm Appt.")
+                Exit Sub
+            End If
+            Dim i As String = InputBox$("Please Enter The Name of the Person" & vbCr & "You Confirmed This Appt. With.", "Enter ""Other"" Contact")
+            If i = "" Then
+                MsgBox("You must enter a Name!", MsgBoxStyle.Exclamation, "Name Required!")
                 Exit Sub
             End If
             c.Confirm(Me.lvConfirming.SelectedItems(0).Text, "Confirm Appointment", i, STATIC_VARIABLES.CurrentUser)
@@ -1079,7 +1087,7 @@ Public Class Confirming
                 'End If
             ElseIf Me.txtApptDate.Text <> Me.dpConfirming.Value.ToShortDateString Then
                 c.Populate(Tab, Me.cboConfirmingPLS.Text, Me.cboConfirmingSLS.Text, Me.dpConfirming.Value.ToString, "Refresh")
-                c2.SetUp(Me, Me.lvConfirming.SelectedItems(0).Text, Me.TScboCustomerHistory)
+                c2.SetUp(Me.TScboCustomerHistory)
             End If
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -1096,9 +1104,8 @@ Public Class Confirming
             Else
                 Kill.Contact1 = Me.txtContact1.Text
                 Kill.Contact2 = Me.txtContact2.Text
-                Kill.frm = "Confirming"
+                Kill.frm = Me
                 Kill.ID = Me.lvConfirming.SelectedItems(0).Text
-                Kill.ShowInTaskbar = False
                 Kill.ShowDialog()
 
             End If
@@ -1308,6 +1315,7 @@ Public Class Confirming
             MsgBox("You must select a record to change Appt. Time!", MsgBoxStyle.Exclamation, "No Record Selected")
             Exit Sub
         End If
+        CNGApptTime.Frm = Me
         CNGApptTime.ShowInTaskbar = False
         CNGApptTime.ShowDialog()
     End Sub
@@ -1369,7 +1377,7 @@ Public Class Confirming
                 Exit Sub
             End If
             Dim c As New CustomerHistory
-            c.SetUp(Me, Me.lvConfirming.SelectedItems(0).Text, Me.TScboCustomerHistory)
+            c.SetUp(Me.TScboCustomerHistory)
             Me.Refresh()
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -1718,24 +1726,32 @@ Public Class Confirming
     End Sub
 
     Private Sub EmailCustomu_Click(sender As Object, e As EventArgs) Handles EmailCustomu.Click
-        Dim emailAddress As String = Me.lnkEmail.Text
+        Dim lnk As LinkLabel = Me.lnkEmail
+        Dim emailAddress As String = lnk.Text
         If Len(emailAddress) <= 0 Then
-            MsgBox("This customer doesn't have a valid email address to mail to.", MsgBoxStyle.Critical, "No Valid Email Address.")
+            MsgBox("This customer doesn't have an email address to send mail to.", MsgBoxStyle.Exclamation, "No Email Address For Customer")
             Exit Sub
-        ElseIf Len(emailAddress) >= 1 Then
-            frmEmailTemplateChoice.Show()
-            frmEmailTemplateChoice.BringToFront()
         End If
+
+        frmLinkSendEmail.MdiParent = Main
+        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
+        frmLinkSendEmail.Cust_Email = lnk.Text
+        frmLinkSendEmail.Show()
+        frmLinkSendEmail.BringToFront()
     End Sub
     Private Sub EmailCustomc_Click(sender As Object, e As EventArgs) Handles EmailCustomc.Click
-        Dim emailAddress As String = Me.lnkEmail.Text
+        Dim lnk As LinkLabel = Me.lnkEmail
+        Dim emailAddress As String = lnk.Text
         If Len(emailAddress) <= 0 Then
-            MsgBox("This customer doesn't have a valid email address to mail to.", MsgBoxStyle.Critical, "No Valid Email Address.")
+            MsgBox("This customer doesn't have an email address to send mail to.", MsgBoxStyle.Exclamation, "No Email Address For Customer")
             Exit Sub
-        ElseIf Len(emailAddress) >= 1 Then
-            frmEmailTemplateChoice.Show()
-            frmEmailTemplateChoice.BringToFront()
         End If
+
+        frmLinkSendEmail.MdiParent = Main
+        frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
+        frmLinkSendEmail.Cust_Email = lnk.Text
+        frmLinkSendEmail.Show()
+        frmLinkSendEmail.BringToFront()
     End Sub
 
     Private Sub CreateNewTemplateu_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CreateNewTemplateu.Click
@@ -1752,16 +1768,95 @@ Public Class Confirming
 
 
     Private Sub EmailBlastSend_Click(sender As Object, e As EventArgs) Handles EmailBlastSend.Click
-        frmBlastMail.MdiParent = Main
-        frmBlastMail.RecID = STATIC_VARIABLES.CurrentID
-        frmBlastMail.Show()
-        frmBlastMail.BringToFront()
+        Try
+            Dim rep1 As String = ""
+            Dim rep2 As String = ""
+            If Me.Rep1.Text <> Nothing Then
+                rep1 = Me.Rep1.Text
+            End If
+            If Me.Rep2.Text <> Nothing Then
+                rep2 = Me.Rep2.Text
+            End If
+
+            If rep1 = "" And Rep2 = "" Then
+                MsgBox("You must assign this Appointment to Email!", MsgBoxStyle.Exclamation, "No Sales Rep Assigned")
+                Exit Sub
+            End If
+            If rep1 <> "" Then
+                EmailSingleRecord(rep1)
+            End If
+            If Rep2 <> "" Then
+                EmailSingleRecord(Rep2)
+            End If
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, Me.Name, "FormCode", "Event", System.Reflection.MethodBase.GetCurrentMethod().Name, STATIC_VARIABLES.CurrentID, ex.Message.ToString)
+            y = Nothing
+        End Try
+    End Sub
+    Private Sub EmailSingleRecord(Rep As String)
+        Try
+            Dim z As New EmailIssuedLeads
+            Dim emlBody As String = ""
+
+            Dim y As Panel
+            Dim leadNum As String = STATIC_VARIABLES.CurrentID
+            Dim strRep() = Split(Rep, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            Dim fname As String = strRep(0)
+            Dim lname As String = strRep(1)
+            Dim canGetEmail As Boolean = z.CanRepGetEmail(fname, lname)
+            If canGetEmail = False Then
+                MsgBox(fname & " " & lname & " cannot recieve Email.", MsgBoxStyle.Exclamation, "Can't Recieve Email")
+                Exit Sub
+            End If
+            Dim emailAddy As String = z.GetRepEmailAddress(fname, lname)
+            Dim exclusionSet As EmailIssuedLeads.Exclusions = z.GetExclusions()
+            STATIC_VARIABLES.CurrentExclusionSet = exclusionSet
+            'MsgBox(fname & " | " & lname & vbCrLf & "Email ? : " & canGetEmail & vbCrLf & "Email Address: " & emailAddy & vbCrLf & "Lead Num: " & leadNum & vbCrLf & vbCrLf & "Exclusions :>" & vbCrLf & "Generated: " & exclusionSet.Generated & vbCrLf & "Marketer: " & exclusionSet.Marketer & vbCrLf & "PLS: " & exclusionSet.PLS & " | SLS: " & exclusionSet.SLS & vbCrLf & "LastMResult:" & exclusionSet.LastMResult & vbCrLf & "Phone: " & exclusionSet.Phone, MsgBoxStyle.Information, "Debug Info:")
+            '' check here to make sure not called an cancelled
+            '' 8-26-2014
+            If z.IsCalledAndCancelled(leadNum, Me.txtApptDate.Text) = False Then
+                MsgBox("This lead was called and cancelled." & vbCrLf & "Please check your marketing results and try again.", MsgBoxStyle.Exclamation, "Lead Called and Cancelled")
+                Exit Sub
+            End If
+            emlBody = z.ConstructMessageWithExclusions(fname, lname, leadNum, exclusionSet, emailAddy)
+            'MsgBox(emlBody)
+            '' uncomment here to actually send
+            z.EMAIL_SINGLE_MarkupEmail_WITH_EXCLUSIONS(fname, lname, leadNum, exclusionSet, emailAddy, emlBody, "Record ID: " & leadNum.ToString)
+
+            'MsgBox("Successfully emailed Appointment Information to " & Rep & ".", MsgBoxStyle.Exclamation, "Email Sent")
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, Me.Name, "FormCode", "Sub", "EmailSingleRecord()", "0", ex.Message.ToString)
+            y = Nothing
+            MsgBox("Something went wrong emailing Appointment Information to " & Rep & ".", MsgBoxStyle.Critical, "Email Error")
+        End Try
+
+
+    End Sub
+    Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
+        frmEditSpecialInstructions.frm = Me
+        frmEditSpecialInstructions.ShowDialog()
     End Sub
 
-    Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
-        frmEditSpecialInstructions.RecID = STATIC_VARIABLES.CurrentID
-        frmEditSpecialInstructions.CallingForm = "Confirming"
-        frmEditSpecialInstructions.Show()
+
+    Private Sub EmailConfirmation1_Click(sender As Object, e As EventArgs) Handles EmailConfirmation1.Click
+        ''Email Individual Customer using default Confirmation template
+    End Sub
+
+    Private Sub EmailConfirmationAll_Click(sender As Object, e As EventArgs) Handles EmailConfirmationAll.Click
+        ''Email All Customers (with valid emails) using default Confirmation template
+    End Sub
+
+    Private Sub btnSetAppt_Click(sender As Object, e As EventArgs) Handles btnSetAppt.Click
+        SetAppt_V2.frm = Me
+        SetAppt_V2.Show()
     End Sub
 End Class
 

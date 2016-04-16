@@ -97,6 +97,7 @@ Partial Class EditCustomerInfo
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.ep = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.btnMoveAppt = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -729,6 +730,7 @@ Partial Class EditCustomerInfo
         '
         'TabPage5
         '
+        Me.TabPage5.Controls.Add(Me.btnMoveAppt)
         Me.TabPage5.Controls.Add(Me.Label5)
         Me.TabPage5.Controls.Add(Me.btnSetAppt2)
         Me.TabPage5.Controls.Add(Me.txtApptTime)
@@ -748,23 +750,23 @@ Partial Class EditCustomerInfo
         '
         Me.Label5.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Gray
-        Me.Label5.Location = New System.Drawing.Point(132, 213)
+        Me.Label5.Location = New System.Drawing.Point(164, 227)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(304, 51)
+        Me.Label5.Size = New System.Drawing.Size(303, 55)
         Me.Label5.TabIndex = 31
-        Me.Label5.Text = "Appt. Info is Read Only, To Set New Appt. for this customer Use Set Appt. Button " & _
-    "Provided"
+        Me.Label5.Text = "Appt. Info is Read Only, To Set New Appt. Use Set Appt. Button Provided, To Move " & _
+    "Appt. Use Move Appt. Button Provided"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btnSetAppt2
         '
         Me.btnSetAppt2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSetAppt2.Image = CType(resources.GetObject("btnSetAppt2.Image"), System.Drawing.Image)
-        Me.btnSetAppt2.Location = New System.Drawing.Point(36, 213)
+        Me.btnSetAppt2.Location = New System.Drawing.Point(19, 235)
         Me.btnSetAppt2.Name = "btnSetAppt2"
-        Me.btnSetAppt2.Size = New System.Drawing.Size(71, 48)
+        Me.btnSetAppt2.Size = New System.Drawing.Size(52, 39)
         Me.btnSetAppt2.TabIndex = 30
-        Me.ToolTip1.SetToolTip(Me.btnSetAppt2, "Click Here to Verify Address")
+        Me.ToolTip1.SetToolTip(Me.btnSetAppt2, "Set Appointment")
         Me.btnSetAppt2.UseVisualStyleBackColor = True
         '
         'txtApptTime
@@ -975,6 +977,17 @@ Partial Class EditCustomerInfo
         Me.ep.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.ep.ContainerControl = Me
         '
+        'btnMoveAppt
+        '
+        Me.btnMoveAppt.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveAppt.Image = Global.Latest.My.Resources.Resources.arrow_right_big
+        Me.btnMoveAppt.Location = New System.Drawing.Point(77, 235)
+        Me.btnMoveAppt.Name = "btnMoveAppt"
+        Me.btnMoveAppt.Size = New System.Drawing.Size(52, 39)
+        Me.btnMoveAppt.TabIndex = 32
+        Me.ToolTip1.SetToolTip(Me.btnMoveAppt, "Move Appointment")
+        Me.btnMoveAppt.UseVisualStyleBackColor = True
+        '
         'EditCustomerInfo
         '
         Me.AcceptButton = Me.btnUpdate
@@ -1086,5 +1099,6 @@ Partial Class EditCustomerInfo
     Friend WithEvents btnSetAppt2 As System.Windows.Forms.Button
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents btnMoveAppt As System.Windows.Forms.Button
 
 End Class

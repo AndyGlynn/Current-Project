@@ -16,8 +16,13 @@ Public Class CustomerHistory
     Private cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.CnnCustomerHistory)
  
 
-    Public Sub SetUp(ByVal frm As Form, ByVal ID As Integer, ByVal TScboCustomerHistory As ToolStripComboBox)
+    Public Sub SetUp(ByVal TScboCustomerHistory As ToolStripComboBox)
         Try
+            Dim ID As String = STATIC_VARIABLES.CurrentID
+            Dim frm As Form
+            Dim q As Control
+            q = TScboCustomerHistory.GetCurrentParent
+            frm = q.FindForm
             Department = TScboCustomerHistory.Text
 
 
@@ -389,7 +394,7 @@ Public Class CustomerHistory
         Catch ex As Exception
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CustomerHistory", "CustomerHistory", "Sub", "SetUp(frm,ID,tscboCustomerHistory)", ID, ex.Message.ToString)
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "CustomerHistory", "CustomerHistory", "Sub", "SetUp(frm,ID,tscboCustomerHistory)", STATIC_VARIABLES.CurrentID, ex.Message.ToString)
             y = Nothing
         End Try
 

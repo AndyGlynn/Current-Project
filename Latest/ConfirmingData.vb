@@ -130,7 +130,7 @@ Public Class ConfirmingData
                     End While
                     r1.Close()
                     cnnC.Close()
-                    Confirming.lblConfirmingFiltered.Text = cntRecs.ToString
+
                     Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
                     Dim param4 As SqlParameter = New SqlParameter("@PLS", PLS)
                     Dim param5 As SqlParameter = New SqlParameter("@SLS", SLS)
@@ -600,11 +600,12 @@ Public Class ConfirmingData
 
         Dim c As New CustomerHistory
         If ID <> "" Then
-            c.SetUp(Confirming, ID, Confirming.TScboCustomerHistory)
+            c.SetUp(Confirming.TScboCustomerHistory)
         End If
 
     End Sub
     Public Sub Confirm(ByVal ID As String, ByVal cmd As String, ByVal spokewith As String, ByVal User As String)
+
         Try
             If cmd = "Confirm Appointment" Then
                 Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
@@ -623,7 +624,7 @@ Public Class ConfirmingData
                 cnn.Close()
 
                 Dim c As New CustomerHistory
-                c.SetUp(Confirming, ID, Confirming.TScboCustomerHistory)
+                c.SetUp(Confirming.TScboCustomerHistory)
             ElseIf cmd = "Undo Confirm Appointment" Then
 
                 Dim cmdIns As SqlCommand = New SqlCommand("dbo.ConfirmUndo", cnn)
@@ -637,7 +638,7 @@ Public Class ConfirmingData
                 cnn.Close()
 
                 Dim c As New CustomerHistory
-                c.SetUp(Confirming, ID, Confirming.TScboCustomerHistory)
+                c.SetUp(Confirming.TScboCustomerHistory)
             Else
                 Exit Sub
             End If
@@ -757,7 +758,7 @@ Public Class ConfirmingData
 
             Me.Populate("Dispatch", Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Refresh")
             Dim c As New CustomerHistory
-            c.SetUp(Confirming, ID, Confirming.TScboCustomerHistory)
+            c.SetUp(Confirming.TScboCustomerHistory)
         Catch ex As Exception
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2

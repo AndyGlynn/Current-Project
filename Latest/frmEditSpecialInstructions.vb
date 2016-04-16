@@ -3,12 +3,16 @@ Imports System.Data.Sql
 Imports System.Data.SqlClient
 
 Public Class frmEditSpecialInstructions
-    Public RecID As String = ""
-    Public CallingForm As String = ""
+    Public RecID As String = STATIC_VARIABLES.CurrentID
+    Public frm As Form
+
+    Private Sub frmEditSpecialInstructions_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        Me.Dispose()
+    End Sub
 
     Private Sub frmEditSpecialInstructions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.MdiParent = Main
-        Me.BringToFront()
+
+
         If RecID <> "" Then
             Try
                 Dim y As New GetSpecialInstructions(RecID)
@@ -32,6 +36,7 @@ Public Class frmEditSpecialInstructions
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Me.ResetForm()
         Me.Close()
+        Me.Dispose()
     End Sub
 
     Private Class GetSpecialInstructions
@@ -97,7 +102,7 @@ Public Class frmEditSpecialInstructions
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Me.rtfSpecialInstructions.Text.Length >= 1 Then
             Dim y As New UpdateSpecialInstructions(Me.RecID, Me.rtfSpecialInstructions.Text)
-            Select Case CallingForm
+            Select Case frm.Name
                 Case Is = "Sales"
                     Sales.rtbSpecialInstructions.Text = Me.rtfSpecialInstructions.Text
                     Exit Select
@@ -110,6 +115,8 @@ Public Class frmEditSpecialInstructions
                 Case Is = "MarketingManager"
                     MarketingManager.rtbSpecialInstructions.Text = Me.rtfSpecialInstructions.Text
                     Exit Select
+                Case Is = "ConfirmingSingleRecord"
+                    ConfirmingSingleRecord.rtbSpecialInstructions.Text = Me.rtfSpecialInstructions.Text
             End Select
             Me.ResetForm()
             Me.Close()

@@ -23,15 +23,13 @@ Partial Class Confirming
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UnConfirmed Appointments", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Confirmed Appointments", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Called & Cancelled", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UnConfirmed Appointments", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Confirmed Appointments", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Called & Cancelled", System.Windows.Forms.HorizontalAlignment.Left)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Confirming))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.lblConfirmingFiltered = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.btnExpandConfirming = New System.Windows.Forms.Button()
         Me.lblToChangeConfirming = New System.Windows.Forms.Label()
         Me.lblConfirmingSLS = New System.Windows.Forms.Label()
@@ -183,7 +181,7 @@ Partial Class Confirming
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabControl1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ImageList = Me.ilCustomerHistory
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -193,8 +191,6 @@ Partial Class Confirming
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.lblConfirmingFiltered)
-        Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Controls.Add(Me.btnExpandConfirming)
         Me.TabPage1.Controls.Add(Me.lblToChangeConfirming)
         Me.TabPage1.Controls.Add(Me.lblConfirmingSLS)
@@ -211,30 +207,10 @@ Partial Class Confirming
         Me.TabPage1.Text = "Confirming"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'lblConfirmingFiltered
-        '
-        Me.lblConfirmingFiltered.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.lblConfirmingFiltered.AutoSize = True
-        Me.lblConfirmingFiltered.Location = New System.Drawing.Point(109, 533)
-        Me.lblConfirmingFiltered.Name = "lblConfirmingFiltered"
-        Me.lblConfirmingFiltered.Size = New System.Drawing.Size(10, 13)
-        Me.lblConfirmingFiltered.TabIndex = 8
-        Me.lblConfirmingFiltered.Text = " "
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Label3.Location = New System.Drawing.Point(3, 533)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(59, 13)
-        Me.Label3.TabIndex = 7
-        Me.Label3.Text = "Records: "
-        '
         'btnExpandConfirming
         '
         Me.btnExpandConfirming.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnExpandConfirming.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExpandConfirming.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExpandConfirming.Location = New System.Drawing.Point(189, 7)
         Me.btnExpandConfirming.Name = "btnExpandConfirming"
         Me.btnExpandConfirming.Size = New System.Drawing.Size(25, 48)
@@ -310,20 +286,20 @@ Partial Class Confirming
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvConfirming.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LeadID, Me.ApptTime, Me.Contact1, Me.Contact2, Me.Address, Me.Products, Me.HousePhone})
-        Me.lvConfirming.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvConfirming.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvConfirming.FullRowSelect = True
-        ListViewGroup1.Header = "UnConfirmed Appointments"
-        ListViewGroup1.Name = "lgUnconfirmed"
-        ListViewGroup2.Header = "Confirmed Appointments"
-        ListViewGroup2.Name = "lgconfirmed"
-        ListViewGroup3.Header = "Called & Cancelled"
-        ListViewGroup3.Name = "lgC&C"
-        Me.lvConfirming.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3})
+        ListViewGroup4.Header = "UnConfirmed Appointments"
+        ListViewGroup4.Name = "lgUnconfirmed"
+        ListViewGroup5.Header = "Confirmed Appointments"
+        ListViewGroup5.Name = "lgconfirmed"
+        ListViewGroup6.Header = "Called & Cancelled"
+        ListViewGroup6.Name = "lgC&C"
+        Me.lvConfirming.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup4, ListViewGroup5, ListViewGroup6})
         Me.lvConfirming.HideSelection = False
         Me.lvConfirming.Location = New System.Drawing.Point(3, 61)
         Me.lvConfirming.MultiSelect = False
         Me.lvConfirming.Name = "lvConfirming"
-        Me.lvConfirming.Size = New System.Drawing.Size(211, 460)
+        Me.lvConfirming.Size = New System.Drawing.Size(211, 488)
         Me.lvConfirming.TabIndex = 0
         Me.lvConfirming.UseCompatibleStateImageBehavior = False
         Me.lvConfirming.View = System.Windows.Forms.View.Details
@@ -461,13 +437,13 @@ Partial Class Confirming
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvSales.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader6, Me.ColumnHeader8, Me.ColumnHeader9, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader2})
         Me.lvSales.Cursor = System.Windows.Forms.Cursors.Default
-        Me.lvSales.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvSales.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvSales.FullRowSelect = True
         Me.lvSales.HideSelection = False
         Me.lvSales.Location = New System.Drawing.Point(3, 61)
         Me.lvSales.MultiSelect = False
         Me.lvSales.Name = "lvSales"
-        Me.lvSales.Size = New System.Drawing.Size(211, 485)
+        Me.lvSales.Size = New System.Drawing.Size(211, 488)
         Me.lvSales.TabIndex = 1
         Me.lvSales.UseCompatibleStateImageBehavior = False
         Me.lvSales.View = System.Windows.Forms.View.Details
@@ -683,7 +659,7 @@ Partial Class Confirming
         Me.gbSpecialInstructions.Size = New System.Drawing.Size(310, 144)
         Me.gbSpecialInstructions.TabIndex = 185
         Me.gbSpecialInstructions.TabStop = False
-        Me.gbSpecialInstructions.Text = "Special Instructions: Open for Edit"
+        Me.gbSpecialInstructions.Text = "Special Instructions"
         '
         'btnEditSPI
         '
@@ -704,6 +680,7 @@ Partial Class Confirming
         Me.rtbSpecialInstructions.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(6, 22)
         Me.rtbSpecialInstructions.Name = "rtbSpecialInstructions"
+        Me.rtbSpecialInstructions.ReadOnly = True
         Me.rtbSpecialInstructions.Size = New System.Drawing.Size(298, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
         Me.rtbSpecialInstructions.Text = ""
@@ -1146,7 +1123,7 @@ Partial Class Confirming
         Me.lnkEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkEmail.AutoSize = True
         Me.lnkEmail.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lnkEmail.Location = New System.Drawing.Point(413, 144)
+        Me.lnkEmail.Location = New System.Drawing.Point(361, 144)
         Me.lnkEmail.Name = "lnkEmail"
         Me.lnkEmail.Size = New System.Drawing.Size(0, 16)
         Me.lnkEmail.TabIndex = 136
@@ -1371,6 +1348,7 @@ Partial Class Confirming
         Me.ilToolStripIcons.Images.SetKeyName(12, "donotmail.ico")
         Me.ilToolStripIcons.Images.SetKeyName(13, "Do not call!.ico")
         Me.ilToolStripIcons.Images.SetKeyName(14, "notes2.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(15, "arrow-right-big.ico")
         '
         'ttCustomerHistoryNotes
         '
@@ -1526,8 +1504,6 @@ Partial Class Confirming
     Friend WithEvents txtWorkHours As System.Windows.Forms.RichTextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents lblConfirmingFiltered As System.Windows.Forms.Label
     Friend WithEvents btnEditSPI As System.Windows.Forms.Button
 
 End Class

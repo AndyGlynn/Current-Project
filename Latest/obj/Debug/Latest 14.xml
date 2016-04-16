@@ -55,6 +55,10 @@ Latest14
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:Latest.My.Resources.Resources.delete2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:Latest.My.Resources.Resources.inetcpl_4480">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

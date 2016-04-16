@@ -40,7 +40,6 @@ C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.Ente
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.ErrorLogForm.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.exclusions.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.Finance.resources
-C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.FinancingDepartment.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.FindLead.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.Form1.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.EditAutoNotesLists.resources
@@ -84,7 +83,6 @@ C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.Mana
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.MarketerLeadSources.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.MarketingManager.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.MemorizeNotes.resources
-C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.openset.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.PastDueAlerts.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.PreviousCustomer.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.prntChoice.resources
@@ -101,7 +99,6 @@ C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.SetA
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.SetUpUser.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.SetUpUser1.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.SetUpUser2.resources
-C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.InstallationDepartment.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.Kill.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.LogPhoneCall.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.Main.resources
@@ -112,7 +109,6 @@ C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.Reis
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.RescheduleAppt.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.Sales.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.SendNotesSM.resources
-C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.SetAppt.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.SplashScreen1.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.WCaller.resources
 C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\Latest.WCallerSingleRecord.resources
@@ -249,3 +245,4 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.exe
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.xml
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.pdb
+C:\Users\Andy\My Programming Folder\Current-Project\Latest\obj\Debug\LeadManager.vbprojResolveAssemblyReference.cache

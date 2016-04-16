@@ -109,6 +109,7 @@ Public Class SetAppt
 
 
     Private Sub btnsave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnsave.Click
+        Me.Confirmed = Me.chkConfirm.Checked
         Try
             If Me.dtpApptDate.Value < Today And Me.txtDate.Visible = False Then
 
@@ -277,7 +278,7 @@ Public Class SetAppt
                 Case "Sales"
                 Case "ConfirmerSingleRecord"
                     Dim c As New CustomerHistory
-                    c.SetUp(frm, ID, ConfirmingSingleRecord.TScboCustomerHistory)
+                    c.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
                 Case "Administration"
                     ''comeback
                 Case "Finance"
@@ -360,7 +361,10 @@ Public Class SetAppt
 
     Private Sub SetAppt_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-
+            If frm.Name = "Sales" Then
+                Me.chkConfirm.Visible = True
+                Me.Size = New System.Drawing.Size(413, 296)
+            End If
             Me.ShowInTaskbar = False
             Me.AcceptButton = Me.btnsave
             Me.cboSpokeWith.Items.Clear()
@@ -442,4 +446,5 @@ Public Class SetAppt
     
 
    
+
 End Class

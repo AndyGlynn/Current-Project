@@ -3,9 +3,15 @@ Imports System.Data.Sql
 Imports System.Data.SqlClient
 Imports System
 Public Class CNGApptTime
-
+    Public Frm As Form
     Private Sub CNGApptTime_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.txtApptTime.Text = Confirming.txtApptTime.Text
+        If Frm.Name = "Confirming" Then
+            Me.txtApptTime.Text = Confirming.txtApptTime.Text
+        Else
+            Me.txtApptTime.Text = ConfirmingSingleRecord.txtApptTime.Text
+        End If
+
+
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
@@ -15,13 +21,19 @@ Public Class CNGApptTime
                 Exit Sub
             End If
             Dim Description As String = "At " & DateTime.Now.ToShortTimeString & " " & STATIC_VARIABLES.CurrentUser & " changed Appt. Time from " & Me.txtApptTime.Text & " to " & Me.dtpApptTime.Value.ToShortTimeString
+            Dim tm As String
+            If Frm.Name = "Confirming" Then
+                tm = Confirming.lvSales.SelectedItems(0).Text
+            Else
+                tm = ConfirmingSingleRecord.ID
+            End If
 
 
 
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
             Dim cmdChange As SqlCommand
             cmdChange = New SqlCommand("dbo.CNGApptTime", cnn)
-            Dim param1 As SqlParameter = New SqlParameter("@ID", Confirming.lvSales.SelectedItems(0).Text)
+            Dim param1 As SqlParameter = New SqlParameter("@ID", tm)
             Dim param2 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
             Dim param3 As SqlParameter = New SqlParameter("@Description", Description)
             Dim param4 As SqlParameter = New SqlParameter("@ApptTime", Me.dtpApptTime.Value)
@@ -36,10 +48,17 @@ Public Class CNGApptTime
             R1.Read()
             R1.Close()
             cnn.Close()
-            Dim c As New ConfirmingData
-            c.Populate("Dispatch", Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Refresh")
             Dim c2 As New CustomerHistory
-            c2.SetUp(Confirming, Confirming.lvSales.SelectedItems(0).Text, Confirming.TScboCustomerHistory)
+            If Frm.Name = "Confirming" Then
+                Dim c As New ConfirmingData
+                c.Populate("Dispatch", Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Refresh")
+
+                c2.SetUp(Confirming.TScboCustomerHistory)
+            Else
+                ConfirmingSingleRecord.txtApptTime.Text = Me.dtpApptTime.Value.ToShortTimeString
+                c2.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
+            End If
+     
             Me.Close()
             Me.Dispose()
         Catch ex As Exception

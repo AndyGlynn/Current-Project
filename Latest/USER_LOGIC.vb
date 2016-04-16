@@ -719,9 +719,9 @@ Public Class USER_LOGIC
             End If
 
             If STATIC_VARIABLES.MarketingManager = True Then
-                Main.tsbmarketing.Enabled = True
+                Main.tsbMarketingManager.Enabled = True
             ElseIf STATIC_VARIABLES.MarketingManager = False Then
-                Main.tsbmarketing.Enabled = False
+                Main.tsbMarketingManager.Enabled = False
             End If
 
             If STATIC_VARIABLES.SalesManager = True Then
@@ -734,6 +734,10 @@ Public Class USER_LOGIC
                 Main.ConfirmingToolStripMenuItem.Enabled = True
             ElseIf STATIC_VARIABLES.Confirmer = False Then
                 Main.ConfirmingToolStripMenuItem.Enabled = False
+            End If
+
+            If STATIC_VARIABLES.MarketingManager = False And STATIC_VARIABLES.Recovery = False And STATIC_VARIABLES.ColdCall = False And STATIC_VARIABLES.Confirmer = False And STATIC_VARIABLES.PreviousCust = False And STATIC_VARIABLES.WarmCall = False Then
+                Main.tsbmarketing.Enabled = False
             End If
         Catch ex As Exception
             Dim y As New ErrorLogging_V2

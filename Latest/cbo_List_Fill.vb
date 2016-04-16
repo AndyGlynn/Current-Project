@@ -37,8 +37,8 @@ Public Class cbo_List_Fill
     End Sub
     Private Sub Add_New_Setup()
         cbo.Items.Add("<Add New>")
-        Dim x As New SeperatorLength
-        Dim y = x.Sep_Line(cbo, cbo.Font)
+
+        Dim y = Sep_Line(cbo, cbo.Font)
         cbo.Items.Add(y)
     End Sub
     Private Sub Query()
@@ -119,10 +119,9 @@ Public Class cbo_List_Fill
         End Select
 
     End Sub
-End Class
 
 
-Public Class SeperatorLength
+
     Dim strsize As New SizeF()
     Dim Width As Integer
     Dim fnt As Font
