@@ -133,7 +133,6 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Inte
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Interop.Microsoft.Office.Core.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Interop.Microsoft.Office.Interop.Outlook.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\AxInterop.MapPoint.dll
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\LeadManager.vbprojResolveAssemblyReference.cache
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Interop.IWshRuntimeLibrary.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Interop.MapPoint.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Interop.Microsoft.Office.Core.dll
