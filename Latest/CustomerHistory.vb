@@ -288,8 +288,8 @@ Public Class CustomerHistory
                 ElseIf pctSubDepartment.Tag = "Set Appointment" Then
                     pctSubDepartment.Image = Main.ilCustomerHistory.Images(9)
                     tooltip = " - Set Appointment"
-                ElseIf pctSubDepartment.Tag = "Moved Appointment" Then
-                    pctSubDepartment.Image = Main.ilCustomerHistory.Images(9)
+                ElseIf pctSubDepartment.Tag = "Move Appointment" Then
+                    pctSubDepartment.Image = Main.ilCustomerHistory.Images(19)
                     tooltip = " - Moved Appointment"
                 ElseIf pctSubDepartment.Tag = "Sales" Then
                     pctSubDepartment.Image = Main.ilCustomerHistory.Images(1)

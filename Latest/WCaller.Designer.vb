@@ -113,6 +113,7 @@ Partial Class WCaller
         Me.Label86 = New System.Windows.Forms.Label()
         Me.Label87 = New System.Windows.Forms.Label()
         Me.gbSpecialInstructions = New System.Windows.Forms.GroupBox()
+        Me.btnEditSPI = New System.Windows.Forms.Button()
         Me.rtbSpecialInstructions = New System.Windows.Forms.RichTextBox()
         Me.gbProductInfo = New System.Windows.Forms.GroupBox()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -186,7 +187,6 @@ Partial Class WCaller
         Me.txtDate2 = New System.Windows.Forms.TextBox()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.btnEditSPI = New System.Windows.Forms.Button()
         Me.tsWarmCalling.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -1141,6 +1141,15 @@ Partial Class WCaller
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions:"
         '
+        'btnEditSPI
+        '
+        Me.btnEditSPI.Location = New System.Drawing.Point(237, 116)
+        Me.btnEditSPI.Name = "btnEditSPI"
+        Me.btnEditSPI.Size = New System.Drawing.Size(51, 23)
+        Me.btnEditSPI.TabIndex = 147
+        Me.btnEditSPI.Text = "Edit"
+        Me.btnEditSPI.UseVisualStyleBackColor = True
+        '
         'rtbSpecialInstructions
         '
         Me.rtbSpecialInstructions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -1893,6 +1902,7 @@ Partial Class WCaller
         '
         'LogAsCalledCancelledToolStripMenuItem
         '
+        Me.LogAsCalledCancelledToolStripMenuItem.Image = Global.Latest.My.Resources.Resources.calledcancelled
         Me.LogAsCalledCancelledToolStripMenuItem.Name = "LogAsCalledCancelledToolStripMenuItem"
         Me.LogAsCalledCancelledToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
         Me.LogAsCalledCancelledToolStripMenuItem.Text = "Log Appt. as Called and Cancelled"
@@ -2002,18 +2012,9 @@ Partial Class WCaller
         '
         Me.Timer1.Interval = 150
         '
-        'btnEditSPI
-        '
-        Me.btnEditSPI.Location = New System.Drawing.Point(237, 116)
-        Me.btnEditSPI.Name = "btnEditSPI"
-        Me.btnEditSPI.Size = New System.Drawing.Size(51, 23)
-        Me.btnEditSPI.TabIndex = 147
-        Me.btnEditSPI.Text = "Edit"
-        Me.btnEditSPI.UseVisualStyleBackColor = True
-        '
         'WCaller
         '
-        Me.AcceptButton = Me.btnExpandWarmCalling
+        Me.AcceptButton = Me.btnSearch
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(990, 601)
