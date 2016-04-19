@@ -1323,6 +1323,11 @@
     <Content Include="Resources\FEATURES_1017.ico" />
     <Content Include="Resources\FEATURES_1_1017.ico" />
     <Content Include="Resources\FEATURES_2_1017.ico" />
+    <None Include="Resources\tranfer1.ico" />
+    <None Include="Resources\tranfer.ico" />
+    <None Include="Resources\Fire %282%29.ico" />
+    <None Include="Resources\hand shake.ico" />
+    <None Include="Resources\notes2.ico" />
     <Content Include="Resources\QBWIN32_1015.ico" />
     <Content Include="Resources\QBWIN32_1016.ico" />
     <Content Include="Resources\QBWIN32_1017.ico" />

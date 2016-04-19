@@ -19,9 +19,10 @@ Partial Class PreviousCustomer
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.pnlCustomerHistory = New System.Windows.Forms.Panel
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
-        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PreviousCustomer))
+        Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
         Me.pnlCustomerHistory.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -55,6 +56,7 @@ Partial Class PreviousCustomer
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(292, 273)
         Me.Controls.Add(Me.pnlCustomerHistory)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "PreviousCustomer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "PreviousCustomer"

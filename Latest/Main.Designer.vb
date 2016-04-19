@@ -134,7 +134,7 @@ Partial Class Main
         '
         'WarmCallingToolStripMenuItem
         '
-        Me.WarmCallingToolStripMenuItem.Image = CType(resources.GetObject("WarmCallingToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.WarmCallingToolStripMenuItem.Image = Global.Latest.My.Resources.Resources.Fire__2_
         Me.WarmCallingToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.WarmCallingToolStripMenuItem.Name = "WarmCallingToolStripMenuItem"
         Me.WarmCallingToolStripMenuItem.Size = New System.Drawing.Size(205, 38)
@@ -142,7 +142,7 @@ Partial Class Main
         '
         'PreviousCustomersToolStripMenuItem
         '
-        Me.PreviousCustomersToolStripMenuItem.Image = CType(resources.GetObject("PreviousCustomersToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.PreviousCustomersToolStripMenuItem.Image = Global.Latest.My.Resources.Resources.hand_shake
         Me.PreviousCustomersToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.PreviousCustomersToolStripMenuItem.Name = "PreviousCustomersToolStripMenuItem"
         Me.PreviousCustomersToolStripMenuItem.Size = New System.Drawing.Size(205, 38)
@@ -550,17 +550,18 @@ Partial Class Main
         Me.ilCustomerHistory.Images.SetKeyName(5, "phone4.ico")
         Me.ilCustomerHistory.Images.SetKeyName(6, "lock.ico")
         Me.ilCustomerHistory.Images.SetKeyName(7, "inetcpl_4480.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(8, "Previous Customer.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(9, "setappt16.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(8, "hand shake.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(9, "tranfer.ico")
         Me.ilCustomerHistory.Images.SetKeyName(10, "Notes4.ico")
         Me.ilCustomerHistory.Images.SetKeyName(11, "Cancel.ico")
         Me.ilCustomerHistory.Images.SetKeyName(12, "Do not call2.ico")
         Me.ilCustomerHistory.Images.SetKeyName(13, "done2.ico")
         Me.ilCustomerHistory.Images.SetKeyName(14, "improveit360_logo.ico")
-        Me.ilCustomerHistory.Images.SetKeyName(15, "Call&Cancel16.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(15, "calledcancelled.ico")
         Me.ilCustomerHistory.Images.SetKeyName(16, "new record32(2).ico")
-        Me.ilCustomerHistory.Images.SetKeyName(17, "Warm Caller.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(17, "Fire (2).ico")
         Me.ilCustomerHistory.Images.SetKeyName(18, "Call&Cancel16.ico")
+        Me.ilCustomerHistory.Images.SetKeyName(19, "arrow-right.ico")
         '
         'tmrmanagealerts
         '

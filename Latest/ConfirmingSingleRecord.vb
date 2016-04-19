@@ -323,7 +323,7 @@ Public Class ConfirmingSingleRecord
 
     Private Sub btnEditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustomer.Click
 
-        EditCustomerInfo.ShowDialog()
+        EditCustomerInfo.Show()
         Me.Refresh()
     End Sub
 
@@ -398,6 +398,8 @@ Public Class ConfirmingSingleRecord
             ElseIf r1.Item(0) = False And r1.Item(2) <> "Kill" Then
                 Me.btnSetAppt.Enabled = True
                 Me.btnSetAppt.ToolTipText = ""
+                Me.btnAppt.Enabled = True
+                Me.btnAppt.ToolTipText = ""
             End If
             If r1.Item(2) = "Kill" Then
                 Me.btnKill.Text = "Undo Kill"
@@ -1330,7 +1332,7 @@ Public Class ConfirmingSingleRecord
     Private Sub btnConfirmationEmail_Click(sender As Object, e As EventArgs) Handles btnConfirmationEmail.Click
         ''comeback
     End Sub
-    Private Sub Update()
+    Public Sub Update()
         Dim cmdGet As SqlCommand = New SqlCommand("dbo.GetCustomerINFO", cnn)
 
         Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
@@ -1479,11 +1481,14 @@ Public Class ConfirmingSingleRecord
     End Sub
 
     Private Sub btnPrintAppt_Click(sender As Object, e As EventArgs) Handles btnPrintAppt.Click
-        frmPrint.Exclusions = True
-        Dim lv As New ListViewItem
-        lv.Text = ID
-        frmPrint.ClearListView()
-        frmPrint.lsLeadIds.Items.Add(lv)
-        frmPrint.ShowDialog()
+        Try
+            Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
     End Sub
 End Class

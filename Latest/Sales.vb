@@ -144,10 +144,8 @@ Public Class Sales
     Friend WithEvents btnCreateNewEmailTemplate As New ToolStripMenuItem
     Friend WithEvents btnEmailThisCustomer As New ToolStripMenuItem
     Friend WithEvents tsSeparatorEmail As New ToolStripSeparator
-
-
-
-
+    Friend WithEvents btnAppt As New ToolStripMenuItem
+    Friend WithEvents btnMoveAppt As New ToolStripMenuItem
 
 #End Region
 #Region "Form Operator Variables"
@@ -463,7 +461,7 @@ Public Class Sales
             Me.btnMemorize.Text = "Memorize This Record"
             'btnCustomerTools
             '
-            Me.btnCustomerTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEditCustomer, Me.sepCustomerTools, Me.btnCallCustomer, Me.btnEMailCustomer, Me.btnLetter, Me.sep, Me.btnSetAppt, Me.btnAssignRep})
+            Me.btnCustomerTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEditCustomer, Me.sepCustomerTools, Me.btnCallCustomer, Me.btnEMailCustomer, Me.btnLetter, Me.sep, Me.btnAppt, Me.btnAssignRep})
             Me.btnCustomerTools.Image = Me.ilToolbarButtons.Images(1)
             Me.btnCustomerTools.ImageTransparentColor = System.Drawing.Color.Magenta
             Me.btnCustomerTools.Name = "btnCustomerTools"
@@ -535,6 +533,18 @@ Public Class Sales
             Me.btnSetAppt.Name = "btnSetAppt"
             Me.btnSetAppt.Size = New System.Drawing.Size(173, 22)
             Me.btnSetAppt.Text = "Set Appointment"
+
+            Me.btnAppt.Image = Me.ilToolbarButtons.Images(8)
+            Me.btnAppt.Name = "btnAppt"
+            Me.btnAppt.Size = New System.Drawing.Size(173, 22)
+            Me.btnAppt.Text = "Appointment"
+
+            Me.btnMoveAppt.Image = Me.ilToolbarButtons.Images(14)
+            Me.btnMoveAppt.Name = "btnMoveAppt"
+            Me.btnMoveAppt.Size = New System.Drawing.Size(173, 22)
+            Me.btnMoveAppt.Text = "Move Appointment"
+
+            Me.btnAppt.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSetAppt, Me.btnMoveAppt})
             'btnAssignRep
             '
             Me.btnAssignRep.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cboRep1, Me.cboRep2, Me.sep2, Me.btnSaveRep})
@@ -3078,12 +3088,12 @@ Public Class Sales
     Private Sub TabControl2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl2.SelectedIndexChanged
         If Me.TabControl2.SelectedIndex = 0 Then
             Me.ToolbarConfig(2)
-            If arItemCache.Count = 0 Then
+            If Me.lvSales.SelectedItems.Count = 0 Then
                 Me.PullInfo("")
                 Me.ID = ""
                 STATIC_VARIABLES.CurrentID = Me.ID
             Else
-                Dim z As ListViewItem = arItemCache(0)
+                Dim z As ListViewItem = Me.lvSales.SelectedItems(0)
                 Me.PullInfo(z.Text)
                 Me.ID = z.Text
                 STATIC_VARIABLES.CurrentID = Me.ID
@@ -5423,7 +5433,10 @@ Public Class Sales
         '    Me.btnSetAppt_Click(sender, e)
         '    SetAppt.Show()
         'End If
-
+        If (Me.lvSales.SelectedItems.Count = 0 And Me.TabControl2.SelectedTab.Name = "TabPage1") Or (Me.lvMemorized.SelectedItems.Count = 0 And Me.TabControl2.SelectedTab.Name = "TabPage2") Then
+            MsgBox("You must select a Record to Set an Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
+            Exit Sub
+        End If
 
         SetAppt_V2.frm = Me
         SetAppt_V2.ShowDialog()
@@ -8909,4 +8922,13 @@ Public Class Sales
 
     End Sub
 
+    Private Sub btnMoveAppt_Click(sender As Object, e As EventArgs) Handles btnMoveAppt.Click
+        If (Me.lvSales.SelectedItems.Count = 0 And Me.TabControl2.SelectedTab.Name = "TabPage1") Or (Me.lvMemorized.SelectedItems.Count = 0 And Me.TabControl2.SelectedTab.Name = "TabPage2") Then
+            MsgBox("You must select a Record to Set an Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
+            Exit Sub
+        End If
+
+        RescheduleAppt.frm = Me
+        RescheduleAppt.ShowDialog()
+    End Sub
 End Class

@@ -36,6 +36,7 @@ Public Class which_form
             Case "ConfirmingSingleRecord"
                 ConfirmingSingleRecord.BringToFront()
                 ConfirmingSingleRecord.Focus()
+                ConfirmingSingleRecord.Update()
 
             Case "Administration"
                 Administration.BringToFront()

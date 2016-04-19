@@ -292,9 +292,8 @@ Public Class SetAppt_V2
                 Case "Installation"
                 Case "Sales"
                     Sales.PullInfo(ID)
-                Case "ConfirmerSingleRecord"
-                    Dim c As New CustomerHistory
-                    c.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
+                Case "ConfirmingSingleRecord"
+                    ConfirmingSingleRecord.Update()
                 Case "Administration"
                     ''comeback
                 Case "Finance"

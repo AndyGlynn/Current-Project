@@ -37,21 +37,8 @@ Partial Class Sales
         Me.lblSold = New System.Windows.Forms.Label()
         Me.lblAccuracy = New System.Windows.Forms.Label()
         Me.pnlPerformanceReport = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label67 = New System.Windows.Forms.Label()
-        Me.Label66 = New System.Windows.Forms.Label()
         Me.lblNoData = New System.Windows.Forms.Label()
         Me.Label64 = New System.Windows.Forms.Label()
-        Me.Label63 = New System.Windows.Forms.Label()
-        Me.Label62 = New System.Windows.Forms.Label()
-        Me.Label61 = New System.Windows.Forms.Label()
-        Me.Label60 = New System.Windows.Forms.Label()
-        Me.Label59 = New System.Windows.Forms.Label()
-        Me.Label58 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.lvnoresults = New System.Windows.Forms.ListView()
@@ -59,7 +46,6 @@ Partial Class Sales
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cmlvnoresults = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.SCsalesresult = New System.Windows.Forms.ToolStripMenuItem()
         Me.SCCustomerList = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.pnlScheduledTasks = New System.Windows.Forms.Panel()
@@ -90,27 +76,7 @@ Partial Class Sales
         Me.ApptDateTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Reps = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ShowNotesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.EnterSalesResultToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MemorizeThisApptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RemoveThisApptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomerToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EditCustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CallThisCustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EmaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SendALetterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SetAppointmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AssignChangeSalesRepToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripComboBox2 = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SaveChangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrintAppointmentSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrintCustomerInformationSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblConfimingPLS = New System.Windows.Forms.Label()
         Me.cboSalesList = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -144,7 +110,6 @@ Partial Class Sales
         Me.txtAlt2Type = New System.Windows.Forms.TextBox()
         Me.lblAltPhone2 = New System.Windows.Forms.Label()
         Me.lblAltPhone1 = New System.Windows.Forms.Label()
-        Me.pctVerified = New System.Windows.Forms.PictureBox()
         Me.lblHousePhone = New System.Windows.Forms.Label()
         Me.lblWorkHours = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
@@ -186,10 +151,7 @@ Partial Class Sales
         Me.tsCustomerLog = New System.Windows.Forms.ToolStrip()
         Me.TScboCustomerHistory = New System.Windows.Forms.ToolStripComboBox()
         Me.tslblShowDepartment = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbtnAFPics = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton()
-        Me.btnCalledandCancelled = New System.Windows.Forms.ToolStripMenuItem()
         Me.tslblCustomerHistory = New System.Windows.Forms.ToolStripLabel()
         Me.pnlAFPics = New System.Windows.Forms.Panel()
         Me.lsAttachedFiles = New System.Windows.Forms.ListView()
@@ -253,8 +215,6 @@ Partial Class Sales
         Me.tsAFPics = New System.Windows.Forms.ToolStrip()
         Me.tscboAFPicsFilter = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbtnShowCH = New System.Windows.Forms.ToolStripButton()
-        Me.tsAttachedFilesNAV = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tslblAFPic = New System.Windows.Forms.ToolStripLabel()
         Me.pnlCustomerHistory = New System.Windows.Forms.Panel()
@@ -279,12 +239,39 @@ Partial Class Sales
         Me.ImgIssued2 = New System.Windows.Forms.ImageList(Me.components)
         Me.ImgIssued3 = New System.Windows.Forms.ImageList(Me.components)
         Me.cmIssue = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.PrintThisLeadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EmailThisLeadToAssignedRepsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.bgGetImages = New System.ComponentModel.BackgroundWorker()
         Me.bgSalesQuery = New System.ComponentModel.BackgroundWorker()
         Me.bgNoResults = New System.ComponentModel.BackgroundWorker()
         Me.bgCustomerHistory = New System.ComponentModel.BackgroundWorker()
+        Me.SCsalesresult = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowNotesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnterSalesResultToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MemorizeThisApptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveThisApptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomerToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditCustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CallThisCustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SendALetterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SetAppointmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AssignChangeSalesRepToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripComboBox2 = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SaveChangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintAppointmentSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintCustomerInformationSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.pctVerified = New System.Windows.Forms.PictureBox()
+        Me.tsbtnAFPics = New System.Windows.Forms.ToolStripButton()
+        Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton()
+        Me.btnCalledandCancelled = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbtnShowCH = New System.Windows.Forms.ToolStripButton()
+        Me.tsAttachedFilesNAV = New System.Windows.Forms.ToolStripButton()
+        Me.PrintThisLeadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmailThisLeadToAssignedRepsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tbMain.SuspendLayout()
         Me.tpSummary.SuspendLayout()
         Me.pnlPerformanceReport.SuspendLayout()
@@ -301,7 +288,6 @@ Partial Class Sales
         Me.ContextMenuStrip1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.gbContactInfo.SuspendLayout()
-        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbHomeInfo.SuspendLayout()
         Me.gbSpecialInstructions.SuspendLayout()
         Me.gbProductInfo.SuspendLayout()
@@ -314,6 +300,7 @@ Partial Class Sales
         Me.tpIssueLeads.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.cmIssue.SuspendLayout()
+        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tsSalesDepartment
@@ -476,109 +463,12 @@ Partial Class Sales
         Me.pnlPerformanceReport.AutoScroll = True
         Me.pnlPerformanceReport.BackColor = System.Drawing.Color.White
         Me.pnlPerformanceReport.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.pnlPerformanceReport.Controls.Add(Me.Label1)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label15)
-        Me.pnlPerformanceReport.Controls.Add(Me.LinkLabel1)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label19)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label20)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label67)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label66)
         Me.pnlPerformanceReport.Controls.Add(Me.lblNoData)
         Me.pnlPerformanceReport.Controls.Add(Me.Label64)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label63)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label62)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label61)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label60)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label59)
-        Me.pnlPerformanceReport.Controls.Add(Me.Label58)
         Me.pnlPerformanceReport.Location = New System.Drawing.Point(3, 353)
         Me.pnlPerformanceReport.Name = "pnlPerformanceReport"
         Me.pnlPerformanceReport.Size = New System.Drawing.Size(1070, 212)
         Me.pnlPerformanceReport.TabIndex = 231
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(113, 4)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(48, 16)
-        Me.Label1.TabIndex = 254
-        Me.Label1.Text = "45870"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label15
-        '
-        Me.Label15.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label15.AutoSize = True
-        Me.Label15.BackColor = System.Drawing.Color.Transparent
-        Me.Label15.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(396, 210)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(45, 16)
-        Me.Label15.TabIndex = 231
-        Me.Label15.Text = "# - %"
-        '
-        'LinkLabel1
-        '
-        Me.LinkLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel1.Location = New System.Drawing.Point(7, 12)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(95, 16)
-        Me.LinkLabel1.TabIndex = 209
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "Brice Starner"
-        '
-        'Label19
-        '
-        Me.Label19.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(805, 160)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(38, 16)
-        Me.Label19.TabIndex = 208
-        Me.Label19.Text = "40%"
-        '
-        'Label20
-        '
-        Me.Label20.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(730, 160)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(16, 16)
-        Me.Label20.TabIndex = 207
-        Me.Label20.Text = "4"
-        '
-        'Label67
-        '
-        Me.Label67.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label67.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label67.Location = New System.Drawing.Point(882, 12)
-        Me.Label67.Name = "Label67"
-        Me.Label67.Size = New System.Drawing.Size(80, 17)
-        Me.Label67.TabIndex = 206
-        Me.Label67.Text = "$9,247,570"
-        '
-        'Label66
-        '
-        Me.Label66.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label66.AutoSize = True
-        Me.Label66.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label66.Location = New System.Drawing.Point(870, 160)
-        Me.Label66.Name = "Label66"
-        Me.Label66.Size = New System.Drawing.Size(80, 16)
-        Me.Label66.TabIndex = 205
-        Me.Label66.Text = "$9,000,000"
         '
         'lblNoData
         '
@@ -602,77 +492,6 @@ Partial Class Sales
         Me.Label64.Size = New System.Drawing.Size(38, 16)
         Me.Label64.TabIndex = 203
         Me.Label64.Text = "35%"
-        '
-        'Label63
-        '
-        Me.Label63.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label63.AutoSize = True
-        Me.Label63.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label63.Location = New System.Drawing.Point(319, 175)
-        Me.Label63.Name = "Label63"
-        Me.Label63.Size = New System.Drawing.Size(38, 16)
-        Me.Label63.TabIndex = 202
-        Me.Label63.Text = "59%"
-        '
-        'Label62
-        '
-        Me.Label62.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label62.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label62.Location = New System.Drawing.Point(225, 4)
-        Me.Label62.Name = "Label62"
-        Me.Label62.Size = New System.Drawing.Size(46, 17)
-        Me.Label62.TabIndex = 201
-        Me.Label62.Text = "100%"
-        Me.Label62.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label61
-        '
-        Me.Label61.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label61.AutoSize = True
-        Me.Label61.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label61.Location = New System.Drawing.Point(403, 130)
-        Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(16, 16)
-        Me.Label61.TabIndex = 200
-        Me.Label61.Text = "1"
-        '
-        'Label60
-        '
-        Me.Label60.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label60.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label60.Location = New System.Drawing.Point(430, 12)
-        Me.Label60.Name = "Label60"
-        Me.Label60.Size = New System.Drawing.Size(82, 17)
-        Me.Label60.TabIndex = 199
-        Me.Label60.Text = "66     100%"
-        '
-        'Label59
-        '
-        Me.Label59.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label59.AutoSize = True
-        Me.Label59.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label59.Location = New System.Drawing.Point(199, 160)
-        Me.Label59.Name = "Label59"
-        Me.Label59.Size = New System.Drawing.Size(24, 16)
-        Me.Label59.TabIndex = 198
-        Me.Label59.Text = "10"
-        '
-        'Label58
-        '
-        Me.Label58.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label58.AutoSize = True
-        Me.Label58.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label58.Location = New System.Drawing.Point(188, 12)
-        Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(40, 16)
-        Me.Label58.TabIndex = 197
-        Me.Label58.Text = "9999"
         '
         'Label4
         '
@@ -733,13 +552,6 @@ Partial Class Sales
         Me.cmlvnoresults.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SCsalesresult, Me.SCCustomerList})
         Me.cmlvnoresults.Name = "cmlvnoresults"
         Me.cmlvnoresults.Size = New System.Drawing.Size(180, 48)
-        '
-        'SCsalesresult
-        '
-        Me.SCsalesresult.Image = Global.Latest.My.Resources.Resources.cash2
-        Me.SCsalesresult.Name = "SCsalesresult"
-        Me.SCsalesresult.Size = New System.Drawing.Size(179, 22)
-        Me.SCsalesresult.Text = "Enter Sales Result"
         '
         'SCCustomerList
         '
@@ -1050,142 +862,10 @@ Partial Class Sales
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(193, 142)
         '
-        'ShowNotesToolStripMenuItem
-        '
-        Me.ShowNotesToolStripMenuItem.Image = CType(resources.GetObject("ShowNotesToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.ShowNotesToolStripMenuItem.Name = "ShowNotesToolStripMenuItem"
-        Me.ShowNotesToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.ShowNotesToolStripMenuItem.Text = "Show Notes"
-        '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(189, 6)
-        '
-        'EnterSalesResultToolStripMenuItem
-        '
-        Me.EnterSalesResultToolStripMenuItem.Image = CType(resources.GetObject("EnterSalesResultToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.EnterSalesResultToolStripMenuItem.Name = "EnterSalesResultToolStripMenuItem"
-        Me.EnterSalesResultToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.EnterSalesResultToolStripMenuItem.Text = "Enter Sales Result"
-        '
-        'MemorizeThisApptToolStripMenuItem
-        '
-        Me.MemorizeThisApptToolStripMenuItem.Image = CType(resources.GetObject("MemorizeThisApptToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.MemorizeThisApptToolStripMenuItem.Name = "MemorizeThisApptToolStripMenuItem"
-        Me.MemorizeThisApptToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.MemorizeThisApptToolStripMenuItem.Text = "Memorize This Record"
-        '
-        'RemoveThisApptToolStripMenuItem
-        '
-        Me.RemoveThisApptToolStripMenuItem.Image = CType(resources.GetObject("RemoveThisApptToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.RemoveThisApptToolStripMenuItem.Name = "RemoveThisApptToolStripMenuItem"
-        Me.RemoveThisApptToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.RemoveThisApptToolStripMenuItem.Text = "Remove This Record"
-        '
-        'CustomerToolsToolStripMenuItem
-        '
-        Me.CustomerToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditCustomerToolStripMenuItem, Me.ToolStripSeparator3, Me.CallThisCustomerToolStripMenuItem, Me.EmaToolStripMenuItem, Me.SendALetterToolStripMenuItem, Me.ToolStripSeparator4, Me.SetAppointmentToolStripMenuItem, Me.AssignChangeSalesRepToolStripMenuItem})
-        Me.CustomerToolsToolStripMenuItem.Image = CType(resources.GetObject("CustomerToolsToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.CustomerToolsToolStripMenuItem.Name = "CustomerToolsToolStripMenuItem"
-        Me.CustomerToolsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.CustomerToolsToolStripMenuItem.Text = "Customer Tools"
-        '
-        'EditCustomerToolStripMenuItem
-        '
-        Me.EditCustomerToolStripMenuItem.Image = CType(resources.GetObject("EditCustomerToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.EditCustomerToolStripMenuItem.Name = "EditCustomerToolStripMenuItem"
-        Me.EditCustomerToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.EditCustomerToolStripMenuItem.Text = "Edit Customer"
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(204, 6)
-        '
-        'CallThisCustomerToolStripMenuItem
-        '
-        Me.CallThisCustomerToolStripMenuItem.Image = CType(resources.GetObject("CallThisCustomerToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.CallThisCustomerToolStripMenuItem.Name = "CallThisCustomerToolStripMenuItem"
-        Me.CallThisCustomerToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.CallThisCustomerToolStripMenuItem.Text = "Call This Customer"
-        '
-        'EmaToolStripMenuItem
-        '
-        Me.EmaToolStripMenuItem.Image = CType(resources.GetObject("EmaToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.EmaToolStripMenuItem.Name = "EmaToolStripMenuItem"
-        Me.EmaToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.EmaToolStripMenuItem.Text = "Email This Customer"
-        '
-        'SendALetterToolStripMenuItem
-        '
-        Me.SendALetterToolStripMenuItem.Image = CType(resources.GetObject("SendALetterToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.SendALetterToolStripMenuItem.Name = "SendALetterToolStripMenuItem"
-        Me.SendALetterToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.SendALetterToolStripMenuItem.Text = "Send a Letter"
-        '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(204, 6)
-        '
-        'SetAppointmentToolStripMenuItem
-        '
-        Me.SetAppointmentToolStripMenuItem.Image = CType(resources.GetObject("SetAppointmentToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.SetAppointmentToolStripMenuItem.Name = "SetAppointmentToolStripMenuItem"
-        Me.SetAppointmentToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.SetAppointmentToolStripMenuItem.Text = "Set Appointment"
-        '
-        'AssignChangeSalesRepToolStripMenuItem
-        '
-        Me.AssignChangeSalesRepToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBox1, Me.ToolStripComboBox2, Me.ToolStripSeparator5, Me.SaveChangesToolStripMenuItem})
-        Me.AssignChangeSalesRepToolStripMenuItem.Name = "AssignChangeSalesRepToolStripMenuItem"
-        Me.AssignChangeSalesRepToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.AssignChangeSalesRepToolStripMenuItem.Text = "Assign/Change Sales Rep"
-        '
-        'ToolStripComboBox1
-        '
-        Me.ToolStripComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Standard
-        Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
-        Me.ToolStripComboBox1.Size = New System.Drawing.Size(150, 23)
-        '
-        'ToolStripComboBox2
-        '
-        Me.ToolStripComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Standard
-        Me.ToolStripComboBox2.Name = "ToolStripComboBox2"
-        Me.ToolStripComboBox2.Size = New System.Drawing.Size(150, 23)
-        '
-        'ToolStripSeparator5
-        '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(207, 6)
-        '
-        'SaveChangesToolStripMenuItem
-        '
-        Me.SaveChangesToolStripMenuItem.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SaveChangesToolStripMenuItem.Name = "SaveChangesToolStripMenuItem"
-        Me.SaveChangesToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
-        Me.SaveChangesToolStripMenuItem.Text = "Save Changes"
-        '
-        'PrintToolStripMenuItem
-        '
-        Me.PrintToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrintAppointmentSheetToolStripMenuItem, Me.PrintCustomerInformationSheetToolStripMenuItem})
-        Me.PrintToolStripMenuItem.Image = CType(resources.GetObject("PrintToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.PrintToolStripMenuItem.Text = "Print"
-        '
-        'PrintAppointmentSheetToolStripMenuItem
-        '
-        Me.PrintAppointmentSheetToolStripMenuItem.Name = "PrintAppointmentSheetToolStripMenuItem"
-        Me.PrintAppointmentSheetToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
-        Me.PrintAppointmentSheetToolStripMenuItem.Text = "Print Appointment Sheet"
-        '
-        'PrintCustomerInformationSheetToolStripMenuItem
-        '
-        Me.PrintCustomerInformationSheetToolStripMenuItem.Name = "PrintCustomerInformationSheetToolStripMenuItem"
-        Me.PrintCustomerInformationSheetToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
-        Me.PrintCustomerInformationSheetToolStripMenuItem.Text = "Print Customer Information Sheet"
         '
         'lblConfimingPLS
         '
@@ -1428,6 +1108,7 @@ Partial Class Sales
         Me.ilToolbarButtons.Images.SetKeyName(11, "Call&Cancel48.ico")
         Me.ilToolbarButtons.Images.SetKeyName(12, "lightoff16x16 copy.ico")
         Me.ilToolbarButtons.Images.SetKeyName(13, "greenlighton16x16 copy.ico")
+        Me.ilToolbarButtons.Images.SetKeyName(14, "arrow-right.ico")
         '
         'gbContactInfo
         '
@@ -1459,7 +1140,7 @@ Partial Class Sales
         Me.gbContactInfo.ForeColor = System.Drawing.Color.Gray
         Me.gbContactInfo.Location = New System.Drawing.Point(5, 3)
         Me.gbContactInfo.Name = "gbContactInfo"
-        Me.gbContactInfo.Size = New System.Drawing.Size(710, 198)
+        Me.gbContactInfo.Size = New System.Drawing.Size(702, 198)
         Me.gbContactInfo.TabIndex = 191
         Me.gbContactInfo.TabStop = False
         Me.gbContactInfo.Text = "Contact Info:"
@@ -1471,7 +1152,7 @@ Partial Class Sales
         Me.txtHousePhone.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtHousePhone.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHousePhone.ForeColor = System.Drawing.Color.Black
-        Me.txtHousePhone.Location = New System.Drawing.Point(502, 33)
+        Me.txtHousePhone.Location = New System.Drawing.Point(494, 33)
         Me.txtHousePhone.Name = "txtHousePhone"
         Me.txtHousePhone.ReadOnly = True
         Me.txtHousePhone.Size = New System.Drawing.Size(116, 16)
@@ -1484,7 +1165,7 @@ Partial Class Sales
         Me.txtaltphone2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone2.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone2.Location = New System.Drawing.Point(502, 96)
+        Me.txtaltphone2.Location = New System.Drawing.Point(494, 96)
         Me.txtaltphone2.Name = "txtaltphone2"
         Me.txtaltphone2.ReadOnly = True
         Me.txtaltphone2.Size = New System.Drawing.Size(116, 16)
@@ -1497,7 +1178,7 @@ Partial Class Sales
         Me.txtaltphone1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone1.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone1.Location = New System.Drawing.Point(502, 64)
+        Me.txtaltphone1.Location = New System.Drawing.Point(494, 64)
         Me.txtaltphone1.Name = "txtaltphone1"
         Me.txtaltphone1.ReadOnly = True
         Me.txtaltphone1.Size = New System.Drawing.Size(116, 16)
@@ -1508,7 +1189,7 @@ Partial Class Sales
         Me.lnkEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkEmail.AutoSize = True
         Me.lnkEmail.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lnkEmail.Location = New System.Drawing.Point(449, 144)
+        Me.lnkEmail.Location = New System.Drawing.Point(441, 144)
         Me.lnkEmail.Name = "lnkEmail"
         Me.lnkEmail.Size = New System.Drawing.Size(0, 16)
         Me.lnkEmail.TabIndex = 136
@@ -1520,7 +1201,7 @@ Partial Class Sales
         Me.lblEmail.BackColor = System.Drawing.Color.Transparent
         Me.lblEmail.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmail.ForeColor = System.Drawing.Color.Gray
-        Me.lblEmail.Location = New System.Drawing.Point(398, 144)
+        Me.lblEmail.Location = New System.Drawing.Point(390, 144)
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.Size = New System.Drawing.Size(45, 16)
         Me.lblEmail.TabIndex = 135
@@ -1546,7 +1227,7 @@ Partial Class Sales
         Me.txtAlt1Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt1Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt1Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt1Type.Location = New System.Drawing.Point(634, 64)
+        Me.txtAlt1Type.Location = New System.Drawing.Point(626, 64)
         Me.txtAlt1Type.Name = "txtAlt1Type"
         Me.txtAlt1Type.ReadOnly = True
         Me.txtAlt1Type.Size = New System.Drawing.Size(57, 16)
@@ -1559,7 +1240,7 @@ Partial Class Sales
         Me.txtAlt2Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt2Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt2Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt2Type.Location = New System.Drawing.Point(634, 96)
+        Me.txtAlt2Type.Location = New System.Drawing.Point(626, 96)
         Me.txtAlt2Type.Name = "txtAlt2Type"
         Me.txtAlt2Type.ReadOnly = True
         Me.txtAlt2Type.Size = New System.Drawing.Size(57, 16)
@@ -1572,7 +1253,7 @@ Partial Class Sales
         Me.lblAltPhone2.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone2.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone2.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone2.Location = New System.Drawing.Point(398, 96)
+        Me.lblAltPhone2.Location = New System.Drawing.Point(390, 96)
         Me.lblAltPhone2.Name = "lblAltPhone2"
         Me.lblAltPhone2.Size = New System.Drawing.Size(84, 16)
         Me.lblAltPhone2.TabIndex = 83
@@ -1585,21 +1266,11 @@ Partial Class Sales
         Me.lblAltPhone1.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone1.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone1.Location = New System.Drawing.Point(398, 64)
+        Me.lblAltPhone1.Location = New System.Drawing.Point(390, 64)
         Me.lblAltPhone1.Name = "lblAltPhone1"
         Me.lblAltPhone1.Size = New System.Drawing.Size(88, 16)
         Me.lblAltPhone1.TabIndex = 81
         Me.lblAltPhone1.Text = "Alt Phone 1:"
-        '
-        'pctVerified
-        '
-        Me.pctVerified.Location = New System.Drawing.Point(29, 114)
-        Me.pctVerified.Name = "pctVerified"
-        Me.pctVerified.Size = New System.Drawing.Size(24, 24)
-        Me.pctVerified.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pctVerified.TabIndex = 133
-        Me.pctVerified.TabStop = False
-        Me.pctVerified.Visible = False
         '
         'lblHousePhone
         '
@@ -1608,7 +1279,7 @@ Partial Class Sales
         Me.lblHousePhone.BackColor = System.Drawing.Color.Transparent
         Me.lblHousePhone.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHousePhone.ForeColor = System.Drawing.Color.Gray
-        Me.lblHousePhone.Location = New System.Drawing.Point(398, 33)
+        Me.lblHousePhone.Location = New System.Drawing.Point(390, 33)
         Me.lblHousePhone.Name = "lblHousePhone"
         Me.lblHousePhone.Size = New System.Drawing.Size(97, 16)
         Me.lblHousePhone.TabIndex = 78
@@ -1728,7 +1399,7 @@ Partial Class Sales
         Me.gbHomeInfo.Controls.Add(Me.txtYrBuilt)
         Me.gbHomeInfo.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbHomeInfo.ForeColor = System.Drawing.Color.Gray
-        Me.gbHomeInfo.Location = New System.Drawing.Point(721, 3)
+        Me.gbHomeInfo.Location = New System.Drawing.Point(713, 3)
         Me.gbHomeInfo.Name = "gbHomeInfo"
         Me.gbHomeInfo.Size = New System.Drawing.Size(138, 198)
         Me.gbHomeInfo.TabIndex = 183
@@ -1818,7 +1489,7 @@ Partial Class Sales
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
         Me.gbSpecialInstructions.Location = New System.Drawing.Point(445, 207)
         Me.gbSpecialInstructions.Name = "gbSpecialInstructions"
-        Me.gbSpecialInstructions.Size = New System.Drawing.Size(414, 144)
+        Me.gbSpecialInstructions.Size = New System.Drawing.Size(406, 144)
         Me.gbSpecialInstructions.TabIndex = 188
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions:"
@@ -1826,7 +1497,7 @@ Partial Class Sales
         'btnUpdateSPI
         '
         Me.btnUpdateSPI.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateSPI.Location = New System.Drawing.Point(341, 116)
+        Me.btnUpdateSPI.Location = New System.Drawing.Point(333, 116)
         Me.btnUpdateSPI.Name = "btnUpdateSPI"
         Me.btnUpdateSPI.Size = New System.Drawing.Size(54, 22)
         Me.btnUpdateSPI.TabIndex = 147
@@ -1843,7 +1514,7 @@ Partial Class Sales
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(6, 22)
         Me.rtbSpecialInstructions.Name = "rtbSpecialInstructions"
         Me.rtbSpecialInstructions.ReadOnly = True
-        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(402, 116)
+        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(394, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
         Me.rtbSpecialInstructions.Text = ""
         '
@@ -2087,7 +1758,7 @@ Partial Class Sales
         Me.tsCustomerLog.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsCustomerLog.Name = "tsCustomerLog"
         Me.tsCustomerLog.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsCustomerLog.Size = New System.Drawing.Size(855, 33)
+        Me.tsCustomerLog.Size = New System.Drawing.Size(853, 33)
         Me.tsCustomerLog.TabIndex = 189
         Me.tsCustomerLog.Text = "ToolStrip1"
         Me.tsCustomerLog.Visible = False
@@ -2111,37 +1782,10 @@ Partial Class Sales
         Me.tslblShowDepartment.Size = New System.Drawing.Size(43, 30)
         Me.tslblShowDepartment.Text = "Show"
         '
-        'tsbtnAFPics
-        '
-        Me.tsbtnAFPics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbtnAFPics.Image = CType(resources.GetObject("tsbtnAFPics.Image"), System.Drawing.Image)
-        Me.tsbtnAFPics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsbtnAFPics.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnAFPics.Name = "tsbtnAFPics"
-        Me.tsbtnAFPics.Size = New System.Drawing.Size(36, 30)
-        Me.tsbtnAFPics.Text = "ShowAFPics"
-        Me.tsbtnAFPics.ToolTipText = "Show Attached Files and Job Pictures for this Customer"
-        '
         'ToolStripButton3
         '
         Me.ToolStripButton3.Name = "ToolStripButton3"
         Me.ToolStripButton3.Size = New System.Drawing.Size(6, 33)
-        '
-        'btnLogCall
-        '
-        Me.btnLogCall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCalledandCancelled})
-        Me.btnLogCall.Image = CType(resources.GetObject("btnLogCall.Image"), System.Drawing.Image)
-        Me.btnLogCall.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnLogCall.Name = "btnLogCall"
-        Me.btnLogCall.Size = New System.Drawing.Size(272, 30)
-        Me.btnLogCall.Text = "Log Phone Conversation with this Customer"
-        '
-        'btnCalledandCancelled
-        '
-        Me.btnCalledandCancelled.Image = Global.Latest.My.Resources.Resources.Call_Cancel48
-        Me.btnCalledandCancelled.Name = "btnCalledandCancelled"
-        Me.btnCalledandCancelled.Size = New System.Drawing.Size(254, 22)
-        Me.btnCalledandCancelled.Text = "Log Appt. as Called and Cancelled"
         '
         'tslblCustomerHistory
         '
@@ -2161,7 +1805,7 @@ Partial Class Sales
         Me.pnlAFPics.Controls.Add(Me.lsJobPictures)
         Me.pnlAFPics.Location = New System.Drawing.Point(4, 390)
         Me.pnlAFPics.Name = "pnlAFPics"
-        Me.pnlAFPics.Size = New System.Drawing.Size(876, 172)
+        Me.pnlAFPics.Size = New System.Drawing.Size(853, 172)
         Me.pnlAFPics.TabIndex = 201
         Me.pnlAFPics.Visible = False
         '
@@ -2533,7 +2177,7 @@ Partial Class Sales
         Me.tsAFPics.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsAFPics.Name = "tsAFPics"
         Me.tsAFPics.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsAFPics.Size = New System.Drawing.Size(859, 33)
+        Me.tsAFPics.Size = New System.Drawing.Size(853, 33)
         Me.tsAFPics.TabIndex = 201
         Me.tsAFPics.Text = "ToolStrip1"
         '
@@ -2556,29 +2200,6 @@ Partial Class Sales
         Me.ToolStripLabel1.Size = New System.Drawing.Size(43, 30)
         Me.ToolStripLabel1.Text = "Show"
         '
-        'tsbtnShowCH
-        '
-        Me.tsbtnShowCH.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbtnShowCH.Image = CType(resources.GetObject("tsbtnShowCH.Image"), System.Drawing.Image)
-        Me.tsbtnShowCH.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsbtnShowCH.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnShowCH.Name = "tsbtnShowCH"
-        Me.tsbtnShowCH.Size = New System.Drawing.Size(36, 30)
-        Me.tsbtnShowCH.Text = "ShowAFPics"
-        Me.tsbtnShowCH.ToolTipText = "Go Back to Customer History"
-        '
-        'tsAttachedFilesNAV
-        '
-        Me.tsAttachedFilesNAV.AutoSize = False
-        Me.tsAttachedFilesNAV.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsAttachedFilesNAV.Enabled = False
-        Me.tsAttachedFilesNAV.Image = CType(resources.GetObject("tsAttachedFilesNAV.Image"), System.Drawing.Image)
-        Me.tsAttachedFilesNAV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsAttachedFilesNAV.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsAttachedFilesNAV.Name = "tsAttachedFilesNAV"
-        Me.tsAttachedFilesNAV.Size = New System.Drawing.Size(36, 30)
-        Me.tsAttachedFilesNAV.Text = "Up One Level"
-        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
@@ -2600,7 +2221,7 @@ Partial Class Sales
         Me.pnlCustomerHistory.AutoScroll = True
         Me.pnlCustomerHistory.Location = New System.Drawing.Point(4, 390)
         Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(876, 172)
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(850, 172)
         Me.pnlCustomerHistory.TabIndex = 200
         '
         'tpIssueLeads
@@ -2780,6 +2401,214 @@ Partial Class Sales
         Me.cmIssue.Name = "cmIssue"
         Me.cmIssue.Size = New System.Drawing.Size(255, 48)
         '
+        'bgGetImages
+        '
+        '
+        'bgSalesQuery
+        '
+        '
+        'bgCustomerHistory
+        '
+        '
+        'SCsalesresult
+        '
+        Me.SCsalesresult.Image = Global.Latest.My.Resources.Resources.cash2
+        Me.SCsalesresult.Name = "SCsalesresult"
+        Me.SCsalesresult.Size = New System.Drawing.Size(179, 22)
+        Me.SCsalesresult.Text = "Enter Sales Result"
+        '
+        'ShowNotesToolStripMenuItem
+        '
+        Me.ShowNotesToolStripMenuItem.Image = CType(resources.GetObject("ShowNotesToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ShowNotesToolStripMenuItem.Name = "ShowNotesToolStripMenuItem"
+        Me.ShowNotesToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.ShowNotesToolStripMenuItem.Text = "Show Notes"
+        '
+        'EnterSalesResultToolStripMenuItem
+        '
+        Me.EnterSalesResultToolStripMenuItem.Image = CType(resources.GetObject("EnterSalesResultToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.EnterSalesResultToolStripMenuItem.Name = "EnterSalesResultToolStripMenuItem"
+        Me.EnterSalesResultToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.EnterSalesResultToolStripMenuItem.Text = "Enter Sales Result"
+        '
+        'MemorizeThisApptToolStripMenuItem
+        '
+        Me.MemorizeThisApptToolStripMenuItem.Image = CType(resources.GetObject("MemorizeThisApptToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.MemorizeThisApptToolStripMenuItem.Name = "MemorizeThisApptToolStripMenuItem"
+        Me.MemorizeThisApptToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.MemorizeThisApptToolStripMenuItem.Text = "Memorize This Record"
+        '
+        'RemoveThisApptToolStripMenuItem
+        '
+        Me.RemoveThisApptToolStripMenuItem.Image = CType(resources.GetObject("RemoveThisApptToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.RemoveThisApptToolStripMenuItem.Name = "RemoveThisApptToolStripMenuItem"
+        Me.RemoveThisApptToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.RemoveThisApptToolStripMenuItem.Text = "Remove This Record"
+        '
+        'CustomerToolsToolStripMenuItem
+        '
+        Me.CustomerToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditCustomerToolStripMenuItem, Me.ToolStripSeparator3, Me.CallThisCustomerToolStripMenuItem, Me.EmaToolStripMenuItem, Me.SendALetterToolStripMenuItem, Me.ToolStripSeparator4, Me.SetAppointmentToolStripMenuItem, Me.AssignChangeSalesRepToolStripMenuItem})
+        Me.CustomerToolsToolStripMenuItem.Image = CType(resources.GetObject("CustomerToolsToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.CustomerToolsToolStripMenuItem.Name = "CustomerToolsToolStripMenuItem"
+        Me.CustomerToolsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.CustomerToolsToolStripMenuItem.Text = "Customer Tools"
+        '
+        'EditCustomerToolStripMenuItem
+        '
+        Me.EditCustomerToolStripMenuItem.Image = CType(resources.GetObject("EditCustomerToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.EditCustomerToolStripMenuItem.Name = "EditCustomerToolStripMenuItem"
+        Me.EditCustomerToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.EditCustomerToolStripMenuItem.Text = "Edit Customer"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(204, 6)
+        '
+        'CallThisCustomerToolStripMenuItem
+        '
+        Me.CallThisCustomerToolStripMenuItem.Image = CType(resources.GetObject("CallThisCustomerToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.CallThisCustomerToolStripMenuItem.Name = "CallThisCustomerToolStripMenuItem"
+        Me.CallThisCustomerToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.CallThisCustomerToolStripMenuItem.Text = "Call This Customer"
+        '
+        'EmaToolStripMenuItem
+        '
+        Me.EmaToolStripMenuItem.Image = CType(resources.GetObject("EmaToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.EmaToolStripMenuItem.Name = "EmaToolStripMenuItem"
+        Me.EmaToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.EmaToolStripMenuItem.Text = "Email This Customer"
+        '
+        'SendALetterToolStripMenuItem
+        '
+        Me.SendALetterToolStripMenuItem.Image = CType(resources.GetObject("SendALetterToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.SendALetterToolStripMenuItem.Name = "SendALetterToolStripMenuItem"
+        Me.SendALetterToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.SendALetterToolStripMenuItem.Text = "Send a Letter"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(204, 6)
+        '
+        'SetAppointmentToolStripMenuItem
+        '
+        Me.SetAppointmentToolStripMenuItem.Image = CType(resources.GetObject("SetAppointmentToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.SetAppointmentToolStripMenuItem.Name = "SetAppointmentToolStripMenuItem"
+        Me.SetAppointmentToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.SetAppointmentToolStripMenuItem.Text = "Set Appointment"
+        '
+        'AssignChangeSalesRepToolStripMenuItem
+        '
+        Me.AssignChangeSalesRepToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBox1, Me.ToolStripComboBox2, Me.ToolStripSeparator5, Me.SaveChangesToolStripMenuItem})
+        Me.AssignChangeSalesRepToolStripMenuItem.Name = "AssignChangeSalesRepToolStripMenuItem"
+        Me.AssignChangeSalesRepToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.AssignChangeSalesRepToolStripMenuItem.Text = "Assign/Change Sales Rep"
+        '
+        'ToolStripComboBox1
+        '
+        Me.ToolStripComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Standard
+        Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
+        Me.ToolStripComboBox1.Size = New System.Drawing.Size(150, 23)
+        '
+        'ToolStripComboBox2
+        '
+        Me.ToolStripComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Standard
+        Me.ToolStripComboBox2.Name = "ToolStripComboBox2"
+        Me.ToolStripComboBox2.Size = New System.Drawing.Size(150, 23)
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(207, 6)
+        '
+        'SaveChangesToolStripMenuItem
+        '
+        Me.SaveChangesToolStripMenuItem.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SaveChangesToolStripMenuItem.Name = "SaveChangesToolStripMenuItem"
+        Me.SaveChangesToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.SaveChangesToolStripMenuItem.Text = "Save Changes"
+        '
+        'PrintToolStripMenuItem
+        '
+        Me.PrintToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrintAppointmentSheetToolStripMenuItem, Me.PrintCustomerInformationSheetToolStripMenuItem})
+        Me.PrintToolStripMenuItem.Image = CType(resources.GetObject("PrintToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.PrintToolStripMenuItem.Text = "Print"
+        '
+        'PrintAppointmentSheetToolStripMenuItem
+        '
+        Me.PrintAppointmentSheetToolStripMenuItem.Name = "PrintAppointmentSheetToolStripMenuItem"
+        Me.PrintAppointmentSheetToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.PrintAppointmentSheetToolStripMenuItem.Text = "Print Appointment Sheet"
+        '
+        'PrintCustomerInformationSheetToolStripMenuItem
+        '
+        Me.PrintCustomerInformationSheetToolStripMenuItem.Name = "PrintCustomerInformationSheetToolStripMenuItem"
+        Me.PrintCustomerInformationSheetToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.PrintCustomerInformationSheetToolStripMenuItem.Text = "Print Customer Information Sheet"
+        '
+        'pctVerified
+        '
+        Me.pctVerified.Location = New System.Drawing.Point(29, 114)
+        Me.pctVerified.Name = "pctVerified"
+        Me.pctVerified.Size = New System.Drawing.Size(24, 24)
+        Me.pctVerified.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pctVerified.TabIndex = 133
+        Me.pctVerified.TabStop = False
+        Me.pctVerified.Visible = False
+        '
+        'tsbtnAFPics
+        '
+        Me.tsbtnAFPics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnAFPics.Image = CType(resources.GetObject("tsbtnAFPics.Image"), System.Drawing.Image)
+        Me.tsbtnAFPics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tsbtnAFPics.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnAFPics.Name = "tsbtnAFPics"
+        Me.tsbtnAFPics.Size = New System.Drawing.Size(36, 30)
+        Me.tsbtnAFPics.Text = "ShowAFPics"
+        Me.tsbtnAFPics.ToolTipText = "Show Attached Files and Job Pictures for this Customer"
+        '
+        'btnLogCall
+        '
+        Me.btnLogCall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCalledandCancelled})
+        Me.btnLogCall.Image = CType(resources.GetObject("btnLogCall.Image"), System.Drawing.Image)
+        Me.btnLogCall.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnLogCall.Name = "btnLogCall"
+        Me.btnLogCall.Size = New System.Drawing.Size(272, 30)
+        Me.btnLogCall.Text = "Log Phone Conversation with this Customer"
+        '
+        'btnCalledandCancelled
+        '
+        Me.btnCalledandCancelled.Image = Global.Latest.My.Resources.Resources.calledcancelled
+        Me.btnCalledandCancelled.Name = "btnCalledandCancelled"
+        Me.btnCalledandCancelled.Size = New System.Drawing.Size(254, 22)
+        Me.btnCalledandCancelled.Text = "Log Appt. as Called and Cancelled"
+        '
+        'tsbtnShowCH
+        '
+        Me.tsbtnShowCH.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnShowCH.Image = CType(resources.GetObject("tsbtnShowCH.Image"), System.Drawing.Image)
+        Me.tsbtnShowCH.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tsbtnShowCH.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnShowCH.Name = "tsbtnShowCH"
+        Me.tsbtnShowCH.Size = New System.Drawing.Size(36, 30)
+        Me.tsbtnShowCH.Text = "ShowAFPics"
+        Me.tsbtnShowCH.ToolTipText = "Go Back to Customer History"
+        '
+        'tsAttachedFilesNAV
+        '
+        Me.tsAttachedFilesNAV.AutoSize = False
+        Me.tsAttachedFilesNAV.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsAttachedFilesNAV.Enabled = False
+        Me.tsAttachedFilesNAV.Image = CType(resources.GetObject("tsAttachedFilesNAV.Image"), System.Drawing.Image)
+        Me.tsAttachedFilesNAV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tsAttachedFilesNAV.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsAttachedFilesNAV.Name = "tsAttachedFilesNAV"
+        Me.tsAttachedFilesNAV.Size = New System.Drawing.Size(36, 30)
+        Me.tsAttachedFilesNAV.Text = "Up One Level"
+        '
         'PrintThisLeadToolStripMenuItem
         '
         Me.PrintThisLeadToolStripMenuItem.Image = Global.Latest.My.Resources.Resources.print_32
@@ -2793,15 +2622,6 @@ Partial Class Sales
         Me.EmailThisLeadToAssignedRepsToolStripMenuItem.Name = "EmailThisLeadToAssignedRepsToolStripMenuItem"
         Me.EmailThisLeadToAssignedRepsToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
         Me.EmailThisLeadToAssignedRepsToolStripMenuItem.Text = "Email this Lead to Assigned Rep(s)"
-        '
-        'bgGetImages
-        '
-        '
-        'bgSalesQuery
-        '
-        '
-        'bgCustomerHistory
-        '
         '
         'Sales
         '
@@ -2835,7 +2655,6 @@ Partial Class Sales
         Me.TabPage2.PerformLayout()
         Me.gbContactInfo.ResumeLayout(False)
         Me.gbContactInfo.PerformLayout()
-        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbHomeInfo.ResumeLayout(False)
         Me.gbHomeInfo.PerformLayout()
         Me.gbSpecialInstructions.ResumeLayout(False)
@@ -2854,6 +2673,7 @@ Partial Class Sales
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.cmIssue.ResumeLayout(False)
+        CType(Me.pctVerified, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2930,16 +2750,8 @@ Partial Class Sales
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblAccuracy As System.Windows.Forms.Label
     Friend WithEvents pnlPerformanceReport As System.Windows.Forms.Panel
-    Friend WithEvents Label67 As System.Windows.Forms.Label
-    Friend WithEvents Label66 As System.Windows.Forms.Label
     Friend WithEvents lblNoData As System.Windows.Forms.Label
     Friend WithEvents Label64 As System.Windows.Forms.Label
-    Friend WithEvents Label63 As System.Windows.Forms.Label
-    Friend WithEvents Label62 As System.Windows.Forms.Label
-    Friend WithEvents Label61 As System.Windows.Forms.Label
-    Friend WithEvents Label60 As System.Windows.Forms.Label
-    Friend WithEvents Label59 As System.Windows.Forms.Label
-    Friend WithEvents Label58 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents TabControl2 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
@@ -2982,9 +2794,6 @@ Partial Class Sales
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents tsbtnShowCH As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents pnlAFPics As System.Windows.Forms.Panel
     Friend WithEvents CallHousePhone4194724000ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToThisCustomerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -3028,7 +2837,6 @@ Partial Class Sales
     Friend WithEvents cmlvnoresults As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents SCsalesresult As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SCCustomerList As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents lblND As System.Windows.Forms.Label
     Friend WithEvents lblResets As System.Windows.Forms.Label
     Friend WithEvents lblRep As System.Windows.Forms.Label
@@ -3072,7 +2880,6 @@ Partial Class Sales
     Friend WithEvents ImgIssued2 As System.Windows.Forms.ImageList
     Friend WithEvents ImgIssued3 As System.Windows.Forms.ImageList
     Friend WithEvents pnlIssue As System.Windows.Forms.Panel
-    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmIssue As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents PrintThisLeadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EmailThisLeadToAssignedRepsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

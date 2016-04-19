@@ -23,9 +23,9 @@ Partial Class Confirming
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UnConfirmed Appointments", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Confirmed Appointments", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Called & Cancelled", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UnConfirmed Appointments", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Confirmed Appointments", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Called & Cancelled", System.Windows.Forms.HorizontalAlignment.Left)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Confirming))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -288,13 +288,13 @@ Partial Class Confirming
         Me.lvConfirming.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LeadID, Me.ApptTime, Me.Contact1, Me.Contact2, Me.Address, Me.Products, Me.HousePhone})
         Me.lvConfirming.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvConfirming.FullRowSelect = True
-        ListViewGroup4.Header = "UnConfirmed Appointments"
-        ListViewGroup4.Name = "lgUnconfirmed"
-        ListViewGroup5.Header = "Confirmed Appointments"
-        ListViewGroup5.Name = "lgconfirmed"
-        ListViewGroup6.Header = "Called & Cancelled"
-        ListViewGroup6.Name = "lgC&C"
-        Me.lvConfirming.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup4, ListViewGroup5, ListViewGroup6})
+        ListViewGroup1.Header = "UnConfirmed Appointments"
+        ListViewGroup1.Name = "lgUnconfirmed"
+        ListViewGroup2.Header = "Confirmed Appointments"
+        ListViewGroup2.Name = "lgconfirmed"
+        ListViewGroup3.Header = "Called & Cancelled"
+        ListViewGroup3.Name = "lgC&C"
+        Me.lvConfirming.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3})
         Me.lvConfirming.HideSelection = False
         Me.lvConfirming.Location = New System.Drawing.Point(3, 61)
         Me.lvConfirming.MultiSelect = False
@@ -632,7 +632,7 @@ Partial Class Confirming
         '
         'calledcancelled
         '
-        Me.calledcancelled.Image = Global.Latest.My.Resources.Resources.Call_Cancel48
+        Me.calledcancelled.Image = Global.Latest.My.Resources.Resources.calledcancelled
         Me.calledcancelled.Name = "calledcancelled"
         Me.calledcancelled.Size = New System.Drawing.Size(254, 22)
         Me.calledcancelled.Text = "Log Appt. as Called and Cancelled"
@@ -1348,7 +1348,7 @@ Partial Class Confirming
         Me.ilToolStripIcons.Images.SetKeyName(12, "donotmail.ico")
         Me.ilToolStripIcons.Images.SetKeyName(13, "Do not call!.ico")
         Me.ilToolStripIcons.Images.SetKeyName(14, "notes2.ico")
-        Me.ilToolStripIcons.Images.SetKeyName(15, "arrow-right-big.ico")
+        Me.ilToolStripIcons.Images.SetKeyName(15, "arrow-right.ico")
         '
         'ttCustomerHistoryNotes
         '
