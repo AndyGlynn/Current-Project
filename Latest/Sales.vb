@@ -6336,7 +6336,7 @@ Public Class Sales
     End Sub
 
     Private Sub btnPrintApptSheet_Click(sender As Object, e As EventArgs) Handles btnPrintApptSheet.Click
-        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
         'MsgBox("btnPrintApptSheet")
         'Try
         '    Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
@@ -6352,7 +6352,7 @@ Public Class Sales
 
     Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click
         'MsgBox("btnPrintCurrentList")
-        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+        ' MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
         'Try
         '    Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
         '    Dim x As New printToPrinterContactList(arItemCache)
@@ -6368,10 +6368,10 @@ Public Class Sales
     End Sub
     Private Sub btnPrintCustomerList_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerList.Click
         'MsgBox("btnPrintCustomerList")
-        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
     End Sub
     Private Sub btnPrintCustomerInfoSheet_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerInfoSheet.Click
-        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
         'Try
         '    Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
         'Catch ex As Exception
@@ -6391,7 +6391,7 @@ Public Class Sales
         '' off = get exclusions
         ''
 
-        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+        ' MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
 
 
         If Me.Exclusions_On_Off = False Then
