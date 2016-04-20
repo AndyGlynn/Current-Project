@@ -7,6 +7,7 @@ Imports System.Data.SqlClient
 
 Public Class printToPrinterApptSheet
 
+#Region "Message Body Structure"
     Public Structure MessageBody
         'strLead += r1.Item("ID") & vbCrLf
         Public RecordID As String
@@ -51,6 +52,9 @@ Public Class printToPrinterApptSheet
         '   strLead += r1.Item("IspreviousCustomer") & " " & r1.Item("IsRecovery") & vbCrLf
         Public PreviousCustomer As String
     End Structure
+#End Region
+
+#Region "Vars"
 
     Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
     Private PD As PrintDocument
@@ -60,6 +64,8 @@ Public Class printToPrinterApptSheet
     Private fld_font As New System.Drawing.Font("Verdana", 10, FontStyle.Bold)
     Private nfo_font As New System.Drawing.Font("Verdana", 10, FontStyle.Regular)
 
+    '' Icon Path
+    Private path As String = "\\server.greenworks.local\Company\ISS\IMGS\print 32.ico"
 
     '' Reference: 
     '' 
@@ -75,11 +81,19 @@ Public Class printToPrinterApptSheet
 
     Private hashRepAndID As Hashtable '' hashtable to hold key values of id:=rep
 
+#End Region
+
+#Region "Properties"
+
     Public ReadOnly Property Current_DOC As PrintDocument
         Get
             Return PD
         End Get
     End Property
+
+#End Region
+
+#Region "Overloaded Constructors"
 
     Public Sub New(ByVal RecID As String)
         '' assumes no exclusions
@@ -97,7 +111,7 @@ Public Class printToPrinterApptSheet
         pprev.Document = PD
         pprev.Text = "Print Preview For: " & RecID.ToString & " "
         Try
-            Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon("C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\Resources\print 32.ico")
+            Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon(path)
             pprev.Icon = ico
         Catch ex As Exception
             Dim stoppp As String = ex.Message.ToString
@@ -130,7 +144,7 @@ Public Class printToPrinterApptSheet
         pprev.Document = PD
         pprev.Text = "Print Preview For: " & RecID.ToString & " "
         Try
-            Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon("C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\Resources\print 32.ico")
+            Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon(path)
             pprev.Icon = ico
         Catch ex As Exception
             Dim stoppp As String = ex.Message.ToString
@@ -163,7 +177,7 @@ Public Class printToPrinterApptSheet
             PPrev = New PrintPreviewDialog
             PPrev.Text = "Print Preview For Multi Lead Info: [" & ArRecIDs.Count.ToString & "] - Leads "
             Try
-                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon("C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\Resources\print 32.ico")
+                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon(path)
                 PPrev.Icon = ico
             Catch ex As Exception
                 Dim stoppp As String = ex.Message.ToString
@@ -218,7 +232,7 @@ Public Class printToPrinterApptSheet
             PPrev = New PrintPreviewDialog
             PPrev.Text = "Print Preview For Multi Lead Info: [" & ArRecIDs.Count.ToString & "] - Leads "
             Try
-                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon("C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\Resources\print 32.ico")
+                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon(path)
                 PPrev.Icon = ico
             Catch ex As Exception
                 Dim stoppp As String = ex.Message.ToString
@@ -251,6 +265,9 @@ Public Class printToPrinterApptSheet
         End Try
     End Sub
 
+#End Region
+
+#Region "Print Handlers"
 
     Private Sub PD_PrintPage(ByVal sender As Object, ByVal e As PrintPageEventArgs)
 
@@ -1053,5 +1070,7 @@ Public Class printToPrinterApptSheet
         End Try
 
     End Function
+
+#End Region
 
 End Class

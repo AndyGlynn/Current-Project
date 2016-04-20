@@ -112,8 +112,17 @@ Public Class SalesListManager
             r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
             Dim cnt As Integer = 0
             r.Read()
-            If r.Item(0) >= 500 Then
+            While r.Read
+                cnt += 1
+            End While
+
+            lvSalesCnt = cnt
+
+            If cnt >= 750 Then
                 ''progressbar class
+                frmGenericPBar.ProgressBar1.Minimum = 1
+                frmGenericPBar.ProgressBar1.Maximum = cnt
+                frmGenericPBar.lblMax.Text = cnt.ToString
             End If
 
             r.Close()
@@ -136,7 +145,15 @@ Public Class SalesListManager
 
         ''
         Try
-            Dim Itemcnt As Integer = 0
+            Count()
+            Dim Itemcnt As Integer = lvSalesCnt
+            If Itemcnt >= 750 Then
+                frmGenericPBar.MdiParent = Main
+                frmGenericPBar.TopMost = True
+                frmGenericPBar.Show()
+            Else
+                '' carry on.
+            End If
             Dim arItems As New ArrayList
             '' 
 
@@ -239,6 +256,21 @@ Public Class SalesListManager
             Dim id As String = ""
             While r.Read
                 cntRecs += 1
+                If lvSalesCnt >= 750 Then
+                    If cntRecs < lvSalesCnt Then
+                        frmGenericPBar.Cursor = Cursors.WaitCursor
+                        frmGenericPBar.ProgressBar1.Increment(1)
+                        frmGenericPBar.lblCurrent.Text = cntRecs.ToString
+                        Application.DoEvents()
+                    ElseIf cntRecs = lvSalesCnt Then
+                        Main.Cursor = Cursors.Default
+                        Sales.Cursor = Cursors.Default
+                        frmGenericPBar.Cursor = Cursors.Default
+                        frmGenericPBar.Close()
+                    End If
+                Else
+                    ''carry on.
+                End If
                 id = r.Item(0)
                 Dim lv As New ListViewItem
                 lv.Name = r.Item(0)
@@ -339,6 +371,8 @@ Public Class SalesListManager
                 lv.SubItems.Add(r.Item(20))
                 ' Sales.lvSales.Items.Add(lv)
                 lvCol.Add(lv)
+
+
 
                 ' arItems.Add(lv)
 

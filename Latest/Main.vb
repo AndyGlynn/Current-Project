@@ -255,14 +255,24 @@ Public Class Main
                 Exit Sub
             End If
             If My.Computer.Network.IsAvailable = True Then
-                Dim tstCNN As New System.Data.SqlClient.SqlConnection("SERVER=192.168.1.2;DataBase=Iss;User Id=sa;Password=spoken1;Timeout=5;")
+                Dim tstCNN As New System.Data.SqlClient.SqlConnection("SERVER=192.168.1.2;DataBase=Iss;User Id=sa;Password=spoken1;Timeout=15;")
                 Try
                     tstCNN.Open()
                     tstCNN.Close()
                 Catch ex As Exception
-                    MsgBox("No connection can be made to SQL server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "No Network Present.")
-                    Application.Exit()
-                    Exit Sub
+                    '' Nest a secondary Attempt.
+                    Try
+                        Dim tstCNN2 As New System.Data.SqlClient.SqlConnection("SERVER=192.168.1.2;DataBase=Iss;User Id=sa;Password=spoken1;Timeout=15;")
+                        tstCNN2.Open()
+                        tstCNN2.Close()
+                    Catch ex2 As Exception
+                        MsgBox("No connection can be made to SQL server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "No Network Present.")
+                        Dim y As New ErrorLogging_V2
+                        y.WriteToLog(Date.Now, My.Computer.Name.ToString, "0.0.0.0", "Main", "FormCode", "Event", "Main_Load()", "0", ex2.Message.ToString)
+                        y = Nothing
+                        Application.Exit()
+                        Exit Sub
+                    End Try
                 End Try
             End If
 
