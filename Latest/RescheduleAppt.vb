@@ -104,7 +104,7 @@ Public Class RescheduleAppt
             y = Nothing
         End Try
     End Function
-   
+
 
     Private Sub RescheduleAppt_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim lock As Boolean = Me.Chk_Locked_Sales_Results

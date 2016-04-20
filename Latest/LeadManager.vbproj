@@ -624,6 +624,7 @@
     <Compile Include="SalesResult.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Sales_Print_Operations_V2.vb" />
     <Compile Include="SALES_REPORTING_LOGIC.vb" />
     <Compile Include="ScheduleAction.designer.vb">
       <DependentUpon>ScheduleAction.vb</DependentUpon>
@@ -819,7 +820,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Administration.resx">
       <DependentUpon>Administration.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AlertNotify.resx">
       <DependentUpon>AlertNotify.vb</DependentUpon>

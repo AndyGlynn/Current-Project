@@ -268,6 +268,18 @@ Public Class Main
 
             Me.tmrAlerts.Stop()
 
+            '' global Mappoint Add
+            ''
+            Try
+                Dim oApp As MapPoint.Application
+                oApp = CreateObject("Mappoint.Application")
+                STATIC_VARIABLES.oApp = oApp
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, MachineName, "", "Main", "FormCode", "Method", "Main_Load", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+
             'ManageAlerts.MdiParent = Me
 
 
@@ -1085,7 +1097,7 @@ Public Class Main
         'Confirming.WindowState = FormWindowState.Maximized
     End Sub
 
-   
+
 
     Private Sub Cascade_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Cascade.Click
         Try
@@ -1134,7 +1146,7 @@ Public Class Main
 
     End Sub
 
-    
+
 
     Private Sub Main_MdiChildActivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MdiChildActivate
         Try
@@ -1251,7 +1263,7 @@ Public Class Main
 
 
 
- 
+
 
 
     Private Sub MarketingManagerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsbMarketingManager.Click

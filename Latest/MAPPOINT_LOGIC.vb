@@ -14,7 +14,8 @@ Public Class MAPPOINT_LOGIC
     Implements IDisposable
     '' mappoint variables
     'Public oApp As MapPoint.Application = New MapPoint.Application
-    Public oApp As MapPoint.Application = CreateObject("Mappoint.Application")
+    'Public oApp As MapPoint.Application = CreateObject("Mappoint.Application")
+    Public oApp As MapPoint.Application = STATIC_VARIABLES.oApp
     Public oMap As MapPoint.Map = oApp.ActiveMap
     Public oResults As MapPoint.FindResults
     Public Mappoint_Dataset As MapPoint.DataSet
@@ -128,15 +129,15 @@ Public Class MAPPOINT_LOGIC
             My.Application.DoEvents()
             Progress.Dispose()
             oMap.Saved = True
-            oMap = Nothing
-            oApp = Nothing
+            'oMap = Nothing
+            'oApp = Nothing
 
         Catch ex As Exception
 
             Main.Cursor = Cursors.Default
             oMap.Saved = True
-            oMap = Nothing
-            oApp = Nothing
+            'oMap = Nothing
+            'oApp = Nothing
 
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC", "MAPPOINT_LOGIC", "Sub", "DoIt(args)", "0", ex.Message.ToString)
@@ -291,14 +292,14 @@ Public Class MAPPOINT_LOGIC
             My.Application.DoEvents()
             Progress.Dispose()
             oMap.Saved = True
-            oMap = Nothing
-            oApp = Nothing
+            'oMap = Nothing
+            'oApp = Nothing
 
         Catch ex As Exception
             Main.Cursor = Cursors.Default
             oMap.Saved = True
-            oMap = Nothing
-            oApp = Nothing
+            'oMap = Nothing
+            'oApp = Nothing
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC", "MAPPOINT_LOGIC", "Sub", "DoIt(args)", "0", ex.Message.ToString)
             y = Nothing

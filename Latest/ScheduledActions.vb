@@ -361,7 +361,7 @@ Public Class ScheduledActions
         Dim pct As PictureBox = sender
         Me.ttNotes.Show(pct.Tag, pct, 30000)
     End Sub
- 
+
     Private Sub scroll(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.panel.Select()
     End Sub

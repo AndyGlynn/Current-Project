@@ -45,7 +45,8 @@ Public Class VerifyAddressBulk
 
     Public Sub New()
 
-        oApp = CreateObject("MapPoint.Application")
+        ' oApp = CreateObject("MapPoint.Application")
+        oApp = STATIC_VARIABLES.oApp
         oMap = oApp.NewMap()
         oMap.Saved = True
         oApp.Visible = False

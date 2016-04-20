@@ -14,7 +14,8 @@ Public Class Validate_Zip_Code_Mappoint
         Dim isValid As Boolean = False
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("Mappoint.Application")
+            'oApp = CreateObject("Mappoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             oApp.Visible = False
             Dim oMap As MapPoint.Map
             oMap = oApp.NewMap
@@ -28,8 +29,8 @@ Public Class Validate_Zip_Code_Mappoint
             End If
             Return isValid
             oMap.Saved = True
-            oApp.Quit()
-            oApp = Nothing
+            'oApp.Quit()
+            ' oApp = Nothing
 
         Catch ex As Exception
             Main.Cursor = Cursors.Default

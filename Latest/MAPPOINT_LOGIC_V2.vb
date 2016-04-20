@@ -203,7 +203,8 @@ Public Class MAPPOINT_LOGIC_V2
             Dim listResults As New List(Of CityState)
             listResults = ListOfCityAndZips
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            'App = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             oApp.Visible = False
             Dim oMap As MapPoint.Map = oApp.NewMap
             Dim start_loc As MapPoint.Location
@@ -236,8 +237,8 @@ Public Class MAPPOINT_LOGIC_V2
             Loop
 
             oMap.Saved = True
-            oApp.Quit()
-            oApp = Nothing
+            'oApp.Quit()
+            'oApp = Nothing
             Return arCityFoundName
         Catch ex As Exception
             Main.Cursor = Cursors.Default
@@ -253,7 +254,8 @@ Public Class MAPPOINT_LOGIC_V2
             Dim listResults As New List(Of ZipState)
             listResults = ListOfCityAndZips
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            ' oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             oApp.Visible = False
             Dim oMap As MapPoint.Map = oApp.NewMap
             Dim start_loc As MapPoint.Location
@@ -300,8 +302,8 @@ Public Class MAPPOINT_LOGIC_V2
             Loop
 
             oMap.Saved = True
-            oApp.Quit()
-            oApp = Nothing
+            'oApp.Quit()
+            'oApp = Nothing
             Return arZipFoundName
         Catch ex As Exception
             Main.Cursor = Cursors.Default
@@ -376,7 +378,8 @@ Public Class MAPPOINT_LOGIC_V2
     Public Sub Map_Single_Address(ByVal StreetAddress As String, ByVal City As String, ByVal State As String, ByVal Zip As String)
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            ' oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             Dim oMap As MapPoint.Map = oApp.NewMap
             Dim oRes As MapPoint.FindResults
             Dim oLoc As MapPoint.Location
@@ -416,7 +419,8 @@ Public Class MAPPOINT_LOGIC_V2
     Public Sub PointToPointDirections(ByVal BeginStAddress As String, ByVal BeginCity As String, ByVal BeginState As String, ByVal BeginZip As String, ByVal EndStAddress As String, ByVal EndCity As String, ByVal EndState As String, ByVal EndZip As String)
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            'oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             Dim oMap As MapPoint.Map = oApp.NewMap
             oApp.Toolbars(1).Visible = False
             oApp.Toolbars(2).Visible = False
@@ -677,7 +681,8 @@ Public Class MAPPOINT_LOGIC_V2
     Public Function PlotNoDemo(ByVal ListOfNoDemo As List(Of LeadToPlotNoDemo))
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            'oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             Dim oMap As MapPoint.Map = oApp.NewMap
             oApp.PaneState = GeoPaneState.geoPaneNone
 
@@ -718,7 +723,8 @@ Public Class MAPPOINT_LOGIC_V2
     Public Sub PlotResets(ByVal ListOfResets As List(Of LeadToPlotReset))
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            'oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             Dim oMap As MapPoint.Map = oApp.NewMap
             oApp.PaneState = GeoPaneState.geoPaneNone
 
@@ -759,7 +765,8 @@ Public Class MAPPOINT_LOGIC_V2
     Public Sub PlotRecissionCancel(ByVal ListOfRecissionCancel As List(Of LeadToPlotRecissionCancel))
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            'oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             Dim oMap As MapPoint.Map = oApp.NewMap
             oApp.PaneState = GeoPaneState.geoPaneNone
 
@@ -800,7 +807,8 @@ Public Class MAPPOINT_LOGIC_V2
     Public Sub PlotNotHot(ByVal ListOfNotHit As List(Of LeadToPlotNotHit))
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            ' oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             Dim oMap As MapPoint.Map = oApp.NewMap
             oApp.PaneState = GeoPaneState.geoPaneNone
 
@@ -841,7 +849,8 @@ Public Class MAPPOINT_LOGIC_V2
     Public Sub PlotDemoNoSale(ByVal ListOfDemoNoSale As List(Of LeadToPlotDemoNoSale))
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            'oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             Dim oMap As MapPoint.Map = oApp.NewMap
             oApp.PaneState = GeoPaneState.geoPaneNone
 
@@ -882,7 +891,8 @@ Public Class MAPPOINT_LOGIC_V2
     Public Sub PlotSales(ByVal ListOfSales As List(Of LeadToPlotSales))
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            'oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             Dim oMap As MapPoint.Map = oApp.NewMap
             oApp.PaneState = GeoPaneState.geoPaneNone
 
@@ -951,7 +961,8 @@ Public Class MAPPOINT_LOGIC_V2
     Public Function GetDistanceBetweenCities(ByVal StartCity As String, ByVal StartState As String, ByVal EndCity As String, ByVal EndState As String)
         Try
             Dim oApp As MapPoint.Application
-            oApp = CreateObject("MapPoint.Application")
+            'oApp = CreateObject("MapPoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             oApp.Units = GeoUnits.geoMiles
             Dim oRes1 As MapPoint.FindResults
             Dim oRes2 As MapPoint.FindResults
@@ -973,8 +984,8 @@ Public Class MAPPOINT_LOGIC_V2
             Dim dis As Double = oMap.ActiveRoute.Distance
             Dim dTime As Double = oMap.ActiveRoute.DrivingTime
             oMap.Saved = True
-            oApp.Quit()
-            oApp = Nothing
+            'oApp.Quit()
+            'oApp = Nothing
 
             Dim DD_Obj As New DriveTimeAndDistance
 

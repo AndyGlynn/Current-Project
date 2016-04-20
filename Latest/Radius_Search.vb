@@ -19,7 +19,8 @@ Public Class Radius_Search
 
         Dim oApp As MapPoint.Application
 
-        oApp = CreateObject("MapPoint.Application")
+        ' oApp = CreateObject("MapPoint.Application")
+        oApp = STATIC_VARIABLES.oApp
         oApp.Toolbars(1).Visible = False
         oApp.Toolbars(2).Visible = False
         oApp.Toolbars(3).Visible = False
@@ -66,8 +67,8 @@ Public Class Radius_Search
         Next
 
         oMap.Saved = True
-        oApp.Quit()
-        oApp = Nothing
+        'oApp.Quit()
+        'oApp = Nothing
 
     End Sub
     Public Sub New(ByVal Zip As Integer, ByVal Unique_List As List(Of Pull_Unique_States_And_Zips.UniqueCityStateZip), ByVal Radius As Integer, ByVal Form As String)
@@ -82,7 +83,8 @@ Public Class Radius_Search
         arZips = New ArrayList
         Dim oApp As MapPoint.Application
 
-        oApp = CreateObject("MapPoint.Application")
+        'oApp = CreateObject("MapPoint.Application")
+        oApp = STATIC_VARIABLES.oApp
         oApp.Toolbars(1).Visible = False
         oApp.Toolbars(2).Visible = False
         oApp.Toolbars(3).Visible = False
@@ -134,8 +136,8 @@ Public Class Radius_Search
         Next
 
         oMap.Saved = True
-        oApp.Quit()
-        oApp = Nothing
+        'oApp.Quit()
+        'oApp = Nothing
 
 
 

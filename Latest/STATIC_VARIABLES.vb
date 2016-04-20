@@ -2,10 +2,13 @@ Imports System.Data
 Imports System.Data.Sql
 Imports System.Data.SqlClient
 Imports System.Net.Sockets
+Imports MapPoint
+Imports AxMapPoint
+
 Module STATIC_VARIABLES
     Public Const ProgramName As String = "Improveit! 360"
     Public SMN As New Collection
-    'Public oApp As New MapPoint.Application
+    Public oApp As MapPoint.Application
     ' Public CurrentUser As String = ""
     Public CurrentManager As String = ""
     Public Cnn As String = "Data Source=192.168.1.2;Initial Catalog=iss;User Id=sa;Password=spoken1;"

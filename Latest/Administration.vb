@@ -1,25 +1,5 @@
-Public Class Administration
+﻿Public Class Administration
 
-
-
-    
-
-    Private Sub TreeView1_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs)
-        ' MsgBox(Me.TreeView1.SelectedNode.Text)
-        'If Me.TreeView1.Nodes(0).Checked = True Then
-        '    Me.TreeView1.Nodes(0).Nodes(0).Checked = True
-        '    Me.TreeView1.Nodes(0).Nodes(0).Nodes(0).Checked = True
-        '    Me.TreeView1.Nodes(0).Nodes(0).Nodes(1).Checked = True
-        '    Me.TreeView1.Nodes(0).Nodes(0).Nodes(2).Checked = True
-        'ElseIf Me.TreeView1.Nodes(0).Checked = False Then
-        '    Me.TreeView1.Nodes(0).Nodes(0).Checked = False
-        '    Me.TreeView1.Nodes(0).Nodes(0).Nodes(0).Checked = False
-        '    Me.TreeView1.Nodes(0).Nodes(0).Nodes(1).Checked = False
-        '    Me.TreeView1.Nodes(0).Nodes(0).Nodes(2).Checked = False
-        'End If
-    End Sub
-
-    
     Private Sub tsbtnUsers_Click(sender As Object, e As EventArgs) Handles tsbtnUsers.Click
         Try
             SetUpUser.ShowDialog()
@@ -32,5 +12,8 @@ Public Class Administration
 
     End Sub
 
-    
+
+    Private Sub Administration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.MdiParent = Main
+    End Sub
 End Class

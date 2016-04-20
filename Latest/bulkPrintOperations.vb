@@ -94,9 +94,7 @@ Public Class bulkPrintOperations
         End Try
 
     End Sub
-    Public Sub New()
-
-    End Sub
+    
 
 #Region "Get Exclusions"
     Public Function GetExclusions()
@@ -596,7 +594,7 @@ Public Class bulkPrintOperations
             Dim can_get_email As Boolean = False
             Dim rep_cnx As SqlConnection = New SqlConnection(sqlCNX)
             rep_cnx.Open()
-            Dim cmdCheck As SqlCommand = New SqlCommand("SELECT HasEmail from tblTestEmployee where FName = '" & RepFName & "' and LName = '" & RepLName & "';", rep_cnx)
+            Dim cmdCheck As SqlCommand = New SqlCommand("SELECT CanRecieveEmail from SalesRepPull where FName = '" & RepFName & "' and LName = '" & RepLName & "';", rep_cnx)
             Dim strReturn As String = cmdCheck.ExecuteScalar
             rep_cnx.Close()
             rep_cnx = Nothing
@@ -615,28 +613,28 @@ Public Class bulkPrintOperations
 
     End Function
 
-    Public Function CanRepGetEmail(ByVal EmployeeID As String)
-        Try
-            Dim can_get_email As Boolean = False
-            Dim rep_cnx As SqlConnection = New SqlConnection(sqlCNX)
-            rep_cnx.Open()
-            Dim cmdCheck As SqlCommand = New SqlCommand("SELECT HasEmail from tblTestEmployee where EmployeeID = '" & EmployeeID & "'", rep_cnx)
-            Dim strReturn As String = cmdCheck.ExecuteScalar
-            rep_cnx.Close()
-            rep_cnx = Nothing
-            If strReturn = "True" Then
-                can_get_email = True
-            ElseIf strReturn = "False" Then
-                can_get_email = False
-            End If
-            Return can_get_email
-        Catch ex As Exception
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "CanRepGetEmail(EmployeeID) {Overloaded}", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+    'Public Function CanRepGetEmail(ByVal EmployeeID As String)
+    '    Try
+    '        Dim can_get_email As Boolean = False
+    '        Dim rep_cnx As SqlConnection = New SqlConnection(sqlCNX)
+    '        rep_cnx.Open()
+    '        Dim cmdCheck As SqlCommand = New SqlCommand("SELECT HasEmail from SalesRepPull where EmployeeID = '" & EmployeeID & "'", rep_cnx)
+    '        Dim strReturn As String = cmdCheck.ExecuteScalar
+    '        rep_cnx.Close()
+    '        rep_cnx = Nothing
+    '        If strReturn = "True" Then
+    '            can_get_email = True
+    '        ElseIf strReturn = "False" Then
+    '            can_get_email = False
+    '        End If
+    '        Return can_get_email
+    '    Catch ex As Exception
+    '        Main.Cursor = Cursors.Default
+    '        Dim y As New ErrorLogging_V2
+    '        y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "bulkEmail", "bulkEmail", "Function", "CanRepGetEmail(EmployeeID) {Overloaded}", "0", ex.Message.ToString)
+    '        y = Nothing
+    '    End Try
 
-    End Function
+    'End Function
 #End Region
 End Class

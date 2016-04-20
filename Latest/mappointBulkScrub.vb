@@ -6,7 +6,8 @@ Public Class mappointBulkScrub
     Public oMap As MapPoint.Map
     Public oRes As MapPoint.FindResults
     Public Sub New()
-        oApp = CreateObject("MapPoint.Application")
+        ' oApp = CreateObject("MapPoint.Application")
+        oApp = STATIC_VARIABLES.oApp
         oMap = oApp.NewMap()
         oMap.Saved = True
         oApp.Visible = False

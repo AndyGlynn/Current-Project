@@ -32,6 +32,10 @@ Public Class Sales
     Dim focusdtp2 As Boolean = False
 #End Region
 
+#Region "Exclusions Variable(s)"
+    Public Exclusions_On_Off As Boolean = True
+#End Region
+
 #Region "Edits For lsAttachedFiles and lsJobPictures 11-15-2015"
     '' AC
     '' static controls on pnlAFPics
@@ -41,7 +45,6 @@ Public Class Sales
     Private rootDirJP As String = "\\192.168.1.2\Company\ISS\Job Pictures\"
 
 #End Region
-
 
 #Region "Toolbar Buttons"
     '' Summary Tab Button Set 
@@ -148,6 +151,7 @@ Public Class Sales
     Friend WithEvents btnMoveAppt As New ToolStripMenuItem
 
 #End Region
+
 #Region "Form Operator Variables"
     Public ID As String = ""
     Public LoadComplete As Boolean = False
@@ -5113,10 +5117,16 @@ Public Class Sales
     End Sub
 
     Private Sub btnExclude_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExclude.Click
+        '' 4-20-2016 AC
+        '' Exclusions_On_Off (bool)
+        '' False = Off
+        '' True = On 
         If Me.btnExclude.Text.Contains("Off") Then
+            Me.Exclusions_On_Off = False
             Me.btnExclude.Text = "Turn On Exclusions"
             Me.btnExclude.Image = Me.ilToolbarButtons.Images(12)
         Else
+            Me.Exclusions_On_Off = True
             Me.btnExclude.Text = "Turn Off Exclusions"
             Me.btnExclude.Image = Me.ilToolbarButtons.Images(13)
         End If
@@ -5236,7 +5246,50 @@ Public Class Sales
     End Sub
 
     Private Sub PrintThisLeadToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PrintThisLeadToolStripMenuItem.Click
-        btnPrintThisIssue_Click(sender, e)
+
+
+
+        '' 4-20-16 AC
+        '' EDITS:
+
+        Dim targetID As String = "0"
+        Try
+            Dim y As Panel
+            For Each y In pnlIssue.Controls
+                If y.BorderStyle = BorderStyle.FixedSingle Then
+                    Dim yy As Control
+                    For Each yy In y.Controls
+                        If TypeOf yy Is LinkLabel Then
+                            'MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                            Dim lead_id As String = yy.Text
+                            targetID = lead_id
+                            Dim x As New Sales_Print_Operations_V2(Me.Exclusions_On_Off, lead_id)
+                        End If
+                    Next
+                End If
+            Next
+        Catch ex As Exception
+            Dim yy As New ErrorLogging_V2
+            yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintThisIssue_Click()", targetID, ex.Message.ToString)
+        End Try
+
+
+
+        'btnPrintThisIssue_Click(sender, e)
+        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+        'Dim y As Panel
+        'For Each y In pnlIssue.Controls
+        '    If y.BorderStyle = BorderStyle.FixedSingle Then
+        '        Dim yy As Control
+        '        For Each yy In y.Controls
+        '            If TypeOf yy Is LinkLabel Then
+        '                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+        '                Dim lead_id As String = yy.Text
+        '                Dim c As New printToPrinterCustInfoSheet(lead_id)
+        '            End If
+        '        Next
+        '    End If
+        'Next
     End Sub
 
     Private Sub EmailThisLeadToAssignedRepsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EmailThisLeadToAssignedRepsToolStripMenuItem.Click
@@ -6108,19 +6161,62 @@ Public Class Sales
     End Sub
 
     Private Sub btnPrintIssue_Click(sender As Object, e As EventArgs) Handles btnPrintIssue.Click
-        'MsgBox("btnPrintIssue")
+
+       
+
     End Sub
 
 #Region "Printing Options"
 
     Private Sub btnPrintIssuedAppts_Click(sender As Object, e As EventArgs) Handles btnPrintIssuedAppts.Click
         'MsgBox("btnPrintIssuedAppts")
+        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+
+
+        ' SQL SP Involved:
+        '
+        'dbo.GetIssued
+        'expects @dt as 'x/x/xxxx';
+        '
+
+        ''
+        '' => Pipe to Multi with / without exclusions on.
+        '' 
+        '' Returns Whole RecordSets | only need ArIds for Multi Print.
+        ''
+
+        Try
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
+            cnx.Open()
+            Dim cmdGET As New SqlCommand("dbo.GetIssued", cnx)
+            Dim arLeads As New ArrayList
+            cmdGET.CommandType = CommandType.StoredProcedure
+            cmdGET.Parameters.Add("@dt", Me.dtpIssueLeads.Value.ToShortDateString)
+            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
+            While r1.Read
+                arLeads.Add(r1.Item("id"))
+            End While
+            r1.Close()
+            cnx.Close()
+            cnx = Nothing
+            If Me.Exclusions_On_Off = True Then
+                Dim y As New Sales_Print_Operations_V2(True, arLeads)
+            Else
+                Dim y As New Sales_Print_Operations_V2(False, arLeads)
+            End If
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales.vb", "FormCode", "Event", "btnPrintIssue_Click()", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
     Private Sub btnPrintAllIssue_Click(sender As Object, e As EventArgs) Handles btnPrintAllIssue.Click
-        '' MsgBox("btnPrintAllIssue")
-        If Me.btnExclude.Text.Contains("On") Then
-            frmPrint.Exclusions = False
+        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+
+        If Me.Exclusions_On_Off = False Then
             Dim y As Panel
             Dim arLeadNums As New ArrayList
             For Each y In pnlIssue.Controls
@@ -6134,17 +6230,9 @@ Public Class Sales
                 Next
             Next
 
-            frmPrint.ClearListView()
+            Dim pt As New Sales_Print_Operations_V2(False, arLeadNums)
 
-            Dim i As Integer = 0
-            For i = 0 To arLeadNums.Count - 1
-                Dim lv As New ListViewItem
-                lv.Text = arLeadNums(i)
-                frmPrint.lsLeadIds.Items.Add(lv)
-            Next
-            frmPrint.ShowDialog()
-        ElseIf Me.btnExclude.Text.Contains("Off") Then
-            frmPrint.Exclusions = True
+        ElseIf Me.Exclusions_On_Off = True Then
             Dim y As Panel
             Dim arLeadNums As New ArrayList
             For Each y In pnlIssue.Controls
@@ -6158,222 +6246,355 @@ Public Class Sales
                 Next
             Next
 
-            frmPrint.ClearListView()
+            Dim pt As New Sales_Print_Operations_V2(True, arLeadNums)
 
-            Dim i As Integer = 0
-            For i = 0 To arLeadNums.Count - 1
-                Dim lv As New ListViewItem
-                lv.Text = arLeadNums(i)
-                frmPrint.lsLeadIds.Items.Add(lv)
-            Next
-            frmPrint.ShowDialog()
         End If
+
+
+
+        ' '' MsgBox("btnPrintAllIssue")
+        'If Me.btnExclude.Text.Contains("On") Then
+        '    'frmPrint.Exclusions = False
+        '    Dim y As Panel
+        '    Dim arLeadNums As New ArrayList
+        '    For Each y In pnlIssue.Controls
+        '        Dim yy As Control
+        '        For Each yy In y.Controls
+        '            If TypeOf yy Is LinkLabel Then
+        '                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+        '                Dim lead_id As String = yy.Text
+        '                arLeadNums.Add(lead_id)
+        '            End If
+        '        Next
+        '    Next
+
+        '    'frmPrint.ClearListView()
+
+        '    'Dim i As Integer = 0
+        '    'For i = 0 To arLeadNums.Count - 1
+        '    '    Dim lv As New ListViewItem
+        '    '    lv.Text = arLeadNums(i)
+        '    '    frmPrint.lsLeadIds.Items.Add(lv)
+        '    'Next
+        '    'frmPrint.ShowDialog()
+
+        '    '' 4-19-2016
+        '    ''arLeadNums = List Of Lead ID's to print
+        '    '' 
+
+        '    ''
+        '    ''** Pipe to printToPrinter Class for Cust Info
+        '    ''** Overloaded constructor => arLeadNums as arg
+
+        '    Dim pt As New printToPrinterCustInfoSheet(arLeadNums)
+
+
+        'ElseIf Me.btnExclude.Text.Contains("Off") Then
+        '    'frmPrint.Exclusions = True
+        '    Dim y As Panel
+        '    Dim arLeadNums As New ArrayList
+        '    For Each y In pnlIssue.Controls
+        '        Dim yy As Control
+        '        For Each yy In y.Controls
+        '            If TypeOf yy Is LinkLabel Then
+        '                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+        '                Dim lead_id As String = yy.Text
+        '                arLeadNums.Add(lead_id)
+        '            End If
+        '        Next
+        '    Next
+
+        '    'frmPrint.ClearListView()
+
+        '    'Dim i As Integer = 0
+        '    'For i = 0 To arLeadNums.Count - 1
+        '    '    Dim lv As New ListViewItem
+        '    '    lv.Text = arLeadNums(i)
+        '    '    frmPrint.lsLeadIds.Items.Add(lv)
+        '    'Next
+        '    'frmPrint.ShowDialog()
+
+
+
+
+
+
+        '    ''
+        '    ''** Pipe to printToPrinter Class for Cust Info
+        '    ''** Overloaded constructor => arLeadNums as arg
+
+
+        '    '' 4-19-2016
+        '    ''arLeadNums = List Of Lead ID's to print
+        '    '' 
+
+        '    Dim pt As New printToPrinterCustInfoSheet(arLeadNums)
+
+        'End If
 
 
     End Sub
 
     Private Sub btnPrintApptSheet_Click(sender As Object, e As EventArgs) Handles btnPrintApptSheet.Click
+        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
         'MsgBox("btnPrintApptSheet")
-        Try
-            Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+        'Try
+        '    Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
+        'Catch ex As Exception
+        '    Me.Cursor = Cursors.Default
+        '    Main.Cursor = Cursors.Default
+        '    Dim y As New ErrorLogging_V2
+        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
+        '    y = Nothing
+        'End Try
 
     End Sub
 
     Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click
         'MsgBox("btnPrintCurrentList")
-        Try
-            Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
-            Dim x As New printToPrinterContactList(arItemCache)
-            x.ShowDoc()
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCurrentList_click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+        'Try
+        '    Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
+        '    Dim x As New printToPrinterContactList(arItemCache)
+        '    x.ShowDoc()
+        'Catch ex As Exception
+        '    Me.Cursor = Cursors.Default
+        '    Main.Cursor = Cursors.Default
+        '    Dim y As New ErrorLogging_V2
+        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCurrentList_click", "0", ex.Message.ToString)
+        '    y = Nothing
+        'End Try
 
     End Sub
     Private Sub btnPrintCustomerList_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerList.Click
         'MsgBox("btnPrintCustomerList")
+        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
     End Sub
     Private Sub btnPrintCustomerInfoSheet_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerInfoSheet.Click
-        Try
-            Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCustomerInfoSheet_click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+        'Try
+        '    Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
+        'Catch ex As Exception
+        '    Me.Cursor = Cursors.Default
+        '    Main.Cursor = Cursors.Default
+        '    Dim y As New ErrorLogging_V2
+        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCustomerInfoSheet_click", "0", ex.Message.ToString)
+        '    y = Nothing
+        'End Try
 
     End Sub
 
     Private Sub btnPrintNoEmailIssue_Click(sender As Object, e As EventArgs) Handles btnPrintNoEmailIssue.Click
-        Try
-            ''MsgBox("btnPrintNoEmailIssue")
-            If Me.btnExclude.Text.Contains("On") Then
-                frmPrint.Exclusions = False
-                Dim y As Panel
-                Dim arRepNames As New ArrayList
-                Dim arLeadNums As New ArrayList
-                Dim _leadNum As String = ""
-                For Each y In pnlIssue.Controls
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
+        '' exclusions are opposite
+        '' 
+        '' on = dont get exclusions;
+        '' off = get exclusions
+        ''
 
-                        If TypeOf ctrl Is LinkLabel Then
-                            _leadNum = ctrl.Text
-                        End If
-                        If TypeOf ctrl Is ComboBox Then
-                            If ctrl.Text <> "" Then
-                                Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                                Dim fname As String = strName(0)
-                                Dim lname As String = strName(1)
-                                Dim g As New bulkPrintOperations
-                                Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
-                                If canGetMail = False Then
-                                    arRepNames.Add(fname & " " & lname)
-                                    arLeadNums.Add(_leadNum)
-                                End If
+        MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+
+
+        If Me.Exclusions_On_Off = False Then
+            Dim y As Panel
+            Dim arLeadNums As New ArrayList
+            Dim leadId As String = ""
+            For Each y In pnlIssue.Controls
+                Dim yy As Control
+                For Each yy In y.Controls
+                    If TypeOf yy Is LinkLabel Then
+                        ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                        Dim lead_id As String = yy.Text
+                        leadId = lead_id
+                    ElseIf TypeOf yy Is ComboBox Then
+                        If yy.Text <> "" Then
+                            Dim strName = Split(yy.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                            Dim fname As String = strName(0)
+                            Dim lname As String = strName(1)
+                            Dim g As New bulkPrintOperations
+                            Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+                            If canGetMail = False Then
+                                arLeadNums.Add(leadId)
                             End If
                         End If
-                    Next
+                    End If
                 Next
+            Next
 
-                Dim gg As Integer = 0
-                ''Dim strMSG As String = ""
-                frmPrint.ClearListView()
-
-                For gg = 0 To arRepNames.Count - 1
-                    '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
-                    Dim lv As New ListViewItem
-                    lv.Text = arLeadNums(gg)
-                    frmPrint.lsLeadIds.Items.Add(lv)
-                Next
-
-                frmPrint.ShowDialog()
-
-
-            ElseIf btnExclude.Text.Contains("Off") Then
-                '' MsgBox("exclusions on")
-                frmPrint.Exclusions = True
-                Dim b As New bulkPrintOperations
-                Dim ex_set As bulkPrintOperations.Exclusions
-                ex_set = b.GetExclusions()
-                Dim y As Panel
-                Dim arRepNames As New ArrayList
-                Dim arLeadNums As New ArrayList
-                Dim _leadNum As String = ""
-                For Each y In pnlIssue.Controls
-                    Dim ctrl As Control
-                    For Each ctrl In y.Controls
-
-                        If TypeOf ctrl Is LinkLabel Then
-                            _leadNum = ctrl.Text
-                        End If
-                        If TypeOf ctrl Is ComboBox Then
-                            If ctrl.Text <> "" Then
-                                Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                                Dim fname As String = strName(0)
-                                Dim lname As String = strName(1)
-                                Dim g As New bulkPrintOperations
-                                Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
-                                If canGetMail = False Then
-                                    arRepNames.Add(fname & " " & lname)
-                                    arLeadNums.Add(_leadNum)
-                                End If
-                            End If
-                        End If
-                    Next
-                Next
-                Dim gg As Integer = 0
-                ''Dim strMSG As String = ""
-                frmPrint.ClearListView()
-
-                For gg = 0 To arRepNames.Count - 1
-                    '' strMSG += arLeadNums(gg) & " " & arRepNames(gg) & vbCrLf
-                    Dim lv As New ListViewItem
-                    lv.Text = arLeadNums(gg)
-                    frmPrint.lsLeadIds.Items.Add(lv)
-                Next
-
-
-                frmPrint.ShowDialog()
+            If arLeadNums.Count >= 1 Then
+                Dim pt As New Sales_Print_Operations_V2(False, arLeadNums)
+            ElseIf arLeadNums.Count <= 0 Then
+                MsgBox("All reps assigned can recieve emails.", MsgBoxStyle.Information, "Rep(s) Have Emails.")
+                Exit Sub
             End If
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintNoEmailIssue_click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
 
+        ElseIf Me.Exclusions_On_Off = True Then
+            Dim y As Panel
+            Dim arLeadNums As New ArrayList
+            Dim leadId As String = ""
+            For Each y In pnlIssue.Controls
+                Dim yy As Control
+                For Each yy In y.Controls
+                    If TypeOf yy Is LinkLabel Then
+                        ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                        Dim lead_id As String = yy.Text
+                        leadId = lead_id
+                    ElseIf TypeOf yy Is ComboBox Then
+                        If yy.Text <> "" Then
+                            Dim strName = Split(yy.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                            Dim fname As String = strName(0)
+                            Dim lname As String = strName(1)
+                            Dim g As New bulkPrintOperations
+                            Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+                            If canGetMail = False Then
+                                arLeadNums.Add(leadId)
+                            End If
+                        End If
+                    End If
+                Next
+            Next
+
+            If arLeadNums.Count >= 1 Then
+                Dim pt As New Sales_Print_Operations_V2(True, arLeadNums)
+            ElseIf arLeadNums.Count <= 0 Then
+                MsgBox("All reps assigned can recieve emails.", MsgBoxStyle.Information, "Rep(s) Have Emails.")
+                Exit Sub
+            End If
+        End If
+
+            'Try
+
+            '    If Me.btnExclude.Text.Contains("On") Then
+
+            '        Dim y As Panel
+            '        Dim _leadNum As String = ""
+            '        Dim arRepIDs_NO_Email As New ArrayList
+
+            '        For Each y In pnlIssue.Controls
+            '            Dim ctrl As Control
+            '            For Each ctrl In y.Controls
+
+            '                If TypeOf ctrl Is LinkLabel Then
+            '                    _leadNum = ctrl.Text
+            '                End If
+            '                If TypeOf ctrl Is ComboBox Then
+            '                    If ctrl.Text <> "" Then
+            '                        Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            '                        Dim fname As String = strName(0)
+            '                        Dim lname As String = strName(1)
+            '                        Dim g As New bulkPrintOperations
+            '                        Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+            '                        If canGetMail = False Then
+            '                            arRepIDs_NO_Email.Add(_leadNum)
+            '                        End If
+            '                    End If
+            '                End If
+            '            Next
+            '        Next
+
+            '        Dim pt_hash As New printToPrinterCustInfoSheet(arRepIDs_NO_Email)
+
+            '    ElseIf btnExclude.Text.Contains("Off") Then
+
+            '        Dim b As New bulkPrintOperations
+            '        Dim ex_set As bulkPrintOperations.Exclusions
+            '        ex_set = b.GetExclusions()
+            '        Dim y As Panel
+            '        Dim arRepNames As New ArrayList
+            '        Dim arLeadNums As New ArrayList
+            '        Dim _leadNum As String = ""
+            '        For Each y In pnlIssue.Controls
+            '            Dim ctrl As Control
+            '            For Each ctrl In y.Controls
+
+            '                If TypeOf ctrl Is LinkLabel Then
+            '                    _leadNum = ctrl.Text
+            '                End If
+            '                If TypeOf ctrl Is ComboBox Then
+            '                    If ctrl.Text <> "" Then
+            '                        Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+            '                        Dim fname As String = strName(0)
+            '                        Dim lname As String = strName(1)
+            '                        Dim g As New bulkPrintOperations
+            '                        Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+            '                        If canGetMail = False Then
+            '                            'arRepNames.Add(fname & " " & lname)
+            '                            arLeadNums.Add(_leadNum)
+            '                        End If
+            '                    End If
+            '                End If
+            '            Next
+            '        Next
+
+            '        Dim pt_arIDs As New printToPrinterCustInfoSheet(arLeadNums)
+
+            '    End If
+            'Catch ex As Exception
+            '    Me.Cursor = Cursors.Default
+            '    Main.Cursor = Cursors.Default
+            '    Dim y As New ErrorLogging_V2
+            '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintNoEmailIssue_click", "0", ex.Message.ToString)
+            '    y = Nothing
+            'End Try
 
     End Sub
 
     Private Sub btnPrintThisIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnPrintThisIssue.Click
+        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
         ''
         '' print selected lead 
         '' 
         ''MsgBox("btnPrintThisIssue")
         ''
+        '' 4-20-2016 Edits
+        Dim targetID As String = "0"
         Try
-            If btnExclude.Text.Contains("On") Then
-                frmPrint.Exclusions = False
-                Dim y As Panel
-                For Each y In pnlIssue.Controls
-                    If y.BorderStyle = BorderStyle.FixedSingle Then
-                        Dim yy As Control
-                        For Each yy In y.Controls
-                            If TypeOf yy Is LinkLabel Then
-                                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
-                                Dim lead_id As String = yy.Text
-                                Dim lv As New ListViewItem
-                                lv.Text = lead_id
-                                frmPrint.ClearListView()
-                                frmPrint.lsLeadIds.Items.Add(lv)
-                                frmPrint.ShowDialog()
-
-                            End If
-                        Next
-                    End If
-                Next
-            ElseIf btnExclude.Text.Contains("Off") Then
-                frmPrint.Exclusions = True
-                Dim y As Panel
-                For Each y In pnlIssue.Controls
-                    If y.BorderStyle = BorderStyle.FixedSingle Then
-                        Dim yy As Control
-                        For Each yy In y.Controls
-                            If TypeOf yy Is LinkLabel Then
-                                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
-                                Dim lead_id As String = yy.Text
-                                Dim lv As New ListViewItem
-                                lv.Text = lead_id
-                                frmPrint.ClearListView()
-                                frmPrint.lsLeadIds.Items.Add(lv)
-                                frmPrint.ShowDialog()
-                            End If
-                        Next
-                    End If
-                Next
-            End If
+            Dim y As Panel
+            For Each y In pnlIssue.Controls
+                If y.BorderStyle = BorderStyle.FixedSingle Then
+                    Dim yy As Control
+                    For Each yy In y.Controls
+                        If TypeOf yy Is LinkLabel Then
+                            'MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+                            Dim lead_id As String = yy.Text
+                            targetID = lead_id
+                            Dim x As New Sales_Print_Operations_V2(Me.Exclusions_On_Off, lead_id)
+                        End If
+                    Next
+                End If
+            Next
         Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintThisIssue", "0", ex.Message.ToString)
-            y = Nothing
+            Dim yy As New ErrorLogging_V2
+            yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintThisIssue_Click()", targetID, ex.Message.ToString)
         End Try
+
+        '    ElseIf btnExclude.Text.Contains("Off") Then
+        '        frmPrint.Exclusions = True
+        '        Dim y As Panel
+        '        For Each y In pnlIssue.Controls
+        '            If y.BorderStyle = BorderStyle.FixedSingle Then
+        '                Dim yy As Control
+        '                For Each yy In y.Controls
+        '                    If TypeOf yy Is LinkLabel Then
+        '                        'MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
+        '                        Dim lead_id As String = yy.Text
+        '                        Dim lv As New ListViewItem
+        '                        lv.Text = lead_id
+        '                        frmPrint.ClearListView()
+        '                        frmPrint.lsLeadIds.Items.Add(lv)
+        '                        frmPrint.ShowDialog()
+        '                        Dim pt_sin As New printToPrinterCustInfoSheet(lead_id)
+        '                    End If
+        '                Next
+        '            End If
+        '        Next
+        '    End If
+        'Catch ex As Exception
+        '    Me.Cursor = Cursors.Default
+        '    Main.Cursor = Cursors.Default
+        '    Dim y As New ErrorLogging_V2
+        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintThisIssue", "0", ex.Message.ToString)
+        '    y = Nothing
+        'End Try
 
     End Sub
 

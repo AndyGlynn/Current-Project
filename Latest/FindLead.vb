@@ -510,6 +510,17 @@ Public Class FindLead
             End Select
 
         Next
+
+        'If focused Is Nothing Then
+        '    ConfirmingSingleRecord.ID = selitem.Text
+        '    STATIC_VARIABLES.ActiveChild = ConfirmingSingleRecord
+        '    STATIC_VARIABLES.ActiveChild.WindowState = FormWindowState.Normal
+        '    Me.lstSearchResults.Items.Clear()
+        '    Me.Close()
+        '    ConfirmingSingleRecord.ShowDialog()
+        '    Exit Sub
+        'End If
+
         If Focused IsNot Nothing And foundinform.Contains(Focused.Name) Then
             Focused.Activate()
         ElseIf foundinform.Contains(" ") = False And foundinform <> "" Then
@@ -520,7 +531,6 @@ Public Class FindLead
                 End If
             Next
         End If
-
 
         If found = 0 And open <> 0 Then
             ConfirmingSingleRecord.ID = selitem.Text
@@ -576,5 +586,10 @@ Public Class FindLead
 
     Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
         Me.txtsearch.Select()
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        Me.Close()
+
     End Sub
 End Class

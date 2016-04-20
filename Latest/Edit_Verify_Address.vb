@@ -479,7 +479,11 @@ Public Class Edit_Verify_Address
 
 
             'oApp = STATIC_VARIABLES.oApp
-            oApp = CreateObject("Mappoint.Application")
+
+            '' switching to global Mappoint Var
+            ''4-19-2015
+            'oApp = CreateObject("Mappoint.Application")
+            oApp = STATIC_VARIABLES.oApp
             oMap = oApp.ActiveMap
             oResults = oMap.FindAddressResults(StAddress, City, , State, Zip, MapPoint.GeoCountry.geoCountryUnitedStates)
             Dim c

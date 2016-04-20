@@ -28,7 +28,8 @@ Public Class launchSeparateMap
 
     Public Sub New(ByVal RecID As String)
 
-        Dim oApp As MapPoint.Application = CreateObject("Mappoint.Application")
+        'dim oApp As MapPoint.Application = CreateObject("Mappoint.Application")
+        Dim oApp As MapPoint.Application = STATIC_VARIABLES.oApp
         Dim oMap As MapPoint.Map = oApp.NewMap()
         Dim ex_INFO As ExtendedInfo = Get_Extended_Info_For_Map(RecID)
 
