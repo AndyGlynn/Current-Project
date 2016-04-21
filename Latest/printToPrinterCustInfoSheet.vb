@@ -39,6 +39,10 @@ Public Class printToPrinterCustInfoSheet
 
     Private hashRepAndID As Hashtable '' hashtable to hold key values of id:=rep
 
+    '' Icon Path
+    Private path As String = "\\server.greenworks.local\Company\ISS\IMGS\print 32.ico"
+
+
     '' Reference: 
     '' 
     ' 0.75 = 75 %
@@ -64,7 +68,7 @@ Public Class printToPrinterCustInfoSheet
             PPrev.Document = PD
             PPrev.Text = "Print Preview For: " & RecID.ToString & " "
             Try
-                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon("C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\Resources\print 32.ico")
+                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon(path)
                 PPrev.Icon = ico
             Catch ex As Exception
                 Dim stoppp As String = ex.Message.ToString
@@ -101,7 +105,7 @@ Public Class printToPrinterCustInfoSheet
             PPrev = New PrintPreviewDialog
             PPrev.Text = "Print Preview For Multi Lead Info: [" & ArRecIDs.Count.ToString & "] - Leads "
             Try
-                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon("C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\Resources\print 32.ico")
+                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon(path)
                 PPrev.Icon = ico
             Catch ex As Exception
                 Dim stoppp As String = ex.Message.ToString
@@ -160,7 +164,7 @@ Public Class printToPrinterCustInfoSheet
             PPrev = New PrintPreviewDialog
             PPrev.Text = "Print Preview For - Rep(s) With NO Email : [" & HashOfIDsAndReps.Count.ToString & "] - Reps |" & "Leads: [" & numPages & "]"
             Try
-                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon("C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\Resources\print 32.ico")
+                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon(path)
                 PPrev.Icon = ico
             Catch ex As Exception
                 Dim stoppp As String = ex.Message.ToString

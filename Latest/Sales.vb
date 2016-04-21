@@ -5531,6 +5531,7 @@ Public Class Sales
         ' MsgBox("test hit btnEmailallIssue ")
         '' email to all reps that can get
         Try
+            Me.Cursor = Cursors.WaitCursor
             Dim z As New EmailIssuedLeads
             Dim arRepsThatCanGetEmail As New ArrayList
             Dim arRepsThatDontGetEmail As New ArrayList
@@ -5606,8 +5607,7 @@ Public Class Sales
                 xyz.BulkMailWithExclusions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
 
 
-
-
+               
 
             End If
             If Me.btnExclude.Text.Contains("On") Then
@@ -5679,7 +5679,15 @@ Public Class Sales
                 Next
 
                 xyz.BulkEmailWithoutExceptions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
+                
+
             End If
+
+
+            Me.Cursor = Cursors.Default
+            MsgBox("Mail Sent.", MsgBoxStyle.Information, "Email Sent Out Successfully.")
+
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -6337,43 +6345,52 @@ Public Class Sales
 
     Private Sub btnPrintApptSheet_Click(sender As Object, e As EventArgs) Handles btnPrintApptSheet.Click
         'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
-        'MsgBox("btnPrintApptSheet")
-        'Try
-        '    Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
-        'Catch ex As Exception
-        '    Me.Cursor = Cursors.Default
-        '    Main.Cursor = Cursors.Default
-        '    Dim y As New ErrorLogging_V2
-        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
-        '    y = Nothing
-        'End Try
+        ' MsgBox("btnPrintApptSheet")
+        Try
+            Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 
     Private Sub btnPrintCurrentList_Click(sender As Object, e As EventArgs) Handles btnPrintCurrentList.Click
         'MsgBox("btnPrintCurrentList")
         ' MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
-        'Try
-        '    Dim lvCol As ListView.ListViewItemCollection = Me.lvSales.Items
-        '    Dim x As New printToPrinterContactList(arItemCache)
-        '    x.ShowDoc()
-        'Catch ex As Exception
-        '    Me.Cursor = Cursors.Default
-        '    Main.Cursor = Cursors.Default
-        '    Dim y As New ErrorLogging_V2
-        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCurrentList_click", "0", ex.Message.ToString)
-        '    y = Nothing
-        'End Try
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim arItems As New ArrayList
+            Dim y
+            For Each y In Me.lvSales.Items
+                arItems.Add(y)
+            Next
+            Dim x As New printToPrinterContactList(arItems)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCustomerInfoSheet_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
     Private Sub btnPrintCustomerList_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerList.Click
         'MsgBox("btnPrintCustomerList")
         'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
-    End Sub
-    Private Sub btnPrintCustomerInfoSheet_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerInfoSheet.Click
-        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
         'Try
-        '    Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
+        '    Me.Cursor = Cursors.WaitCursor
+        '    Dim arIDS As New ArrayList
+        '    Dim y
+        '    For Each y In Me.lvSales.Items
+        '        arIDS.Add(y.Text)
+        '    Next
+        '    Dim x As New printToPrinterContactList(arIDS)
+        '    Me.Cursor = Cursors.Default
         'Catch ex As Exception
         '    Me.Cursor = Cursors.Default
         '    Main.Cursor = Cursors.Default
@@ -6381,6 +6398,18 @@ Public Class Sales
         '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCustomerInfoSheet_click", "0", ex.Message.ToString)
         '    y = Nothing
         'End Try
+    End Sub
+    Private Sub btnPrintCustomerInfoSheet_Click(sender As Object, e As EventArgs) Handles btnPrintCustomerInfoSheet.Click
+        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
+        Try
+            Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintCustomerInfoSheet_click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
 
     End Sub
 

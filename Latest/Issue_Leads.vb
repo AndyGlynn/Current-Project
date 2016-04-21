@@ -1675,6 +1675,7 @@ Public Class Issue_Leads
             For Each i In Sales.lvSales.Items
                 If i.Text = sender.text Then
                     i.Selected = True
+                    STATIC_VARIABLES.CurrentID = i.Text
                 End If
             Next
             If Sales.tbMain.SelectedIndex <> 1 Then
@@ -1683,7 +1684,10 @@ Public Class Issue_Leads
             If Sales.TabControl2.SelectedIndex <> 0 Then
                 Sales.TabControl2.SelectedIndex = 0
             End If
+            Sales.Cursor = Cursors.Default
         Catch ex As Exception
+            Main.Cursor = Cursors.Default
+            Sales.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "Link", "0", ex.Message.ToString)
             y = Nothing

@@ -321,9 +321,10 @@ Public Class ScheduledActions
                     If Sales.cboSalesList.Text <> "Scheduled Tasks List" Then
                         Sales.cboSalesList.SelectedItem = "Scheduled Tasks List"
                     End If
-                    For Each i In Sales.lvSales.Items
+                    For Each i In Sales.lvSales.Items '' i as listview item 
                         If i.Text = sender.text Then
                             i.Selected = True
+                            STATIC_VARIABLES.CurrentID = i.Text
                         End If
                     Next
                     If Sales.tbMain.SelectedIndex <> 1 Then
@@ -332,6 +333,8 @@ Public Class ScheduledActions
                     If Sales.TabControl2.SelectedIndex <> 0 Then
                         Sales.TabControl2.SelectedIndex = 0
                     End If
+                    Sales.Cursor = Cursors.Default
+                    Exit Select
                 Case "MarketingManager"
                     ''comeback 
 
@@ -346,8 +349,10 @@ Public Class ScheduledActions
 
 
             End Select
-        Catch ex As Exception
 
+
+        Catch ex As Exception
+            Sales.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "ScheduleActions", "FormCode", "Sub", "Link()", "0", ex.Message.ToString)

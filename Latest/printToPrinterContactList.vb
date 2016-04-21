@@ -48,6 +48,11 @@ Public Class printToPrinterContactList
     Dim curIDX As Integer = -1
     Dim ttlPages As Integer = 0
     Dim lvCol As ArrayList
+    Private zoomX As Double = 0.82
+
+    '' Icon Path
+    Private path As String = "\\server.greenworks.local\Company\ISS\IMGS\print 32.ico"
+
 
     Public ReadOnly Property List_Of_Records As List(Of RecordOBJ)
         Get
@@ -56,6 +61,8 @@ Public Class printToPrinterContactList
     End Property
     Public Sub New(ByVal Data As ArrayList)
         PD = New PrintDocument
+        AddHandler PD.PrintPage, AddressOf PD_PrintPage
+
         lvCol = Data
         PPrev = New PrintPreviewDialog
         arRecs = New List(Of RecordOBJ)
@@ -76,15 +83,30 @@ Public Class printToPrinterContactList
                 arRecs.Add(b)
             Next
 
-            PD.DefaultPageSettings.Landscape = True
+            PPrev = New PrintPreviewDialog
             With PD.DefaultPageSettings
-                .Margins.Top = 0.25
-                .Margins.Left = 0.25
-                .Margins.Right = 0.25
-                .Margins.Bottom = 0.25
+                .Landscape = True
+                .Margins.Left = 0.4
+                .Margins.Right = 0.4
+                .Margins.Top = 0.4
+                .Margins.Bottom = 0.4
             End With
-            AddHandler PD.PrintPage, AddressOf PD_PrintPage
             PPrev.Document = PD
+            PPrev.Text = "Print Preview For: [" & arRecs.Count & " - Items] "
+            Try
+                Dim ico As Icon = System.Drawing.Icon.ExtractAssociatedIcon(path)
+                PPrev.Icon = ico
+            Catch ex As Exception
+                Dim stoppp As String = ex.Message.ToString
+                '' fail it. 
+            End Try
+            With PPrev
+                '.ShowIcon = False
+                .PrintPreviewControl.Zoom = zoomX
+                .ClientSize = New System.Drawing.Size(800, 800)
+                .DesktopLocation = New System.Drawing.Point(400, 400)
+            End With
+            PPrev.ShowDialog()
         ElseIf Data.Count <= 0 Then
             Exit Sub
         End If
@@ -110,7 +132,7 @@ Public Class printToPrinterContactList
         '' layout rectangles -> e.graphics.drawRectangle() is for debug purpose only.
         ''
         Try
-            Dim ttlcnt As Integer = arRecs.Count - 1
+            Dim ttlcnt As Integer = arRecs.Count
             Dim currentIteration As Integer = -1
             Dim linesPerPage As Single = CInt(e.MarginBounds.Height / pr_font.GetHeight(e.Graphics)) - 1
             Dim yPos As Integer = 0

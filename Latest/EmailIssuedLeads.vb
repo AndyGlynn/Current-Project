@@ -1087,7 +1087,7 @@ Public Class EmailIssuedLeads
                 .IsBodyHtml = False
             End With
             smptSERV.Send(eml_msg)
-            MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
+            'MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
         Catch ex As Exception
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
@@ -1117,7 +1117,7 @@ Public Class EmailIssuedLeads
                 .IsBodyHtml = False
             End With
             smptSERV.Send(eml_msg)
-            MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
+            'MsgBox("Mail Sent.", MsgBoxStyle.Information, "Mail Was Sent.")
         Catch ex As Exception
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
