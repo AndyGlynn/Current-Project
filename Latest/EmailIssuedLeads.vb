@@ -194,7 +194,8 @@ Public Class EmailIssuedLeads
             Dim can_get_email As Boolean = False
             Dim rep_cnx As SqlConnection = New SqlConnection(cnx_string)
             rep_cnx.Open()
-            Dim cmdCheck As SqlCommand = New SqlCommand("SELECT CanEmail from UserPermissionTable where UserFirstName = '" & RepFName & "' and UserLastName = '" & RepLName & "';", rep_cnx)
+            'Dim cmdCheck As SqlCommand = New SqlCommand("SELECT CanRecieveEmail from SalesRepPull where FName = '" & RepFName & "' and LName = '" & RepLName & "';", rep_cnx)
+            Dim cmdCheck As SqlCommand = New SqlCommand("SELECT CanRecieveEmail From SalesRepPull WHERE FName = '" & RepFName & "' and LName = '" & RepLName & "' and CanRecieveEmail = 1;", rep_cnx)
             Dim strReturn As String = cmdCheck.ExecuteScalar
             rep_cnx.Close()
             rep_cnx = Nothing
@@ -218,7 +219,7 @@ Public Class EmailIssuedLeads
             Dim can_get_email As Boolean = False
             Dim rep_cnx As SqlConnection = New SqlConnection(cnx_string)
             rep_cnx.Open()
-            Dim cmdCheck As SqlCommand = New SqlCommand("SELECT CanEmail from UserPermissionTable where ID = '" & EmployeeID & "'", rep_cnx)
+            Dim cmdCheck As SqlCommand = New SqlCommand("SELECT CanRecieveEmail from SalesRepPull where ID = '" & EmployeeID & "'", rep_cnx)
             Dim strReturn As String = cmdCheck.ExecuteScalar
             rep_cnx.Close()
             rep_cnx = Nothing
@@ -243,7 +244,8 @@ Public Class EmailIssuedLeads
         Try
             Dim emailAddress As String
             Dim rep_cnx As SqlConnection = New SqlConnection(cnx_string)
-            Dim cmdGet As SqlCommand = New SqlCommand("SELECT Email from UserPermissionTable where CanEmail = 1 and UserFirstName = '" & RepFName & "' and UserLastName = '" & RepLName & "';", rep_cnx)
+            'Dim cmdGet As SqlCommand = New SqlCommand("SELECT Email from SalesRepPull where CanRecieveEmail = 1 and FName = '" & RepFName & "' and LName = '" & RepLName & "';", rep_cnx)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT Email FROM SalesRepPull WHERE Fname = '" & RepFName & "' and LName = '" & RepLName & "';", rep_cnx)
             rep_cnx.Open()
             emailAddress = cmdGet.ExecuteScalar
             rep_cnx.Close()
@@ -261,7 +263,8 @@ Public Class EmailIssuedLeads
         Try
             Dim emailAddress As String
             Dim rep_cnx As SqlConnection = New SqlConnection(cnx_string)
-            Dim cmdGet As SqlCommand = New SqlCommand("SELECT Email from UserPermissionTable where CanEmail = 1 and ID = '" & EmployeeID & "';", rep_cnx)
+            Dim cmdGet As SqlCommand = New SqlCommand("SELECT Email from SalesRepPull where CanRecieveEmail = 1 and ID = '" & EmployeeID & "';", rep_cnx)
+            'Dim cmdGET As SqlCommand = New SqlCommand("SELECT Email FROM SalesRepPull WHERE Fname = '" & RepFName & "' and LName = '" & RepLName & "';", rep_cnx)
             rep_cnx.Open()
             emailAddress = cmdGet.ExecuteScalar
             rep_cnx.Close()
@@ -278,7 +281,7 @@ Public Class EmailIssuedLeads
 
 
 
-   
+
 #End Region
 
 #Region "Construct  Email - With Exclusions "
@@ -608,7 +611,7 @@ Public Class EmailIssuedLeads
                 prxyFAr2.Add(fname1)
                 prxyLAr2.Add(lname1)
                 rep_cnx.Open()
-                Dim cmdEMAIL As SqlCommand = New SqlCommand("SELECT Email from UserPermissionTable where UserFirstName = '" & fname1 & "' and UserLastName = '" & lname1 & "';", rep_cnx)
+                Dim cmdEMAIL As SqlCommand = New SqlCommand("SELECT Email from SalesRepPull where FName = '" & fname1 & "' and LName = '" & lname1 & "';", rep_cnx)
                 Dim EmailAddress As String = cmdEMAIL.ExecuteScalar
                 rep_cnx.Close()
                 arListOfEmails.add(EmailAddress)
@@ -796,7 +799,7 @@ Public Class EmailIssuedLeads
                 prxyFAr2.Add(fname1)
                 prxyLAr2.Add(lname1)
                 rep_cnx.Open()
-                Dim cmdEMAIL As SqlCommand = New SqlCommand("SELECT Email from UserPermissionTable where UserFirstName = '" & fname1 & "' and UserLastName = '" & lname1 & "';", rep_cnx)
+                Dim cmdEMAIL As SqlCommand = New SqlCommand("SELECT Email from SalesRepPull where FName = '" & fname1 & "' and LName = '" & lname1 & "';", rep_cnx)
                 Dim EmailAddress As String = cmdEMAIL.ExecuteScalar
                 rep_cnx.Close()
                 arListOfEmails.add(EmailAddress)
@@ -1275,7 +1278,7 @@ Public Class EmailIssuedLeads
 
 #End Region
 
- 
+
 
 #Region "Email Marketing Manager List"
     '' select ID,appttime,Contact1FirstName,Contact2FirstName,Staddress,city,state,zip, product1,product2,product3,rep1,rep2 from enterlead

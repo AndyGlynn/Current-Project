@@ -120,3 +120,4 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.xml
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.pdb
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmGenericPBar.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\LeadManager.vbprojResolveAssemblyReference.cache
