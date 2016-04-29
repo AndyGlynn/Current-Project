@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>Latest.My.MyApplication</StartupObject>
     <RootNamespace>Latest</RootNamespace>
-    <AssemblyName>Latest 14</AssemblyName>
+    <AssemblyName>ImproveIt! 360</AssemblyName>
     <MyType>WindowsForms</MyType>
     <TargetZone>LocalIntranet</TargetZone>
     <GenerateManifests>true</GenerateManifests>
@@ -49,7 +49,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Latest 14.xml</DocumentationFile>
+    <DocumentationFile>ImproveIt! 360.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
@@ -61,7 +61,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Latest 14.xml</DocumentationFile>
+    <DocumentationFile>ImproveIt! 360.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <WarningLevel>0</WarningLevel>

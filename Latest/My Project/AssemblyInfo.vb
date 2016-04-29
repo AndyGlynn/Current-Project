@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Lead Manager")> 
+<Assembly: AssemblyTitle("ImproveIt! 360")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("Greenworks Remodeling LLC")> 
-<Assembly: AssemblyProduct("Lead Manager")> 
+<Assembly: AssemblyProduct("ImproveIt! 360")> 
 <Assembly: AssemblyCopyright("Copyright © Greenworks Remodeling LLC 2016")> 
 <Assembly: AssemblyTrademark("")> 
 

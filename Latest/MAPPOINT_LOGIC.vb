@@ -51,6 +51,8 @@ Public Class MAPPOINT_LOGIC
         Try
             Dim cmdGET As SqlCommand = New SqlCommand("select distinct(zip) from iss.dbo.enterlead", CNN)
             Dim cmdCNT As SqlCommand = New SqlCommand("select Count(distinct(zip)) from iss.dbo.enterlead ", CNN)
+            Dim dataset As MapPoint.DataSet
+            Dim dset_Name As Object = "TEST"
             CNN.Open()
             Dim r As SqlDataReader = cmdCNT.ExecuteReader(CommandBehavior.SingleResult)
             r.Read()
@@ -63,26 +65,32 @@ Public Class MAPPOINT_LOGIC
             r.Close()
             Dim r1 As SqlDataReader
             r1 = cmdGET.ExecuteReader(CommandBehavior.CloseConnection)
-            Dim dset_Name As Object = "TEST"
             'If oMap.DataSets.Count > 0 And oMap.DataSets.Item(dset_Name) IsNot Nothing Then
             '    oMap.DataSets(1).Delete()
             'End If
-            Dim dataset As MapPoint.DataSet = oMap.DataSets.AddPushpinSet("TEST")
+            dataset = oMap.DataSets.AddPushpinSet("TEST")
             Dim i As Integer = 0
             While r1.Read
                 Dim LOC As MapPoint.Location
                 oResults = oMap.FindAddressResults(, , , , r1.Item(0))
-                If oResults IsNot Nothing Then
-                    LOC = oResults.Item(1)
-                End If
-                If LOC IsNot Nothing Then
-                    i += 1
-                    Dim push As MapPoint.Pushpin = oMap.AddPushpin(LOC, "Found")
-                    push.Note = r1.Item(0)
-                    push.MoveTo(dataset)
-                End If
-                Progress.ProgressBar1.Value = Progress.ProgressBar1.Value + 1
-                WCaller.pbRadiusSearch.Value = WCaller.pbRadiusSearch.Value + 1
+                Try
+                    If oResults IsNot Nothing Then
+                        LOC = oResults.Item(1)
+                    End If
+                    If LOC IsNot Nothing Then
+                        i += 1
+                        Dim push As MapPoint.Pushpin = oMap.AddPushpin(LOC, "Found")
+                        push.Note = r1.Item(0)
+                        push.MoveTo(dataset)
+                    End If
+                    Progress.ProgressBar1.Value = Progress.ProgressBar1.Value + 1
+                    WCaller.pbRadiusSearch.Value = WCaller.pbRadiusSearch.Value + 1
+                Catch ex As Exception
+                    '' just fail it if for some reason it goes awry. 
+                    '' 
+
+                End Try
+
             End While
             'Me.ProgressMax = i
 
@@ -128,17 +136,27 @@ Public Class MAPPOINT_LOGIC
             Progress.Close()
             My.Application.DoEvents()
             Progress.Dispose()
+            oMap.DataSets.Item(dset_Name).Delete()
+            oMap.DataSets.Item(dataset).Delete()
             oMap.Saved = True
+
             'oMap = Nothing
             'oApp = Nothing
-
+            WCaller.btnZipCity.Enabled = True
         Catch ex As Exception
-
+            Dim oApp As MapPoint.Application
+            oApp = CreateObject("Mappoint.Application")
+            STATIC_VARIABLES.oApp = oApp
             Main.Cursor = Cursors.Default
             oMap.Saved = True
+            WCaller.btnZipCity.Enabled = True
             'oMap = Nothing
             'oApp = Nothing
 
+            Dim yt As MapPoint.DataSet
+            For Each yt In oMap.DataSets
+                yt.Delete()
+            Next
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC", "MAPPOINT_LOGIC", "Sub", "DoIt(args)", "0", ex.Message.ToString)
             y = Nothing
@@ -183,7 +201,6 @@ Public Class MAPPOINT_LOGIC
                 oResults = oMap.FindAddressResults(, cty, , state, ) '' had to fix this code, looking in the postal code region still
                 arCity.Add(cty)
                 arST.Add(state)
-
                 If oResults IsNot Nothing Then
                     '' fails as invalid index item
                     '' "requested member of collection doesnt exist. please use valid index of item."
@@ -291,15 +308,25 @@ Public Class MAPPOINT_LOGIC
             Progress.Close()
             My.Application.DoEvents()
             Progress.Dispose()
+            oMap.DataSets.Item(dset_Name).Delete()
+            oMap.DataSets.Item(dataset).Delete()
             oMap.Saved = True
             'oMap = Nothing
             'oApp = Nothing
-
+            WCaller.btnZipCity.Enabled = True
         Catch ex As Exception
+            Dim oApp As MapPoint.Application
+            oApp = CreateObject("Mappoint.Application")
+            STATIC_VARIABLES.oApp = oApp
             Main.Cursor = Cursors.Default
             oMap.Saved = True
             'oMap = Nothing
             'oApp = Nothing
+            WCaller.btnZipCity.Enabled = True
+            Dim yt As MapPoint.DataSet
+            For Each yt In oMap.DataSets
+                yt.Delete()
+            Next
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MAPPOINT_LOGIC", "MAPPOINT_LOGIC", "Sub", "DoIt(args)", "0", ex.Message.ToString)
             y = Nothing

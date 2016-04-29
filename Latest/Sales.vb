@@ -920,7 +920,8 @@ Public Class Sales
             ''End While
             'R1.Close()
             'Cnn.Close()
-
+            Me.Label38.Text = ""
+            Me.Label38.Text = "All Records Needing Sales Results: "
             Me.Label38.Text = (Me.Label38.Text & " -[ Records: " & cntNoResults & " ]")
         Catch ex As Exception
             Me.Cursor = Cursors.Default

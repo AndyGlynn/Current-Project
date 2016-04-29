@@ -415,12 +415,15 @@ Public Class WCaller
 
     Private Sub rdoCity_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdoCity.CheckedChanged
         Try
+
             Me.lblEnter.Text = "Enter Starting City:"
             Me.lblShow.Text = "Show Cities within                      miles of" & vbCrLf & "starting City"
             Me.btnZipCity.Text = "Show Cities"
+            Me.btnZipCity.Enabled = True
             Dim c As New AutoCompleteSourceCities
             Me.txtZipCode.Text = ""
         Catch ex As Exception
+            Me.btnZipCity.Enabled = True
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "rdoCity_CheckedChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -429,6 +432,7 @@ Public Class WCaller
     End Sub
 
     Private Sub rdoZip_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles rdoZip.CheckedChanged
+        Me.btnZipCity.Enabled = True
         Me.lblEnter.Text = "Enter Starting Zip Code:"
         Me.lblShow.Text = "Show Zip Codes within                miles of" & vbCrLf & "starting Zip Code"
         Me.btnZipCity.Text = "Show Zip Codes"
@@ -795,6 +799,7 @@ Public Class WCaller
             Me.btnZipCity.Enabled = True
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.btnZipCity.Enabled = True
             Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "btnZipCity_click", "0", ex.Message.ToString)
@@ -863,6 +868,7 @@ Public Class WCaller
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Try
             Me.Cursor = Cursors.WaitCursor
+
             If Me.lbZipCity.Items.Count > 0 And Me.lbZipCity.CheckedItems.Count = 0 Then
                 MsgBox("You must check at least 1 Zip/City to Search", MsgBoxStyle.Exclamation, "No Zip/City Selected")
                 Me.lbZipCity.SetSelected(0, True)
@@ -877,6 +883,7 @@ Public Class WCaller
             c.Populate()
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+
             Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "btnSearch_Click", "0", ex.Message.ToString)
