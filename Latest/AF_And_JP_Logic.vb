@@ -228,6 +228,9 @@ Public Class AF_And_JP_Logic
         '' FALSE = JP
         Try
             Dim target_path As String = ""
+            If STATIC_VARIABLES.CurrentID = "" Then
+                Exit Sub
+            End If
             If Which_Control = "AF" Then
                 target_path = (af_dir & LeadNum & "\")
             ElseIf Which_Control = "JP" Then

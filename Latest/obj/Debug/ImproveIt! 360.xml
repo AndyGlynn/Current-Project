@@ -27,6 +27,10 @@ ImproveIt!360
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:Latest.My.Resources.Resources.AppIcon">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:Latest.My.Resources.Resources.arrow_right">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

@@ -2684,6 +2684,9 @@ Public Class Sales
 
     Private Sub lvSales_MouseClick(sender As Object, e As MouseEventArgs) Handles lvSales.MouseClick
         Try
+            If Me.pnlAFPics.Visible Then
+                Me.tsbtnAFPics_Click(Me.tsbtnAFPics, Nothing)
+            End If
             If current_Item IsNot Nothing Then
                 STATIC_VARIABLES.CurrentID = current_Item.Text
                 PullInfo(current_Item.Text)
@@ -2988,17 +2991,30 @@ Public Class Sales
         Me.ycordinate = e.Y
     End Sub
     Public Sub lvMemorized_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvMemorized.SelectedIndexChanged
-        If Me.lvMemorized.SelectedItems.Count <> 0 Then
-            Me.RefreshSelectedItem(Me.lvMemorized, Me.lvMemorized.SelectedItems(0).Tag)
-            Me.PullInfo(Me.lvMemorized.SelectedItems(0).Tag)
-            Me.ID = Me.lvMemorized.SelectedItems(0).Tag
-            STATIC_VARIABLES.CurrentID = Me.ID
-            ''add code to refresh line item without refreshing entire list 
-        Else
-            Me.PullInfo("")
-            Me.ID = ""
-            STATIC_VARIABLES.CurrentID = Me.ID
-        End If
+        Try
+            If Me.pnlAFPics.Visible Then
+                Me.tsbtnAFPics_Click(Me.tsbtnAFPics, Nothing)
+            End If
+
+            If Me.lvMemorized.SelectedItems.Count <> 0 Then
+                Me.RefreshSelectedItem(Me.lvMemorized, Me.lvMemorized.SelectedItems(0).Tag)
+                Me.PullInfo(Me.lvMemorized.SelectedItems(0).Tag)
+                Me.ID = Me.lvMemorized.SelectedItems(0).Tag
+                STATIC_VARIABLES.CurrentID = Me.ID
+                ''add code to refresh line item without refreshing entire list 
+            Else
+                Me.PullInfo("")
+                Me.ID = ""
+                STATIC_VARIABLES.CurrentID = Me.ID
+            End If
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "lvMemorized_SelectedIndexChanged", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+
     End Sub
 
 
@@ -9018,8 +9034,8 @@ Public Class Sales
             'arItemCache = c.LV_Sales_Items
             'bgSalesQuery_RunWorkerCompleted(Me, Nothing)
 
-            If Me.lvSales.Items.Count > 0 Then
-                Dim a As ListViewItem = Me.lvSales.Items.Item(0)
+            If Me.lvSales.Items.Count > 0 And Me.lvSales.SelectedItems.Count > 0 Then
+                Dim a As ListViewItem = Me.lvSales.SelectedItems.Item(0)
                 STATIC_VARIABLES.CurrentID = a.Text
                 Me.Text = "Sales Department Record ID: " & a.Text
                 PullInfo(STATIC_VARIABLES.CurrentID)
@@ -9029,6 +9045,20 @@ Public Class Sales
                 'End If
                 Me.Cursor = Cursors.Default
             Else
+                If Me.lvSales.Items.Count <> 0 Then
+                    Me.lvSales.TopItem.Selected = True
+                    Dim a As ListViewItem = Me.lvSales.SelectedItems.Item(0)
+                    STATIC_VARIABLES.CurrentID = a.Text
+                    Me.Text = "Sales Department Record ID: " & a.Text
+                    PullInfo(STATIC_VARIABLES.CurrentID)
+                    AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                    Me.lvSales.EnsureVisible(0)
+                    RaiseEvent PopCustHistory()
+                Else
+                    PullInfo("")
+                    AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                    RaiseEvent PopCustHistory()
+                End If
                 Me.Cursor = Cursors.Default
                 Main.Cursor = Cursors.Default
             End If
@@ -9045,44 +9075,44 @@ Public Class Sales
     End Sub
 
     Private Sub bgSalesQuery_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles bgSalesQuery.RunWorkerCompleted
-        Try
-            ' If arItemCache.Count > 1 Then
+        'Try
+        '    ' If arItemCache.Count > 1 Then
 
-            If Me.lvSales.Items.Count > 0 Then
-                If lvSales.SelectedItems.Count = 1 Then
-                    Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
-                    STATIC_VARIABLES.CurrentID = a.Text
-                    Me.Text = "Sales Department Record ID: " & a.Text
-                    PullInfo(a.Text)
-                    ' AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-                    Me.lvSales.EnsureVisible(0)
-                    ' RaiseEvent PopCustHistory()
-                    'End If
+        '    If Me.lvSales.Items.Count > 0 Then
+        '        If lvSales.SelectedItems.Count = 1 Then
+        '            Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
+        '            STATIC_VARIABLES.CurrentID = a.Text
+        '            Me.Text = "Sales Department Record ID: " & a.Text
+        '            PullInfo(a.Text)
+        '            ' AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+        '            Me.lvSales.EnsureVisible(0)
+        '            ' RaiseEvent PopCustHistory()
+        '            'End If
 
-                Else
-                    Me.lvSales.TopItem.Selected = True
-                    Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
-                    STATIC_VARIABLES.CurrentID = a.Text
-                    Me.Text = "Sales Department Record ID: " & a.Text
-                    PullInfo(a.Text)
-                    ' AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-                    Me.lvSales.EnsureVisible(0)
-                    ' RaiseEvent PopCustHistory()
-                    'End If
-                End If
+        '        Else
+        '            Me.lvSales.TopItem.Selected = True
+        '            Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
+        '            STATIC_VARIABLES.CurrentID = a.Text
+        '            Me.Text = "Sales Department Record ID: " & a.Text
+        '            PullInfo(a.Text)
+        '            ' AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+        '            Me.lvSales.EnsureVisible(0)
+        '            ' RaiseEvent PopCustHistory()
+        '            'End If
+        '        End If
 
-                Me.Cursor = Cursors.Default
-            Else
+        '        Me.Cursor = Cursors.Default
+        '    Else
 
-            End If
+        '    End If
 
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_RunworkerCompleted", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+        'Catch ex As Exception
+        '    Me.Cursor = Cursors.Default
+        '    Main.Cursor = Cursors.Default
+        '    Dim y As New ErrorLogging_V2
+        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "bgSalesQuery_RunworkerCompleted", "0", ex.Message.ToString)
+        '    y = Nothing
+        'End Try
 
     End Sub
 

@@ -17,7 +17,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
-    <StartWorkingDirectory>C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\</StartWorkingDirectory>
+    <StartWorkingDirectory>C:\Users\Andy\My Programming Folder\Current-Project\Latest\bin\Debug\</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>

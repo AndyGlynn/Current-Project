@@ -60,14 +60,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImproveIt! 360.exe" size="4462976">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImproveIt! 360.exe" size="4467584">
       <assemblyIdentity name="ImproveIt! 360" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>shyS6NcvUxxzZZGonfbH66XKpzc=</dsig:DigestValue>
+        <dsig:DigestValue>v+TI1PX51ozd/b7Kz9s1ZAOvqas=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -79,7 +79,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>wsWnSuLtNcxazA+aJdst2b1/ULc=</dsig:DigestValue>
+        <dsig:DigestValue>W/+/Dp8lhXFF3X4sKZ4ElR7Sr0s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -91,31 +91,31 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>7rPoyECs7AqdSezQ9d2JCynOHOA=</dsig:DigestValue>
+        <dsig:DigestValue>JJBd72EfxwGG52DwqZn+VKCtcvU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Core.dll" size="437248">
-      <assemblyIdentity name="Interop.Microsoft.Office.Core" version="2.7.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Core.dll" size="430592">
+      <assemblyIdentity name="Interop.Microsoft.Office.Core" version="2.5.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>EVmnhOSXGqJo5V4Mcp8hQijP9jM=</dsig:DigestValue>
+        <dsig:DigestValue>dDhyXquz/0e9UZsl0as/vZh2iOA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Interop.Outlook.dll" size="965632">
-      <assemblyIdentity name="Interop.Microsoft.Office.Interop.Outlook" version="9.5.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Interop.Outlook.dll" size="911872">
+      <assemblyIdentity name="Interop.Microsoft.Office.Interop.Outlook" version="9.3.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>oqtxiNaMynaknghS8h3HeTF1I3w=</dsig:DigestValue>
+        <dsig:DigestValue>X5i5SsfU+fpnpnXRs0maF4w0O20=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -76,7 +76,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\inetcpl_4480.ico</ApplicationIcon>
+    <ApplicationIcon>ProgramIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -1317,6 +1317,8 @@
     <None Include="Resources\delete2.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\AppIcon.bmp" />
+    <Content Include="ProgramIcon.ico" />
     <Content Include="Resources\arrow-right-big.ico" />
     <Content Include="Resources\arrow-right.ico" />
     <Content Include="Resources\FEATURES_1017.ico" />
@@ -1327,6 +1329,8 @@
     <None Include="Resources\Fire %282%29.ico" />
     <None Include="Resources\hand shake.ico" />
     <None Include="Resources\notes2.ico" />
+    <None Include="Resources\ProgramIcon.bmp" />
+    <None Include="Resources\ProgramIcon.png" />
     <Content Include="Resources\QBWIN32_1015.ico" />
     <Content Include="Resources\QBWIN32_1016.ico" />
     <Content Include="Resources\QBWIN32_1017.ico" />
