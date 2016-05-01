@@ -112,11 +112,17 @@ Partial Class frmWCList
         'txtRecordCount
         '
         Me.txtRecordCount.BackColor = System.Drawing.SystemColors.Window
-        Me.txtRecordCount.Location = New System.Drawing.Point(132, 342)
+        Me.txtRecordCount.Location = New System.Drawing.Point(132, 344)
         Me.txtRecordCount.Name = "txtRecordCount"
         Me.txtRecordCount.ReadOnly = True
         Me.txtRecordCount.Size = New System.Drawing.Size(114, 20)
         Me.txtRecordCount.TabIndex = 58
+        '
+        'BackgroundWorkerCity
+        '
+        '
+        'BackgroundWorkerZip
+        '
         '
         'epForm
         '
@@ -808,8 +814,12 @@ Partial Class frmWCList
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnRecordCount)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmWCList"
-        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Create Warm Calling List"
         CType(Me.epForm, System.ComponentModel.ISupportInitialize).EndInit()

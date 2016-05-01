@@ -87,31 +87,7 @@ Public Class MarketingManager
     End Sub
 
     Private Sub btnEditScheduledTask_Click(sender As Object, e As EventArgs) Handles btnEditScheduledTask.Click
-        Try
-            ScheduleAction.edit = True
-            Dim c As Integer = Me.pnlScheduledTasks.Controls.Count
-            Dim i As Integer
-            For i = 1 To c
-                Dim all As Panel = Me.pnlScheduledTasks.Controls(i - 1)
-                If all.BorderStyle = BorderStyle.FixedSingle Then
-                    ScheduleAction.EditId = all.Name.ToString.Substring(3)
-                End If
-            Next
-            If ScheduleAction.EditId = "" Then
-                MsgBox("You must select a Task.", MsgBoxStyle.Exclamation, "Please Select a Task")
-                Exit Sub
-            End If
-            ScheduleAction.ShowDialog()
-            Dim x As New ScheduledActions
-            x.SetUp(Me)
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "MarketingManager", "FormCode", "Event", "btnEditScheduledTask_Click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+        Dim x As New SubForm_Launcher(sender)
 
     End Sub
 
@@ -172,8 +148,7 @@ Public Class MarketingManager
 
     Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
 
-        frmEditSpecialInstructions.frm = Me
-        frmEditSpecialInstructions.ShowDialog()
+Dim x As New SubForm_Launcher(sender)
     End Sub
 
     Private Sub PreviewCustomerListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PreviewCustomerListToolStripMenuItem.Click

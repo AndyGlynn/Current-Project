@@ -9,6 +9,11 @@ Public Class ImportData
     Public cnnDA As New SqlConnection("SERVER=192.168.1.2;Database=Data_Automation;User Id=sa;Password=spoken1;")
     Public cnnDA2 As New SqlConnection("SERVER=192.168.1.2;Database=Data_Automation;User Id=sa;Password=spoken1;")
     Public CorrectPhoneNumberResponse As String = ""
+    Public vfy_address As String = ""
+    Public vfy_city As String = ""
+    Public vfy_st As String = ""
+    Public vfy_zip As String = ""
+    Public vfy_mapped As Boolean = False
 
     Private Const da_cnx As String = "SERVER=192.168.1.2;Database=Data_Automation;User Id=sa;Password=spoken1;"
     Private Const iss_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
@@ -98,6 +103,7 @@ Public Class ImportData
     
 
 #End Region
+
 
     Public Sub New()
         Dim Marketer As String
@@ -1119,7 +1125,11 @@ Public Class ImportData
                     r2.Close()
                     cnxDA.Close()
                     cnxDA = Nothing
-
+                    vfy_address = ""
+                    vfy_city = ""
+                    vfy_st = ""
+                    vfy_zip = ""
+                    vfy_mapped = False
                     If Marketer = "" Then
                         Description = "Appt. Generated from " & PLS & ", set up with " & PFirstName
                     ElseIf Marketer <> "" Then
@@ -1160,13 +1170,23 @@ Public Class ImportData
                     'Dim param17 As SqlParameter = New SqlParameter("@StNumber", EnterLead.txtStNum.Text)
                     Dim stAddress As String = ""
                     Dim param18 As SqlParameter = New SqlParameter("@StAddress", Trim(Addy))
+                    vfy_address = Addy
                     Dim param19 As SqlParameter = New SqlParameter("@City", Trim(City))
+                    vfy_city = City
                     Dim param20 As SqlParameter = New SqlParameter("@State", State)
+                    Dim glbl As New Input_Utility_Class
+
+                    vfy_st = glbl.Convert_State_Two_Char(State)
                     Dim param21 As SqlParameter = New SqlParameter("@Zip", Zip)
+                    vfy_Zip = glbl.Check_Zip(Zip)
                     Dim param22 As SqlParameter = New SqlParameter("@SpokeWith", PFirstName)
                     Dim param23 As SqlParameter = New SqlParameter("@C1Work", "Unknown")
                     Dim param24 As SqlParameter = New SqlParameter("@C2Work", "")
                     Dim param25 As SqlParameter = New SqlParameter("@AppDate", ApptDate)
+
+
+                    ''Dim vrfy As New VerifyAddress(vfy_address, vfy_city, vfy_st, vfy_Zip, 1)
+
 
                     Dim d1 = ApptDate.DayOfWeek
                     Select Case d1
@@ -1305,8 +1325,18 @@ Public Class ImportData
                 'cnnDA2.Close()
                 cnx2.Close()
                 cnx2 = Nothing
-                Dim recID As String = GetMaxID()
-                VerifyAddress(Get_Address_To_Verify(recID), False)
+                ' Dim recID As String = GetMaxID()
+                'VerifyAddress(Get_Address_To_Verify(recID), False)
+                cnx2.Open()
+                Dim cmdGET_ID As New SqlCommand("SELECT MAX(ID) FROM EnterLead;", cnx2)
+                Dim res As String = cmdGET_ID.ExecuteScalar
+                cnx2.Close()
+                Try
+                    Dim z As New VerifyAddress.ADHOC_VERIFY_ADDRESS(vfy_address, vfy_city, vfy_st, vfy_zip, 1, res)
+                Catch ex As Exception
+                    '' fail it if done.
+                End Try
+
             End While
 
 

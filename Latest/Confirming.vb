@@ -1754,6 +1754,7 @@ Public Class Confirming
 
     Private Sub btnSetAppt_Click(sender As Object, e As EventArgs) Handles btnSetAppt.Click
         Dim x As New SubForm_Launcher(sender)
+
     End Sub
 
     Private Sub btnMoveAppt_Click(sender As Object, e As EventArgs) Handles btnMoveAppt.Click

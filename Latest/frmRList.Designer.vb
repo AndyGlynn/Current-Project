@@ -55,6 +55,8 @@ Partial Class frmRList
         Me.tabSort = New System.Windows.Forms.TabPage()
         Me.btnUnCheckOrderBy = New System.Windows.Forms.Label()
         Me.btnCheckOrderBy = New System.Windows.Forms.Label()
+        Me.btnDown = New System.Windows.Forms.Button()
+        Me.btnUp = New System.Windows.Forms.Button()
         Me.chlstOrderBy = New System.Windows.Forms.CheckedListBox()
         Me.chGroupBy = New System.Windows.Forms.CheckBox()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
@@ -92,8 +94,6 @@ Partial Class frmRList
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.btnUncheckProducts = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnDown = New System.Windows.Forms.Button()
-        Me.btnUp = New System.Windows.Forms.Button()
         Me.tabGeo.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.numMiles, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -217,7 +217,7 @@ Partial Class frmRList
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(227, 136)
+        Me.Label11.Location = New System.Drawing.Point(194, 136)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(128, 13)
         Me.Label11.TabIndex = 6
@@ -225,7 +225,7 @@ Partial Class frmRList
         '
         'numMiles
         '
-        Me.numMiles.Location = New System.Drawing.Point(179, 134)
+        Me.numMiles.Location = New System.Drawing.Point(141, 134)
         Me.numMiles.Name = "numMiles"
         Me.numMiles.Size = New System.Drawing.Size(42, 20)
         Me.numMiles.TabIndex = 5
@@ -333,7 +333,7 @@ Partial Class frmRList
         '
         'numPar
         '
-        Me.numPar.Location = New System.Drawing.Point(109, 34)
+        Me.numPar.Location = New System.Drawing.Point(84, 34)
         Me.numPar.Name = "numPar"
         Me.numPar.Size = New System.Drawing.Size(51, 20)
         Me.numPar.TabIndex = 40
@@ -343,9 +343,9 @@ Partial Class frmRList
         Me.Label26.AutoSize = True
         Me.Label26.Location = New System.Drawing.Point(10, 36)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(216, 13)
+        Me.Label26.Size = New System.Drawing.Size(240, 13)
         Me.Label26.TabIndex = 39
-        Me.Label26.Text = "Quoted Price               % Or More Above Par"
+        Me.Label26.Text = "Quoted Price                       % Or More Above Par"
         '
         'btnUncheckRehash
         '
@@ -437,6 +437,24 @@ Partial Class frmRList
         Me.btnCheckOrderBy.TabIndex = 39
         Me.btnCheckOrderBy.Text = "Check All"
         '
+        'btnDown
+        '
+        Me.btnDown.Image = CType(resources.GetObject("btnDown.Image"), System.Drawing.Image)
+        Me.btnDown.Location = New System.Drawing.Point(23, 100)
+        Me.btnDown.Name = "btnDown"
+        Me.btnDown.Size = New System.Drawing.Size(26, 38)
+        Me.btnDown.TabIndex = 3
+        Me.btnDown.UseVisualStyleBackColor = True
+        '
+        'btnUp
+        '
+        Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
+        Me.btnUp.Location = New System.Drawing.Point(23, 56)
+        Me.btnUp.Name = "btnUp"
+        Me.btnUp.Size = New System.Drawing.Size(26, 38)
+        Me.btnUp.TabIndex = 2
+        Me.btnUp.UseVisualStyleBackColor = True
+        '
         'chlstOrderBy
         '
         Me.chlstOrderBy.ColumnWidth = 200
@@ -473,6 +491,12 @@ Partial Class frmRList
         '
         Me.epForm.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.epForm.ContainerControl = Me
+        '
+        'BackgroundWorkerZip
+        '
+        '
+        'BackgroundWorkerCity
+        '
         '
         'btnRecordCount
         '
@@ -797,24 +821,6 @@ Partial Class frmRList
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'btnDown
-        '
-        Me.btnDown.Image = CType(resources.GetObject("btnDown.Image"), System.Drawing.Image)
-        Me.btnDown.Location = New System.Drawing.Point(23, 100)
-        Me.btnDown.Name = "btnDown"
-        Me.btnDown.Size = New System.Drawing.Size(26, 38)
-        Me.btnDown.TabIndex = 3
-        Me.btnDown.UseVisualStyleBackColor = True
-        '
-        'btnUp
-        '
-        Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
-        Me.btnUp.Location = New System.Drawing.Point(23, 56)
-        Me.btnUp.Name = "btnUp"
-        Me.btnUp.Size = New System.Drawing.Size(26, 38)
-        Me.btnUp.TabIndex = 2
-        Me.btnUp.UseVisualStyleBackColor = True
-        '
         'frmRList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -826,8 +832,12 @@ Partial Class frmRList
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnCancel)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmRList"
-        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Create Recovery List"
         Me.tabGeo.ResumeLayout(False)

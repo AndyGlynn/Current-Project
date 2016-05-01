@@ -303,6 +303,15 @@ Public Class frmRList
         For x As Integer = 0 To Me.chlstProducts.Items.Count - 1
             Me.chlstProducts.SetItemChecked(x, True)
         Next
+        For x As Integer = 0 To Me.chlstMarketers.Items.Count - 1
+            Me.chlstMarketers.SetItemChecked(x, True)
+        Next
+        For x As Integer = 0 To Me.chlstRehash.Items.Count - 1
+            Me.chlstRehash.SetItemChecked(x, True)
+        Next
+        For x As Integer = 0 To Me.chlstOrderBy.Items.Count - 1
+            Me.chlstOrderBy.SetItemChecked(x, False)
+        Next
         Me.numMiles.Value = 0
         Me.txtZipCity.Text = ""
         Me.chlstZipCity.Items.Clear()

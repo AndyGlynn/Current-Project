@@ -45,6 +45,8 @@ Partial Class frmPCList
         Me.tabSort = New System.Windows.Forms.TabPage()
         Me.btnUnCheckOrderBy = New System.Windows.Forms.Label()
         Me.btnCheckOrderBy = New System.Windows.Forms.Label()
+        Me.btnDown = New System.Windows.Forms.Button()
+        Me.btnUp = New System.Windows.Forms.Button()
         Me.chlstOrderBy = New System.Windows.Forms.CheckedListBox()
         Me.chGroupBy = New System.Windows.Forms.CheckBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -86,8 +88,6 @@ Partial Class frmPCList
         Me.chlstMarketers = New System.Windows.Forms.CheckedListBox()
         Me.tabProducts = New System.Windows.Forms.TabPage()
         Me.BackgroundWorkerZip = New System.ComponentModel.BackgroundWorker()
-        Me.btnDown = New System.Windows.Forms.Button()
-        Me.btnUp = New System.Windows.Forms.Button()
         Me.tabGeo.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.numMiles, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -332,11 +332,29 @@ Partial Class frmPCList
         Me.btnCheckOrderBy.TabIndex = 39
         Me.btnCheckOrderBy.Text = "Check All"
         '
+        'btnDown
+        '
+        Me.btnDown.Image = CType(resources.GetObject("btnDown.Image"), System.Drawing.Image)
+        Me.btnDown.Location = New System.Drawing.Point(23, 100)
+        Me.btnDown.Name = "btnDown"
+        Me.btnDown.Size = New System.Drawing.Size(26, 38)
+        Me.btnDown.TabIndex = 3
+        Me.btnDown.UseVisualStyleBackColor = True
+        '
+        'btnUp
+        '
+        Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
+        Me.btnUp.Location = New System.Drawing.Point(23, 56)
+        Me.btnUp.Name = "btnUp"
+        Me.btnUp.Size = New System.Drawing.Size(26, 38)
+        Me.btnUp.TabIndex = 2
+        Me.btnUp.UseVisualStyleBackColor = True
+        '
         'chlstOrderBy
         '
         Me.chlstOrderBy.ColumnWidth = 200
         Me.chlstOrderBy.FormattingEnabled = True
-        Me.chlstOrderBy.Items.AddRange(New Object() {"City, State", "Zip Code", "Job Completed Date", "Products"})
+        Me.chlstOrderBy.Items.AddRange(New Object() {"City, State", "Zip Code", "Job Completed Date", "Products", "Reference Rating", "Available Loan Balance", "Loan Pay-Off Date"})
         Me.chlstOrderBy.Location = New System.Drawing.Point(55, 56)
         Me.chlstOrderBy.MultiColumn = True
         Me.chlstOrderBy.Name = "chlstOrderBy"
@@ -513,10 +531,10 @@ Partial Class frmPCList
         '
         Me.numReferences.DecimalPlaces = 1
         Me.numReferences.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.numReferences.Location = New System.Drawing.Point(276, 204)
+        Me.numReferences.Location = New System.Drawing.Point(209, 204)
         Me.numReferences.Maximum = New Decimal(New Integer() {60, 0, 0, 65536})
         Me.numReferences.Name = "numReferences"
-        Me.numReferences.Size = New System.Drawing.Size(62, 20)
+        Me.numReferences.Size = New System.Drawing.Size(38, 20)
         Me.numReferences.TabIndex = 33
         '
         'txtDate2PC
@@ -533,9 +551,9 @@ Partial Class frmPCList
         Me.Label19.AutoSize = True
         Me.Label19.Location = New System.Drawing.Point(10, 206)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(285, 13)
+        Me.Label19.Size = New System.Drawing.Size(297, 13)
         Me.Label19.TabIndex = 32
-        Me.Label19.Text = "Customers With A Reference Rating Of                Or Higher"
+        Me.Label19.Text = "Customers With A Reference Rating Of                    Or Higher"
         '
         'Label17
         '
@@ -549,9 +567,9 @@ Partial Class frmPCList
         'txtApprovedDollars
         '
         Me.txtApprovedDollars.Enabled = False
-        Me.txtApprovedDollars.Location = New System.Drawing.Point(483, 155)
+        Me.txtApprovedDollars.Location = New System.Drawing.Point(296, 156)
         Me.txtApprovedDollars.Name = "txtApprovedDollars"
-        Me.txtApprovedDollars.Size = New System.Drawing.Size(149, 20)
+        Me.txtApprovedDollars.Size = New System.Drawing.Size(81, 20)
         Me.txtApprovedDollars.TabIndex = 8
         '
         'txtDate1PC
@@ -587,9 +605,9 @@ Partial Class frmPCList
         'numMonths
         '
         Me.numMonths.Enabled = False
-        Me.numMonths.Location = New System.Drawing.Point(390, 118)
+        Me.numMonths.Location = New System.Drawing.Point(374, 114)
         Me.numMonths.Name = "numMonths"
-        Me.numMonths.Size = New System.Drawing.Size(51, 20)
+        Me.numMonths.Size = New System.Drawing.Size(46, 20)
         Me.numMonths.TabIndex = 5
         '
         'dpDate2PC
@@ -659,10 +677,10 @@ Partial Class frmPCList
         Me.chLoanSatisfied.CheckAlign = System.Drawing.ContentAlignment.TopLeft
         Me.chLoanSatisfied.Location = New System.Drawing.Point(296, 89)
         Me.chLoanSatisfied.Name = "chLoanSatisfied"
-        Me.chLoanSatisfied.Size = New System.Drawing.Size(236, 43)
+        Me.chLoanSatisfied.Size = New System.Drawing.Size(263, 43)
         Me.chLoanSatisfied.TabIndex = 6
-        Me.chLoanSatisfied.Text = "Show Loans That Have Been Satisfied Or" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Are Within             Months Of Being " & _
-    "Satisfied"
+        Me.chLoanSatisfied.Text = "Show Loans That Have Been Satisfied Or" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Are Within                      Months " & _
+    "Of Being Satisfied"
         Me.chLoanSatisfied.UseVisualStyleBackColor = True
         '
         'tabMarketers
@@ -731,24 +749,6 @@ Partial Class frmPCList
         Me.tabProducts.Text = "Products"
         Me.tabProducts.UseVisualStyleBackColor = True
         '
-        'btnDown
-        '
-        Me.btnDown.Image = CType(resources.GetObject("btnDown.Image"), System.Drawing.Image)
-        Me.btnDown.Location = New System.Drawing.Point(23, 100)
-        Me.btnDown.Name = "btnDown"
-        Me.btnDown.Size = New System.Drawing.Size(26, 38)
-        Me.btnDown.TabIndex = 3
-        Me.btnDown.UseVisualStyleBackColor = True
-        '
-        'btnUp
-        '
-        Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
-        Me.btnUp.Location = New System.Drawing.Point(23, 56)
-        Me.btnUp.Name = "btnUp"
-        Me.btnUp.Size = New System.Drawing.Size(26, 38)
-        Me.btnUp.TabIndex = 2
-        Me.btnUp.UseVisualStyleBackColor = True
-        '
         'frmPCList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -758,8 +758,12 @@ Partial Class frmPCList
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.TabControl1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmPCList"
-        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Create Previous Customer List"
         Me.tabGeo.ResumeLayout(False)

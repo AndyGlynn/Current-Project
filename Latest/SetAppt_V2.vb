@@ -127,7 +127,7 @@ Public Class SetAppt_V2
     Private Sub btnsave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnsave.Click
         Me.Confirmed = Me.chkConfirm.Checked
         Try
-            If Me.dtpApptDate.Value < Today And Me.txtDate.Visible = False Then
+            If Me.dtpApptDate.Value < Today And Me.txtDate.Visible = False And chkConfirm.Checked = False Then
 
                 Dim er As New ErrorProvider
                 er.BlinkStyle = ErrorBlinkStyle.NeverBlink
@@ -358,6 +358,7 @@ Public Class SetAppt_V2
             Me.Dispose()
         End If
         Try
+
             Select Case frm.Name
                 Case Is = "Sales"
                     Me.chkConfirm.Visible = True
@@ -418,7 +419,7 @@ Public Class SetAppt_V2
                     Me.OrigApptTime = EditCustomerInfo.txtApptTime.Text
             End Select
 
-
+            
 
 
             Me.cboSpokeWith.Items.Clear()
@@ -466,6 +467,11 @@ Public Class SetAppt_V2
             End While
             r1.Close()
             cnn.Close()
+
+            If frm.Name = "ConfirmingSingleRecord" And ConfirmingSingleRecord.Lastbtn = "btnSales" Then
+                frm = Sales
+            End If
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default

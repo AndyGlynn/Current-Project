@@ -276,7 +276,7 @@ Partial Class SDResult
         Me.ImageList1.Images.SetKeyName(3, "locked.ico")
         Me.ImageList1.Images.SetKeyName(4, "arrow-right.ico")
         Me.ImageList1.Images.SetKeyName(5, "recoveryIcon.ico")
-        Me.ImageList1.Images.SetKeyName(6, "Previous Customer.ico")
+        Me.ImageList1.Images.SetKeyName(6, "hand shake.ico")
         '
         'pnlFirst
         '
