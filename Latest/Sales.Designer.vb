@@ -90,6 +90,8 @@ Partial Class Sales
         Me.SendALetterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.SetAppointmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetAppointmentToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MoveAppointmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AssignChangeSalesRepToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripComboBox2 = New System.Windows.Forms.ToolStripComboBox()
@@ -176,7 +178,7 @@ Partial Class Sales
         Me.tsbtnAFPics = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnLogCall = New System.Windows.Forms.ToolStripSplitButton()
-        Me.btnCalledandCancelled = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnCandC = New System.Windows.Forms.ToolStripMenuItem()
         Me.tslblCustomerHistory = New System.Windows.Forms.ToolStripLabel()
         Me.pnlAFPics = New System.Windows.Forms.Panel()
         Me.lsAttachedFiles = New System.Windows.Forms.ListView()
@@ -272,6 +274,8 @@ Partial Class Sales
         Me.bgSalesQuery = New System.ComponentModel.BackgroundWorker()
         Me.bgNoResults = New System.ComponentModel.BackgroundWorker()
         Me.bgCustomerHistory = New System.ComponentModel.BackgroundWorker()
+        Me.tmrdtpCustList = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrSum = New System.Windows.Forms.Timer(Me.components)
         Me.tbMain.SuspendLayout()
         Me.tpSummary.SuspendLayout()
         Me.pnlPerformanceReport.SuspendLayout()
@@ -363,7 +367,7 @@ Partial Class Sales
         'lblRC
         '
         Me.lblRC.BackColor = System.Drawing.Color.Transparent
-        Me.lblRC.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRC.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRC.ForeColor = System.Drawing.Color.Black
         Me.lblRC.Location = New System.Drawing.Point(738, 329)
         Me.lblRC.Name = "lblRC"
@@ -375,7 +379,7 @@ Partial Class Sales
         'lblND
         '
         Me.lblND.BackColor = System.Drawing.Color.Transparent
-        Me.lblND.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblND.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblND.ForeColor = System.Drawing.Color.Black
         Me.lblND.Location = New System.Drawing.Point(512, 329)
         Me.lblND.Name = "lblND"
@@ -387,7 +391,7 @@ Partial Class Sales
         'lblRep
         '
         Me.lblRep.BackColor = System.Drawing.Color.Transparent
-        Me.lblRep.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRep.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRep.ForeColor = System.Drawing.Color.Black
         Me.lblRep.Location = New System.Drawing.Point(12, 329)
         Me.lblRep.Name = "lblRep"
@@ -399,7 +403,7 @@ Partial Class Sales
         'lblDNS
         '
         Me.lblDNS.BackColor = System.Drawing.Color.Transparent
-        Me.lblDNS.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDNS.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDNS.ForeColor = System.Drawing.Color.Black
         Me.lblDNS.Location = New System.Drawing.Point(173, 329)
         Me.lblDNS.Name = "lblDNS"
@@ -411,7 +415,7 @@ Partial Class Sales
         'lblNH
         '
         Me.lblNH.BackColor = System.Drawing.Color.Transparent
-        Me.lblNH.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNH.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNH.ForeColor = System.Drawing.Color.Black
         Me.lblNH.Location = New System.Drawing.Point(286, 329)
         Me.lblNH.Name = "lblNH"
@@ -423,7 +427,7 @@ Partial Class Sales
         'lblsales
         '
         Me.lblsales.BackColor = System.Drawing.Color.Transparent
-        Me.lblsales.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblsales.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblsales.ForeColor = System.Drawing.Color.Black
         Me.lblsales.Location = New System.Drawing.Point(625, 329)
         Me.lblsales.Name = "lblsales"
@@ -435,7 +439,7 @@ Partial Class Sales
         'lblSold
         '
         Me.lblSold.BackColor = System.Drawing.Color.Transparent
-        Me.lblSold.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSold.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSold.ForeColor = System.Drawing.Color.Black
         Me.lblSold.Location = New System.Drawing.Point(851, 329)
         Me.lblSold.Name = "lblSold"
@@ -448,7 +452,7 @@ Partial Class Sales
         '
         Me.lblAccuracy.AutoSize = True
         Me.lblAccuracy.BackColor = System.Drawing.Color.Transparent
-        Me.lblAccuracy.Font = New System.Drawing.Font("Tahoma", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAccuracy.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAccuracy.ForeColor = System.Drawing.Color.Black
         Me.lblAccuracy.Location = New System.Drawing.Point(12, 300)
         Me.lblAccuracy.Name = "lblAccuracy"
@@ -496,10 +500,10 @@ Partial Class Sales
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Tahoma", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(368, 295)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(174, 19)
+        Me.Label4.Size = New System.Drawing.Size(169, 18)
         Me.Label4.TabIndex = 225
         Me.Label4.Text = "Performance Report"
         '
@@ -507,10 +511,10 @@ Partial Class Sales
         '
         Me.Label38.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label38.AutoSize = True
-        Me.Label38.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label38.Location = New System.Drawing.Point(669, 6)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(226, 16)
+        Me.Label38.Size = New System.Drawing.Size(229, 16)
         Me.Label38.TabIndex = 224
         Me.Label38.Text = "All Records Needing Sales Results"
         '
@@ -571,7 +575,7 @@ Partial Class Sales
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.pnlScheduledTasks)
-        Me.GroupBox4.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox4.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox4.ForeColor = System.Drawing.Color.Black
         Me.GroupBox4.Location = New System.Drawing.Point(6, 6)
         Me.GroupBox4.Name = "GroupBox4"
@@ -621,7 +625,7 @@ Partial Class Sales
         'lblResets
         '
         Me.lblResets.BackColor = System.Drawing.Color.Transparent
-        Me.lblResets.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblResets.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblResets.ForeColor = System.Drawing.Color.Black
         Me.lblResets.Location = New System.Drawing.Point(399, 329)
         Me.lblResets.Name = "lblResets"
@@ -633,7 +637,7 @@ Partial Class Sales
         'lblIssued
         '
         Me.lblIssued.BackColor = System.Drawing.Color.Transparent
-        Me.lblIssued.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblIssued.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblIssued.ForeColor = System.Drawing.Color.Black
         Me.lblIssued.Location = New System.Drawing.Point(74, 329)
         Me.lblIssued.Name = "lblIssued"
@@ -685,7 +689,7 @@ Partial Class Sales
         Me.TabControl2.Controls.Add(Me.TabPage1)
         Me.TabControl2.Controls.Add(Me.TabPage2)
         Me.TabControl2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl2.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabControl2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl2.ImageList = Me.ilToolbarButtons
         Me.TabControl2.Location = New System.Drawing.Point(0, 0)
         Me.TabControl2.Name = "TabControl2"
@@ -722,7 +726,7 @@ Partial Class Sales
         Me.lblCntFiltered.AutoSize = True
         Me.lblCntFiltered.Location = New System.Drawing.Point(92, 519)
         Me.lblCntFiltered.Name = "lblCntFiltered"
-        Me.lblCntFiltered.Size = New System.Drawing.Size(10, 13)
+        Me.lblCntFiltered.Size = New System.Drawing.Size(11, 13)
         Me.lblCntFiltered.TabIndex = 99
         Me.lblCntFiltered.Text = " "
         '
@@ -732,7 +736,7 @@ Partial Class Sales
         Me.Label3.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Label3.Location = New System.Drawing.Point(3, 519)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(59, 13)
+        Me.Label3.Size = New System.Drawing.Size(62, 13)
         Me.Label3.TabIndex = 98
         Me.Label3.Text = "Records: "
         '
@@ -950,10 +954,25 @@ Partial Class Sales
         '
         'SetAppointmentToolStripMenuItem
         '
+        Me.SetAppointmentToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetAppointmentToolStripMenuItem1, Me.MoveAppointmentToolStripMenuItem})
         Me.SetAppointmentToolStripMenuItem.Image = CType(resources.GetObject("SetAppointmentToolStripMenuItem.Image"), System.Drawing.Image)
         Me.SetAppointmentToolStripMenuItem.Name = "SetAppointmentToolStripMenuItem"
         Me.SetAppointmentToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.SetAppointmentToolStripMenuItem.Text = "Set Appointment"
+        Me.SetAppointmentToolStripMenuItem.Text = "Appointment"
+        '
+        'SetAppointmentToolStripMenuItem1
+        '
+        Me.SetAppointmentToolStripMenuItem1.Image = Global.Latest.My.Resources.Resources.tranfer1
+        Me.SetAppointmentToolStripMenuItem1.Name = "SetAppointmentToolStripMenuItem1"
+        Me.SetAppointmentToolStripMenuItem1.Size = New System.Drawing.Size(178, 22)
+        Me.SetAppointmentToolStripMenuItem1.Text = "Set Appointment"
+        '
+        'MoveAppointmentToolStripMenuItem
+        '
+        Me.MoveAppointmentToolStripMenuItem.Image = Global.Latest.My.Resources.Resources.arrow_right
+        Me.MoveAppointmentToolStripMenuItem.Name = "MoveAppointmentToolStripMenuItem"
+        Me.MoveAppointmentToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.MoveAppointmentToolStripMenuItem.Text = "Move Appointment"
         '
         'AssignChangeSalesRepToolStripMenuItem
         '
@@ -1010,11 +1029,11 @@ Partial Class Sales
         '
         Me.lblConfimingPLS.AutoSize = True
         Me.lblConfimingPLS.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.lblConfimingPLS.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblConfimingPLS.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblConfimingPLS.ForeColor = System.Drawing.Color.Black
         Me.lblConfimingPLS.Location = New System.Drawing.Point(12, 3)
         Me.lblConfimingPLS.Name = "lblConfimingPLS"
-        Me.lblConfimingPLS.Size = New System.Drawing.Size(75, 13)
+        Me.lblConfimingPLS.Size = New System.Drawing.Size(76, 13)
         Me.lblConfimingPLS.TabIndex = 90
         Me.lblConfimingPLS.Text = "Select a List"
         '
@@ -1279,7 +1298,7 @@ Partial Class Sales
         Me.gbContactInfo.ForeColor = System.Drawing.Color.Gray
         Me.gbContactInfo.Location = New System.Drawing.Point(5, 3)
         Me.gbContactInfo.Name = "gbContactInfo"
-        Me.gbContactInfo.Size = New System.Drawing.Size(720, 198)
+        Me.gbContactInfo.Size = New System.Drawing.Size(708, 198)
         Me.gbContactInfo.TabIndex = 191
         Me.gbContactInfo.TabStop = False
         Me.gbContactInfo.Text = "Contact Info:"
@@ -1291,7 +1310,7 @@ Partial Class Sales
         Me.txtHousePhone.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtHousePhone.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHousePhone.ForeColor = System.Drawing.Color.Black
-        Me.txtHousePhone.Location = New System.Drawing.Point(512, 33)
+        Me.txtHousePhone.Location = New System.Drawing.Point(500, 33)
         Me.txtHousePhone.Name = "txtHousePhone"
         Me.txtHousePhone.ReadOnly = True
         Me.txtHousePhone.Size = New System.Drawing.Size(116, 16)
@@ -1304,7 +1323,7 @@ Partial Class Sales
         Me.txtaltphone2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone2.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone2.Location = New System.Drawing.Point(512, 96)
+        Me.txtaltphone2.Location = New System.Drawing.Point(500, 96)
         Me.txtaltphone2.Name = "txtaltphone2"
         Me.txtaltphone2.ReadOnly = True
         Me.txtaltphone2.Size = New System.Drawing.Size(116, 16)
@@ -1317,7 +1336,7 @@ Partial Class Sales
         Me.txtaltphone1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtaltphone1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtaltphone1.ForeColor = System.Drawing.Color.Black
-        Me.txtaltphone1.Location = New System.Drawing.Point(512, 64)
+        Me.txtaltphone1.Location = New System.Drawing.Point(500, 64)
         Me.txtaltphone1.Name = "txtaltphone1"
         Me.txtaltphone1.ReadOnly = True
         Me.txtaltphone1.Size = New System.Drawing.Size(116, 16)
@@ -1328,7 +1347,7 @@ Partial Class Sales
         Me.lnkEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkEmail.AutoSize = True
         Me.lnkEmail.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lnkEmail.Location = New System.Drawing.Point(459, 144)
+        Me.lnkEmail.Location = New System.Drawing.Point(447, 144)
         Me.lnkEmail.Name = "lnkEmail"
         Me.lnkEmail.Size = New System.Drawing.Size(0, 16)
         Me.lnkEmail.TabIndex = 136
@@ -1340,7 +1359,7 @@ Partial Class Sales
         Me.lblEmail.BackColor = System.Drawing.Color.Transparent
         Me.lblEmail.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmail.ForeColor = System.Drawing.Color.Gray
-        Me.lblEmail.Location = New System.Drawing.Point(408, 144)
+        Me.lblEmail.Location = New System.Drawing.Point(396, 144)
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.Size = New System.Drawing.Size(45, 16)
         Me.lblEmail.TabIndex = 135
@@ -1366,7 +1385,7 @@ Partial Class Sales
         Me.txtAlt1Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt1Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt1Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt1Type.Location = New System.Drawing.Point(644, 64)
+        Me.txtAlt1Type.Location = New System.Drawing.Point(632, 64)
         Me.txtAlt1Type.Name = "txtAlt1Type"
         Me.txtAlt1Type.ReadOnly = True
         Me.txtAlt1Type.Size = New System.Drawing.Size(57, 16)
@@ -1379,7 +1398,7 @@ Partial Class Sales
         Me.txtAlt2Type.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtAlt2Type.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAlt2Type.ForeColor = System.Drawing.Color.Black
-        Me.txtAlt2Type.Location = New System.Drawing.Point(644, 96)
+        Me.txtAlt2Type.Location = New System.Drawing.Point(632, 96)
         Me.txtAlt2Type.Name = "txtAlt2Type"
         Me.txtAlt2Type.ReadOnly = True
         Me.txtAlt2Type.Size = New System.Drawing.Size(57, 16)
@@ -1392,7 +1411,7 @@ Partial Class Sales
         Me.lblAltPhone2.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone2.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone2.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone2.Location = New System.Drawing.Point(408, 96)
+        Me.lblAltPhone2.Location = New System.Drawing.Point(396, 96)
         Me.lblAltPhone2.Name = "lblAltPhone2"
         Me.lblAltPhone2.Size = New System.Drawing.Size(84, 16)
         Me.lblAltPhone2.TabIndex = 83
@@ -1405,7 +1424,7 @@ Partial Class Sales
         Me.lblAltPhone1.BackColor = System.Drawing.Color.Transparent
         Me.lblAltPhone1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAltPhone1.ForeColor = System.Drawing.Color.Gray
-        Me.lblAltPhone1.Location = New System.Drawing.Point(408, 64)
+        Me.lblAltPhone1.Location = New System.Drawing.Point(396, 64)
         Me.lblAltPhone1.Name = "lblAltPhone1"
         Me.lblAltPhone1.Size = New System.Drawing.Size(88, 16)
         Me.lblAltPhone1.TabIndex = 81
@@ -1428,7 +1447,7 @@ Partial Class Sales
         Me.lblHousePhone.BackColor = System.Drawing.Color.Transparent
         Me.lblHousePhone.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHousePhone.ForeColor = System.Drawing.Color.Gray
-        Me.lblHousePhone.Location = New System.Drawing.Point(408, 33)
+        Me.lblHousePhone.Location = New System.Drawing.Point(396, 33)
         Me.lblHousePhone.Name = "lblHousePhone"
         Me.lblHousePhone.Size = New System.Drawing.Size(97, 16)
         Me.lblHousePhone.TabIndex = 78
@@ -1548,7 +1567,7 @@ Partial Class Sales
         Me.gbHomeInfo.Controls.Add(Me.txtYrBuilt)
         Me.gbHomeInfo.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbHomeInfo.ForeColor = System.Drawing.Color.Gray
-        Me.gbHomeInfo.Location = New System.Drawing.Point(731, 3)
+        Me.gbHomeInfo.Location = New System.Drawing.Point(719, 3)
         Me.gbHomeInfo.Name = "gbHomeInfo"
         Me.gbHomeInfo.Size = New System.Drawing.Size(138, 198)
         Me.gbHomeInfo.TabIndex = 183
@@ -1638,7 +1657,7 @@ Partial Class Sales
         Me.gbSpecialInstructions.ForeColor = System.Drawing.Color.Gray
         Me.gbSpecialInstructions.Location = New System.Drawing.Point(445, 207)
         Me.gbSpecialInstructions.Name = "gbSpecialInstructions"
-        Me.gbSpecialInstructions.Size = New System.Drawing.Size(424, 144)
+        Me.gbSpecialInstructions.Size = New System.Drawing.Size(412, 144)
         Me.gbSpecialInstructions.TabIndex = 188
         Me.gbSpecialInstructions.TabStop = False
         Me.gbSpecialInstructions.Text = "Special Instructions:"
@@ -1646,7 +1665,7 @@ Partial Class Sales
         'btnUpdateSPI
         '
         Me.btnUpdateSPI.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateSPI.Location = New System.Drawing.Point(351, 116)
+        Me.btnUpdateSPI.Location = New System.Drawing.Point(352, 114)
         Me.btnUpdateSPI.Name = "btnUpdateSPI"
         Me.btnUpdateSPI.Size = New System.Drawing.Size(54, 22)
         Me.btnUpdateSPI.TabIndex = 147
@@ -1663,7 +1682,7 @@ Partial Class Sales
         Me.rtbSpecialInstructions.Location = New System.Drawing.Point(6, 22)
         Me.rtbSpecialInstructions.Name = "rtbSpecialInstructions"
         Me.rtbSpecialInstructions.ReadOnly = True
-        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(412, 116)
+        Me.rtbSpecialInstructions.Size = New System.Drawing.Size(400, 116)
         Me.rtbSpecialInstructions.TabIndex = 146
         Me.rtbSpecialInstructions.Text = ""
         '
@@ -1907,7 +1926,7 @@ Partial Class Sales
         Me.tsCustomerLog.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsCustomerLog.Name = "tsCustomerLog"
         Me.tsCustomerLog.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsCustomerLog.Size = New System.Drawing.Size(871, 33)
+        Me.tsCustomerLog.Size = New System.Drawing.Size(865, 33)
         Me.tsCustomerLog.TabIndex = 189
         Me.tsCustomerLog.Text = "ToolStrip1"
         Me.tsCustomerLog.Visible = False
@@ -1925,10 +1944,10 @@ Partial Class Sales
         'tslblShowDepartment
         '
         Me.tslblShowDepartment.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.tslblShowDepartment.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tslblShowDepartment.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tslblShowDepartment.Margin = New System.Windows.Forms.Padding(10, 1, 0, 2)
         Me.tslblShowDepartment.Name = "tslblShowDepartment"
-        Me.tslblShowDepartment.Size = New System.Drawing.Size(43, 30)
+        Me.tslblShowDepartment.Size = New System.Drawing.Size(44, 30)
         Me.tslblShowDepartment.Text = "Show"
         '
         'tsbtnAFPics
@@ -1949,23 +1968,23 @@ Partial Class Sales
         '
         'btnLogCall
         '
-        Me.btnLogCall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCalledandCancelled})
+        Me.btnLogCall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCandC})
         Me.btnLogCall.Image = CType(resources.GetObject("btnLogCall.Image"), System.Drawing.Image)
         Me.btnLogCall.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnLogCall.Name = "btnLogCall"
         Me.btnLogCall.Size = New System.Drawing.Size(272, 30)
         Me.btnLogCall.Text = "Log Phone Conversation with this Customer"
         '
-        'btnCalledandCancelled
+        'btnCandC
         '
-        Me.btnCalledandCancelled.Image = Global.Latest.My.Resources.Resources.calledcancelled
-        Me.btnCalledandCancelled.Name = "btnCalledandCancelled"
-        Me.btnCalledandCancelled.Size = New System.Drawing.Size(254, 22)
-        Me.btnCalledandCancelled.Text = "Log Appt. as Called and Cancelled"
+        Me.btnCandC.Image = Global.Latest.My.Resources.Resources.calledcancelled
+        Me.btnCandC.Name = "btnCandC"
+        Me.btnCandC.Size = New System.Drawing.Size(254, 22)
+        Me.btnCandC.Text = "Log Appt. as Called and Cancelled"
         '
         'tslblCustomerHistory
         '
-        Me.tslblCustomerHistory.Font = New System.Drawing.Font("Tahoma", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tslblCustomerHistory.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tslblCustomerHistory.Margin = New System.Windows.Forms.Padding(40, 1, 0, 2)
         Me.tslblCustomerHistory.Name = "tslblCustomerHistory"
         Me.tslblCustomerHistory.Size = New System.Drawing.Size(150, 30)
@@ -1981,7 +2000,7 @@ Partial Class Sales
         Me.pnlAFPics.Controls.Add(Me.lsJobPictures)
         Me.pnlAFPics.Location = New System.Drawing.Point(4, 390)
         Me.pnlAFPics.Name = "pnlAFPics"
-        Me.pnlAFPics.Size = New System.Drawing.Size(871, 172)
+        Me.pnlAFPics.Size = New System.Drawing.Size(864, 172)
         Me.pnlAFPics.TabIndex = 201
         Me.pnlAFPics.Visible = False
         '
@@ -2353,7 +2372,7 @@ Partial Class Sales
         Me.tsAFPics.Margin = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.tsAFPics.Name = "tsAFPics"
         Me.tsAFPics.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsAFPics.Size = New System.Drawing.Size(871, 33)
+        Me.tsAFPics.Size = New System.Drawing.Size(865, 33)
         Me.tsAFPics.TabIndex = 201
         Me.tsAFPics.Text = "ToolStrip1"
         '
@@ -2370,10 +2389,10 @@ Partial Class Sales
         'ToolStripLabel1
         '
         Me.ToolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripLabel1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripLabel1.Margin = New System.Windows.Forms.Padding(10, 1, 0, 2)
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(43, 30)
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(44, 30)
         Me.ToolStripLabel1.Text = "Show"
         '
         'tsbtnShowCH
@@ -2406,10 +2425,10 @@ Partial Class Sales
         '
         'tslblAFPic
         '
-        Me.tslblAFPic.Font = New System.Drawing.Font("Tahoma", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tslblAFPic.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tslblAFPic.Margin = New System.Windows.Forms.Padding(5, 1, 0, 2)
         Me.tslblAFPic.Name = "tslblAFPic"
-        Me.tslblAFPic.Size = New System.Drawing.Size(279, 30)
+        Me.tslblAFPic.Size = New System.Drawing.Size(283, 30)
         Me.tslblAFPic.Text = "Attached Files and Job Pictures..."
         '
         'pnlCustomerHistory
@@ -2420,7 +2439,7 @@ Partial Class Sales
         Me.pnlCustomerHistory.AutoScroll = True
         Me.pnlCustomerHistory.Location = New System.Drawing.Point(4, 390)
         Me.pnlCustomerHistory.Name = "pnlCustomerHistory"
-        Me.pnlCustomerHistory.Size = New System.Drawing.Size(868, 172)
+        Me.pnlCustomerHistory.Size = New System.Drawing.Size(861, 172)
         Me.pnlCustomerHistory.TabIndex = 200
         '
         'tpIssueLeads
@@ -2623,6 +2642,14 @@ Partial Class Sales
         'bgCustomerHistory
         '
         '
+        'tmrdtpCustList
+        '
+        Me.tmrdtpCustList.Interval = 3000
+        '
+        'tmrSum
+        '
+        Me.tmrSum.Interval = 3000
+        '
         'Sales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2799,7 +2826,7 @@ Partial Class Sales
     Friend WithEvents ToThisCustomerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExportListToLetterWizardToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GoToLetterWizardToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btnCalledandCancelled As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnCandC As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TScboCustomerHistory As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
     Friend WithEvents tsAttachedFilesNAV As System.Windows.Forms.ToolStripButton
@@ -2925,4 +2952,8 @@ Partial Class Sales
     Friend WithEvents bgSalesQuery As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgNoResults As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgCustomerHistory As System.ComponentModel.BackgroundWorker
+    Friend WithEvents SetAppointmentToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MoveAppointmentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tmrdtpCustList As System.Windows.Forms.Timer
+    Friend WithEvents tmrSum As System.Windows.Forms.Timer
 End Class

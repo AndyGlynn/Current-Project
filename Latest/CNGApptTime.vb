@@ -4,7 +4,16 @@ Imports System.Data.SqlClient
 Imports System
 Public Class CNGApptTime
     Public Frm As Form
+    Public Id As String
+
     Private Sub CNGApptTime_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        Id = STATIC_VARIABLES.CurrentID
+        If Id = "" Then
+            MsgBox("You must select a record to change Appt. Time!", MsgBoxStyle.Exclamation, "No Record Selected")
+            Me.Dispose()
+        End If
+
         If Frm.Name = "Confirming" Then
             Me.txtApptTime.Text = Confirming.txtApptTime.Text
         Else
@@ -48,17 +57,7 @@ Public Class CNGApptTime
             R1.Read()
             R1.Close()
             cnn.Close()
-            Dim c2 As New CustomerHistory
-            If Frm.Name = "Confirming" Then
-                Dim c As New ConfirmingData
-                c.Populate("Dispatch", Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Refresh")
-
-                c2.SetUp(Confirming.TScboCustomerHistory)
-            Else
-                ConfirmingSingleRecord.txtApptTime.Text = Me.dtpApptTime.Value.ToShortTimeString
-                c2.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
-            End If
-     
+            STATIC_VARIABLES.Update = True
             Me.Close()
             Me.Dispose()
         Catch ex As Exception

@@ -18,6 +18,8 @@ Module STATIC_VARIABLES
     Public SAAttachedFileDirectory As String = "\\SERVER\Company\ISS\ScheduledActionAttachments\"
     Public JobPicturesFileDirectory As String = "\\SERVER\Company\ISS\Job Pictures\"
     Public EmailDirectory As String = "\\SERVER\Company\ISS\Email Leads\" & Date.Now.ToString & "\"
+    Public Update As Boolean = False
+    Public New_SA_Dept As String = ""
 
 #Region "User Information"
 

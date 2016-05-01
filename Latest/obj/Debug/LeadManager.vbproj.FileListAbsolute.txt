@@ -1,8 +1,8 @@
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Latest 14.exe.manifest
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Latest 14.application
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Latest 14.exe
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Latest 14.pdb
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Latest 14.xml
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\ImproveIt! 360.exe.manifest
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\ImproveIt! 360.application
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\ImproveIt! 360.exe
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\ImproveIt! 360.pdb
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\ImproveIt! 360.xml
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Interop.IWshRuntimeLibrary.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Interop.MapPoint.dll
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\bin\Debug\Interop.Microsoft.Office.Core.dll
@@ -58,6 +58,7 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmEmailTemplateListManager.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmErrorLogs.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmExpandedRolodex.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmGenericPBar.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmImportBulkData.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmLinkSendEmail.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmLogin.resources
@@ -89,9 +90,9 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.ProductDetail.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.Recovery.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.RolodexEdit.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.Sales.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.SalesListBuilder.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.SDResult.resources
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.salessetappt.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.ScheduleAction.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.SecondSource.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.SetApptTelemarketing.resources
@@ -107,16 +108,14 @@ C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Late
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.Progress.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.Reissue.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.RescheduleAppt.resources
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.Sales.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.SendNotesSM.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.SplashScreen1.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.WCaller.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.WCallerSingleRecord.resources
 C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\LeadManager.vbproj.GenerateResource.Cache
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.TrustInfo.xml
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.exe.manifest
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.application
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.exe
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.xml
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest 14.pdb
-C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\Latest.frmGenericPBar.resources
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\ImproveIt! 360.TrustInfo.xml
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\ImproveIt! 360.exe.manifest
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\ImproveIt! 360.application
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\ImproveIt! 360.exe
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\ImproveIt! 360.xml
+C:\Users\Clay\Documents\Visual Studio 2013\Current-Project\Latest\obj\Debug\ImproveIt! 360.pdb

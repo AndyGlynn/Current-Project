@@ -5,7 +5,7 @@ Imports System.Data.SqlClient
 Imports System
 Public Class Confirming
     Friend WithEvents Confirm As New ToolStripDropDownButton '
-    Friend WithEvents EditCustomer As New ToolStripButton '
+    Friend WithEvents btnEditCustomer As New ToolStripButton '
     Friend WithEvents ChangeStatus As New ToolStripDropDownButton '
     Friend WithEvents UndoConfirm As New ToolStripSplitButton '
     Friend WithEvents Emailc As New ToolStripDropDownButton '
@@ -19,9 +19,9 @@ Public Class Confirming
     Friend WithEvents ConfirmwithContact2 As New ToolStripMenuItem
     Friend WithEvents ConfirmwithBoth As New ToolStripMenuItem
     Friend WithEvents Confirmwithther As New ToolStripMenuItem
-    Friend WithEvents Reschedule As New ToolStripMenuItem '
+    Friend WithEvents btnMoveAppt As New ToolStripMenuItem '
     Friend WithEvents btnKill As New ToolStripMenuItem '
-    Friend WithEvents Cancelled As New ToolStripMenuItem
+    Friend WithEvents btnCandC As New ToolStripMenuItem
     Friend WithEvents DoNotCall As New ToolStripMenuItem '
     Friend WithEvents DoNotMail As New ToolStripMenuItem '
     Friend WithEvents DoNotCallOrMail As New ToolStripMenuItem '
@@ -138,12 +138,15 @@ Public Class Confirming
             Dim x
             x = Me.ilToolStripIcons.Images
             'Confirm
+
+            Me.Confirm.Name = "Confirm"
             Me.Confirm.Text = "Confirm Appointment"
             Me.Confirm.Image = x(0)
             Me.Confirmwith.Text = "Select who you spoke with" & vbCr & "to Confirm this Appt."
             'Edit Cutomer
-            Me.EditCustomer.Text = "Edit Customer"
-            Me.EditCustomer.Image = x(1)
+            Me.btnEditCustomer.Text = "Edit Customer"
+            Me.btnEditCustomer.Image = x(1)
+            Me.btnEditCustomer.Name = "btnEditCustomer"
             'Change Status
             Me.ChangeStatus.Text = "Change Status"
             Me.ChangeStatus.Image = x(2)
@@ -165,7 +168,7 @@ Public Class Confirming
             Me.Sales.DropDownItems.Add(Me.btnCNGApptTime)
             Me.Sales.DropDownItems.Add(Me.SalesSeparator)
             Me.Sales.DropDownItems.Add(Me.Issue)
-
+            Me.SalesResult.Name = "SalesResult"
 
             Me.Rep1.DropDownStyle = ComboBoxStyle.DropDownList
 
@@ -181,29 +184,33 @@ Public Class Confirming
             Me.Issue.DropDownItems.Add(Me.SaveChanges)
             Me.btnCNGApptTime.Text = "Change Appt. Time"
             Me.tsConfirming.Items.Add(Me.EnterLead)
-
+            Me.btnCNGApptTime.Name = "btnCNGApptTime"
 
 
             ' Send Notes
             Me.SendNotes.Text = "Attach Notes for the" & vbCr & "Issuing Sales Manager"
             Me.SendNotes.Image = x(7)
             ' Reschedule
-            Me.Reschedule.Text = "Move Appointment"
-            Me.Reschedule.Image = x(15)
+            Me.btnMoveAppt.Text = "Move Appointment"
+            Me.btnMoveAppt.Image = x(15)
+            Me.btnMoveAppt.Name = "btnMoveAppt"
             '   Set Appt
             Me.btnSetAppt.Text = "Set Appointment"
             Me.btnSetAppt.Image = x(8)
+            Me.btnSetAppt.Name = "btnSetAppt"
             '  Appt
             Me.btnAppt.Text = "Appointment"
             Me.btnAppt.Image = x(8)
             Me.btnAppt.DropDownItems.Add(Me.btnSetAppt)
-            Me.btnAppt.DropDownItems.Add(Me.Reschedule)
+            Me.btnAppt.DropDownItems.Add(Me.btnMoveAppt)
             ' Kill
-            Me.btnKill.Text = "Kill This Appointment"
+            Me.btnKill.Text = "Kill Appointment"
             Me.btnKill.Image = x(9)
+            Me.btnKill.Name = "btnKill"
             'Cancelled
-            Me.Cancelled.Text = "Log This Appointment as Called & Cancelled"
-            Me.Cancelled.Image = x(10)
+            Me.btnCandC.Text = "Log This Appointment as Called & Cancelled"
+            Me.btnCandC.Image = x(10)
+            Me.btnCandC.Name = "btnCandC"
             'Do Not Call 
             Me.DoNotCall.Text = "Mark as Do Not Call"
             Me.DoNotCall.Image = x(11)
@@ -348,7 +355,7 @@ Public Class Confirming
                 c.Populate("Dispatch", Me.cboSalesPLS.Text.ToString, Me.cboSalesSLS.Text.ToString, Me.dpSales.Value.ToString, "Refresh")
                 Me.RefreshData.Stop()
                 Me.tsConfirming.Items.Clear()
-                Me.tsConfirming.Items.Add(Me.EditCustomer)
+                Me.tsConfirming.Items.Add(Me.btnEditCustomer)
                 Me.tsConfirming.Items.Add(Me.Sales)
                 Me.tsConfirming.Items.Add(Me.Emailu)
                 Me.tsConfirming.Items.Add(Me.AutoDial)
@@ -380,6 +387,7 @@ Public Class Confirming
                 If Me.lvSales.SelectedItems.Count > 0 Then
                     Me.Text = "Confirming"
                     c.PullCustomerINFO("Dispatch", Me.lvSales.SelectedItems(0).Text)
+                    STATIC_VARIABLES.CurrentID = Me.lvSales.SelectedItems(0).Text
                 Else
                     c.PullCustomerINFO("Dispatch", "")
                 End If
@@ -391,12 +399,14 @@ Public Class Confirming
                 Dim c As New ConfirmingData
                 If Me.lvConfirming.SelectedItems.Count > 0 Then
                     c.PullCustomerINFO("Confirm", Me.lvConfirming.SelectedItems(0).Text)
+                    STATIC_VARIABLES.CurrentID = Me.lvConfirming.SelectedItems(0).Text
                 Else
                     c.PullCustomerINFO("Confirm", "")
                 End If
                 Me.dpConfirming.Visible = True
                 Me.dpSales.Visible = False
                 Me.lvConfirming_SelectedIndexChanged(Nothing, Nothing)
+
             End If
             'Me.cboConfirmingPLS_LostFocus(Nothing, Nothing)
         Catch ex As Exception
@@ -458,7 +468,7 @@ Public Class Confirming
                 Me.tsConfirming.Items.Add(Me.Confirm)
 
 
-                Me.tsConfirming.Items.Add(Me.EditCustomer)
+                Me.tsConfirming.Items.Add(Me.btnEditCustomer)
                 Me.tsConfirming.Items.Add(Me.ChangeStatus)
                 Dim cs
                 cs = Me.ChangeStatus.DropDownItems
@@ -539,7 +549,7 @@ Public Class Confirming
 
                 End If
 
-                Me.tsConfirming.Items.Add(Me.EditCustomer)
+                Me.tsConfirming.Items.Add(Me.btnEditCustomer)
                 Me.tsConfirming.Items.Add(Me.ChangeStatus)
                 Dim cs
                 cs = Me.ChangeStatus.DropDownItems
@@ -586,7 +596,7 @@ Public Class Confirming
                 Me.tsConfirming.Items.Clear()
                 Me.tsConfirming.Items.Add(Me.UndoConfirm)
                 Me.UndoConfirm.DropDownItems.Add(Me.SendNotes)
-                Me.tsConfirming.Items.Add(Me.EditCustomer)
+                Me.tsConfirming.Items.Add(Me.btnEditCustomer)
                 Me.tsConfirming.Items.Add(Me.Emailc)
                 Me.tsConfirming.Items.Add(Me.AutoDial)
                 Dim ad
@@ -735,45 +745,14 @@ Public Class Confirming
 
     End Sub
 
-    Private Sub Reschedule_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Reschedule.Click
-        Try
-            If Me.TabControl1.SelectedIndex = 0 Then
-                If Me.lvConfirming.SelectedItems.Count <> 0 Then
-                    RescheduleAppt.ID = Me.lvConfirming.SelectedItems(0).Text
-                    RescheduleAppt.frm = Me
-                    RescheduleAppt.ShowDialog()
-                Else
-                    MsgBox("You must select a record to reschedule Appt. Date!", MsgBoxStyle.Exclamation, "No Record Selected")
-                End If
-            ElseIf Me.TabControl1.SelectedIndex = 1 Then
-                If Me.lvSales.SelectedItems.Count <> 0 Then
-                    RescheduleAppt.ID = Me.lvSales.SelectedItems(0).Text
-                    RescheduleAppt.frm = Me
-                    RescheduleAppt.ShowDialog()
-                Else
-                    MsgBox("You must select a record to reschedule Appt. Date!", MsgBoxStyle.Exclamation, "No Record Selected")
-                End If
-            End If
-        Catch ex As Exception
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Confirming", "Confirming", "Event", "Reschedule_Click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
 
     Private Sub SalesResult_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles SalesResult.Click
         Try
-            If Me.lvSales.SelectedItems.Count = 0 Then
-                MsgBox("You must select a record to enter a result!", MsgBoxStyle.Exclamation, "No Record Selected")
-                Exit Sub
-            End If
+
             If Me.SalesResult.Text = "Enter Sales Result and Reschedule Appt." Then
-                Reissue.frm = Me
-                Reissue.ShowInTaskbar = False
-                Reissue.ShowDialog()
+                Dim x As New SubForm_Launcher(sender)
             Else
-                Me.Reschedule_Click(Nothing, Nothing)
+                Me.btnMoveAppt_Click(Me.btnMoveAppt, Nothing)
             End If
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -785,65 +764,11 @@ Public Class Confirming
 
 
 
-    Private Sub calledcancelled_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles calledcancelled.Click
-        Try
-            Dim s = Split(Me.txtContact1.Text, " ")
-            Dim c1 = s(0)
-            Dim s2 = Split(Me.txtContact2.Text, " ")
-            Dim c2 = s2(0)
-            CandCNotes.Contact1 = c1
-            CandCNotes.Contact2 = c2
-            CandCNotes.OrigApptDate = Me.txtApptDate.Text
-            CandCNotes.OrigApptTime = Me.txtApptTime.Text
-            CandCNotes.frm = Me
 
-            If Tab = "Confirm" Then
-                If Me.lvConfirming.SelectedItems.Count = 0 Then
-                    MsgBox("You must select an Appt. to Log Cancellation!", MsgBoxStyle.Exclamation, "Cannot Log Cancellation")
-                Else
-                    CandCNotes.ID = Me.lvConfirming.SelectedItems(0).Text
-                    CandCNotes.ShowInTaskbar = False
-                    CandCNotes.ShowDialog()
-                End If
-
-            ElseIf Tab = "Dispatch" Then
-                If Me.lvSales.SelectedItems.Count = 0 Then
-                    MsgBox("You must select an Appt. to Log Cancellation!", MsgBoxStyle.Exclamation, "Cannot Log Cancellation")
-                Else
-                    CandCNotes.ID = Me.lvSales.SelectedItems(0).Text
-                    CandCNotes.ShowInTaskbar = False
-                    CandCNotes.ShowDialog()
-                End If
-            End If
-        Catch ex As Exception
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Confirming", "Confirming", "Event", "calledandcancelled_Click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-    End Sub
 
     Private Sub btnLogCall_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnLogCall.Click
         Try
-            If Tab = "Confirm" Then
-                If Me.lvConfirming.SelectedItems.Count = 0 Then
-                    MsgBox("You must Select a Customer" & vbCr & "to Log a Phone Conversation", MsgBoxStyle.Exclamation, "No Customer Selected")
-                    Exit Sub
-                End If
-                LogPhoneCall.ID = Me.lvConfirming.SelectedItems(0).Text
-
-            ElseIf Tab = "Dispatch" Then
-                If Me.lvSales.SelectedItems.Count = 0 Then
-                    MsgBox("You must Select a Customer" & vbCr & "to Log a Phone Conversation", MsgBoxStyle.Exclamation, "No Customer Selected")
-                    Exit Sub
-                End If
-                LogPhoneCall.ID = Me.lvSales.SelectedItems(0).Text
-            End If
-            LogPhoneCall.Contact1 = Me.txtContact1.Text
-            LogPhoneCall.Contact2 = Me.txtContact2.Text
-            LogPhoneCall.frm = Me
-            LogPhoneCall.ShowInTaskbar = False
-            LogPhoneCall.ShowDialog()
+            Dim x As New SubForm_Launcher(sender)
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Confirming", "Confirming", "Event", "btnLogCall_Click", "0", ex.Message.ToString)
@@ -1066,7 +991,7 @@ Public Class Confirming
 
     Private Sub Confirmwithther_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Confirmwithther.Click
         Try
-    
+
             Dim c As New ConfirmingData
             Dim c2 As New CustomerHistory
             If Me.dpConfirming.Value < Today Then
@@ -1099,16 +1024,7 @@ Public Class Confirming
 
     Private Sub btnKill_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnKill.Click
         Try
-            If Me.lvConfirming.SelectedItems.Count = 0 Then
-                MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Else
-                Kill.Contact1 = Me.txtContact1.Text
-                Kill.Contact2 = Me.txtContact2.Text
-                Kill.frm = Me
-                Kill.ID = Me.lvConfirming.SelectedItems(0).Text
-                Kill.ShowDialog()
-
-            End If
+            Dim x As New SubForm_Launcher(sender)
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Confirming", "Confirming", "Event", "btnKill_Click", "0", ex.Message.ToString)
@@ -1311,13 +1227,7 @@ Public Class Confirming
     End Sub
 
     Private Sub btnCNGApptTime_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCNGApptTime.Click
-        If Me.lvSales.SelectedItems.Count = 0 Then
-            MsgBox("You must select a record to change Appt. Time!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
-        CNGApptTime.Frm = Me
-        CNGApptTime.ShowInTaskbar = False
-        CNGApptTime.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
     Private Sub lnkEmail_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkEmail.Click
         frmLinkSendEmail.Cust_Email = Me.lnkEmail.Text
@@ -1326,18 +1236,7 @@ Public Class Confirming
         frmLinkSendEmail.BringToFront()
     End Sub
 
-    Private Sub EditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EditCustomer.Click
-        If Me.TabControl1.SelectedIndex = 0 Then
-            If Me.lvConfirming.SelectedItems.Count <> 0 Then
-                EditCustomerInfo.ID = Me.lvConfirming.SelectedItems(0).Text
-            End If
-        Else
-            If Me.lvSales.SelectedItems.Count <> 0 Then
-                EditCustomerInfo.ID = Me.lvSales.SelectedItems(0).Text
-            End If
-        End If
-        EditCustomerInfo.Show()
-    End Sub
+
 
 
 
@@ -1841,8 +1740,7 @@ Public Class Confirming
 
     End Sub
     Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
-        frmEditSpecialInstructions.frm = Me
-        frmEditSpecialInstructions.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
 
@@ -1855,8 +1753,34 @@ Public Class Confirming
     End Sub
 
     Private Sub btnSetAppt_Click(sender As Object, e As EventArgs) Handles btnSetAppt.Click
-        SetAppt_V2.frm = Me
-        SetAppt_V2.Show()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
+
+    Private Sub btnMoveAppt_Click(sender As Object, e As EventArgs) Handles btnMoveAppt.Click
+        Try
+            Dim x As New SubForm_Launcher(sender)
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Confirming", "Confirming", "Event", "Reschedule_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+    End Sub
+
+    Private Sub btnCandC_Click(sender As Object, e As EventArgs) Handles btnCandC.Click
+        Try
+            Dim x As New SubForm_Launcher(sender)
+
+        Catch ex As Exception
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Confirming", "Confirming", "Event", "calledandcancelled_Click", "0", ex.Message.ToString)
+            y = Nothing
+        End Try
+    End Sub
+
+    Private Sub btnEditCustomer_Click(sender As Object, e As EventArgs) Handles btnEditCustomer.Click
+        Dim x As New SubForm_Launcher(sender)
+    End Sub
+
+
 End Class
 

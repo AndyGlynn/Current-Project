@@ -8,7 +8,7 @@ Imports System
 Public Class ConfirmingSingleRecord
 
 
-    Private Lastbtn As String
+    Public Lastbtn As String
     Private DoNotCall
     Private DoNotMail
     Private DoNotCallMail
@@ -27,34 +27,13 @@ Public Class ConfirmingSingleRecord
 
 
 
-    Private Sub calledcancelled_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles calledcancelled.Click
-        Dim s = Split(Me.txtContact1.Text, " ")
-        Dim c1 = s(0)
-        Dim s2 = Split(Me.txtContact2.Text, " ")
-        Dim c2 = s2(0)
-        CandCNotes.ID = ID
-        CandCNotes.Contact1 = c1
-        CandCNotes.Contact2 = c2
-        CandCNotes.OrigApptDate = Me.txtApptDate.Text
-        CandCNotes.OrigApptTime = Me.txtApptTime.Text
-        CandCNotes.ShowInTaskbar = False
-        CandCNotes.ShowDialog()
-        Dim c As New CustomerHistory
-        c.SetUp(Me.TScboCustomerHistory)
+    Private Sub btnCandC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCandC.Click
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
-    Private Sub btnLogCall_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogCall.ButtonClick
+    Private Sub btnLogCall_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
-        LogPhoneCall.frm = Me
-
-        LogPhoneCall.ID = ID
-
-        LogPhoneCall.Contact1 = Me.txtContact1.Text
-        LogPhoneCall.Contact2 = Me.txtContact2.Text
-        LogPhoneCall.ShowInTaskbar = False
-        LogPhoneCall.ShowDialog()
-        Dim c As New CustomerHistory
-        c.SetUp(Me.TScboCustomerHistory)
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
     Private Sub ConfirmingSingleRecord_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
@@ -94,6 +73,7 @@ Public Class ConfirmingSingleRecord
 
         Me.btnSpokeWith.Text = "Select who you spoke with" & vbCr & "to Confirm this Appt."
         Me.btnSMNotes.Text = "Attach notes for the" & vbCr & "Issuing Sales Manager"
+
         ID = STATIC_VARIABLES.CurrentID
         Me.btnConfirmDispatch.Image = Me.ilToolStripIcons.Images(6)
 
@@ -101,8 +81,8 @@ Public Class ConfirmingSingleRecord
         Me.TScboCustomerHistory.Text = "All"
         Me.cboRep2.Items.Clear()
         Me.cboRep1.Items.Clear()
-        Dim x As New TScbo_List_Fill(Me.cboRep1, True, True)
-        Dim y As New TScbo_List_Fill(Me.cboRep2, True, True)
+        Dim x As New cbo_List_Fill(Me.cboRep1, False, True)
+        Dim y As New cbo_List_Fill(Me.cboRep2, False, True)
         Me.lblSalesRep.Text = ""
 
         Me.Text = Me.Text & ID
@@ -215,20 +195,30 @@ Public Class ConfirmingSingleRecord
                 End If
                 'MsgBox(r1.Item("DoNotCall").ToString & " | " & r1.Item("DoNotMail").ToString & " | " & r1.Item("MarketingResults"))
                 Try
-                    Rep1 = r1.Item(36)
-                    OrigRep1 = r1.Item(36)
+                    If r1.Item(36) <> "" Then
+                        Rep1 = r1.Item(36)
+                        OrigRep1 = r1.Item(36)
+                    Else
+                        Rep1 = ""
+                        OrigRep1 = ""
+                    End If
                 Catch ex As Exception
                     Rep1 = ""
                     OrigRep1 = ""
                 End Try
                 Try
-                    Rep2 = r1.Item(37)
-                    OrigRep2 = r1.Item(37)
+                    If r1.Item(37) <> "" Then
+                        Rep2 = r1.Item(37)
+                        OrigRep2 = r1.Item(37)
+                    Else
+                        Rep2 = ""
+                        OrigRep2 = ""
+                    End If
                 Catch ex As Exception
                     Rep2 = ""
                     OrigRep2 = ""
                 End Try
- 
+
                 NR = r1.Item("NeedsSaleResult")
             End While
             r1.Close()
@@ -285,15 +275,13 @@ Public Class ConfirmingSingleRecord
 
     End Sub
 
-    Public Sub btnSetAppt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetAppt.Click
-        SetAppt_V2.frm = Me
-        SetAppt_V2.ShowDialog()
-        Exit Sub
+    Public Sub btnSetAppt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
 
 
-    Private Sub btnDoNotCall_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDoNotCall.Click
+    Private Sub btnDoNotCall_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim c As New DoNotCallOrMail
         c.DoNot(ID, sender.text.ToString)
         Dim d As New CustomerHistory
@@ -304,7 +292,7 @@ Public Class ConfirmingSingleRecord
 
     End Sub
 
-    Private Sub btnDoNotCallOrMail_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDoNotCallOrMail.Click
+    Private Sub btnDoNotCallOrMail_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim c As New DoNotCallOrMail
         c.DoNot(ID, sender.text.ToString)
         Dim d As New CustomerHistory
@@ -313,7 +301,7 @@ Public Class ConfirmingSingleRecord
 
     End Sub
 
-    Private Sub btnDoNotMail_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDoNotMail.Click
+    Private Sub btnDoNotMail_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim x As New DoNotCallOrMail
         x.DoNot(ID, sender.text.ToString)
         Dim d As New CustomerHistory
@@ -321,18 +309,17 @@ Public Class ConfirmingSingleRecord
         Me.Manage_Buttons()
     End Sub
 
-    Private Sub btnEditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustomer.Click
+    Private Sub btnEditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs)
 
-        EditCustomerInfo.Show()
-        Me.Refresh()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
-    Private Sub TScboCustomerHistory_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TScboCustomerHistory.SelectedIndexChanged
+    Private Sub TScboCustomerHistory_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim c As New CustomerHistory
         c.SetUp(Me.TScboCustomerHistory)
     End Sub
 
-    Private Sub rtbSpecialInstructions_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles rtbSpecialInstructions.LostFocus
+    Private Sub rtbSpecialInstructions_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         ''Comeback
         Dim cnn = New SqlConnection(STATIC_VARIABLES.Cnn)
         Dim cmdUP As SqlCommand = New SqlCommand("Update enterlead set SpecialInstruction = @SI where id = @ID", cnn)
@@ -349,7 +336,7 @@ Public Class ConfirmingSingleRecord
     Private Sub ConfirmingSingleRecord_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
         Me.WindowState = FormWindowState.Normal
     End Sub
-    Private Sub Manage_Buttons()
+    Public Sub Manage_Buttons()
         Dim cmdGet As SqlCommand = New SqlCommand(("Select DoNotCall, DoNotMail, MarketingResults from enterlead where id = " & ID), cnn)
         cmdGet.CommandType = CommandType.Text
         cnn.Open()
@@ -380,7 +367,7 @@ Public Class ConfirmingSingleRecord
                 Me.btnDoNotCall.Text = "Mark as Do Not Call"
                 Me.btnDoNotMail.Text = "Mark as Do Not Mail"
                 Me.btnDoNotCallOrMail.Text = "Mark as Do Not Call Or Mail"
-       
+
             ElseIf r1.Item(0) = True And r1.Item(1) = False Then
                 Me.btnDoNotCall.Text = "Undo Do Not Call"
                 Me.btnDoNotMail.Text = "Mark as Do Not Mail"
@@ -414,7 +401,7 @@ Public Class ConfirmingSingleRecord
         r1.Close()
         cnn.Close()
     End Sub
-    Private Sub btnKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnKill.Click
+    Private Sub btnKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim c As New CustomerHistory
         If Me.btnKill.Text = "Undo Kill" Then
             Dim cnn = New SqlConnection(STATIC_VARIABLES.Cnn)
@@ -433,18 +420,14 @@ Public Class ConfirmingSingleRecord
             c.SetUp(Me.TScboCustomerHistory)
             Exit Sub
         End If
-        Kill.frm = Me
-        Kill.Contact1 = Me.txtContact1.Text
-        Kill.Contact2 = Me.txtContact2.Text
-        Kill.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
 
-        Me.Manage_Buttons()
     End Sub
 
 
 
 
-    Private Sub btnNone_Click(sender As Object, e As EventArgs) Handles btnNone.Click
+    Private Sub btnNone_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -461,7 +444,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Private Sub btnSales_Click(sender As Object, e As EventArgs) Handles btnSales.Click
+    Private Sub btnSales_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -529,12 +512,12 @@ Public Class ConfirmingSingleRecord
                 End If
                 Me.tsSingleForm.Items.Add(Me.lblSalesRep)
                 Me.cboRep1.SelectedItem = Rep1
-                If Me.cboRep1.SelectedItem = Nothing Then
+                If Me.cboRep1.SelectedItem = Nothing And Rep1 <> "" Then
                     Me.cboRep1.Items.Add(Rep1)
                     Me.cboRep1.SelectedItem = Rep1
                 End If
                 Me.cboRep2.SelectedItem = Rep2
-                If Me.cboRep2.SelectedItem = Nothing Then
+                If Me.cboRep2.SelectedItem = Nothing And Rep2 <> "" Then
                     Me.cboRep2.Items.Add(Rep2)
                     Me.cboRep2.SelectedItem = Rep2
                 End If
@@ -563,11 +546,14 @@ Public Class ConfirmingSingleRecord
                     Me.tsSingleForm.Items.Add(Me.ToolStripSeparator6)
                     If MResult <> "Confirmed" Then
                         Me.tsSingleForm.Items.Add(Me.btnConfirm)
+                        Me.btnSpokeWith.DropDownItems.Clear()
                         Me.btnConfirm.DropDownItems.Add(Me.btnSpokeWith)
-                        Me.btnSpokeWith.DropDownItems.Add(Me.btnContact1)
-                        If Me.txtContact1.Text <> "" And Me.txtContact2.Text = " " Then
+
+
+                        If Me.txtContact1.Text <> "" Then
                             Dim s = Split(Me.txtContact1.Text, " ")
                             Me.btnContact1.Text = s(0)
+                            Me.btnSpokeWith.DropDownItems.Add(Me.btnContact1)
                         End If
                         If Me.txtContact1.Text <> "" And Me.txtContact2.Text <> " " Then
                             Dim s = Split(Me.txtContact2.Text, " ")
@@ -605,6 +591,7 @@ Public Class ConfirmingSingleRecord
                     Me.tsSingleForm.Items.Add(Me.btnPrint)
                     Me.btnPrint.DropDownItems.Clear()
                     Me.btnPrint.DropDownItems.Add(Me.btnPrintAppt)
+                    Me.btnPrintInfo.DisplayStyle = ToolStripItemDisplayStyle.Text
                     Me.btnPrint.DropDownItems.Add(Me.btnPrintInfo)
                 Else
                     Me.tsSingleForm.Items.Add(Me.btnConfirmDispatch)
@@ -661,8 +648,8 @@ Public Class ConfirmingSingleRecord
         End Select
     End Sub
 
-  
-    Private Sub btnColdCall_Click(sender As Object, e As EventArgs) Handles btnColdCall.Click
+
+    Private Sub btnColdCall_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -679,7 +666,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Private Sub btnWarmCall_Click(sender As Object, e As EventArgs) Handles btnWarmCall.Click
+    Private Sub btnWarmCall_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -696,7 +683,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Private Sub btnPC_Click(sender As Object, e As EventArgs) Handles btnPC.Click
+    Private Sub btnPC_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -713,7 +700,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Private Sub btnRecovery_Click(sender As Object, e As EventArgs) Handles btnRecovery.Click
+    Private Sub btnRecovery_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -730,7 +717,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Private Sub btnConfirming_Click(sender As Object, e As EventArgs) Handles btnConfirming.Click
+    Private Sub btnConfirming_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -747,7 +734,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Private Sub btnMarketManager_Click(sender As Object, e As EventArgs) Handles btnMarketManager.Click
+    Private Sub btnMarketManager_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -764,7 +751,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Private Sub btnInstall_Click(sender As Object, e As EventArgs) Handles btnInstall.Click
+    Private Sub btnInstall_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -781,7 +768,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Private Sub btnFinance_Click(sender As Object, e As EventArgs) Handles btnFinance.Click
+    Private Sub btnFinance_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -798,7 +785,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Private Sub btnAdmin_Click(sender As Object, e As EventArgs) Handles btnAdmin.Click
+    Private Sub btnAdmin_Click(sender As Object, e As EventArgs)
         Dim btn As Object
         For Each btn In Me.TSMain.Items
             Try
@@ -815,7 +802,7 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(sender)
     End Sub
 
-    Public Sub btnConfirmDispatch_Click(sender As Object, e As EventArgs) Handles btnConfirmDispatch.Click
+    Public Sub btnConfirmDispatch_Click(sender As Object, e As EventArgs)
         If Me.btnConfirmDispatch.Text = "Switch to Dispatch Sales Toolbar" Then
             Me.btnConfirmDispatch.Text = "Switch to Confirming Toolbar"
             Me.btnConfirmDispatch.Image = Me.ilToolStripIcons.Images(15)
@@ -826,19 +813,16 @@ Public Class ConfirmingSingleRecord
         Tool_Bar_Config(Me.btnConfirming)
     End Sub
 
-    Private Sub btnSalesResult_Click(sender As Object, e As EventArgs) Handles btnSalesResult.Click
-        SDResult.ID = Me.ID
-        SDResult.Frm = Me
-        SDResult.ShowDialog()
+    Private Sub btnSalesResult_Click(sender As Object, e As EventArgs)
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
-    Private Sub btnEditCust2_Click(sender As Object, e As EventArgs) Handles btnEditCust2.Click
-        EditCustomerInfo.Show()
-        Me.Update()
+    Private Sub btnEditCust2_Click(sender As Object, e As EventArgs)
+        Dim x As New SubForm_Launcher(sender)
 
     End Sub
 
-    Private Sub btnRemoveFromMemorized_Click(sender As Object, e As EventArgs) Handles btnRemoveFromMemorized.Click
+    Private Sub btnRemoveFromMemorized_Click(sender As Object, e As EventArgs)
         Try
             Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
             Dim cmdGet1 As SqlCommand
@@ -857,7 +841,7 @@ Public Class ConfirmingSingleRecord
         btnSales_Click(Me.btnSales, Nothing)
     End Sub
 
-    Private Sub btnUndoConfirm_Click(sender As Object, e As EventArgs) Handles btnUndoConfirm.Click
+    Private Sub btnUndoConfirm_Click(sender As Object, e As EventArgs)
         Try
             Dim cmdIns As SqlCommand = New SqlCommand("dbo.ConfirmUndo", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
@@ -878,16 +862,18 @@ Public Class ConfirmingSingleRecord
         btnConfirming_Click(Me.btnConfirming, Nothing)
     End Sub
 
-    Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+    Private Sub btnConfirm_Click(sender As Object, e As EventArgs)
         Try
-
             If CType(Me.txtApptDate.Text, Date) < Today Then
-                MsgBox("Appointment Date Must be for Today or Future!", MsgBoxStyle.Exclamation, "Cannot Confirm Appt.")
+
                 Exit Sub
+            Else
+                Me.btnSpokeWith.Select()
+                Me.btnSpokeWith.ShowDropDown()
             End If
 
-            Me.btnSpokeWith.Select()
-            Me.btnSpokeWith.ShowDropDown()
+
+
             If Me.txtContact2.Text = " " Then
                 Me.btnContact1.Select()
             End If
@@ -899,7 +885,7 @@ Public Class ConfirmingSingleRecord
 
     End Sub
 
-    Private Sub btnBoth_Click(sender As Object, e As EventArgs) Handles btnBoth.Click
+    Private Sub btnBoth_Click(sender As Object, e As EventArgs)
 
         Try
 
@@ -933,7 +919,7 @@ Public Class ConfirmingSingleRecord
         btnConfirming_Click(Me.btnConfirming, Nothing)
     End Sub
 
-    Private Sub btnContact1_Click(sender As Object, e As EventArgs) Handles btnContact1.Click
+    Private Sub btnContact1_Click(sender As Object, e As EventArgs)
         Try
 
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
@@ -966,7 +952,7 @@ Public Class ConfirmingSingleRecord
         btnConfirming_Click(Me.btnConfirming, Nothing)
     End Sub
 
-    Private Sub btnContact2_Click(sender As Object, e As EventArgs) Handles btnContact2.Click
+    Private Sub btnContact2_Click(sender As Object, e As EventArgs)
         Try
 
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
@@ -999,7 +985,7 @@ Public Class ConfirmingSingleRecord
         btnConfirming_Click(Me.btnConfirming, Nothing)
     End Sub
 
-    Private Sub btnOther_Click(sender As Object, e As EventArgs) Handles btnOther.Click
+    Private Sub btnOther_Click(sender As Object, e As EventArgs)
         Dim i As String = InputBox$("Please Enter The Name of the Person" & vbCr & "You Confirmed This Appt. With.", "Enter ""Other"" Contact")
         If i = "" Then
             MsgBox("You must enter a Name!", MsgBoxStyle.Exclamation, "Name Required!")
@@ -1037,7 +1023,7 @@ Public Class ConfirmingSingleRecord
         btnConfirming_Click(Me.btnConfirming, Nothing)
     End Sub
 
-    Private Sub btnMemorize_Click(sender As Object, e As EventArgs) Handles btnMemorize.Click
+    Private Sub btnMemorize_Click(sender As Object, e As EventArgs)
         Try
             If Me.ID = "" Then
                 MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
@@ -1057,10 +1043,10 @@ Public Class ConfirmingSingleRecord
         btnSales_Click(Me.btnSales, Nothing)
     End Sub
 
- 
-    Private Sub btnSMNotes_Click(sender As Object, e As EventArgs) Handles btnSMNotes.Click
+
+    Private Sub btnSMNotes_Click(sender As Object, e As EventArgs)
         Try
-    
+
             If MResult = "Confirmed" Then
                 SendNotesSM.ID = Me.ID
                 SendNotesSM.ShowInTaskbar = False
@@ -1076,15 +1062,10 @@ Public Class ConfirmingSingleRecord
         End Try
     End Sub
 
-    Private Sub btnResultResched_Click(sender As Object, e As EventArgs) Handles btnResultResched.Click
+    Private Sub btnResultResched_Click(sender As Object, e As EventArgs)
         Try
-            If Me.ID = "" Then
-                MsgBox("You must select a record to enter a result!", MsgBoxStyle.Exclamation, "No Record Selected")
-                Exit Sub
-            End If
-            Reissue.frm = Me
-            Reissue.ShowInTaskbar = False
-            Reissue.ShowDialog()
+
+            Dim x As New SubForm_Launcher(sender)
 
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -1093,14 +1074,17 @@ Public Class ConfirmingSingleRecord
         End Try
     End Sub
 
-    Private Sub btnChangeTime_Click(sender As Object, e As EventArgs) Handles btnChangeTime.Click
-        CNGApptTime.Frm = Me
-        CNGApptTime.ShowInTaskbar = False
-        CNGApptTime.ShowDialog()
+    Private Sub btnChangeTime_Click(sender As Object, e As EventArgs)
+        Dim x As New SubForm_Launcher(sender)
 
     End Sub
 
-    Private Sub cboRep1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRep1.SelectedIndexChanged
+    Private Sub cboRep1_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+        ''Code Add News You Dumbass
+
+
+
         If Me.cboRep1.Text <> "" Then
             Me.cboRep2.Enabled = True
         End If
@@ -1112,7 +1096,7 @@ Public Class ConfirmingSingleRecord
         End If
     End Sub
 
-    Private Sub btnSaveRep_Click(sender As Object, e As EventArgs) Handles btnSaveRep.Click
+    Private Sub btnSaveRep_Click(sender As Object, e As EventArgs)
         Try
             Dim r1 As String
             Dim r2 As String
@@ -1158,7 +1142,7 @@ Public Class ConfirmingSingleRecord
         End Try
     End Sub
 
-    Private Sub cboRep2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRep2.SelectedIndexChanged
+    Private Sub cboRep2_SelectedIndexChanged(sender As Object, e As EventArgs)
         If Me.cboRep2.Text <> OrigRep2 And Me.cboRep1.Text <> Me.cboRep2.Text Then
             Me.btnSaveRep.Enabled = True
             Me.btnSaveRep.Select()
@@ -1233,7 +1217,7 @@ Public Class ConfirmingSingleRecord
 
     End Sub
 
-    Private Sub btnEmailCust_Click(sender As Object, e As EventArgs) Handles btnEmailCust.Click
+    Private Sub btnEmailCust_Click(sender As Object, e As EventArgs)
         Dim emailAddress As String = Me.lnkEmail.Text
         If Len(emailAddress) <= 0 Then
             MsgBox("This customer doesn't have an email address to send mail to.", MsgBoxStyle.Exclamation, "No Email Address For Customer")
@@ -1249,7 +1233,7 @@ Public Class ConfirmingSingleRecord
         frmLinkSendEmail.BringToFront()
     End Sub
 
-    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
+    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Dim lnk As LinkLabel = sender
         Dim emailAddress As String = lnk.Text
         If Len(emailAddress) <= 0 Then
@@ -1264,7 +1248,7 @@ Public Class ConfirmingSingleRecord
         frmLinkSendEmail.BringToFront()
     End Sub
 
-    Private Sub btnEmailRep_Click(sender As Object, e As EventArgs) Handles btnEmailRep.Click
+    Private Sub btnEmailRep_Click(sender As Object, e As EventArgs)
         Try
             If Rep1 = "" And Rep2 = "" Then
                 MsgBox("You must assign this Appointment to Email!", MsgBoxStyle.Exclamation, "No Sales Rep Assigned")
@@ -1329,7 +1313,7 @@ Public Class ConfirmingSingleRecord
 
     End Sub
 
-    Private Sub btnConfirmationEmail_Click(sender As Object, e As EventArgs) Handles btnConfirmationEmail.Click
+    Private Sub btnConfirmationEmail_Click(sender As Object, e As EventArgs)
         ''comeback
     End Sub
     Public Sub Update()
@@ -1339,9 +1323,6 @@ Public Class ConfirmingSingleRecord
         cmdGet.CommandType = CommandType.StoredProcedure
         cmdGet.Parameters.Add(param1)
         Try
-
-
-
             cnn.Open()
 
 
@@ -1444,31 +1425,21 @@ Public Class ConfirmingSingleRecord
         c.SetUp(Me.TScboCustomerHistory)
     End Sub
 
-    Private Sub btnSetAppt2_Click(sender As Object, e As EventArgs) Handles btnSetAppt2.Click
-        If Lastbtn = "btnSales" Then
-            SetAppt_V2.chkConfirm.Visible = True
-            SetAppt_V2.Size = New System.Drawing.Size(413, 296)
-            SetAppt_V2.frm = Me
-            SetAppt_V2.ShowDialog()
-        Else
-            SetAppt_V2.frm = Me
-            SetAppt_V2.ShowDialog()
-        End If
+    Private Sub btnSetAppt2_Click(sender As Object, e As EventArgs)
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
-    Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
+    Private Sub btnEditSPI_Click(sender As Object, e As EventArgs)
 
-        frmEditSpecialInstructions.frm = Me
-        frmEditSpecialInstructions.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
 
     End Sub
 
-    Private Sub btnMoveAppt_Click(sender As Object, e As EventArgs) Handles btnMoveAppt.Click
-        RescheduleAppt.frm = Me
-        RescheduleAppt.ShowDialog()
+    Private Sub btnMoveAppt_Click(sender As Object, e As EventArgs)
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
-    Private Sub btnPrintInfo_Click(sender As Object, e As EventArgs) Handles btnPrintInfo.Click
+    Private Sub btnPrintInfo_Click(sender As Object, e As EventArgs)
         Try
             Dim x As New printToPrinterCustInfoSheet(STATIC_VARIABLES.CurrentID)
         Catch ex As Exception
@@ -1480,7 +1451,7 @@ Public Class ConfirmingSingleRecord
         End Try
     End Sub
 
-    Private Sub btnPrintAppt_Click(sender As Object, e As EventArgs) Handles btnPrintAppt.Click
+    Private Sub btnPrintAppt_Click(sender As Object, e As EventArgs)
         Try
             Dim x As New printToPrinterApptSheet(STATIC_VARIABLES.CurrentID)
         Catch ex As Exception
@@ -1490,5 +1461,13 @@ Public Class ConfirmingSingleRecord
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintApptSheet_click", "0", ex.Message.ToString)
             y = Nothing
         End Try
+    End Sub
+
+    Private Sub btnConfirm_MouseDown(sender As Object, e As MouseEventArgs)
+        If CType(Me.txtApptDate.Text, Date) < Today Then
+            Me.btnConfirm.HideDropDown()
+            MsgBox("Appointment Date Must be for Today or Future!", MsgBoxStyle.Exclamation, "Cannot Confirm Appt.")
+            Exit Sub
+        End If
     End Sub
 End Class

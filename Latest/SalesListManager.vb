@@ -112,17 +112,8 @@ Public Class SalesListManager
             r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
             Dim cnt As Integer = 0
             r.Read()
-            While r.Read
-                cnt += 1
-            End While
-
-            lvSalesCnt = cnt
-
-            If cnt >= 750 Then
+            If r.Item(0) >= 500 Then
                 ''progressbar class
-                frmGenericPBar.ProgressBar1.Minimum = 1
-                frmGenericPBar.ProgressBar1.Maximum = cnt
-                frmGenericPBar.lblMax.Text = cnt.ToString
             End If
 
             r.Close()
@@ -138,22 +129,14 @@ Public Class SalesListManager
         End Try
 
     End Sub
-    Public Sub New(ByVal sender As Object)
+    Public Sub New()
         'Dim type = sender.GetType
         'MsgBox("Sender: " & sender.ToString, MsgBoxStyle.Information, "DEBUG INFO")
         'Application.DoEvents()
 
         ''
         Try
-            Count()
-            Dim Itemcnt As Integer = lvSalesCnt
-            If Itemcnt >= 750 Then
-                frmGenericPBar.MdiParent = Main
-                frmGenericPBar.TopMost = True
-                frmGenericPBar.Show()
-            Else
-                '' carry on.
-            End If
+            Dim Itemcnt As Integer = 0
             Dim arItems As New ArrayList
             '' 
 
@@ -256,21 +239,6 @@ Public Class SalesListManager
             Dim id As String = ""
             While r.Read
                 cntRecs += 1
-                If lvSalesCnt >= 750 Then
-                    If cntRecs < lvSalesCnt Then
-                        frmGenericPBar.Cursor = Cursors.WaitCursor
-                        frmGenericPBar.ProgressBar1.Increment(1)
-                        frmGenericPBar.lblCurrent.Text = cntRecs.ToString
-                        Application.DoEvents()
-                    ElseIf cntRecs = lvSalesCnt Then
-                        Main.Cursor = Cursors.Default
-                        Sales.Cursor = Cursors.Default
-                        frmGenericPBar.Cursor = Cursors.Default
-                        frmGenericPBar.Close()
-                    End If
-                Else
-                    ''carry on.
-                End If
                 id = r.Item(0)
                 Dim lv As New ListViewItem
                 lv.Name = r.Item(0)
@@ -372,8 +340,6 @@ Public Class SalesListManager
                 ' Sales.lvSales.Items.Add(lv)
                 lvCol.Add(lv)
 
-
-
                 ' arItems.Add(lv)
 
                 If lv.Text = Sales.ID Then
@@ -383,6 +349,7 @@ Public Class SalesListManager
                 ' Application.DoEvents()
                 id = ""
             End While
+
             Itemcnt = arItems.Count
             Me.lvSalesCnt = Itemcnt
             'Me._arLVSalesItems = arItems
@@ -405,11 +372,18 @@ Public Class SalesListManager
             Next
             'Sales.arItemCache = arItems
             Sales.lblCntFiltered.Text = cntRecs.ToString
+
             If Sales.lvSales.SelectedItems.Count = 0 And Sales.lvSales.Items.Count <> 0 Then
                 Sales.lvSales.TopItem.Selected = True
+                Sales.ID = Sales.lvSales.SelectedItems(0).Text
+                STATIC_VARIABLES.CurrentID = Sales.ID
             End If
+
+
             If Sales.lvSales.Items.Count = 0 Then
                 Sales.PullInfo("")
+                Sales.ID = ""
+                STATIC_VARIABLES.CurrentID = Sales.ID
             End If
             Sales.LastD1 = Date1
             Sales.LastD2 = Date2
@@ -417,14 +391,14 @@ Public Class SalesListManager
 
             '' now get default top item for Static_Variables.ID
             '' 
-            If Sales.lvSales.Items.Count > 0 Then
-                Dim lv As New ListViewItem
-                lv = Sales.lvSales.Items.Item(0)
-                STATIC_VARIABLES.CurrentID = lv.Name.ToString
-                lv = Nothing
-            Else
-                '' just trap it. 
-            End If
+            'If Sales.lvSales.Items.Count > 0 Then
+            '    Dim lv As New ListViewItem
+            '    lv = Sales.lvSales.Items.Item(0)
+            '    STATIC_VARIABLES.CurrentID = lv.Text.ToString
+            '    lv = Nothing
+            'Else
+            '    '' just trap it. 
+            'End If
 
             Sales.Cursor = Cursors.Default
 

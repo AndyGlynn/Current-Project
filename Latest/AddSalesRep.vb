@@ -57,7 +57,7 @@ Public Class AddSalesRep
                 End If
             End If
 
-           
+
             Try
                 Dim cmdCheck As SqlCommand = New SqlCommand("Select Count (Id) from SalesRepPull Where FName = '" & Trim(CapitalizeText(Me.txtFName.Text)) & "' and LName = '" & Trim(CapitalizeText(Me.txtLname.Text)) & "'", cnn)
                 cmdCheck.CommandType = CommandType.Text

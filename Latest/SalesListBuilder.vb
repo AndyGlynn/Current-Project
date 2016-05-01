@@ -163,7 +163,7 @@ Public Class SalesListBuilder
                     Sales.R8 = Me.chklbResult.CheckedItems(7).ToString()
             End Select
             Me.Close()
-            Dim c As New SalesListManager(sender)
+            Dim c As New SalesListManager()
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default

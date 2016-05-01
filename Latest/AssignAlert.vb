@@ -189,7 +189,7 @@ Public Class AssignAlert
 
     End Sub
 
-   
+
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Try
@@ -296,7 +296,7 @@ Public Class AssignAlert
         End Try
 
     End Sub
-    
+
     Private Sub cboAutonotes_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboAutonotes.SelectedValueChanged
         Try
             Dim i As String

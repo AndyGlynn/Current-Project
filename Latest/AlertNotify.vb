@@ -26,7 +26,7 @@ Public Class AlertNotify
         'Me.Close()
         'Me.Dispose()
     End Sub
- 
+
     Private Sub AlertNotify_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
@@ -330,11 +330,11 @@ Public Class AlertNotify
 
     End Sub
 
-  
+
 
 
     Private Sub AlertNotify_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
-       
+
         'Me.Opacity = 0
         Me.WindowState = FormWindowState.Normal
 

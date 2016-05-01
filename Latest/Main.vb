@@ -123,8 +123,7 @@ Public Class Main
 
     Private Sub tsbattach_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbattach.Click
         Try
-            AttachAFile.ShowInTaskbar = False
-            AttachAFile.ShowDialog()
+            Dim x As New SubForm_Launcher(sender)
             'Try
             '    Dim y As String = InputBox$("Please enter the lead number you wish to attach the file(s) to.", "Enter Lead Number", STATIC_VARIABLES.CurrentID.ToString) ' RecordLogic.CurrentID was taken out for default recordID in rev 5
             '    If y = "" Then
@@ -149,11 +148,7 @@ Public Class Main
 
     Private Sub tsImportsPics_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsImportsPics.Click
         Try
-            Dim x As Form
-            x = ImportPictures
-            'x.MdiParent = Me
-            x.ShowInTaskbar = False
-            x.ShowDialog()
+            Dim x As New SubForm_Launcher(sender)
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsImportPics_Click", "0", ex.Message.ToString)
@@ -255,40 +250,18 @@ Public Class Main
                 Exit Sub
             End If
             If My.Computer.Network.IsAvailable = True Then
-                Dim tstCNN As New System.Data.SqlClient.SqlConnection("SERVER=192.168.1.2;DataBase=Iss;User Id=sa;Password=spoken1;Timeout=15;")
+                Dim tstCNN As New System.Data.SqlClient.SqlConnection("SERVER=192.168.1.2;DataBase=Iss;User Id=sa;Password=spoken1;Timeout=5;")
                 Try
                     tstCNN.Open()
                     tstCNN.Close()
                 Catch ex As Exception
-                    '' Nest a secondary Attempt.
-                    Try
-                        Dim tstCNN2 As New System.Data.SqlClient.SqlConnection("SERVER=192.168.1.2;DataBase=Iss;User Id=sa;Password=spoken1;Timeout=15;")
-                        tstCNN2.Open()
-                        tstCNN2.Close()
-                    Catch ex2 As Exception
-                        MsgBox("No connection can be made to SQL server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "No Network Present.")
-                        Dim y As New ErrorLogging_V2
-                        y.WriteToLog(Date.Now, My.Computer.Name.ToString, "0.0.0.0", "Main", "FormCode", "Event", "Main_Load()", "0", ex2.Message.ToString)
-                        y = Nothing
-                        Application.Exit()
-                        Exit Sub
-                    End Try
+                    MsgBox("No connection can be made to SQL server. Please check your network connection and try again.", MsgBoxStyle.Exclamation, "No Network Present.")
+                    Application.Exit()
+                    Exit Sub
                 End Try
             End If
 
             Me.tmrAlerts.Stop()
-
-            '' global Mappoint Add
-            ''
-            Try
-                Dim oApp As MapPoint.Application
-                oApp = CreateObject("Mappoint.Application")
-                STATIC_VARIABLES.oApp = oApp
-            Catch ex As Exception
-                Dim y As New ErrorLogging_V2
-                y.WriteToLog(Date.Now, MachineName, "", "Main", "FormCode", "Method", "Main_Load", "0", ex.Message.ToString)
-                y = Nothing
-            End Try
 
             'ManageAlerts.MdiParent = Me
 
@@ -303,7 +276,19 @@ Public Class Main
             'tmrStartupLauncher.Enabled = True
 
 
+            '' global Mappoint Add
+            ''
+            Try
+                Dim oApp As MapPoint.Application
+                oApp = CreateObject("Mappoint.Application")
+                STATIC_VARIABLES.oApp = oApp
+            Catch ex As Exception
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, MachineName, "", "Main", "FormCode", "Method", "Main_Load", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
 
+            'ManageAlerts.MdiParent = Me
 
 
 
@@ -393,20 +378,22 @@ Public Class Main
     End Sub
 
     Private Sub tsbschedule_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbschedule.Click
-        Try
-            'Dim x As Form
-            'x = ScheduleAction
-            'x.ShowInTaskbar = False
-            'x.ShowDialog()
-            ScheduleAction.MdiParent = Me
-            ScheduleAction.ShowInTaskbar = False
-            ScheduleAction.TopMost = True
-            ScheduleAction.Show()
-        Catch ex As Exception
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbschedule_Click", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+
+        Dim x As New SubForm_Launcher(sender)
+        'Try
+        '    'Dim x As Form
+        '    'x = ScheduleAction
+        '    'x.ShowInTaskbar = False
+        '    'x.ShowDialog()
+        '    ScheduleAction.MdiParent = Me
+        '    ScheduleAction.ShowInTaskbar = False
+        '    ScheduleAction.TopMost = True
+        '    ScheduleAction.Show()
+        'Catch ex As Exception
+        '    Dim y As New ErrorLogging_V2
+        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Main", "FormCode", "Event", "tsbschedule_Click", "0", ex.Message.ToString)
+        '    y = Nothing
+        'End Try
 
     End Sub
 
@@ -1195,16 +1182,16 @@ Public Class Main
                                         If Sales.TabControl2.SelectedIndex = 0 Then
                                             lv = Sales.lvSales
                                         ElseIf Sales.TabControl2.SelectedIndex = 1 Then
-                                            lv = Nothing
+                                            lv = Sales.lvMemorized
                                         Else
                                             lv = Nothing
                                         End If
                                     End If
 
                                 Case "Wcaller"
-                                    If WCaller.TabControl2.SelectedIndex = 0 Then
-                                        lv = WCaller.lvWarmCalling
-                                    ElseIf WCaller.TabControl2.SelectedIndex = 1 Then
+                                    If WCaller.TabControl1.SelectedIndex = 0 Then
+                                        lv = WCaller.lvCallList
+                                    ElseIf WCaller.TabControl1.SelectedIndex = 1 Then
                                         lv = WCaller.lvMyAppts
                                     Else
                                         lv = Nothing
@@ -1229,25 +1216,39 @@ Public Class Main
                                 Case "SecondSource"
                             End Select
                             If lv IsNot Nothing Then
-                                'If lv.SelectedItems.Count <> 0 And lv IsNot Sales.lvnoresults Then
-                                '    STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).Text
-                                'ElseIf lv.SelectedItems.Count <> 0 And lv Is Sales.lvnoresults Then
-                                '    STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).SubItems(1).Text
-                                'Else
-                                '    STATIC_VARIABLES.CurrentID = ""
-                                'End If
+                                Select Case lv.Name
+                                    Case Is = "lvMyAppts", "lvnoresults"
+                                        If lv.SelectedItems.Count = 0 Then
+                                            STATIC_VARIABLES.CurrentID = ""
+                                        Else
+                                            If lv.Name = "lvNoResults" Then
+                                                STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).SubItems(1).Text
 
+                                            Else
+                                                STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).Tag
+                                            End If
+
+                                        End If
+                                    Case Is = "lvMemorized"
+                                        If lv.SelectedItems.Count = 0 Then
+                                            STATIC_VARIABLES.CurrentID = ""
+                                        Else
+                                            STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).SubItems.Item(1).Text
+
+                                        End If
+                                    Case Else
+                                        If lv.SelectedItems.Count = 0 Then
+                                            STATIC_VARIABLES.CurrentID = ""
+                                        Else
+                                            STATIC_VARIABLES.CurrentID = lv.SelectedItems(0).Text
+                                        End If
+                                End Select
                             Else
                                 If f.Name = "ConfirmingSingleRecord" Then
                                     STATIC_VARIABLES.CurrentID = ConfirmingSingleRecord.ID
-                                ElseIf f.Name = "Sales" And Sales.tbMain.SelectedIndex = 0 Then
-                                    If Sales.lvnoresults.SelectedItems.Count <> 0 Then
-                                        STATIC_VARIABLES.CurrentID = Sales.lvnoresults.Tag
-                                    End If
-                                ElseIf f.Name = "Sales" And Sales.tbMain.SelectedIndex = 1 And Sales.TabControl2.SelectedIndex = 1 Then
-                                    STATIC_VARIABLES.CurrentID = Sales.lvMemorized.SelectedItems.Item(0).SubItems.Item(1).Text
+                                ElseIf f.Name = "EditCustomerInfo" Then
+                                    STATIC_VARIABLES.CurrentID = EditCustomerInfo.ID
                                 Else
-
                                     STATIC_VARIABLES.CurrentID = ""
                                 End If
                             End If
@@ -1317,8 +1318,8 @@ Public Class Main
         End Try
     End Sub
 
- 
-    
+
+
     Private Sub TestingFormACToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestingFormACToolStripMenuItem.Click
         Try
             frmTesting.MdiParent = Me
@@ -1340,4 +1341,7 @@ Public Class Main
             y = Nothing
         End Try
     End Sub
+
+
+
 End Class

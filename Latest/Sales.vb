@@ -32,10 +32,6 @@ Public Class Sales
     Dim focusdtp2 As Boolean = False
 #End Region
 
-#Region "Exclusions Variable(s)"
-    Public Exclusions_On_Off As Boolean = True
-#End Region
-
 #Region "Edits For lsAttachedFiles and lsJobPictures 11-15-2015"
     '' AC
     '' static controls on pnlAFPics
@@ -45,6 +41,7 @@ Public Class Sales
     Private rootDirJP As String = "\\192.168.1.2\Company\ISS\Job Pictures\"
 
 #End Region
+
 
 #Region "Toolbar Buttons"
     '' Summary Tab Button Set 
@@ -151,7 +148,6 @@ Public Class Sales
     Friend WithEvents btnMoveAppt As New ToolStripMenuItem
 
 #End Region
-
 #Region "Form Operator Variables"
     Public ID As String = ""
     Public LoadComplete As Boolean = False
@@ -254,7 +250,7 @@ Public Class Sales
             Me.btnSalesResult.ImageTransparentColor = System.Drawing.Color.Magenta
             Me.btnSalesResult.Name = "btnSalesResult"
             Me.btnSalesResult.Size = New System.Drawing.Size(110, 22)
-            Me.btnSalesResult.Text = "Enter sales result"
+            Me.btnSalesResult.Text = "Enter Sales Result"
             'btnScheduledTasks
             '
             Me.btnScheduledTasks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMarkTaskAsDone, Me.btnEditScheduledTask, Me.btnRemoveThisCompletedTask, Me.btnRemoveAllScheduledTask, Me.btnShowAllCompletedTasks, Me.sepScheduledTasks, Me.btnSAPreferences})
@@ -331,7 +327,7 @@ Public Class Sales
             'lblSummary
             '
             Me.lblSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-            Me.lblSummary.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblSummary.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             'Me.lblSummary.Margin = New System.Windows.Forms.Padding(0, 1, 115, 2)
             Me.lblSummary.Name = "tslblPerformance"
             Me.lblSummary.Size = New System.Drawing.Size(215, 22)
@@ -339,23 +335,23 @@ Public Class Sales
             'dtpSummary
             '
             Me.dtpSummary.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.dtpSummary.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.dtpSummary.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpSummary.CalendarFont = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpSummary.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.dtpSummary.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-            Me.dtpSummary.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
+            Me.dtpSummary.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 116, 2)
             Me.dtpSummary.Name = "dtpSummary"
-            Me.dtpSummary.Size = New System.Drawing.Size(98, 21)
+            Me.dtpSummary.Size = New System.Drawing.Size(107, 21)
             Me.dtpSummary.TabIndex = 443
             'Dim ts As New TimeSpan(1, 0, 0, 0)
             'Me.dtpSummary.Value = Me.dtpSummary.Value.Subtract(ts)
 
             Me.dtpSummary2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.dtpSummary2.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.dtpSummary2.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpSummary2.CalendarFont = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpSummary2.Font = New System.Drawing.Font("Verdana", 8.25!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.dtpSummary2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-            Me.dtpSummary2.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2)
+            Me.dtpSummary2.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 261, 2)
             Me.dtpSummary2.Name = "dtpSummary2"
-            Me.dtpSummary2.Size = New System.Drawing.Size(98, 21)
+            Me.dtpSummary2.Size = New System.Drawing.Size(107, 21)
             Me.dtpSummary2.TabIndex = 444
             'Dim ts As New TimeSpan(1, 0, 0, 0)
             'Me.dtpSummary2.Value = Me.dtpSummary2.Value.Subtract(ts)
@@ -368,15 +364,15 @@ Public Class Sales
             Me.cboDateRangeSummary.Size = New System.Drawing.Size(123, 25)
 
             Me.lblFromSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-            Me.lblFromSummary.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblFromSummary.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblFromSummary.Margin = New System.Windows.Forms.Padding(0, 1, 120, 2)
             Me.lblFromSummary.Name = "lblFromSummary"
             Me.lblFromSummary.Size = New System.Drawing.Size(39, 22)
             Me.lblFromSummary.Text = "From"
 
             Me.lblToSummary.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-            Me.lblToSummary.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblToSummary.Margin = New System.Windows.Forms.Padding(0, 1, 115, 2)
+            Me.lblToSummary.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblToSummary.Margin = New System.Windows.Forms.Padding(0, 1, 120, 2)
             Me.lblToSummary.Name = "lblToSummary"
             Me.lblToSummary.Size = New System.Drawing.Size(23, 22)
             Me.lblToSummary.Text = "To"
@@ -390,7 +386,7 @@ Public Class Sales
             Me.btnSalesResult2.ImageTransparentColor = System.Drawing.Color.Magenta
             Me.btnSalesResult2.Name = "btnSalesResult2"
             Me.btnSalesResult2.Size = New System.Drawing.Size(122, 22)
-            Me.btnSalesResult2.Text = "Enter sales result"
+            Me.btnSalesResult2.Text = "Enter Sales Result"
             '' Email template wizard button adds
             '' 11-3-15 AC
             ''
@@ -557,7 +553,7 @@ Public Class Sales
             Me.btnAssignRep.Text = "Assign/Change Sales Rep(s)"
             'btnSaveRep
             '
-            Me.btnSaveRep.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.btnSaveRep.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnSaveRep.Name = "btnAssignRep"
             Me.btnSaveRep.Size = New System.Drawing.Size(173, 22)
             Me.btnSaveRep.Text = "Save Changes"
@@ -587,7 +583,7 @@ Public Class Sales
             Me.txtSingleRecordInput.BorderStyle = BorderStyle.FixedSingle
             'btnSingleRecord
             '
-            Me.btnSingleRecord.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.btnSingleRecord.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnSingleRecord.TextAlign = ContentAlignment.MiddleCenter
             Me.btnSingleRecord.Name = "btnSingleRecord"
             Me.btnSingleRecord.Size = New System.Drawing.Size(118, 22)
@@ -616,7 +612,7 @@ Public Class Sales
             'lblDateRangeCustomerList
             '
             Me.lblDateRangeCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-            Me.lblDateRangeCustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblDateRangeCustomerList.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblDateRangeCustomerList.Name = "lblDateRangeCustomerList"
             Me.lblDateRangeCustomerList.Size = New System.Drawing.Size(86, 22)
             Me.lblDateRangeCustomerList.Text = "Appt. Dates"
@@ -632,8 +628,8 @@ Public Class Sales
             'lblToCustomerList
             '
             Me.lblToCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-            Me.lblToCustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblToCustomerList.Margin = New System.Windows.Forms.Padding(0, 1, 115, 2)
+            Me.lblToCustomerList.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblToCustomerList.Margin = New System.Windows.Forms.Padding(0, 1, 120, 2)
             Me.lblToCustomerList.Name = "lblToCustomerList"
             Me.lblToCustomerList.Size = New System.Drawing.Size(23, 22)
             Me.lblToCustomerList.Text = "To"
@@ -641,7 +637,7 @@ Public Class Sales
             'lblFromCustomerList
             '
             Me.lblFromCustomerList.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-            Me.lblFromCustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblFromCustomerList.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblFromCustomerList.Margin = New System.Windows.Forms.Padding(0, 1, 120, 2)
             Me.lblFromCustomerList.Name = "lblFromCustomerList"
             Me.lblFromCustomerList.Size = New System.Drawing.Size(39, 22)
@@ -649,23 +645,23 @@ Public Class Sales
             'dtp1CustomerList
             '
             Me.dtp1CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.dtp1CustomerList.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.dtp1CustomerList.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtp1CustomerList.CalendarFont = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtp1CustomerList.Font = New System.Drawing.Font("Verdana", 8.25!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.dtp1CustomerList.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-            Me.dtp1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2) '745
+            Me.dtp1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 261, 2) '745
             Me.dtp1CustomerList.Name = "dtp1CustomerList"
-            Me.dtp1CustomerList.Size = New System.Drawing.Size(98, 21)
+            Me.dtp1CustomerList.Size = New System.Drawing.Size(107, 21)
             Me.dtp1CustomerList.TabIndex = 442
             Me.dtp1CustomerList.Visible = False
             'dtp2CustomerList
             '
             Me.dtp2CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.dtp2CustomerList.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.dtp2CustomerList.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtp2CustomerList.CalendarFont = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtp2CustomerList.Font = New System.Drawing.Font("Verdana", 8.25!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.dtp2CustomerList.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-            Me.dtp2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2) '882
+            Me.dtp2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 116, 2) '882
             Me.dtp2CustomerList.Name = "dtp2CustomerList"
-            Me.dtp2CustomerList.Size = New System.Drawing.Size(98, 21)
+            Me.dtp2CustomerList.Size = New System.Drawing.Size(107, 21)
             Me.dtp2CustomerList.TabIndex = 443
             Me.dtp2CustomerList.Visible = False
             'txt1CustomerList
@@ -673,12 +669,12 @@ Public Class Sales
             Me.txt1CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             Me.txt1CustomerList.BackColor = System.Drawing.Color.White
             Me.txt1CustomerList.BorderStyle = System.Windows.Forms.BorderStyle.None
-            Me.txt1CustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.txt1CustomerList.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txt1CustomerList.ForeColor = System.Drawing.Color.Black
-            Me.txt1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 246, 4) '747
+            Me.txt1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 257, 4) '747
             Me.txt1CustomerList.Name = "txt1CustomerList"
             Me.txt1CustomerList.ReadOnly = True
-            Me.txt1CustomerList.Size = New System.Drawing.Size(60, 16)
+            Me.txt1CustomerList.Size = New System.Drawing.Size(76, 16)
             Me.txt1CustomerList.TabIndex = 179
             Me.txt1CustomerList.TabStop = False
             Me.txt1CustomerList.Visible = False
@@ -687,34 +683,34 @@ Public Class Sales
             Me.txt2CustomerList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             Me.txt2CustomerList.BackColor = System.Drawing.Color.White
             Me.txt2CustomerList.BorderStyle = System.Windows.Forms.BorderStyle.None
-            Me.txt2CustomerList.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.txt2CustomerList.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txt2CustomerList.ForeColor = System.Drawing.Color.Black
-            Me.txt2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 107, 4) '885
+            Me.txt2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 112, 4) '885
             Me.txt2CustomerList.Name = "txt2CustomerList"
             Me.txt2CustomerList.ReadOnly = True
-            Me.txt2CustomerList.Size = New System.Drawing.Size(60, 16)
+            Me.txt2CustomerList.Size = New System.Drawing.Size(76, 16)
             Me.txt2CustomerList.TabIndex = 180
             Me.txt2CustomerList.TabStop = False
             Me.txt2CustomerList.Visible = False
 
             ''IssueLeads Tab
             Me.dtpIssueLeads.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.dtpIssueLeads.CalendarFont = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.dtpIssueLeads.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpIssueLeads.CalendarFont = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.dtpIssueLeads.Font = New System.Drawing.Font("Verdana", 8.25!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.dtpIssueLeads.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-            Me.dtpIssueLeads.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
+            Me.dtpIssueLeads.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 116, 2)
             Me.dtpIssueLeads.Name = "dtpIssueLeads"
-            Me.dtpIssueLeads.Size = New System.Drawing.Size(98, 21)
+            Me.dtpIssueLeads.Size = New System.Drawing.Size(107, 21)
             Me.dtpIssueLeads.TabIndex = 442
             Me.dtpIssueLeads.Visible = False
             Me.dtpIssueLeads.Value = Today
 
             Me.lblIssue.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-            Me.lblIssue.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblIssue.Font = New System.Drawing.Font("Verdana", 9.75!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblIssue.Name = "lblIssue"
             Me.lblIssue.Size = New System.Drawing.Size(296, 22)
             Me.lblIssue.Text = "Issue Appointments For"
-            Me.lblIssue.Padding = New Padding(0, 0, 228, 0)
+            Me.lblIssue.Padding = New Padding(0, 0, 242, 0)
 
 
 
@@ -920,9 +916,8 @@ Public Class Sales
             ''End While
             'R1.Close()
             'Cnn.Close()
-            Me.Label38.Text = ""
-            Me.Label38.Text = "All Records Needing Sales Results: "
-            Me.Label38.Text = (Me.Label38.Text & " -[ Records: " & cntNoResults & " ]")
+
+            Me.Label38.Text = ("All Records Needing Sales Results" & " -[ Records: " & cntNoResults & " ]")
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -1679,7 +1674,7 @@ Public Class Sales
 
 
     End Sub
-    Private Sub RefreshSelectedItem(ByVal Listview As ListView, ByVal ID As String)
+    Public Sub RefreshSelectedItem(ByVal Listview As ListView, ByVal ID As String)
         Try
             Dim cnn1 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
             Dim x As Integer = 0
@@ -1788,6 +1783,11 @@ Public Class Sales
     End Sub
 #End Region
 
+#Region "Exclusion Variable(s)"
+    Public Exclusions_On_Off As Boolean = True
+#End Region
+
+
 #Region "Whole Form Events"
 
 
@@ -1824,7 +1824,7 @@ Public Class Sales
             Me.tsAFPics.Visible = False
             Me.pnlCustomerHistory.Visible = True
             Me.pnlAFPics.Visible = False
-
+            Me.cboDateRangeCustomerList.Text = "Last Month"
 
 
             Me.SplitContainer1.SplitterDistance = 218
@@ -1865,17 +1865,20 @@ Public Class Sales
             'Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
 
             Me.cboDateRangeSummary.Text = "Last Week"
-            Dim r As New Sales_Performance_Report()
+            'Dim r As New Sales_Performance_Report()
+            'bgSalesQuery_DoWork(Nothing, Nothing)
+            'If current_Item IsNot Nothing Then
+            '    PullInfo(current_Item.Text)
+            '    RaiseEvent PopCustHistory()
+            'End If
 
-            Me.cboDateRangeCustomerList.Text = "Last Month"
             Me.LoadComplete = True
             Me.cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
             Me.cboDateRangeCustomerList_SelectedIndexChanged(Nothing, Nothing)
             If Me.WindowState <> FormWindowState.Normal Then
 
             End If
-            Me.tbMain.TabPages(0).Font = New Font("Verdana", 12, FontStyle.Strikeout)
-
+            'Me.tbMain.TabPages(0).Font = New Font("Verdana", 12, FontStyle.Strikeout)
 
             'MsgBox(Me.tsSalesDepartment.Width.ToString & " - " & Me.txt2CustomerList.Location.X.ToString)
         Catch ex As Exception
@@ -1924,9 +1927,17 @@ Public Class Sales
                     Me.tbMain.TabPages(4).ImageKey = "Reports.png"
                     Me.ToolbarConfig(1)
                     Me.PopulateNoResults()
+
                     If Me.lvnoresults.SelectedItems.Count = 0 Then
-                        Me.ID = ""
-                        STATIC_VARIABLES.CurrentID = Me.ID
+                        If Me.lvnoresults.Items.Count > 0 Then
+                            Me.lvnoresults.TopItem.Selected = True
+                            Me.ID = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
+                            STATIC_VARIABLES.CurrentID = Me.ID
+                        Else
+                            Me.ID = ""
+                            STATIC_VARIABLES.CurrentID = Me.ID
+                        End If
+
                     Else
                         Me.ID = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
                         STATIC_VARIABLES.CurrentID = Me.ID
@@ -1942,24 +1953,28 @@ Public Class Sales
                     'Me.lvAttachedFiles.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvAttachedFiles.Height)
                     'Me.lvJobPics.Size = New System.Drawing.Size(Me.pnlAFPics.Width / 2 - 5, Me.lvJobPics.Height)
                     If Me.TabControl2.SelectedIndex = 0 Then
-                        'If Me.lvSales.Items.Count <> 0 And Me.lvSales.SelectedItems.Count = 0 Then
-                        '    Me.lvSales.TopItem.Selected = True
-                        'End If
+                        If Me.lvSales.Items.Count <> 0 And Me.lvSales.SelectedItems.Count = 0 Then
+                            Me.lvSales.TopItem.Selected = True
+                        End If
                         Me.ToolbarConfig(2)
-                        'If Me.lvSales.SelectedItems.Count = 0 Then
-                        '    Me.ID = ""
-                        '    STATIC_VARIABLES.CurrentID = Me.ID
-                        'Else
-                        '    Me.ID = Me.lvSales.SelectedItems(0).Text
-                        '    STATIC_VARIABLES.CurrentID = Me.ID
-                        'End If
-                    Else
-                        Me.ToolbarConfig(3)
-                        If Me.lvMemorized.SelectedItems.Count = 0 Then
+                        If Me.lvSales.SelectedItems.Count = 0 Then
                             Me.ID = ""
                             STATIC_VARIABLES.CurrentID = Me.ID
                         Else
+                            Me.ID = Me.lvSales.SelectedItems(0).Text
+                            STATIC_VARIABLES.CurrentID = Me.ID
+                        End If
+                    Else
+                        Me.ToolbarConfig(3)
+                        If Me.lvMemorized.Items.Count <> 0 And Me.lvMemorized.SelectedItems.Count = 0 Then
+                            Me.lvMemorized.TopItem.Selected = True
                             Me.ID = Me.lvMemorized.SelectedItems(0).Tag
+                            STATIC_VARIABLES.CurrentID = Me.ID
+                        ElseIf Me.lvMemorized.Items.Count <> 0 And Me.lvMemorized.SelectedItems.Count <> 0 Then
+                            Me.ID = Me.lvMemorized.SelectedItems(0).Tag
+                            STATIC_VARIABLES.CurrentID = Me.ID
+                        Else
+                            Me.ID = ""
                             STATIC_VARIABLES.CurrentID = Me.ID
                         End If
                     End If
@@ -2165,12 +2180,9 @@ Public Class Sales
     End Sub
     ''Sales Result Controls
     Private Sub btnSalesResult_Click1(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalesResult.Click
-        If Me.ID = "" Then
-            MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
-        SDResult.ID = Me.ID
-        SDResult.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
+
+
     End Sub
 
     Private Sub lvnoresults_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvnoresults.DoubleClick
@@ -2180,9 +2192,20 @@ Public Class Sales
 
         Me.tbMain.SelectedIndex = 1
         Me.TabControl2.SelectedIndex = 0
+        Me.LoadComplete = False
         Me.cboSalesList.Text = "Records Needing Sales Results"
-        Me.txtSingleRecordInput.Text = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
-        Me.btnSingleRecord_Click(Nothing, Nothing)
+        Me.cboDateRangeCustomerList.Text = "All"
+        Me.LoadComplete = True
+        cboDateRangeCustomerList_SelectedIndexChanged(Nothing, Nothing)
+        Dim lv = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
+        Dim i As Integer = 0
+        Dim q As Integer = Me.lvSales.Items.Count - 1
+        For i = 0 To q
+            If lv = Me.lvSales.Items.Item(i).Text Then
+                Me.lvSales.Items.Item(i).Selected = True
+            End If
+        Next
+
 
 
     End Sub
@@ -2205,12 +2228,7 @@ Public Class Sales
 
 #Region "Customer List Page Toolbar Buttons"
     Private Sub btnSalesResult2_ButtonClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalesResult2.ButtonClick
-        If Me.ID = "" Then
-            MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
-        SDResult.ID = Me.ID
-        SDResult.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
     Private Sub btnBuildList_ButtonClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBuildList.ButtonClick
         SalesListBuilder.Rollback = Me.cboSalesList.Text
@@ -2241,23 +2259,133 @@ Public Class Sales
         txt1CustomerList.Text = dtp1CustomerList.Value.ToShortDateString
         Me.cboDateRangeCustomerList.Text = "Custom"
     End Sub
+
+
+    Private Sub cboDateRangeSummary_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDateRangeSummary.SelectedIndexChanged
+        If Me.LoadComplete = False Then
+            Exit Sub
+        End If
+        Try
+            If Me.cboDateRangeSummary.Text <> "Custom" Then
+                Dim d As New DTPManipulation(Me.cboDateRangeSummary.Text)
+                Me.dtpSummary2.Value = d.retDateFrom
+                Me.dtpSummary.Value = d.retDateTo
+                Dim r As New Sales_Performance_Report
+                Dim accuracy As String = r.ReportAccuracy
+                'Me.lblPrintReport.Visible = True
+                'Dim response As Integer = MsgBox("Would you like to view in a web browser for styled printing?", MsgBoxStyle.YesNo, "Styled Printing?")
+                'Select Case response
+                '    Case Is = vbYes
+                '        Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
+                '        x = Nothing
+                '        Exit Select
+                '    Case Is = vbNo
+                '        '' no nothing 
+                '        '' just let it run. 
+                '        Exit Select
+                'End Select
+                r = Nothing
+            End If
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            Main.Cursor = Cursors.Default
+            Dim y As New ErrorLogging_V2
+            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboDateRangeSummary_SelectedIndexChanged", ID, ex.Message.ToString)
+            y = Nothing
+        End Try
+
+
+    End Sub
+    Private Sub tmrSum_Tick(sender As Object, e As EventArgs) Handles tmrSum.Tick
+        If Me.cboDateRangeSummary.Text = "Custom" Then
+            cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
+        Else
+            Me.cboDateRangeSummary.SelectedItem = "Custom"
+        End If
+        Me.tmrSum.Stop()
+    End Sub
+    Private Sub dtpSummary2_LostFocus(sender As Object, e As EventArgs) Handles dtpSummary2.LostFocus
+        Me.tmrSum.Stop()
+        Me.tmrSum.Start()
+    End Sub
+    Private Sub dtpSummary2_ValueChanged(sender As Object, e As EventArgs) Handles dtpSummary2.ValueChanged
+        If LoadComplete = False Then
+            Exit Sub
+        End If
+        If Me.dtpSummary2.ContainsFocus = True Then
+            Me.tmrSum.Stop()
+            Me.tmrSum.Start()
+        End If
+
+    End Sub
+
+    Private Sub dtpSummary_LostFocus(sender As Object, e As EventArgs) Handles dtpSummary.LostFocus
+        tmrSum_Tick(Nothing, Nothing)
+    End Sub
+
+    Private Sub dtpSummary_ValueChanged(sender As Object, e As EventArgs) Handles dtpSummary.ValueChanged
+        If LoadComplete = False Then
+            Exit Sub
+        End If
+        If Me.dtpSummary.ContainsFocus = True Then
+            Me.tmrSum.Stop()
+            Me.tmrSum.Start()
+        End If
+
+
+
+    End Sub
+    Private Sub dtpSummary_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpSummary.GotFocus
+        If LoadComplete = False Then
+            Exit Sub
+        End If
+
+        dtpsum1orig = Me.dtpSummary.Value.ToString
+
+        Me.tmrSum.Stop()
+        Me.tmrSum.Start()
+
+    End Sub
+
+    Private Sub dtpSummary2_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpSummary2.GotFocus
+        If LoadComplete = False Then
+            Exit Sub
+        End If
+
+        dtpsum2orig = Me.dtpSummary2.Value.ToString
+        Me.tmrSum.Stop()
+        Me.tmrSum.Start()
+
+    End Sub
     Private Sub dtp2CustomerList_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2CustomerList.GotFocus
 
         txt1CustomerList.Visible = False
         txt2CustomerList.Text = Me.dtp2CustomerList.Value.ToShortDateString
         txt2CustomerList.Visible = False
-        Me.cboDateRangeCustomerList.Text = "Custom"
+        If Me.LoadComplete = False Then
+            Exit Sub
+        End If
+
+        Me.tmrdtpCustList.Stop()
+        Me.tmrdtpCustList.Start()
+        'Me.cboDateRangeCustomerList.Text = "Custom"
     End Sub
     Private Sub dtp2CustomerList_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2CustomerList.LostFocus
         Try
             If Me.LastD1 = txt1CustomerList.Text And Me.LastD2 = txt2CustomerList.Text Then
                 Exit Sub
             End If
-            bgSalesQuery_DoWork(Nothing, Nothing)
-            If current_Item IsNot Nothing Then
-                PullInfo(current_Item.Text)
-                RaiseEvent PopCustHistory()
+            If Me.LoadComplete = False Then
+                Exit Sub
             End If
+
+            Me.tmrdtpCustList_Tick(Me.dtp2CustomerList, Nothing)
+            'bgSalesQuery_DoWork(Nothing, Nothing)
+            'If current_Item IsNot Nothing Then
+            '    PullInfo(current_Item.Text)
+            '    RaiseEvent PopCustHistory()
+            'End If
             'Me.Cursor = Cursors.WaitCursor
             'Dim c As New SalesListManager(sender)
             'arItemCache = New ArrayList
@@ -2278,25 +2406,55 @@ Public Class Sales
             Exit Sub
         End If
         txt2CustomerList.Text = Me.dtp2CustomerList.Value.ToShortDateString
+        If Me.dtp2CustomerList.ContainsFocus = True Then
+            Me.tmrdtpCustList.Stop()
+            Me.tmrdtpCustList.Start()
+        End If
+
+    End Sub
+    Private Sub tmrdtpCustList_Tick(sender As Object, e As EventArgs) Handles tmrdtpCustList.Tick
+        If Me.cboDateRangeCustomerList.Text <> "Custom" Then
+            Me.cboDateRangeCustomerList.Text = "Custom"
+            Me.tmrdtpCustList.Stop()
+            Exit Sub
+        Else
+            bgSalesQuery_DoWork(sender, Nothing)
+            'If current_Item IsNot Nothing Then
+            '    PullInfo(current_Item.Text)
+            '    RaiseEvent PopCustHistory()
+            'End If
+        End If
+        Me.tmrdtpCustList.Stop()
     End Sub
     Private Sub dtp1CustomerList_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1CustomerList.GotFocus
+
         current_Item = Nothing
         txt1CustomerList.Visible = False
         txt1CustomerList.Text = dtp1CustomerList.Value.ToShortDateString
+        If Me.LoadComplete = False Then
+            Exit Sub
+        End If
+        Me.tmrdtpCustList.Start()
         'txt2CustomerList.Visible = False
-        Me.cboDateRangeCustomerList.Text = "Custom"
+
     End Sub
     Private Sub dtp1CustomerList_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1CustomerList.LostFocus
         Try
             If txt1CustomerList.Text = Me.LastD1 And txt2CustomerList.Text = Me.LastD2 Then
                 Exit Sub
             End If
-            ''Dim c As New SalesListManager
-            bgSalesQuery_DoWork(Nothing, Nothing)
-            If current_Item IsNot Nothing Then
-                PullInfo(current_Item.Text)
-                RaiseEvent PopCustHistory()
+            If Me.LoadComplete = False Then
+                Exit Sub
             End If
+            Me.tmrdtpCustList.Stop()
+            Me.tmrdtpCustList.Start()
+
+            ''Dim c As New SalesListManager
+            'bgSalesQuery_DoWork(Nothing, Nothing)
+            'If current_Item IsNot Nothing Then
+            '    PullInfo(current_Item.Text)
+            '    RaiseEvent PopCustHistory()
+            'End If
 
             '' Make them choose both dates in an instance for only querying for ONE day.
             '' 
@@ -2320,13 +2478,21 @@ Public Class Sales
             Exit Sub
         End If
         txt1CustomerList.Text = dtp1CustomerList.Value.ToShortDateString
+
+        If Me.dtp1CustomerList.ContainsFocus = True Then
+            Me.tmrdtpCustList.Stop()
+            Me.tmrdtpCustList.Start()
+        End If
+
     End Sub
+
 #End Region
     Private Sub cboDateRangeCustomerList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDateRangeCustomerList.SelectedIndexChanged
         Try
             If Me.LoadComplete = False Then
                 Exit Sub
             End If
+
             If Me.cboDateRangeCustomerList.Text = "All" Then
                 txt1CustomerList.Text = ""
                 txt1CustomerList.Visible = True
@@ -2347,12 +2513,13 @@ Public Class Sales
             If Me.LastD1 = txt1CustomerList.Text And Me.LastD2 = txt2CustomerList.Text Then
                 Exit Sub
             End If
+            Me.tmrdtpCustList.Stop()
             ''Dim c As New SalesListManager
-            bgSalesQuery_DoWork(Nothing, Nothing)
-            If current_Item IsNot Nothing Then
-                PullInfo(current_Item.Text)
-                RaiseEvent PopCustHistory()
-            End If
+            bgSalesQuery_DoWork(sender, Nothing)
+            'If current_Item IsNot Nothing Then
+            '    PullInfo(current_Item.Text)
+            '    RaiseEvent PopCustHistory()
+            'End If
             'Me.Cursor = Cursors.WaitCursor
             'Dim c As New SalesListManager(sender)
             'arItemCache = New ArrayList
@@ -2468,11 +2635,12 @@ Public Class Sales
                     Me.cboDateRangeCustomerList.SelectedItem = "Custom"
                 End If
             End If
+            'Dim x As New SalesListManager()
             bgSalesQuery_DoWork(Nothing, Nothing)
-            If current_Item IsNot Nothing Then
-                PullInfo(current_Item.Text)
-                RaiseEvent PopCustHistory()
-            End If
+            'If current_Item IsNot Nothing Then
+            '    PullInfo(current_Item.Text)
+            '    RaiseEvent PopCustHistory()
+            'End If
             'Me.Cursor = Cursors.WaitCursor
             'Dim c As New SalesListManager(sender)
             'arItemCache = New ArrayList
@@ -2747,35 +2915,13 @@ Public Class Sales
 
     Private Sub btnLogCall_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogCall.ButtonClick
 
-        If Me.ID = "" Then
-            MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
-        LogPhoneCall.ID = Me.ID
-        LogPhoneCall.frm = Me
-        LogPhoneCall.Contact1 = Me.txtContact1.Text
-        LogPhoneCall.Contact2 = Me.txtContact2.Text
-        LogPhoneCall.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
 
     End Sub
 
-    Private Sub btnCalledandCancelled_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCalledandCancelled.Click
+    Private Sub btnCandC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCandC.Click
 
-        If Me.ID = "" Then
-            MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
-        Dim s = Split(Me.txtContact1.Text, " ")
-        Dim c1 = s(0)
-        Dim s2 = Split(Me.txtContact2.Text, " ")
-        Dim c2 = s2(0)
-        CandCNotes.ID = Me.ID
-        CandCNotes.Contact1 = c1
-        CandCNotes.Contact2 = c2
-        CandCNotes.OrigApptDate = Me.txtApptDate.Text
-        CandCNotes.OrigApptTime = Me.txtApptTime.Text
-        CandCNotes.frm = Me
-        CandCNotes.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 #End Region
 #Region "Memorized Controls"
@@ -2965,11 +3111,11 @@ Public Class Sales
 
 
             Try
-                Me.cboRep1.Text = R2.Item(0)
-                If Me.cboRep1.Text = "" And R2.Item(0) <> "" Then
-                    Me.cboRep1.Items.Add(R2.Item(0))
-                    Me.cboRep2.Items.Add(R2.Item(0))
-                    Me.cboRep1.Text = R2.Item(0)
+                Me.cboRep1.Text = r2.Item(0)
+                If Me.cboRep1.Text = "" And r2.Item(0) <> "" Then
+                    Me.cboRep1.Items.Add(r2.Item(0))
+                    Me.cboRep2.Items.Add(r2.Item(0))
+                    Me.cboRep1.Text = r2.Item(0)
 
                 End If
             Catch ex As Exception
@@ -2977,11 +3123,11 @@ Public Class Sales
 
             End Try
             Try
-                Me.cboRep2.Text = R2.Item(1)
-                If Me.cboRep2.Text = "" And R2.Item(1) <> "" Then
-                    Me.cboRep2.Items.Add(R2.Item(1))
-                    Me.cboRep1.Items.Add(R2.Item(1))
-                    Me.cboRep2.Text = R2.Item(1)
+                Me.cboRep2.Text = r2.Item(1)
+                If Me.cboRep2.Text = "" And r2.Item(1) <> "" Then
+                    Me.cboRep2.Items.Add(r2.Item(1))
+                    Me.cboRep1.Items.Add(r2.Item(1))
+                    Me.cboRep2.Text = r2.Item(1)
 
                 End If
             Catch ex As Exception
@@ -2989,7 +3135,7 @@ Public Class Sales
 
             End Try
 
-            R2.Close()
+            r2.Close()
             cnn2.Close()
             If Me.TabControl2.SelectedIndex = 1 Then
                 Me.lvMemorized_SelectedIndexChanged(Nothing, Nothing)
@@ -3172,7 +3318,7 @@ Public Class Sales
     End Sub
 
     Private Sub EnterSalesResultToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnterSalesResultToolStripMenuItem.Click
-        Me.btnSalesResult2_ButtonClick(Nothing, Nothing)
+        Me.btnSalesResult2_ButtonClick(Me.btnSalesResult2, Nothing)
     End Sub
 
     Private Sub MemorizeThisApptToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MemorizeThisApptToolStripMenuItem.Click
@@ -3188,7 +3334,7 @@ Public Class Sales
     End Sub
 
     Private Sub SetAppointmentToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SetAppointmentToolStripMenuItem.Click
-        Me.btnSetAppt_Click(Nothing, Nothing)
+
     End Sub
 
     Private Sub SaveChangesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveChangesToolStripMenuItem.Click
@@ -3204,22 +3350,7 @@ Public Class Sales
     End Sub
 
     Private Sub btnEditCustomer_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustomer.Click
-        If Me.TabControl2.SelectedIndex = 0 Then
-            'If Me.lvSales.SelectedItems.Count <> 0 Then
-            EditCustomerInfo.ID = STATIC_VARIABLES.CurrentID
-            'End If
-        Else
-            If Me.lvMemorized.SelectedItems.Count <> 0 Then
-                EditCustomerInfo.ID = STATIC_VARIABLES.CurrentID
-            End If
-            'End If
-            EditCustomerInfo.Show()
-        End If
-
-        If Me.tbMain.SelectedIndex = 1 Then '' customer history
-            EditCustomerInfo.ID = STATIC_VARIABLES.CurrentID
-            EditCustomerInfo.Show()
-        End If
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
     Private Sub MarkTaskAsDoneToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MarkTaskAsDoneToolStripMenuItem.Click
@@ -3227,34 +3358,13 @@ Public Class Sales
     End Sub
 
     Private Sub EditScheduledTaskToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EditScheduledTaskToolStripMenuItem.Click
-        Me.btnEditScheduledTask_Click(Nothing, Nothing)
+        Me.btnEditScheduledTask_Click(Me.btnEditScheduledTask, Nothing)
     End Sub
 
     Private Sub btnEditScheduledTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditScheduledTask.Click
-        Try
-            ScheduleAction.edit = True
-            Dim c As Integer = Me.pnlScheduledTasks.Controls.Count
-            Dim i As Integer
-            For i = 1 To c
-                Dim all As Panel = Me.pnlScheduledTasks.Controls(i - 1)
-                If all.BorderStyle = BorderStyle.FixedSingle Then
-                    ScheduleAction.EditId = all.Name.ToString.Substring(3)
-                End If
-            Next
-            If ScheduleAction.EditId = "" Then
-                MsgBox("You must select a Task.", MsgBoxStyle.Exclamation, "Please Select a Task")
-                Exit Sub
-            End If
-            ScheduleAction.ShowDialog()
-            Dim x As New ScheduledActions
-            x.SetUp(Me)
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEditScheduledTask_click", ID, ex.Message.ToString)
-            y = Nothing
-        End Try
+
+
+        Dim x As New SubForm_Launcher(sender)
 
     End Sub
 
@@ -3275,84 +3385,27 @@ Public Class Sales
     End Sub
 
     Private Sub tsSalesDepartment_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsSalesDepartment.SizeChanged
-        Me.dtpSummary.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
-        Me.dtpSummary2.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2)
-        Me.dtp1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2)
-        Me.dtp2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
-        Me.txt1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 246, 4)
-        Me.txt2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 107, 4)
-        Me.dtpIssueLeads.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
+        'Me.dtpSummary.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
+        'Me.dtpSummary2.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2)
+        'Me.dtp1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 247, 2)
+        'Me.dtp2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
+        'Me.txt1CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 246, 4)
+        'Me.txt2CustomerList.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 107, 4)
+        'Me.dtpIssueLeads.Location = New System.Drawing.Point(Me.tsSalesDepartment.Width - 108, 2)
 
         ''comeback 
         '' add other datepickers and cover labels as needed 
     End Sub
 
     Private Sub SCsalesresult_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles SCsalesresult.Click
-        Me.btnSalesResult_Click1(Nothing, Nothing)
+        Me.btnSalesResult_Click1(Me.btnSalesResult, Nothing)
     End Sub
 
     Private Sub SCCustomerList_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles SCCustomerList.Click
         Me.lvnoresults_DoubleClick(Nothing, Nothing)
     End Sub
 
-    Private Sub cboDateRangeSummary_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDateRangeSummary.SelectedIndexChanged
-        If Me.LoadComplete = False Then
-            Exit Sub
-        End If
 
-
-        Try
-            If Me.cboDateRangeSummary.Text <> "Custom" Then
-                Dim d As New DTPManipulation(Me.cboDateRangeSummary.Text)
-                Me.dtpSummary2.Value = d.retDateFrom
-                Me.dtpSummary.Value = d.retDateTo
-                Dim r As New Sales_Performance_Report
-                Dim accuracy As String = r.ReportAccuracy
-                'Me.lblPrintReport.Visible = True
-                'Dim response As Integer = MsgBox("Would you like to view in a web browser for styled printing?", MsgBoxStyle.YesNo, "Styled Printing?")
-                'Select Case response
-                '    Case Is = vbYes
-                '        Dim x As New Print_Sales_Perf_Report(d.retDateFrom, d.retDateTo, accuracy)
-                '        x = Nothing
-                '        Exit Select
-                '    Case Is = vbNo
-                '        '' no nothing 
-                '        '' just let it run. 
-                '        Exit Select
-                'End Select
-                r = Nothing
-            End If
-
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "cboDateRangeSummary_SelectedIndexChanged", ID, ex.Message.ToString)
-            y = Nothing
-        End Try
-
-
-    End Sub
-
-    Private Sub dtpSummary_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpSummary.GotFocus
-        If LoadComplete = False Then
-            Exit Sub
-        End If
-        Focusdtp1 = True
-        dtpsum1orig = Me.dtpSummary.Value.ToString
-
-
-
-    End Sub
-
-    Private Sub dtpSummary2_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpSummary2.GotFocus
-        If LoadComplete = False Then
-            Exit Sub
-        End If
-        focusdtp2 = True
-        dtpsum2orig = Me.dtpSummary2.Value.ToString
-
-    End Sub
 
 #Region "List View Context Menus - NOTES"
 
@@ -4715,7 +4768,7 @@ Public Class Sales
 #End Region
 
     Private Sub EditCustomerToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EditCustomerToolStripMenuItem.Click
-        Me.btnEditCustomer_Click(Nothing, Nothing)
+        Me.btnEditCustomer_Click(Me.btnEditCustomer, Nothing)
     End Sub
 
     Private Sub dtpIssueLeads_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpIssueLeads.ValueChanged
@@ -4820,15 +4873,15 @@ Public Class Sales
             Me.lblsales.Location = New System.Drawing.Point(625, Me.lblRep.Location.Y)
             Me.lblRC.Location = New System.Drawing.Point(738, Me.lblRep.Location.Y)
             Me.lblSold.Location = New System.Drawing.Point(851, Me.lblRep.Location.Y)
-            Me.lblIssued.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblNH.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblResets.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblND.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblsales.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblRC.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblSold.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblRep.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblIssued.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblDNS.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblNH.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblResets.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblND.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblsales.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblRC.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblSold.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblRep.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             'If Me.pnlPerformanceReport.Controls.Count <= 1 Then
             '    Exit Sub
             'End If
@@ -4863,75 +4916,75 @@ Public Class Sales
 
                         Dim lblissue As Label = z.Controls.Item(1)
                         Dim name As Label = z.Controls.Item(0)
-                        name.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        name.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         name.Location = New System.Drawing.Point(name.Location.X, 8)
 
                         lblissue.Location = New System.Drawing.Point((Me.lblIssued.Location.X + 61) - (22 + h), 0)
-                        lblissue.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblissue.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblissue.Size = New Size(44 + h, 32)
 
                         Dim lblDNS As Label = z.Controls.Item(8)
-                        lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblDNS.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblDNS.Location = New System.Drawing.Point((Me.lblDNS.Location.X + 61) - (42 + h), 0) '192
                         lblDNS.Size = New Size(32 + h, 32)
 
                         Dim lblDNSper As Label = z.Controls.Item(9)
-                        lblDNSper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblDNSper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblDNSper.Location = New System.Drawing.Point(lblDNS.Location.X + (32 + h), 0) '224
                         lblDNSper.Size = New Size(42 + h, 32)
 
                         Dim lblNH As Label = z.Controls.Item(4)
-                        lblNH.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNH.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblNH.Size = New Size(32 + h, 32)
                         lblNH.Location = New System.Drawing.Point((Me.lblNH.Location.X + 61) - (42 + h), 0) '305
 
                         Dim lblNHper As Label = z.Controls.Item(5)
-                        lblNHper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNHper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblNHper.Size = New Size(46 + h, 32)
                         lblNHper.Location = New System.Drawing.Point(lblNH.Location.X + (32 + h), 0) '337
 
                         Dim lblResets As Label = z.Controls.Item(2)
-                        lblResets.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblResets.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblResets.Size = New Size(32 + h, 32)
                         lblResets.Location = New System.Drawing.Point((Me.lblResets.Location.X + 61) - (42 + h), 0) '418
 
                         Dim lblResetsper As Label = z.Controls.Item(3)
-                        lblResetsper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblResetsper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblResetsper.Size = New Size(46 + h, 32)
                         lblResetsper.Location = New System.Drawing.Point(lblResets.Location.X + (32 + h), 0) '450
 
                         Dim lblND As Label = z.Controls.Item(6)
-                        lblND.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblND.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblND.Size = New Size(32 + h, 32)
                         lblND.Location = New System.Drawing.Point((Me.lblND.Location.X + 61) - (42 + h), 0) '534
 
                         Dim lblNDper As Label = z.Controls.Item(7)
-                        lblNDper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNDper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblNDper.Size = New Size(46 + h, 32)
                         lblNDper.Location = New System.Drawing.Point(lblND.Location.X + (32 + h), 0) '566
 
                         Dim lblSales As Label = z.Controls.Item(12)
-                        lblSales.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblSales.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblSales.Size = New Size(32 + h, 32)
                         lblSales.Location = New System.Drawing.Point((Me.lblsales.Location.X + 61) - (42 + h), 0) '664
 
                         Dim lblSalesper As Label = z.Controls.Item(13)
-                        lblSalesper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblSalesper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblSalesper.Size = New Size(46 + h, 32)
                         lblSalesper.Location = New System.Drawing.Point(lblSales.Location.X + (32 + h), 0) '676
 
                         Dim lblRC As Label = z.Controls.Item(10)
-                        lblRC.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblRC.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblRC.Size = New Size(32 + h, 32)
                         lblRC.Location = New System.Drawing.Point((Me.lblRC.Location.X + 61) - (42 + h), 0) '757
 
                         Dim lblRCper As Label = z.Controls.Item(11)
-                        lblRCper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblRCper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblRCper.Size = New Size(46 + h, 32)
                         lblRCper.Location = New System.Drawing.Point(lblRC.Location.X + (32 + h), 0) '789
 
                         Dim lblsold As Label = z.Controls.Item(14)
-                        lblsold.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblsold.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblsold.Size = New Size(80 + j, 32)
                         If y < 0 Then
                             lblsold.Location = New System.Drawing.Point(Me.lblSold.Location.X + 20, 0) '869
@@ -4979,15 +5032,15 @@ Public Class Sales
             Me.lblsales.Location = New System.Drawing.Point((x * 6) - y, Me.lblRep.Location.Y)
             Me.lblRC.Location = New System.Drawing.Point((x * 7) - y, Me.lblRep.Location.Y)
             Me.lblSold.Location = New System.Drawing.Point((x * 8) - y, Me.lblRep.Location.Y)
-            Me.lblIssued.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblNH.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblResets.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblND.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblsales.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblRC.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblSold.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblRep.Font = New System.Drawing.Font("Tahoma", fs!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblIssued.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblDNS.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblNH.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblResets.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblND.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblsales.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblRC.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblSold.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblRep.Font = New System.Drawing.Font("Verdana", fs!, 0, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             'If Me.pnlPerformanceReport.Controls.Count <= 1 Then
             '    Exit Sub
             'End If
@@ -5014,7 +5067,7 @@ Public Class Sales
 
                         Dim name As Label = z.Controls.Item(0)
 
-                        name.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        name.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         If name.Location.Y >= 8 Then
                             name.Location = New System.Drawing.Point(name.Location.X, name.Location.Y - pix)
                         End If
@@ -5022,72 +5075,72 @@ Public Class Sales
 
                         Dim lblissue As Label = z.Controls.Item(1)
                         lblissue.Location = New System.Drawing.Point((Me.lblIssued.Location.X + (Me.lblIssued.Width / 2)) - (22 + h), 0)
-                        lblissue.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblissue.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblissue.Size = New Size(44 + h, 32)
 
 
                         Dim lblDNS As Label = z.Controls.Item(8)
-                        lblDNS.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblDNS.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblDNS.Location = New System.Drawing.Point((Me.lblDNS.Location.X + (Me.lblDNS.Width / 2)) - (42 + h), 0) '192
                         lblDNS.Size = New Size(32 + h, 32)
 
                         Dim lblDNSper As Label = z.Controls.Item(9)
-                        lblDNSper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblDNSper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblDNSper.Location = New System.Drawing.Point(lblDNS.Location.X + (32 + h), 0) '224
                         lblDNSper.Size = New Size(42 + h, 32)
 
                         Dim lblNH As Label = z.Controls.Item(4)
-                        lblNH.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNH.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblNH.Size = New Size(32 + h, 32)
                         lblNH.Location = New System.Drawing.Point((Me.lblNH.Location.X + (Me.lblNH.Width / 2)) - (42 + h), 0) '305
 
                         Dim lblNHper As Label = z.Controls.Item(5)
-                        lblNHper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNHper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblNHper.Size = New Size(46 + h, 32)
                         lblNHper.Location = New System.Drawing.Point(lblNH.Location.X + (32 + h), 0) '337
 
                         Dim lblResets As Label = z.Controls.Item(2)
-                        lblResets.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblResets.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblResets.Size = New Size(32 + h, 32)
                         lblResets.Location = New System.Drawing.Point((Me.lblResets.Location.X + (Me.lblResets.Width / 2)) - (42 + h), 0) '418
 
                         Dim lblResetsper As Label = z.Controls.Item(3)
-                        lblResetsper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblResetsper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblResetsper.Size = New Size(46 + h, 32)
                         lblResetsper.Location = New System.Drawing.Point(lblResets.Location.X + (32 + h), 0) '450
 
                         Dim lblND As Label = z.Controls.Item(6)
-                        lblND.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblND.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblND.Size = New Size(32 + h, 32)
                         lblND.Location = New System.Drawing.Point((Me.lblND.Location.X + (Me.lblND.Width / 2)) - (42 + h), 0) '534
 
                         Dim lblNDper As Label = z.Controls.Item(7)
-                        lblNDper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblNDper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblNDper.Size = New Size(46 + h, 32)
                         lblNDper.Location = New System.Drawing.Point(lblND.Location.X + (32 + h), 0) '566
 
                         Dim lblSales As Label = z.Controls.Item(12)
-                        lblSales.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblSales.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblSales.Size = New Size(32 + h, 32)
                         lblSales.Location = New System.Drawing.Point((Me.lblsales.Location.X + (Me.lblsales.Width / 2)) - (42 + h), 0) '664
 
                         Dim lblSalesper As Label = z.Controls.Item(13)
-                        lblSalesper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblSalesper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblSalesper.Size = New Size(46 + h, 32)
                         lblSalesper.Location = New System.Drawing.Point(lblSales.Location.X + (32 + h), 0) '676
 
                         Dim lblRC As Label = z.Controls.Item(10)
-                        lblRC.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblRC.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblRC.Size = New Size(32 + h, 32)
                         lblRC.Location = New System.Drawing.Point((Me.lblRC.Location.X + (Me.lblRC.Width / 2)) - (42 + h), 0) '757
 
                         Dim lblRCper As Label = z.Controls.Item(11)
-                        lblRCper.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblRCper.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblRCper.Size = New Size(46 + h, 32)
                         lblRCper.Location = New System.Drawing.Point(lblRC.Location.X + (32 + h), 0) '789
 
                         Dim lblsold As Label = z.Controls.Item(14)
-                        lblsold.Font = New System.Drawing.Font("Tahoma", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                        lblsold.Font = New System.Drawing.Font("Verdana", fs!, fstyle, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                         lblsold.Size = New Size(80 + j, 32)
                         If j > 0 Then
                             lblsold.Location = New System.Drawing.Point(Me.pnlPerformanceReport.Width - (lblsold.Width + 10), 0) '869
@@ -5118,10 +5171,6 @@ Public Class Sales
     End Sub
 
     Private Sub btnExclude_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExclude.Click
-        '' 4-20-2016 AC
-        '' Exclusions_On_Off (bool)
-        '' False = Off
-        '' True = On 
         If Me.btnExclude.Text.Contains("Off") Then
             Me.Exclusions_On_Off = False
             Me.btnExclude.Text = "Turn On Exclusions"
@@ -5147,7 +5196,7 @@ Public Class Sales
     Private Sub btnEditCustIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditCustIssue.Click
         Refocus_IssueLeads()
 
-        EditCustomerInfo.Show()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
     Private Sub btnCCIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCCIssue.Click
@@ -5196,44 +5245,8 @@ Public Class Sales
 
             ElseIf buttonText = "Log Appt. as Called and Cancelled" Then
 
-                Dim lead As String = ""
-                For t As Integer = 0 To Me.pnlIssue.Controls.Count - 1
-                    If Me.pnlIssue.Controls.Item(t).Name.Contains("pnl") Then
-                        Dim z As Panel = Me.pnlIssue.Controls.Item(t)
-                        If z.BorderStyle = BorderStyle.FixedSingle Then
-                            lead = z.Controls.Item(2).Text
-                        End If
-                    End If
-                Next
-                If lead = "" Then
-                    MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-                    Exit Sub
-                End If
-                'Me.cboSalesList.SelectedItem = "Issue Leads List"
-                'For x As Integer = 0 To Me.lvSales.Items.Count - 1
-                '    If Me.lvSales.Items(x).Text = lead Then
-                '        Me.lvSales.Items(x).Selected = True
-                '        If Me.lvSales.Items(x).Selected = True Then
-                '            Me.PullInfo(lead)
-                '        End If
-                '    End If
-                'Next
-                Me.PullInfo(lead)
-
-                Dim s = Split(Me.txtContact1.Text, " ")
-                Dim c1 = s(0)
-                Dim s2 = Split(Me.txtContact2.Text, " ")
-                Dim c2 = s2(0)
-                CandCNotes.ID = lead
-                CandCNotes.Contact1 = c1
-                CandCNotes.Contact2 = c2
-                CandCNotes.OrigApptDate = Me.txtApptDate.Text
-                CandCNotes.OrigApptTime = Me.txtApptTime.Text
-                CandCNotes.frm = Me
-
-
-                CandCNotes.ShowInTaskbar = False
-                CandCNotes.ShowDialog()
+                Dim x = New SubForm_Launcher(sender)
+                Exit Sub
 
             End If
         Catch ex As Exception
@@ -5247,9 +5260,7 @@ Public Class Sales
     End Sub
 
     Private Sub PrintThisLeadToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PrintThisLeadToolStripMenuItem.Click
-
-
-
+        ' btnPrintThisIssue_Click(sender, e)
         '' 4-20-16 AC
         '' EDITS:
 
@@ -5274,23 +5285,6 @@ Public Class Sales
             yy.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintThisIssue_Click()", targetID, ex.Message.ToString)
         End Try
 
-
-
-        'btnPrintThisIssue_Click(sender, e)
-        'MsgBox("This is being reworked: Exclusions/NoExclusions", MsgBoxStyle.Information, "4-20-16")
-        'Dim y As Panel
-        'For Each y In pnlIssue.Controls
-        '    If y.BorderStyle = BorderStyle.FixedSingle Then
-        '        Dim yy As Control
-        '        For Each yy In y.Controls
-        '            If TypeOf yy Is LinkLabel Then
-        '                ''MsgBox("Record ID: " & yy.Text,information,"DEBUG INFO")
-        '                Dim lead_id As String = yy.Text
-        '                Dim c As New printToPrinterCustInfoSheet(lead_id)
-        '            End If
-        '        Next
-        '    End If
-        'Next
     End Sub
 
     Private Sub EmailThisLeadToAssignedRepsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EmailThisLeadToAssignedRepsToolStripMenuItem.Click
@@ -5300,6 +5294,8 @@ Public Class Sales
     Private Sub btnExcludeManage_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExcludeManage.Click
         exclusions.ShowDialog()
     End Sub
+
+
 
     Private Sub Sales_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
         'Me.Label4.Location = New System.Drawing.Point((Me.tpSummary.Width / 2) - 87, Me.Label4.Location.Y)
@@ -5487,13 +5483,7 @@ Public Class Sales
         '    Me.btnSetAppt_Click(sender, e)
         '    SetAppt.Show()
         'End If
-        If (Me.lvSales.SelectedItems.Count = 0 And Me.TabControl2.SelectedTab.Name = "TabPage1") Or (Me.lvMemorized.SelectedItems.Count = 0 And Me.TabControl2.SelectedTab.Name = "TabPage2") Then
-            MsgBox("You must select a Record to Set an Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
-
-        SetAppt_V2.frm = Me
-        SetAppt_V2.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
 
     End Sub
 
@@ -5532,7 +5522,6 @@ Public Class Sales
         ' MsgBox("test hit btnEmailallIssue ")
         '' email to all reps that can get
         Try
-            Me.Cursor = Cursors.WaitCursor
             Dim z As New EmailIssuedLeads
             Dim arRepsThatCanGetEmail As New ArrayList
             Dim arRepsThatDontGetEmail As New ArrayList
@@ -5608,7 +5597,8 @@ Public Class Sales
                 xyz.BulkMailWithExclusions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
 
 
-               
+
+
 
             End If
             If Me.btnExclude.Text.Contains("On") Then
@@ -5680,15 +5670,7 @@ Public Class Sales
                 Next
 
                 xyz.BulkEmailWithoutExceptions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
-                
-
             End If
-
-
-            Me.Cursor = Cursors.Default
-            MsgBox("Mail Sent.", MsgBoxStyle.Information, "Email Sent Out Successfully.")
-
-
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -6170,9 +6152,7 @@ Public Class Sales
     End Sub
 
     Private Sub btnPrintIssue_Click(sender As Object, e As EventArgs) Handles btnPrintIssue.Click
-
-       
-
+        'MsgBox("btnPrintIssue")
     End Sub
 
 #Region "Printing Options"
@@ -6491,80 +6471,80 @@ Public Class Sales
             End If
         End If
 
-            'Try
+        'Try
 
-            '    If Me.btnExclude.Text.Contains("On") Then
+        '    If Me.btnExclude.Text.Contains("On") Then
 
-            '        Dim y As Panel
-            '        Dim _leadNum As String = ""
-            '        Dim arRepIDs_NO_Email As New ArrayList
+        '        Dim y As Panel
+        '        Dim _leadNum As String = ""
+        '        Dim arRepIDs_NO_Email As New ArrayList
 
-            '        For Each y In pnlIssue.Controls
-            '            Dim ctrl As Control
-            '            For Each ctrl In y.Controls
+        '        For Each y In pnlIssue.Controls
+        '            Dim ctrl As Control
+        '            For Each ctrl In y.Controls
 
-            '                If TypeOf ctrl Is LinkLabel Then
-            '                    _leadNum = ctrl.Text
-            '                End If
-            '                If TypeOf ctrl Is ComboBox Then
-            '                    If ctrl.Text <> "" Then
-            '                        Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-            '                        Dim fname As String = strName(0)
-            '                        Dim lname As String = strName(1)
-            '                        Dim g As New bulkPrintOperations
-            '                        Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
-            '                        If canGetMail = False Then
-            '                            arRepIDs_NO_Email.Add(_leadNum)
-            '                        End If
-            '                    End If
-            '                End If
-            '            Next
-            '        Next
+        '                If TypeOf ctrl Is LinkLabel Then
+        '                    _leadNum = ctrl.Text
+        '                End If
+        '                If TypeOf ctrl Is ComboBox Then
+        '                    If ctrl.Text <> "" Then
+        '                        Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+        '                        Dim fname As String = strName(0)
+        '                        Dim lname As String = strName(1)
+        '                        Dim g As New bulkPrintOperations
+        '                        Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+        '                        If canGetMail = False Then
+        '                            arRepIDs_NO_Email.Add(_leadNum)
+        '                        End If
+        '                    End If
+        '                End If
+        '            Next
+        '        Next
 
-            '        Dim pt_hash As New printToPrinterCustInfoSheet(arRepIDs_NO_Email)
+        '        Dim pt_hash As New printToPrinterCustInfoSheet(arRepIDs_NO_Email)
 
-            '    ElseIf btnExclude.Text.Contains("Off") Then
+        '    ElseIf btnExclude.Text.Contains("Off") Then
 
-            '        Dim b As New bulkPrintOperations
-            '        Dim ex_set As bulkPrintOperations.Exclusions
-            '        ex_set = b.GetExclusions()
-            '        Dim y As Panel
-            '        Dim arRepNames As New ArrayList
-            '        Dim arLeadNums As New ArrayList
-            '        Dim _leadNum As String = ""
-            '        For Each y In pnlIssue.Controls
-            '            Dim ctrl As Control
-            '            For Each ctrl In y.Controls
+        '        Dim b As New bulkPrintOperations
+        '        Dim ex_set As bulkPrintOperations.Exclusions
+        '        ex_set = b.GetExclusions()
+        '        Dim y As Panel
+        '        Dim arRepNames As New ArrayList
+        '        Dim arLeadNums As New ArrayList
+        '        Dim _leadNum As String = ""
+        '        For Each y In pnlIssue.Controls
+        '            Dim ctrl As Control
+        '            For Each ctrl In y.Controls
 
-            '                If TypeOf ctrl Is LinkLabel Then
-            '                    _leadNum = ctrl.Text
-            '                End If
-            '                If TypeOf ctrl Is ComboBox Then
-            '                    If ctrl.Text <> "" Then
-            '                        Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-            '                        Dim fname As String = strName(0)
-            '                        Dim lname As String = strName(1)
-            '                        Dim g As New bulkPrintOperations
-            '                        Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
-            '                        If canGetMail = False Then
-            '                            'arRepNames.Add(fname & " " & lname)
-            '                            arLeadNums.Add(_leadNum)
-            '                        End If
-            '                    End If
-            '                End If
-            '            Next
-            '        Next
+        '                If TypeOf ctrl Is LinkLabel Then
+        '                    _leadNum = ctrl.Text
+        '                End If
+        '                If TypeOf ctrl Is ComboBox Then
+        '                    If ctrl.Text <> "" Then
+        '                        Dim strName = Split(ctrl.Text, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+        '                        Dim fname As String = strName(0)
+        '                        Dim lname As String = strName(1)
+        '                        Dim g As New bulkPrintOperations
+        '                        Dim canGetMail As Boolean = g.CanRepGetEmail(fname, lname)
+        '                        If canGetMail = False Then
+        '                            'arRepNames.Add(fname & " " & lname)
+        '                            arLeadNums.Add(_leadNum)
+        '                        End If
+        '                    End If
+        '                End If
+        '            Next
+        '        Next
 
-            '        Dim pt_arIDs As New printToPrinterCustInfoSheet(arLeadNums)
+        '        Dim pt_arIDs As New printToPrinterCustInfoSheet(arLeadNums)
 
-            '    End If
-            'Catch ex As Exception
-            '    Me.Cursor = Cursors.Default
-            '    Main.Cursor = Cursors.Default
-            '    Dim y As New ErrorLogging_V2
-            '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintNoEmailIssue_click", "0", ex.Message.ToString)
-            '    y = Nothing
-            'End Try
+        '    End If
+        'Catch ex As Exception
+        '    Me.Cursor = Cursors.Default
+        '    Main.Cursor = Cursors.Default
+        '    Dim y As New ErrorLogging_V2
+        '    y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnPrintNoEmailIssue_click", "0", ex.Message.ToString)
+        '    y = Nothing
+        'End Try
 
     End Sub
 
@@ -6823,41 +6803,7 @@ Public Class Sales
 
 #End Region
 
-    Private Sub dtpSummary2_LostFocus(sender As Object, e As EventArgs) Handles dtpSummary2.LostFocus
-        focusdtp2 = False
-    End Sub
 
-    Private Sub dtpSummary2_ValueChanged(sender As Object, e As EventArgs) Handles dtpSummary2.ValueChanged
-        If LoadComplete = False Then
-            Exit Sub
-        End If
-        If focusdtp2 = True Then
-            If dtpsum2orig <> Me.dtpSummary2.Value.ToString Then
-                Me.cboDateRangeSummary.SelectedItem = "Custom"
-                dtpsum2orig = Me.dtpSummary2.Value.ToString
-                cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
-            End If
-        End If
-
-    End Sub
-
-    Private Sub dtpSummary_LostFocus(sender As Object, e As EventArgs) Handles dtpSummary.LostFocus
-        Focusdtp1 = False
-    End Sub
-
-    Private Sub dtpSummary_ValueChanged(sender As Object, e As EventArgs) Handles dtpSummary.ValueChanged
-        If LoadComplete = False Then
-            Exit Sub
-        End If
-        If Focusdtp1 = True Then
-            If dtpsum1orig <> Me.dtpSummary.Value.ToString Then
-                Me.cboDateRangeSummary.SelectedItem = "Custom"
-                Me.dtpsum1orig = Me.dtpSummary.Value.ToString
-                cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
-            End If
-        End If
-
-    End Sub
 
     Private Sub bgGetImages_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgGetImages.DoWork
         GetImages_Files_And_Folders(STATIC_VARIABLES.CurrentID)
@@ -9034,33 +8980,54 @@ Public Class Sales
 
     Private Sub btnUpdateSPI_Click(sender As Object, e As EventArgs) Handles btnUpdateSPI.Click
 
-        frmEditSpecialInstructions.frm = Me
-        frmEditSpecialInstructions.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
     Private Sub bgSalesQuery_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgSalesQuery.DoWork
         Try
+            'If sender Is Nothing Then
+            '    MsgBox("Sender is Nothing")
+            'Else
+            '    MsgBox(sender.name.ToString)
+            'End If
             Me.Cursor = Cursors.WaitCursor
-            Dim c As New SalesListManager(sender)
+            Dim c As New SalesListManager()
             'arItemCache = New ArrayList
             'arItemCache = c.LV_Sales_Items
-            'bgSalesQuery_RunWorkerCompleted(Me, Nothing)
+
 
             If Me.lvSales.Items.Count > 0 Then
-                Dim a As ListViewItem = Me.lvSales.Items.Item(0)
-                STATIC_VARIABLES.CurrentID = a.Text
-                Me.Text = "Sales Department Record ID: " & a.Text
-                PullInfo(a.Text)
-                AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-                Me.lvSales.EnsureVisible(0)
-                RaiseEvent PopCustHistory()
+                If Me.lvSales.SelectedItems.Count = 1 Then
+                    Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
+                    'MsgBox(a.Text)
+                    STATIC_VARIABLES.CurrentID = a.Text
+                    Me.Text = "Sales Department Record ID: " & a.Text
+                    PullInfo(a.Text)
+                    AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                    a.EnsureVisible()
+                    RaiseEvent PopCustHistory()
+                Else
+                    Me.lvSales.TopItem.Selected = True
+                    Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
+                    'MsgBox(a.Text)
+                    STATIC_VARIABLES.CurrentID = a.Text
+                    Me.Text = "Sales Department Record ID: " & a.Text
+                    PullInfo(a.Text)
+                    AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                    a.EnsureVisible()
+                    RaiseEvent PopCustHistory()
+                End If
+
                 'End If
                 Me.Cursor = Cursors.Default
             Else
+
                 Me.Cursor = Cursors.Default
                 Main.Cursor = Cursors.Default
             End If
-            
+            'bgSalesQuery_RunWorkerCompleted(Me, Nothing)
+
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -9076,14 +9043,28 @@ Public Class Sales
             ' If arItemCache.Count > 1 Then
 
             If Me.lvSales.Items.Count > 0 Then
-                Dim a As ListViewItem = Me.lvSales.Items.Item(0)
-                STATIC_VARIABLES.CurrentID = a.Text
-                Me.Text = "Sales Department Record ID: " & a.Text
-                PullInfo(a.Text)
-                AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-                Me.lvSales.EnsureVisible(0)
-                RaiseEvent PopCustHistory()
-                'End If
+                If lvSales.SelectedItems.Count = 1 Then
+                    Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
+                    STATIC_VARIABLES.CurrentID = a.Text
+                    Me.Text = "Sales Department Record ID: " & a.Text
+                    PullInfo(a.Text)
+                    ' AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                    Me.lvSales.EnsureVisible(0)
+                    ' RaiseEvent PopCustHistory()
+                    'End If
+
+                Else
+                    Me.lvSales.TopItem.Selected = True
+                    Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
+                    STATIC_VARIABLES.CurrentID = a.Text
+                    Me.Text = "Sales Department Record ID: " & a.Text
+                    PullInfo(a.Text)
+                    ' AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                    Me.lvSales.EnsureVisible(0)
+                    ' RaiseEvent PopCustHistory()
+                    'End If
+                End If
+
                 Me.Cursor = Cursors.Default
             Else
 
@@ -9174,12 +9155,22 @@ Public Class Sales
     End Sub
 
     Private Sub btnMoveAppt_Click(sender As Object, e As EventArgs) Handles btnMoveAppt.Click
-        If (Me.lvSales.SelectedItems.Count = 0 And Me.TabControl2.SelectedTab.Name = "TabPage1") Or (Me.lvMemorized.SelectedItems.Count = 0 And Me.TabControl2.SelectedTab.Name = "TabPage2") Then
-            MsgBox("You must select a Record to Set an Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
-
-        RescheduleAppt.frm = Me
-        RescheduleAppt.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
+
+    Private Sub SetAppointmentToolStripMenuItem_MouseEnter(sender As Object, e As EventArgs) Handles SetAppointmentToolStripMenuItem.MouseEnter
+        SetAppointmentToolStripMenuItem_Click(Nothing, Nothing)
+
+    End Sub
+
+    Private Sub SetAppointmentToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SetAppointmentToolStripMenuItem1.Click
+        Me.btnSetAppt_Click(Me.btnSetAppt, Nothing)
+    End Sub
+
+    Private Sub MoveAppointmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MoveAppointmentToolStripMenuItem.Click
+        btnMoveAppt_Click(Me.btnMoveAppt, Nothing)
+    End Sub
+
+
+
 End Class

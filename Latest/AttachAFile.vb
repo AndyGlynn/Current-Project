@@ -18,7 +18,7 @@ Public Class AttachAFile
             Me.txtLeadNumber.Text = STATIC_VARIABLES.CurrentID
             Dim a As New CUSTOMER_LABEL
             a.GetINFO(Me.txtLeadNumber.Text)
-            Me.lblPhoneInfo.Font = New Font("Tahoma", 12.25!, FontStyle.Bold, GraphicsUnit.Pixel, CType(0, Byte))
+            Me.lblPhoneInfo.Font = New Font("Verdana", 12.25!, 0, GraphicsUnit.Pixel, CType(0, Byte))
             Me.lblPhoneInfo.Text = a.Contact1Name & vbCrLf & a.StAddress & vbCrLf & a.HousePhone & vbCrLf & a.AltPhone1 & "     " & a.AltPhone1Type & vbCrLf & a.AltPhone2 & "     " & a.AltPhone2Type
             Me.Text = Me.Text & " for Record ID: " & Me.txtLeadNumber.Text
         Catch ex As Exception
@@ -57,14 +57,14 @@ Public Class AttachAFile
             str = Me.txtLeadNumber.Text
             If str.ToString.Length <= 2 Then
                 'Me.lblContactInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
-                Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
+                Me.lblPhoneInfo.Font = New Font("Verdana", 10.25!, 0, GraphicsUnit.Pixel, CType(0, Byte))
                 'Me.lblContactInfo.Text = "No Contact Information"
                 Me.lblPhoneInfo.Text = "No Contact Information Available" & vbCrLf & "(You must supply a valid Customer ID)"
                 Exit Sub
             End If
             If str.ToString.ToString <= 0 Then
                 ''Me.lblContactInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
-                Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
+                Me.lblPhoneInfo.Font = New Font("Verdana", 10.25!, 0, GraphicsUnit.Pixel, CType(0, Byte))
                 ''Me.lblContactInfo.Text = "No Contact Information"
                 Me.lblPhoneInfo.Text = "No Contact Information Available" & vbCrLf & "(You must supply a valid Customer ID)"
             End If
@@ -73,7 +73,7 @@ Public Class AttachAFile
                 'If Me.RemoveErrP = True Then
                 Dim a As New CUSTOMER_LABEL
                 a.GetINFO(Me.txtLeadNumber.Text)
-                Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, FontStyle.Bold, GraphicsUnit.Pixel, CType(0, Byte))
+                Me.lblPhoneInfo.Font = New Font("Verdana", 10.25!, 0, GraphicsUnit.Pixel, CType(0, Byte))
                 Me.lblPhoneInfo.Text = a.Contact1Name & vbCrLf & a.StAddress & vbCrLf & vbCrLf & a.HousePhone & vbCrLf & a.AltPhone1 & "     " & a.AltPhone1Type & vbCrLf & a.AltPhone2 & "     " & a.AltPhone2Type
                 Me.ep.Clear()
                 'End If
@@ -104,7 +104,7 @@ Public Class AttachAFile
                 If r1.Item(0) <= 0 Then
                     'MsgBox("invalid lead num.")
                     ep.SetError(Me.txtLeadNumber, "Invalid Lead Number")
-                    Me.lblPhoneInfo.Font = New Font("Tahoma", 10.25!, 3, GraphicsUnit.Pixel, CType(0, Byte))
+                    Me.lblPhoneInfo.Font = New Font("Verdana", 10.25!, 0, GraphicsUnit.Pixel, CType(0, Byte))
                     ' Me.lblContactInfo.Text = "No Contact Information"
                     Me.lblPhoneInfo.Text = "No Contact Information Available" & vbCrLf & "(You must supply a valid Customer ID)"
 
@@ -130,7 +130,7 @@ Public Class AttachAFile
         Me.Close()
     End Sub
 
-   
+
     Private Sub btnNext_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNext.Click
         Try
             Me.ep.Clear()
@@ -171,50 +171,50 @@ Public Class AttachAFile
             '' end if 
             '' 
 
-            Dim f As Windows.Forms.Form = Sales
-            Dim y As Panel
-            Dim g As TabControl
+            'Dim f As Windows.Forms.Form = Sales
+            'Dim y As Panel
+            'Dim g As TabControl
 
-            g = f.Controls("tbMain")
-            Dim b As TabPage = g.TabPages("tpCustomerList")
-            If g.SelectedTab Is b Then
-                For Each a As Control In b.Controls
-                    Dim c As SplitterPanel
-                    For Each c In a.Controls
-                        Dim d As Control
-                        For Each d In c.Controls
-                            If d.Name = "pnlAFPics" Then
-                                Dim p As Panel = d
-                                Dim lv As ListView
-                                For Each lv In p.Controls
-                                    If lv.Name = "lsAF" Then
-                                        '' refresh them if they are active
-                                        p.Controls.RemoveByKey("lsAF")
-                                        Dim widthOfParent As Integer = Sales.pnlAFPics.Width
-                                        Dim widthOfControl As Integer = (widthOfParent / 2) - 20
-                                        Dim heightOfParent As Integer = Sales.pnlAFPics.Height
-                                        Dim heightOfControl As Integer = (heightOfParent - 30)
-                                        Dim InitPoint As System.Drawing.Point = New System.Drawing.Point((0 + 10), (0 + 10))
-                                        Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(((widthOfParent / 2) + 10), (0 + 10))
+            'g = f.Controls("tbMain")
+            'Dim b As TabPage = g.TabPages("tpCustomerList")
+            'If g.SelectedTab Is b Then
+            '    For Each a As Control In b.Controls
+            '        Dim c As SplitterPanel
+            '        For Each c In a.Controls
+            '            Dim d As Control
+            '            For Each d In c.Controls
+            '                If d.Name = "pnlAFPics" Then
+            '                    Dim p As Panel = d
+            '                    Dim lv As ListView
+            '                    For Each lv In p.Controls
+            '                        If lv.Name = "lsAF" Then
+            '                            '' refresh them if they are active
+            '                            p.Controls.RemoveByKey("lsAF")
+            '                            Dim widthOfParent As Integer = Sales.pnlAFPics.Width
+            '                            Dim widthOfControl As Integer = (widthOfParent / 2) - 20
+            '                            Dim heightOfParent As Integer = Sales.pnlAFPics.Height
+            '                            Dim heightOfControl As Integer = (heightOfParent - 30)
+            '                            Dim InitPoint As System.Drawing.Point = New System.Drawing.Point((0 + 10), (0 + 10))
+            '                            Dim InitPoint2 As System.Drawing.Point = New System.Drawing.Point(((widthOfParent / 2) + 10), (0 + 10))
 
-                                        Dim pt As New System.Drawing.Point(0, 0)
-                                        Dim xyz As New ReusableListViewControl
-                                        xyz.GenerateListControl(Sales.pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, pt, "lsAF", heightOfControl, widthOfControl)
+            '                            Dim pt As New System.Drawing.Point(0, 0)
+            '                            Dim xyz As New ReusableListViewControl
+            '                            xyz.GenerateListControl(Sales.pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, pt, "lsAF", heightOfControl, widthOfControl)
 
-                                        'ElseIf lv.Name = "lsJP" Then
-                                        '    ''refresh them if they are active 
-                                        '    p.Controls.RemoveByKey("lsJP")
-                                        '    Dim pt2 As New System.Drawing.Point(364, 0)
-                                        '    Dim xyz2 As New ReusableListViewControl(Sales.pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, pt2, "lsJP")
+            '                            'ElseIf lv.Name = "lsJP" Then
+            '                            '    ''refresh them if they are active 
+            '                            '    p.Controls.RemoveByKey("lsJP")
+            '                            '    Dim pt2 As New System.Drawing.Point(364, 0)
+            '                            '    Dim xyz2 As New ReusableListViewControl(Sales.pnlAFPics, (STATIC_VARIABLES.AttachedFilesDirectory & STATIC_VARIABLES.CurrentID).ToString, pt2, "lsJP")
 
-                                    End If
-                                Next
-                            End If
-                        Next
-                    Next
-                Next
-            End If
-
+            '                        End If
+            '                    Next
+            '                End If
+            '            Next
+            '        Next
+            '    Next
+            'End If
+            STATIC_VARIABLES.Update = True
             Me.Close()
 
         Catch ex As Exception

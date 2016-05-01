@@ -11,7 +11,9 @@ Public Class CandCNotes
     Public frm As Form
     Dim d As Boolean = False
 
-  
+
+
+
 
     Private Sub cboautonotes_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboautonotes.SelectedValueChanged
         Try
@@ -207,60 +209,10 @@ Public Class CandCNotes
             R1.Read()
             R1.Close()
             cnn.close()
-
-
-
-
+            STATIC_VARIABLES.Update = True
             Me.Close()
+
             Me.Dispose()
-            Dim c As New ConfirmingData
-            Dim c2 As New CustomerHistory
-            Dim c3 As New WarmCalling
-            If frm.Name = "Confirming" Then
-                If Confirming.Tab = "Confirm" Then
-                    If Me.cbCallBack.Checked = True Or Me.cbNoReschedule.Checked = True Then
-                        c.Populate(Confirming.Tab, Confirming.cboConfirmingPLS.Text, Confirming.cboConfirmingSLS.Text, Confirming.dpConfirming.Value.ToString, "Refresh")
-                        c2.SetUp(Confirming.TScboCustomerHistory)
-                    Else
-                        c.Populate(Confirming.Tab, Confirming.cboConfirmingPLS.Text, Confirming.cboConfirmingSLS.Text, Confirming.dpConfirming.Value.ToString, "Populate")
-                    End If
-                ElseIf Confirming.Tab = "Dispatch" Then
-                    If Me.cbCallBack.Checked = True Or Me.cbNoReschedule.Checked = True Then
-                        c.Populate(Confirming.Tab, Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Refresh")
-                        If Confirming.lvSales.SelectedItems.Count >= 1 Then
-                            c2.SetUp(Confirming.TScboCustomerHistory)
-                        End If
-                    Else
-                        c.Populate(Confirming.Tab, Confirming.cboSalesPLS.Text, Confirming.cboSalesSLS.Text, Confirming.dpSales.Value.ToString, "Populate")
-                    End If
-                End If
-            ElseIf frm.Name = "WCaller" Then
-                If WCaller.Tab = "WC" Then
-                    c2.SetUp(WCaller.TScboCustomerHistory)
-                Else
-                    If WCaller.lvMyAppts.SelectedItems(0).Group.Name <> "grpMemorized" Then
-                        Dim x As New WarmCalling.MyApptsTab.Populate(WCaller.cboFilter.Text)
-                        c3.Populate()
-                    Else
-                        c2.SetUp(WCaller.TScboCustomerHistory)
-
-                    End If
-
-                End If
-            ElseIf frm.Name = "ConfirmingSingleRecord" Then
-                c2.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
-
-            ElseIf frm.Name = "Sales" Then
-                If Sales.tbMain.SelectedIndex = 2 Then
-                    Dim x As New Issue_Leads(True, "")
-                End If
-                If Sales.tbMain.SelectedIndex = 1 Then
-                    c2.SetUp(Sales.TScboCustomerHistory)
-                End If
-            End If
-
-            ''revisit for other forms 
-
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -368,15 +320,15 @@ Public Class CandCNotes
         Me.cboSpokeWith.DroppedDown = True
     End Sub
 
-   
 
 
 
-  
 
 
 
- 
+
+
+
 
 
 
@@ -418,8 +370,86 @@ Public Class CandCNotes
 
     Private Sub CandCNotes_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
+            ID = STATIC_VARIABLES.CurrentID
+            Select Case frm.Name
+                Case Is = "Sales"
+                    If Sales.tbMain.SelectedIndex = 1 Then
+                        Contact1 = Sales.txtContact1.Text
+                        Contact2 = Sales.txtContact2.Text
+                        OrigApptDate = Sales.txtApptDate.Text
+                        OrigApptTime = Sales.txtApptTime.Text
+                    Else
+                        Dim lead As String = ""
+                        For t As Integer = 0 To Sales.pnlIssue.Controls.Count - 1
+                            If Sales.pnlIssue.Controls.Item(t).Name.Contains("pnl") Then
+                                Dim z As Panel = Sales.pnlIssue.Controls.Item(t)
+                                If z.BorderStyle = BorderStyle.FixedSingle Then
+                                    lead = z.Controls.Item(2).Text
+                                End If
+                            End If
+                        Next
+                        Sales.PullInfo(lead)
+                        Me.ID = lead
+                        Me.Contact1 = Sales.txtContact1.Text
+                        Me.Contact2 = Sales.txtContact2.Text
+                        Me.OrigApptDate = Sales.txtApptDate.Text
+                        Me.OrigApptTime = Sales.txtApptTime.Text
+                    End If
+                Case Is = "Confirming"
+                    Contact1 = Confirming.txtContact1.Text
+                    Contact2 = Confirming.txtContact2.Text
+                    OrigApptDate = Confirming.txtApptDate.Text
+                    OrigApptTime = Confirming.txtApptTime.Text
+                Case Is = "WCaller"
+                    Contact1 = WCaller.txtContact1.Text
+                    Contact2 = WCaller.txtContact2.Text
+                    OrigApptDate = WCaller.txtApptDate.Text
+                    OrigApptTime = WCaller.txtApptTime.Text
+                Case Is = "Recovery"
+                    'Contact1 = Recovery.txtContact1.Text
+                    'Contact2 = Recovery.txtContact2.Text
+                    'OrigApptDate = Recovery.txtApptDate.Text
+                    'OrigApptTime = Recovery.txtApptTime.Text
+                Case Is = "Administration"
+                    'Contact1 = Administration.txtContact1.Text
+                    'Contact2 = Administration.txtContact2.Text
+                    'OrigApptDate = Administration.txtApptDate.Text
+                    'OrigApptTime = Administration.txtApptTime.Text
+                Case Is = "Installation"
+                    'Contact1 = Installation.txtContact1.Text
+                    'Contact2 = Installation.txtContact2.Text
+                    'OrigApptDate = Installation.txtApptDate.Text
+                    'OrigApptTime = Installation.txtApptTime.Text
+                Case Is = "ConfirmingSingleRecord"
+                    Contact1 = ConfirmingSingleRecord.txtContact1.Text
+                    Contact2 = ConfirmingSingleRecord.txtContact2.Text
+                    OrigApptDate = ConfirmingSingleRecord.txtApptDate.Text
+                    OrigApptTime = ConfirmingSingleRecord.txtApptTime.Text
+                Case Is = "Finance"
+                    'Contact1 = Finance.txtContact1.Text
+                    'Contact2 = Finance.txtContact2.Text
+                    'OrigApptDate = Finance.txtApptDate.Text
+                    'OrigApptTime = Finance.txtApptTime.Text
+                Case Is = "MarketingManager"
+                    Contact1 = MarketingManager.txtContact1.Text
+                    Contact2 = MarketingManager.txtContact2.Text
+                    OrigApptDate = MarketingManager.txtApptDate.Text
+                    OrigApptTime = MarketingManager.txtApptTime.Text
+                Case Is = "PreviousCustomer"
+                    'Contact1 = PreviousCustomer.txtContact1.Text
+                    'Contact2 = PreviousCustomer.txtContact2.Text
+                    'OrigApptDate = PreviousCustomer.txtApptDate.Text
+                    'OrigApptTime = PreviousCustomer.txtApptTime.Text
+            End Select
+            If Me.ID = "" Then
+                MsgBox("You must select an Appt. to Log Cancellation!", MsgBoxStyle.Exclamation, "Cannot Log Cancellation")
+                Me.Dispose()
+            End If
+            Dim s1 = Split(Contact1, " ")
+            Contact1 = s1(0)
+            Dim s2 = Split(Contact2, " ")
+            Contact2 = s2(0)
             Me.cboSpokeWith.Items.Clear()
-
             Me.cboSpokeWith.Items.Add(Contact1)
             If Contact2 <> "" Then
                 Me.cboSpokeWith.Items.Add(Contact2)
@@ -473,8 +503,8 @@ Public Class CandCNotes
 
     End Sub
 
-   
-    
+
+
 
     Private Sub cboSpokeWith_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboSpokeWith.SelectedValueChanged
         Try
@@ -493,9 +523,9 @@ Public Class CandCNotes
 
     End Sub
 
-   
 
- 
+
+
     Private Sub txtDate_GotFocus1(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDate.GotFocus
         Me.dtpApptDate.Select()
 

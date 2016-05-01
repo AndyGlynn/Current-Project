@@ -55,7 +55,7 @@ Public Class WarmCalling
 
     Public Sub GroupBy()
         Try
-            WCaller.lvWarmCalling.Groups.Clear()
+            WCaller.lvCallList.Groups.Clear()
             If PLS = "" Then
                 PLS = "%"
             End If
@@ -690,44 +690,44 @@ Public Class WarmCalling
             cmdGet.Parameters.Add(param32)
             cmdGet.Parameters.Add(param33)
             cmdGet.Parameters.Add(param34)
-        
 
-        Try
-            Cnn.Open()
-            r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-            Dim cnt As Integer = 0
-            While r.Read
-                Dim g As New ListViewGroup
-                If WCaller.cboGroupBy.Text = "Zip Code" Then
-                    g.Name = r.Item(0)
-                    g.Header = r.Item(0)
-                    WCaller.lvWarmCalling.Groups.Add(g)
-                ElseIf WCaller.cboGroupBy.Text = "City, State" Then
-                    g.Name = r.Item(0)
-                    g.Header = r.Item(0) & ", " & r.Item(1)
-                    WCaller.lvWarmCalling.Groups.Add(g)
-                ElseIf WCaller.cboGroupBy.Text = "Primary Product" Then
-                    g.Name = r.Item(0)
-                    g.Header = r.Item(0)
-                    WCaller.lvWarmCalling.Groups.Add(g)
-                ElseIf WCaller.cboGroupBy.Text = "Primary Lead Source" Then
-                    g.Name = r.Item(0)
-                    g.Header = r.Item(0)
-                    WCaller.lvWarmCalling.Groups.Add(g)
-                ElseIf WCaller.cboGroupBy.Text = "Marketing Result" Then
-                    g.Name = r.Item(0)
-                    g.Header = r.Item(0)
-                    WCaller.lvWarmCalling.Groups.Add(g)
-                End If
-            End While
-            r.Close()
-            Cnn.Close()
-            WCaller.txtRecordsMatching.Text = CStr(cnt)
+
+            Try
+                Cnn.Open()
+                r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+                Dim cnt As Integer = 0
+                While r.Read
+                    Dim g As New ListViewGroup
+                    If WCaller.cboGroupBy.Text = "Zip Code" Then
+                        g.Name = r.Item(0)
+                        g.Header = r.Item(0)
+                        WCaller.lvCallList.Groups.Add(g)
+                    ElseIf WCaller.cboGroupBy.Text = "City, State" Then
+                        g.Name = r.Item(0)
+                        g.Header = r.Item(0) & ", " & r.Item(1)
+                        WCaller.lvCallList.Groups.Add(g)
+                    ElseIf WCaller.cboGroupBy.Text = "Primary Product" Then
+                        g.Name = r.Item(0)
+                        g.Header = r.Item(0)
+                        WCaller.lvCallList.Groups.Add(g)
+                    ElseIf WCaller.cboGroupBy.Text = "Primary Lead Source" Then
+                        g.Name = r.Item(0)
+                        g.Header = r.Item(0)
+                        WCaller.lvCallList.Groups.Add(g)
+                    ElseIf WCaller.cboGroupBy.Text = "Marketing Result" Then
+                        g.Name = r.Item(0)
+                        g.Header = r.Item(0)
+                        WCaller.lvCallList.Groups.Add(g)
+                    End If
+                End While
+                r.Close()
+                Cnn.Close()
+                WCaller.txtRecordsMatching.Text = CStr(cnt)
             Catch ex As Exception
                 Main.Cursor = Cursors.Default
                 MsgBox(ex.ToString)
-        End Try
-        Me.Populate()
+            End Try
+            Me.Populate()
         Catch ex As Exception
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
@@ -739,11 +739,11 @@ Public Class WarmCalling
     Dim LastID As String
     Public Sub Populate()
         Try
-            If WCaller.lvWarmCalling.SelectedItems.Count = 1 Then
-                LastID = WCaller.lvWarmCalling.SelectedItems(0).Text
+            If WCaller.lvCallList.SelectedItems.Count = 1 Then
+                LastID = WCaller.lvCallList.SelectedItems(0).Text
             End If
 
-            WCaller.lvWarmCalling.Items.Clear()
+            WCaller.lvCallList.Items.Clear()
 
             If PLS = "" Then
                 PLS = "%"
@@ -1448,18 +1448,18 @@ Public Class WarmCalling
                     lv.SubItems.Add(r.Item(14))
                     If WCaller.cboGroupBy.Text <> "" Then
                         If WCaller.cboGroupBy.Text = "Zip Code" Then
-                            lv.Group = WCaller.lvWarmCalling.Groups(r.Item(10))
+                            lv.Group = WCaller.lvCallList.Groups(r.Item(10))
                         ElseIf WCaller.cboGroupBy.Text = "City, State" Then
-                            lv.Group = WCaller.lvWarmCalling.Groups(r.Item(8))
+                            lv.Group = WCaller.lvCallList.Groups(r.Item(8))
                         ElseIf WCaller.cboGroupBy.Text = "Marketing Result" Then
-                            lv.Group = WCaller.lvWarmCalling.Groups(r.Item(14))
+                            lv.Group = WCaller.lvCallList.Groups(r.Item(14))
                         ElseIf WCaller.cboGroupBy.Text = "Primary Lead Source" Then
-                            lv.Group = WCaller.lvWarmCalling.Groups(r.Item(18))
+                            lv.Group = WCaller.lvCallList.Groups(r.Item(18))
                         ElseIf WCaller.cboGroupBy.Text = "Primary Product" Then
-                            lv.Group = WCaller.lvWarmCalling.Groups(r.Item(11))
+                            lv.Group = WCaller.lvCallList.Groups(r.Item(11))
                         End If
                     End If
-                    WCaller.lvWarmCalling.Items.Add(lv)
+                    WCaller.lvCallList.Items.Add(lv)
                     If r.Item(0) = LastID Then
                         lv.Selected = True
                     End If
@@ -1472,11 +1472,11 @@ Public Class WarmCalling
                 WCaller.txtRecordsMatching.Text = CStr(cnt)
                 WCaller.LastD1 = WCaller.txtDate1.Text
                 WCaller.LastD2 = WCaller.txtDate2.Text
-                If WCaller.lvWarmCalling.SelectedItems.Count = 0 And WCaller.lvWarmCalling.Items.Count > 0 Then
-                    WCaller.lvWarmCalling.TopItem.Selected = True
-                    LastID = WCaller.lvWarmCalling.SelectedItems(0).Text
+                If WCaller.lvCallList.SelectedItems.Count = 0 And WCaller.lvCallList.Items.Count > 0 Then
+                    WCaller.lvCallList.TopItem.Selected = True
+                    LastID = WCaller.lvCallList.SelectedItems(0).Text
                 End If
-                If WCaller.lvWarmCalling.Items.Count = 0 Then
+                If WCaller.lvCallList.Items.Count = 0 Then
                     Me.PullCustomerINFO("")
                 End If
                 WCaller.lblCntReturned.Text = rectCNTW.ToString
@@ -1492,7 +1492,7 @@ Public Class WarmCalling
 
     End Sub
 
-     
+
     Public Sub ManagerCriteria()
         Try
             Dim param1 As SqlParameter = New SqlParameter("@User", STATIC_VARIABLES.CurrentUser)
@@ -2116,11 +2116,11 @@ Public Class WarmCalling
             End Sub
 
 
-            
+
         End Class
     End Class
     Public Class LoadProcedure
-        
+
         Public Sub New()
             Try
                 ' WCaller.MdiParent = Main
@@ -2181,8 +2181,8 @@ Public Class WarmCalling
                 WCaller.SplitContainer1.IsSplitterFixed = True
 
                 '           Select First Listview Item Both Tabs
-                If WCaller.lvWarmCalling.Items.Count > 0 Then
-                    WCaller.lvWarmCalling.TopItem.Selected = True
+                If WCaller.lvCallList.Items.Count > 0 Then
+                    WCaller.lvCallList.TopItem.Selected = True
                 End If
                 'If WCaller.lvMyAppts.Items.Count > 0 Then
                 '    WCaller.lvMyAppts.TopItem.Selected = True
@@ -2201,7 +2201,7 @@ Public Class WarmCalling
                 WCaller.Controls.Add(WCaller.tsAutoDial)
                 WCaller.tsAutoDial.Location = New System.Drawing.Point(335, 25)
 
-                If WCaller.lvWarmCalling.SelectedItems.Count > 0 Then
+                If WCaller.lvCallList.SelectedItems.Count > 0 Then
                     WCaller.btnAutoDialer.DropDownItems.Add(WCaller.separator)
                     WCaller.btnAutoDialer.DropDownItems.Add(WCaller.btnMain)
                     WCaller.btnMain.Text = "Call Main- " & WCaller.txtHousePhone.Text
@@ -2276,9 +2276,9 @@ Public Class WarmCalling
 
         End Sub
     End Class
-   
-     
-     
+
+
+
 End Class
 
 

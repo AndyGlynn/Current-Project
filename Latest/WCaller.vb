@@ -53,9 +53,9 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub TabControl2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl2.SelectedIndexChanged
+    Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
         Try
-            If Me.TabControl2.SelectedIndex = (1) Then
+            If Me.TabControl1.SelectedIndex = (1) Then
                 Me.Tab = "MA"
                 Me.btnExpandCollapse.Enabled = False
                 If Me.lvMyAppts.Items.Count > 0 And Me.lvMyAppts.SelectedItems.Count = 0 Then
@@ -76,17 +76,28 @@ Public Class WCaller
 
                 Me.pnlSearch.Visible = False
                 Me.btnExpandCollapse.BringToFront()
+                If Me.lvMyAppts.SelectedItems.Count > 0 Then
+                    STATIC_VARIABLES.CurrentID = Me.lvMyAppts.SelectedItems(0).Tag
+                Else
+                    STATIC_VARIABLES.CurrentID = ""
+                End If
+
             Else
                 If Me.IfExists = True Then
                     Me.TT.Dispose()
                 End If
-                If Me.lvWarmCalling.Items.Count > 0 And Me.lvWarmCalling.SelectedItems.Count = 0 Then
-                    Me.lvWarmCalling.TopItem.Selected = True
+                If Me.lvCallList.Items.Count > 0 And Me.lvCallList.SelectedItems.Count = 0 Then
+                    Me.lvCallList.TopItem.Selected = True
                 End If
                 Me.Tab = "WC"
                 Me.ToolBarConfig(1)
-                Me.lvWarmCalling_SelectedIndexChanged(Nothing, Nothing)
+                Me.lvCallList_SelectedIndexChanged(Nothing, Nothing)
                 Me.btnExpandCollapse.Enabled = True
+                If Me.lvCallList.SelectedItems.Count > 0 Then
+                    STATIC_VARIABLES.CurrentID = Me.lvCallList.SelectedItems(0).Text
+                Else
+                    STATIC_VARIABLES.CurrentID = ""
+                End If
             End If
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
@@ -96,7 +107,7 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub lvMyAppts_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvMyAppts.Click
+    Private Sub lvMyAppts_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.IfExists = True Then
             Me.TT.Dispose()
         End If
@@ -105,7 +116,7 @@ Public Class WCaller
         'MsgBox(Me.SelItem.Tag)
     End Sub
 
-    Private Sub lvMyAppts_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvMyAppts.DoubleClick
+    Private Sub lvMyAppts_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
             Me.TT = New ToolTip
             Me.IfExists = True
@@ -136,13 +147,13 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub lvMyAppts_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvMyAppts.MouseMove
+    Private Sub lvMyAppts_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         Me.xcordinate = e.X
         Me.ycordinate = e.Y
 
     End Sub
 
-    Private Sub lvMyAppts_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvMyAppts.SelectedIndexChanged
+    Private Sub lvMyAppts_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.lvMyAppts.SelectedItems.Count > 0 Then
             STATIC_VARIABLES.CurrentID = Me.lvMyAppts.SelectedItems(0).Tag
         End If
@@ -287,53 +298,11 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub lvWarmCalling_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvWarmCalling.SelectedIndexChanged
-        If Me.lvWarmCalling.SelectedItems.Count > 0 Then
-            STATIC_VARIABLES.CurrentID = Me.lvWarmCalling.SelectedItems(0).Text
-        End If
-        Try
-            If Me.Tab = "WC" Then
-                Dim c As New WarmCalling
-                Me.ToolBarConfig(1)
-                If Me.lvWarmCalling.SelectedItems.Count > 0 Then
-                    c.PullCustomerINFO(Me.lvWarmCalling.SelectedItems(0).Text)
-                    Dim g As New WarmCalling
-                    Dim res As Boolean = g.IsAppointmentSet(Me.lvWarmCalling.SelectedItems(0).Text)
-                    If res = True Then
-                        Me.btnSetAppt.Text = "Move Appointment"
-                    ElseIf res = False Then
-                        Me.btnSetAppt.Text = "Set Appointment"
-                    End If
-                    g = Nothing
-                    Me.btnAutoDialer.DropDownItems.Add(Me.separator)
-                    Me.btnAutoDialer.DropDownItems.Add(Me.btnMain)
-                    Me.btnMain.Text = "Call Main- " & Me.txtHousePhone.Text
-                    If Me.txtaltphone1.Text <> "" Then
-                        Me.btnAutoDialer.DropDownItems.Add(Me.btnAlt1)
-                        Me.btnAlt1.Text = "Call Alt 1- " & Me.txtaltphone1.Text
-                    Else
-                        Me.btnAutoDialer.DropDownItems.Remove(Me.btnAlt1)
-
-                    End If
-                    If Me.txtaltphone2.Text <> "" Then
-                        Me.btnAutoDialer.DropDownItems.Add(Me.btnAlt2)
-                        Me.btnAlt2.Text = "Call Alt 2- " & Me.txtaltphone2.Text
-                    Else
-                        Me.btnAutoDialer.DropDownItems.Remove(Me.btnAlt2)
-                    End If
-                Else
-                    c.PullCustomerINFO("")
-                End If
-            End If
-        Catch ex As Exception
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "lvWarmCalling_selectedINdexChanged", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
+    Private Sub lvCallList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvCallList.SelectedIndexChanged
 
     End Sub
 
-    Private Sub btnExpandWarmCalling_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExpandWarmCalling.Click
+    Private Sub btnExpandWarmCalling_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Select Case Me.btnExpandWarmCalling.Text
             Case Chr(187)
                 Me.SplitContainer1.SplitterDistance = 2500
@@ -348,21 +317,21 @@ Public Class WCaller
         End Select
     End Sub
 
-    Private Sub btnExpandMyAppts_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExpandMyAppts.Click
+    Private Sub btnExpandMyAppts_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.btnExpandWarmCalling_Click(Nothing, Nothing)
     End Sub
 
-    Private Sub cboPLSWarmCalling_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboPLSWarmCalling.GotFocus
+    Private Sub cboPLSWarmCalling_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.lblPLSWarmCalling.Visible = False
     End Sub
 
-    Private Sub cboPLSWarmCalling_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboPLSWarmCalling.LostFocus
+    Private Sub cboPLSWarmCalling_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.cboPLSWarmCalling.Text = "" Then
             Me.lblPLSWarmCalling.Visible = True
         End If
     End Sub
 
-    Private Sub cboSLSWarmCalling_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboSLSWarmCalling.GotFocus
+    Private Sub cboSLSWarmCalling_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.lblSLSWarmCalling.Visible = False
         If Me.cboPLSWarmCalling.Text = "" Then
             Me.cboSLSWarmCalling.Items.Clear()
@@ -370,21 +339,21 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub cboSLSWarmCalling_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboSLSWarmCalling.LostFocus
+    Private Sub cboSLSWarmCalling_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.cboSLSWarmCalling.Text = "" Then
             Me.lblSLSWarmCalling.Visible = True
         End If
     End Sub
 
-    Private Sub lblPLSWarmCalling_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblPLSWarmCalling.Click
+    Private Sub lblPLSWarmCalling_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.cboPLSWarmCalling.Focus()
     End Sub
 
-    Private Sub lblSLSWarmCalling_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblSLSWarmCalling.Click
+    Private Sub lblSLSWarmCalling_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.cboSLSWarmCalling.Focus()
     End Sub
 
-    Private Sub btnExpandCollapse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExpandCollapse.Click
+    Private Sub btnExpandCollapse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim w = Me.Size.Width
         If Me.btnExpandCollapse.Text = Chr(171) Then
             Me.Controls.Remove(Me.btnExpandCollapse)
@@ -413,17 +382,14 @@ Public Class WCaller
         End If
     End Sub
 
-    Private Sub rdoCity_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdoCity.CheckedChanged
+    Private Sub rdoCity_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
-
             Me.lblEnter.Text = "Enter Starting City:"
             Me.lblShow.Text = "Show Cities within                      miles of" & vbCrLf & "starting City"
             Me.btnZipCity.Text = "Show Cities"
-            Me.btnZipCity.Enabled = True
             Dim c As New AutoCompleteSourceCities
             Me.txtZipCode.Text = ""
         Catch ex As Exception
-            Me.btnZipCity.Enabled = True
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "rdoCity_CheckedChanged", "0", ex.Message.ToString)
             y = Nothing
@@ -431,8 +397,7 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub rdoZip_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles rdoZip.CheckedChanged
-        Me.btnZipCity.Enabled = True
+    Private Sub rdoZip_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.lblEnter.Text = "Enter Starting Zip Code:"
         Me.lblShow.Text = "Show Zip Codes within                miles of" & vbCrLf & "starting Zip Code"
         Me.btnZipCity.Text = "Show Zip Codes"
@@ -466,63 +431,27 @@ Public Class WCaller
     End Sub
 
 
-    Private Sub LaunchProgressiveDialerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LaunchProgressiveDialerToolStripMenuItem.Click
+    Private Sub LaunchProgressiveDialerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.tsAutoDial.Visible = True
     End Sub
 
-    Private Sub tsbtnCloseDialer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnCloseDialer.Click
+    Private Sub tsbtnCloseDialer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.tsAutoDial.Visible = False
     End Sub
 
-    Private Sub btnLogCall_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogCall.ButtonClick
+    Private Sub btnLogCall_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
-        LogPhoneCall.frm = Me
-        If Me.Tab = "WC" Then
-            If Me.lvWarmCalling.SelectedItems.Count = 0 Then
-                MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-                Exit Sub
-            End If
-            LogPhoneCall.ID = Me.lvWarmCalling.SelectedItems(0).Text
-        Else
-            If Me.lvMyAppts.SelectedItems.Count = 0 Then
-                MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-                Exit Sub
-            End If
-            LogPhoneCall.ID = Me.lvMyAppts.SelectedItems(0).Tag
-        End If
-        LogPhoneCall.Contact1 = Me.txtContact1.Text
-        LogPhoneCall.Contact2 = Me.txtContact2.Text
-        LogPhoneCall.ShowInTaskbar = False
-        LogPhoneCall.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
-    Private Sub LogAsCalledCancelledToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LogAsCalledCancelledToolStripMenuItem.Click
+    Private Sub btnCandC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCandC.Click
 
-        Dim s = Split(Me.txtContact1.Text, " ")
-        Dim c1 = s(0)
-        Dim s2 = Split(Me.txtContact2.Text, " ")
-        Dim c2 = s2(0)
-        CandCNotes.Contact1 = c1
-        CandCNotes.Contact2 = c2
-        CandCNotes.OrigApptDate = Me.txtApptDate.Text
-        CandCNotes.OrigApptTime = Me.txtApptTime.Text
-
-        CandCNotes.frm = Me
-        If Me.Tab = "WC" And Me.lvWarmCalling.SelectedItems.Count <> 0 Then
-            CandCNotes.ID = Me.lvWarmCalling.SelectedItems(0).Text
-        ElseIf Me.Tab = "MA" And Me.lvMyAppts.SelectedItems.Count <> 0 Then
-            CandCNotes.ID = Me.lvMyAppts.SelectedItems(0).Tag
-        Else
-            MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
-            Exit Sub
-        End If
-        CandCNotes.ShowInTaskbar = False
-        CandCNotes.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
         'Stamp in Log without notes
 
     End Sub
 
-    Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
+    Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Me.btnClear.Enabled = False
             Me.txtTime1.Text = ""
@@ -549,7 +478,7 @@ Public Class WCaller
 
     End Sub
 
-    Public Sub lblCheckAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblCheckAll.Click
+    Public Sub lblCheckAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
 
         For i As Integer = 0 To Me.lbZipCity.Items.Count - 1
@@ -559,7 +488,7 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub lblUncheckAll_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblUncheckAll.Click
+    Private Sub lblUncheckAll_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         For i As Integer = 0 To Me.lbZipCity.Items.Count - 1
             Me.lbZipCity.SetItemChecked(i, False)
         Next
@@ -604,56 +533,56 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub cboGroupBy_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboGroupBy.LostFocus
+    Private Sub cboGroupBy_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.cboGroupBy.Text = "" Then
             Me.lblGroupBy.Visible = True
         End If
     End Sub
 
-    Private Sub cboGroupBy_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboGroupBy.GotFocus
+    Private Sub cboGroupBy_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.lblGroupBy.Visible = False
     End Sub
 
-    Private Sub lblGroupBy_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblGroupBy.Click
+    Private Sub lblGroupBy_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.cboGroupBy.Focus()
     End Sub
 
-    Private Sub txtTime1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtTime1.Click
+    Private Sub txtTime1_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.txtTime1.Visible = False
         Me.dtpTime1.Focus()
         Me.txtTime1.Text = Me.dtpTime1.Value.ToShortTimeString
     End Sub
 
-    Private Sub txtTime2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtTime2.Click
+    Private Sub txtTime2_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.txtTime2.Visible = False
         Me.dptTime2.Focus()
         Me.txtTime2.Text = Me.dptTime2.Value.ToShortTimeString
     End Sub
 
-    Private Sub dtpTime1_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpTime1.GotFocus
+    Private Sub dtpTime1_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.txtTime1.Text = Me.dtpTime1.Value.ToShortTimeString
     End Sub
 
-    Private Sub dtpTime1_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpTime1.ValueChanged
+    Private Sub dtpTime1_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.LoadComplete = False Then
             Exit Sub
         End If
         Me.txtTime1.Text = Me.dtpTime1.Value.ToShortTimeString
     End Sub
 
-    Private Sub dptTime2_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dptTime2.GotFocus
+    Private Sub dptTime2_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
 
         Me.txtTime2.Text = Me.dptTime2.Value.ToShortTimeString
     End Sub
 
-    Private Sub dptTime2_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dptTime2.ValueChanged
+    Private Sub dptTime2_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.LoadComplete = False Then
             Exit Sub
         End If
         Me.txtTime2.Text = Me.dptTime2.Value.ToShortTimeString
     End Sub
 
-    Private Sub txtDate2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDate2.Click
+    Private Sub txtDate2_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.dtp2.Focus()
         Me.txtDate2.Visible = False
 
@@ -661,21 +590,21 @@ Public Class WCaller
         Me.cboDateRange.Text = "Custom"
     End Sub
 
-    Private Sub txtDate1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDate1.Click
+    Private Sub txtDate1_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.txtDate1.Visible = False
         Me.dtp1.Focus()
         Me.txtDate1.Text = Me.dtp1.Value.ToShortDateString
         Me.cboDateRange.Text = "Custom"
     End Sub
 
-    Private Sub dtp1_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1.GotFocus
+    Private Sub dtp1_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.txtDate1.Visible = False
         Me.txtDate1.Text = Me.dtp1.Value.ToShortDateString
         'Me.txtDate2.Visible = False
         Me.cboDateRange.Text = "Custom"
     End Sub
 
-    Private Sub dtp1_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1.LostFocus
+    Private Sub dtp1_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
             If Me.txtDate1.Text = Me.LastD1 And Me.txtDate2.Text = Me.LastD2 Then
                 Exit Sub
@@ -690,7 +619,7 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub dtp1_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp1.ValueChanged
+    Private Sub dtp1_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.LoadComplete = False Then
             Exit Sub
         End If
@@ -698,14 +627,14 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub dtp2_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2.GotFocus
+    Private Sub dtp2_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         'Me.txtDate1.Visible = False
         Me.txtDate2.Text = Me.dtp2.Value.ToShortDateString
         Me.txtDate2.Visible = False
         Me.cboDateRange.Text = "Custom"
     End Sub
 
-    Private Sub dtp2_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2.LostFocus
+    Private Sub dtp2_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
             Dim c As New WarmCalling
             'If Me.txtDate1.Text = "" Then
@@ -727,7 +656,7 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub dtp2_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtp2.ValueChanged
+    Private Sub dtp2_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.LoadComplete = False Then
             Exit Sub
         End If
@@ -735,7 +664,7 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub cboDateRange_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDateRange.SelectedIndexChanged
+    Private Sub cboDateRange_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
             If Me.LoadComplete = False Then
                 Exit Sub
@@ -771,7 +700,7 @@ Public Class WCaller
 
     End Sub
 
-    Public Sub btnZipCity_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnZipCity.Click
+    Public Sub btnZipCity_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
             Me.Cursor = Cursors.WaitCursor
             Me.pbRadiusSearch.Value = 0
@@ -799,7 +728,6 @@ Public Class WCaller
             Me.btnZipCity.Enabled = True
             Me.Cursor = Cursors.Default
         Catch ex As Exception
-            Me.btnZipCity.Enabled = True
             Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "btnZipCity_click", "0", ex.Message.ToString)
@@ -808,14 +736,14 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub cboGroupBy_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboGroupBy.SelectedValueChanged
+    Private Sub cboGroupBy_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
             If Me.LoadComplete = False Then
                 Exit Sub
             End If
             Dim c As New WarmCalling
             If Me.cboGroupBy.Text = "" Then
-                Me.lvWarmCalling.Groups.Clear()
+                Me.lvCallList.Groups.Clear()
                 c.Populate()
 
                 Exit Sub
@@ -829,7 +757,7 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub cboPLSWarmCalling_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboPLSWarmCalling.SelectedIndexChanged
+    Private Sub cboPLSWarmCalling_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Dim c As New WarmCalling
 
@@ -850,7 +778,7 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub cboSLSWarmCalling_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboSLSWarmCalling.SelectedIndexChanged
+    Private Sub cboSLSWarmCalling_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
             If Me.LoadComplete = False Then
                 Exit Sub
@@ -865,10 +793,9 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Me.Cursor = Cursors.WaitCursor
-
             If Me.lbZipCity.Items.Count > 0 And Me.lbZipCity.CheckedItems.Count = 0 Then
                 MsgBox("You must check at least 1 Zip/City to Search", MsgBoxStyle.Exclamation, "No Zip/City Selected")
                 Me.lbZipCity.SetSelected(0, True)
@@ -883,7 +810,6 @@ Public Class WCaller
             c.Populate()
             Me.Cursor = Cursors.Default
         Catch ex As Exception
-
             Me.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "btnSearch_Click", "0", ex.Message.ToString)
@@ -892,9 +818,9 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub btnKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnKill.Click
+    Private Sub btnKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If Me.Tab = "WC" Then
-            If Me.lvWarmCalling.SelectedItems.Count = 0 Then
+            If Me.lvCallList.SelectedItems.Count = 0 Then
                 MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
                 Exit Sub
             End If
@@ -906,37 +832,28 @@ Public Class WCaller
         End If
 
 
-        Kill.Contact1 = Me.txtContact1.Text
-        Kill.Contact2 = Me.txtContact2.Text
-        Kill.frm = Me
-        If Me.Tab = "WC" Then
-            Kill.ID = Me.lvWarmCalling.SelectedItems(0).Text
-        Else
-            Kill.ID = Me.lvMyAppts.SelectedItems(0).Tag
-        End If
-        Kill.ShowInTaskbar = False
-        Kill.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 
-    Private Sub btnDoNotCall_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDoNotCall.Click
+    Private Sub btnDoNotCall_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             If Me.Tab = "WC" Then
-                If Me.lvWarmCalling.SelectedItems.Count = 0 Then
+                If Me.lvCallList.SelectedItems.Count = 0 Then
                     MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
                     Exit Sub
                 Else
                     Dim c As New DoNotCallOrMail
-                    c.DoNot(Me.lvWarmCalling.SelectedItems(0).Text, sender.text.ToString)
+                    c.DoNot(Me.lvCallList.SelectedItems(0).Text, sender.text.ToString)
                 End If
-                Dim i As Integer = Me.lvWarmCalling.Items.IndexOfKey(Me.lvWarmCalling.SelectedItems(0).Text)
+                Dim i As Integer = Me.lvCallList.Items.IndexOfKey(Me.lvCallList.SelectedItems(0).Text)
                 Dim x As New WarmCalling.MyApptsTab.Populate(Me.cboFilter.Text)
-                Me.lvWarmCalling.SelectedItems(0).Remove()
+                Me.lvCallList.SelectedItems(0).Remove()
                 Me.txtRecordsMatching.Text = CStr(CInt(Me.txtRecordsMatching.Text) - 1)
-                If Me.lvWarmCalling.Items.Count <> 0 Then
-                    If i > Me.lvWarmCalling.Items.Count - 1 Then
-                        Me.lvWarmCalling.Items(i - 1).Selected = True
+                If Me.lvCallList.Items.Count <> 0 Then
+                    If i > Me.lvCallList.Items.Count - 1 Then
+                        Me.lvCallList.Items(i - 1).Selected = True
                     Else
-                        Me.lvWarmCalling.Items(i).Selected = True
+                        Me.lvCallList.Items(i).Selected = True
                     End If
                 Else
                     Dim wc As New WarmCalling
@@ -962,16 +879,16 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub btnDoNotMail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDoNotMail.Click
+    Private Sub btnDoNotMail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             If Me.Tab = "WC" Then
 
-                If Me.lvWarmCalling.SelectedItems.Count = 0 Then
+                If Me.lvCallList.SelectedItems.Count = 0 Then
                     MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
                     Exit Sub
                 Else
                     Dim y As New DoNotCallOrMail
-                    y.DoNot(Me.lvWarmCalling.SelectedItems(0).Text, sender.text.ToString)
+                    y.DoNot(Me.lvCallList.SelectedItems(0).Text, sender.text.ToString)
                 End If
                 Dim c As New CustomerHistory
                 c.SetUp(Me.TScboCustomerHistory)
@@ -994,25 +911,25 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub btnDoNotCallOrMail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDoNotCallOrMail.Click
+    Private Sub btnDoNotCallOrMail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             If Me.Tab = "WC" Then
-                If Me.lvWarmCalling.SelectedItems.Count = 0 Then
+                If Me.lvCallList.SelectedItems.Count = 0 Then
                     MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
                     Exit Sub
                 Else
                     Dim c As New DoNotCallOrMail
-                    c.DoNot(Me.lvWarmCalling.SelectedItems(0).Text, sender.text.ToString)
+                    c.DoNot(Me.lvCallList.SelectedItems(0).Text, sender.text.ToString)
                 End If
                 Dim x As New WarmCalling.MyApptsTab.Populate(Me.cboFilter.Text)
-                Dim i As Integer = Me.lvWarmCalling.Items.IndexOfKey(Me.lvWarmCalling.SelectedItems(0).Text)
-                Me.lvWarmCalling.SelectedItems(0).Remove()
+                Dim i As Integer = Me.lvCallList.Items.IndexOfKey(Me.lvCallList.SelectedItems(0).Text)
+                Me.lvCallList.SelectedItems(0).Remove()
                 Me.txtRecordsMatching.Text = CStr(CInt(Me.txtRecordsMatching.Text) - 1)
-                If Me.lvWarmCalling.Items.Count <> 0 Then
-                    If i > Me.lvWarmCalling.Items.Count - 1 Then
-                        Me.lvWarmCalling.Items(i - 1).Selected = True
+                If Me.lvCallList.Items.Count <> 0 Then
+                    If i > Me.lvCallList.Items.Count - 1 Then
+                        Me.lvCallList.Items(i - 1).Selected = True
                     Else
-                        Me.lvWarmCalling.Items(i).Selected = True
+                        Me.lvCallList.Items(i).Selected = True
                     End If
                 Else
                     Dim wc As New WarmCalling
@@ -1098,7 +1015,7 @@ Public Class WCaller
     End Class
 
 
-    Private Sub txtZipCode_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtZipCode.LostFocus
+    Private Sub txtZipCode_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
             If IsNumeric(Me.txtZipCode.Text) = True Then
                 Exit Sub
@@ -1113,18 +1030,18 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub MemorizeThisApptToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MemorizeThisApptToolStripMenuItem.Click
-        If Me.lvWarmCalling.SelectedItems.Count = 0 Then
+    Private Sub MemorizeThisApptToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        If Me.lvCallList.SelectedItems.Count = 0 Then
             MsgBox("You must Select a Record!", MsgBoxStyle.Exclamation, "No Record Selected")
             Exit Sub
         End If
-    
+
 
         MemorizeNotes.ShowDialog()
 
     End Sub
 
-    Private Sub btnEditCustomer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditCustomer.Click
+    Private Sub btnEditCustomer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
 
@@ -1139,17 +1056,17 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub cboDisplayColumn_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDisplayColumn.GotFocus
+    Private Sub cboDisplayColumn_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.lblDisplayColumn.Visible = False
     End Sub
 
-    Private Sub cboDisplayColumn_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDisplayColumn.LostFocus
+    Private Sub cboDisplayColumn_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.cboDisplayColumn.Text = "" Then
             Me.lblDisplayColumn.Visible = True
         End If
     End Sub
 
-    Private Sub cboDisplayColumn_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDisplayColumn.SelectedIndexChanged
+    Private Sub cboDisplayColumn_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Dim c As New WarmCalling.MyApptsTab.DisplayColumn()
         Catch ex As Exception
@@ -1160,17 +1077,17 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub cboFilter_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboFilter.GotFocus
+    Private Sub cboFilter_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.lblFilter.Visible = False
     End Sub
 
-    Private Sub cboFilter_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboFilter.LostFocus
+    Private Sub cboFilter_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.cboFilter.Text = "" Then
             Me.lblFilter.Visible = True
         End If
     End Sub
 
-    Private Sub cboFilter_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboFilter.SelectedIndexChanged
+    Private Sub cboFilter_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Dim c As New WarmCalling.MyApptsTab.Populate(Me.cboFilter.Text)
         Catch ex As Exception
@@ -1181,29 +1098,29 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub cboGroupSetAppt_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboGroupSetAppt.GotFocus
+    Private Sub cboGroupSetAppt_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.lblGroupSetAppts.Visible = False
     End Sub
 
-    Private Sub cboGroupSetAppt_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboGroupSetAppt.LostFocus
+    Private Sub cboGroupSetAppt_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         If Me.cboGroupSetAppt.Text = "" Then
             Me.lblGroupSetAppts.Visible = True
         End If
     End Sub
 
-    Private Sub lblGroupSetAppts_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblGroupSetAppts.Click
+    Private Sub lblGroupSetAppts_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.cboGroupSetAppt.Focus()
     End Sub
 
-    Private Sub lblDisplayColumn_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblDisplayColumn.Click
+    Private Sub lblDisplayColumn_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.cboDisplayColumn.Focus()
     End Sub
 
-    Private Sub lblFilter_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblFilter.Click
+    Private Sub lblFilter_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.cboFilter.Focus()
     End Sub
 
-    Private Sub cboGroupSetAppt_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboGroupSetAppt.SelectedIndexChanged
+    Private Sub cboGroupSetAppt_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Dim c As New WarmCalling.MyApptsTab.Populate(Me.cboFilter.Text)
         Catch ex As Exception
@@ -1242,35 +1159,9 @@ Public Class WCaller
 
     End Sub
 
-    Private Sub btnSetAppt_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetAppt.ButtonClick
+    Private Sub btnSetAppt_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
-            Dim id As String
-            Dim frm As Form = Me
-            Select Case Me.btnSetAppt.Text
-                Case Is = "Set Apointment"
-                    If Tab = "WC" Then
-                        If Me.lvWarmCalling.SelectedItems.Count = 0 Then
-                            MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-                            Exit Sub
-                        End If
-                        id = Me.lvWarmCalling.SelectedItems(0).Text
-                    Else
-                        If Me.lvMyAppts.SelectedItems.Count = 0 Then
-                            MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-                            Exit Sub
-                        End If
-                        id = Me.lvMyAppts.SelectedItems(0).Tag
-                    End If
-                    Dim s = Split(Me.txtContact1.Text, " ")
-                    Dim s2 = Split(Me.txtContact2.Text, " ")
-                    SetAppt_V2.frm = frm
-                    SetAppt_V2.ShowDialog()
-                    Exit Select
-                Case Is = "Move Appointment"
-                    RescheduleAppt.frm = Me
-                    RescheduleAppt.ShowDialog()
-                    Exit Select
-            End Select
+            Dim x As New SubForm_Launcher(sender)
         Catch ex As Exception
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "WCaller", "FormCode", "Event", "BtnSetAppt_ButtonClick", "0", ex.Message.ToString)
@@ -1279,7 +1170,7 @@ Public Class WCaller
 
     End Sub
 
-  Private Sub WCaller_ResizeEnd(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ResizeEnd
+    Private Sub WCaller_ResizeEnd(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ResizeEnd
         Dim x As Integer = Me.pnlSearch.Size.Height
         If Me.btnExpandCollapse.Parent.Name = "pnlSearch" Then
             Me.btnExpandCollapse.Size = New Size(Me.btnExpandCollapse.Size.Width, x - 6)
@@ -1289,18 +1180,17 @@ Public Class WCaller
     End Sub
 
 
-  
 
-    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkEmail.LinkClicked
+
+    Private Sub lnkEmail_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         frmLinkSendEmail.Cust_Email = Me.lnkEmail.Text
         frmLinkSendEmail.RecID = STATIC_VARIABLES.CurrentID
         frmLinkSendEmail.Show()
         frmLinkSendEmail.BringToFront()
     End Sub
 
-    Private Sub btnEditSPI_Click(sender As Object, e As EventArgs) Handles btnEditSPI.Click
+    Private Sub btnEditSPI_Click(sender As Object, e As EventArgs)
 
-        frmEditSpecialInstructions.frm = Me
-        frmEditSpecialInstructions.ShowDialog()
+        Dim x As New SubForm_Launcher(sender)
     End Sub
 End Class

@@ -14,11 +14,12 @@ Public Class SetAppt_V2
     '' 
     Public Contact1 As String
     Public Contact2 As String
-    Public ID As String = STATIC_VARIABLES.CurrentID
+    Public ID As String
     Public OrigApptDate As String
     Public OrigApptTime As String
     Public frm As Form
     Public Confirmed As Boolean = False
+
 
     Private Sub cboautonotes_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboautonotes.SelectedValueChanged
         Try
@@ -169,11 +170,6 @@ Public Class SetAppt_V2
                     day = "Saturday"
                 End If
 
-
-
-
-
-
                 If Me.txtDate.Text = "" Then
 
                     Me.txtDate.Text = OrigApptDate
@@ -259,56 +255,10 @@ Public Class SetAppt_V2
                 R1.Read()
                 R1.Close()
                 cnn.close()
+                STATIC_VARIABLES.Update = True
                 Me.Close()
                 Me.Dispose()
             End If
-            Select Case frm.Name
-                Case "WCaller"
-                    If WCaller.Tab = "WC" Then
-                        Dim i As Integer = WCaller.lvWarmCalling.Items.IndexOfKey(WCaller.lvWarmCalling.SelectedItems(0).Text)
-                        WCaller.lvWarmCalling.SelectedItems(0).Remove()
-                        WCaller.txtRecordsMatching.Text = CStr(CInt(WCaller.txtRecordsMatching.Text) - 1)
-                        If WCaller.lvWarmCalling.Items.Count <> 0 Then
-                            If i > WCaller.lvWarmCalling.Items.Count - 1 Then
-                                WCaller.lvWarmCalling.Items(i - 1).Selected = True
-                            Else
-                                WCaller.lvWarmCalling.Items(i).Selected = True
-                            End If
-                        Else
-                            Dim wc As New WarmCalling
-                            wc.PullCustomerINFO("")
-                        End If
-                        Dim c As New WarmCalling.MyApptsTab.Populate(WCaller.cboFilter.Text)
-                    ElseIf WCaller.Tab = "MA" Then
-                        Dim c As New WarmCalling.MyApptsTab.Populate(WCaller.cboFilter.Text)
-                        Dim y As New WarmCalling
-                        y.Populate()
-                        WCaller.SuspendLayout()
-                    End If
-                Case "Confirming"
-
-                    Dim c As New ConfirmingData
-                    c.PullCustomerINFO(Confirming.Tab, ID)
-                Case "Installation"
-                Case "Sales"
-                    Sales.PullInfo(ID)
-                Case "ConfirmingSingleRecord"
-                    ConfirmingSingleRecord.Update()
-                Case "Administration"
-                    ''comeback
-                Case "Finance"
-                    'comeback
-                Case "Recovery"
-                    'comeback
-                Case "PreviousCustomer"
-                    'comeback
-                Case "ColdCalling"
-                    'comeback
-                Case "SecondSource"
-                    'comeback
-            End Select
-
-
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -397,58 +347,80 @@ Public Class SetAppt_V2
 
 
     Private Sub SetAppt_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        ID = STATIC_VARIABLES.CurrentID
         Dim lock As Boolean = Me.Chk_Locked_Sales_Results
         If lock = True Then
             MsgBox("This Record is locked pending a sales result!" & vbCr & "Cannot Set Appointment at this time!", MsgBoxStyle.Exclamation, "Pending Sales Result")
             Me.Dispose()
         End If
-
+        If Me.ID = "" Then
+            MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
+            Me.Dispose()
+        End If
         Try
-            If frm.Name = "Sales" Then
-                Me.chkConfirm.Visible = True
-                Me.Size = New System.Drawing.Size(413, 296)
-                Me.Contact1 = Sales.txtContact1.Text
-                Me.Contact2 = Sales.txtContact2.Text
-                Me.ID = STATIC_VARIABLES.CurrentID
-                Me.OrigApptDate = Sales.txtApptDate.Text
-                Me.OrigApptTime = Sales.txtApptTime.Text
-            ElseIf frm.Name = "ConfirmingSingleRecord" Then
-                Me.Contact1 = ConfirmingSingleRecord.txtContact1.Text
-                Me.Contact2 = ConfirmingSingleRecord.txtContact2.Text
-                Me.ID = STATIC_VARIABLES.CurrentID
-                Me.OrigApptDate = ConfirmingSingleRecord.txtApptDate.Text
-                Me.OrigApptTime = ConfirmingSingleRecord.txtApptTime.Text
-            ElseIf frm.Name = "Confirming" Then
-                Me.Contact1 = Confirming.txtContact1.Text
-                Me.Contact2 = Confirming.txtContact2.Text
-                Me.ID = STATIC_VARIABLES.CurrentID
-                Me.OrigApptDate = Confirming.txtApptDate.Text
-                Me.OrigApptTime = Confirming.txtApptTime.Text
-            ElseIf frm.Name = "EditCustomerInfo" Then
-                Me.Contact1 = EditCustomerInfo.txtContact1.Text
-                Me.Contact2 = EditCustomerInfo.txtContact2.Text
-                Me.ID = STATIC_VARIABLES.CurrentID
-                Me.OrigApptDate = EditCustomerInfo.txtApptDate.Text
-                Me.OrigApptTime = EditCustomerInfo.txtApptTime.Text
-            ElseIf frm.Name = "WCaller" Then
-                If WCaller.Tab = "WC" Then
-                    If WCaller.lvWarmCalling.SelectedItems.Count = 0 Then
-                        MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-                        Exit Sub
-                    End If
-                    ID = WCaller.lvWarmCalling.SelectedItems(0).Text
-                Else
-                    If WCaller.lvMyAppts.SelectedItems.Count = 0 Then
-                        MsgBox("You must select a record to Set Appointment!", MsgBoxStyle.Exclamation, "No Record Selected")
-                        Exit Sub
-                    End If
-                    ID = WCaller.lvMyAppts.SelectedItems(0).Tag
-                End If
-                Me.Contact1 = WCaller.txtContact1.Text
-                Me.Contact2 = WCaller.txtContact2.Text
-                Me.OrigApptDate = WCaller.txtApptDate.Text
-                Me.OrigApptTime = WCaller.txtApptTime.Text
-            End If
+            Select Case frm.Name
+                Case Is = "Sales"
+                    Me.chkConfirm.Visible = True
+                    Me.Size = New System.Drawing.Size(413, 296)
+                    Me.Contact1 = Sales.txtContact1.Text
+                    Me.Contact2 = Sales.txtContact2.Text
+                    Me.OrigApptDate = Sales.txtApptDate.Text
+                    Me.OrigApptTime = Sales.txtApptTime.Text
+                Case Is = "Confirming"
+                    Contact1 = Confirming.txtContact1.Text
+                    Contact2 = Confirming.txtContact2.Text
+                    OrigApptDate = Confirming.txtApptDate.Text
+                    OrigApptTime = Confirming.txtApptTime.Text
+                Case Is = "WCaller"
+                    Contact1 = WCaller.txtContact1.Text
+                    Contact2 = WCaller.txtContact2.Text
+                    OrigApptDate = WCaller.txtApptDate.Text
+                    OrigApptTime = WCaller.txtApptTime.Text
+                Case Is = "Recovery"
+                    'Contact1 = Recovery.txtContact1.Text
+                    'Contact2 = Recovery.txtContact2.Text
+                    'OrigApptDate = Recovery.txtApptDate.Text
+                    'OrigApptTime = Recovery.txtApptTime.Text
+                Case Is = "Administration"
+                    'Contact1 = Administration.txtContact1.Text
+                    'Contact2 = Administration.txtContact2.Text
+                    'OrigApptDate = Administration.txtApptDate.Text
+                    'OrigApptTime = Administration.txtApptTime.Text
+                Case Is = "Installation"
+                    'Contact1 = Installation.txtContact1.Text
+                    'Contact2 = Installation.txtContact2.Text
+                    'OrigApptDate = Installation.txtApptDate.Text
+                    'OrigApptTime = Installation.txtApptTime.Text
+                Case Is = "ConfirmingSingleRecord"
+                    Contact1 = ConfirmingSingleRecord.txtContact1.Text
+                    Contact2 = ConfirmingSingleRecord.txtContact2.Text
+                    OrigApptDate = ConfirmingSingleRecord.txtApptDate.Text
+                    OrigApptTime = ConfirmingSingleRecord.txtApptTime.Text
+                Case Is = "Finance"
+                    'Contact1 = Finance.txtContact1.Text
+                    'Contact2 = Finance.txtContact2.Text
+                    'OrigApptDate = Finance.txtApptDate.Text
+                    'OrigApptTime = Finance.txtApptTime.Text
+                Case Is = "MarketingManager"
+                    Contact1 = MarketingManager.txtContact1.Text
+                    Contact2 = MarketingManager.txtContact2.Text
+                    OrigApptDate = MarketingManager.txtApptDate.Text
+                    OrigApptTime = MarketingManager.txtApptTime.Text
+                Case Is = "PreviousCustomer"
+                    'Contact1 = PreviousCustomer.txtContact1.Text
+                    'Contact2 = PreviousCustomer.txtContact2.Text
+                    'OrigApptDate = PreviousCustomer.txtApptDate.Text
+                    'OrigApptTime = PreviousCustomer.txtApptTime.Text
+                Case Is = "EditCustomerInfo"
+                    Me.Contact1 = EditCustomerInfo.txtContact1.Text
+                    Me.Contact2 = EditCustomerInfo.txtContact2.Text
+                    Me.OrigApptDate = EditCustomerInfo.txtApptDate.Text
+                    Me.OrigApptTime = EditCustomerInfo.txtApptTime.Text
+            End Select
+
+
+
+
             Me.cboSpokeWith.Items.Clear()
             Dim s = Split(Contact1, " ")
             Dim s2 = Split(Contact2, " ")
@@ -546,10 +518,13 @@ Public Class SetAppt_V2
 
     End Function
 
-   
+
     Private Sub chkConfirm_CheckedChanged(sender As Object, e As EventArgs) Handles chkConfirm.CheckedChanged
         Me.Confirmed = Me.chkConfirm.CheckState
     End Sub
+
+
+
 End Class
 '#Region "Private Classes"
 

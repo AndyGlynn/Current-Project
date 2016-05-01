@@ -6,8 +6,9 @@ Imports System
 Public Class Kill
     Public Contact1 As String
     Public Contact2 As String
-    Public ID As String = STATIC_VARIABLES.CurrentID
+    Public ID As String
     Public frm As Form
+
 
     Private Sub Kill_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         Me.Dispose()
@@ -15,16 +16,62 @@ Public Class Kill
 
     Private Sub Kill_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
+            ID = STATIC_VARIABLES.CurrentID
+            If Me.ID = "" Then
+                MsgBox("You must select a record to Kill!", MsgBoxStyle.Exclamation, "No Record Selected")
+                Me.Dispose()
+            End If
+            Select Case frm.Name
+                Case Is = "Sales"
+                    Me.Contact1 = Sales.txtContact1.Text
+                    Me.Contact2 = Sales.txtContact2.Text
+                Case Is = "Confirming"
+                    Contact1 = Confirming.txtContact1.Text
+                    Contact2 = Confirming.txtContact2.Text
+                Case Is = "WCaller"
+                    Contact1 = WCaller.txtContact1.Text
+                    Contact2 = WCaller.txtContact2.Text
+                Case Is = "Recovery"
+                    'Contact1 = Recovery.txtContact1.Text
+                    'Contact2 = Recovery.txtContact2.Text
+                Case Is = "Administration"
+                    'Contact1 = Administration.txtContact1.Text
+                    'Contact2 = Administration.txtContact2.Text
+                Case Is = "Installation"
+                    'Contact1 = Installation.txtContact1.Text
+                    'Contact2 = Installation.txtContact2.Text
+                Case Is = "ConfirmingSingleRecord"
+                    Contact1 = ConfirmingSingleRecord.txtContact1.Text
+                    Contact2 = ConfirmingSingleRecord.txtContact2.Text
+                Case Is = "Finance"
+                    'Contact1 = Finance.txtContact1.Text
+                    'Contact2 = Finance.txtContact2.Text
+                Case Is = "MarketingManager"
+                    Contact1 = MarketingManager.txtContact1.Text
+                    Contact2 = MarketingManager.txtContact2.Text
+
+                Case Is = "PreviousCustomer"
+                    'Contact1 = PreviousCustomer.txtContact1.Text
+                    'Contact2 = PreviousCustomer.txtContact2.Text
+                Case Is = "EditCustomerInfo"
+                    Me.Contact1 = EditCustomerInfo.txtContact1.Text
+                    Me.Contact2 = EditCustomerInfo.txtContact2.Text
+            End Select
+
+
+
+
+
             Dim s = Split(Contact1, " ")
-            Dim c1 = s(0)
+            Me.Contact1 = s(0)
             Dim s2 = Split(Contact2, " ")
-            Dim c2 = s2(0)
-            Me.cboSpokeWith.Items.Add(c1)
+            Me.Contact2 = s2(0)
+            Me.cboSpokeWith.Items.Add(Me.Contact1)
             If Me.Contact2 <> " " Then
-                Me.cboSpokeWith.Items.Add(c2)
-                Me.cboSpokeWith.Items.Add(c1 & " & " & c2)
+                Me.cboSpokeWith.Items.Add(Contact2)
+                Me.cboSpokeWith.Items.Add(Contact1 & " & " & Contact2)
             Else
-                Me.cboSpokeWith.Text = c1
+                Me.cboSpokeWith.Text = Contact1
             End If
 
             Dim cnn = New SqlConnection(STATIC_VARIABLES.Cnn)
@@ -94,30 +141,13 @@ Public Class Kill
                 If frm.Name = "Confirming" Then
                     c.Populate(Confirming.Tab, Confirming.cboConfirmingPLS.Text, Confirming.cboConfirmingSLS.Text, Confirming.dpConfirming.Value.ToString, "Populate")
                 ElseIf frm.Name = "WCaller" Then
-                    If WCaller.Tab = "WC" Then
-                        Dim i As Integer = WCaller.lvWarmCalling.Items.IndexOfKey(ID)
-                        WCaller.lvWarmCalling.SelectedItems(0).Remove()
-                        WCaller.txtRecordsMatching.Text = CStr(CInt(WCaller.txtRecordsMatching.Text) - 1)
-                        If WCaller.lvWarmCalling.Items.Count <> 0 Then
-                            If i > WCaller.lvWarmCalling.Items.Count - 1 Then
-                                WCaller.lvWarmCalling.Items(i - 1).Selected = True
-                            Else
-                                WCaller.lvWarmCalling.Items(i).Selected = True
-                            End If
-                        Else
-                            Dim wc As New WarmCalling
-                            wc.PullCustomerINFO("")
-                        End If
-                    Else
-                        Dim x As New WarmCalling.MyApptsTab.Populate(WCaller.cboFilter.Text)
-                        Dim y As New WarmCalling
-                        y.Populate()
-                    End If
+
                 ElseIf frm.Name = "ConfirmingSingleRecord" Then
                     Dim q As New CustomerHistory
                     q.SetUp(ConfirmingSingleRecord.TScboCustomerHistory)
 
                 End If
+                STATIC_VARIABLES.Update = True
                 Me.Close()
                 Me.Dispose()
             End If
@@ -227,6 +257,6 @@ Public Class Kill
 
     End Sub
 
-  
- 
+
+
 End Class
