@@ -1,17 +1,18 @@
 ﻿Public Class SubForm_Launcher
-    Dim Calling_Form As Form
-    Dim SubFrm As Form
-    Dim Contact1 As String
-    Dim Contact2 As String
-    Dim OrigApptTime As String
-    Dim OrigApptDate As String
-    Dim Id As String = STATIC_VARIABLES.CurrentID
-    Dim btn As Object
+    Public Calling_Form As Form
+    Public SubFrm As Form
+    Public Contact1 As String
+    Public Contact2 As String
+    Public OrigApptTime As String
+    Public OrigApptDate As String
+    Public Id As String = STATIC_VARIABLES.CurrentID
+    Public btn As Object
 
 
     Public Sub New(ByVal sender As Object)
         Try
             STATIC_VARIABLES.Update = False
+            Me.Id = STATIC_VARIABLES.CurrentID
             Select Case sender.GetType.ToString
                 Case Is = "System.Windows.Forms.ToolStripMenuItem", "System.Windows.Forms.ToolStripSplitButton", "System.Windows.Forms.ToolStripButton" _
                     , "System.Windows.Forms.ToolStripDropDown", "System.Windows.Forms.ToolStripDropDownButton"
@@ -387,7 +388,7 @@
                         Case Is = 1
                             Sales.ForceRefresh = True
                             If Sales.cboSalesList.Text <> "Unfiltered Sales Dept. List" Or (Sales.cboGroupSales.Text = "Sales Result" Or Sales.cboGroupSales.Text = "Marketing Result" Or Sales.cboGroupSales.Text = "Sales Rep") Then
-                                Dim c As New SalesListManager()
+                                Dim c As New SalesListManager(Me)
                             Else
                                 If Sales.TabControl2.TabIndex = 0 And Sales.lvSales.SelectedItems.Count <> 0 Then
                                     Sales.lvSales_SelectedIndexChanged(Nothing, Nothing)

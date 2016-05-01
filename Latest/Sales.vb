@@ -774,7 +774,7 @@ Public Class Sales
                     Me.MemorizeThisApptToolStripMenuItem.Visible = True
 
                     '' will probably have to revisit this 
-
+                    PullInfo(STATIC_VARIABLES.CurrentID)
                     ''Need code to deselect any tasks in the task manager
                     Me.Cursor = Cursors.Default
                     Exit Select
@@ -837,6 +837,7 @@ Public Class Sales
                     Me.dtpIssueLeads.Visible = False
 
             End Select
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
@@ -990,272 +991,277 @@ Public Class Sales
     Public Sub PullInfo(ByVal ID As String)
 
         If Me.ID = ID And Me.ForceRefresh = False Then
+            STATIC_VARIABLES.CurrentID = Me.ID
+            Me.ForceRefresh = True
             Exit Sub
-        End If
-        Me.ID = ID
-        STATIC_VARIABLES.CurrentID = Me.ID
-        Me.ForceRefresh = False
-        Me.btnCallCustomer.DropDownItems.Item(0).Visible = False
-        Me.btnCallCustomer.DropDownItems.Item(1).Visible = False
-        Me.btnCallCustomer.DropDownItems.Item(2).Visible = False
-        If ID = "" Then
-            Me.txtContact1.Text = ""
-            Me.txtContact2.Text = ""
-            Me.txtAddress.Text = ""
-            Me.txtWorkHours.Text = ""
-            Me.txtHousePhone.Text = ""
-            Me.txtaltphone1.Text = ""
-            Me.txtaltphone2.Text = ""
-            Me.txtAlt1Type.Text = ""
-            Me.txtAlt2Type.Text = ""
-            Me.lnkEmail.Text = ""
-            Me.txtApptDate.Text = ""
-            Me.txtApptDay.Text = ""
-            Me.txtApptTime.Text = ""
-            Me.txtProducts.Text = ""
-            Me.txtColor.Text = ""
-            Me.txtQty.Text = ""
-            Me.txtYrBuilt.Text = ""
-            Me.txtYrsOwned.Text = ""
-            Me.txtHomeValue.Text = ""
-            Me.rtbSpecialInstructions.Text = ""
-            Me.pnlCustomerHistory.Controls.Clear()
-            Me.Text = "Sales Department"
+        Else
+            Me.ID = ID
+            STATIC_VARIABLES.CurrentID = Me.ID
+            Me.ForceRefresh = False
+            Me.btnCallCustomer.DropDownItems.Item(0).Visible = False
+            Me.btnCallCustomer.DropDownItems.Item(1).Visible = False
+            Me.btnCallCustomer.DropDownItems.Item(2).Visible = False
+            If ID = "" Then
+                Me.txtContact1.Text = ""
+                Me.txtContact2.Text = ""
+                Me.txtAddress.Text = ""
+                Me.txtWorkHours.Text = ""
+                Me.txtHousePhone.Text = ""
+                Me.txtaltphone1.Text = ""
+                Me.txtaltphone2.Text = ""
+                Me.txtAlt1Type.Text = ""
+                Me.txtAlt2Type.Text = ""
+                Me.lnkEmail.Text = ""
+                Me.txtApptDate.Text = ""
+                Me.txtApptDay.Text = ""
+                Me.txtApptTime.Text = ""
+                Me.txtProducts.Text = ""
+                Me.txtColor.Text = ""
+                Me.txtQty.Text = ""
+                Me.txtYrBuilt.Text = ""
+                Me.txtYrsOwned.Text = ""
+                Me.txtHomeValue.Text = ""
+                Me.rtbSpecialInstructions.Text = ""
+                Me.pnlCustomerHistory.Controls.Clear()
+                Me.Text = "Sales Department"
 
+                Try
+                    Dim ctrl
+                    For Each ctrl In Me.pnlAFPics.Controls
+                        If TypeOf (ctrl) Is ListView Then
+                            ctrl.items.clear()
+                        End If
+
+                    Next
+                Catch ex As Exception
+                    Me.Cursor = Cursors.Default
+                    Main.Cursor = Cursors.Default
+                    Dim ctrl
+                    For Each ctrl In Me.pnlAFPics.Controls
+                        If TypeOf (ctrl) Is ListView Then
+                            ctrl.items.clear()
+                        End If
+
+                    Next
+                End Try
+
+                Exit Sub
+            End If
+
+            Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet As SqlCommand = New SqlCommand("dbo.GetCustomerINFO", cnn)
+
+            Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
+            cmdGet.CommandType = CommandType.StoredProcedure
+            cmdGet.Parameters.Add(param1)
             Try
-                Dim ctrl
-                For Each ctrl In Me.pnlAFPics.Controls
-                    If TypeOf (ctrl) Is ListView Then
-                        ctrl.items.clear()
+                cnn.Open()
+                Dim r1 As SqlDataReader
+                r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
+                While r1.Read
+                    Me.txtContact1.Text = r1.Item(5) & " " & r1.Item(6)
+                    Me.txtContact2.Text = r1.Item(7) & " " & r1.Item(8)
+                    Me.txtAddress.Text = r1.Item(9) & " " & vbCrLf & r1.Item(10) & ", " & r1.Item(11) & " " & r1.Item(12)
+                    If r1.Item(7) = "" Then
+                        Me.txtWorkHours.Text = r1.Item(5) & ": " & r1.Item(19)
+                    Else
+                        Me.txtWorkHours.Text = r1.Item(5) & ": " & r1.Item(19) & vbNewLine & (r1.Item(7) & ": " & r1.Item(20))
                     End If
+                    Me.txtHousePhone.Text = r1.Item(13)
+                    Me.txtaltphone1.Text = r1.Item(14)
+                    Me.txtaltphone2.Text = r1.Item(16)
+                    Me.txtAlt1Type.Text = r1.Item(15)
+                    Me.txtAlt2Type.Text = r1.Item(17)
+                    Me.lnkEmail.Text = r1.Item(52)
+                    Dim d
+                    d = Split(r1.Item(29), " ", 2)
+                    Trim(d(0))
+                    Me.txtApptDate.Text = d(0)
+                    Me.txtApptDay.Text = r1.Item(30)
+                    ''
+                    '' 11-6-2015 AC
+                    '' table structure for debugging purpose:
+                    '' 
+                    ''        ID, Marketer, PLS , SLS, LeadGenOn, C1FName,C1Lname,C2fname,c2lname
+                    '' Idx:   0     1       2      3     4         5        6       7       8 
 
-                Next
+                    ''        staddress , city, state, zip, housephone, altphone1, phone1type, altphone2, 
+                    '' Idx:     9            10    11    12    13          14          15          16
+
+                    ''        phone2type, spokewith, c1work, c2work, p1, p2, p3, color, prodQTY, YearsOwned
+                    '' Idx:     17           18        19      20    21  22  23   24      25       26 
+
+                    ''        homeage, homeval, apptdate, apptday, appttime, specIns, lat, long, TimeStampVal
+                    '' Idx:     27      28        29       30        31        32      33   34      35
+
+                    ''        Rep1, rep2, Result, QuotedSold, Par, Recoverable, ManagerNotes, Cash, Finance
+                    '' Idx:    36   37     38       39         40     41            42          43    44 
+
+                    ''        p1qssplit,p2qssplit,p3qssplit,MarketingResults, confirmer, DoNotMail, DoNotCall
+                    '' Idx:     45        46         47        48               49         50          51
+
+                    ''        emailAddy, p1 acro, p2 acro, p3 acro, marketing man, sales man, kill pend, issue note,
+                    '' Idx:     52         53       54        55        56           57          58         59
+
+                    ''        NeedsSalesRes, SetNotes,IsPrevCust, IsRecovery, LastUpdated
+                    '' Idx:    60              61        62         63           64
+
+
+
+                    '' r1.item(31) = 'ApptTime' Field | (DateTime, null) Type on table [ EnterLead ] 
+                    '' sample data from 68336:> '1900-01-01 15:00:00.000'
+                    '' im pretty sure what is trying to happen here is just to pull out the 
+                    '' the time like "5:00 PM" and its getting lost in translation. 
+
+
+
+                    'Dim t = Split(r1.Item(31), " ", 2)
+                    'Dim u = t(1)
+                    'Dim u2 As String
+                    'Dim u3 As String
+                    'If u.Length = 11 Then
+                    '    u2 = Microsoft.VisualBasic.Left(u, 5)
+                    '    u3 = Microsoft.VisualBasic.Right(u, 3)
+                    '    u = u2 & u3
+                    'Else
+                    '    u2 = Microsoft.VisualBasic.Left(u, 4)
+                    '    u3 = Microsoft.VisualBasic.Right(u, 3)
+                    '    u = u2 & u3
+                    'End If
+
+                    Dim _Hour As Object = r1.Item("ApptTime").ToString
+                    Dim dateTime() = Split(_Hour, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                    Dim _date As String = ""
+                    Dim _time As String = ""
+                    Dim _AmPM As String = ""
+                    _date = dateTime(0) '' 1900-01-01
+                    _time = dateTime(1) '' 12:00:00 
+                    _AmPM = dateTime(2) '' AM/PM
+                    Dim splitTime() = Split(_time, ":", -1, Microsoft.VisualBasic.CompareMethod.Text)
+                    Dim hour As String = splitTime(0) '' 12
+                    Dim minute As String = splitTime(1) '' 00-59 
+                    Dim correctedTime As String = ((hour & ":" & minute) & " " & _AmPM)
+                    Me.txtApptTime.Text = correctedTime.ToString
+                    Me.txtProducts.Text = r1.Item(21) & vbCrLf & r1.Item(22) & vbCrLf & r1.Item(23)
+                    Me.txtColor.Text = r1.Item(24)
+                    Me.txtQty.Text = r1.Item(25)
+                    '' vars for auto calcs
+                    '' 1-13-2015 AC
+                    Dim curYear As Integer = Date.Today.Year
+                    Dim builtYear As Integer = CType(r1.Item(27), Integer)
+                    Dim AgeOfHome As Integer = (curYear - builtYear)
+                    Me.txtYrBuilt.Text = AgeOfHome.ToString
+
+                    Dim yrPur As Integer = CType(r1.Item(26), Integer)
+                    Dim YrsOwned As Integer = (curYear - yrPur)
+                    Me.txtYrsOwned.Text = YrsOwned.ToString
+                    ''
+                    Me.txtHomeValue.Text = r1.Item(28)
+                    Me.rtbSpecialInstructions.Text = r1.Item(32)
+                End While
+                r1.Close()
+                cnn.Close()
+
+            Catch ex As Exception
+                'Cnn.Close()
+                'Me.PullCustomerINFO(ID)
+                'MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
+                Dim err As String = ex.Message
+                MsgBox("Error: " & vbCrLf & err, MsgBoxStyle.Critical, "DEBUG INFO - ERROR PULLInfo()")
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo(id)", ID, ex.Message.ToString)
+                y = Nothing
+            End Try
+            If Me.txtHousePhone.Text <> "" Then
+                Me.btnMain.Text = "Call Main Phone - " & Me.txtHousePhone.Text
+                Me.btnMain.Visible = True
+            End If
+            If Me.txtaltphone1.Text <> "" Then
+                Me.btnAltPhone1.Text = "Call Alt Phone 1 - " & Me.txtaltphone1.Text
+                Me.btnAltPhone1.Visible = True
+            End If
+            If Me.txtaltphone2.Text <> "" Then
+                Me.btnAltPhone2.Text = "Call Alt Phone 2 - " & Me.txtaltphone2.Text
+                Me.btnAltPhone2.Visible = True
+            End If
+            ''Populate current reps
+
+            Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
+            Dim cmdGet1 As SqlCommand
+            Dim r2 As SqlDataReader
+            cmdGet1 = New SqlCommand("Select Rep1, Rep2 from enterlead where ID = " & Me.ID, cnn2)
+            cmdGet1.CommandType = CommandType.Text
+            cnn2.Open()
+            r2 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
+            r2.Read()
+            '' Loads Names of Latest Rep from sales rep pull list and will also add 
+            '' the name to rep combos if they are not part of the current rep list 
+            Try
+                Me.cboRep1.Text = r2.Item(0)
+                Me.ToolStripComboBox1.Text = r2.Item(0)
+                If Me.cboRep1.Text = "" And r2.Item(0) <> "" Then
+                    Me.cboRep1.Items.Add(r2.Item(0))
+                    Me.cboRep2.Items.Add(r2.Item(0))
+                    Me.ToolStripComboBox1.Items.Add(r2.Item(0))
+                    Me.ToolStripComboBox2.Items.Add(r2.Item(0))
+                    Me.ToolStripComboBox1.Text = r2.Item(0)
+                    Me.cboRep1.Text = r2.Item(0)
+
+                End If
             Catch ex As Exception
                 Me.Cursor = Cursors.Default
                 Main.Cursor = Cursors.Default
-                Dim ctrl
-                For Each ctrl In Me.pnlAFPics.Controls
-                    If TypeOf (ctrl) Is ListView Then
-                        ctrl.items.clear()
-                    End If
+                Me.cboRep1.Text = ""
+                Me.ToolStripComboBox1.Text = ""
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo-rep 1 & rep2 logic", "0", ex.Message.ToString)
+                y = Nothing
+            End Try
+            Try
+                Me.cboRep2.Text = r2.Item(1)
+                Me.ToolStripComboBox2.Text = r2.Item(1)
+                If Me.cboRep2.Text = "" And r2.Item(1) <> "" Then
+                    Me.cboRep2.Items.Add(r2.Item(1))
+                    Me.cboRep1.Items.Add(r2.Item(1))
+                    Me.ToolStripComboBox1.Items.Add(r2.Item(1))
+                    Me.ToolStripComboBox2.Items.Add(r2.Item(1))
+                    Me.ToolStripComboBox2.Text = r2.Item(1)
+                    Me.cboRep2.Text = r2.Item(1)
 
-                Next
+                End If
+            Catch ex As Exception
+                Me.Cursor = Cursors.Default
+                Main.Cursor = Cursors.Default
+                Me.cboRep2.Text = ""
+                Dim y As New ErrorLogging_V2
+                y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo-rep1 & rep2 logic", "0", ex.Message.ToString)
+                y = Nothing
             End Try
 
-            Exit Sub
-        End If
+            r2.Close()
+            cnn2.Close()
 
-        Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet As SqlCommand = New SqlCommand("dbo.GetCustomerINFO", cnn)
-
-        Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
-        cmdGet.CommandType = CommandType.StoredProcedure
-        cmdGet.Parameters.Add(param1)
-        Try
-            cnn.Open()
-            Dim r1 As SqlDataReader
-            r1 = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
-            While r1.Read
-                Me.txtContact1.Text = r1.Item(5) & " " & r1.Item(6)
-                Me.txtContact2.Text = r1.Item(7) & " " & r1.Item(8)
-                Me.txtAddress.Text = r1.Item(9) & " " & vbCrLf & r1.Item(10) & ", " & r1.Item(11) & " " & r1.Item(12)
-                If r1.Item(7) = "" Then
-                    Me.txtWorkHours.Text = r1.Item(5) & ": " & r1.Item(19)
-                Else
-                    Me.txtWorkHours.Text = r1.Item(5) & ": " & r1.Item(19) & vbNewLine & (r1.Item(7) & ": " & r1.Item(20))
+            'Dim c As New CustomerHistory
+            If ID <> "" Then
+                If Me.tbMain.SelectedIndex = 1 Then
+                    Me.Text = "Sales Department Record ID: " & ID
                 End If
-                Me.txtHousePhone.Text = r1.Item(13)
-                Me.txtaltphone1.Text = r1.Item(14)
-                Me.txtaltphone2.Text = r1.Item(16)
-                Me.txtAlt1Type.Text = r1.Item(15)
-                Me.txtAlt2Type.Text = r1.Item(17)
-                Me.lnkEmail.Text = r1.Item(52)
-                Dim d
-                d = Split(r1.Item(29), " ", 2)
-                Trim(d(0))
-                Me.txtApptDate.Text = d(0)
-                Me.txtApptDay.Text = r1.Item(30)
-                ''
-                '' 11-6-2015 AC
-                '' table structure for debugging purpose:
-                '' 
-                ''        ID, Marketer, PLS , SLS, LeadGenOn, C1FName,C1Lname,C2fname,c2lname
-                '' Idx:   0     1       2      3     4         5        6       7       8 
+                If Me.pnlCustomerHistory.Visible = True Then
+                    'c.SetUp(Me, ID, Me.TScboCustomerHistory)
+                    bgCustomerHistory_DoWork(Nothing, Nothing)
+                Else
+                    ' Me.GetRidOfOldAndPutNew()
+                    GetImages_Files_And_Folders(ID)
+                End If
 
-                ''        staddress , city, state, zip, housephone, altphone1, phone1type, altphone2, 
-                '' Idx:     9            10    11    12    13          14          15          16
-
-                ''        phone2type, spokewith, c1work, c2work, p1, p2, p3, color, prodQTY, YearsOwned
-                '' Idx:     17           18        19      20    21  22  23   24      25       26 
-
-                ''        homeage, homeval, apptdate, apptday, appttime, specIns, lat, long, TimeStampVal
-                '' Idx:     27      28        29       30        31        32      33   34      35
-
-                ''        Rep1, rep2, Result, QuotedSold, Par, Recoverable, ManagerNotes, Cash, Finance
-                '' Idx:    36   37     38       39         40     41            42          43    44 
-
-                ''        p1qssplit,p2qssplit,p3qssplit,MarketingResults, confirmer, DoNotMail, DoNotCall
-                '' Idx:     45        46         47        48               49         50          51
-
-                ''        emailAddy, p1 acro, p2 acro, p3 acro, marketing man, sales man, kill pend, issue note,
-                '' Idx:     52         53       54        55        56           57          58         59
-
-                ''        NeedsSalesRes, SetNotes,IsPrevCust, IsRecovery, LastUpdated
-                '' Idx:    60              61        62         63           64
-
-
-
-                '' r1.item(31) = 'ApptTime' Field | (DateTime, null) Type on table [ EnterLead ] 
-                '' sample data from 68336:> '1900-01-01 15:00:00.000'
-                '' im pretty sure what is trying to happen here is just to pull out the 
-                '' the time like "5:00 PM" and its getting lost in translation. 
-
-
-
-                'Dim t = Split(r1.Item(31), " ", 2)
-                'Dim u = t(1)
-                'Dim u2 As String
-                'Dim u3 As String
-                'If u.Length = 11 Then
-                '    u2 = Microsoft.VisualBasic.Left(u, 5)
-                '    u3 = Microsoft.VisualBasic.Right(u, 3)
-                '    u = u2 & u3
-                'Else
-                '    u2 = Microsoft.VisualBasic.Left(u, 4)
-                '    u3 = Microsoft.VisualBasic.Right(u, 3)
-                '    u = u2 & u3
-                'End If
-
-                Dim _Hour As Object = r1.Item("ApptTime").ToString
-                Dim dateTime() = Split(_Hour, " ", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                Dim _date As String = ""
-                Dim _time As String = ""
-                Dim _AmPM As String = ""
-                _date = dateTime(0) '' 1900-01-01
-                _time = dateTime(1) '' 12:00:00 
-                _AmPM = dateTime(2) '' AM/PM
-                Dim splitTime() = Split(_time, ":", -1, Microsoft.VisualBasic.CompareMethod.Text)
-                Dim hour As String = splitTime(0) '' 12
-                Dim minute As String = splitTime(1) '' 00-59 
-                Dim correctedTime As String = ((hour & ":" & minute) & " " & _AmPM)
-                Me.txtApptTime.Text = correctedTime.ToString
-                Me.txtProducts.Text = r1.Item(21) & vbCrLf & r1.Item(22) & vbCrLf & r1.Item(23)
-                Me.txtColor.Text = r1.Item(24)
-                Me.txtQty.Text = r1.Item(25)
-                '' vars for auto calcs
-                '' 1-13-2015 AC
-                Dim curYear As Integer = Date.Today.Year
-                Dim builtYear As Integer = CType(r1.Item(27), Integer)
-                Dim AgeOfHome As Integer = (curYear - builtYear)
-                Me.txtYrBuilt.Text = AgeOfHome.ToString
-
-                Dim yrPur As Integer = CType(r1.Item(26), Integer)
-                Dim YrsOwned As Integer = (curYear - yrPur)
-                Me.txtYrsOwned.Text = YrsOwned.ToString
-                ''
-                Me.txtHomeValue.Text = r1.Item(28)
-                Me.rtbSpecialInstructions.Text = r1.Item(32)
-            End While
-            r1.Close()
-            cnn.Close()
-
-        Catch ex As Exception
-            'Cnn.Close()
-            'Me.PullCustomerINFO(ID)
-            'MsgBox("Lost Network Connection! Pull Customer Info" & ex.ToString, MsgBoxStyle.Critical, "Server not Available")
+            End If
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
-            Dim err As String = ex.Message
-            MsgBox("Error: " & vbCrLf & err, MsgBoxStyle.Critical, "DEBUG INFO - ERROR PULLInfo()")
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo(id)", ID, ex.Message.ToString)
-            y = Nothing
-        End Try
-        If Me.txtHousePhone.Text <> "" Then
-            Me.btnMain.Text = "Call Main Phone - " & Me.txtHousePhone.Text
-            Me.btnMain.Visible = True
-        End If
-        If Me.txtaltphone1.Text <> "" Then
-            Me.btnAltPhone1.Text = "Call Alt Phone 1 - " & Me.txtaltphone1.Text
-            Me.btnAltPhone1.Visible = True
-        End If
-        If Me.txtaltphone2.Text <> "" Then
-            Me.btnAltPhone2.Text = "Call Alt Phone 2 - " & Me.txtaltphone2.Text
-            Me.btnAltPhone2.Visible = True
-        End If
-        ''Populate current reps
-
-        Dim cnn2 As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGet1 As SqlCommand
-        Dim r2 As SqlDataReader
-        cmdGet1 = New SqlCommand("Select Rep1, Rep2 from enterlead where ID = " & Me.ID, cnn2)
-        cmdGet1.CommandType = CommandType.Text
-        cnn2.Open()
-        r2 = cmdGet1.ExecuteReader(CommandBehavior.CloseConnection)
-        r2.Read()
-        '' Loads Names of Latest Rep from sales rep pull list and will also add 
-        '' the name to rep combos if they are not part of the current rep list 
-        Try
-            Me.cboRep1.Text = r2.Item(0)
-            Me.ToolStripComboBox1.Text = r2.Item(0)
-            If Me.cboRep1.Text = "" And r2.Item(0) <> "" Then
-                Me.cboRep1.Items.Add(r2.Item(0))
-                Me.cboRep2.Items.Add(r2.Item(0))
-                Me.ToolStripComboBox1.Items.Add(r2.Item(0))
-                Me.ToolStripComboBox2.Items.Add(r2.Item(0))
-                Me.ToolStripComboBox1.Text = r2.Item(0)
-                Me.cboRep1.Text = r2.Item(0)
-
-            End If
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Me.cboRep1.Text = ""
-            Me.ToolStripComboBox1.Text = ""
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo-rep 1 & rep2 logic", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-        Try
-            Me.cboRep2.Text = r2.Item(1)
-            Me.ToolStripComboBox2.Text = r2.Item(1)
-            If Me.cboRep2.Text = "" And r2.Item(1) <> "" Then
-                Me.cboRep2.Items.Add(r2.Item(1))
-                Me.cboRep1.Items.Add(r2.Item(1))
-                Me.ToolStripComboBox1.Items.Add(r2.Item(1))
-                Me.ToolStripComboBox2.Items.Add(r2.Item(1))
-                Me.ToolStripComboBox2.Text = r2.Item(1)
-                Me.cboRep2.Text = r2.Item(1)
-
-            End If
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            Main.Cursor = Cursors.Default
-            Me.cboRep2.Text = ""
-            Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Sub", "PullInfo-rep1 & rep2 logic", "0", ex.Message.ToString)
-            y = Nothing
-        End Try
-
-        r2.Close()
-        cnn2.Close()
-
-        'Dim c As New CustomerHistory
-        If ID <> "" Then
-            If Me.tbMain.SelectedIndex = 1 Then
-                Me.Text = "Sales Department Record ID: " & ID
-            End If
-            If Me.pnlCustomerHistory.Visible = True Then
-                'c.SetUp(Me, ID, Me.TScboCustomerHistory)
-                bgCustomerHistory_DoWork(Nothing, Nothing)
-            Else
-                ' Me.GetRidOfOldAndPutNew()
-                GetImages_Files_And_Folders(ID)
-            End If
 
         End If
-        Me.Cursor = Cursors.Default
-        Main.Cursor = Cursors.Default
+        
     End Sub
     Private Sub DisplayColumn(ByVal Column As String, ByVal LV As ListView)
         Try
@@ -1870,10 +1876,10 @@ Public Class Sales
             Me.cboDateRangeSummary.Text = "Last Week"
             'Dim r As New Sales_Performance_Report()
             'bgSalesQuery_DoWork(Nothing, Nothing)
-            'If current_Item IsNot Nothing Then
-            '    PullInfo(current_Item.Text)
-            '    RaiseEvent PopCustHistory()
-            'End If
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
 
             Me.LoadComplete = True
             Me.cboDateRangeSummary_SelectedIndexChanged(Nothing, Nothing)
@@ -1936,14 +1942,17 @@ Public Class Sales
                             Me.lvnoresults.TopItem.Selected = True
                             Me.ID = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
                             STATIC_VARIABLES.CurrentID = Me.ID
+                            PullInfo(STATIC_VARIABLES.CurrentID)
                         Else
                             Me.ID = ""
                             STATIC_VARIABLES.CurrentID = Me.ID
+                            PullInfo(STATIC_VARIABLES.CurrentID)
                         End If
 
                     Else
                         Me.ID = Me.lvnoresults.SelectedItems(0).SubItems(1).Text
                         STATIC_VARIABLES.CurrentID = Me.ID
+                        PullInfo(STATIC_VARIABLES.CurrentID)
                     End If
 
                     Exit Select
@@ -1963,9 +1972,11 @@ Public Class Sales
                         If Me.lvSales.SelectedItems.Count = 0 Then
                             Me.ID = ""
                             STATIC_VARIABLES.CurrentID = Me.ID
+                            PullInfo(STATIC_VARIABLES.CurrentID)
                         Else
                             Me.ID = Me.lvSales.SelectedItems(0).Text
                             STATIC_VARIABLES.CurrentID = Me.ID
+                            PullInfo(STATIC_VARIABLES.CurrentID)
                         End If
                     Else
                         Me.ToolbarConfig(3)
@@ -1973,12 +1984,15 @@ Public Class Sales
                             Me.lvMemorized.TopItem.Selected = True
                             Me.ID = Me.lvMemorized.SelectedItems(0).Tag
                             STATIC_VARIABLES.CurrentID = Me.ID
+                            PullInfo(STATIC_VARIABLES.CurrentID)
                         ElseIf Me.lvMemorized.Items.Count <> 0 And Me.lvMemorized.SelectedItems.Count <> 0 Then
                             Me.ID = Me.lvMemorized.SelectedItems(0).Tag
                             STATIC_VARIABLES.CurrentID = Me.ID
+                            PullInfo(STATIC_VARIABLES.CurrentID)
                         Else
                             Me.ID = ""
                             STATIC_VARIABLES.CurrentID = Me.ID
+                            PullInfo(STATIC_VARIABLES.CurrentID)
                         End If
                     End If
 
@@ -1993,7 +2007,7 @@ Public Class Sales
                     Me.ID = ""
                     STATIC_VARIABLES.CurrentID = Me.ID
                     ToolbarConfig(4)
-
+                    PullInfo(STATIC_VARIABLES.CurrentID)
                     Me.Cursor = Cursors.WaitCursor
                     Dim d As New Issue_Leads(True, "")
                     Me.Cursor = Cursors.Default
@@ -2007,6 +2021,7 @@ Public Class Sales
                     Me.tbMain.TabPages(4).ImageKey = "Reports.png"
                     Me.ID = ""
                     STATIC_VARIABLES.CurrentID = Me.ID
+                    PullInfo(STATIC_VARIABLES.CurrentID)
                     Exit Select
                 Case 4
                     Me.tbMain.TabPages(x).ImageKey = "Reports- Selected.png"
@@ -2016,6 +2031,7 @@ Public Class Sales
                     Me.tbMain.TabPages(1).ImageKey = "Customer List.png"
                     Me.ID = ""
                     STATIC_VARIABLES.CurrentID = Me.ID
+                    PullInfo(STATIC_VARIABLES.CurrentID)
                     Exit Select
             End Select
             If Me.tbMain.SelectedIndex <> 0 Then
@@ -2385,10 +2401,10 @@ Public Class Sales
 
             Me.tmrdtpCustList_Tick(Me.dtp2CustomerList, Nothing)
             'bgSalesQuery_DoWork(Nothing, Nothing)
-            'If current_Item IsNot Nothing Then
-            '    PullInfo(current_Item.Text)
-            '    RaiseEvent PopCustHistory()
-            'End If
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
             'Me.Cursor = Cursors.WaitCursor
             'Dim c As New SalesListManager(sender)
             'arItemCache = New ArrayList
@@ -2422,10 +2438,10 @@ Public Class Sales
             Exit Sub
         Else
             bgSalesQuery_DoWork(sender, Nothing)
-            'If current_Item IsNot Nothing Then
-            '    PullInfo(current_Item.Text)
-            '    RaiseEvent PopCustHistory()
-            'End If
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
         End If
         Me.tmrdtpCustList.Stop()
     End Sub
@@ -2454,10 +2470,10 @@ Public Class Sales
 
             ''Dim c As New SalesListManager
             'bgSalesQuery_DoWork(Nothing, Nothing)
-            'If current_Item IsNot Nothing Then
-            '    PullInfo(current_Item.Text)
-            '    RaiseEvent PopCustHistory()
-            'End If
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
 
             '' Make them choose both dates in an instance for only querying for ONE day.
             '' 
@@ -2519,10 +2535,10 @@ Public Class Sales
             Me.tmrdtpCustList.Stop()
             ''Dim c As New SalesListManager
             bgSalesQuery_DoWork(sender, Nothing)
-            'If current_Item IsNot Nothing Then
-            '    PullInfo(current_Item.Text)
-            '    RaiseEvent PopCustHistory()
-            'End If
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
             'Me.Cursor = Cursors.WaitCursor
             'Dim c As New SalesListManager(sender)
             'arItemCache = New ArrayList
@@ -2640,10 +2656,10 @@ Public Class Sales
             End If
             'Dim x As New SalesListManager()
             bgSalesQuery_DoWork(Nothing, Nothing)
-            'If current_Item IsNot Nothing Then
-            '    PullInfo(current_Item.Text)
-            '    RaiseEvent PopCustHistory()
-            'End If
+            If current_Item IsNot Nothing Then
+                PullInfo(current_Item.Text)
+                RaiseEvent PopCustHistory()
+            End If
             'Me.Cursor = Cursors.WaitCursor
             'Dim c As New SalesListManager(sender)
             'arItemCache = New ArrayList
@@ -2669,8 +2685,9 @@ Public Class Sales
     Private Sub lvSales_MouseClick(sender As Object, e As MouseEventArgs) Handles lvSales.MouseClick
         Try
             If current_Item IsNot Nothing Then
-                PullInfo(current_Item.Text)
                 STATIC_VARIABLES.CurrentID = current_Item.Text
+                PullInfo(current_Item.Text)
+
             Else
                 Exit Sub
             End If
@@ -2822,7 +2839,7 @@ Public Class Sales
             If Me.ID <> "" Then
                 'Dim x As New CustomerHistory
                 'x.SetUp(Me, ID, Me.TScboCustomerHistory)
-                STATIC_VARIABLES.CurrentID = ID
+                STATIC_VARIABLES.CurrentID = Me.ID
                 bgCustomerHistory_DoWork(Nothing, Nothing)
             End If
         Catch ex As Exception
@@ -8990,54 +9007,33 @@ Public Class Sales
     Private Sub btnUpdateSPI_Click(sender As Object, e As EventArgs) Handles btnUpdateSPI.Click
 
         Dim x As New SubForm_Launcher(sender)
+
     End Sub
 
     Private Sub bgSalesQuery_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles bgSalesQuery.DoWork
-        Try
-            'If sender Is Nothing Then
-            '    MsgBox("Sender is Nothing")
-            'Else
-            '    MsgBox(sender.name.ToString)
-            'End If
+       Try
             Me.Cursor = Cursors.WaitCursor
-            Dim c As New SalesListManager()
+            Dim c As New SalesListManager(sender)
             'arItemCache = New ArrayList
             'arItemCache = c.LV_Sales_Items
-
+            'bgSalesQuery_RunWorkerCompleted(Me, Nothing)
 
             If Me.lvSales.Items.Count > 0 Then
-                If Me.lvSales.SelectedItems.Count = 1 Then
-                    Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
-                     
-                    'MsgBox(a.Text)
-                    STATIC_VARIABLES.CurrentID = a.Text
-                    Me.Text = "Sales Department Record ID: " & a.Text
-                    PullInfo(a.Text)
-                    AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-                    a.EnsureVisible()
-                    RaiseEvent PopCustHistory()
-                Else
-                    Me.lvSales.TopItem.Selected = True
-                    Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
-                    'MsgBox(a.Text)
-                    STATIC_VARIABLES.CurrentID = a.Text
-                    Me.Text = "Sales Department Record ID: " & a.Text
-                    PullInfo(a.Text)
-                    AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
-                    a.EnsureVisible()
-                    RaiseEvent PopCustHistory()
-                End If
-
+                Dim a As ListViewItem = Me.lvSales.Items.Item(0)
+                STATIC_VARIABLES.CurrentID = a.Text
+                Me.Text = "Sales Department Record ID: " & a.Text
+                PullInfo(STATIC_VARIABLES.CurrentID)
+                AddHandler PopCustHistory, AddressOf PopulateCustomerHistory
+                Me.lvSales.EnsureVisible(0)
+                RaiseEvent PopCustHistory()
                 'End If
                 Me.Cursor = Cursors.Default
             Else
-
                 Me.Cursor = Cursors.Default
                 Main.Cursor = Cursors.Default
             End If
-            'bgSalesQuery_RunWorkerCompleted(Me, Nothing)
 
-
+            
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -9092,7 +9088,9 @@ Public Class Sales
 
     Private Sub PopulateCustomerHistory()
         If CType(Me.lblCntFiltered.Text, Integer) > 0 Then
+
             bgCustomerHistory_DoWork(Nothing, Nothing)
+
         Else
             PullInfo("")
             Me.pnlCustomerHistory.Controls.Clear()
@@ -9103,6 +9101,7 @@ Public Class Sales
         Try
             Dim c As New CustomerHistory
             c.SetUp(Me.TScboCustomerHistory)
+            PullInfo(STATIC_VARIABLES.CurrentID)
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -9146,13 +9145,21 @@ Public Class Sales
                 For Each y In Me.lvSales.Items
                     If y.Selected = True Then
                         Me.Cursor = Cursors.WaitCursor
-                        PullInfo(y.Text)
-                        STATIC_VARIABLES.CurrentID = y.Text
 
+                        STATIC_VARIABLES.CurrentID = y.Text
+                        PullInfo(y.Text)
                     End If
                 Next
             Else
-                '' do nothing 
+                ''
+                Dim y As ListViewItem
+                For Each y In Me.lvSales.Items
+                    If y.Selected = True Then
+                        Me.Cursor = Cursors.WaitCursor
+                        STATIC_VARIABLES.CurrentID = y.Text
+                        PullInfo(y.Text)
+                    End If
+                Next
             End If
 
         Catch ex As Exception

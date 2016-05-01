@@ -55,19 +55,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>6X0dd6Ro5sAIUUd4AsfE2vAU2Ao=</dsig:DigestValue>
+        <dsig:DigestValue>B9YFJVQkyh+tuZqYoeUrByuJNgU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImproveIt! 360.exe" size="4461952">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImproveIt! 360.exe" size="4462976">
       <assemblyIdentity name="ImproveIt! 360" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>so6l4gsqrDQmD53RCQRcDZjcmYI=</dsig:DigestValue>
+        <dsig:DigestValue>shyS6NcvUxxzZZGonfbH66XKpzc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -79,7 +79,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>4ugUd9qcH8tFP4RCva5gBdY2Sog=</dsig:DigestValue>
+        <dsig:DigestValue>wsWnSuLtNcxazA+aJdst2b1/ULc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -91,7 +91,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>2waJWqa8WYhqt13UmwVMq/duPK8=</dsig:DigestValue>
+        <dsig:DigestValue>7rPoyECs7AqdSezQ9d2JCynOHOA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,7 +103,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>hU1I6w3xA3L4nT6NG4MmzNnMaK8=</dsig:DigestValue>
+        <dsig:DigestValue>EVmnhOSXGqJo5V4Mcp8hQijP9jM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -115,7 +115,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>TVYn0tJ3FJrAeTMRhd9UQGQretY=</dsig:DigestValue>
+        <dsig:DigestValue>oqtxiNaMynaknghS8h3HeTF1I3w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

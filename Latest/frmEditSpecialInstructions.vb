@@ -3,7 +3,7 @@ Imports System.Data.Sql
 Imports System.Data.SqlClient
 
 Public Class frmEditSpecialInstructions
-    Public RecID As String = STATIC_VARIABLES.CurrentID
+    Public RecID As String = ""
     Public frm As Form
 
     Private Sub frmEditSpecialInstructions_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
@@ -11,7 +11,7 @@ Public Class frmEditSpecialInstructions
     End Sub
 
     Private Sub frmEditSpecialInstructions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Me.RecID = STATIC_VARIABLES.CurrentID
 
         If RecID <> "" Then
             Try

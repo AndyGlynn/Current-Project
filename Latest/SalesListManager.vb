@@ -159,7 +159,7 @@ Public Class SalesListManager
         End Try
 
     End Sub
-    Public Sub New()
+    Public Sub New(ByVal sender As Object)
         'Dim type = sender.GetType
         'MsgBox("Sender: " & sender.ToString, MsgBoxStyle.Information, "DEBUG INFO")
         'Application.DoEvents()
