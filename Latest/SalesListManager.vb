@@ -112,16 +112,46 @@ Public Class SalesListManager
             r = cmdGet.ExecuteReader(CommandBehavior.CloseConnection)
             Dim cnt As Integer = 0
             r.Read()
-            If r.Item(0) >= 500 Then
-                ''progressbar class
-            End If
+            Try
+                Dim Cntres As String = r.Item(0)
+                If Cntres = "" Then
+                    lvSalesCnt = 0
+                ElseIf Cntres = " " Then
+                    lvSalesCnt = 0
+                ElseIf Len(Cntres) <= -0 Then
+                    lvSalesCnt = 0
+                ElseIf Cntres Is Nothing Then
+                    lvSalesCnt = 0
+                Else
+                    lvSalesCnt = r.Item(0)
+                End If
 
+            Catch ex As Exception
+                Sales.Cursor = Cursors.Default
+                lvSalesCnt = 0
+            End Try
+
+            If lvSalesCnt >= 500 Then
+                While r.Read
+                    cnt += 1
+                End While
+
+                lvSalesCnt = cnt
+
+                If cnt >= 750 Then
+                    ''progressbar class
+                    frmGenericPBar.ProgressBar1.Minimum = 1
+                    frmGenericPBar.ProgressBar1.Maximum = cnt
+                    frmGenericPBar.lblMax.Text = cnt.ToString
+                End If
+            End If
             r.Close()
             cnn.Close()
             cnn = Nothing
-
+            Sales.Cursor = Cursors.Default
         Catch ex As Exception
-
+            lvSalesCnt = 0
+            Sales.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesListManager", "SalesListManager", "Sub", "Count()", "0", ex.Message.ToString)
@@ -136,7 +166,16 @@ Public Class SalesListManager
 
         ''
         Try
-            Dim Itemcnt As Integer = 0
+            Count()
+            Dim Itemcnt As Integer = lvSalesCnt
+            If Itemcnt >= 750 Then
+                frmGenericPBar.MdiParent = Main
+                frmGenericPBar.TopMost = True
+                frmGenericPBar.Show()
+            Else
+                '' carry on.
+            End If
+
             Dim arItems As New ArrayList
             '' 
 
@@ -239,6 +278,21 @@ Public Class SalesListManager
             Dim id As String = ""
             While r.Read
                 cntRecs += 1
+                If lvSalesCnt >= 750 Then
+                    If cntRecs < lvSalesCnt Then
+                        frmGenericPBar.Cursor = Cursors.WaitCursor
+                        frmGenericPBar.ProgressBar1.Increment(1)
+                        frmGenericPBar.lblCurrent.Text = cntRecs.ToString
+                        Application.DoEvents()
+                    ElseIf cntRecs = lvSalesCnt Then
+                        Main.Cursor = Cursors.Default
+                        Sales.Cursor = Cursors.Default
+                        frmGenericPBar.Cursor = Cursors.Default
+                        frmGenericPBar.Close()
+                    End If
+                Else
+                    ''carry on.
+                End If
                 id = r.Item(0)
                 Dim lv As New ListViewItem
                 lv.Name = r.Item(0)
@@ -403,7 +457,7 @@ Public Class SalesListManager
             Sales.Cursor = Cursors.Default
 
         Catch ex As Exception
-
+            Sales.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "SalesListManager", "SalesListManager", "Constructor", "New()", "0", ex.Message.ToString)

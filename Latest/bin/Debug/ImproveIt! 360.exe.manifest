@@ -60,14 +60,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImproveIt! 360.exe" size="4460928">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImproveIt! 360.exe" size="4461952">
       <assemblyIdentity name="ImproveIt! 360" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>LLU1OG4QjaiYrJMkajJN/Xu76jM=</dsig:DigestValue>
+        <dsig:DigestValue>so6l4gsqrDQmD53RCQRcDZjcmYI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

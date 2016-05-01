@@ -776,6 +776,8 @@ Public Class Sales
                     '' will probably have to revisit this 
 
                     ''Need code to deselect any tasks in the task manager
+                    Me.Cursor = Cursors.Default
+                    Exit Select
                 Case Is = 3 '' Customer List Tab , Memorized Appts Tab
 
                     Me.tsSalesDepartment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSalesResult2, Me.btnCustomerTools, Me.btnPrintCustomerList, Me.btnEmailWizard})
@@ -835,6 +837,7 @@ Public Class Sales
                     Me.dtpIssueLeads.Visible = False
 
             End Select
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -5522,6 +5525,7 @@ Public Class Sales
         ' MsgBox("test hit btnEmailallIssue ")
         '' email to all reps that can get
         Try
+            Me.Cursor = Cursors.WaitCursor
             Dim z As New EmailIssuedLeads
             Dim arRepsThatCanGetEmail As New ArrayList
             Dim arRepsThatDontGetEmail As New ArrayList
@@ -5599,7 +5603,6 @@ Public Class Sales
 
 
 
-
             End If
             If Me.btnExclude.Text.Contains("On") Then
                 Dim y As Panel
@@ -5670,7 +5673,15 @@ Public Class Sales
                 Next
 
                 xyz.BulkEmailWithoutExceptions(arRepsThatCanGetEmail, Me.dtpIssueLeads.Value.ToString)
+
+
             End If
+
+
+            Me.Cursor = Cursors.Default
+            MsgBox("Mail Sent.", MsgBoxStyle.Information, "Email Sent Out Successfully.")
+
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
@@ -5678,8 +5689,6 @@ Public Class Sales
             y.WriteToLog(Date.Now, My.Computer.Name, STATIC_VARIABLES.IP, "Sales", "FormCode", "Event", "btnEmailAllIssue_click", "0", ex.Message.ToString)
             y = Nothing
         End Try
-
-
     End Sub
 
     Private Sub btnEmailThisIssue_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEmailThisIssue.Click
@@ -8999,6 +9008,7 @@ Public Class Sales
             If Me.lvSales.Items.Count > 0 Then
                 If Me.lvSales.SelectedItems.Count = 1 Then
                     Dim a As ListViewItem = Me.lvSales.SelectedItems(0)
+                     
                     'MsgBox(a.Text)
                     STATIC_VARIABLES.CurrentID = a.Text
                     Me.Text = "Sales Department Record ID: " & a.Text
