@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="ImproveIt! 360.exe" version="1.0.0.3" publicKeyToken="09a1b8ee580ea94b" language="en-US" processorArchitecture="x86" type="win32" />
+  <description asmv2:iconFile="ProgramIcon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="ImproveIt! 360" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="ImproveIt! 360.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="stdole" version="7.0.3300.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AxInterop.MapPoint.dll" size="17920">
+      <assemblyIdentity name="AxInterop.MapPoint" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>B9YFJVQkyh+tuZqYoeUrByuJNgU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImproveIt! 360.exe" size="4462976">
+      <assemblyIdentity name="ImproveIt! 360" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>HylCesLybsbh04tNeR/Aaix8/MA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.IWshRuntimeLibrary.dll" size="37376">
+      <assemblyIdentity name="Interop.IWshRuntimeLibrary" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>W/+/Dp8lhXFF3X4sKZ4ElR7Sr0s=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.MapPoint.dll" size="81920">
+      <assemblyIdentity name="Interop.MapPoint" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>JJBd72EfxwGG52DwqZn+VKCtcvU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Core.dll" size="430592">
+      <assemblyIdentity name="Interop.Microsoft.Office.Core" version="2.5.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>dDhyXquz/0e9UZsl0as/vZh2iOA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Microsoft.Office.Interop.Outlook.dll" size="911872">
+      <assemblyIdentity name="Interop.Microsoft.Office.Interop.Outlook" version="9.3.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>X5i5SsfU+fpnpnXRs0maF4w0O20=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="ProgramIcon.ico" size="15086">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>k/1V4jjKEhnL9ya5eenRhges1uw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\arrow-right.ico" size="1406">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>l5Mfq2SHyaSTUwIyQC07A09IXCI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\arrow-right-big.ico" size="1406">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>sakhC6Ar3g/8vR5jFRNk2NKzxTM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\FEATURES_1_1017.ico" size="766">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ZiNAg14PT9InzT7OUWvig/jqIlw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\FEATURES_1017.ico" size="766">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ZiNAg14PT9InzT7OUWvig/jqIlw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\FEATURES_2_1017.ico" size="766">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ZiNAg14PT9InzT7OUWvig/jqIlw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\QBWIN32_1015.ico" size="1086">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>m7G39QbH3RWQZWED56TtuRuAIhc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\QBWIN32_1016.ico" size="1086">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>EmUmCDgu0R9UXNagdVXpUVgsmFs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\QBWIN32_1017.ico" size="766">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ZiNAg14PT9InzT7OUWvig/jqIlw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\QBWIN32_1104.ico" size="326">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>t3WR1/8ps232DZytS0fpI2mTYKk=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=PC-101\Clay" issuerKeyHash="bd3101ad5e2158b3cf3b08119898ccce884c2323" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>ebZEgZ0iaUNjdx+Br5QnStbgp2Q=</DigestValue></Reference></SignedInfo><SignatureValue>MFGME1i3KZz0DBsy/ATzusLJVYNTSHNMJCmR4642+huiTvDxSFeCJv7qTlhMQ+RdA1xhEkJpl9D91XECZUZ1o/N+PdWglTNb5GYzBCc8bUQkEVDpcn1Yw6mZslrShOVy3eJZLmdQ9eprlmok9pRe8dbkbBNZKSrCCD3NsQmKQYE=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>oxwshduYd0c5PohbNXv7un81HJ2EU1MHPQ45tk7ODXTsuvWM7+89U37FjcmWvyhDg8WWzlBCtrlqxpeKS4tIehCw98T8Gbody2QOv83YrZzYFEYngUQpUEVZbWWRm8KW/4pnLGZlgnMpLlFfP94TzxRWk2BAK4IyVMBN4YesfdU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="64a7e0d64a2794af811f77634369229d8144b679" Description="" Url=""><as:assemblyIdentity name="ImproveIt! 360.exe" version="1.0.0.3" publicKeyToken="09a1b8ee580ea94b" language="en-US" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=PC-101\Clay</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>BMal8IA9pNzB4Iwo3KkF0ZuTsmU=</DigestValue></Reference></SignedInfo><SignatureValue>DeRnEHs1sdw/eivV9iGsCqLB7NC9UjEeyovUfPdohQVeYVaun3BYkmcj90TltLcWx2Q3b1INJ02OgsE12qwPSk/KjzeJR/qpbxQwhHfFu9ROZMZv7DsyvxnSgbzFXhEjmyCBGjJTNhPSNQJPZ7dxxN1PIxnWGp4MSjcZcJ9qkg0=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>oxwshduYd0c5PohbNXv7un81HJ2EU1MHPQ45tk7ODXTsuvWM7+89U37FjcmWvyhDg8WWzlBCtrlqxpeKS4tIehCw98T8Gbody2QOv83YrZzYFEYngUQpUEVZbWWRm8KW/4pnLGZlgnMpLlFfP94TzxRWk2BAK4IyVMBN4YesfdU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBxTCCAS6gAwIBAgIQeRCrTCgHO65O/sumeRzPpjANBgkqhkiG9w0BAQUFADAhMR8wHQYDVQQDHhYAUABDAC0AMQAwADEAXABDAGwAYQB5MB4XDTE2MDQwODExNTEzNFoXDTE3MDQwODE3NTEzNFowITEfMB0GA1UEAx4WAFAAQwAtADEAMAAxAFwAQwBsAGEAeTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAoxwshduYd0c5PohbNXv7un81HJ2EU1MHPQ45tk7ODXTsuvWM7+89U37FjcmWvyhDg8WWzlBCtrlqxpeKS4tIehCw98T8Gbody2QOv83YrZzYFEYngUQpUEVZbWWRm8KW/4pnLGZlgnMpLlFfP94TzxRWk2BAK4IyVMBN4YesfdUCAwEAATANBgkqhkiG9w0BAQUFAAOBgQA76IXpAlKMo/JLDwRpZed7j1CqNdLGriQ6DAw5iOQHq+Nx3b8hh6qd3OgxDIl7i/4wq+DaRG/uv3rvdA3DpQtHoWZO4LgRCbPkamNKKduGbr0nILfpqHR+nAYd5xrsLM8h4KiUQ+QatJXiR/F8hxSpC73JzHYMkLFCB7GpYQgERg==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

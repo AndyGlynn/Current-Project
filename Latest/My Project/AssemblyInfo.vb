@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("ImproveIt! 360")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Greenworks Remodeling LLC")> 
+<Assembly: AssemblyCompany("ImproveIt! 360")> 
 <Assembly: AssemblyProduct("ImproveIt! 360")> 
 <Assembly: AssemblyCopyright("Copyright © Greenworks Remodeling LLC 2016")> 
 <Assembly: AssemblyTrademark("")> 
