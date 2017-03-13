@@ -52,7 +52,7 @@ End Class
 ''
 ''Example code from small app. Basic idea of how it will all work
 ''together. Needs a refresh script for images, probably per local form but we will see....
-''Table iss.dbo.attachfiles is in play, but no values on it.
+''Table .attachfiles is in play, but no values on it.
 ''
 'Imports System.Data
 'Imports System.Data.Sql
@@ -86,7 +86,7 @@ End Class
 '            z = e(cnt)
 
 '            Try
-'                Dim cmdAttach As SqlCommand = New SqlCommand("Insert Iss.dbo.attachfiles (LeadNum, Location) values (@ID, @LOC)", cnn)
+'                Dim cmdAttach As SqlCommand = New SqlCommand("Insert .attachfiles (LeadNum, Location) values (@ID, @LOC)", cnn)
 '                Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
 '                Dim param2 As SqlParameter = New SqlParameter("@LOC", d.ToString)
 '                cmdAttach.Parameters.Add(param1)
@@ -119,7 +119,7 @@ End Class
 '    End Sub
 '    Public Sub GetID()
 '        Try
-'            Dim cmdGetID As SqlCommand = New SqlCommand("Select ID from iss.dbo.enterlead", cnn)
+'            Dim cmdGetID As SqlCommand = New SqlCommand("Select ID from .enterlead", cnn)
 '            Dim r1 As SqlDataReader '
 '            cnn.open()
 '            frmAttach.ComboBox1.Items.Clear()
@@ -140,7 +140,7 @@ End Class
 
 
 '        Try
-'            Dim cmdGetFiles As SqlCommand = New SqlCommand("Select Location from iss.dbo.attachfiles where LeadNum = @ID", cnn)
+'            Dim cmdGetFiles As SqlCommand = New SqlCommand("Select Location from .attachfiles where LeadNum = @ID", cnn)
 '            Dim param1 As SqlParameter = New SqlParameter("@ID", id)
 '            cmdGetFiles.Parameters.Add(param1)
 '            Dim r1 As SqlDataReader
@@ -197,7 +197,7 @@ End Class
 '            Exit Sub
 '        End If
 
-'        Dim cmdGetFile As SqlCommand = New SqlCommand("Select Location from iss.dbo.attachfiles where LeadNum = @ID and Location LIKE '%" & file.ToString & "'", cnn)
+'        Dim cmdGetFile As SqlCommand = New SqlCommand("Select Location from .attachfiles where LeadNum = @ID and Location LIKE '%" & file.ToString & "'", cnn)
 '        Dim r1 As SqlDataReader
 '        Dim param1 As SqlParameter = New SqlParameter("@ID", id)
 '        cmdGetFile.Parameters.Add(param1)

@@ -15,7 +15,7 @@ Public Class ViewEditWorkHours
 
     Public Sub PopulateWorkHours()
         Try
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT Hour from iss.dbo.workhours", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT Hour from .workhours", cnn)
             cnn.Open()
             Dim r1 As SqlDataReader
             r1 = cmdGET.ExecuteReader
@@ -36,7 +36,7 @@ Public Class ViewEditWorkHours
     End Sub
     Public Sub DeleteWorkHour(ByVal Hour As String)
         Try
-            Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.workhours where Hour = @HR", cnn)
+            Dim cmdDEL As SqlCommand = New SqlCommand("DELETE .workhours where Hour = @HR", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@HR", Hour)
             cmdDEL.Parameters.Add(param1)
             cnn.Open()
@@ -54,7 +54,7 @@ Public Class ViewEditWorkHours
     End Sub
     Public Sub InsertHour(ByVal Hour As String)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.workhours where Hour = @HR", cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .workhours where Hour = @HR", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@HR", Hour)
             cmdCNT.Parameters.Add(param1)
             cnn.Open()
@@ -68,7 +68,7 @@ Public Class ViewEditWorkHours
                     '' refresh 
                     '' 
                     Try
-                        Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.workhours (Hour) values(@HR)", cnn)
+                        Dim cmdINS As SqlCommand = New SqlCommand("INSERT .workhours (Hour) values(@HR)", cnn)
                         Dim param2 As SqlParameter = New SqlParameter("@HR", Hour)
                         cmdINS.Parameters.Add(param2)
                         cnn.Open()

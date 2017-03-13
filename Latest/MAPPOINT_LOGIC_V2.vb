@@ -107,7 +107,7 @@ Public Class MAPPOINT_LOGIC_V2
     Public arCityState As List(Of CityState)
     Public arZipState As List(Of ZipState)
 
-    Private Const sql_cnx As String = "SERVER=192.168.1.2;DATABASE=ISS;User Id=sa;Password=spoken1;"
+    Private sql_cnx As String = STATIC_VARIABLES.Cnn
 
     Public Function Begin()
         arCityAndZips = GetUniqueCityAndZips()

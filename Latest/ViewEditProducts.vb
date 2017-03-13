@@ -16,7 +16,7 @@ Public Class ViewEditProducts
     Public Sub PopuluateList()
 
         Try
-            Dim cmdGET As SqlCommand = New SqlCommand("Select Product, ProdAcronym from iss.dbo.products", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("Select Product, ProdAcronym from .products", cnn)
             cnn.Open()
             Dim r1 As SqlDataReader
             r1 = cmdGET.ExecuteReader
@@ -39,7 +39,7 @@ Public Class ViewEditProducts
 
     Public Sub Add_Product(ByVal ProductName As String, ByVal ProdAcro As String)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) From iss.dbo.Products where Product = @PR", cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) From .Products where Product = @PR", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@PR", ProductName)
             cmdCNT.Parameters.Add(param1)
             Dim cnt As Integer = 0
@@ -51,7 +51,7 @@ Public Class ViewEditProducts
                     '' doesnt exist
                     '' add it.
                     Try
-                        Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.products (Product,ProdAcronym) values(@PR,@PRA)", cnn)
+                        Dim cmdINS As SqlCommand = New SqlCommand("INSERT .products (Product,ProdAcronym) values(@PR,@PRA)", cnn)
                         Dim param2 As SqlParameter = New SqlParameter("@PR", ProductName)
                         Dim param3 As SqlParameter = New SqlParameter("@PRA", ProdAcro)
                         cmdINS.Parameters.Add(param2)

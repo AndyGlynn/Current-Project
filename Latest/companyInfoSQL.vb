@@ -25,7 +25,7 @@ Public Class companyInfoSQL
         Public CompanyName As String
     End Structure
     Private CoINFO As CompanyAddress
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
     Public ReadOnly Property Comp_Info As CompanyAddress
         Get
             Return CoINFO
@@ -33,7 +33,7 @@ Public Class companyInfoSQL
     End Property
     Public Function Get_Company_Info()
         Dim z As New CompanyAddress
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("SELECT streetNumber,StreetName,AddressLine2,City,State,Zip,CompanyName FROM companyInfo;", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader

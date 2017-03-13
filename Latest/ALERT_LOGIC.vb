@@ -45,7 +45,7 @@ Public Class ALERT_LOGIC
     '' 
 
 
-    '' Table Structure: iss.dbo.AlertTable
+    '' Table Structure: .AlertTable
     '' |ID|LeadNum|UserName|AlertTime|ExecutionDate|Notes|AssignedBy|Completed|
     ''  0   1       2        3         4             5      6          7
     '' 
@@ -65,7 +65,7 @@ Public Class ALERT_LOGIC
     '')
     ''as
     ''set nocount off;
-    ''INSERT iss.dbo.AlertTable(LeadNum,UserName,AlertTime,ExecutionDate,Notes,AssignedBy,Completed)
+    ''INSERT .AlertTable(LeadNum,UserName,AlertTime,ExecutionDate,Notes,AssignedBy,Completed)
     ''values(@LeadNum,@UserName,@AlertTime,@ExecutionDate,@Notes,@AssignedBy,@Completed)
 
     '' Stored Proc: UPDATE
@@ -82,7 +82,7 @@ Public Class ALERT_LOGIC
     ''@Completed bit
     '')
     ''as set nocount off;
-    ''Update iss.dbo.AlertTable
+    ''Update .AlertTable
     ''Set LeadNum = @ID,
     ''	UserName = @UserName,
     ''	AlertTime = @AlertTime,
@@ -101,7 +101,7 @@ Public Class ALERT_LOGIC
     '')
     ''as
     ''set nocount off;
-    ''Delete iss.dbo.alerttable
+    ''Delete .alerttable
     ''where ID = @RecID
     ''GO
 
@@ -109,7 +109,7 @@ Public Class ALERT_LOGIC
     ''create proc dbo.CountAlert
     ''as
     ''set nocount off;
-    ''SELECT COUNT(ID) from iss.dbo.AlertTable where Completed = 0
+    ''SELECT COUNT(ID) from .AlertTable where Completed = 0
     ''GO
 
 #End Region
@@ -145,7 +145,7 @@ Public Class ALERT_LOGIC
         '' will need to edit this call to represent time frames
         Try
             Dim cmdGET As SqlCommand = New SqlCommand _
-            ("SELECT AlertTable .*, EnterLead .Contact1FirstName ,EnterLead .Contact1LastName ,EnterLead .HousePhone  from iss.dbo.alerttable inner join EnterLead  on enterlead.id = alerttable.LeadNUM   where completed = 0 and UserName = @USR and (select ExecutionDate + AlertTime)  <= {fn current_timestamp()} order by ExecutionDate asc , AlertTime asc", cnn)
+            ("SELECT AlertTable .*, EnterLead .Contact1FirstName ,EnterLead .Contact1LastName ,EnterLead .HousePhone  from .alerttable inner join EnterLead  on enterlead.id = alerttable.LeadNUM   where completed = 0 and UserName = @USR and (select ExecutionDate + AlertTime)  <= {fn current_timestamp()} order by ExecutionDate asc , AlertTime asc", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@USR", UserName)
             cmdGET.Parameters.Add(param1)
             cnn.Open()
@@ -196,7 +196,7 @@ Public Class ALERT_LOGIC
 #Region "Functions"
     Public Function CountAlerts(ByVal UserName As String)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.AlertTable where Completed = 0 and UserName = @USR and (select ExecutionDate + AlertTime)  <= {fn current_timestamp()}", cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .AlertTable where Completed = 0 and UserName = @USR and (select ExecutionDate + AlertTime)  <= {fn current_timestamp()}", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@USR", UserName)
             cmdCNT.Parameters.Add(param1)
             cmdCNT.CommandType = CommandType.Text

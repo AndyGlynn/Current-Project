@@ -5,13 +5,13 @@ Imports System
 Imports MapPoint
 
 Public Class ImportData
-    Public cnnISS As New SqlConnection("SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;")
-    Public cnnDA As New SqlConnection("SERVER=192.168.1.2;Database=Data_Automation;User Id=sa;Password=spoken1;")
-    Public cnnDA2 As New SqlConnection("SERVER=192.168.1.2;Database=Data_Automation;User Id=sa;Password=spoken1;")
+    Public cnnISS As New SqlConnection(STATIC_VARIABLES.Cnn)
+    Public cnnDA As New SqlConnection(STATIC_VARIABLES.Cnn)
+    Public cnnDA2 As New SqlConnection(STATIC_VARIABLES.Cnn)
     Public CorrectPhoneNumberResponse As String = ""
 
-    Private Const da_cnx As String = "SERVER=192.168.1.2;Database=Data_Automation;User Id=sa;Password=spoken1;"
-    Private Const iss_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+    Private da_cnx As String = STATIC_VARIABLES.Cnn
+    Private iss_cnx As String = STATIC_VARIABLES.Cnn
 
 #Region "Notes 11-3-15 PRE COMBINE - RE ORG"
 

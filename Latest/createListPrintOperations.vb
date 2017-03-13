@@ -96,7 +96,7 @@ Public Class createListPrintOperations
     Public arListOfLeadsToDisplay As List(Of LeadToPrint)
     Public arListOfLeadsToDisplayRecovery As List(Of LeadToPrintRecovery)
 
-    Private Const sql_cnx As String = "SERVER=192.168.1.2;DATABASE=ISS;User Id=sa;Password=spoken1;"
+    Private sql_cnx As String = STATIC_VARIABLES.Cnn
     Private Const Test_Directory As String = "C:\Users\Clay\Desktop\Print Leads\"
     Private Const Production_Directory As String = "\\server.greenworks.local\Company\ISS\Print Leads\"
 #End Region

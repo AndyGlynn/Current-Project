@@ -5,11 +5,11 @@ Imports System.Data.SqlClient
 
 Public Class systemCheckLogin
     Public cntOfRecords As Integer = 0
-    Public Const sqlCNX As String = "Server=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1"
+    Public Const sqlCNX As String = ""
 
     Public Function CntRecs()
         Try
-            Dim cnt_cnx As SqlConnection = New SqlConnection(sqlCNX)
+            Dim cnt_cnx As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
             Dim cmdCNT As SqlCommand = New SqlCommand("SELECT count(ID) from EnterLead;", cnt_cnx)
             Dim cnt As Integer = 0
             cnt_cnx.Open()
@@ -40,7 +40,7 @@ Public Class systemCheckLogin
     Public Function CheckSQLStatus()
         Try
             Dim status As Boolean
-            Dim test_cnx As SqlConnection = New SqlConnection(sqlCNX)
+            Dim test_cnx As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
 
             Try
                 test_cnx.Open()

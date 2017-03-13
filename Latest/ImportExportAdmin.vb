@@ -15,8 +15,8 @@ Public Class ImportExportAdmin
     '' need to correlate
     '' 
 
-    Private Const ISS_CNX As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
-    Private Const I360_CNX As String = "SERVER=192.168.1.2;Database=I360_Data_Dump;User Id=sa;Password=spoken1;"
+    Private ISS_CNX As String = STATIC_VARIABLES.Cnn
+    Private I360_CNX As String = STATIC_VARIABLES.Cnn
 
     Public Structure i360Appt
         Public ID As String

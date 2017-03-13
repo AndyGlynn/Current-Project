@@ -68,7 +68,7 @@ Public Class USER_LOGIC
             '    Exit Sub
             'End If
 
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT Count(ID) from iss.dbo.userpermissiontable where UserName = @USR and UserPWD = @PWD", cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT Count(ID) from  userpermissiontable where UserName = @USR and UserPWD = @PWD", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@USR", USR)
             'Dim param33 As SqlParameter = New SqlParameter("@USRL", USRL)
             Dim param2 As SqlParameter = New SqlParameter("@PWD", PWD)
@@ -247,7 +247,7 @@ Public Class USER_LOGIC
                             'cnn.Close()
 
 
-                            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.userpermissiontable " _
+                            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE  userpermissiontable " _
                                    & " SET LoggedOn = 1 " _
                                    & " WHERE UserName = @USR  and UserPWD = @PWD", cnn)
                             Dim param78 As SqlParameter = New SqlParameter("@USR", USR)
@@ -342,7 +342,7 @@ Public Class USER_LOGIC
 
 
                             'Try
-                            '    Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.tblUserHash (UserName,UserHASH) " _
+                            '    Dim cmdINS As SqlCommand = New SqlCommand("INSERT .tblUserHash (UserName,UserHASH) " _
                             '    & "VALUES(@USR,@USRL,@HASH)", cnn)
                             '    Dim param100 As SqlParameter = New SqlParameter("@USR", Trim(STATIC_VARIABLES.Login.ToString))
                             '    ' Dim param200 As SqlParameter = New SqlParameter("@USRL", Trim(STATIC_VARIABLES.CurrentUser))
@@ -647,7 +647,7 @@ Public Class USER_LOGIC
             fname = UserName
             'lname = str(1)
 
-            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.userpermissiontable " _
+            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE  userpermissiontable " _
             & " SET LoggedOn = 0, " _
             & "     MachineName = ' ', " _
             & "     IP = ' ' " _

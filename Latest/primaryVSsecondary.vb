@@ -7,7 +7,7 @@ Imports MapPoint
 Imports AxMapPoint
 
 Public Class primaryVSsecondary
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
 
     Private PrimaryList As Dictionary(Of String, RecordToPlot)
     Private SecondaryList As Dictionary(Of String, RecordToPlot)
@@ -43,7 +43,7 @@ Public Class primaryVSsecondary
 
     Private Function Get_List_Of_PrimayLeads(ByVal BeginDate As String, ByVal EndDate As String, ByVal ArPrimaries As ArrayList, ByVal NumRecords As String)
         Dim arList As New Dictionary(Of String, RecordToPlot)
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         For Each x As String In ArPrimaries
             If InStr(x, "(Sales)") >= 1 Then
@@ -89,7 +89,7 @@ Public Class primaryVSsecondary
 
     Private Function Get_List_Of_SecondarLeads(ByVal BeginDate As String, ByVal EndDate As String, ByVal ArSecondaries As ArrayList, ByVal NumRecords As String)
         Dim arList As New Dictionary(Of String, RecordToPlot)
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         For Each x As String In ArSecondaries
             If InStr(x, "(Sales)") >= 1 Then

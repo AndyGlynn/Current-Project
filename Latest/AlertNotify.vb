@@ -15,7 +15,7 @@ Public Class AlertNotify
 
     Private Sub AlertNotify_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         'Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        'Dim cmdDEL As SqlCommand = New SqlCommand("DELETE Iss.dbo.alerttable where ID = @ID", cnn)
+        'Dim cmdDEL As SqlCommand = New SqlCommand("DELETE .alerttable where ID = @ID", cnn)
         'Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
         'cmdDEL.Parameters.Add(param1)
         'cnn.Open()
@@ -30,7 +30,7 @@ Public Class AlertNotify
     Private Sub AlertNotify_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ID, Contact1FirstName,Contact1LastName,Contact2FirstName,Contact2LastName,Staddress,city,state,zip,housephone,altphone1,altphone2,phone1type,phone2type,(select notes from AlertTable where id = @id ) from iss.dbo.enterlead where ID = (select leadnum from alerttable where @ID = id)", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ID, Contact1FirstName,Contact1LastName,Contact2FirstName,Contact2LastName,Staddress,city,state,zip,housephone,altphone1,altphone2,phone1type,phone2type,(select notes from AlertTable where id = @id ) from .enterlead where ID = (select leadnum from alerttable where @ID = id)", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
             cmdGET.Parameters.Add(param1)
             cnn.Open()
@@ -73,7 +73,7 @@ Public Class AlertNotify
     Private Sub Label5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnclosewindow.Click
         Try
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdDEL As SqlCommand = New SqlCommand("DELETE Iss.dbo.alerttable where ID = @ID", cnn)
+            Dim cmdDEL As SqlCommand = New SqlCommand("DELETE  alerttable where ID = @ID", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
             cmdDEL.Parameters.Add(param1)
             cnn.Open()
@@ -105,7 +105,7 @@ Public Class AlertNotify
 
             'MsgBox(dt & "   " & time)
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.alerttable SET ExecutionDate = @Date, AlertTime = @Time, completed = 0 WHERE ID = @ID", cnn)
+            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE  alerttable SET ExecutionDate = @Date, AlertTime = @Time, completed = 0 WHERE ID = @ID", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@Date", dt)
             Dim param2 As SqlParameter = New SqlParameter("@Time", time)
             Dim param3 As SqlParameter = New SqlParameter("@ID", ID)

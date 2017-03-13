@@ -5,7 +5,7 @@ Imports System.Data.SqlClient
 
 Public Class generateDataSets
 
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
     Private cntSRES As Integer = 0
     Private cntMRES As Integer = 0
     Private cntSales As Integer = 0
@@ -55,7 +55,7 @@ Public Class generateDataSets
     Public Function Get_Num_Unconfirmed(ByVal Begindate As String, ByVal EndDate As String, ByVal NumRecords As String)
         Dim res As New Dictionary(Of String, RecordToPlot)
         cntUnconfirmed = 0
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select top(" & NumRecords & ") ID,StAddress,City,State,zip from Enterlead where MarketingResults = 'Unconfirmed' and LeadGeneratedOn Between '" & Begindate & "' and '" & EndDate & "';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -77,7 +77,7 @@ Public Class generateDataSets
     Public Function Get_Previous_Customers_Data_Set(ByVal BeginDate As String, ByVal EndDate As String, ByVal NumRecords As String)
         Dim res As New Dictionary(Of String, RecordToPlotSale)
         cntSRES = 0
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select top(" & NumRecords & ") ID,StAddress,City,State,zip,QuotedSold,ParPrice,Cash,Finance from Enterlead where Result = 'Sale' and LeadGeneratedOn Between '" & BeginDate & "' and '" & EndDate & "';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -104,7 +104,7 @@ Public Class generateDataSets
     Public Function Get_Sales_Results_Data_Set(ByVal BeginDate As String, ByVal EndDate As String, ByVal SalesResult As String, ByVal NumRecords As String)
         Dim res As New Dictionary(Of String, RecordToPlot)
         cntSRES = 0
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select top(" & NumRecords & ") ID,StAddress,City,State,zip from Enterlead where Result = '" & SalesResult & "' and LeadGeneratedOn Between '" & BeginDate & "' and '" & EndDate & "';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -127,7 +127,7 @@ Public Class generateDataSets
     Public Function Get_Marketing_Results_Data_Set(ByVal BeginDate As String, ByVal EndDate As String, ByVal MarketingResult As String, ByVal NumRecords As String)
         Dim res As New Dictionary(Of String, RecordToPlot)
         cntMRES = 0
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select top(" & NumRecords & ") ID,StAddress,City,State,zip from Enterlead where MarketingResults = '" & MarketingResult & "' and LeadGeneratedOn Between '" & BeginDate & "' and '" & EndDate & "';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader

@@ -108,7 +108,7 @@ Public Class ROLODEX_LOGIC
         Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
         Public Sub DelEmployee(ByVal RecID As String)
             Try
-                Dim cmdDel As SqlCommand = New SqlCommand("Delete iss.dbo.CompanyRolodex WHERE ID = @RECID", cnn)
+                Dim cmdDel As SqlCommand = New SqlCommand("Delete .CompanyRolodex WHERE ID = @RECID", cnn)
                 Dim param1 As SqlParameter = New SqlParameter("@RecID", RecID)
                 cmdDel.Parameters.Add(param1)
                 cnn.Open()
@@ -133,7 +133,7 @@ Public Class ROLODEX_LOGIC
         Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
         Public Sub InsertNewEmployee(ByVal FName As String, ByVal LName As String, ByVal Department As String, ByVal PrimaryPhone As String)
             Try
-                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.CompanyRolodex WHERE EmpFirstName = @EMPF and EmpLastName = @EMPL and Department = @DEP", cnn)
+                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .CompanyRolodex WHERE EmpFirstName = @EMPF and EmpLastName = @EMPL and Department = @DEP", cnn)
                 Dim param1 As SqlParameter = New SqlParameter("@EMPF", FName)
                 Dim param2 As SqlParameter = New SqlParameter("@EMPL", LName)
                 Dim param3 As SqlParameter = New SqlParameter("@DEP", Department)

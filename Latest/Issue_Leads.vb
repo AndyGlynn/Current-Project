@@ -1796,7 +1796,7 @@ Public Class Issue_Leads
 
         '' first find the 'lnk#ID#' control
         '' then get its text
-        '' then query against sql to find last marketing status [iss.dbo.enter lead]
+        '' then query against sql to find last marketing status [.enter lead]
         '' if res = called and cancelled
         '' form button = "undo c and c"
         '' elseif res <> called and cancelled

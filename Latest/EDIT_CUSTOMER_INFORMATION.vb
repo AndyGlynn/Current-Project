@@ -1259,7 +1259,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
     End Sub
     Public Sub AddNewProduct(ByVal Product As String, ByVal ProdACRO As String, ByVal CBO As String)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT count(ID) from iss.dbo.products where Product = @Product", cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT count(ID) from .products where Product = @Product", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@Product", Product)
             cmdCNT.Parameters.Add(param1)
             cnn.Open()
@@ -1393,7 +1393,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
     End Function
     Public Sub InsertNewPLS(ByVal PLS As String)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.PrimaryLeadSource WHERE PrimaryLead = @PLS", cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .PrimaryLeadSource WHERE PrimaryLead = @PLS", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@PLS", PLS)
 
             PLS = CapitalizeText(PLS)
@@ -1431,7 +1431,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
     End Sub
     Public Sub InsertWH(ByVal str As String, ByVal cbo As ComboBox)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.WorkHours WHERE Hour = '" & str & "'", cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .WorkHours WHERE Hour = '" & str & "'", cnn)
             'Dim param1 As SqlParameter = New SqlParameter("@str", str)
 
             'cmdCNT.Parameters.Add(param1)
@@ -1475,7 +1475,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
     End Sub
     Public Sub InsertSLS(ByVal PLS As String, ByVal SLS As String)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.SecondaryLeadSource WHERE SecondaryLead = @SLS and PrimaryLead = @PLS", cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .SecondaryLeadSource WHERE SecondaryLead = @SLS and PrimaryLead = @PLS", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@SLS", SLS)
             Dim param2 As SqlParameter = New SqlParameter("@PLS", PLS)
             cmdCNT.Parameters.Add(param1)
@@ -1568,7 +1568,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
     End Sub
     Public Sub AutoFillState(ByVal city)
         Try
-            Dim cmdGETState As SqlCommand = New SqlCommand("SELECT State from iss.dbo.CityPull where City = @city", cnn)
+            Dim cmdGETState As SqlCommand = New SqlCommand("SELECT State from .CityPull where City = @city", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@city", city)
             cnn.Open()
             cmdGETState.Parameters.Add(param1)
@@ -1710,7 +1710,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
             Public PLS As String
             Public SLS As String
         End Structure
-        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+        Private pro_cnx As String = STATIC_VARIABLES.Cnn
         Private _PLSandSLS As PreviousResults
         Public ReadOnly Property Previous_PLSandSLS As PreviousResults
             Get
@@ -1725,7 +1725,7 @@ Public Class EDIT_CUSTOMER_INFORMATION
 
         Private Function What_Was_PreviousPLS(ByVal RecID As String)
             Try
-                Dim cnx As New SqlConnection(pro_cnx)
+                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
                 cnx.Open()
                 Dim cmdGET As New SqlCommand("SELECT PrimaryLeadSource,SecondaryLeadSource FROM EnterLead WHERE ID='" & RecID & "';", cnx)
                 Dim a As New PreviousResults
@@ -1748,13 +1748,13 @@ Public Class EDIT_CUSTOMER_INFORMATION
         End Function
     End Class
     Private Class LogPLSChange
-        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+        Private proc_cnx As String = STATIC_VARIABLES.Cnn
         Public Sub New(ByVal RecID As String, ByVal OldPLS As String, ByVal NewPLS As String, ByVal TriggerDate As Date)
             UpdateLog(OldPLS, NewPLS, RecID, TriggerDate)
         End Sub
         Private Sub UpdateLog(ByVal OldPLS As String, ByVal NewPLS As String, ByVal RecID As String, ByVal TriggerDate As Date)
             Try
-                Dim cnx As New SqlConnection(pro_cnx)
+                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
                 cnx.Open()
                 Dim strReason As String = ""
                 strReason = "Primary Lead Source Was changed from: " & OldPLS & " to " & NewPLS & " by " & STATIC_VARIABLES.CurrentUser
@@ -1772,13 +1772,13 @@ Public Class EDIT_CUSTOMER_INFORMATION
         End Sub
     End Class
     Private Class LogSLSChange
-        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+        Private pro_cnx As String = STATIC_VARIABLES.Cnn
         Public Sub New(ByVal RecID As String, ByVal OldSLS As String, ByVal NewSLS As String, ByVal TriggerDate As Date)
             UpdateLog(OldSLS, NewSLS, RecID, TriggerDate)
         End Sub
         Private Sub UpdateLog(ByVal OldSLS As String, ByVal NewSLS As String, ByVal RecID As String, ByVal TriggerDate As Date)
             Try
-                Dim cnx As New SqlConnection(pro_cnx)
+                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
                 cnx.Open()
                 Dim strReason As String = ""
                 strReason = "Secondary Lead Source Was changed from: " & OldSLS & " to " & NewSLS & " by " & STATIC_VARIABLES.CurrentUser

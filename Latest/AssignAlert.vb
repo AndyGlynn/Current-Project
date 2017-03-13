@@ -77,7 +77,7 @@ Public Class AssignAlert
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "txtLeadNumber", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AssignAlert", "FormCode", "Event", "txtLeadNumber", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
@@ -87,7 +87,7 @@ Public Class AssignAlert
         ep.BlinkStyle = ErrorBlinkStyle.NeverBlink
         ep.Clear()
         Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdVAL As SqlCommand = New SqlCommand("SELECT COUNT(ID) From iss.dbo.enterlead where ID = @ID", cnn)
+        Dim cmdVAL As SqlCommand = New SqlCommand("SELECT COUNT(ID) From  enterlead where ID = @ID", cnn)
         Dim param1 As SqlParameter = New SqlParameter("@ID", LeadNumber)
         cnn.Open()
         cmdVAL.Parameters.Add(param1)
@@ -114,7 +114,7 @@ Public Class AssignAlert
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "ValidateLeadNumber(leadNumber)", LeadNumber.ToString, ex.Message.ToString)
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AssignAlert", "FormCode", "Event", "ValidateLeadNumber(leadNumber)", LeadNumber.ToString, ex.Message.ToString)
             y = Nothing
         End Try
 
@@ -124,7 +124,7 @@ Public Class AssignAlert
         Try
             Me.cboUser.Items.Clear()
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT UserFirstName, UserLastName from iss.dbo.userpermissiontable", cnn)
+            Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT UserFirstName, UserLastName from  userpermissiontable", cnn)
             Dim ArUsers As New ArrayList
             cnn.Open()
             Dim r1 As SqlDataReader
@@ -146,7 +146,7 @@ Public Class AssignAlert
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Sub", "GetAutoCompleteSource()", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AssignAlert", "FormCode", "Sub", "GetAutoCompleteSource()", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
@@ -183,7 +183,7 @@ Public Class AssignAlert
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "AssignAlert_Load()", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AssignAlert", "FormCode", "Event", "AssignAlert_Load()", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
@@ -206,7 +206,7 @@ Public Class AssignAlert
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "Button2_Click", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AssignAlert", "FormCode", "Event", "Button2_Click", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
@@ -291,7 +291,7 @@ Public Class AssignAlert
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "Button1_click", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AssignAlert", "FormCode", "Event", "Button1_click", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
@@ -368,7 +368,7 @@ Public Class AssignAlert
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "cboAutoNotes_SelectedValueChanged", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AssignAlert", "FormCode", "Event", "cboAutoNotes_SelectedValueChanged", "0", ex.Message.ToString)
             y = Nothing
         End Try
 
@@ -382,7 +382,7 @@ Public Class AssignAlert
             Me.Cursor = Cursors.Default
             Main.Cursor = Cursors.Default
             Dim y As New ErrorLogging_V2
-            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AlertNotify", "FormCode", "Event", "lblAutoNotes_Click", "0", ex.Message.ToString)
+            y.WriteToLog(Date.Now.ToString, My.Computer.Name, STATIC_VARIABLES.IP, "AssignAlert", "FormCode", "Event", "lblAutoNotes_Click", "0", ex.Message.ToString)
             y = Nothing
         End Try
 

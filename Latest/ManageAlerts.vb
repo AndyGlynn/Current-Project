@@ -195,7 +195,7 @@ Public Class ManageAlerts
   
     Private Sub GetINFO(ByVal ID As String)
         Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdGET As SqlCommand = New SqlCommand("SELECT Contact1FirstName,Contact1LastName,Contact2FirstName,Contact2LastName,Staddress,city,state,zip,housephone,altphone1,altphone2,phone1type,phone2type from iss.dbo.enterlead where ID = @ID", cnn)
+        Dim cmdGET As SqlCommand = New SqlCommand("SELECT Contact1FirstName,Contact1LastName,Contact2FirstName,Contact2LastName,Staddress,city,state,zip,housephone,altphone1,altphone2,phone1type,phone2type from .enterlead where ID = @ID", cnn)
         Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
         cmdGET.Parameters.Add(param1)
         cnn.Open()
@@ -210,7 +210,7 @@ Public Class ManageAlerts
     End Sub
     Private Sub DeleteAlert(ByVal ID As String)
         Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdDEL As SqlCommand = New SqlCommand("DELETE Iss.dbo.alerttable where ID = @ID", cnn)
+        Dim cmdDEL As SqlCommand = New SqlCommand("DELETE .alerttable where ID = @ID", cnn)
         Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
         cmdDEL.Parameters.Add(param1)
         cnn.Open()
@@ -273,7 +273,7 @@ Public Class ManageAlerts
     End Sub
     Private Sub UpdateAlertTime(ByVal ID As String, ByVal AlertTime As String, ByVal ExecutionDate As String)
         Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.alerttable " _
+        Dim cmdUP As SqlCommand = New SqlCommand("UPDATE .alerttable " _
         & " SET AlertTime = @TIME, " _
         & "     ExecutionDate = @ED, " _
         & "     Completed = 0" _

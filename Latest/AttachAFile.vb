@@ -93,7 +93,7 @@ Public Class AttachAFile
         ep.BlinkStyle = ErrorBlinkStyle.NeverBlink
         ep.Clear()
         Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdVAL As SqlCommand = New SqlCommand("SELECT COUNT(ID) From iss.dbo.enterlead where ID = @ID", cnn)
+        Dim cmdVAL As SqlCommand = New SqlCommand("SELECT COUNT(ID) From .enterlead where ID = @ID", cnn)
         Dim param1 As SqlParameter = New SqlParameter("@ID", LeadNumber)
         cnn.Open()
         cmdVAL.Parameters.Add(param1)

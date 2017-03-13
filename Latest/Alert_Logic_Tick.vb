@@ -46,7 +46,7 @@ Public Class Alert_Logic_Tick
     Public Sub Completed(ByVal ID)
         Try
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.alerttable SET Completed = 1 WHERE ID = @ID", cnn)
+            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE .alerttable SET Completed = 1 WHERE ID = @ID", cnn)
             Dim param3 As SqlParameter = New SqlParameter("@ID", ID)
             cmdUP.Parameters.Add(param3)
             cnn.Open()

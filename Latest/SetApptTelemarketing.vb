@@ -344,7 +344,7 @@ Public Class SetApptTelemarketing
     Public Sub InsertNewPLS(ByVal PLS As String)
         Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.PrimaryLeadSource WHERE PrimaryLead = @PLS", Cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .PrimaryLeadSource WHERE PrimaryLead = @PLS", Cnn)
             Dim param1 As SqlParameter = New SqlParameter("@PLS", PLS)
 
             PLS = CapitalizeText(PLS)
@@ -401,7 +401,7 @@ Public Class SetApptTelemarketing
     Public Sub InsertSLS(ByVal PLS As String, ByVal SLS As String)
         Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.SecondaryLeadSource WHERE SecondaryLead = @SLS and PrimaryLead = @PLS", Cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .SecondaryLeadSource WHERE SecondaryLead = @SLS and PrimaryLead = @PLS", Cnn)
             Dim param1 As SqlParameter = New SqlParameter("@SLS", SLS)
             Dim param2 As SqlParameter = New SqlParameter("@PLS", PLS)
             cmdCNT.Parameters.Add(param1)
@@ -476,7 +476,7 @@ Public Class SetApptTelemarketing
     Private Sub AddNewProduct(ByVal Product As String, ByVal ProdACRO As String, ByVal CBO As String)
         Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT count(ID) from iss.dbo.products where Product = @Product", Cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT count(ID) from .products where Product = @Product", Cnn)
             Dim param1 As SqlParameter = New SqlParameter("@Product", Product)
             cmdCNT.Parameters.Add(param1)
             Cnn.Open()

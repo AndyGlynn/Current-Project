@@ -62,7 +62,7 @@ Public Class PastDueAlerts
     Private Sub ToggleComplete(ByVal RecordID As String)
         Try
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.alerttable SET Completed = 1 where ID = @ID", cnn)
+            Dim cmdUP As SqlCommand = New SqlCommand("UPDATE .alerttable SET Completed = 1 where ID = @ID", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@ID", RecordID)
             cmdUP.Parameters.Add(param1)
             cnn.Open()

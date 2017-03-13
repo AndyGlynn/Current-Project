@@ -17,7 +17,7 @@ Public Class Pull_Unique_States_And_Zips
     End Structure
 
     Private cmdTXT As String = "select Distinct(dbo.[EnterLead].[Zip]), dbo.[EnterLead].[City], dbo.[EnterLead].[State] from dbo.[EnterLead] Right Join dbo.[CityPull] On dbo.[EnterLead].[State] = dbo.[CityPull].[State] and dbo.[EnterLead].Zip is not null and dbo.[EnterLead].Zip <> ' ' and dbo.[EnterLead].[State] is not null and dbo.[EnterLead].[State] <> ' ' and dbo.[EnterLead].[City] is not null and dbo.[EnterLead].[City] <> '' and dbo.[EnterLead].[City] <> ' ';"
-    Private cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+    Private cnx As String = STATIC_VARIABLES.Cnn
 
     Public ar_UniqueCityStateZip As List(Of UniqueCityStateZip)
 

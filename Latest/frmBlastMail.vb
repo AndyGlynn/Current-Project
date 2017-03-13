@@ -215,7 +215,7 @@ Public Class frmBlastMail
         End Structure
 
         Private arReps As List(Of Rep)
-        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+        Private pro_cnx As String = STATIC_VARIABLES.Cnn
 
         Public ReadOnly Property List_Of_Reps As List(Of Rep)
             Get
@@ -229,7 +229,7 @@ Public Class frmBlastMail
         Private Function Get_Reps()
             Try
                 Dim reps As New List(Of Rep)
-                Dim cnx As New SqlConnection(pro_cnx)
+                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
                 cnx.Open()
                 Dim cmdGET As New SqlCommand("SELECT ID,Email,CanRecieveEmail,ExcludePrintInfo,FName,LName,SalesManager FROM salesreppull WHERE CanRecieveEmail = 1;", cnx)
                 Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -287,7 +287,7 @@ Public Class frmBlastMail
 
         Private coInfo As CompanyInfo
         Private usrInfo As UserInfo
-        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+        Private pro_cnx As String = STATIC_VARIABLES.Cnn
         Public ReadOnly Property Company_Information As CompanyInfo
             Get
                 Return coInfo
@@ -308,7 +308,7 @@ Public Class frmBlastMail
         Private Function Get_User_Info(ByVal FName As String, ByVal LName As String)
             Try
                 Dim a As New UserInfo
-                Dim cnx As New SqlConnection(pro_cnx)
+                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
                 cnx.Open()
                 Dim strCMD As String = ""
                 strCMD += "SELECT UserFirstName,UserLastName,Email,EmailLogon,EmailPassword,Incoming,Outgoing,IncomingPort,OutgoingPort,LogonUsing FROM UserPermissionTable WHERE UserFirstName = '" & FName & "' and UserLastName = '" & LName & "';"
@@ -342,7 +342,7 @@ Public Class frmBlastMail
         Private Function Get_Company_Info()
             Try
                 Dim a As New CompanyInfo
-                Dim cnx As New SqlConnection(pro_cnx)
+                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
                 cnx.Open()
                 Dim cmdGET As New SqlCommand("SELECT CompanyName,Email,EmailLogin,Incoming,Outgoing,Iport,OPort,LogonUsing,EmailPassword FROM CompanyInfo;", cnx)
                 Dim r1 As SqlDataReader = cmdGET.ExecuteReader

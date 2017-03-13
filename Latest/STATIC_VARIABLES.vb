@@ -6,20 +6,72 @@ Imports MapPoint
 Imports AxMapPoint
 
 Module STATIC_VARIABLES
+    'Public Const ProgramName As String = "Improveit! 360"
+    'Public SMN As New Collection
+    'Public oApp As MapPoint.Application
+    '' Public CurrentUser As String = ""
+    'Public CurrentManager As String = ""
+    'Public Cnn As String = "Data Source=192.168.1.2;Initial Catalog=iss;User Id=sa;Password=spoken1;"
+    'Public CnnTimedRefresh As String = "Data Source=192.168.1.2;Initial Catalog=iss;User Id=sa;Password=spoken1;"
+    'Public CnnCustomerHistory As String = "Data Source=192.168.1.2;Initial Catalog=iss;User Id=sa;Password=spoken1;"
+    'Public AttachedFilesDirectory As String = "\\SERVER\Company\ISS\Attached Files\"
+    'Public SAAttachedFileDirectory As String = "\\SERVER\Company\ISS\ScheduledActionAttachments\"
+    'Public JobPicturesFileDirectory As String = "\\SERVER\Company\ISS\Job Pictures\"
+    'Public EmailDirectory As String = "\\SERVER\Company\ISS\Email Leads\" & Date.Now.ToString & "\"
+    'Public Update As Boolean = False
+    'Public New_SA_Dept As String = ""
+
+
+
+
     Public Const ProgramName As String = "Improveit! 360"
     Public SMN As New Collection
     Public oApp As MapPoint.Application
     ' Public CurrentUser As String = ""
     Public CurrentManager As String = ""
-    Public Cnn As String = "Data Source=192.168.1.2;Initial Catalog=iss;User Id=sa;Password=spoken1;"
-    Public CnnTimedRefresh As String = "Data Source=192.168.1.2;Initial Catalog=iss;User Id=sa;Password=spoken1;"
-    Public CnnCustomerHistory As String = "Data Source=192.168.1.2;Initial Catalog=iss;User Id=sa;Password=spoken1;"
-    Public AttachedFilesDirectory As String = "\\SERVER\Company\ISS\Attached Files\"
-    Public SAAttachedFileDirectory As String = "\\SERVER\Company\ISS\ScheduledActionAttachments\"
-    Public JobPicturesFileDirectory As String = "\\SERVER\Company\ISS\Job Pictures\"
-    Public EmailDirectory As String = "\\SERVER\Company\ISS\Email Leads\" & Date.Now.ToString & "\"
+    'Public Cnn As String = "Data Source=SERVER1;Initial Catalog=iss;User Id=sa;Password=Spoken1!;"
+    'Public CnnTimedRefresh As String = "Data Source=SERVER1;Initial Catalog=iss;User Id=sa;Password=Spoken1!;"
+    'Public CnnCustomerHistory As String = "Data Source=SERVER1;Initial Catalog=iss;User Id=sa;Password=Spoken1!;"
+    'Public Import_cnx As String = "Data Source=SERVER1;Initial Catalog=iss;User Id=sa;Password=Spoken1!;"
+    'Public Data_Dump_cnx As String = "Data Source=SERVER1;Initial Catalog=iss;User Id=sa;Password=Spoken1!;"
+    'Public Test_cnx As String = "Data Source=SERVER1;Initial Catalog=iss;User Id=sa;Password=Spoken1!;Timeout=5;"
+
+    Public Cnn As String = "SERVER=PC-101\DEVMIRROREXPRESS;DATABASE=ISS_DEV;User Id=sa;Password=Legend1!"
+    Public CnnTimedRefresh As String = "SERVER=PC-101\DEVMIRROREXPRESS;DATABASE=ISS_DEV;User Id=sa;Password=Legend1!"
+    Public CnnCustomerHistory As String = "SERVER=PC-101\DEVMIRROREXPRESS;DATABASE=ISS_DEV;User Id=sa;Password=Legend1!"
+    Public Import_cnx As String = "SERVER=PC-101\DEVMIRROREXPRESS;DATABASE=ISS_DEV;User Id=sa;Password=Legend1!"
+    Public Data_Dump_cnx As String = "SERVER=PC-101\DEVMIRROREXPRESS;DATABASE=ISS_DEV;User Id=sa;Password=Legend1!"
+    Public Test_cnx As String = "SERVER=PC-101\DEVMIRROREXPRESS;DATABASE=ISS_DEV;User Id=sa;Password=Legend1!"
+
+
+    'Public AttachedFilesDirectory As String = "\\server1\ISS\Attached Files\"
+    Public AttachedFilesDirectory As String = "C:\Users\Clay\Desktop\ISS_DEV\ISS\Attached Files\"
+    'Public SAAttachedFileDirectory As String = "\\server1\ISS\ScheduledActionAttachments\"
+    Public SAAttachedFileDirectory As String = "C:\Users\Clay\Desktop\ISS_DEV\ISS\ScheduledActionAttachments\"
+    'Public JobPicturesFileDirectory As String = "\\server1\ISS\Job Pictures\"
+    Public JobPicturesFileDirectory As String = "C:\Users\Clay\Desktop\ISS_DEV\ISS\Job Pictures\"
+    'Public EmailDirectory As String = "\\server1\ISS\Email Leads\" & Date.Now.ToString & "\"
+    Public EmailDirectory As String = "C:\Users\Clay\Desktop\ISS_DEV\ISS\Email Leads\" & Date.Now.ToString & "\"
+    'Public ErrorLogFilePath As String = "\\server1\ISS\Logs\"
+    Public ErrorLogFilePath As String = "C:\Users\Clay\Desktop\ISS_DEV\Logs\"
+    'Public Server_directory_print As String = "\\server1\ISS\Print Leads\"
+    Public Server_directory_print As String = "C:\Users\Clay\Desktop\ISS_DEV\Print Leads\"
+    'Public Import_Report As String = "\\server1\ISS\Data Automation Reports\"
+    Public Import_Report As String = "C:\Users\Clay\Desktop\ISS_DEV\Data Automation Reports\"
+    'Public ReportDirectory As String = "\\server1\ISS\Sales Performance Reports\"
+    Public ReportDirectory As String = "C:\Users\Clay\Desktop\ISS_DEV\Sales Performance Reports\"
+    'Public Icon_Path As String = "\\server1\ISS\IMGS\print 32.ico"
+    Public Icon_Path As String = "C:\Users\Clay\Desktop\ISS_DEV\IMGS\print 32.ico"
+    'Public Log_Path As String = "\\server1\ISS\Logs\"
+    Public Log_Path As String = "C:\Users\Clay\Desktop\ISS_DEV\Errors\"
+    'Public Alert_Wav_File As String = "\\server1\ISS\samsung_whistle.wav"
+    Public Alert_Wav_File As String = "C:\Users\Clay\Desktop\ISS_DEV\samsung_whistle.wav"
+
     Public Update As Boolean = False
     Public New_SA_Dept As String = ""
+
+
+
 
 #Region "User Information"
 

@@ -73,24 +73,24 @@ Public Class frmLinkSendEmail
 
         Private coInfo As CompanyInfo
 
-        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+        Private pro_cnx As String = STATIC_VARIABLES.Cnn
         Public ReadOnly Property Company_Information As CompanyInfo
             Get
                 Return coInfo
             End Get
         End Property
-        
+
         Public Sub New()
             coInfo = New CompanyInfo
             coInfo = Get_Company_Info()
         End Sub
 
-       
+
 
         Private Function Get_Company_Info()
             Try
                 Dim a As New CompanyInfo
-                Dim cnx As New SqlConnection(pro_cnx)
+                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
                 cnx.Open()
                 Dim cmdGET As New SqlCommand("SELECT CompanyName,Email,EmailLogin,Incoming,Outgoing,Iport,OPort,LogonUsing,EmailPassword FROM CompanyInfo;", cnx)
                 Dim r1 As SqlDataReader = cmdGET.ExecuteReader

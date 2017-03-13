@@ -118,7 +118,7 @@ Public Class CompanyInformation
 
     Public Sub GetInformation()
         Try
-            Dim cmdGET As SqlCommand = New SqlCommand("select * from iss.dbo.companyinfo", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("select * from .companyinfo", cnn)
             Dim r1 As SqlDataReader
             cnn.Open()
             r1 = cmdGET.ExecuteReader

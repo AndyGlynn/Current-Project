@@ -16,7 +16,7 @@ Public Class ViewEditPrimaryLeadSources
     Public ArPLS As New ArrayList
     Public Sub PopulateList()
         Try
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT PrimaryLead from iss.dbo.primaryleadsource", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT PrimaryLead from .primaryleadsource", cnn)
             cnn.Open()
             Dim r1 As SqlDataReader
             r1 = cmdGET.ExecuteReader
@@ -37,7 +37,7 @@ Public Class ViewEditPrimaryLeadSources
     End Sub
     Public Sub Add_PLS(ByVal PLS As String)
         Try
-            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.primaryleadsource where PrimaryLead = @PLS", cnn)
+            Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .primaryleadsource where PrimaryLead = @PLS", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@PLS", PLS)
             cmdCNT.Parameters.Add(param1)
             cnn.Open()
@@ -50,7 +50,7 @@ Public Class ViewEditPrimaryLeadSources
                     '' add it
                     '' refresh
                     Try
-                        Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.primaryleadsource (PrimaryLead) values(@PLS)", cnn)
+                        Dim cmdINS As SqlCommand = New SqlCommand("INSERT .primaryleadsource (PrimaryLead) values(@PLS)", cnn)
                         Dim param2 As SqlParameter = New SqlParameter("@PLS", PLS)
                         cmdINS.Parameters.Add(param2)
                         cnn.Open()

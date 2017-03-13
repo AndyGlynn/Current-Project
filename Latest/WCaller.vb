@@ -962,7 +962,7 @@ Public Class WCaller
             Try
                 WCaller.lbZipCity.Items.Clear()
                 WCaller.txtZipCode.AutoCompleteSource = AutoCompleteSource.CustomSource
-                Dim cmdGET As SqlCommand = New SqlCommand("SELECT City,State from iss.dbo.citypull", cnn)
+                Dim cmdGET As SqlCommand = New SqlCommand("SELECT City,State from .citypull", cnn)
                 Dim r1 As SqlDataReader
                 cnn.Open()
                 r1 = cmdGET.ExecuteReader
@@ -994,7 +994,7 @@ Public Class WCaller
         End Property
         Public Sub New(ByVal City As String)
             Try
-                Dim cmdGET As SqlCommand = New SqlCommand("SELECT state from iss.dbo.citypull where city = @CTY", cnn)
+                Dim cmdGET As SqlCommand = New SqlCommand("SELECT state from .citypull where city = @CTY", cnn)
                 Dim param1 As SqlParameter = New SqlParameter("@CTY", City)
                 cmdGET.Parameters.Add(param1)
                 Dim r1 As SqlDataReader

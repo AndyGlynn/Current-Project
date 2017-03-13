@@ -6,7 +6,20 @@ ImproveIt!360
 </name>
 </assembly>
 <members>
-<member name="P:Latest.My.Resources.Resources.ResourceManager">
+<member name="P:Latest.frmLogin.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Latest.frmLogin.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Latest.frmLogin">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="P:Latest.My.Resources.Resources.ResourceManager">
 	<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
@@ -128,19 +141,6 @@ ImproveIt!360
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member><member name="T:Latest.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member><member name="P:Latest.frmLogin.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:Latest.frmLogin.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:Latest.frmLogin">
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.
 </summary>

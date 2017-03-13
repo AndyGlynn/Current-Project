@@ -6,7 +6,7 @@ Imports System.Data.SqlClient
 
 Public Class printToPrinterCustInfoSheet
 
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
 
     Public Structure CustomerInfo
         Public ID As String
@@ -200,7 +200,7 @@ Public Class printToPrinterCustInfoSheet
     Private Function GetCustInfo(ByVal RecID As String)
         Try
             Dim x As New CustomerInfo
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx.Open()
             Dim cmdGET As New SqlCommand("select Contact1FirstName,Contact1LastName,Contact2FirstName,Contact2LastName,StAddress,City,State,Zip,Contact1WorkHours,HousePhone,AltPhone1,AltPhone2,EmailAddress FROM EnterLead WHERE ID= N'" & RecID & "';", cnx)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader

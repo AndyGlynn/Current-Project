@@ -157,7 +157,7 @@ Public Class Attach
         Try
             Dim cnx_MOVE As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx_MOVE.Open()
-            Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.AttachFiles (LeadNum,Location,AttachedHash) values('" & ID & "','" & SourcePath & "','" & ServerDestination & "');", cnx_MOVE)
+            Dim cmdINS As SqlCommand = New SqlCommand("INSERT .AttachFiles (LeadNum,Location,AttachedHash) values('" & ID & "','" & SourcePath & "','" & ServerDestination & "');", cnx_MOVE)
             cmdINS.ExecuteScalar()
             cnx_MOVE.Close()
             cnx_MOVE = Nothing
@@ -283,7 +283,7 @@ Public Class Attach
 
     Public Sub GetFilesSM(ByVal ID As String)
         'Try
-        '    Dim cmdGetFiles As SqlCommand = New SqlCommand("Select Location from iss.dbo.attachfiles where LeadNum = @ID", cnn)
+        '    Dim cmdGetFiles As SqlCommand = New SqlCommand("Select Location from .attachfiles where LeadNum = @ID", cnn)
         '    Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
         '    cmdGetFiles.Parameters.Add(param1)
         '    Dim r1 As SqlDataReader
@@ -340,7 +340,7 @@ Public Class Attach
                 Exit Sub
             End If
 
-            Dim cmdGetFile As SqlCommand = New SqlCommand("Select Location from iss.dbo.attachfiles where LeadNum = @ID and Location LIKE '%" & file.ToString & "'", cnn)
+            Dim cmdGetFile As SqlCommand = New SqlCommand("Select Location from .attachfiles where LeadNum = @ID and Location LIKE '%" & file.ToString & "'", cnn)
             Dim r1 As SqlDataReader
             Dim param1 As SqlParameter = New SqlParameter("@ID", id)
             cmdGetFile.Parameters.Add(param1)

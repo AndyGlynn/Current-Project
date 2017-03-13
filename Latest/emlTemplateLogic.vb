@@ -4,8 +4,8 @@ Imports System.Data.SqlClient
 
 
 Public Class emlTemplateLogic
-    Private Const dev_cnx As String = "SERVER=PC-101\DEVMIRROREXPRESS;Database=devMirror;User Id=sa;Password=Legend1!"
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1"
+    Private dev_cnx = STATIC_VARIABLES.Cnn
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
 
     Public Structure TemplateInfo
         Public ID As String
@@ -36,7 +36,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT TOP(1) ID FROM EnterLead;", cnx)
@@ -60,7 +60,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT * From tblEmailTemplates WHERE Department = '" & Department_Name & "';", cnx)
@@ -111,7 +111,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT * FROM tblEmailTemplates WHERE TemplateName = '" & TemplateName & "';", cnx)
@@ -141,7 +141,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
 
@@ -170,7 +170,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim strUP As String = "UPDATE tblEmailTemplates" & vbCrLf
@@ -195,7 +195,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim strUP As String = "UPDATE tblEmailTemplates" & vbCrLf
@@ -220,7 +220,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim strUP As String = "UPDATE tblEmailTemplates" & vbCrLf
@@ -245,7 +245,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim strUP As String = "UPDATE tblEmailTemplates" & vbCrLf
@@ -273,7 +273,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim cmdDEL As New SqlCommand("DELETE FROM tblEmailTemplates WHERE ID = " & Template_Info.ID & ";", cnx)
@@ -296,7 +296,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim cmdCHK As New SqlCommand("select count(ID) from tblEmailTemplates where TemplateName = '" & Template_Info.TemplateName & "';", cnx)
@@ -325,7 +325,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT Department FROM tblTestEmployee WHERE FName like '" & FName & "%' and LName like '" & LName & "%'", cnx)
@@ -481,7 +481,7 @@ Public Class emlTemplateLogic
     Private Function GetCompanyWebSite()
         Try
             Dim ret_str As String = ""
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT * FROM CompanyInfo;", cnx)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -513,7 +513,7 @@ Public Class emlTemplateLogic
     Private Function GetCompanyFax()
         Try
             Dim ret_str As String = ""
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT * FROM CompanyInfo;", cnx)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -545,7 +545,7 @@ Public Class emlTemplateLogic
     Private Function GetCompanyPhone()
         Try
             Dim ret_str As String = ""
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT * FROM CompanyInfo;", cnx)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -578,7 +578,7 @@ Public Class emlTemplateLogic
     Private Function GetCompanyAddressMulti()
         Try
             Dim ret_str As String = ""
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT StreetName,AddressLine2,City,State,Zip FROM CompanyInfo;", cnx)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -606,7 +606,7 @@ Public Class emlTemplateLogic
     Private Function GetCompanyAddressSingle()
         Try
             Dim ret_str As String = ""
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT StreetName,AddressLine2,City,State,Zip FROM CompanyInfo;", cnx)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -635,7 +635,7 @@ Public Class emlTemplateLogic
     Private Function GetCompanyName()
         Try
             Dim ret_str As String = ""
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT CompanyName from companyinfo;", cnx)
             ret_str = cmdGET.ExecuteScalar
@@ -828,7 +828,7 @@ Public Class emlTemplateLogic
             If Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             ElseIf Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             End If
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT * from tblEmailTemplates;", cnx)

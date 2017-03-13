@@ -5,7 +5,7 @@ Imports MapPoint
 Imports AxMapPoint
 
 Public Class launchSeparateMap
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
 
    Private Structure ExtendedInfo
         Public ID As String
@@ -43,7 +43,7 @@ Public Class launchSeparateMap
 
 
 
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 
         cnx.Open()
         Dim oLoc As MapPoint.Location
@@ -71,7 +71,7 @@ Public Class launchSeparateMap
 
     Private Function Get_Extended_Info_For_Map(ByVal RecID As String)
         Dim x As New ExtendedInfo
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select ID,StAddress,City,State,Zip,Contact1FirstName,Contact2FirstName,Contact1LastName,Contact1LastName,Contact2LastName,YearsOwned,HomeAge,HomeValue,HousePhone, AltPhone1, AltPhone2, Product1, Product2, Product3 FROM EnterLead WHERE ID= '" & RecID & "';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader

@@ -101,7 +101,7 @@ Public Class LOGIN
             Dim c As New USER_LOGICv2
             Try
                 If My.Computer.Network.IsAvailable = True Then
-                    Dim tstCNN As New System.Data.SqlClient.SqlConnection("SERVER=192.168.1.2;DataBase=Iss;User Id=sa;Password=spoken1;Timeout=5;")
+                    Dim tstCNN As New System.Data.SqlClient.SqlConnection(STATIC_VARIABLES.Cnn)
                     Try
                         tstCNN.Open()
                         tstCNN.Close()
@@ -292,7 +292,7 @@ Public Class LOGIN
 
 
     Private Class preLoad
-        Private Const cnxSTR As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+        Private cnxSTR As String = STATIC_VARIABLES.Cnn
         Private recCnt As Integer = 0
         Private netAvail As Boolean
         Private sqlSTATUS As Boolean

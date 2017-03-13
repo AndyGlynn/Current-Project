@@ -69,7 +69,7 @@ Public Class SCHEDULE_ACTION_LOGIC
         Public Sub InsertNewSchedAction(ByVal LeadNum As String, ByVal Department As String, _
          ByVal AssignedTo As String, ByVal ExecDate As Date, ByVal Notes As String, ByVal AttachedFiles As Boolean, ByVal scheduledAction As String, ByVal Hash As String, ByVal Completed As Boolean)
             Try
-                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.ScheduledTasks " _
+                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .ScheduledTasks " _
                 & " WHERE LeadNum = @LEADNUM and Department = @DEP and AssignedTo = @AT and ExecutionDate = @ED and SchedAction = @SA", cnn)
                 Dim param1 As SqlParameter = New SqlParameter("@LeadNum", LeadNum)
                 Dim param2 As SqlParameter = New SqlParameter("@DEP", Department)

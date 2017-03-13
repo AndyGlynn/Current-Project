@@ -27,7 +27,7 @@ Public Class printToPrinterContactList
     '' class houses implementation logic -> keep off front end. 
     '' dim xyz as new printToPrinterContactList(lvSales.ListViewItemCollection) 
 
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
 
     Public Structure RecordOBJ
         Public ID As String

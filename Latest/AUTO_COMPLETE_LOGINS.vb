@@ -10,7 +10,7 @@ Public Class AUTO_COMPLETE_LOGINS
         Try
             LOGIN.txtUserName.AutoCompleteCustomSource.Clear()
             Dim ArUSERS As New ArrayList
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT UserName from iss.dbo.userpermissiontable Order By UserName", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT UserName from userpermissiontable Order By UserName", cnn)
             Dim r1 As SqlDataReader
             cnn.Open()
             r1 = cmdGET.ExecuteReader

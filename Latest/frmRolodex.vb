@@ -63,7 +63,7 @@ Public Class frmRolodex
     End Sub
     Public Sub PopulateDefaultList(ByVal Department As String)
         Try
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ID,EmpFirstName,EmpLastName,Department,PrimaryPhone FROM iss.dbo.tblCompanyRolodex2 where Department like @DEP order by LName asc", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ID,EmpFirstName,EmpLastName,Department,PrimaryPhone FROM .tblCompanyRolodex2 where Department like @DEP order by LName asc", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@DEP", Department)
             cmdGET.Parameters.Add(param1)
             cnn.Open()
@@ -145,7 +145,7 @@ Public Class frmRolodex
             result = MsgBox("Are you sure you wish to delete this employee?", MsgBoxStyle.YesNo, "Delete Employee")
             Select Case result
                 Case Is = 6
-                    Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.tblCompanyRolodex2 where ID = @ID", cnn)
+                    Dim cmdDEL As SqlCommand = New SqlCommand("DELETE .tblCompanyRolodex2 where ID = @ID", cnn)
                     Dim param1 As SqlParameter = New SqlParameter("@ID", SelItem.Text)
                     cmdDEL.Parameters.Add(param1)
                     cnn.Open()

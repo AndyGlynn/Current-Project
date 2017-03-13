@@ -7,7 +7,7 @@ Imports System.Data.SqlClient
 
 Public Class generateCSVForDataMap
     Private str_Writer As StreamWriter
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
 
 
     '' \\server.greenworks.local\Company\ISS\PROTOTYPES\Mappoint\DataMap_Files
@@ -121,7 +121,7 @@ Public Class generateCSVForDataMap
                 resultsList = Get_Counts_Marketing(arFLDS, BeginDate, EndDate)
                 Exit Select
         End Select
-        
+
         Dim id As Guid = Guid.NewGuid
 
         File_Path = ("\\server.greenworks.local\Company\ISS\PROTOTYPES\Mappoint\DataMap_Files\" & id.ToString & ".csv")
@@ -158,7 +158,7 @@ Public Class generateCSVForDataMap
         '' third for each fld query city/state combo for result
         ''
         Dim arStates As New ArrayList
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select distinct(State) from EnterLead WHERE State is not null and State != ' ';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -215,7 +215,7 @@ Public Class generateCSVForDataMap
         '' third for each fld query city/state combo for result
         ''
         Dim arStates As New ArrayList
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select distinct(State) from EnterLead WHERE State is not null and State != ' ';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader

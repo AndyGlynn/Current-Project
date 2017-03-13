@@ -41,7 +41,7 @@ Public Class CommonNFO
     Private Sub GetINFO(ByVal ID As String)
         Try
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT Contact1FirstName,Contact1LastName,Contact2FirstName,Contact2LastName,Staddress,city,state,zip,housephone,altphone1,altphone2,phone1type,phone2type from iss.dbo.enterlead where ID = @ID", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT Contact1FirstName,Contact1LastName,Contact2FirstName,Contact2LastName,Staddress,city,state,zip,housephone,altphone1,altphone2,phone1type,phone2type from .enterlead where ID = @ID", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
             cmdGET.Parameters.Add(param1)
             cnn.Open()

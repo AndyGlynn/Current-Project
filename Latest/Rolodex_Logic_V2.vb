@@ -4,7 +4,7 @@ Imports System.Data
 
 
 Public Class Rolodex_Logic_V2
-    Private Const dev_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private dev_cnx As String = STATIC_VARIABLES.Cnn
     Private DoesDuplicateExist As Boolean
 
     Public Structure EmployeeOBJ

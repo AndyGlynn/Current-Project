@@ -529,7 +529,7 @@ End Class
 '#Region "Private Classes"
 
 'Private Class GetINFOAutoNotes
-'    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+'    Private Const STATIC_VARIABLES.Cnn As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
 '    Private arAutoNotes As List(Of String)
 '    Public ReadOnly Property List_Of_Auto_Notes As List(Of String)
 '        Get
@@ -544,7 +544,7 @@ End Class
 
 '        Dim res As New List(Of String)
 '        Try
-'            Dim cnx As New SqlConnection(pro_cnx)
+'            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 '            cnx.Open()
 '            Dim cmdGET As New SqlCommand("SELECT notes FROM SetApptNotes;", cnx)
 '            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -577,7 +577,7 @@ End Class
 '        Public ExtendedNote As String
 '    End Structure
 
-'    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+'    Private Const STATIC_VARIABLES.Cnn As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
 '    Private custNames As List(Of String)
 '    Private aptDateAndTime As OriginalApptDateAndTime
 '    Private ExtendInfo As AutoNoteInformation
@@ -608,7 +608,7 @@ End Class
 '    Private Function Get_Customer_names(ByVal recID As String)
 '        Try
 '            Dim arNames As New List(Of String)
-'            Dim cnx As New SqlConnection(pro_cnx)
+'            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 '            cnx.Open()
 '            Dim cmdGET As New SqlCommand("SELECT Contact1FirstName,Contact2FirstName from EnterLead WHERE ID = '" & recID & "';", cnx)
 '            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -640,7 +640,7 @@ End Class
 '    Private Function Get_Appointment_Date_And_Time(ByVal RecID As String)
 '        Try
 '            Dim x As New OriginalApptDateAndTime
-'            Dim cnx As New SqlConnection(pro_cnx)
+'            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 '            Dim apt_Date As String = ""
 '            Dim apt_Time As String = ""
 '            cnx.Open()
@@ -674,7 +674,7 @@ End Class
 '    Private Function Get_ExtendedAutoNote_Info(ByVal RecID)
 '        Try
 '            Dim a As New AutoNoteInformation
-'            Dim cnx As New SqlConnection(pro_cnx)
+'            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 '            cnx.Open()
 '            Dim cmdGET As New SqlCommand("SELECT ExtendedNote,DelayedInstall FROM tblAutoNotesPerLead WHERE LeadNumber = '" & RecID & "';", cnx)
 '            Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -698,7 +698,7 @@ End Class
 
 'End Class
 'Private Class InsertNewAuotNote
-'    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+'    Private Const STATIC_VARIABLES.Cnn As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
 
 '    Public Sub New(ByVal Note As String)
 '        Insert_Note(Note)
@@ -710,7 +710,7 @@ End Class
 '                Exit Sub
 '            Else
 '                '' insert the new note. 
-'                Dim cnx As New SqlConnection(pro_cnx)
+'                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 '                cnx.Open()
 '                Dim cmdINS As New SqlCommand("INSERT SetApptNotes(Notes) values('" & Note & "');", cnx)
 '                cmdINS.ExecuteScalar()
@@ -729,7 +729,7 @@ End Class
 '    Private Function Check_For_DuplicateNote(ByVal Note As String)
 '        Try
 '            Dim cnt As Integer = 0
-'            Dim cnx As New SqlConnection(pro_cnx)
+'            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 '            cnx.Open()
 '            Dim cmdCNT As New SqlCommand("SELECT COUNT(ID) FROM SetApptNotes WHERE Notes = '" & Note & "';", cnx)
 '            cnt = cmdCNT.ExecuteScalar
@@ -747,7 +747,7 @@ End Class
 '    End Function
 'End Class
 'Private Class SetMoveAppointment
-'    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+'    Private Const STATIC_VARIABLES.Cnn As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
 
 '    '' notes:
 '    '' first determine if lead exists.
@@ -777,7 +777,7 @@ End Class
 '    End Sub
 '    Private Function Check_If_Exists_Alread(ByVal RecID As String)
 '        Try
-'            Dim cnx As New SqlConnection(pro_cnx)
+'            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 '            cnx.Open()
 '            Dim cmdGET As New SqlCommand("SELECT COUNT(ID) FROM tblAutoNotesPerLead where LeadNumber = '" & RecID & "';", cnx)
 '            Dim cnt As Integer = cmdGET.ExecuteScalar
@@ -796,7 +796,7 @@ End Class
 
 '    Private Sub Insert_New_ExtendedInfo(ByVal RecID As String, ByVal AutoNote As String, ByVal ExtendedNote As String, ByVal DelayedInstall As Boolean, ByVal DateLogged As DateTime, ByVal UserLogged As String)
 '        Try
-'            Dim cnx As New SqlConnection(pro_cnx)
+'            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 '            cnx.Open()
 '            Dim cmdINS As New SqlCommand("INSERT tblAutoNotesPerLead(LeadNumber,AutoNote,ExtendedNote,DelayedInstall,DateLogged,UserLogged) values('" & RecID & "','" & AutoNote & "','" & ExtendedNote & "','" & DelayedInstall & "','" & DateLogged & "','" & UserLogged & "');", cnx)
 '            cmdINS.ExecuteScalar()
@@ -813,7 +813,7 @@ End Class
 '    End Sub
 '    Private Sub Update_ExtendedInfoLog(ByVal RecID As String, ByVal AutoNote As String, ByVal ExtendedNote As String, ByVal DelayedInstall As Boolean, ByVal DateLogged As DateTime, ByVal UserLogged As String)
 '        Try
-'            Dim cnx As New SqlConnection(pro_cnx)
+'            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
 '            cnx.Open()
 '            '' yyyyMMdd Format for sql
 '            '' 

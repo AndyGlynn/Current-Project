@@ -13,7 +13,7 @@ Public Class FindLogic
         Try
             FindLead.lstSearchResults.Items.Clear()
             Dim CNN As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdGet As SqlCommand = New SqlCommand("iss.dbo.Search", CNN)
+            Dim cmdGet As SqlCommand = New SqlCommand("Search", CNN)
             Dim param1 As SqlParameter = New SqlParameter("@String", Str)
             cmdGet.CommandType = CommandType.StoredProcedure
             cmdGet.Parameters.Add(param1)

@@ -933,7 +933,7 @@ Public Class Sales
     End Sub
 
     Private Class PullNoResults
-        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1"
+        Private pro_cnx As String = STATIC_VARIABLES.Cnn
         '' query Results Structure
         '' -----------------------
         '' ApptDate,ID,Rep1,Rep2
@@ -958,7 +958,7 @@ Public Class Sales
             _NoRes = Get_No_Results()
         End Sub
         Private Function Get_No_Results()
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             Try
                 cnx.Open()
                 Dim cmdGET As New SqlCommand("exec [dbo].[NoResultsSummary];", cnx)

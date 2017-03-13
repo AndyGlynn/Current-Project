@@ -11,8 +11,8 @@ Imports System.Linq    '' inline sql queries
 
 Public Class ImportData_V2
 
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Data_Automation;User Id=sa;Password=spoken1"
-    Private Const dev_cnx As String = "SERVER=PC-101\DEVMIRROREXPRESS;Database=TestMigration;User Id=sa;Password=Legend1!"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
+    Private dev_cnx As String = STATIC_VARIABLES.Cnn
 
     Private Const Production_Dir As String = "\\192.168.1.2\Company\ISS\Data Automation Reports\"
     Private Const Testing_Dir As String = "C:\Users\Clay\Desktop\Print Leads\Data Automation Reports\"
@@ -246,8 +246,8 @@ Public Class ImportData_V2
 
     Public Class sqlOperations
         '' queries, updates, creates
-        Private Const dev_cnx As String = "SERVER=PC-101\DEVMIRROREXPRESS;Database=TestMigration;User Id=sa;Password=Legend1!"
-        Private Const cnx_string As String = "SERVER=192.168.1.2;Database=Data_Automation;User Id=sa;Password=spoken1"
+        Private dev_cnx As String = STATIC_VARIABLES.Cnn
+        Private cnx_string As String = STATIC_VARIABLES.Cnn
         Private Const Testing_Dir As String = "C:\Users\Clay\Desktop\Print Leads\Data Automation Reports\"
         Private Const Production_Dir As String = "\\192.168.1.2\Company\ISS\Data Automation Reports\"
 
@@ -264,9 +264,9 @@ Public Class ImportData_V2
             Try
                 Dim cnx As SqlConnection
                 If Dev_Or_Production = True Then
-                    cnx = New SqlConnection(pro_cnx)
+                    cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
                 ElseIf Dev_Or_Production = False Then
-                    cnx = New SqlConnection(pro_cnx)
+                    cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
                 End If
                 '' i360__Home__Address__c, i360__Home_City__c, i360__Home_State__c, i360__Home_Zip_Postal_Code__c"
                 cnx.Open()
@@ -519,9 +519,9 @@ Public Class ImportData_V2
                 '' both the structure and the key of the hash entry will house the id from the table
                 '' 
                 If Dev_Or_Production = True Then
-                    cnx = New SqlConnection(pro_cnx)
+                    cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
                 ElseIf Dev_Or_Production = False Then
-                    cnx = New SqlConnection(pro_cnx)
+                    cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
                 End If
 
                 cnx.Open()
@@ -685,9 +685,9 @@ Public Class ImportData_V2
                 Dim cnt As Integer = 0
                 Dim cnx As SqlConnection
                 If DEV_or_Production = True Then
-                    cnx = New SqlConnection(pro_cnx)
+                    cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
                 ElseIf DEV_or_Production = False Then
-                    cnx = New SqlConnection(pro_cnx)
+                    cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
                 End If
                 cnx.Open()
                 Dim cmdCNT As New SqlCommand("SELECT COUNT(Id) FROM [dbo].[" & TableName & "];", cnx)
@@ -704,7 +704,7 @@ Public Class ImportData_V2
 
         End Function
 
- 
+
     End Class
 
 

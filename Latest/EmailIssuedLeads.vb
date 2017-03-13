@@ -8,7 +8,7 @@ Imports System.IO
 Imports System.Net.Mail
 
 Public Class EmailIssuedLeads
-    Public Const cnx_string As String = "Server=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1"
+    Public cnx_string As String = STATIC_VARIABLES.Cnn
 
     ''
     '' notes: 8-15-2015
@@ -150,7 +150,7 @@ Public Class EmailIssuedLeads
     Public Function GetExclusions()
         Try
             Dim cnx_ex As SqlConnection = New SqlConnection(cnx_string)
-            Dim cmdGet As SqlCommand = New SqlCommand("SELECT * From iss.dbo.Exclusions", cnx_ex)
+            Dim cmdGet As SqlCommand = New SqlCommand("SELECT * From .Exclusions", cnx_ex)
             cnx_ex.Open()
             Dim exclusion_ As New Exclusions
             Dim r1 As SqlDataReader = cmdGet.ExecuteReader

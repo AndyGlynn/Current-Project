@@ -130,7 +130,7 @@ Public Class USER_LOGICv2
     ''
     '' consts: sql cnx
     '' 
-    Public Const cnx As String = "Server=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1"
+    Public cnx As String = STATIC_VARIABLES.Cnn
 
     ''
     '' props:

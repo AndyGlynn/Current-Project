@@ -5,7 +5,7 @@ Imports System.Data.SqlClient
 
 Public Class generateLists
 
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
     Private SalesResults As List(Of String)
     Private MarketingResults As List(Of String)
     Private CityList As List(Of String)
@@ -40,7 +40,7 @@ Public Class generateLists
 
     Private Function Get_Cities()
         Dim arRes As New List(Of String)
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select Distinct(City),state FROM EnterLead WHERE City is not Null and City != ' ';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -55,7 +55,7 @@ Public Class generateLists
 
     Private Function Get_MResults()
         Dim arRes As New List(Of String)
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select Distinct(MarketingResults) FROM EnterLead WHERE MarketingResults is not Null and MarketingResults != ' ';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -69,7 +69,7 @@ Public Class generateLists
     End Function
     Private Function Get_SResults()
         Dim arRes As New List(Of String)
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select Distinct(Result) FROM EnterLead WHERE Result is not Null and Result != ' ';", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader

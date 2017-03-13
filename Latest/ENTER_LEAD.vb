@@ -333,7 +333,7 @@ Public Class ENTER_LEAD
         End Sub
         Public Sub InsertWH(ByVal str As String, ByVal cbo As ComboBox)
             Try
-                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.WorkHours WHERE Hour = '" & str & "'", cnn)
+                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .WorkHours WHERE Hour = '" & str & "'", cnn)
                 'Dim param1 As SqlParameter = New SqlParameter("@str", str)
 
                 'cmdCNT.Parameters.Add(param1)
@@ -420,7 +420,7 @@ Public Class ENTER_LEAD
         Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
         Public Sub AddNewProduct(ByVal Product As String, ByVal ProdACRO As String, ByVal CBO As String)
             Try
-                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT count(ID) from iss.dbo.products where Product = @Product", cnn)
+                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT count(ID) from .products where Product = @Product", cnn)
                 Dim param1 As SqlParameter = New SqlParameter("@Product", Product)
                 cmdCNT.Parameters.Add(param1)
                 cnn.Open()
@@ -594,7 +594,7 @@ Public Class ENTER_LEAD
         Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
         Public Sub InsertNewPLS(ByVal PLS As String)
             Try
-                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.PrimaryLeadSource WHERE PrimaryLead = @PLS", cnn)
+                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .PrimaryLeadSource WHERE PrimaryLead = @PLS", cnn)
                 Dim param1 As SqlParameter = New SqlParameter("@PLS", PLS)
                 Dim g As New Captilalize
                 PLS = g.CapitalizeText(PLS)
@@ -635,7 +635,7 @@ Public Class ENTER_LEAD
         Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
         Public Sub InsertSLS(ByVal PLS As String, ByVal SLS As String)
             Try
-                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.SecondaryLeadSource WHERE SecondaryLead = @SLS and PrimaryLead = @PLS", cnn)
+                Dim cmdCNT As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .SecondaryLeadSource WHERE SecondaryLead = @SLS and PrimaryLead = @PLS", cnn)
                 Dim param1 As SqlParameter = New SqlParameter("@SLS", SLS)
                 Dim param2 As SqlParameter = New SqlParameter("@PLS", PLS)
                 cmdCNT.Parameters.Add(param1)
@@ -701,7 +701,7 @@ Public Class ENTER_LEAD
                 dTab.Columns.Add(dColContact1FName)
                 dTab.Columns.Add(dColContactAddress)
                 dTab.Columns.Add(dColLeadNumber)
-                Dim CmdGET As SqlCommand = New SqlCommand("SELECT ID, Contact1FirstName, Contact1LastName,  StAddress, City, State, Zip from iss.dbo.enterlead WHERE StAddress = @STA and City = @CTY and State = @STN and Zip = @ZP", cnn)
+                Dim CmdGET As SqlCommand = New SqlCommand("SELECT ID, Contact1FirstName, Contact1LastName,  StAddress, City, State, Zip from .enterlead WHERE StAddress = @STA and City = @CTY and State = @STN and Zip = @ZP", cnn)
                 Dim param1 As SqlParameter = New SqlParameter("@STN", State)
                 Dim param2 As SqlParameter = New SqlParameter("@STA", StAddress)
                 Dim param3 As SqlParameter = New SqlParameter("@CTY", City)
@@ -1229,7 +1229,7 @@ Public Class ENTER_LEAD
     End Class
     Public Sub AutoFillState(ByVal city)
         Try
-            Dim cmdGETState As SqlCommand = New SqlCommand("SELECT State from iss.dbo.CityPull where City = @city", cnn)
+            Dim cmdGETState As SqlCommand = New SqlCommand("SELECT State from .CityPull where City = @city", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@city", city)
             cnn.Open()
             cmdGETState.Parameters.Add(param1)

@@ -40,7 +40,7 @@ Public Class frmEditSpecialInstructions
     End Sub
 
     Private Class GetSpecialInstructions
-        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+        Private pro_cnx As String = STATIC_VARIABLES.Cnn
         Private _spi As String = ""
         Public ReadOnly Property SpecialInstructions As String
             Get
@@ -53,7 +53,7 @@ Public Class frmEditSpecialInstructions
 
         Private Function Get_SPI(ByVal RecID As String)
             Try
-                Dim cnx As New SqlConnection(pro_cnx)
+                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
                 Dim retSTR As String = ""
                 cnx.Open()
                 Dim cmdGET As New SqlCommand("SELECT SpecialInstruction FROM EnterLead WHERE ID = '" & RecID & "';", cnx)
@@ -73,7 +73,7 @@ Public Class frmEditSpecialInstructions
     End Class
 
     Private Class UpdateSpecialInstructions
-        Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+        Private pro_cnx As String = STATIC_VARIABLES.Cnn
 
         Public Sub New(ByVal RecID As String, ByVal SPI As String)
             UpdateSPI(RecID, SPI)
@@ -81,7 +81,7 @@ Public Class frmEditSpecialInstructions
 
         Private Sub UpdateSPI(ByVal RecID As String, ByVal SPI As String)
             Try
-                Dim cnx As New SqlConnection(pro_cnx)
+                Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
                 cnx.Open()
                 Dim cmdGET As New SqlCommand("UPDATE EnterLead SET SpecialInstruction = '" & SPI & "' WHERE ID = '" & RecID & "';", cnx)
                 cmdGET.ExecuteReader()

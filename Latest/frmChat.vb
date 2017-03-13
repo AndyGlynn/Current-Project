@@ -17,7 +17,7 @@ Public Class frmChat
     End Sub
     Private Sub GetUsers()
         Try
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT UserName from iss.dbo.userpermissiontable", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT UserName from  userpermissiontable", cnn)
             Dim arUser As New ArrayList
             Dim r1 As SqlDataReader
             cnn.Open()
@@ -45,7 +45,7 @@ Public Class frmChat
     End Sub
     Private Function UserOnline(ByVal UserName As String) As Boolean
         Try
-            Dim cmdONLINE As SqlCommand = New SqlCommand("SELECT LOGGEDON from iss.dbo.userpermissiontable where UserName = @USR", cnn)
+            Dim cmdONLINE As SqlCommand = New SqlCommand("SELECT LOGGEDON from  userpermissiontable where UserName = @USR", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@USR", UserName)
             cmdONLINE.Parameters.Add(param1)
             Dim ONLINE As Boolean

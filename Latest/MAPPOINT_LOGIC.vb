@@ -49,8 +49,8 @@ Public Class MAPPOINT_LOGIC
 
     Public Sub DoIt(ByVal radius As Double, ByVal StartingZip As String)
         Try
-            Dim cmdGET As SqlCommand = New SqlCommand("select distinct(zip) from iss.dbo.enterlead", CNN)
-            Dim cmdCNT As SqlCommand = New SqlCommand("select Count(distinct(zip)) from iss.dbo.enterlead ", CNN)
+            Dim cmdGET As SqlCommand = New SqlCommand("select distinct(zip) from .enterlead", CNN)
+            Dim cmdCNT As SqlCommand = New SqlCommand("select Count(distinct(zip)) from .enterlead ", CNN)
             Dim dataset As MapPoint.DataSet
             Dim dset_Name As Object = "TEST"
             CNN.Open()
@@ -166,8 +166,8 @@ Public Class MAPPOINT_LOGIC
     Public Sub DoItCity(ByVal radius As Double, ByVal City As String, ByVal StatePulled As String)
         Try
             WCaller.pbRadiusSearch.Maximum = 100
-            Dim cmdGET As SqlCommand = New SqlCommand("select city,state from iss.dbo.enterlead group by city,state", CNN)
-            Dim cmdCNT As SqlCommand = New SqlCommand("select Count(city) from iss.dbo.enterlead group by city, state", CNN)
+            Dim cmdGET As SqlCommand = New SqlCommand("select city,state from .enterlead group by city,state", CNN)
+            Dim cmdCNT As SqlCommand = New SqlCommand("select Count(city) from .enterlead group by city, state", CNN)
             CNN.Open()
             Dim r As SqlDataReader = cmdCNT.ExecuteReader(CommandBehavior.SingleResult)
             r.Read()
@@ -188,7 +188,7 @@ Public Class MAPPOINT_LOGIC
             Dim p As Integer = 0
             '' doesnt pull city 'fayette' ?
             '' was pointing to wrong table.
-            '' reflected to point at iss.dbo.tblenterlead with a group by clause on city,state
+            '' reflected to point at .tblenterlead with a group by clause on city,state
             ''
             Dim arCity As New ArrayList
             Dim arST As New ArrayList
@@ -227,7 +227,7 @@ Public Class MAPPOINT_LOGIC
                     '' The requirements are mappoint and a List of either cities or Zip codes to be verified against.
                     '' First you have to supply the method with a starting radius
                     '' second supply mappoint's dataset with a list of cities or zips to verify against (YOUR data)
-                    '' in this instance it will be a list of cities supplied from a SQL store (iss.dbo.citypull or iss.dbo.tblZips)
+                    '' in this instance it will be a list of cities supplied from a SQL store (.citypull or .tblZips)
                     '' third draw a shape on the map
                     '' then have mappoint find out wether the city or zip is within the shape.
                     '' --------

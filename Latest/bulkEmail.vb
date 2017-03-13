@@ -6,8 +6,8 @@ Imports System.Data.SqlClient
 
 
 Public Class bulkEmail
-    Private Const dev_cnx As String = "SERVER=PC-101\DEVMIRROREXPRESS;Database=ISS;User Id=sa;Password=Legend1!"
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1"
+    Private dev_cnx = STATIC_VARIABLES.Cnn
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
 
     '' Purpose: Take a (list) of "leads" and apply a template to them, then send out to be mailed.
     '' 
@@ -65,7 +65,7 @@ Public Class bulkEmail
             Dim arLeadIds As New ArrayList
             Dim cnx As SqlConnection
             If Dev_or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             ElseIf Dev_or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             End If
@@ -128,7 +128,7 @@ Public Class bulkEmail
             Dim depart_ As String = ""
             Dim cnx As SqlConnection
             If Dev_Or_Pro = False Then
-                cnx = New SqlConnection(pro_cnx)
+                cnx = New SqlConnection(STATIC_VARIABLES.Cnn)
             ElseIf Dev_Or_Pro = True Then
                 cnx = New SqlConnection(dev_cnx)
             End If

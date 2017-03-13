@@ -34,7 +34,7 @@ Public Class Print_Sales_Perf_Report
     Private Const Pro_ReportDirectory As String = "\\192.168.1.2\Company\ISS\Sales Performance Reports\"
     Private Const Dev_ReportDirectory As String = "C:\Users\Clay\Desktop\Sales Performance Reports\"
 
-    Private Const cnx As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1;"
+    Private cnx As String = STATIC_VARIABLES.Cnn
 
     Public Structure LineOfData
         Public ControlName As String

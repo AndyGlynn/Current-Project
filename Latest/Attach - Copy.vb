@@ -119,7 +119,7 @@ Public Class Attach2
 
     Public Sub GetFilesSM(ByVal ID As String)
         'Try
-        '    Dim cmdGetFiles As SqlCommand = New SqlCommand("Select Location from iss.dbo.attachfiles where LeadNum = @ID", cnn)
+        '    Dim cmdGetFiles As SqlCommand = New SqlCommand("Select Location from .attachfiles where LeadNum = @ID", cnn)
         '    Dim param1 As SqlParameter = New SqlParameter("@ID", ID)
         '    cmdGetFiles.Parameters.Add(param1)
         '    Dim r1 As SqlDataReader
@@ -176,7 +176,7 @@ Public Class Attach2
                 Exit Sub
             End If
 
-            Dim cmdGetFile As SqlCommand = New SqlCommand("Select Location from iss.dbo.attachfiles where LeadNum = @ID and Location LIKE '%" & file.ToString & "'", cnn)
+            Dim cmdGetFile As SqlCommand = New SqlCommand("Select Location from .attachfiles where LeadNum = @ID and Location LIKE '%" & file.ToString & "'", cnn)
             Dim r1 As SqlDataReader
             Dim param1 As SqlParameter = New SqlParameter("@ID", id)
             cmdGetFile.Parameters.Add(param1)

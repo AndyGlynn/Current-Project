@@ -56,7 +56,7 @@ Public Class ScheduleAction
     Private Sub Populate_Edit()
         Try
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT * from iss.dbo.ScheduledTasks where id = '" & Me.EditId & "'", cnn)
+            Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT * from .ScheduledTasks where id = '" & Me.EditId & "'", cnn)
             Dim ArUsers As New ArrayList
             cnn.Open()
             Dim r1 As SqlDataReader
@@ -140,7 +140,7 @@ Public Class ScheduleAction
         Try
             Me.txtAssignedto.AutoCompleteCustomSource.Clear()
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT UserFirstName, UserLastName from iss.dbo.userpermissiontable", cnn)
+            Dim cmdGETUSR As SqlCommand = New SqlCommand("SELECT UserFirstName, UserLastName from  userpermissiontable", cnn)
             Dim ArUsers As New ArrayList
             cnn.Open()
             Dim r1 As SqlDataReader
@@ -169,7 +169,7 @@ Public Class ScheduleAction
         Try
             Me.CboScheduledAction.Items.Clear()
             Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ScheduledAction from iss.dbo.actionlist", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT ScheduledAction from  actionlist", cnn)
             Dim r1 As SqlDataReader
             cnn.Open()
             r1 = cmdGET.ExecuteReader
@@ -199,7 +199,7 @@ Public Class ScheduleAction
         ep.BlinkStyle = ErrorBlinkStyle.NeverBlink
         ep.Clear()
         Dim cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
-        Dim cmdVAL As SqlCommand = New SqlCommand("SELECT COUNT(ID) From iss.dbo.enterlead where ID = @ID", cnn)
+        Dim cmdVAL As SqlCommand = New SqlCommand("SELECT COUNT(ID) From  enterlead where ID = @ID", cnn)
         Dim param1 As SqlParameter = New SqlParameter("@ID", LeadNumber)
         cnn.Open()
         cmdVAL.Parameters.Add(param1)
@@ -246,7 +246,7 @@ Public Class ScheduleAction
     Private Sub remove_file()
 
         Dim cnn As SqlConnection = New SqlConnection(STATIC_VARIABLES.Cnn)
-        Dim cmdGETUSR As SqlCommand = New SqlCommand("update iss.dbo.ScheduledTasks set attachedfiles = 'False', attachedhashvalue = '0' where id = '" & Me.EditId & "'", cnn)
+        Dim cmdGETUSR As SqlCommand = New SqlCommand("update  ScheduledTasks set attachedfiles = 'False', attachedhashvalue = '0' where id = '" & Me.EditId & "'", cnn)
         Try
             cnn.Open()
             cmdGETUSR.ExecuteNonQuery()

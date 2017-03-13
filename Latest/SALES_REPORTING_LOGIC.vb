@@ -98,7 +98,7 @@ Public Class SALES_REPORTING_LOGIC
             End If
             Dim fs As New StreamWriter("\\ekg1\iss\Reports\DataSets\NoResults_" + putbacktogether.ToString + ".xml") '' directory needs to point to a 'iss share'
             '\\ekg1\iss\Reports\DataSets\'Generate a Name for the xml file 
-            Dim cmdGET As SqlCommand = New SqlCommand("Select XML_Val from iss.dbo.InsertXMLForReporting", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("Select XML_Val from .InsertXMLForReporting", cnn)
             cnn.Open()
             Dim r1 As SqlDataReader
             r1 = cmdGET.ExecuteReader
@@ -119,7 +119,7 @@ Public Class SALES_REPORTING_LOGIC
         End Try
 
         Try
-            Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.InsertXMLForReporting", cnn)
+            Dim cmdDEL As SqlCommand = New SqlCommand("DELETE .InsertXMLForReporting", cnn)
 
             cnn.Open()
             cmdDEL.ExecuteNonQuery()
@@ -145,7 +145,7 @@ Public Class SALES_REPORTING_LOGIC
             End If
             Dim fs As New StreamWriter("\\ekg1\iss\Reports\DataSets\report_" + putbacktogether.ToString + ".xml") '' directory needs to point to a 'iss share'
             '\\ekg1\iss\Reports\DataSets\'Generate a Name for the xml file 
-            Dim cmdGET As SqlCommand = New SqlCommand("Select XML_Val from iss.dbo.InsertXMLForReporting", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("Select XML_Val from .InsertXMLForReporting", cnn)
             cnn.Open()
             Dim r1 As SqlDataReader
             r1 = cmdGET.ExecuteReader
@@ -166,7 +166,7 @@ Public Class SALES_REPORTING_LOGIC
         End Try
 
         Try
-            Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.InsertXMLForReporting", cnn)
+            Dim cmdDEL As SqlCommand = New SqlCommand("DELETE .InsertXMLForReporting", cnn)
 
             cnn.Open()
             cmdDEL.ExecuteNonQuery()
@@ -499,7 +499,7 @@ Public Class SALES_REPORTING_LOGIC
     & " set @ApptDate = '8/16/2008' " _
     & " select ID ,Contact1FirstName ,Contact1LastName ,Contact2FirstName ,Contact2LastName ,StAddress ,city ,state ,zip , " _
     & " product1 ,product2 , product3 ,appttime ,rep1 ,rep2 " _
-    & " from iss.dbo.enterlead " _
+    & " from .enterlead " _
     & " where Result =' ' or Result is null and ApptDate = @ApptDate " _
     & " order by ApptTime, Rep1 "
         Private m_fields As ArrayList
@@ -512,7 +512,7 @@ Public Class SALES_REPORTING_LOGIC
         & " set @ApptDate = '8/16/2008' " _
         & " select ID ,Contact1FirstName ,Contact1LastName ,Contact2FirstName ,Contact2LastName ,StAddress ,city ,state ,zip , " _
         & " product1 ,product2 , product3 ,appttime ,rep1 ,rep2 " _
-        & " from iss.dbo.enterlead " _
+        & " from .enterlead " _
         & " where Result =' ' or Result is null and ApptDate = @ApptDate " _
         & " order by ApptTime, Rep1 ", cnn)
                 cnn.Open()
@@ -795,7 +795,7 @@ Public Class SALES_REPORTING_LOGIC
                 End If
                 Dim fs As New StreamWriter("\\ekg1\iss\Reports\DataSets\SalesSummary_" + putbacktogether.ToString + ".xml") '' directory needs to point to a 'iss share'
                 '\\ekg1\iss\Reports\DataSets\'Generate a Name for the xml file 
-                Dim cmdGET As SqlCommand = New SqlCommand("Select XML_Val from iss.dbo.InsertXMLForReporting", cnn)
+                Dim cmdGET As SqlCommand = New SqlCommand("Select XML_Val from .InsertXMLForReporting", cnn)
                 cnn.Open()
                 Dim r1 As SqlDataReader
                 r1 = cmdGET.ExecuteReader
@@ -815,7 +815,7 @@ Public Class SALES_REPORTING_LOGIC
             End Try
 
             Try
-                Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.InsertXMLForReporting", cnn)
+                Dim cmdDEL As SqlCommand = New SqlCommand("DELETE .InsertXMLForReporting", cnn)
 
                 cnn.Open()
                 cmdDEL.ExecuteNonQuery()
@@ -833,7 +833,7 @@ Public Class SALES_REPORTING_LOGIC
                 '' clean up temp table, if it exists.
                 '' 
                 Try
-                    Dim cmdDEL As SqlCommand = New SqlCommand("Drop table iss.dbo.temp", cnn)
+                    Dim cmdDEL As SqlCommand = New SqlCommand("Drop table .temp", cnn)
                     cnn.Open()
                     cmdDEL.ExecuteNonQuery()
                     cnn.Close()
@@ -1016,7 +1016,7 @@ Public Class SALES_REPORTING_LOGIC
                     '' 6 = 'Yes'
                     Case Is = DialogResult.OK
 
-                        Dim cmdDROP As SqlCommand = New SqlCommand("Drop table iss.dbo.temp", cnn)
+                        Dim cmdDROP As SqlCommand = New SqlCommand("Drop table .temp", cnn)
                         cnn.Open()
                         cmdDROP.ExecuteNonQuery()
 
@@ -1077,131 +1077,131 @@ Public Class SALES_REPORTING_LOGIC
 
         Public Sub GenerateFieldsList_Summary(ByVal ApptDate As String)
             Try
-                Dim cmd1 As SqlCommand = New SqlCommand("create table iss.dbo.temp (id int identity,  rep varchar (max), issued integer, demos integer, " _
+                Dim cmd1 As SqlCommand = New SqlCommand("create table .temp (id int identity,  rep varchar (max), issued integer, demos integer, " _
     & " nodemos integer, resets integer, nothits integer, sales integer, dollars  money, noresults  integer)", cnn)
                 cnn.Open()
                 cmd1.ExecuteNonQuery()
                 cnn.Close()
 
-                Dim cmdGet As SqlCommand = New SqlCommand("insert into iss.dbo.temp (rep) " _
-    & " select distinct rep1 from iss.dbo.leadhistory " _
+                Dim cmdGet As SqlCommand = New SqlCommand("insert into .temp (rep) " _
+    & " select distinct rep1 from .leadhistory " _
     & " where rep1 is not null and Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) " _
     & " order by rep1 " _
     & " " _
     & " declare @cnt as integer " _
-    & " set @cnt = (select count (id) from iss.dbo.temp) " _
+    & " set @cnt = (select count (id) from .temp) " _
     & " " _
     & " declare @id as integer " _
     & " set @id = 1 " _
     & " " _
     & " declare @rep as varchar (max) " _
-    & " set @rep = (select rep from iss.dbo.temp where id = @id ) " _
+    & " set @rep = (select rep from .temp where id = @id ) " _
     & " " _
     & " " _
     & " While @id <= @cnt " _
     & " Begin " _
-    & " update iss.dbo.temp " _
-    & " set issued = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set issued = (select count (sresult) from .leadhistory " _
     & " where rep1 = @rep and Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where id = @id " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set resets = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set resets = (select count (sresult) from .leadhistory " _
     & " where rep1 = @rep and sresult = 'Reset' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) )" _
     & " where id = @id " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set demos = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set demos = (select count (sresult) from .leadhistory " _
     & " where rep1 = @rep and sresult = 'Demo/No Sale' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) )" _
     & " where id = @id " _
     & " " _
-    & " update iss.dbo.temp  " _
-    & " set sales = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp  " _
+    & " set sales = (select count (sresult) from .leadhistory " _
     & " where rep1 = @rep and sresult = 'Sale' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) )" _
     & " where id = @id " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set dollars = (select sum (QuotedSold) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set dollars = (select sum (QuotedSold) from .leadhistory " _
     & " where rep1 = @rep and sresult = 'Sale' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where id = @id " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set nothits = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set nothits = (select count (sresult) from .leadhistory " _
     & " where rep1 = @rep and sresult = 'Not Hit' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where id = @id " _
     & " " _
-    & " update iss.dbo.temp  " _
-    & " set nodemos = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp  " _
+    & " set nodemos = (select count (sresult) from .leadhistory " _
     & " where rep1 = @rep and sresult = 'No Demo' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where id = @id " _
     & " " _
-    & " update iss.dbo.temp " _
+    & " update .temp " _
     & " set noresults = (select count (id) from enterlead " _
     & " where rep1 = @rep and NeedsSaleResult = 'True' and  " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where id = @id " _
     & " " _
     & " set @id = @id + 1 " _
-    & " set @rep = (select rep from iss.dbo.temp where id = @id) " _
+    & " set @rep = (select rep from .temp where id = @id) " _
     & " " _
     & " End " _
-    & "  insert iss.dbo.temp(rep) " _
+    & "  insert .temp(rep) " _
     & " values ('Total') " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set issued = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set issued = (select count (sresult) from .leadhistory " _
     & " where Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where rep = 'Total' " _
     & " " _
-    & "  update iss.dbo.temp " _
-    & " set nothits = (select count (sresult) from iss.dbo.leadhistory " _
+    & "  update .temp " _
+    & " set nothits = (select count (sresult) from .leadhistory " _
     & " where sresult = 'Not Hit' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) )" _
     & " where rep = 'Total' " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set demos = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set demos = (select count (sresult) from .leadhistory " _
     & " where sresult = 'Demo/No Sale' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) )" _
     & " where rep = 'Total' " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set nodemos = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set nodemos = (select count (sresult) from .leadhistory " _
     & " where sresult = 'No Demo' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where rep = 'Total' " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set sales = (select count (sresult) from iss.dbo.leadhistory  " _
+    & " update .temp " _
+    & " set sales = (select count (sresult) from .leadhistory  " _
     & " where sresult = 'Sale' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where rep = 'Total' " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set resets = (select count (sresult) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set resets = (select count (sresult) from .leadhistory " _
     & " where sresult = 'Reset' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where rep = 'Total' " _
     & " " _
-    & " update iss.dbo.temp  " _
+    & " update .temp  " _
     & " set noresults = (select count (id) from enterlead " _
     & " where  rep1 is not null and NeedsSaleResult = 'True' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) )" _
     & " where rep = 'Total' " _
     & " " _
-    & " update iss.dbo.temp " _
-    & " set dollars = (select sum (QuotedSold) from iss.dbo.leadhistory " _
+    & " update .temp " _
+    & " set dollars = (select sum (QuotedSold) from .leadhistory " _
     & " where sresult = 'Sale' and " _
     & " Convert(varchar (12), ApptDate, 101) = convert(varchar (12), @Date, 101) ) " _
     & " where rep = 'Total' " _
     & " " _
-    & " select * from iss.dbo.temp ", cnn)
+    & " select * from .temp ", cnn)
 
 
 
@@ -1719,7 +1719,7 @@ Public Class SALES_REPORTING_LOGIC
                 End If
                 Dim fs As New StreamWriter("\\ekg1\iss\Reports\DataSets\ScheduledTasks_" + putbacktogether.ToString + ".xml") '' directory needs to point to a 'iss share'
                 '\\ekg1\iss\Reports\DataSets\'Generate a Name for the xml file 
-                Dim cmdGET As SqlCommand = New SqlCommand("Select XML_Val from iss.dbo.InsertXMLForReporting", cnn)
+                Dim cmdGET As SqlCommand = New SqlCommand("Select XML_Val from .InsertXMLForReporting", cnn)
                 cnn.Open()
                 Dim r1 As SqlDataReader
                 r1 = cmdGET.ExecuteReader
@@ -1739,7 +1739,7 @@ Public Class SALES_REPORTING_LOGIC
             End Try
 
             Try
-                Dim cmdDEL As SqlCommand = New SqlCommand("DELETE iss.dbo.InsertXMLForReporting", cnn)
+                Dim cmdDEL As SqlCommand = New SqlCommand("DELETE .InsertXMLForReporting", cnn)
 
                 cnn.Open()
                 cmdDEL.ExecuteNonQuery()
@@ -2031,7 +2031,7 @@ Public Class SALES_REPORTING_LOGIC
             Public Sub GenerateFieldsList_Tasks()
                 Try
                     Dim cmdGet As SqlCommand = New SqlCommand("Select  scheduledtasks.ID, Completed,Executiondate, Leadnum,Schedaction,Assignedto " _
-    & " from iss.dbo.ScheduledTasks " _
+    & " from .ScheduledTasks " _
     & " Join [Sapreferences] " _
     & " on ScheduledTasks.Department = [sapreferences] . Departmentally " _
     & " " _

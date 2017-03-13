@@ -17,7 +17,7 @@ Public Class ErrorLogging_V2
     '' args: date/time,machine name,IP,user,form,class(with args),[type:Network,Form,Background,Thread...etc.],Method(args),Record ID [if applicable],actual stack error
     '' 
     Private FileList As Hashtable
-    Private Const filePath As String = "\\server\company\ISS\Logs\"
+    Private filePath As String = STATIC_VARIABLES.ErrorLogFilePath
     Private wrtr As StreamWriter
     Public ReadOnly Property File_List As Hashtable
         Get

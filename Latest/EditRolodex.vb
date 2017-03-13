@@ -6,7 +6,7 @@ Public Class EditRolodex
     Private cnn As SqlConnection = New sqlconnection(STATIC_VARIABLES.cnn)
     Private Sub Edit_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-            Dim cmdGET As SqlCommand = New SqlCommand("SELECT * from iss.dbo.companyrolodex where id = @ID", cnn)
+            Dim cmdGET As SqlCommand = New SqlCommand("SELECT * from .companyrolodex where id = @ID", cnn)
             Dim param1 As SqlParameter = New SqlParameter("@ID", Target_ID)
             cmdGET.Parameters.Add(param1)
             cnn.Open()
@@ -37,7 +37,7 @@ Public Class EditRolodex
         Try
             Select Case Me.btnAction.Text
                 Case Is = "Add"
-                    Dim cmdFIND As SqlCommand = New SqlCommand("SELECT COUNT(ID) from iss.dbo.companyrolodex where EmpFirstName = @EMP and EmpLastName = @EMPL", cnn)
+                    Dim cmdFIND As SqlCommand = New SqlCommand("SELECT COUNT(ID) from .companyrolodex where EmpFirstName = @EMP and EmpLastName = @EMPL", cnn)
                     Dim param44 As SqlParameter = New SqlParameter("@EMP", Me.txtFirstName.Text)
                     Dim param55 As SqlParameter = New SqlParameter("@EMPL", Me.txtLastName.Text)
                     cmdFIND.Parameters.Add(param44)
@@ -54,7 +54,7 @@ Public Class EditRolodex
                         MsgBox("Duplicate employee exists. Please enter a new employee.", MsgBoxStyle.Critical, "Duplicate Employee")
                         Exit Sub
                     ElseIf cnt <= 0 Then
-                        Dim cmdINS As SqlCommand = New SqlCommand("INSERT iss.dbo.companyrolodex (EmpFirstName,EmpLastName,PrimaryPhone,Department) " _
+                        Dim cmdINS As SqlCommand = New SqlCommand("INSERT .companyrolodex (EmpFirstName,EmpLastName,PrimaryPhone,Department) " _
                         & " VALUES(@EMPF,@EMPL,@PH,@DEP)", cnn)
                         Dim param60 As SqlParameter = New SqlParameter("@EMPF", Me.txtFirstName.Text)
                         Dim param61 As SqlParameter = New SqlParameter("@EMPL", Me.txtLastName.Text)
@@ -78,7 +78,7 @@ Public Class EditRolodex
                     frmRolodex.PopulateDefaultList(frmRolodex.cboDepartment.Text)
                     Exit Select
                 Case Is = "Edit"
-                    Dim cmdUP As SqlCommand = New SqlCommand("UPDATE iss.dbo.companyrolodex " _
+                    Dim cmdUP As SqlCommand = New SqlCommand("UPDATE .companyrolodex " _
                     & " SET EmpFirstName = @EMPF, " _
                     & "     EmpLastName = @EMPL, " _
                     & "     PrimaryPhone = @PPH, " _

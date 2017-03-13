@@ -4,7 +4,7 @@ Imports System.Data.SqlClient
 
 
 Public Class quickINFO
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnn As String = STATIC_VARIABLES.Cnn
 
     Public Structure QuickInfo
         Public ID As String
@@ -33,7 +33,7 @@ Public Class quickINFO
     End Sub
     Private Function Get_Quick_Info(ByVal RecID As String)
         Dim a As New QuickInfo
-        Dim cnx As New SqlConnection(pro_cnx)
+        Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
         cnx.Open()
         Dim cmdGET As New SqlCommand("select Contact1FirstName,Contact1LastName,Contact2FirstName,Contact2LastName,Product1,Product2,Product3,HousePhone, LeadGeneratedOn, AltPhone1, AltPhone2 FROM EnterLead where ID = N'" & RecID & "'; ", cnx)
         Dim r1 As SqlDataReader = cmdGET.ExecuteReader

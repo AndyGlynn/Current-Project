@@ -218,7 +218,7 @@ Public Class frmSMS
             Public coFrom As String
         End Structure
 
-        Private Const cnxSTR As String = "SERVER=192.168.1.2;Database=Iss;User id=sa;Password=spoken1;"
+        Private cnxSTR As String = STATIC_VARIABLES.Cnn
         Private coInfoObj As CoInfo
         Public ReadOnly Property CompanyInfo As CoInfo
             Get

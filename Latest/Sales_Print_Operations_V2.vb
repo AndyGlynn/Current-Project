@@ -44,13 +44,13 @@ Public Class Sales_Print_Operations_V2
         Public AltPhone2 As String
     End Structure
 
-    Private Const sqlCNX As String = "SERVER=192.168.1.2;Database=ISS;User Id=sa;Password=spoken1"
+    Private sqlCNX As String = STATIC_VARIABLES.Cnn
 
 #Region "Get Exclusions"
     Private Function GetExclusions()
         Try
             Dim cnx_ex As SqlConnection = New SqlConnection(sqlCNX)
-            Dim cmdGet As SqlCommand = New SqlCommand("SELECT * From iss.dbo.Exclusions", cnx_ex)
+            Dim cmdGet As SqlCommand = New SqlCommand("SELECT * From .Exclusions", cnx_ex)
             cnx_ex.Open()
             Dim exclusion_ As New Exclusions
             Dim r1 As SqlDataReader = cmdGet.ExecuteReader

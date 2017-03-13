@@ -9,7 +9,7 @@ Public Class ToggleUndoCandC
     '' edit 8-27-2015
     ''
     ''
-    '' 1) get the ID of the 'Called and Cancel' flag from [iss.dbo.leadhistory]
+    '' 1) get the ID of the 'Called and Cancel' flag from [.leadhistory]
     ''    a) or have it supplied as an argument
     '' 2) delete the record of [id]
     '' 3) log that it was 'Undone' 

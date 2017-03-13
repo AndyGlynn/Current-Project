@@ -56,7 +56,7 @@ Public Class printToPrinterApptSheet
 
 #Region "Vars"
 
-    Private Const pro_cnx As String = "SERVER=192.168.1.2;Database=Iss;User Id=sa;Password=spoken1;"
+    Private pro_cnx As String = STATIC_VARIABLES.Cnn
     Private PD As PrintDocument
     Private CurrentLeadInfo As MessageBody
     Private PPrev As PrintPreviewDialog
@@ -950,7 +950,7 @@ Public Class printToPrinterApptSheet
     Private Function Get_Lead_Info(ByVal RecID As String)
         Try
             Dim x As New MessageBody
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT * FROM EnterLead WHERE ID = N'" & RecID & "';", cnx)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
@@ -1007,7 +1007,7 @@ Public Class printToPrinterApptSheet
             '' False = Show Info 
 
             Dim x As New MessageBody
-            Dim cnx As New SqlConnection(pro_cnx)
+            Dim cnx As New SqlConnection(STATIC_VARIABLES.Cnn)
             cnx.Open()
             Dim cmdGET As New SqlCommand("SELECT * FROM EnterLead WHERE ID = N'" & RecID & "';", cnx)
             Dim r1 As SqlDataReader = cmdGET.ExecuteReader
